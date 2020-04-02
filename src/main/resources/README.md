@@ -1,0 +1,1 @@
+github에 src/main/resources/ 경로를 추가하기 위해 README.md 파일을 임시로 사용한다.
