@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e:DomainDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:e="http://exerd.tomato.com/model" UUID="DDefinition_lottsHVoEeq_pcyMGFtP3w" productId="com.tomato.db.mysql" version="3.3.2.20200310-1502">
+  <domain UUID="Domain_lottsXVoEeq_pcyMGFtP3w" name="문자" suggestedDataType="VARCHAR">
+    <domain UUID="Domain_lottsnVoEeq_pcyMGFtP3w" name="주민등록번호" suggestedDataType="VARCHAR(14)"/>
+    <domain UUID="Domain_lotts3VoEeq_pcyMGFtP3w" name="주소" suggestedDataType="VARCHAR(100)"/>
+    <domain UUID="Domain_lotttHVoEeq_pcyMGFtP3w" name="전화번호" suggestedDataType="VARCHAR(20)"/>
+    <domain UUID="Domain_lotttXVoEeq_pcyMGFtP3w" name="이메일" suggestedDataType="VARCHAR(50)"/>
+    <domain UUID="Domain_lotttnVoEeq_pcyMGFtP3w" name="이름" suggestedDataType="VARCHAR(40)"/>
+    <domain UUID="Domain_lottt3VoEeq_pcyMGFtP3w" name="URL" suggestedDataType="VARCHAR(255)"/>
+    <domain UUID="Domain_lottuHVoEeq_pcyMGFtP3w" name="우편번호" suggestedDataType="VARCHAR(6)"/>
+    <domain UUID="Domain_lottuXVoEeq_pcyMGFtP3w" name="계좌" suggestedDataType="VARCHAR(20)"/>
+    <domain UUID="Domain_lottunVoEeq_pcyMGFtP3w" name="제목" suggestedDataType="VARCHAR(255)"/>
+    <domain UUID="Domain_lottu3VoEeq_pcyMGFtP3w" name="사업자등록번호" suggestedDataType="VARCHAR(15)"/>
+  </domain>
+  <domain UUID="Domain_lottvHVoEeq_pcyMGFtP3w" name="숫자" suggestedDataType="INTEGER">
+    <domain UUID="Domain_lottvXVoEeq_pcyMGFtP3w" name="금액"/>
+    <domain UUID="Domain_lottvnVoEeq_pcyMGFtP3w" name="식별번호" suggestedDataType="INTEGER"/>
+    <domain UUID="Domain_lottv3VoEeq_pcyMGFtP3w" name="FLAG"/>
+    <domain UUID="Domain_lottwHVoEeq_pcyMGFtP3w" name="진행상태"/>
+    <domain UUID="Domain_lottwXVoEeq_pcyMGFtP3w" name="기간"/>
+  </domain>
+  <domain UUID="Domain_lottwnVoEeq_pcyMGFtP3w" name="객체" suggestedDataType="">
+    <domain UUID="Domain_lottw3VoEeq_pcyMGFtP3w" name="이미지" suggestedDataType=""/>
+    <domain UUID="Domain_lottxHVoEeq_pcyMGFtP3w" name="오디오" suggestedDataType=""/>
+  </domain>
+  <domain UUID="Domain_lottxXVoEeq_pcyMGFtP3w" name="식별"/>
+  <domain UUID="Domain_lottxnVoEeq_pcyMGFtP3w" name="장문">
+    <domain UUID="Domain_lottx3VoEeq_pcyMGFtP3w" name="내용" suggestedDataType="TEXT"/>
+  </domain>
+  <domain UUID="Domain_lottyHVoEeq_pcyMGFtP3w" name="날짜" suggestedDataType="DATETIME">
+    <domain UUID="Domain_lottyXVoEeq_pcyMGFtP3w" name="일시" suggestedDataType="DATETIME"/>
+  </domain>
+</e:DomainDefinition>
