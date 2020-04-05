@@ -1,13 +1,4 @@
-CREATE DATABASE portfolidb 
-CHARACTER SET utf8 
-COLLATE utf8_general_ci;
-
-GRANT ALL ON portfolidb.* TO kyh@localhost;
-GRANT ALL ON portfolidb.* TO kyh@'%';
-
-USE portfolidb;
-
--- 일반회원
+﻿-- 일반회원
 DROP TABLE IF EXISTS pf_general_member RESTRICT;
 
 -- 기업회원
@@ -80,10 +71,10 @@ DROP TABLE IF EXISTS pf_certificate RESTRICT;
 DROP TABLE IF EXISTS pf_general_member_certification RESTRICT;
 
 -- 일반회원학력전공
-DROP TABLE IF EXISTS pf_general_member_education_major RESTRICT;
+DROP TABLE IF EXISTS pf_general_mem_edu_major RESTRICT;
 
 -- 일반회원학력
-DROP TABLE IF EXISTS pf_general_member_education RESTRICT;
+DROP TABLE IF EXISTS pf_general_mem_edu RESTRICT;
 
 -- 일반회원관심지역
 DROP TABLE IF EXISTS pf_interest_location RESTRICT;
@@ -142,6 +133,18 @@ DROP TABLE IF EXISTS pf_notice_category RESTRICT;
 -- 일정(개인용)
 DROP TABLE IF EXISTS pf_schedule RESTRICT;
 
+-- 알림제목
+DROP TABLE IF EXISTS pf_alarm_title RESTRICT;
+
+-- 신고처리
+DROP TABLE IF EXISTS pf_report_handle RESTRICT;
+
+-- 신고처리분류
+DROP TABLE IF EXISTS pf_report_handle_class RESTRICT;
+
+-- 결제수단
+DROP TABLE IF EXISTS pf_payment_method RESTRICT;
+
 -- 일반회원
 CREATE TABLE pf_general_member (
 	general_member_no INTEGER      NOT NULL COMMENT '일반회원번호', -- 일반회원번호
@@ -198,12 +201,6 @@ ALTER TABLE pf_portfolio
 			board_no -- 포트폴리오게시글번호
 		);
 
-ALTER TABLE pf_portfolio
-	MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '포트폴리오게시글번호';
-
-ALTER TABLE pf_portfolio
-	AUTO_INCREMENT = 1;
-
 -- 채용공고
 CREATE TABLE pf_job_posting (
 	job_posting_no       INTEGER      NOT NULL COMMENT '채용공고번호', -- 채용공고번호
@@ -221,7 +218,7 @@ CREATE TABLE pf_job_posting (
 	year_salary          INTEGER      NULL     COMMENT '연봉', -- 연봉
 	readable             INTEGER      NOT NULL COMMENT '공개여부', -- 공개여부
 	minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
-	employment_status_no INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
+	employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
 )
 COMMENT '채용공고';
 
@@ -237,12 +234,10 @@ ALTER TABLE pf_job_posting
 
 -- 신고
 CREATE TABLE pf_report (
-	report_no       INTEGER      NOT NULL COMMENT '신고번호', -- 신고번호
-	reporter_no     INTEGER      NOT NULL COMMENT '신고자번호', -- 신고자번호
-	target_no       INTEGER      NOT NULL COMMENT '대상자번호', -- 대상자번호
-	report_class_no INTEGER      NOT NULL COMMENT '신고분류번호', -- 신고분류번호
-	content         TEXT         NOT NULL COMMENT '처리내용', -- 처리내용
-	stat            VARCHAR(255) NOT NULL COMMENT '처리상태' -- 처리상태
+	board_no        INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
+	reporter_no     INTEGER NOT NULL COMMENT '신고자번호', -- 신고자번호
+	target_no       INTEGER NOT NULL COMMENT '대상자번호', -- 대상자번호
+	report_class_no INTEGER NOT NULL COMMENT '신고분류번호' -- 신고분류번호
 )
 COMMENT '신고';
 
@@ -250,11 +245,8 @@ COMMENT '신고';
 ALTER TABLE pf_report
 	ADD CONSTRAINT PK_pf_report -- 신고 기본키
 		PRIMARY KEY (
-			report_no -- 신고번호
+			board_no -- 게시글번호
 		);
-
-ALTER TABLE pf_report
-	MODIFY COLUMN report_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '신고번호';
 
 -- 회원쪽지
 CREATE TABLE pf_message (
@@ -329,12 +321,12 @@ ALTER TABLE pf_banner
 
 -- 결제
 CREATE TABLE pf_payment (
-	pay_no     INTEGER      NOT NULL COMMENT '결제번호', -- 결제번호
-	member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-	product_id INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
-	stat       VARCHAR(255) NOT NULL COMMENT '결제상태', -- 결제상태
-	date       DATETIME     NOT NULL DEFAULT now() COMMENT '결제일', -- 결제일
-	method     VARCHAR(255) NOT NULL COMMENT '결제수단' -- 결제수단
+	pay_no            INTEGER  NOT NULL COMMENT '결제번호', -- 결제번호
+	member_no         INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+	product_no        INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
+	payment_method_no INTEGER  NOT NULL COMMENT '결제수단번호', -- 결제수단번호
+	stat              INTEGER  NOT NULL COMMENT '결제상태', -- 결제상태
+	pay_date          DATETIME NOT NULL DEFAULT now() COMMENT '결제일' -- 결제일
 )
 COMMENT '결제';
 
@@ -350,8 +342,7 @@ ALTER TABLE pf_payment
 
 -- 판매상품
 CREATE TABLE pf_product (
-	product_id INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
-	pay_no     INTEGER      NOT NULL COMMENT '결제번호', -- 결제번호
+	product_no INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
 	name       VARCHAR(255) NOT NULL COMMENT '상품명', -- 상품명
 	duration   INTEGER      NOT NULL COMMENT '기간', -- 기간
 	price      INTEGER      NOT NULL COMMENT '가격' -- 가격
@@ -362,11 +353,11 @@ COMMENT '판매상품';
 ALTER TABLE pf_product
 	ADD CONSTRAINT PK_pf_product -- 판매상품 기본키
 		PRIMARY KEY (
-			product_id -- 상품번호
+			product_no -- 상품번호
 		);
 
 ALTER TABLE pf_product
-	MODIFY COLUMN product_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '상품번호';
+	MODIFY COLUMN product_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '상품번호';
 
 -- 회원
 CREATE TABLE pf_members (
@@ -416,18 +407,12 @@ ALTER TABLE pf_notice
 			board_no -- 게시글번호
 		);
 
-ALTER TABLE pf_notice
-	MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
-
-ALTER TABLE pf_notice
-	AUTO_INCREMENT = 1;
-
 -- 알림
 CREATE TABLE pf_alarm (
-	alarm_no  INTEGER      NOT NULL COMMENT '알림번호', -- 알림번호
-	member_no INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-	title     VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-	content   TEXT         NOT NULL COMMENT '내용' -- 내용
+	alarm_no       INTEGER NOT NULL COMMENT '알림번호', -- 알림번호
+	member_no      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+	alarm_title_no INTEGER NOT NULL COMMENT '알림제목번호', -- 알림제목번호
+	content        TEXT    NOT NULL COMMENT '내용' -- 내용
 )
 COMMENT '알림';
 
@@ -541,12 +526,6 @@ ALTER TABLE pf_portfolio_file
 			portfolio_file_no -- 파일번호
 		);
 
-ALTER TABLE pf_portfolio_file
-	MODIFY COLUMN portfolio_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '파일번호';
-
-ALTER TABLE pf_portfolio_file
-	AUTO_INCREMENT = 1;
-
 -- 분야
 CREATE TABLE pf_field (
 	field_no INTEGER     NOT NULL COMMENT '분야번호', -- 분야번호
@@ -632,16 +611,20 @@ ALTER TABLE pf_major
 			major_no -- 전공번호
 		);
 
+-- 전공 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pf_major
+	ON pf_major ( -- 전공
+		name ASC -- 전공이름
+	);
+
 ALTER TABLE pf_major
 	MODIFY COLUMN major_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '전공번호';
 
 -- 자격증
 CREATE TABLE pf_certificate (
-	certificate_no  INTEGER      NOT NULL COMMENT '자격증번호', -- 자격증번호
-	agency          VARCHAR(255) NOT NULL COMMENT '발급기관', -- 발급기관
-	name            VARCHAR(255) NOT NULL COMMENT '자격증이름', -- 자격증이름
-	issue_date      DATETIME     NULL     COMMENT '발급일자', -- 발급일자
-	expiration_date DATETIME     NULL     COMMENT '만료일자' -- 만료일자
+	certificate_no INTEGER      NOT NULL COMMENT '자격증번호', -- 자격증번호
+	agency         VARCHAR(255) NOT NULL COMMENT '발급기관', -- 발급기관
+	name           VARCHAR(255) NOT NULL COMMENT '자격증이름' -- 자격증이름
 )
 COMMENT '자격증';
 
@@ -680,7 +663,7 @@ ALTER TABLE pf_general_member_certification
 		);
 
 -- 일반회원학력전공
-CREATE TABLE pf_general_member_education_major (
+CREATE TABLE pf_general_mem_edu_major (
 	general_member_no INTEGER NOT NULL COMMENT '일반회원번호', -- 일반회원번호
 	education_no      INTEGER NOT NULL COMMENT '학력번호', -- 학력번호
 	major_no          INTEGER NOT NULL COMMENT '전공번호' -- 전공번호
@@ -688,19 +671,19 @@ CREATE TABLE pf_general_member_education_major (
 COMMENT '일반회원학력전공';
 
 -- 일반회원학력전공
-ALTER TABLE pf_general_member_education_major
-	ADD CONSTRAINT PK_pf_general_member_education_major -- 일반회원학력전공 기본키
+ALTER TABLE pf_general_mem_edu_major
+	ADD CONSTRAINT PK_pf_general_mem_edu_major -- 일반회원학력전공 기본키
 		PRIMARY KEY (
 			general_member_no, -- 일반회원번호
 			education_no,      -- 학력번호
 			major_no           -- 전공번호
 		);
 
-ALTER TABLE pf_general_member_education_major
+ALTER TABLE pf_general_mem_edu_major
 	MODIFY COLUMN general_member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일반회원번호';
 
 -- 일반회원학력
-CREATE TABLE pf_general_member_education (
+CREATE TABLE pf_general_mem_edu (
 	general_member_no INTEGER     NOT NULL COMMENT '일반회원번호', -- 일반회원번호
 	education_no      INTEGER     NOT NULL COMMENT '학력번호', -- 학력번호
 	school_name       VARCHAR(40) NOT NULL COMMENT '학교명' -- 학교명
@@ -708,14 +691,14 @@ CREATE TABLE pf_general_member_education (
 COMMENT '일반회원학력';
 
 -- 일반회원학력
-ALTER TABLE pf_general_member_education
-	ADD CONSTRAINT PK_pf_general_member_education -- 일반회원학력 기본키
+ALTER TABLE pf_general_mem_edu
+	ADD CONSTRAINT PK_pf_general_mem_edu -- 일반회원학력 기본키
 		PRIMARY KEY (
 			general_member_no, -- 일반회원번호
 			education_no       -- 학력번호
 		);
 
-ALTER TABLE pf_general_member_education
+ALTER TABLE pf_general_mem_edu
 	MODIFY COLUMN general_member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일반회원번호';
 
 -- 일반회원관심지역
@@ -791,8 +774,8 @@ ALTER TABLE pf_portfolio_skill
 
 -- 고용형태
 CREATE TABLE pf_employment_status (
-	employment_status_no   INTEGER     NOT NULL COMMENT '고용형태번호', -- 고용형태번호
-	employment_status_name VARCHAR(40) NOT NULL COMMENT '고용형태이름' -- 고용형태이름
+	employment_stat_no   INTEGER     NOT NULL COMMENT '고용형태번호', -- 고용형태번호
+	employment_stat_name VARCHAR(40) NOT NULL COMMENT '고용형태이름' -- 고용형태이름
 )
 COMMENT '고용형태';
 
@@ -800,11 +783,17 @@ COMMENT '고용형태';
 ALTER TABLE pf_employment_status
 	ADD CONSTRAINT PK_pf_employment_status -- 고용형태 기본키
 		PRIMARY KEY (
-			employment_status_no -- 고용형태번호
+			employment_stat_no -- 고용형태번호
 		);
 
+-- 고용형태 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pf_employment_status
+	ON pf_employment_status ( -- 고용형태
+		employment_stat_name ASC -- 고용형태이름
+	);
+
 ALTER TABLE pf_employment_status
-	MODIFY COLUMN employment_status_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '고용형태번호';
+	MODIFY COLUMN employment_stat_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '고용형태번호';
 
 -- 기업요구전공
 CREATE TABLE pf_company_required_major (
@@ -820,6 +809,13 @@ ALTER TABLE pf_company_required_major
 			major_no,       -- 전공번호
 			job_posting_no  -- 채용공고번호
 		);
+
+-- 기업요구전공 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pf_company_required_major
+	ON pf_company_required_major ( -- 기업요구전공
+		major_no ASC,       -- 전공번호
+		job_posting_no ASC  -- 채용공고번호
+	);
 
 -- 기업요구자격증
 CREATE TABLE pf_company_required_certificate (
@@ -857,12 +853,6 @@ ALTER TABLE pf_board
 			board_no -- 게시글번호
 		);
 
-ALTER TABLE pf_board
-	MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
-
-ALTER TABLE pf_board
-	AUTO_INCREMENT = 1;
-
 -- QNA질문
 CREATE TABLE pf_qna (
 	board_no           INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
@@ -882,12 +872,6 @@ ALTER TABLE pf_qna
 		PRIMARY KEY (
 			board_no -- 게시글번호
 		);
-
-ALTER TABLE pf_qna
-	MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
-
-ALTER TABLE pf_qna
-	AUTO_INCREMENT = 1;
 
 -- 기업
 CREATE TABLE pf_company (
@@ -1052,12 +1036,6 @@ ALTER TABLE pf_notice_category
 			notice_no -- 공지사항분류번호
 		);
 
-ALTER TABLE pf_notice_category
-	MODIFY COLUMN notice_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항분류번호';
-
-ALTER TABLE pf_notice_category
-	AUTO_INCREMENT = 1;
-
 -- 일정(개인용)
 CREATE TABLE pf_schedule (
 	schedule_no       INTEGER  NOT NULL COMMENT '일정번호', -- 일정번호
@@ -1077,6 +1055,76 @@ ALTER TABLE pf_schedule
 
 ALTER TABLE pf_schedule
 	MODIFY COLUMN schedule_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일정번호';
+
+-- 알림제목
+CREATE TABLE pf_alarm_title (
+	alarm_title_no INTEGER      NOT NULL COMMENT '알림제목번호', -- 알림제목번호
+	title          VARCHAR(255) NOT NULL COMMENT '알림제목' -- 알림제목
+)
+COMMENT '알림제목';
+
+-- 알림제목
+ALTER TABLE pf_alarm_title
+	ADD CONSTRAINT PK_pf_alarm_title -- 알림제목 기본키
+		PRIMARY KEY (
+			alarm_title_no -- 알림제목번호
+		);
+
+ALTER TABLE pf_alarm_title
+	MODIFY COLUMN alarm_title_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '알림제목번호';
+
+-- 신고처리
+CREATE TABLE pf_report_handle (
+	report_handle_no       INTEGER  NOT NULL COMMENT '신고처리번호', -- 신고처리번호
+	board_no               INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
+	report_handle_class_no INTEGER  NOT NULL COMMENT '처리분류번호', -- 처리분류번호
+	handle_date            DATETIME NOT NULL DEFAULT now() COMMENT '처리일' -- 처리일
+)
+COMMENT '신고처리';
+
+-- 신고처리
+ALTER TABLE pf_report_handle
+	ADD CONSTRAINT PK_pf_report_handle -- 신고처리 기본키
+		PRIMARY KEY (
+			report_handle_no -- 신고처리번호
+		);
+
+ALTER TABLE pf_report_handle
+	MODIFY COLUMN report_handle_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '신고처리번호';
+
+-- 신고처리분류
+CREATE TABLE pf_report_handle_class (
+	report_handle_class_no INTEGER     NOT NULL COMMENT '처리분류번호', -- 처리분류번호
+	report_handle_class    VARCHAR(40) NOT NULL COMMENT '처리분류명' -- 처리분류명
+)
+COMMENT '신고처리분류';
+
+-- 신고처리분류
+ALTER TABLE pf_report_handle_class
+	ADD CONSTRAINT PK_pf_report_handle_class -- 신고처리분류 기본키
+		PRIMARY KEY (
+			report_handle_class_no -- 처리분류번호
+		);
+
+ALTER TABLE pf_report_handle_class
+	MODIFY COLUMN report_handle_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '처리분류번호';
+
+-- 결제수단
+CREATE TABLE pf_payment_method (
+	payment_method_no INTEGER     NOT NULL COMMENT '결제수단번호', -- 결제수단번호
+	payment_method    VARCHAR(40) NOT NULL COMMENT '결제수단명' -- 결제수단명
+)
+COMMENT '결제수단';
+
+-- 결제수단
+ALTER TABLE pf_payment_method
+	ADD CONSTRAINT PK_pf_payment_method -- 결제수단 기본키
+		PRIMARY KEY (
+			payment_method_no -- 결제수단번호
+		);
+
+ALTER TABLE pf_payment_method
+	MODIFY COLUMN payment_method_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제수단번호';
 
 -- 일반회원
 ALTER TABLE pf_general_member
@@ -1152,10 +1200,10 @@ ALTER TABLE pf_job_posting
 ALTER TABLE pf_job_posting
 	ADD CONSTRAINT FK_pf_employment_status_TO_pf_job_posting -- 고용형태 -> 채용공고
 		FOREIGN KEY (
-			employment_status_no -- 고용형태번호
+			employment_stat_no -- 고용형태번호
 		)
 		REFERENCES pf_employment_status ( -- 고용형태
-			employment_status_no -- 고용형태번호
+			employment_stat_no -- 고용형태번호
 		);
 
 -- 채용공고
@@ -1198,6 +1246,16 @@ ALTER TABLE pf_report
 			report_class_no -- 신고분류번호
 		);
 
+-- 신고
+ALTER TABLE pf_report
+	ADD CONSTRAINT FK_pf_board_TO_pf_report -- 게시글 -> 신고
+		FOREIGN KEY (
+			board_no -- 게시글번호
+		)
+		REFERENCES pf_board ( -- 게시글
+			board_no -- 게시글번호
+		);
+
 -- 회원쪽지
 ALTER TABLE pf_message
 	ADD CONSTRAINT FK_pf_members_TO_pf_message -- 회원 -> 회원쪽지
@@ -1232,10 +1290,10 @@ ALTER TABLE pf_banner
 ALTER TABLE pf_payment
 	ADD CONSTRAINT FK_pf_product_TO_pf_payment -- 판매상품 -> 결제
 		FOREIGN KEY (
-			product_id -- 상품번호
+			product_no -- 상품번호
 		)
 		REFERENCES pf_product ( -- 판매상품
-			product_id -- 상품번호
+			product_no -- 상품번호
 		);
 
 -- 결제
@@ -1248,14 +1306,14 @@ ALTER TABLE pf_payment
 			member_no -- 회원번호
 		);
 
--- 판매상품
-ALTER TABLE pf_product
-	ADD CONSTRAINT FK_pf_payment_TO_pf_product -- 결제 -> 판매상품
+-- 결제
+ALTER TABLE pf_payment
+	ADD CONSTRAINT FK_pf_payment_method_TO_pf_payment -- 결제수단 -> 결제
 		FOREIGN KEY (
-			pay_no -- 결제번호
+			payment_method_no -- 결제수단번호
 		)
-		REFERENCES pf_payment ( -- 결제
-			pay_no -- 결제번호
+		REFERENCES pf_payment_method ( -- 결제수단
+			payment_method_no -- 결제수단번호
 		);
 
 -- 공지사항
@@ -1286,6 +1344,16 @@ ALTER TABLE pf_alarm
 		)
 		REFERENCES pf_members ( -- 회원
 			member_no -- 회원번호
+		);
+
+-- 알림
+ALTER TABLE pf_alarm
+	ADD CONSTRAINT FK_pf_alarm_title_TO_pf_alarm -- 알림제목 -> 알림
+		FOREIGN KEY (
+			alarm_title_no -- 알림제목번호
+		)
+		REFERENCES pf_alarm_title ( -- 알림제목
+			alarm_title_no -- 알림제목번호
 		);
 
 -- 즐겨찾기
@@ -1369,8 +1437,8 @@ ALTER TABLE pf_general_member_certification
 		);
 
 -- 일반회원학력전공
-ALTER TABLE pf_general_member_education_major
-	ADD CONSTRAINT FK_pf_major_TO_pf_general_member_education_major -- 전공 -> 일반회원학력전공
+ALTER TABLE pf_general_mem_edu_major
+	ADD CONSTRAINT FK_pf_major_TO_pf_general_mem_edu_major -- 전공 -> 일반회원학력전공
 		FOREIGN KEY (
 			major_no -- 전공번호
 		)
@@ -1379,20 +1447,20 @@ ALTER TABLE pf_general_member_education_major
 		);
 
 -- 일반회원학력전공
-ALTER TABLE pf_general_member_education_major
-	ADD CONSTRAINT FK_pf_g_member_edu_TO_pf_g_member_edu_major -- 일반회원학력 -> 일반회원학력전공
+ALTER TABLE pf_general_mem_edu_major
+	ADD CONSTRAINT FK_pf_general_mem_edu_TO_pf_general_mem_edu_major -- 일반회원학력 -> 일반회원학력전공
 		FOREIGN KEY (
 			general_member_no, -- 일반회원번호
 			education_no       -- 학력번호
 		)
-		REFERENCES pf_general_member_education ( -- 일반회원학력
+		REFERENCES pf_general_mem_edu ( -- 일반회원학력
 			general_member_no, -- 일반회원번호
 			education_no       -- 학력번호
 		);
 
 -- 일반회원학력
-ALTER TABLE pf_general_member_education
-	ADD CONSTRAINT FK_pf_general_member_TO_pf_general_member_education -- 일반회원 -> 일반회원학력
+ALTER TABLE pf_general_mem_edu
+	ADD CONSTRAINT FK_pf_general_member_TO_pf_general_mem_edu -- 일반회원 -> 일반회원학력
 		FOREIGN KEY (
 			general_member_no -- 일반회원번호
 		)
@@ -1401,8 +1469,8 @@ ALTER TABLE pf_general_member_education
 		);
 
 -- 일반회원학력
-ALTER TABLE pf_general_member_education
-	ADD CONSTRAINT FK_pf_final_education_TO_pf_general_member_education -- 학력 -> 일반회원학력
+ALTER TABLE pf_general_mem_edu
+	ADD CONSTRAINT FK_pf_final_education_TO_pf_general_mem_edu -- 학력 -> 일반회원학력
 		FOREIGN KEY (
 			education_no -- 학력번호
 		)
@@ -1648,4 +1716,24 @@ ALTER TABLE pf_schedule
 		)
 		REFERENCES pf_general_member ( -- 일반회원
 			general_member_no -- 일반회원번호
+		);
+
+-- 신고처리
+ALTER TABLE pf_report_handle
+	ADD CONSTRAINT FK_pf_report_TO_pf_report_handle -- 신고 -> 신고처리
+		FOREIGN KEY (
+			board_no -- 게시글번호
+		)
+		REFERENCES pf_report ( -- 신고
+			board_no -- 게시글번호
+		);
+
+-- 신고처리
+ALTER TABLE pf_report_handle
+	ADD CONSTRAINT FK_pf_report_handle_class_TO_pf_report_handle -- 신고처리분류 -> 신고처리
+		FOREIGN KEY (
+			report_handle_class_no -- 처리분류번호
+		)
+		REFERENCES pf_report_handle_class ( -- 신고처리분류
+			report_handle_class_no -- 처리분류번호
 		);
