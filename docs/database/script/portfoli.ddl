@@ -133,22 +133,11 @@ DROP TABLE IF EXISTS pf_notice_category RESTRICT;
 -- 일정(개인용)
 DROP TABLE IF EXISTS pf_schedule RESTRICT;
 
-<<<<<<< HEAD
--- 알림제목
-DROP TABLE IF EXISTS pf_alarm_title RESTRICT;
-
--- 신고처리
-DROP TABLE IF EXISTS pf_report_handle RESTRICT;
-
--- 신고처리분류
-DROP TABLE IF EXISTS pf_report_handle_class RESTRICT;
-=======
 -- 알림분류
 DROP TABLE IF EXISTS pf_alarm_class RESTRICT;
 
 -- 신고처리분류
 DROP TABLE IF EXISTS pf_handle_class RESTRICT;
->>>>>>> upstream/master
 
 -- 결제수단
 DROP TABLE IF EXISTS pf_payment_method RESTRICT;
@@ -216,7 +205,7 @@ CREATE TABLE pf_job_posting (
 	title                VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content              TEXT         NOT NULL COMMENT '내용', -- 내용
 	work_place_no        INTEGER      NOT NULL COMMENT '근무지번호', -- 근무지번호
-	minimum_education    INTEGER      NULL     COMMENT '최소경력년수', -- 최소경력년수
+	minimum_career       INTEGER      NULL     COMMENT '최소경력년수', -- 최소경력년수
 	view_count           INTEGER      NOT NULL COMMENT '조회수', -- 조회수
 	posting_registration DATETIME     NOT NULL COMMENT '등록일', -- 등록일
 	start_dated          DATETIME     NOT NULL COMMENT '시작일', -- 시작일
@@ -242,12 +231,6 @@ ALTER TABLE pf_job_posting
 
 -- 신고
 CREATE TABLE pf_report (
-<<<<<<< HEAD
-	board_no        INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
-	reporter_no     INTEGER NOT NULL COMMENT '신고자번호', -- 신고자번호
-	target_no       INTEGER NOT NULL COMMENT '대상자번호', -- 대상자번호
-	report_class_no INTEGER NOT NULL COMMENT '신고분류번호' -- 신고분류번호
-=======
 	board_no        INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
 	reporter_no     INTEGER  NOT NULL COMMENT '신고자번호', -- 신고자번호
 	target_no       INTEGER  NOT NULL COMMENT '대상자번호', -- 대상자번호
@@ -255,7 +238,6 @@ CREATE TABLE pf_report (
 	handle_class_no INTEGER  NULL     COMMENT '처리분류번호', -- 처리분류번호
 	handle_date     DATETIME NULL     COMMENT '신고처리일', -- 신고처리일
 	handle_content  TEXT     NULL     COMMENT '신고처리내용' -- 신고처리내용
->>>>>>> upstream/master
 )
 COMMENT '신고';
 
@@ -429,11 +411,7 @@ ALTER TABLE pf_notice
 CREATE TABLE pf_alarm (
 	alarm_no       INTEGER NOT NULL COMMENT '알림번호', -- 알림번호
 	member_no      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-<<<<<<< HEAD
-	alarm_title_no INTEGER NOT NULL COMMENT '알림제목번호', -- 알림제목번호
-=======
 	alarm_class_no INTEGER NOT NULL COMMENT '알림분류번호', -- 알림분류번호
->>>>>>> upstream/master
 	content        TEXT    NOT NULL COMMENT '내용' -- 내용
 )
 COMMENT '알림';
@@ -1078,48 +1056,6 @@ ALTER TABLE pf_schedule
 ALTER TABLE pf_schedule
 	MODIFY COLUMN schedule_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일정번호';
 
-<<<<<<< HEAD
--- 알림제목
-CREATE TABLE pf_alarm_title (
-	alarm_title_no INTEGER      NOT NULL COMMENT '알림제목번호', -- 알림제목번호
-	title          VARCHAR(255) NOT NULL COMMENT '알림제목' -- 알림제목
-)
-COMMENT '알림제목';
-
--- 알림제목
-ALTER TABLE pf_alarm_title
-	ADD CONSTRAINT PK_pf_alarm_title -- 알림제목 기본키
-		PRIMARY KEY (
-			alarm_title_no -- 알림제목번호
-		);
-
-ALTER TABLE pf_alarm_title
-	MODIFY COLUMN alarm_title_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '알림제목번호';
-
--- 신고처리
-CREATE TABLE pf_report_handle (
-	report_handle_no       INTEGER  NOT NULL COMMENT '신고처리번호', -- 신고처리번호
-	board_no               INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
-	report_handle_class_no INTEGER  NOT NULL COMMENT '처리분류번호', -- 처리분류번호
-	handle_date            DATETIME NOT NULL DEFAULT now() COMMENT '처리일' -- 처리일
-)
-COMMENT '신고처리';
-
--- 신고처리
-ALTER TABLE pf_report_handle
-	ADD CONSTRAINT PK_pf_report_handle -- 신고처리 기본키
-		PRIMARY KEY (
-			report_handle_no -- 신고처리번호
-		);
-
-ALTER TABLE pf_report_handle
-	MODIFY COLUMN report_handle_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '신고처리번호';
-
--- 신고처리분류
-CREATE TABLE pf_report_handle_class (
-	report_handle_class_no INTEGER     NOT NULL COMMENT '처리분류번호', -- 처리분류번호
-	report_handle_class    VARCHAR(40) NOT NULL COMMENT '처리분류명' -- 처리분류명
-=======
 -- 알림분류
 CREATE TABLE pf_alarm_class (
 	alarm_class_no INTEGER      NOT NULL COMMENT '알림분류번호', -- 알림분류번호
@@ -1141,21 +1077,11 @@ ALTER TABLE pf_alarm_class
 CREATE TABLE pf_handle_class (
 	handle_class_no INTEGER     NOT NULL COMMENT '처리분류번호', -- 처리분류번호
 	handle_class    VARCHAR(40) NOT NULL COMMENT '처리분류명' -- 처리분류명
->>>>>>> upstream/master
 )
 COMMENT '신고처리분류';
 
 -- 신고처리분류
-<<<<<<< HEAD
-ALTER TABLE pf_report_handle_class
-	ADD CONSTRAINT PK_pf_report_handle_class -- 신고처리분류 기본키
-		PRIMARY KEY (
-			report_handle_class_no -- 처리분류번호
-		);
 
-ALTER TABLE pf_report_handle_class
-	MODIFY COLUMN report_handle_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '처리분류번호';
-=======
 ALTER TABLE pf_handle_class
 	ADD CONSTRAINT PK_pf_handle_class -- 신고처리분류 기본키
 		PRIMARY KEY (
@@ -1164,7 +1090,6 @@ ALTER TABLE pf_handle_class
 
 ALTER TABLE pf_handle_class
 	MODIFY COLUMN handle_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '처리분류번호';
->>>>>>> upstream/master
 
 -- 결제수단
 CREATE TABLE pf_payment_method (
@@ -1313,8 +1238,6 @@ ALTER TABLE pf_report
 			board_no -- 게시글번호
 		);
 
-<<<<<<< HEAD
-=======
 -- 신고
 ALTER TABLE pf_report
 	ADD CONSTRAINT FK_pf_handle_class_TO_pf_report -- 신고처리분류 -> 신고
@@ -1325,7 +1248,6 @@ ALTER TABLE pf_report
 			handle_class_no -- 처리분류번호
 		);
 
->>>>>>> upstream/master
 -- 회원쪽지
 ALTER TABLE pf_message
 	ADD CONSTRAINT FK_pf_members_TO_pf_message -- 회원 -> 회원쪽지
@@ -1418,21 +1340,12 @@ ALTER TABLE pf_alarm
 
 -- 알림
 ALTER TABLE pf_alarm
-<<<<<<< HEAD
-	ADD CONSTRAINT FK_pf_alarm_title_TO_pf_alarm -- 알림제목 -> 알림
-		FOREIGN KEY (
-			alarm_title_no -- 알림제목번호
-		)
-		REFERENCES pf_alarm_title ( -- 알림제목
-			alarm_title_no -- 알림제목번호
-=======
 	ADD CONSTRAINT FK_pf_alarm_class_TO_pf_alarm -- 알림분류 -> 알림
 		FOREIGN KEY (
 			alarm_class_no -- 알림분류번호
 		)
 		REFERENCES pf_alarm_class ( -- 알림분류
 			alarm_class_no -- 알림분류번호
->>>>>>> upstream/master
 		);
 
 -- 즐겨찾기
@@ -1795,24 +1708,4 @@ ALTER TABLE pf_schedule
 		)
 		REFERENCES pf_general_member ( -- 일반회원
 			general_member_no -- 일반회원번호
-		);
-
--- 신고처리
-ALTER TABLE pf_report_handle
-	ADD CONSTRAINT FK_pf_report_TO_pf_report_handle -- 신고 -> 신고처리
-		FOREIGN KEY (
-			board_no -- 게시글번호
-		)
-		REFERENCES pf_report ( -- 신고
-			board_no -- 게시글번호
-		);
-
--- 신고처리
-ALTER TABLE pf_report_handle
-	ADD CONSTRAINT FK_pf_report_handle_class_TO_pf_report_handle -- 신고처리분류 -> 신고처리
-		FOREIGN KEY (
-			report_handle_class_no -- 처리분류번호
-		)
-		REFERENCES pf_report_handle_class ( -- 신고처리분류
-			report_handle_class_no -- 처리분류번호
 		);

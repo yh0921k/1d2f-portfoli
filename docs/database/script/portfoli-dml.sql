@@ -147,27 +147,6 @@ INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, p
 INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat) values(6, 8, 1, 1, 1);
 INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat) values(7, 9, 2, 3, 1);
 
-<<<<<<< HEAD
--- 알림제목 예제 데이터
-INSERT INTO pf_alarm_title(alarm_title_no, title) values(1,  '새 쪽지가 도착했습니다.');
-INSERT INTO pf_alarm_title(alarm_title_no, title) values(2,  '일주일 뒤 마감되는 일정이 있습니다.');
-INSERT INTO pf_alarm_title(alarm_title_no, title) values(3,  '3일 뒤 마감되는 일정이 있습니다.');
-INSERT INTO pf_alarm_title(alarm_title_no, title) values(4,  '2일 뒤 마감되는 일정이 있습니다.');
-INSERT INTO pf_alarm_title(alarm_title_no, title) values(5,  '1일 뒤 마감되는 일정이 있습니다.');
-INSERT INTO pf_alarm_title(alarm_title_no, title) values(6,  '오늘 마감되는 일정이 있습니다.');
-
--- 알림 예제 데이터
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(1, 1, 1,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(2, 1, 2,  '내용2');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(3, 2, 1,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(4, 3, 3,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(5, 4, 4,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(6, 5, 5,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(7, 6, 6,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(8, 6, 1,  '내용2');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(9, 7, 1,  '내용1');
-INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(10, 8, 1,  '내용1');
-=======
 -- 알림분류 예제 데이터
 INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(1,  '새 쪽지가 도착했습니다.');
 INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(2,  '일주일 뒤 마감되는 일정이 있습니다.');
@@ -187,7 +166,6 @@ INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(7, 6, 
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(8, 6, 1,  '내용2');
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(9, 7, 1,  '내용1');
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(10, 8, 1,  '내용1');
->>>>>>> upstream/master
 
 -- 배너 예제 데이터
 INSERT INTO pf_banner(banner_no, company_no, image, url, register_date, end_date) values(1, 1, '.data/banner1.png', 'https://plus-ex.com/', '2020-3-1 08:00:00', '2020-03-31 23:59:59');
@@ -203,12 +181,6 @@ INSERT INTO pf_report_class(report_class_no, report_class) values(3, '저작물 
 INSERT INTO pf_report_class(report_class_no, report_class) values(4, '상업적 홍보');
 INSERT INTO pf_report_class(report_class_no, report_class) values(5, '기타');
 
-<<<<<<< HEAD
--- 신고 예제 데이터 (게시글 데이터 입력 후 insert)
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(1, 1, 2, 1);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(2, 3, 4, 2);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(3, 5, 6, 3);
-=======
 -- 신고처리분류 예제 데이터
 INSERT INTO pf_handle_class(handle_class) values('게시글 삭제');
 INSERT INTO pf_handle_class(handle_class) values('1개월 정지');
@@ -219,19 +191,6 @@ INSERT INTO pf_handle_class(handle_class) values('회원 추방');
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(1, 1, 2, 1, 1, '2020-4-1', '처리내용1');
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(2, 3, 4, 2, 2, '2020-4-2', '처리내용2');
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(3, 5, 6, 3, 4, '2020-4-2', '처리내용3');
->>>>>>> upstream/master
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(4, 7, 8, 5);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(5, 1, 3, 1);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(6, 1, 8, 1);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(7, 1, 9, 4);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(8, 1, 3, 5);
-<<<<<<< HEAD
-
--- 신고처리분류 예제 데이터
-INSERT INTO pf_report_handle_class(report_handle_class) values('게시글 삭제');
-INSERT INTO pf_report_handle_class(report_handle_class) values('1개월 정지');
-INSERT INTO pf_report_handle_class(report_handle_class) values('3개월 정지');
-INSERT INTO pf_report_handle_class(report_handle_class) values('회원 추방');
 
 -- 신고처리 예제 데이터
 INSERT INTO pf_report_handle(report_handle_no, board_no, report_handle_class_no, handle_date) values(1, 1, 1, '2020-4-1');
@@ -239,8 +198,6 @@ INSERT INTO pf_report_handle(report_handle_no, board_no, report_handle_class_no,
 INSERT INTO pf_report_handle(board_no, report_handle_class_no, handle_date) values(3, 4, '2020-4-2');
 INSERT INTO pf_report_handle(board_no, report_handle_class_no, handle_date) values(4, 3, '2020-4-3');
 INSERT INTO pf_report_handle(board_no, report_handle_class_no) values(4, 2);
-=======
->>>>>>> upstream/master
 
 
 
@@ -285,3 +242,128 @@ INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 3);
 INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(4, 4);
 
 INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 1);
+
+
+-- pf_employment_status 고용형태
+insert into pf_employment_status(employment_stat_no,employment_stat_name)
+  values(1,'정규직');
+insert into pf_employment_status(employment_stat_no,employment_stat_name)
+  values(2,'계약직');
+insert into pf_employment_status(employment_stat_no,employment_stat_name)
+  values(3,'인턴');
+insert into pf_employment_status(employment_stat_no,employment_stat_name)
+  values(4,'경력직');
+insert into pf_employment_status(employment_stat_no,employment_stat_name)
+  values(5,'파견직');
+
+-- pf_major 전공 데이터
+insert into pf_major(major_no, name)
+  values(1,'손영국');
+insert into pf_major(major_no, name)
+  values(2,'김용휘');
+insert into pf_major(major_no, name)
+  values(3,'전은혜');
+insert into pf_major(major_no, name)
+  values(4,'송율리아');
+insert into pf_major(major_no, name)
+  values(5,'문국대');
+  
+-- pf_job_posting 채용공고 (pf_company_member 인서트 후)
+insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
+minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
+year_salary,readable,minimum_education_no,employment_stat_no)
+  values(1,1,'프론트엔드 개발자 모집','내용1',1,1,1,'2020-1-1','2020-1-1','2020-2-2','프론트엔드','www.google.com',
+  26000000,1,1,1);  
+insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
+minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
+year_salary,readable,minimum_education_no,employment_stat_no)
+  values(2,2,'백엔드 개발자 모집','내용2',2,2,2,'2020-2-2','2020-2-2','2020-3-3','백엔드','www.google.com',
+  28000000,2,2,2);  
+insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
+minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
+year_salary,readable,minimum_education_no,employment_stat_no)
+  values(3,3,'서버 개발자 모집','내용3',3,3,3,'2020-3-3','2020-3-3','2020-4-4','서버개발','www.google.com',
+  30000000,3,3,3);  
+insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
+minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
+year_salary,readable,minimum_education_no,employment_stat_no)
+  values(4,4,'자바 개발자 모집','내용4',4,4,4,'2020-4-4','2020-4-4','2020-5-5','자바','www.google.com',
+  32000000,4,4,4);  
+insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
+minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
+year_salary,readable,minimum_education_no,employment_stat_no)
+  values(5,5,'풀스택 개발자 모집','내용5',5,5,5,'2020-5-5','2020-5-5','2020-6-6','풀스택','www.google.com',
+  34000000,5,5,5);  
+  
+-- pf_job_posting_file 채용공고첨부파일 데이터(pf_job_posting 인서트 후)
+insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
+  values(1,1,'/file/path'); 
+insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
+  values(2,2,'/file/path'); 
+insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
+  values(3,3,'/file/path'); 
+insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
+  values(4,4,'/file/path'); 
+insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
+  values(5,5,'/file/path');  
+  
+-- pf_company_required_major 기업요구전공 데이터(pf_major , pf_job_posting 인서트 후) 
+insert into pf_company_required_major(major_no, job_posting_no)
+  values(1,1);
+insert into pf_company_required_major(major_no, job_posting_no)
+  values(2,2);
+insert into pf_company_required_major(major_no, job_posting_no)
+  values(3,3);
+insert into pf_company_required_major(major_no, job_posting_no)
+  values(4,4);
+insert into pf_company_required_major(major_no, job_posting_no)
+  values(5,5); 
+  
+-- pf_job_recommendation 채용추천 (pf_job_posting 인서트 후)
+insert into pf_job_recommendation (general_member_no,job_posting_no)
+  values(1,1);
+insert into pf_job_recommendation (general_member_no,job_posting_no)
+  values(2,2);
+insert into pf_job_recommendation (general_member_no,job_posting_no)
+  values(3,3);
+insert into pf_job_recommendation (general_member_no,job_posting_no)
+  values(4,4);
+insert into pf_job_recommendation (general_member_no,job_posting_no)
+  values(5,5);  
+  
+
+-- pf_general_mem_edu 일반회원학력 데이터(pf_final_education 인서트 후)
+insert into pf_general_mem_edu(general_member_no,education_no,school_name)
+  values(1,1,'서울대학교');
+insert into pf_general_mem_edu(general_member_no,education_no,school_name)
+  values(1,1,'고려대학교');
+insert into pf_general_mem_edu(general_member_no,education_no,school_name)
+  values(1,1,'연세대학교');
+insert into pf_general_mem_edu(general_member_no,education_no,school_name)
+  values(1,1,'세종대학교');
+insert into pf_general_mem_edu(general_member_no,education_no,school_name)
+  values(1,1,'한양대학교');
+  
+-- pf_general_mem_edu_major 일반회원학력전공(pf_general_mem_edu 인서트 후)
+insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
+  values(1,1,1);
+insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
+  values(2,2,2);
+insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
+  values(3,3,3);
+insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
+  values(4,4,4);
+insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
+  values(5,5,5);
+  
+-- pf_company_required_certificate 기업요구자격증 (pf_certificate 인서트 후)
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(1,1);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(2,2);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(3,3);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(4,4);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(5,5);  
