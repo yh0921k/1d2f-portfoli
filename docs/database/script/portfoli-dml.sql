@@ -147,6 +147,7 @@ INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, p
 INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat) values(6, 8, 1, 1, 1);
 INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat) values(7, 9, 2, 3, 1);
 
+<<<<<<< HEAD
 -- 알림제목 예제 데이터
 INSERT INTO pf_alarm_title(alarm_title_no, title) values(1,  '새 쪽지가 도착했습니다.');
 INSERT INTO pf_alarm_title(alarm_title_no, title) values(2,  '일주일 뒤 마감되는 일정이 있습니다.');
@@ -166,6 +167,27 @@ INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(7, 6, 
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(8, 6, 1,  '내용2');
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(9, 7, 1,  '내용1');
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_title_no, content) values(10, 8, 1,  '내용1');
+=======
+-- 알림분류 예제 데이터
+INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(1,  '새 쪽지가 도착했습니다.');
+INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(2,  '일주일 뒤 마감되는 일정이 있습니다.');
+INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(3,  '3일 뒤 마감되는 일정이 있습니다.');
+INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(4,  '2일 뒤 마감되는 일정이 있습니다.');
+INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(5,  '1일 뒤 마감되는 일정이 있습니다.');
+INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) values(6,  '오늘 마감되는 일정이 있습니다.');
+
+-- 알림 예제 데이터
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(1, 1, 1,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(2, 1, 2,  '내용2');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(3, 2, 1,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(4, 3, 3,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(5, 4, 4,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(6, 5, 5,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(7, 6, 6,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(8, 6, 1,  '내용2');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(9, 7, 1,  '내용1');
+INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) values(10, 8, 1,  '내용1');
+>>>>>>> upstream/master
 
 -- 배너 예제 데이터
 INSERT INTO pf_banner(banner_no, company_no, image, url, register_date, end_date) values(1, 1, '.data/banner1.png', 'https://plus-ex.com/', '2020-3-1 08:00:00', '2020-03-31 23:59:59');
@@ -181,15 +203,29 @@ INSERT INTO pf_report_class(report_class_no, report_class) values(3, '저작물 
 INSERT INTO pf_report_class(report_class_no, report_class) values(4, '상업적 홍보');
 INSERT INTO pf_report_class(report_class_no, report_class) values(5, '기타');
 
+<<<<<<< HEAD
 -- 신고 예제 데이터 (게시글 데이터 입력 후 insert)
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(1, 1, 2, 1);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(2, 3, 4, 2);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(3, 5, 6, 3);
+=======
+-- 신고처리분류 예제 데이터
+INSERT INTO pf_handle_class(handle_class) values('게시글 삭제');
+INSERT INTO pf_handle_class(handle_class) values('1개월 정지');
+INSERT INTO pf_handle_class(handle_class) values('3개월 정지');
+INSERT INTO pf_handle_class(handle_class) values('회원 추방');
+
+-- 신고 예제 데이터 (게시글 데이터 입력 후 insert)
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(1, 1, 2, 1, 1, '2020-4-1', '처리내용1');
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(2, 3, 4, 2, 2, '2020-4-2', '처리내용2');
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(3, 5, 6, 3, 4, '2020-4-2', '처리내용3');
+>>>>>>> upstream/master
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(4, 7, 8, 5);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(5, 1, 3, 1);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(6, 1, 8, 1);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(7, 1, 9, 4);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(8, 1, 3, 5);
+<<<<<<< HEAD
 
 -- 신고처리분류 예제 데이터
 INSERT INTO pf_report_handle_class(report_handle_class) values('게시글 삭제');
@@ -203,6 +239,8 @@ INSERT INTO pf_report_handle(report_handle_no, board_no, report_handle_class_no,
 INSERT INTO pf_report_handle(board_no, report_handle_class_no, handle_date) values(3, 4, '2020-4-2');
 INSERT INTO pf_report_handle(board_no, report_handle_class_no, handle_date) values(4, 3, '2020-4-3');
 INSERT INTO pf_report_handle(board_no, report_handle_class_no) values(4, 2);
+=======
+>>>>>>> upstream/master
 
 
 
