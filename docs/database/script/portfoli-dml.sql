@@ -20,6 +20,90 @@ INSERT INTO pf_members(id, password, name, post_no, basic_address, detail_addres
 
 INSERT INTO pf_members(id, password, name, post_no, basic_address, detail_address, email, tel, sms_yn, email_yn) VALUES ('planningadd', PASSWORD('1010'), '김성수', '13637', '경기도 성남시 분당구 구미로9번길 10(구미동, 세종그랑시아II)', '1-230', 'planning1@naver.com', '010-4958-9068', 1, 1);
 
+
+-- 게시글 예제 데이터 (pf_board)
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+ values(1, "제목1", "내용1", 3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (2,"제목2","내용2",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (3,"제목3","내용3",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (4,"제목4","내용4",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date, attachment)
+values (5,"제목5","내용5",3, "2020-04-01 00:00:00", 1);
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (6,"제목6","내용6",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (7,"제목7","내용7",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (8,"제목8","내용8",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (9,"제목9","내용9",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (10,"제목10","내용10",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (11,"제목11","내용11",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (12,"제목12","내용12",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (13,"제목13","내용13",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (14,"제목14","내용14",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (15,"제목15","내용15",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (16,"제목16","내용16",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (17,"제목17","내용17",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (18,"제목18","내용18",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (19,"제목19","내용19",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (20,"제목20","내용20",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (21,"제목21","내용21",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (22,"제목22","내용22",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (23,"제목23","내용23",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (24,"제목24","내용24",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (25,"제목25","내용25",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (26,"제목26","내용26",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (27,"제목27","내용27",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (28,"제목28","내용28",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (29,"제목29","내용29",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date, attachment)
+values (30,"제목30","내용30",3, "2020-04-01 00:00:00", 4);
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+ values(31, "제목31", "내용31", 3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+ values(32, "제목32", "내용32", 0, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (33,"제목33","내용33",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (34,"제목34","내용34",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date, attachment)
+values (35,"제목35","내용35",3, "2020-04-01 00:00:00", 5);
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (36,"제목36","내용36",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (37,"제목37","내용37",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (38,"제목38","내용38",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (39,"제목39","내용39",3, "2020-04-01 00:00:00");
+Insert into pf_board (board_no, title, content, view_count, registered_date)
+values (40,"제목40","내용40",3, "2020-04-01 00:00:00");
+
+
 -- 일반회원 예제 데이터
 
 INSERT INTO pf_general_member(general_member_no, seeking_flag, photo, membership, career) VALUES (1, 1, 'photo2394823jfshf.jpg', 'Portfoli Pro', 5);
@@ -31,6 +115,22 @@ INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, caree
 INSERT INTO pf_general_member(general_member_no, seeking_flag, membership) VALUES (4, 0, 'Portfoli Pro');
 
 INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, career) VALUES (5, 1, 'Portfoli Basic', 1);
+
+
+
+-- 포트폴리오 예제데이터 (pf_portfolio) pf_general_member뒤에(완료)
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(31,1,”www.naver.com”, "c:\folder1\folder2\file1.jpg", 1, 1);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(32,1,”www.daum.com”, "c:\folder1\folder2\file2.jpg", 0, 0);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(33,1,”www. daum.com”, "c:\folder1\folder2\file3.jpg", 3, 1);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(34,1,”www.daum.com”, "c:\folder1\folder2\file4.jpg", 0, 1);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(35,1,”www.daum.com”, "c:\folder1\folder2\file5.jpg", 0, 1);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(36,2,”www.daum.com”, "c:\folder1\file1.jpg", 0, 1);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(37,2,”www.google.com”, "c:\folder1\folder2\file1.jpg", 3, 0);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(38,2,”www.daum.com”, "c:\folder1\folder2\file2.jpg", 1, 1);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(39,3,”www.google.com”, "c:\ folder2\file3.jpg", 0, 0);
+Insert into pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) values(40,3,”www.google.com”, "c:\folder1\folder2\file4.jpg", 0, 1);
+
+
 
 -- 기업 예제 데이터
 
@@ -68,7 +168,8 @@ INSERT INTO pf_certificate(certificate_no, agency, name) VALUES(2290, '한국산
 
 INSERT INTO pf_certificate(certificate_no, agency, name) VALUES(2434, '한국산업인력공단', '시각디자인산업기사');
 
-INSERT INTO pf_certificate(certificate_no, agency, name) VALUES(1790, '한국산업인력공단', '시각디자인기사');
+INSERT INTO 
+(certificate_no, agency, name) VALUES(1790, '한국산업인력공단', '시각디자인기사');
 
 -- 일반회원자격증 예제 데이터
 
@@ -187,7 +288,7 @@ INSERT INTO pf_handle_class(handle_class) values('1개월 정지');
 INSERT INTO pf_handle_class(handle_class) values('3개월 정지');
 INSERT INTO pf_handle_class(handle_class) values('회원 추방');
 
--- 신고 예제 데이터 (게시글 데이터 입력 후 insert)
+-- 신고 예제 데이터 (게시글 데이터 입력 후 insert(완))
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(1, 1, 2, 1, 1, '2020-4-1', '처리내용1');
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(2, 3, 4, 2, 2, '2020-4-2', '처리내용2');
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) values(3, 5, 6, 3, 4, '2020-4-2', '처리내용3');
@@ -201,45 +302,18 @@ INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) values(
 
 
 
--- pf_bookmark (pf_portfolio 인서트 후)
+-- pf_bookmark (pf_portfolio 인서트 후(완))
 
-INSERT INTO pf_bookmark(board_no, member_no) VALUES(1, 2);
+INSERT INTO pf_bookmark(board_no, member_no) VALUES(31, 2);
 
-INSERT INTO pf_bookmark(board_no, member_no) VALUES(2, 2);
+INSERT INTO pf_bookmark(board_no, member_no) VALUES(32, 2);
 
-INSERT INTO pf_bookmark(board_no, member_no) VALUES(3, 4);
+INSERT INTO pf_bookmark(board_no, member_no) VALUES(33, 4);
 
-INSERT INTO pf_bookmark(board_no, member_no) VALUES(4, 5);
+INSERT INTO pf_bookmark(board_no, member_no) VALUES(34, 5);
 
-INSERT INTO pf_bookmark(board_no, member_no) VALUES(5, 8);
+INSERT INTO pf_bookmark(board_no, member_no) VALUES(35, 8);
 
--- pf_apply (job_posting 인서트 후)
-
-INSERT INTO pf_apply(apply_no, general_member_no, job_posting_no) VALUES(1, 1, 1);
-
-INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(2, 2);
-
-INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(3, 4);
-
-INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(4, 5);
-
-INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(1, 2);
-
--- interest_location (pf_country_district 인서트 후)
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(1, 1);
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(2, 3);
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(3, 4);
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(3, 2);
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 3);
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(4, 4);
-
-INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 1);
 
 
 -- pf_employment_status 고용형태
@@ -266,34 +340,137 @@ insert into pf_major(major_no, name)
 insert into pf_major(major_no, name)
   values(5,'문국대');
   
--- pf_job_posting 채용공고 (pf_company_member 인서트 후)
+
+
+
+
+
+
+-- 공지사항분류 예제데이터 (pf_notice_category)
+Insert into pf_notice_category (notice_no, name) values(1, "제목1");
+Insert into pf_notice_category (notice_no, name) values(2, "제목2");
+Insert into pf_notice_category (notice_no, name) values(3, "제목3");
+Insert into pf_notice_category (notice_no, name) values(4, "제목4");
+Insert into pf_notice_category (notice_no, name) values(5, "제목5");
+Insert into pf_notice_category (notice_no, name) values(6, "제목6");
+Insert into pf_notice_category (notice_no, name) values(7, "제목7");
+Insert into pf_notice_category (notice_no, name) values(8, "제목8");
+Insert into pf_notice_category (notice_no, name) values(9, "제목9"); 
+Insert into pf_notice_category (notice_no, name) values(10, "제목10");
+
+-- 공지사항 예제데이터 (pf_notice)
+Insert into pf_notice (board_no, notice_no) values(11,1);
+Insert into pf_notice (board_no, notice_no) values(12,2);
+Insert into pf_notice (board_no, notice_no) values(13,3);
+Insert into pf_notice (board_no, notice_no) values(14,4);
+Insert into pf_notice (board_no, notice_no) values(15,5);
+Insert into pf_notice (board_no, notice_no) values(16,6);
+Insert into pf_notice (board_no, notice_no) values(17,7);
+Insert into pf_notice (board_no, notice_no) values(18,8);
+Insert into pf_notice (board_no, notice_no) values(19,9);
+Insert into pf_notice (board_no, notice_no) values(20,10);
+
+-- 질문분류 예제데이터 (pf_question_class)
+Insert into pf_question_class(question_no, category) values(1, "질문유형1");
+Insert into pf_question_class(question_no, category) values(2, "질문유형2");
+Insert into pf_question_class(question_no, category) values(3, "질문유형3");
+Insert into pf_question_class(question_no, category) values(4, "질문유형4");
+Insert into pf_question_class(question_no, category) values(5, "질문유형5");
+
+
+-- qna질문 예제데이터 (pf_qna)
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(21, 1, 5, 1, 1, 1, "내용입니다", "2020-04-01 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(22, 2, 1, 1, 0, 1, "내용입니다", "2020-04-01 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(23, 3, 1, 0, 1, 0, "내용입니다", "2020-04-01 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(24, 4, 2, 0, 0, 0, "내용입니다", "2020-04-01 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(25, 5, 2, 0, 0, 0, "내용입니다", "2020-04-02 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(26, 6, 2, 0, 1, 1, "내용입니다", "2020-04-02 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(27, 7, 3, 1, 1, 0, "내용입니다", "2020-04-02 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(28, 8, 3, 0, 0, 1, "내용입니다", "2020-04-02 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(29, 9, 3, 0, 0, 0, "내용입니다", "2020-04-02 00:00:00");
+Insert into pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+values(30,10,4, 1, 1, 1, "내용입니다", "2020-04-01 00:00:00");
+
+
+
+-- 게시글추천 예제데이터 (pf_recommendation)
+Insert into pf_recommendation(board_no, member_no) values (1, 1);
+Insert into pf_recommendation(board_no, member_no) values (2, 2);
+Insert into pf_recommendation(board_no, member_no) values (3, 3);
+Insert into pf_recommendation(board_no, member_no) values (4, 4);
+Insert into pf_recommendation(board_no, member_no) values (5, 5);
+
+-- 포트폴리오파일 예제데이터 (pf_portfolio_file)
+Insert into pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+ values(1, 5, "file1.jpg", "c:\file1\file1.jpg");
+Insert into pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+ values(2, 13, "file2.jpg", "c:\file1\file2.jpg");
+Insert into pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+ values(3, 15, "file3.jpg", "c:\file1\file3.jpg");
+Insert into pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+ values(4, 20, "file4.jpg", "c:\file1\file4.jpg");
+Insert into pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+ values(5, 30, "file5.jpg", "c:\file1\file5.jpg");
+
+
+-------------------------------------------------------------------------------------------
+-- 여기서부터 FK로 인해 입력불가함.
+
+-- pf_job_posting 채용공고 (pf_company_member 인서트 후(완), pf_final_education인서트 후)
 insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
 year_salary,readable,minimum_education_no,employment_stat_no)
-  values(1,1,'프론트엔드 개발자 모집','내용1',1,1,1,'2020-1-1','2020-1-1','2020-2-2','프론트엔드','www.google.com',
+  values(1,6,'프론트엔드 개발자 모집','내용1',1,1,1,'2020-1-1','2020-1-1','2020-2-2','프론트엔드','www.google.com',
   26000000,1,1,1);  
 insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
 year_salary,readable,minimum_education_no,employment_stat_no)
-  values(2,2,'백엔드 개발자 모집','내용2',2,2,2,'2020-2-2','2020-2-2','2020-3-3','백엔드','www.google.com',
+  values(2,7,'백엔드 개발자 모집','내용2',2,2,2,'2020-2-2','2020-2-2','2020-3-3','백엔드','www.google.com',
   28000000,2,2,2);  
 insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
 year_salary,readable,minimum_education_no,employment_stat_no)
-  values(3,3,'서버 개발자 모집','내용3',3,3,3,'2020-3-3','2020-3-3','2020-4-4','서버개발','www.google.com',
+  values(3,8,'서버 개발자 모집','내용3',3,3,3,'2020-3-3','2020-3-3','2020-4-4','서버개발','www.google.com',
   30000000,3,3,3);  
 insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
 year_salary,readable,minimum_education_no,employment_stat_no)
-  values(4,4,'자바 개발자 모집','내용4',4,4,4,'2020-4-4','2020-4-4','2020-5-5','자바','www.google.com',
+  values(4,9,'자바 개발자 모집','내용4',4,4,4,'2020-4-4','2020-4-4','2020-5-5','자바','www.google.com',
   32000000,4,4,4);  
 insert into pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,
 year_salary,readable,minimum_education_no,employment_stat_no)
-  values(5,5,'풀스택 개발자 모집','내용5',5,5,5,'2020-5-5','2020-5-5','2020-6-6','풀스택','www.google.com',
+  values(5,10,'풀스택 개발자 모집','내용5',5,5,5,'2020-5-5','2020-5-5','2020-6-6','풀스택','www.google.com',
   34000000,5,5,5);  
   
--- pf_job_posting_file 채용공고첨부파일 데이터(pf_job_posting 인서트 후)
+
+
+
+-- pf_apply (pf_job_posting 인서트 후)
+
+INSERT INTO pf_apply(apply_no, general_member_no, job_posting_no) VALUES(1, 1, 1);
+
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(2, 2);
+
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(3, 4);
+
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(4, 5);
+
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(1, 2);
+
+
+
+ 
+-- pf_job_posting_file 채용공고첨부파일 데이터  (pf_job_posting 인서트 후)
 insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
   values(1,1,'/file/path'); 
 insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
@@ -305,7 +482,7 @@ insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
 insert into pf_job_posting_file(job_posting_file_no,job_posting_no,file_path)
   values(5,5,'/file/path');  
   
--- pf_company_required_major 기업요구전공 데이터(pf_major , pf_job_posting 인서트 후) 
+-- pf_company_required_major 기업요구전공 데이터 (pf_job_posting 인서트 후)
 insert into pf_company_required_major(major_no, job_posting_no)
   values(1,1);
 insert into pf_company_required_major(major_no, job_posting_no)
@@ -330,6 +507,21 @@ insert into pf_job_recommendation (general_member_no,job_posting_no)
   values(5,5);  
   
 
+  
+-- pf_company_required_certificate 기업요구자격증 (pf_job_posting 인서트 후)
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(1322,1);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(1320,2);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(1325,3);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(2290,4);
+insert into pf_company_required_certificate  (certificate_no,job_posting_no)
+  values(2434,5);  
+
+
+
 -- pf_general_mem_edu 일반회원학력 데이터(pf_final_education 인서트 후)
 insert into pf_general_mem_edu(general_member_no,education_no,school_name)
   values(1,1,'서울대학교');
@@ -341,7 +533,8 @@ insert into pf_general_mem_edu(general_member_no,education_no,school_name)
   values(1,1,'세종대학교');
 insert into pf_general_mem_edu(general_member_no,education_no,school_name)
   values(1,1,'한양대학교');
-  
+
+
 -- pf_general_mem_edu_major 일반회원학력전공(pf_general_mem_edu 인서트 후)
 insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
   values(1,1,1);
@@ -353,16 +546,33 @@ insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
   values(4,4,4);
 insert into pf_general_mem_edu_major (general_member_no,education_no,major_no)
   values(5,5,5);
+
   
--- pf_company_required_certificate 기업요구자격증 (pf_certificate 인서트 후)
-insert into pf_company_required_certificate  (certificate_no,job_posting_no)
-  values(1,1);
-insert into pf_company_required_certificate  (certificate_no,job_posting_no)
-  values(2,2);
-insert into pf_company_required_certificate  (certificate_no,job_posting_no)
-  values(3,3);
-insert into pf_company_required_certificate  (certificate_no,job_posting_no)
-  values(4,4);
-insert into pf_company_required_certificate  (certificate_no,job_posting_no)
-  values(5,5);  
- 
+-- interest_location (pf_country_district 인서트 후)
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(1, 1);
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(2, 3);
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(3, 4);
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(3, 2);
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 3);
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(4, 4);
+
+INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 1);
+
+
+-- 포트폴리오구성기술 예제데이터 (pf_member_skill 인서트 후)
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(31, 1);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(32, 1);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(33, 2);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(34, 2);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(35, 2);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(36, 2);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(37, 3);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(38, 3);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(39, 3);
+Insert into pf_portfolio_skill(board_no, member_skill_no) values(40, 4);
