@@ -1,4 +1,18 @@
-﻿-- 일반회원
+﻿-- 기존 데이터베이스가 존재하면 삭제
+DROP DATABASE IF EXISTS portfolidb;
+
+-- 데이터베이스 새로 생성
+CREATE DATABASE portfolidb
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+-- 유저에게 데이터베이스 권한 부여
+GRANT ALL ON portfolidb.* TO kyh@localhost;
+GRANT ALL ON portfolidb.* TO kyh@'%';
+
+use portfolidb;
+
+-- 일반회원
 DROP TABLE IF EXISTS pf_general_member RESTRICT;
 
 -- 기업회원
@@ -205,7 +219,7 @@ CREATE TABLE pf_job_posting (
 	title                VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content              TEXT         NOT NULL COMMENT '내용', -- 내용
 	work_place_no        INTEGER      NOT NULL COMMENT '근무지번호', -- 근무지번호
-	minimum_career    INTEGER      NULL     COMMENT '최소경력년수', -- 최소경력년수
+	minimum_career       INTEGER      NULL     COMMENT '최소경력년수', -- 최소경력년수
 	view_count           INTEGER      NOT NULL COMMENT '조회수', -- 조회수
 	posting_registration DATETIME     NOT NULL COMMENT '등록일', -- 등록일
 	start_dated          DATETIME     NOT NULL COMMENT '시작일', -- 시작일
@@ -276,9 +290,9 @@ ALTER TABLE pf_message
 CREATE TABLE pf_admin (
 	admin_no    INTEGER      NOT NULL COMMENT '관리자번호', -- 관리자번호
 	id          VARCHAR(40)  NOT NULL COMMENT '아이디', -- 아이디
-	password    VARCHAR(255) NOT NULL COMMENT '암호', -- 암호
-	ip_addr     VARCHAR(255) NOT NULL COMMENT '접속IP', -- 접속IP
-	access_time DATETIME     NOT NULL COMMENT '접속시간' -- 접속시간
+	pwd         VARCHAR(255) NOT NULL COMMENT '암호', -- 암호
+	ip_addr     VARCHAR(255) NULL     COMMENT '접속IP', -- 접속IP
+	access_time DATETIME     NULL     COMMENT '접속시간' -- 접속시간
 )
 COMMENT '관리자';
 
@@ -363,7 +377,7 @@ ALTER TABLE pf_product
 CREATE TABLE pf_members (
 	member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 	id             VARCHAR(40)  NOT NULL COMMENT '아이디', -- 아이디
-	password       VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
+	pwd            VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
 	name           VARCHAR(30)  NOT NULL COMMENT '이름', -- 이름
 	post_no        VARCHAR(6)   NULL     COMMENT '우편번호', -- 우편번호
 	basic_address  VARCHAR(100) NULL     COMMENT '기본주소', -- 기본주소
@@ -574,10 +588,13 @@ CREATE UNIQUE INDEX UIX_pf_county_district
 		district_name ASC  -- 구이름
 	);
 
+ALTER TABLE pf_county_district
+	MODIFY COLUMN county_district_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '군구번호';
+
 -- 학력
 CREATE TABLE pf_final_education (
 	education_no INTEGER     NOT NULL COMMENT '학력번호', -- 학력번호
-	category     VARCHAR(40) NOT NULL DEFAULT '기타' COMMENT '학력구분' -- 학력구분
+	category     VARCHAR(40) NOT NULL DEFAULT 'etc' COMMENT '학력구분' -- 학력구분
 )
 COMMENT '학력';
 
@@ -1059,7 +1076,7 @@ ALTER TABLE pf_schedule
 -- 알림분류
 CREATE TABLE pf_alarm_class (
 	alarm_class_no INTEGER      NOT NULL COMMENT '알림분류번호', -- 알림분류번호
-	alarm_class    VARCHAR(255) NOT NULL COMMENT '알림분류' -- 알림분류
+	alarm_class    VARCHAR(255) NOT NULL COMMENT '알림분류명' -- 알림분류명
 )
 COMMENT '알림분류';
 
