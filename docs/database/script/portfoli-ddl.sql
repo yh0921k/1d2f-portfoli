@@ -1725,3 +1725,7 @@ ALTER TABLE pf_schedule
 		REFERENCES pf_general_member ( -- 일반회원
 			general_member_no -- 일반회원번호
 		);
+		
+-- 변경
+ALTER TABLE pf_general_member MODIFY COLUMN general_member_no INTEGER NOT NULL COMMENT '일반회원번호';
+ALTER TABLE pf_company_member MODIFY COLUMN company_member_no INTEGER NOT NULL COMMENT '기업회원번호';
