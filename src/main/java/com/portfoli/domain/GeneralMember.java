@@ -2,16 +2,20 @@ package com.portfoli.domain;
 
 import java.io.Serializable;
 
-public class GeneralMember extends Member implements Serializable {
+public class GeneralMember implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  public GeneralMember() {
-    super();
+  private int number, seekingFlag, career;
+  private String photoFilePath, membership;
+
+  public int getNumber() {
+    return number;
   }
 
-  private int seekingFlag, career;
-  private String photoFilePath, membereship;
+  public void setNumber(int number) {
+    this.number = number;
+  }
 
   public int getSeekingFlag() {
     return seekingFlag;
@@ -38,11 +42,11 @@ public class GeneralMember extends Member implements Serializable {
   }
 
   public String getMembereship() {
-    return membereship;
+    return membership;
   }
 
   public void setMembereship(String membereship) {
-    this.membereship = membereship;
+    this.membership = membereship;
   }
 
   @Override
@@ -50,7 +54,8 @@ public class GeneralMember extends Member implements Serializable {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + career;
-    result = prime * result + ((membereship == null) ? 0 : membereship.hashCode());
+    result = prime * result + ((membership == null) ? 0 : membership.hashCode());
+    result = prime * result + number;
     result = prime * result + ((photoFilePath == null) ? 0 : photoFilePath.hashCode());
     result = prime * result + seekingFlag;
     return result;
@@ -67,10 +72,12 @@ public class GeneralMember extends Member implements Serializable {
     GeneralMember other = (GeneralMember) obj;
     if (career != other.career)
       return false;
-    if (membereship == null) {
-      if (other.membereship != null)
+    if (membership == null) {
+      if (other.membership != null)
         return false;
-    } else if (!membereship.equals(other.membereship))
+    } else if (!membership.equals(other.membership))
+      return false;
+    if (number != other.number)
       return false;
     if (photoFilePath == null) {
       if (other.photoFilePath != null)
@@ -84,8 +91,8 @@ public class GeneralMember extends Member implements Serializable {
 
   @Override
   public String toString() {
-    return "GeneralMember [seekingFlag=" + seekingFlag + ", career=" + career + ", photoFilePath="
-        + photoFilePath + ", membereship=" + membereship + "]";
+    return "GeneralMember [number=" + number + ", seekingFlag=" + seekingFlag + ", career=" + career
+        + ", photoFilePath=" + photoFilePath + ", membereship=" + membership + "]";
   }
 
 }

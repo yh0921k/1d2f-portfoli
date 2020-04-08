@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.MemberDao">
+
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="number" />
+    <result column="pwd" property="password"/>
+    <result column="name" property="name"/>
+    <result column="post_no" property="postNumber"/>
+    <result column="basic_address" property="basicAddress"/>
+    <result column="detail_address" property="detailAddress"/>
+    <result column="email" property="email"/>
+    <result column="tel" property="tel"/>
+    <result column="create_date" property="createDate"/>
+    <result column="sms_yn" property="smsYN"/>
+    <result column="email_yn" property="emailYN"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="Member"
+   useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
+    INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn)
+    VALUES (#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN}, #{emailYN})
+  </insert>
+  
+  
+</mapper>
