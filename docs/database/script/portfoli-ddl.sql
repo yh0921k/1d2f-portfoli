@@ -1,15 +1,21 @@
 ﻿-- 기존 데이터베이스가 존재하면 삭제
 DROP DATABASE IF EXISTS portfolidb;
 
+-- 로컬에서만 접속할 수 있는 사용자를 만들기:
+CREATE USER 'team'@localhost IDENTIFIED BY '1111';
+-- 원격에서만 접속할 수 있는 사용자를 만들기:
+CREATE USER 'team'@'%' IDENTIFIED BY '1111';
+
+-- 유저에게 데이터베이스 권한 부여
+GRANT ALL ON portfolidb.* TO team@localhost;
+GRANT ALL ON portfolidb.* TO team@'%';
+
 -- 데이터베이스 새로 생성
 CREATE DATABASE portfolidb
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 
--- 유저에게 데이터베이스 권한 부여
-GRANT ALL ON portfolidb.* TO kyh@localhost;
-GRANT ALL ON portfolidb.* TO kyh@'%';
-
+-- 데이터베이스 접속
 use portfolidb;
 
 -- 일반회원
@@ -537,8 +543,10 @@ COMMENT '포트폴리오파일';
 ALTER TABLE pf_portfolio_file
 	ADD CONSTRAINT PK_pf_portfolio_file -- 포트폴리오파일 기본키
 		PRIMARY KEY (
-			portfolio_file_no -- 파일번호
-		);
+			portfolio_file_no); -- 파일번호
+
+ALTER TABLE pf_portfolio_file
+	MODIFY portfolio_file_no INTEGER NOT NULL auto_increment;
 
 -- 분야
 CREATE TABLE pf_field (
@@ -1729,3 +1737,4 @@ ALTER TABLE pf_schedule
 -- 변경
 ALTER TABLE pf_general_member MODIFY COLUMN general_member_no INTEGER NOT NULL COMMENT '일반회원번호';
 ALTER TABLE pf_company_member MODIFY COLUMN company_member_no INTEGER NOT NULL COMMENT '기업회원번호';
+

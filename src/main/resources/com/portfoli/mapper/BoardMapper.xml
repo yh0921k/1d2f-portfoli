@@ -5,16 +5,16 @@
 
 <mapper namespace="com.portfoli.dao.BoardDao">
 	<resultMap type="Board" id="BoardMap">
-    <id column="board_no" property="number" />
-    <id column="title" property="title" />
-    <id column="content" property="content" />
-    <id column="view_count" property="viewCount" />
-    <id column="registered_date" property="registeredDate" />
-    <id column="attachment" property="attachment" />
+		<id column="board_no" property="number" />
+		<id column="title" property="title" />
+		<id column="content" property="content" />
+		<id column="view_count" property="viewCount" />
+		<id column="registered_date" property="registeredDate" />
+		<id column="attachment" property="attachment" />
 	</resultMap>
 
- 
- 
+
+
 
 </mapper>
 
