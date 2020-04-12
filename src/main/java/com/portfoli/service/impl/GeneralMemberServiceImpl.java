@@ -26,13 +26,14 @@ public class GeneralMemberServiceImpl implements GeneralMemberService {
 
   @Transactional
   @Override
-  public void add(Member member, GeneralMember generalMember) throws Exception {
+  public int add(Member member, GeneralMember generalMember) throws Exception {
     if (memberDao.insert(member) == 0) {
-      throw new Exception("회원 등록 실패.");
+      return 0;
     }
     System.out.println(member.getNumber() + member.getName());
     generalMember.setNumber(member.getNumber());
     generalMemberDao.insert(generalMember);
+    return 1;
   }
 
 }

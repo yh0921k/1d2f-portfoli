@@ -5,6 +5,6 @@ import com.portfoli.domain.Member;
 
 public interface GeneralMemberService {
 
-  void add(Member member, GeneralMember generalMember) throws Exception;
+  int add(Member member, GeneralMember generalMember) throws Exception;
 
 }
