@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.CompanyMemberDao">
+  <resultMap type="CompanyMember" id="CompanyMember">
+    <id column="company_member_no"    property="{number=number}"/>
+    <result column="position" property="position"/>
+
+    <association property="company" javaType="Company">
+      <id column="company_no" property="number"/>
+      <result column="business_registration_no" property="businessRegistrationNumber"/>
+      <result column="company_name" property="name"/>
+      <result column="company_tel" property="tel"/>
+    </association>
+  </resultMap>
+
+  <insert id="insert" parameterType="CompanyMember">
+    insert into pf_company_member(
+      company_member_no,
+	    position,
+	    company_no)
+    values(
+      #{number},
+      #{position},
+      #{company.number})
+  </insert>
+</mapper>
