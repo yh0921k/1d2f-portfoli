@@ -1,66 +1,132 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<hr>
-<div class="row">
-	<div class="col-md-8">
-		<div class="card bg-light mb-3 float-left"
-			style="max-width: 18rem; margin-right: 20px;">
-			<div class="card-body">
-				<h5 class="card-title">(주) Portfoli</h5>
-				<h3>📞 1577-1677</h3>
-				<small>대표: XXX<br> 주소: 서울특별시 xxxx xxxx xxxx<br>
-					사업자등록번호: XXX-XX-XXXXXX<br> Fax: 02-1577-1677 <br> email:
-					help@portfoli.com
-				</small>
-			</div>
-		</div>
-		<h2>Support</h2>
-		<br>
-		<h5 style="border-left: 5px solid lightgray;">
-			<button type="button" class="btn btn-link text-muted"
-				style="font-size: 14px;">FAQ</button>
-			<br>
-			<button type="button" class="btn btn-link text-muted"
-				style="font-size: 14px;">QNA</button>
-			<br>
-			<button type="button" class="btn btn-link text-muted"
-				style="font-size: 14px;">이용약관</button>
-		</h5>
-		<br> <small> CopyrightⓒPortfoli Corp. All rights reserved</small>
-	</div>
-	<div class="col-md-4">
-		<div class="dropdown float-right">
-			<button class="btn btn-secondary dropdown-toggle" type="button"
-				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false">Languages</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item" href="#">Korean</a> <a
-					class="dropdown-item" href="#">English</a> <a class="dropdown-item"
-					href="#">Japanese</a>
-			</div>
-		</div>
-		<div class="btn_wrap float-right" style="margin-top: 160px;">
-			<span class="share_span">Share</span>
-			<div class="share_container">
-				<i class="fab fa-facebook-f"></i> <i class="fab fa-twitter"></i> <i
-					class="fab fa-instagram"></i> <i class="fab fa-github"></i>
-			</div>
-		</div>
+      <!-- Footer -->
+      <footer id="footer" class="footer-dark">
+        <div class="container">
 
-	</div>
-</div>
+          <div class="row">
+            
+            <div class="bg-distinct col-12 col-md-6 col-lg-4 text-center p-0 py-5">
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
-</body>
+             
+
+              <form method="post" action="#subscribe_url" class="px-4"> 
+
+                <input type="hidden" name="action" value="subscribe" tabindex="-1"> 
+                
+                <p id="btnAriaFooterFormTitle" class="text-muted">
+                  Claim your candy now!
+                </p>
+                
+                  
+                <div class="input-group-over input-group-pill mb-4"> 
+                  
+                  <input required class="form-control b-0" name="subscriber_email" type="email" value="" placeholder="email address..." aria-label="email address...">
+                  
+                  <button type="submit" class="btn bg-transparent shadow-none" aria-label="subscribe" aria-labelledby="btnAriaFooterFormTitle"> 
+                    <i class="fi fi-send fs--18"></i> 
+                  </button>
+
+                </div>
+
+
+              </form>
+
+              <div class="mt--12"> 
+
+                <a href="#!" class="btn btn-sm btn-facebook transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="facebook page">
+                  <i class="fi fi-social-facebook"></i> 
+                </a>
+
+                <a href="#!" class="btn btn-sm btn-twitter transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="twitter page">
+                  <i class="fi fi-social-twitter"></i> 
+                </a>
+
+                <a href="#!" class="btn btn-sm btn-linkedin transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="linkedin page">
+                  <i class="fi fi-social-linkedin"></i> 
+                </a>
+
+                <a href="#!" class="btn btn-sm btn-youtube transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="youtube page">
+                  <i class="fi fi-social-youtube"></i> 
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="col-12 col-md-6 col-lg-8 py-5 fs--15 text-center-xs">
+
+              <h3 class="fs--15 text-muted">SPY US! WE'VE GOT SECRETS!</h3>
+
+              <ul class="mt--30 mb-0 breadcrumb bg-transparent p-0 block-xs"> 
+                <li class="breadcrumb-item"><a href="contact-1.html">Contact</a></li> 
+                <li class="breadcrumb-item"><a href="about-us-1.html">About Us</a></li> 
+                <li class="breadcrumb-item"><a href="page-terms-and-conditions.html">Terms &amp; Conditions</a></li> 
+                <li class="breadcrumb-item"><a href="page-cookie.html">GDPR &amp; Cookies</a></li> 
+              </ul>
+
+              <div class="text-muted mt--30">
+                <p>
+                  Frontend? Admin? What if you don't need anymore to learn and work with two different templates on your projects? 
+                  <b>What would you do if time really matter?</b> Both: frontend and admin uses exactly the same core and all elements can be used in both sides because... actually there are no such thing "two sides" with Smarty!
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="bg-distinct py-3 clearfix">
+
+          <div class="container clearfix font-weight-light text-center-xs">
+
+            <div class="fs--14 py-2 float-start float-none-xs m-0-xs">
+              &copy; My Portfoli Inc.
+            </div>
+
+            <ul class="list-inline mb-0 mt-2 float-end float-none-xs m-0-xs"> 
+              <li class="list-inline-item m-0"> 
+                <img width="38" height="24" class="lazy" data-src="resources/assets/images/credit_card/visa.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="visa credit card icon">
+              </li> 
+
+              <li class="list-inline-item m-0"> 
+                <img width="38" height="24" class="lazy" data-src="resources/assets/images/credit_card/mastercard.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="mastercard credit card icon">
+              </li> 
+
+              <li class="list-inline-item m-0"> 
+                <img width="38" height="24" class="lazy" data-src="resources/assets/images/credit_card/discover.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="discover credit card icon">
+              </li>
+
+              <li class="list-inline-item m-0"> 
+                <img width="38" height="24" class="lazy" data-src="resources/assets/images/credit_card/amazon.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="amazon credit card icon">
+              </li>
+              
+              <li class="list-inline-item m-0"> 
+                <img width="38" height="24" class="lazy" data-src="resources/assets/images/credit_card/paypal.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="paypal credit card icon">
+              </li>
+
+              <li class="list-inline-item m-0"> 
+                <img width="38" height="24" class="lazy" data-src="resources/assets/images/credit_card/skrill.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="skrill credit card icon">
+              </li>
+
+              <!-- more vendors on resources/assets/images/credit_card/ -->
+
+            </ul>
+
+          </div>
+        </div>
+
+      </footer>
+      <!-- /Footer -->
+
+
+    </div><!-- /#wrapper -->
+
+    <script src="resources/assets/js/core.min.js"></script>
+    
+  </body>
 </html>

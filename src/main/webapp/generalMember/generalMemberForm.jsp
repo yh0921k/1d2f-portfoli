@@ -4,7 +4,7 @@
 <jsp:include page='/header.jsp' />
 
 <br>
-<div class='col-md-12'>
+<div class='col-md-8' style='display: block; margin: 0 auto;'>
 	<div class='text-center'>
 		<h3>Portfoli에 오신 것을 환영합니다.</h3>
 		<del>손님은왕, 너님이왕</del>
@@ -39,7 +39,7 @@
 				<div style='display: block; margin: 0 auto;'>
 					<div class='form-check form-check-inline'>
 						<input class='form-check-input' type='radio' name='emailYN'
-							id='emailYN' value='1'> <label class='form-check-label'
+							id='emailYN' value='1' checked> <label class='form-check-label'
 							for='inlineRadio1'>이메일 수신동의</label>
 					</div>
 					<div class='form-check form-check-inline'>
@@ -51,7 +51,7 @@
 				<div style='display: block; margin: 0 auto;'>
 					<div class='form-check form-check-inline'>
 						<input class='form-check-input' type='radio' name='smsYN'
-							id='smsYN' value='1'> <label class='form-check-label'
+							id='smsYN' value='1' checked> <label class='form-check-label'
 							for='inlineRadio1'>SMS 수신동의</label>
 					</div>
 					<div class='form-check form-check-inline'>

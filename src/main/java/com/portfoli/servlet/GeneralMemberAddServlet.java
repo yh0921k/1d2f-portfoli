@@ -22,7 +22,8 @@ public class GeneralMemberAddServlet extends HttpServlet {
       throws ServletException, IOException {
     try {
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/member/generalMemberForm.jsp").include(request, response);
+      request.getRequestDispatcher("/generalMember/generalMemberForm.jsp").include(request,
+          response);
 
     } catch (Exception e) {
       throw new ServletException(e);
