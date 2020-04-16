@@ -2,17 +2,23 @@ package com.portfoli.domain;
 
 import java.io.Serializable;
 
-public class GeneralMember implements Serializable {
+public class GeneralMember extends Member implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private int number, seekingFlag, career;
   private String photoFilePath, membership;
 
+  public GeneralMember() {
+    super();
+  }
+
+  @Override
   public int getNumber() {
     return number;
   }
 
+  @Override
   public void setNumber(int number) {
     this.number = number;
   }

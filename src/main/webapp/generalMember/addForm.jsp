@@ -31,16 +31,16 @@
 					name='tel'> <input type='number' class='form-control'
 					placeholder='경력' name='career'>
 
-				<p style='display: block; margin: 0 auto;'>
-					🖊portfoli에서 보내는 이메일 및 SMS 수신에 동의하십니까?<br> 등록한 관심 채용 공고와 일정을
-					받아보실 수 있습니다!
-				</p>
+				<pre style='display: block; margin: 0 auto;'>
+					🖊portfoli에서 보내는 이메일 및 SMS 수신에 동의하십니까?
+					등록한 관심 채용 공고와 일정을받아보실 수 있습니다!
+				</pre>
 
 				<div style='display: block; margin: 0 auto;'>
 					<div class='form-check form-check-inline'>
 						<input class='form-check-input' type='radio' name='emailYN'
-							id='emailYN' value='1' checked> <label class='form-check-label'
-							for='inlineRadio1'>이메일 수신동의</label>
+							id='emailYN' value='1' checked> <label
+							class='form-check-label' for='inlineRadio1'>이메일 수신동의</label>
 					</div>
 					<div class='form-check form-check-inline'>
 						<input class='form-check-input' type='radio' name='emailYN'
@@ -51,8 +51,8 @@
 				<div style='display: block; margin: 0 auto;'>
 					<div class='form-check form-check-inline'>
 						<input class='form-check-input' type='radio' name='smsYN'
-							id='smsYN' value='1' checked> <label class='form-check-label'
-							for='inlineRadio1'>SMS 수신동의</label>
+							id='smsYN' value='1' checked> <label
+							class='form-check-label' for='inlineRadio1'>SMS 수신동의</label>
 					</div>
 					<div class='form-check form-check-inline'>
 						<input class='form-check-input' type='radio' name='smsYN'
