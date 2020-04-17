@@ -101,10 +101,9 @@
 
 									<!-- CURRENCY -->
 									<li class="dropdown list-inline-item m-0"><span
-										class="text-white">/</span>
-									<!-- optional separator --> <a id="topDDCurrency" href="#"
-										class="py-2 d-inline-block" data-toggle="dropdown"
-										aria-expanded="false"> <span
+										class="text-white">/</span> <!-- optional separator --> <a
+										id="topDDCurrency" href="#" class="py-2 d-inline-block"
+										data-toggle="dropdown" aria-expanded="false"> <span
 											class="fs--14 text-white pl-2 pr-2">USD</span>
 									</a>
 
@@ -265,9 +264,9 @@
 						<!-- 
                 Logo : height: 70px max
               -->
-						<a class="navbar-brand" href="index.html"> <img
-							src="../../resources/assets/images/logo/logo_light.svg" width="110"
-							height="70" alt="...">
+						<a class="navbar-brand" href="../../index.html"> <img
+							src="../../resources/assets/images/logo/logo_light.svg"
+							width="110" height="70" alt="...">
 						</a>
 
 					</div>
@@ -333,8 +332,8 @@
                   Logo : height: 70px max
                 -->
 							<a class="navbar-brand" href="index.html"> <img
-								src="../../resources/assets/images/logo/logo_dark.svg" width="110"
-								height="70" alt="...">
+								src="../../resources/assets/images/logo/logo_dark.svg"
+								width="110" height="70" alt="...">
 							</a>
 
 						</div>
@@ -1032,104 +1031,25 @@
 
 
 
-
-							<!-- social : mobile only (d-block d-sm-none)-->
-							<li class="nav-item d-block d-sm-none text-center mb-4">
-
-								<h3 class="h6 text-muted">Follow Us</h3> <a href="#!"
-								class="btn btn-sm btn-facebook transition-hover-top mb-2 rounded-circle text-white"
-								rel="noopener"> <i class="fi fi-social-facebook"></i>
-							</a> <a href="#!"
-								class="btn btn-sm btn-twitter transition-hover-top mb-2 rounded-circle text-white"
-								rel="noopener"> <i class="fi fi-social-twitter"></i>
-							</a> <a href="#!"
-								class="btn btn-sm btn-linkedin transition-hover-top mb-2 rounded-circle text-white"
-								rel="noopener"> <i class="fi fi-social-linkedin"></i>
-							</a> <a href="#!"
-								class="btn btn-sm btn-youtube transition-hover-top mb-2 rounded-circle text-white"
-								rel="noopener"> <i class="fi fi-social-youtube"></i>
-							</a>
-
-							</li>
-
-
-
-							<!-- buy now : mobile only (d-block d-sm-none)-->
-							<li class="nav-item d-block d-sm-none"><a target="_blank"
-								href="#buy_now"
-								class="btn btn-block btn-primary shadow-none text-white m-0">
-									Buy Now </a></li>
-
-						</ul>
 						<!-- /NAVIGATION -->
 
 
 					</div>
 
 
+					<li class="list-inline-item mx-1 dropdown">
+                <a href="#" aria-label="website search" class="btn-sow-search-toggler btn btn-sm rounded-circle btn-secondary">
+                  <i class="fi fi-search"></i>
+                </a>
+              </li>
+              
+              <li class="list-inline-item" >
+                  <a class="nav-link scroll-to" href="../../app/generalMember/joinForm.jsp" style="text-decoration: none;">회원가입</a>
+                </li>
 
-
-
-					<!-- OPTIONS -->
-					<ul class="list-inline list-unstyled mb-0 d-flex align-items-end">
-
-						<li class="list-inline-item mx-1 dropdown"><a href="#"
-							aria-label="Account Options" id="dropdownAccountOptions"
-							class="btn btn-sm rounded-circle btn-secondary"
-							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-								<span class="group-icon"> <i class="fi fi-user-male"></i>
-									<i class="fi fi-close"></i>
-							</span>
-						</a> <!--
-                  
-                  Dropdown Classes
-                    .dropdown-menu-dark     - dark dropdown (desktop only, will be white on mobile)
-                    .dropdown-menu-hover    - open on hover
-                    .dropdown-menu-clean    - no background color on hover
-                    .dropdown-menu-invert     - open dropdown in oposite direction (left|right, according to RTL|LTR)
-                    .dropdown-click-ignore    - keep dropdown open on inside click (useful on forms inside dropdown)
-
-                    Dropdown prefix icon (optional, if enabled in variables.scss)
-                      .prefix-link-icon .prefix-icon-dot    - link prefix
-                      .prefix-link-icon .prefix-icon-line   - link prefix
-                      .prefix-link-icon .prefix-icon-ico    - link prefix
-                      .prefix-link-icon .prefix-icon-arrow  - link prefix
-
-                      .prefix-icon-ignore           - ignore, do not use on a specific link
-
-                -->
-							<div aria-labelledby="dropdownAccountOptions"
-								class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore dropdown-menu-dark p-0 mt--18 fs--15">
-								<div class="dropdown-header">John Doe</div>
-								<div class="dropdown-divider"></div>
-								<a href="account-orders.html" title="My Orders"
-									class="dropdown-item text-truncate font-weight-light"> My
-									Orders <small>(2)</small>
-								</a> <a href="account-favourites.html" title="My Favourites"
-									class="dropdown-item text-truncate font-weight-light"> My
-									Favourites <small>(3)</small>
-								</a> <a href="account-settings.html" title="Account Settings"
-									class="dropdown-item text-truncate font-weight-light">
-									Account Settings </a>
-								<div class="dropdown-divider mb-0"></div>
-								<a href="#!" title="Log Out"
-									class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
-									<i class="fi fi-power float-start"></i> Log Out
-								</a>
-							</div></li>
-
-						<li class="list-inline-item mx-1 dropdown"><a href="#"
-							aria-label="website search"
-							class="btn-sow-search-toggler btn btn-sm rounded-circle btn-secondary">
-								<i class="fi fi-search"></i>
-						</a></li>
-
-						<li
-							class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-							<a target="_blank"
-							href="https://wrapbootstrap.com/theme/smarty-website-admin-rtl-WB02DSN1B"
-							class="btn btn-sm btn-warning shadow-none m-0"> Buy Now </a>
-						</li>
+              <li class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
+                <a target="_blank" href="../../app/generalMember/login.jsp" class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
+              </li>
 
 					</ul>
 					<!-- /OPTIONS -->

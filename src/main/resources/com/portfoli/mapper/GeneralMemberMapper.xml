@@ -12,6 +12,16 @@
 		<result column="photo" property="photoFilePath" />
 		<result column="membership" property="membereship" />
 		<result column="career" property="career" />
+		<result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="post_no" property="postNumber" />
+    <result column="basic_address" property="basicAddress" />
+    <result column="detail_address" property="detailAddress" />
+    <result column="email" property="email" />
+    <result column="tel" property="tel" />
+    <result column="create_date" property="createDate" />
+    <result column="sms_yn" property="smsYN" />
+    <result column="email_yn" property="emailYN" />
 	</resultMap>
 
 	<insert id="insert" parameterType="GeneralMember">
@@ -19,6 +29,14 @@
 		career)
 		VALUES(#{number}, 1, 'none', #{career})
 	</insert>
-
-
+	
+	<select id="findByEmailAndPassword" 
+    resultMap="GeneralMemberMap" 
+    parameterType="map">
+    SELECT m.member_no, m.id, m.pwd, m.name, m.post_no, m.basic_address, m.detail_address, m.email, m.tel, m.create_date, m.sms_yn, m.email_yn, g.seeking_flag, g.photo, g.membership, g.career
+    FROM pf_members m JOIN pf_general_member g
+    ON m.member_no = g.general_member_no
+    WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
+  </select>
+  
 </mapper>

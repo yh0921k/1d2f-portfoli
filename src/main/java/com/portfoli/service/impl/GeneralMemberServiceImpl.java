@@ -1,5 +1,6 @@
 package com.portfoli.service.impl;
 
+import java.util.HashMap;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,14 @@ public class GeneralMemberServiceImpl implements GeneralMemberService {
     generalMember.setNumber(member.getNumber());
     generalMemberDao.insert(generalMember);
     return 1;
+  }
+
+  @Override
+  public GeneralMember get(String email, String password) throws Exception {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("email", email);
+    params.put("password", password);
+    return generalMemberDao.findByEmailAndPassword(params);
   }
 
 }
