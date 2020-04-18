@@ -265,8 +265,8 @@
                 Logo : height: 70px max
               -->
 						<a class="navbar-brand" href="../../index.html"> <img
-							src="../../resources/assets/images/logo/logo_light.svg"
-							width="110" height="70" alt="...">
+							src="../../resources/assets/images/logo/logo.png"
+							width="110" height="32" alt="...">
 						</a>
 
 					</div>
