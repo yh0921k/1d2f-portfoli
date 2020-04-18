@@ -44,8 +44,8 @@
 		<!-- light logo -->
 		<a aria-label="go back" href="../../index.html"
 			class="position-absolute top-0 start-0 my-2 mx-4 z-index-3 h--70 d-inline-flex align-items-center">
-			<img src="../../resources/assets/images/logo/logo_light.svg"
-			width="110" alt="...">
+			<img src="../../resources/assets/images/logo/logo.png"
+			width="110" height="32" alt="...">
 		</a>
 
 
