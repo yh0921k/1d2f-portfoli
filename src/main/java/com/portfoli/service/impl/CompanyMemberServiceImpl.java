@@ -17,8 +17,8 @@ public class CompanyMemberServiceImpl implements CompanyMemberService {
   CompanyMemberDao companyMemberDao;
   CompanyDao companyDao;
 
-  public CompanyMemberServiceImpl(PlatformTransactionManager txManager,
-      MemberDao memberDao, CompanyMemberDao companyMemberDao, CompanyDao companyDao) {
+  public CompanyMemberServiceImpl(PlatformTransactionManager txManager, MemberDao memberDao,
+      CompanyMemberDao companyMemberDao, CompanyDao companyDao) {
     this.transactionTemplate = new TransactionTemplate(txManager);
     this.memberDao = memberDao;
     this.companyMemberDao = companyMemberDao;
@@ -28,6 +28,7 @@ public class CompanyMemberServiceImpl implements CompanyMemberService {
   @Transactional
   @Override
   public void add(CompanyMember companyMember) throws Exception {
+    companyMember.setType(2);
     if (companyDao.insert(companyMember.getCompany()) == 0) {
       throw new Exception("기업 등록 실패");
     }

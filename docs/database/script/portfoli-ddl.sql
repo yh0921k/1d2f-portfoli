@@ -169,6 +169,7 @@ CREATE TABLE pf_general_member (
 	photo             VARCHAR(255) NULL     COMMENT '사진', -- 사진
 	membership        VARCHAR(255) NOT NULL COMMENT '멤버십(등급)', -- 멤버십(등급)
 	career            INTEGER      NULL     COMMENT '경력' -- 경력
+	type              INTEGER      NOT NULL COMMENT '회원유형' -- 회원유형 
 )
 COMMENT '일반회원';
 

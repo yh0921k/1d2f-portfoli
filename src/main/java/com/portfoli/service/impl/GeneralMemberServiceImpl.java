@@ -28,10 +28,10 @@ public class GeneralMemberServiceImpl implements GeneralMemberService {
   @Transactional
   @Override
   public int add(Member member, GeneralMember generalMember) throws Exception {
+    member.setType(1);
     if (memberDao.insert(member) == 0) {
       return 0;
     }
-    System.out.println(member.getNumber() + member.getName());
     generalMember.setNumber(member.getNumber());
     generalMemberDao.insert(generalMember);
     return 1;
