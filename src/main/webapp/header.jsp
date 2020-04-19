@@ -19,21 +19,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <!-- preloading icon font is helping to speed up a little bit -->
 <link rel="preload"
-	href="../../resources/assets/fonts/flaticon/Flaticon.woff2" as="font"
+	href="http://localhost:9999/portfoli/resources/assets/fonts/flaticon/Flaticon.woff2" as="font"
 	type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="../../resources/assets/css/core.min.css">
+<link rel="stylesheet" href="http://localhost:9999/portfoli/resources/assets/css/core.min.css">
 <link rel="stylesheet"
-	href="../../resources/assets/css/vendor_bundle.min.css">
+	href="http://localhost:9999/portfoli/resources/assets/css/vendor_bundle.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
 <!-- favicon -->
-<link rel="shortcut icon" href="../../favicon.ico">
-<link rel="apple-touch-icon" href="demo.files/logo/icon_512x512.png">
+<link rel="shortcut icon" href="http://localhost:9999/portfoli/favicon.ico">
+<link rel="apple-touch-icon" href="http://localhost:9999/portfoli/demo.files/logo/icon_512x512.png">
 
 <link rel="manifest"
-	href="../../resources/assets/images/manifest/manifest.json">
+	href="http://localhost:9999/portfoli/resources/assets/images/manifest/manifest.json">
 <meta name="theme-color" content="#377dff">
 
 </head>
@@ -264,8 +264,8 @@
 						<!-- 
                 Logo : height: 70px max
               -->
-						<a class="navbar-brand" href="../../index.html"> <img
-							src="../../resources/assets/images/logo/logo.png"
+						<a class="navbar-brand" href="http://localhost:9999/portfoli/index.html"> <img
+							src="http://localhost:9999/portfoli/resources/assets/images/logo/logo.png"
 							width="110" height="32" alt="...">
 						</a>
 
@@ -332,7 +332,7 @@
                   Logo : height: 70px max
                 -->
 							<a class="navbar-brand" href="index.html"> <img
-								src="../../resources/assets/images/logo/logo_dark.svg"
+								src="http://localhost:9999/portfoli/resources/assets/images/logo/logo_dark.svg"
 								width="110" height="70" alt="...">
 							</a>
 
@@ -382,7 +382,7 @@
 								<!-- image -->
 								<div class="mb-4">
 									<img width="600" height="600" class="img-fluid"
-										src="demo.files/svg/artworks/people_crossbrowser.svg"
+										src="http://localhost:9999/portfoli/demo.files/svg/artworks/people_crossbrowser.svg"
 										alt="...">
 								</div> <!-- search -->
 								<form method="get" action="#!search"
@@ -977,7 +977,7 @@
 
 													<div class="mt-4">
 														<img width="600" height="600" class="img-fluid"
-															src="demo.files/svg/artworks/undraw_wireframing_nxyi.svg"
+															src="http://localhost:9999/portfoli/demo.files/svg/artworks/undraw_wireframing_nxyi.svg"
 															alt="...">
 													</div>
 
@@ -1006,7 +1006,7 @@
 
 										<span class="float-start w--50 mr--20"> <img width="50"
 											height="50" class="img-fluid"
-											src="demo.files/svg/icons/menu_doc_1.svg" alt="...">
+											src="http://localhost:9999/portfoli/demo.files/svg/icons/menu_doc_1.svg" alt="...">
 									</span> DOCUMENTATION <span
 										class="d-block text-white text-truncate fs--14"> Don't
 											get stuck! </span>
@@ -1022,7 +1022,7 @@
 
 										<span class="float-start w--50 mr--20"> <img width="50"
 											height="50" class="img-fluid"
-											src="demo.files/svg/icons/menu_doc_2.svg" alt="...">
+											src="http://localhost:9999/portfoli/demo.files/svg/icons/menu_doc_2.svg" alt="...">
 									</span> CHANGELOG <span
 										class="d-block text-white text-truncate fs--14"> Smarty
 											Reborn Changes </span>
@@ -1044,11 +1044,11 @@
               </li>
               
               <li class="list-inline-item" >
-                  <a class="nav-link scroll-to" href="../../app/generalMember/joinForm.jsp" style="text-decoration: none;">회원가입</a>
+                  <a class="nav-link scroll-to" href="http://localhost:9999/portfoli/app/generalMember/join.jsp" style="text-decoration: none;">회원가입</a>
                 </li>
 
               <li class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-                <a target="_blank" href="../../app/generalMember/login.jsp" class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
+                <a target="_blank" href="http://localhost:9999/portfoli/app/generalMember/login.jsp" class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
               </li>
 
 					</ul>

@@ -50,7 +50,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
       <!-- light logo -->
       <a
         aria-label="go back"
-        href="index.html"
+        href="../../index.html"
         class="position-absolute top-0 start-0 my-2 mx-4 z-index-3 h--70 d-inline-flex align-items-center"
       >
         <img
@@ -124,7 +124,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
                   type="checkbox"
                   name="saveEmail"
                   style="color: graytext; margin: 10px 0px 0px 0px;"
-                />
+                 checked />
                 아이디 저장해두기<br />
               </div>
 
@@ -156,7 +156,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
                 </div>
 
                 <div class="col-12 col-md-6 mt-4 text-align-end text-center-xs">
-                  <a href="#" class="btn px-0"> 아직 계정이 없으신가요? </a>
+                  <a href="../generalMember/join" class="btn px-0"> 아직 계정이 없으신가요? </a>
                 </div>
               </div>
             </form>
