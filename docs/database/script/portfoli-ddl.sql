@@ -217,6 +217,10 @@ ALTER TABLE pf_portfolio
 		PRIMARY KEY (
 			board_no -- 포트폴리오게시글번호
 		);
+		
+ALTER TABLE pf_portfolio
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
+
 
 -- 채용공고
 CREATE TABLE pf_job_posting (
@@ -877,6 +881,9 @@ ALTER TABLE pf_board
 		PRIMARY KEY (
 			board_no -- 게시글번호
 		);
+		
+ALTER TABLE pf_board
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
 
 -- QNA질문
 CREATE TABLE pf_qna (
@@ -1014,6 +1021,10 @@ ALTER TABLE pf_question_class
 		PRIMARY KEY (
 			question_no -- 질문분류번호
 		);
+		
+ALTER TABLE pf_question_class
+  MODIFY COLUMN question_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문분류번호';
+
 
 -- 신고분류
 CREATE TABLE pf_report_class (
@@ -1060,6 +1071,10 @@ ALTER TABLE pf_notice_category
 		PRIMARY KEY (
 			notice_no -- 공지사항분류번호
 		);
+		
+ALTER TABLE pf_notice_category
+  MODIFY COLUMN notice_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항분류번호';
+
 
 -- 일정(개인용)
 CREATE TABLE pf_schedule (
@@ -1644,6 +1659,10 @@ ALTER TABLE pf_qna
 			question_no -- 질문분류번호
 		);
 
+ALTER TABLE pf_qna
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
+
+		
 -- 회원기업공고지원
 ALTER TABLE pf_apply
 	ADD CONSTRAINT FK_pf_general_member_TO_pf_apply -- 일반회원 -> 회원기업공고지원
@@ -1704,6 +1723,10 @@ ALTER TABLE pf_recommendation
 			member_no -- 회원번호
 		);
 
+ALTER TABLE pf_recommendation
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
+
+		
 -- 팔로잉
 ALTER TABLE pf_following
 	ADD CONSTRAINT FK_pf_members_TO_pf_following -- 회원 -> 팔로잉

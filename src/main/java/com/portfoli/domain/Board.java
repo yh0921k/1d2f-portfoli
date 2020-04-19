@@ -2,25 +2,25 @@ package com.portfoli.domain;
 
 import java.sql.Date;
 
-public abstract class Board implements java.io.Serializable{
+public /*abstract*/ class Board implements java.io.Serializable{
   private static final long serialVersionUID = 1L;
-  
+
   int number;
   String title;
   String content;
   int viewCount;
   Date registeredDate;
   String attachment;
-  
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((attachment == null) ? 0 : attachment.hashCode());
-    result = prime * result + ((content == null) ? 0 : content.hashCode());
+    result = prime * result + (attachment == null ? 0 : attachment.hashCode());
+    result = prime * result + (content == null ? 0 : content.hashCode());
     result = prime * result + number;
-    result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
-    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    result = prime * result + (registeredDate == null ? 0 : registeredDate.hashCode());
+    result = prime * result + (title == null ? 0 : title.hashCode());
     result = prime * result + viewCount;
     return result;
   }
@@ -101,6 +101,6 @@ public abstract class Board implements java.io.Serializable{
     this.attachment = attachment;
   }
 
-  
-  
+
+
 }
