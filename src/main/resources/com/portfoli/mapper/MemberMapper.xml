@@ -18,13 +18,14 @@
 		<result column="create_date" property="createDate" />
 		<result column="sms_yn" property="smsYN" />
 		<result column="email_yn" property="emailYN" />
+		<result column="type" property="type" />
 	</resultMap>
 
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
-		INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn)
+		INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type)
 		VALUES (#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
-		#{emailYN})
+		#{emailYN}, #{type})
 	</insert>
 
 

@@ -97,8 +97,13 @@ public class GeneralMember extends Member implements Serializable {
 
   @Override
   public String toString() {
-    return "GeneralMember [number=" + number + ", seekingFlag=" + seekingFlag + ", career=" + career
-        + ", photoFilePath=" + photoFilePath + ", membereship=" + membership + "]";
+    return "GeneralMember [number=" + super.getNumber() + ", type=" + super.getType() + ", smsYN="
+        + super.getSmsYN() + ", emailYN=" + super.getEmailYN() + ", id=" + super.getId()
+        + ", password=" + super.getPassword() + ", name=" + super.getName() + ", postNumber="
+        + super.getPostNumber() + ", basicAddress=" + super.getBasicAddress() + ", detailAddress="
+        + super.getDetailAddress() + ", email=" + super.getEmail() + ", tel=" + super.getTel()
+        + ", createDate=" + super.getCreateDate() + ", seekingFlag=" + seekingFlag + ", career="
+        + career + ", photoFilePath=" + photoFilePath + ", membereship=" + membership + "]";
   }
 
 }

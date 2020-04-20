@@ -7,7 +7,7 @@ public class Member implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private int number, smsYN, emailYN;
+  private int number, smsYN, emailYN, type;
   private String id, password, name, postNumber, basicAddress, detailAddress, email, tel;
   private Date createDate;
 
@@ -33,6 +33,14 @@ public class Member implements Serializable {
 
   public void setEmailYN(int emailYN) {
     this.emailYN = emailYN;
+  }
+
+  public int getType() {
+    return type;
+  }
+
+  public void setType(int type) {
+    this.type = type;
   }
 
   public String getId() {
@@ -123,6 +131,7 @@ public class Member implements Serializable {
     result = prime * result + ((postNumber == null) ? 0 : postNumber.hashCode());
     result = prime * result + smsYN;
     result = prime * result + ((tel == null) ? 0 : tel.hashCode());
+    result = prime * result + type;
     return result;
   }
 
@@ -186,15 +195,17 @@ public class Member implements Serializable {
         return false;
     } else if (!tel.equals(other.tel))
       return false;
+    if (type != other.type)
+      return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "Member [number=" + number + ", smsYN=" + smsYN + ", emailYN=" + emailYN + ", id=" + id
-        + ", password=" + password + ", name=" + name + ", postNumber=" + postNumber
-        + ", basicAddress=" + basicAddress + ", detailAddress=" + detailAddress + ", email=" + email
-        + ", tel=" + tel + ", createDate=" + createDate + "]";
+    return "Member [number=" + number + ", smsYN=" + smsYN + ", emailYN=" + emailYN + ", type="
+        + type + ", id=" + id + ", password=" + password + ", name=" + name + ", postNumber="
+        + postNumber + ", basicAddress=" + basicAddress + ", detailAddress=" + detailAddress
+        + ", email=" + email + ", tel=" + tel + ", createDate=" + createDate + "]";
   }
 
 }
