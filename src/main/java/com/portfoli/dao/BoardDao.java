@@ -7,9 +7,9 @@ public interface BoardDao {
 
   int insert(Board board) throws Exception;
 
-  int insert(Board board, String attachment) throws Exception;
-
   List<Board> findAll() throws Exception;
+
+  Board findByNo(int number) throws Exception;
 
 
 }

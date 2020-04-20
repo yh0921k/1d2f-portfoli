@@ -75,7 +75,7 @@
 
 
 					<!-- optional class: .form-control-pill -->
-					<form action="addForm" method="POST"
+					<form action="add" method="POST"
 						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600"
 						data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
 						data-error-toast-delay="3000"

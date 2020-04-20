@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8" />
@@ -44,8 +44,8 @@
 		<!-- light logo -->
 		<a aria-label="go back" href="../../index.html"
 			class="position-absolute top-0 start-0 my-2 mx-4 z-index-3 h--70 d-inline-flex align-items-center">
-			<img src="../../resources/assets/images/logo/logo.png"
-			width="110" height="32" alt="...">
+			<img src="../../resources/assets/images/logo/logo.png" width="110"
+			height="32" alt="...">
 		</a>
 
 
@@ -70,72 +70,30 @@
 
 
 			<div class="col-12 col-lg-7 d-lg-flex">
-				<div
-					class="w-100 align-self-center text-center-md text-center-xl py-2">
+				<div class="w-100 align-self-center text-center-md text-center-xl py-2">
+
+					<table style="color: white">
+						<tr>
+							<th>게시물번호</th>
+							<th>제목</th>
+							<th>내용</th>
+							<th>조회수</th>
+							<th>등록일</th>
+							<th>첨부파일</th>
+						</tr>
 
 
-					<!-- optional class: .form-control-pill -->
-					<form action="list" method="POST"
-						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600"
-						data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
-						data-error-toast-delay="3000"
-						data-error-toast-position="top-right" data-error-scroll-up="true">
-
-						<!--
-              <p class="text-danger">
-                Ups! Please check again
-              </p>
-              -->
-
-
-						<div class="form-label-group mb-3">
-							<input required placeholder="타이틀" name="title" type="text"
-								class="form-control"> <label for="account_id">타이틀</label>
-						</div>
-
-						<div class="input-group-over">
-							<div class="form-label-group mb-3">
-								<input required placeholder="콘텐트" name="content" type="text"
-									class="form-control"> <label for="account_email">콘텐트</label>
-							</div>
-						</div>
-
-						<div class="form-label-group mb-3">
-							<input required placeholder="뷰카운트" name="viewCount"
-								type="number" class="form-control"> <label
-								for="account_password">뷰카운트(숫자)</label>
-						</div>
-
-						<div class="form-label-group mb-3">
-							<input required placeholder="등록일" name="registeredDate" type="date"
-								class="form-control"> <label for="account_name">등록일</label>
-						</div>
-
-						<div class="form-label-group mb-3">
-							<input required placeholder="첨부파일" name="attachment" type="text"
-								class="form-control"> <label for="account_id">첨부파일</label>
-						</div>
-
-
-						<div class="clearfix bg-light position-relative rounded p-4 mb-4">
-							<span class="text-muted fs--15 d-block m-2"> 🖊 이거 그냥 샘플임
-							</span>
-						</div>
-
-						<div class="row">
-
-							<div class="col-12 col-md-8">
-								<button type="submit" class="btn btn-primary btn-block" style="display: block; margin: 0 90px;">
-									입력하기</button>
-							</div>
-
-							<div class="col-12 col-md-6 mb-4 text-align-end text-center-xs">
-								<!-- empty -->
-							</div>
-
-						</div>
-
-					</form>
+            <c:forEach items="${list}" var="item">
+						<tr>
+							<th><a href="detail?number=${item.number}">${item.number}</a></th>
+							<th><a href="detail?number=${item.number}">${item.title}</a></th>
+							<th><a href="detail?number=${item.number}">${item.content}</a></th>
+							<th><a href="detail?number=${item.number}">${item.viewCount}</a></th>
+							<th><a href="detail?number=${item.number}">${item.registeredDate}</a></th>
+							<th><a href="detail?number=${item.number}">${item.attachment}</a></th>
+						</tr>
+            </c:forEach>
+					</table>
 
 				</div>
 			</div>
