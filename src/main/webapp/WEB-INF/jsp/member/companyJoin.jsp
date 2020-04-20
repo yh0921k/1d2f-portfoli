@@ -31,7 +31,7 @@ function chkBizNumber() {
 <body>
 
 <h1>기업회원 가입</h1>
-<form name='form' action='join' onsubmit='return chkBizNumber();' method='post'>
+<form name='form' action='companyJoin' onsubmit='return chkBizNumber();' method='post'>
 사업자등록번호: <input name='businessRegistrationNumber' type='text' maxlength='12'><br>
 기업명: <input name='companyName' type='text'><br>
 기업전화번호: <input name='companyTel' type='text'><br>

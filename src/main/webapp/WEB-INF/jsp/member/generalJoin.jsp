@@ -90,7 +90,7 @@
 				<div
 					class="w-100 align-self-center text-center-md text-center-xs py-2">
 					<!-- optional class: .form-control-pill -->
-					<form action="join" method="POST"
+					<form action="generalJoin" method="POST"
 						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600"
 						data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
 						data-error-toast-delay="3000"
@@ -191,7 +191,7 @@
 								<button type="submit" class="btn btn-primary btn-block"
 									style="display: block; margin: 0 90px;">
 									회원가입</button>
-								<a href="../companyMember/join"
+								<a href="../member/companyJoin"
 									style="color: graytext; display: block; margin: 10px 0px 0px 175px;">기업
 									회원 가입하기</a>
 							</div>

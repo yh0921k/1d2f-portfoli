@@ -156,7 +156,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
                 </div>
 
                 <div class="col-12 col-md-6 mt-4 text-align-end text-center-xs">
-                  <a href="../generalMember/join" class="btn px-0"> 아직 계정이 없으신가요? </a>
+                  <a href="../member/generalJoin" class="btn px-0"> 아직 계정이 없으신가요? </a>
                 </div>
               </div>
             </form>

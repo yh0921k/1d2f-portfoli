@@ -52,4 +52,7 @@ dependencies {
     implementation 'jstl:jstl:1.2'
     
     implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.5'
+    
+    // multipart 데이터 처리 라이브러리
+    implementation 'commons-fileupload:commons-fileupload:1.4'
 }

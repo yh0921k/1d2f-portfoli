@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.portfoli.domain.CompanyMember;
@@ -12,6 +13,7 @@ import com.portfoli.domain.Member;
 import com.portfoli.service.MemberService;
 
 @Controller
+@RequestMapping("member")
 public class MemberController {
 
   static Logger logger = LogManager.getLogger(MemberController.class);
@@ -25,12 +27,10 @@ public class MemberController {
 
   // 일반회원
 
-  @RequestMapping("/generalMember/join")
-  public String addForm() {
-    return "/generalMember/addForm.jsp";
-  }
+  @GetMapping("generalJoin")
+  public void addForm() {}
 
-  @PostMapping("/generalMember/join")
+  @PostMapping("generalJoin")
   public String add(Member member, GeneralMember generalMember) throws Exception {
 
     if (memberService.add(member, generalMember) > 0) {
@@ -43,12 +43,10 @@ public class MemberController {
 
   // 기업회원
 
-  @RequestMapping("/companyMember/join")
-  public String companyAddForm() {
-    return "/companyMember/JoinForm.jsp";
-  }
+  @GetMapping("companyJoin")
+  public void companyAddForm() {}
 
-  @PostMapping("/companyMember/join")
+  @PostMapping("companyJoin")
   public String companyAdd(CompanyMember companyMember) throws Exception {
 
     memberService.add(companyMember);

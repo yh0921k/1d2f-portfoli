@@ -8,12 +8,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.service.MemberService;
 
 @Controller
+@RequestMapping("auth")
 public class AuthController {
 
   static Logger logger = LogManager.getLogger(MemberController.class);
@@ -25,8 +27,8 @@ public class AuthController {
   @Autowired
   MemberService memberService;
 
-  @RequestMapping("/auth/login")
-  public String loginForm(HttpServletRequest request, Map<String, Object> model) throws Exception {
+  @GetMapping("loginForm")
+  public void loginForm(HttpServletRequest request, Map<String, Object> model) throws Exception {
 
     String email = "";
     Cookie[] cookies = request.getCookies();
@@ -39,11 +41,9 @@ public class AuthController {
       }
     }
     model.put("email", email);
-
-    return "/auth/loginForm.jsp";
   }
 
-  @PostMapping("/auth/login")
+  @PostMapping("login")
   public String login(HttpServletRequest request, HttpServletResponse response, String email,
       String password, String saveEmail) throws Exception {
 
@@ -66,7 +66,7 @@ public class AuthController {
       request.getSession().invalidate();
       request.setAttribute("refreshUrl", "2;url=login");
     }
-    return "/auth/login.jsp";
+    return "auth/login";
   }
 
   @RequestMapping("/auth/logout")

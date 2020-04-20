@@ -3,7 +3,7 @@
 	errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:include page="/header.jsp" />
+<jsp:include page="../header.jsp" />
 
 <section class="bg-light p-0">
 	<div class="container py-5" style="height: 550px">
@@ -20,4 +20,4 @@
 	</div>
 </section>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="../footer.jsp" />
