@@ -28,10 +28,9 @@ public class NoticeController {
   NoticeService noticeService;
 
   @RequestMapping("list")
-  public String list(Model model) throws Exception {
+  public void list(Model model) throws Exception {
     List<Notice> notices = noticeService.list();
     model.addAttribute("list", notices);
-    return "/notice/list.jsp";
   }
 
 

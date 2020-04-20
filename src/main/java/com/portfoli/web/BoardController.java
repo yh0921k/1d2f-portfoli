@@ -26,16 +26,13 @@ public class BoardController {
   BoardService boardService;
 
   @RequestMapping("list")
-  public String list(Model model) throws Exception{
+  public void list(Model model) throws Exception{
     List<Board> boards = boardService.list();
     model.addAttribute("list", boards);
-    return "/board/list.jsp";
   }
 
   @RequestMapping("form")
-  public String form() throws Exception {
-    return "/board/form.jsp";
-  }
+  public void form() throws Exception {}
 
   @RequestMapping("add")
   public String add(String title, String content, int viewCount, String attachment) throws Exception {
@@ -44,17 +41,15 @@ public class BoardController {
     board.setContent(content);
     board.setTitle(title);
     board.setAttachment(attachment);
-    System.out.println(board);
 
     boardService.add(board);
     return "redirect:list";
   }
 
   @GetMapping("detail")
-  public String detail(int number, Model model) throws Exception {
+  public void detail(int number, Model model) throws Exception {
     Board board = boardService.get(number);
     model.addAttribute("board", board);
-    return "/board/detail.jsp";
   }
 
   @GetMapping("delete")
@@ -68,7 +63,6 @@ public class BoardController {
 
   @PostMapping("updateForm")
   public String updateForm(Board board) throws Exception {
-    System.out.println(board);
     if(boardService.update(board))
       return "redirect:list";
     else
