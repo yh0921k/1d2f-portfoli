@@ -6,15 +6,67 @@
 <mapper namespace="com.portfoli.dao.BoardDao">
 	<resultMap type="Board" id="BoardMap">
 		<id column="board_no" property="number" />
-		<id column="title" property="title" />
-		<id column="content" property="content" />
-		<id column="view_count" property="viewCount" />
-		<id column="registered_date" property="registeredDate" />
-		<id column="attachment" property="attachment" />
+    <result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="view_count" property="viewCount" />
+		<result column="registered_date" property="registeredDate" />
+		<result column="attachment" property="attachment" />
 	</resultMap>
 
+  <sql id="select">
+    SELECT board_no, title, content, view_count, registered_date, attachment
+    FROM pf_board
+  </sql>
+
+  <select id="findAll" resultMap="BoardMap">
+    <include refid="select"/>
+      order by board_no desc
+  </select>
+  
+    <select id="findByNo" resultMap="BoardMap" parameterType="int">
+    <include refid="select"/>
+      WHERE board_no = #{number}
+  </select>
+
+  <insert id="insert" parameterType="Board">
+    INSERT INTO pf_board (
+	    title, 
+	    content, 
+	    view_count, 
+	    registered_date, 
+	    attachment)
+    VALUES(
+	    #{title},
+	    #{content}, 
+	    #{viewCount}, 
+	    now(), 
+      <if test="attachment!=null and attachment!=''">
+	    #{attachment}
+	    </if>
+	    <if test="attachment==null or attachment == ''">
+	    null
+	    </if> 
+    )
+  </insert>
+ 
+   <update id="update" parameterType="Board">
+     UPDATE pf_board SET 
+	     registered_date = now()
+	     <if test="title!=null and title!=''">,title = #{title}</if>
+	     <if test="content!=null and content!=''">,content = #{content}</if>
+	     <if test="viewCount!=null and viewCount!=''">,view_count = #{viewCount}</if>
+	     <if test="attachment!=null and attachment!=''">,attachment = #{attachment}</if>
+     WHERE board_no = #{number}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    DELETE 
+      FROM pf_board
+    WHERE board_no = #{number}
+  </delete>
 
 
+ 
 
 </mapper>
 
