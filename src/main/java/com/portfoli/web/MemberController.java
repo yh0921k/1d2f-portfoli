@@ -7,9 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.portfoli.domain.Company;
 import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
+import com.portfoli.service.CompanyService;
 import com.portfoli.service.MemberService;
 
 @Controller
@@ -19,11 +22,14 @@ public class MemberController {
   static Logger logger = LogManager.getLogger(MemberController.class);
 
   public MemberController() {
-    MemberController.logger.debug("GeneralMemeberController 객체 생성!");
+    logger.debug("GeneralMemeberController 객체 생성!");
   }
 
   @Autowired
   MemberService memberService;
+
+  @Autowired
+  CompanyService companyService;
 
   // 일반회원
 
@@ -47,10 +53,16 @@ public class MemberController {
   public void companyAddForm() {}
 
   @PostMapping("companyJoin")
-  public String companyAdd(CompanyMember companyMember) throws Exception {
+  public String companyAdd(Member member, CompanyMember companyMember,
+      @RequestParam("businessRegistrationNumber") String businessRegistrationNumber)
+      throws Exception {
 
-    memberService.add(companyMember);
-    return "redirect:/index.html";
+    Company company = companyService.getByBusinessRegistrationNumber(businessRegistrationNumber);
+    if (memberService.add(member, companyMember, company.getNumber()) > 0) {
+      return "redirect:/index.html";
+    } else {
+      throw new Exception("회원을 추가할 수 없습니다.");
+    }
   }
 
 

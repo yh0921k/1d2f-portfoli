@@ -22,4 +22,11 @@
 	    #{name},
 	    #{tel})
 	</insert>
+	
+	<select id="findByBusinessRegistrationNumber" resultMap="CompanyMap" parameterType="string">
+    SELECT *
+    FROM pf_company
+    WHERE business_registration_no=#{businessRegistrationNumber}
+  </select>
+  
 </mapper>

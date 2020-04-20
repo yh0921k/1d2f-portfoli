@@ -35,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
   }
 
 
+  // 일반회원가입
   @Transactional
   @Override
   public int add(Member member, GeneralMember generalMember) throws Exception {
@@ -47,20 +48,23 @@ public class MemberServiceImpl implements MemberService {
     return 1;
   }
 
+  // 기업회원가입
   @Transactional
   @Override
-  public void add(CompanyMember companyMember) throws Exception {
-    companyMember.setType(2);
-    // Company company = new Company();
-    // companyMember.setCompany(company);
-    if (companyDao.insert(companyMember.getCompany()) == 0) {
-      throw new Exception("기업 등록 실패");
+  public int add(Member member, CompanyMember companyMember, int companyNumber) throws Exception {
+    member.setType(2);
+    if (memberDao.insert(member) == 0) {
+      return 0;
     }
 
-    memberDao.insert(companyMember);
+    companyMember.setNumber(member.getNumber());
+    companyMember.setCompanyNumber(companyNumber);
     companyMemberDao.insert(companyMember);
+    return 1;
   }
 
+
+  // 로그인
   @Override
   public GeneralMember get(String email, String password) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
