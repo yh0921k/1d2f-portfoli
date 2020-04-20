@@ -11,11 +11,9 @@ public interface BoardService {
 
   Board get(int number) throws Exception;
 
-  
-//  boolean delete(int boardNo) throws Exception;
-//
-//
-//  boolean update(Board newBoard) throws Exception;
-  
-  
+  boolean delete(int number) throws Exception;
+
+  boolean update(Board board) throws Exception;
+
+
 }

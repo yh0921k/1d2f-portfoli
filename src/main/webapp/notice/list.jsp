@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <jsp:include page="/header.jsp"/>
 
 			<!-- PAGE TITLE -->
@@ -130,17 +130,24 @@
 							<div class="bg-white p-5 p-4-xs rounded-xl article-format">
                 <table border='1'>
                 <tr>
-                <td>
-								제목
-								</td>
-								<td style='width:70%'>
-								내용
-								</td>
-								<td>
-                                    조회수
-                </td>
-								
+                  <td>공지사항 글 번호</td>
+                  <td>제목</td>
+                  <td>내용</td>
+                  <td>조회수</td>
+                  <td>등록일</td>
                 </tr>
+                
+            <c:forEach items="${list}" var="item">
+            <tr>
+              <td><a href="detail?number=${item.number}">${item.noticeNumber}</a></td>
+              <td><a href="detail?number=${item.number}">${item.title}</a></td>
+              <td><a href="detail?number=${item.number}">${item.content}</a></td>
+              <td><a href="detail?number=${item.number}">${item.viewCount}</a></td>
+              <td><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
+            </tr>
+            </c:forEach>
+
+                
                 </table>
 
 							</div>

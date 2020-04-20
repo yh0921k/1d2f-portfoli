@@ -64,7 +64,7 @@
                       <ul class="mt-4 mb-0 list-unstyled p-0 block-xs"> 
                         <li><a href="#!">FAQ</a></li> 
                         <li><a href="#!">QNA</a></li> 
-                        <li><a href="#!">고객센터</a></li> 
+                        <li><a href="../notice/list">고객센터</a></li> 
                       </ul>
     
                     </div>

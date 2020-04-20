@@ -12,20 +12,25 @@ public class NoticeServiceImpl implements NoticeService {
   NoticeDao noticeDao;
   TransactionTemplate transactionTemplate;
 
-  @Override
-  public int add(Notice notice) throws Exception {
-    if (noticeDao.insert(notice) == 0) {
-      return 0;
-    }
-    System.out.println("게시판 등록 성공! (게시글번호 : 공지사항 분류번호)");
-    System.out.println(notice.getNumber() + " : " + notice.getNoticeNumber());
-    return 1;
+  public NoticeServiceImpl(NoticeDao noticeDao) {
+    this.noticeDao = noticeDao;
   }
 
   @Override
   public List<Notice> list() throws Exception {
-    return noticeDao.findByAll();
+    return noticeDao.findAll();
   }
+
+  //  @Override
+  //  public int add(Notice notice) throws Exception {
+  //    if (noticeDao.insert(notice) == 0) {
+  //      return 0;
+  //    }
+  //    System.out.println("게시판 등록 성공! (게시글번호 : 공지사항 분류번호)");
+  //    System.out.println(notice.getNumber() + " : " + notice.getNoticeNumber());
+  //    return 1;
+  //  }
+
 
 
 }

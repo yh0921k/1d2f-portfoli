@@ -6,7 +6,7 @@
 <mapper namespace="com.portfoli.dao.BoardDao">
 	<resultMap type="Board" id="BoardMap">
 		<id column="board_no" property="number" />
-		<result column="title" property="title" />
+    <result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="view_count" property="viewCount" />
 		<result column="registered_date" property="registeredDate" />
@@ -48,15 +48,14 @@
 	    </if> 
     )
   </insert>
-
  
    <update id="update" parameterType="Board">
      UPDATE pf_board SET 
-	     registeredDate = now()
-	     <if test="title!=null and title!=''">title = #{title},</if>
-	     <if test="content!=null and content!=''">content = #{content},</if>
-	     <if test="viewCount!=null and viewCount!=''">view_count = #{viewCount},</if>
-	     <if test="attachment!=null and attachment!=''">attachment = #{attachment},</if>
+	     registered_date = now()
+	     <if test="title!=null and title!=''">,title = #{title}</if>
+	     <if test="content!=null and content!=''">,content = #{content}</if>
+	     <if test="viewCount!=null and viewCount!=''">,view_count = #{viewCount}</if>
+	     <if test="attachment!=null and attachment!=''">,attachment = #{attachment}</if>
      WHERE board_no = #{number}
   </update>
 

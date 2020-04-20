@@ -5,8 +5,8 @@ import com.portfoli.domain.Notice;
 
 public interface NoticeDao {
 
-  int insert(Notice notice) throws Exception;
+  List<Notice> findAll() throws Exception;
 
-  List<Notice> findByAll() throws Exception;
+  //  int insert(Notice notice) throws Exception;
 
 }

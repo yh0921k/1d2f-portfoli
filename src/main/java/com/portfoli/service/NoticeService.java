@@ -5,8 +5,8 @@ import com.portfoli.domain.Notice;
 
 public interface NoticeService {
 
-  int add(Notice notice) throws Exception;
-
   List<Notice> list() throws Exception;
+
+  //  int add(Notice notice) throws Exception;
 
 }

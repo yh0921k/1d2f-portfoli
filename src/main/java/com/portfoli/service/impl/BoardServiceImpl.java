@@ -16,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 
   @Override
   public boolean add(Board board) throws Exception {
-      return boardDao.insert(board) > 0;
+    return boardDao.insert(board) > 0;
   }
 
   @Override
@@ -27,6 +27,16 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public Board get(int number) throws Exception {
     return boardDao.findByNo(number);
+  }
+
+  @Override
+  public boolean delete(int number) throws Exception {
+    return boardDao.delete(number) > 0;
+  }
+
+  @Override
+  public boolean update(Board board) throws Exception {
+    return boardDao.update(board) > 0;
   }
 
 
