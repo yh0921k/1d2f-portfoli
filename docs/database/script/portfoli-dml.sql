@@ -192,11 +192,11 @@ INSERT INTO pf_portfolio_skill(board_no, member_skill_no) VALUES(39, 3);
 INSERT INTO pf_portfolio_skill(board_no, member_skill_no) VALUES(40, 4);
 
 -- 기업 예제 데이터
-INSERT INTO pf_company(company_no, business_registration_no, name, tel) VALUES (1, '201-81-64418', '워플', '064-903-1555');
-INSERT INTO pf_company(business_registration_no, name, tel) VALUES ('120-87-65764', '배고파', '1600-0988');
-INSERT INTO pf_company(business_registration_no, name, tel) VALUES ('220-81-83678', 'Hmarket', '1566-5700');
-INSERT INTO pf_company(business_registration_no, name, tel) VALUES ('211-88-79575', '모신나', '1544-7200');
-INSERT INTO pf_company(business_registration_no, name, tel) VALUES ('129-86-50524', '플래닝애드', '070-8680-6620');
+INSERT INTO pf_company(company_no, business_registration_no, name, tel, representative) VALUES (1, '201-81-64418', '워플', '064-903-1555', '김국헌');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('120-87-65764', '배고파', '1600-0988', '신용재');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('220-81-83678', 'Hmarket', '1566-5700', '정재화');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('211-88-79575', '모신나', '1544-7200', '변진섭');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('129-86-50524', '플래닝애드', '070-8680-6620', '윤미래');
 
 -- 기업회원 예제 데이터
 INSERT INTO pf_company_member(company_member_no, position, company_no) VALUES (6, '대리', 1);
@@ -503,8 +503,6 @@ INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(4, 4);
 INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(5, 1);
 
 -- 일반회원관심분야 샘플 데이터(pf_general_member_interest)
-INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(1, 1);
-INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(1, 3);
 INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(1, 4);
 INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(2, 8);
 INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(2, 9);

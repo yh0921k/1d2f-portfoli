@@ -8,13 +8,13 @@
 				<div class="container py-1">
 
 					<h1 class="h2">
-						고객센터
+						공지사항
 					</h1>
 
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-							<li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
+              <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
 						</ol>
 					</nav>
 
@@ -57,7 +57,7 @@
 										</li>
 
 										<li>
-											<a class="nav-link rounded-pill scroll-to py-3" href=""list"">
+											<a class="nav-link rounded-pill scroll-to py-3" href="list">
 												<i class="fs--13 fi fi-arrow-end-slim"></i>
 												<span>공지사항</span>
 											</a>
@@ -128,27 +128,21 @@
 								src/scss/_core/base/_typography.scss
 							-->
 							<div class="bg-white p-5 p-4-xl rounded-xl article-format">
-                <table border='1' style="width: 100%">
-                <tr>
-                  <td width="10%">공지사항 글 번호</td>
-                  <td width="10%">제목</td>
-                  <td width="60%">내용</td>
-                  <td width="5%">조회수</td>
-                  <td width="15%">등록일</td>
-                </tr>
-                
-            <c:forEach items="${list}" var="item">
+							
+            <table border='1' style="width: 100%;">
+            <c:if test="${not empty notice}">
             <tr>
-              <td><a href="detail?number=${item.number}">${item.noticeNumber}</a></td>
-              <td><a href="detail?number=${item.number}">${item.title}</a></td>
-              <td><a href="detail?number=${item.number}">${item.content}</a></td>
-              <td><a href="detail?number=${item.number}">${item.viewCount}</a></td>
-              <td><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
+              <td width="75%" style="padding: 10px;">${notice.title}</td>
+              <td width="25%" style="padding: 10px; color:#313335;">작성일 : ${notice.registeredDate}</td>
             </tr>
-            </c:forEach>
-
-                
-                </table>
+            <tr>
+              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.number}">링크주소 : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</a></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding: 10px;">${notice.content}</td>
+            </tr>
+            </c:if>
+            </table>
 
 							</div>
 

@@ -26,6 +26,20 @@
     from pf_notice n left outer join pf_board b 
     on n.board_no = b.board_no;
   </select>
+  
+  <select id="findByNo" resultMap="NoticeMap" parameterType="int">
+    SELECT 
+      n.notice_no, 
+      n.board_no,
+      b.title, 
+      b.content, 
+      b.view_count, 
+      b.registered_date, 
+      b.attachment 
+    from pf_notice n left outer join pf_board b 
+    on n.board_no = b.board_no
+    WHERE n.board_no = #{boardNumber};
+  </select>
 
 </mapper>
 

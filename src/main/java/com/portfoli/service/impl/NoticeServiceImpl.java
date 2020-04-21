@@ -21,6 +21,11 @@ public class NoticeServiceImpl implements NoticeService {
     return noticeDao.findAll();
   }
 
+  @Override
+  public Notice get(int number) throws Exception {
+    return noticeDao.findByNo(number);
+  }
+
   //  @Override
   //  public int add(Notice notice) throws Exception {
   //    if (noticeDao.insert(notice) == 0) {

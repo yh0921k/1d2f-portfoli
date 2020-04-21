@@ -9,7 +9,7 @@ public class Notice extends Board implements Serializable {
 
   @Override
   public String toString() {
-    return "Notice [noticeNumber=" + noticeNumber + "]";
+    return "Notice [noticeNumber=" + noticeNumber + "] " + super.toString();
   }
 
   @Override

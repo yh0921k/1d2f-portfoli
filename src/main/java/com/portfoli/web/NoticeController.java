@@ -33,6 +33,12 @@ public class NoticeController {
     model.addAttribute("list", notices);
   }
 
+  @RequestMapping("detail")
+  public void detail(int number, Model model) throws Exception {
+    Notice notice = noticeService.get(number);
+    model.addAttribute("notice", notice);
+  }
 
+  
 
 }
