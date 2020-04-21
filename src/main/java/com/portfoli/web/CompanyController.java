@@ -18,11 +18,13 @@ public class CompanyController {
   static Logger logger = LogManager.getLogger(CompanyController.class);
 
   public CompanyController() {
-    logger.debug("CompanyController 객체 생성!");
+    CompanyController.logger.debug("CompanyController 객체 생성!");
   }
 
   @Autowired
   CompanyService companyService;
+
+  // 사업자등록번호로 찾기
 
   @GetMapping("search")
   public void search() {}
@@ -36,8 +38,23 @@ public class CompanyController {
       model.addAttribute(company);
       return "member/companyJoin";
     } else {
-      model.addAttribute(businessRegistrationNumber);
+      model.addAttribute("businessRegistrationNumber", businessRegistrationNumber);
       return "company/add";
+    }
+  }
+
+
+  // 기업 등록
+  @GetMapping("add")
+  public void add() {}
+
+  @PostMapping("add")
+  public String add(String businessRegistrationNumber, Company company) throws Exception {
+
+    if (companyService.add(company) > 0) {
+      return "member/companyJoin";
+    } else {
+      throw new Exception("기업 등록에 실패하였습니다.");
     }
 
 

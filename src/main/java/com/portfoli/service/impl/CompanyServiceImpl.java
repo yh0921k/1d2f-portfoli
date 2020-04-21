@@ -22,6 +22,15 @@ public class CompanyServiceImpl implements CompanyService {
 
   }
 
+  @Override
+  public int add(Company company) throws Exception {
+    if (companyDAO.insert(company) > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
 
 
 }
