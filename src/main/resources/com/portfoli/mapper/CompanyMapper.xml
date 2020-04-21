@@ -9,6 +9,7 @@
     <id column="business_registration_no" property="businessRegistrationNumber"/>
     <id column="name" property="name"/>
     <id column="tel" property="tel"/>
+    <id column="representative" property="representative"/>
 	</resultMap>
 	
 	<insert id="insert" parameterType="Company"
@@ -16,10 +17,19 @@
 	  insert into pf_company(
 	    business_registration_no,
 	    name,
-	    tel)
+	    tel,
+	    representative)
 	  values(
 	    #{businessRegistrationNumber},
 	    #{name},
-	    #{tel})
+	    #{tel}, 
+	    #{representative})
 	</insert>
+	
+	<select id="findByBusinessRegistrationNumber" resultMap="CompanyMap" parameterType="string">
+    SELECT *
+    FROM pf_company
+    WHERE business_registration_no=#{businessRegistrationNumber}
+  </select>
+  
 </mapper>

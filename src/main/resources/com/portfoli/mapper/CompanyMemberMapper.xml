@@ -7,23 +7,28 @@
   <resultMap type="CompanyMember" id="CompanyMember">
     <id column="company_member_no"    property="{number=number}"/>
     <result column="position" property="position"/>
-
-    <association property="company" javaType="Company">
-      <id column="company_no" property="number"/>
-      <result column="business_registration_no" property="businessRegistrationNumber"/>
-      <result column="company_name" property="name"/>
-      <result column="company_tel" property="tel"/>
-    </association>
+    <result column="id" property="id" />
+    <result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="post_no" property="postNumber" />
+    <result column="basic_address" property="basicAddress" />
+    <result column="detail_address" property="detailAddress" />
+    <result column="email" property="email" />
+    <result column="tel" property="tel" />
+    <result column="create_date" property="createDate" />
+    <result column="sms_yn" property="smsYN" />
+    <result column="email_yn" property="emailYN" />
+    <result column="type" property="type" />
   </resultMap>
 
   <insert id="insert" parameterType="CompanyMember">
-    insert into pf_company_member(
+    INSERT INTO pf_company_member(
       company_member_no,
 	    position,
 	    company_no)
-    values(
+    VALUES(
       #{number},
       #{position},
-      #{company.number})
+      #{companyNumber})
   </insert>
 </mapper>

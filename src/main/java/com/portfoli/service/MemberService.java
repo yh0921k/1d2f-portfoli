@@ -8,7 +8,7 @@ public interface MemberService {
 
   int add(Member member, GeneralMember generalMember) throws Exception;
 
-  void add(CompanyMember companyMember) throws Exception;
+  int add(Member member, CompanyMember companyMember, int companyNumber) throws Exception;
 
   GeneralMember get(String email, String password) throws Exception;
 
