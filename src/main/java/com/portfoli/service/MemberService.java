@@ -10,6 +10,6 @@ public interface MemberService {
 
   int add(Member member, CompanyMember companyMember, int companyNumber) throws Exception;
 
-  GeneralMember get(String email, String password) throws Exception;
+  Member get(String email, String password) throws Exception;
 
 }
