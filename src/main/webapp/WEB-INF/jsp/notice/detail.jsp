@@ -132,14 +132,19 @@
             <table border='1' style="width: 100%;">
             <c:if test="${not empty notice}">
             <tr>
-              <td width="75%" style="padding: 10px;">${notice.title}</td>
-              <td width="25%" style="padding: 10px; color:#313335;">작성일 : ${notice.registeredDate}</td>
+              <td width="75%" style="padding: 10px;">${notice.noticeNumber}번_유형)${notice.board.title}</td>
+              <td width="25%" style="padding: 10px; color:#313335;">작성일 : ${notice.board.registeredDate}</td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.number}">링크주소 : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</a></td>
+              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.board.number}">링크주소 : localhost:9999/portfoli/app/notice/detail?number=${notice.board.number}</a></td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;">${notice.content}</td>
+              <td colspan="2" style="padding: 10px;">${notice.board.content}</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding: 10px;">
+              <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.board.attachment}' height='80'><br>
+              </td>
             </tr>
             </c:if>
             </table>

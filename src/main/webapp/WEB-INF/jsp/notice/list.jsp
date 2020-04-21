@@ -128,22 +128,27 @@
 								src/scss/_core/base/_typography.scss
 							-->
 							<div class="bg-white p-5 p-4-xl rounded-xl article-format">
+							<button onclick="location.href='form'">공지사항 파워추가</button>
                 <table border='1' style="width: 100%">
                 <tr>
-                  <td width="10%">공지사항 글 번호</td>
+                <!-- 
+                  <td width="10%">공지사항유형</td>
+                 -->
                   <td width="10%">제목</td>
-                  <td width="60%">내용</td>
+                  <td width="70%">내용</td>
                   <td width="5%">조회수</td>
                   <td width="15%">등록일</td>
                 </tr>
                 
             <c:forEach items="${list}" var="item">
             <tr>
-              <td><a href="detail?number=${item.number}">${item.noticeNumber}</a></td>
-              <td><a href="detail?number=${item.number}">${item.title}</a></td>
-              <td><a href="detail?number=${item.number}">${item.content}</a></td>
-              <td><a href="detail?number=${item.number}">${item.viewCount}</a></td>
-              <td><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
+              <!-- 공지사항 유형번호
+              <td><a href="detail?number=${item.Board.number}">${item.noticeNumber}</a></td>
+               -->
+              <td><a href="detail?number=${item.Board.number}">${item.Board.title}</a></td>
+              <td><a href="detail?number=${item.Board.number}">${item.Board.content}</a></td>
+              <td><a href="detail?number=${item.Board.number}">${item.Board.viewCount}</a></td>
+              <td><a href="detail?number=${item.Board.number}">${item.Board.registeredDate}</a></td>
             </tr>
             </c:forEach>
 

@@ -9,6 +9,6 @@ public interface NoticeDao {
 
   Notice findByNo(int number) throws Exception;
   
-  //  int insert(Notice notice) throws Exception;
+  int insert(Notice notice) throws Exception;
 
 }

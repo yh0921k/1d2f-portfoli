@@ -1,4 +1,4 @@
-package com.portfoli.servlet;
+package com.portfoli.web;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -14,6 +14,8 @@ import javax.servlet.http.Part;
 import org.springframework.context.ApplicationContext;
 import com.portfoli.domain.PortfolioFile;
 import com.portfoli.service.PortfolioFileService;
+
+// Controller로 수정예정
 
 @WebServlet("/portfolioFile/add")
 @MultipartConfig(maxFileSize = 10000000)

@@ -28,7 +28,7 @@
       WHERE board_no = #{number}
   </select>
 
-  <insert id="insert" parameterType="Board">
+  <insert id="insert" parameterType="Board" useGeneratedKeys="true" keyColumn="board_no" keyProperty="number">
     INSERT INTO pf_board (
 	    title, 
 	    content, 
@@ -45,7 +45,7 @@
 	    </if>
 	    <if test="attachment==null or attachment == ''">
 	    null
-	    </if> 
+	    </if>
     )
   </insert>
  

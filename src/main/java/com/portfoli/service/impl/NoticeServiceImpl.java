@@ -26,15 +26,16 @@ public class NoticeServiceImpl implements NoticeService {
     return noticeDao.findByNo(number);
   }
 
-  //  @Override
-  //  public int add(Notice notice) throws Exception {
-  //    if (noticeDao.insert(notice) == 0) {
-  //      return 0;
-  //    }
-  //    System.out.println("게시판 등록 성공! (게시글번호 : 공지사항 분류번호)");
-  //    System.out.println(notice.getNumber() + " : " + notice.getNoticeNumber());
-  //    return 1;
-  //  }
+  @Override
+  public int insert(Notice notice) throws Exception {
+//    if(noticeDao.insert(notice.getBoard().getNumber()) ==0 )
+//      return 0;
+//    return 1;
+    
+    if (noticeDao.insert(notice) == 0)
+      return 0;
+    return 1;
+  }
 
 
 

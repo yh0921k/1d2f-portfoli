@@ -1,12 +1,21 @@
 package com.portfoli.web;
 
+import java.io.File;
+import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import com.portfoli.domain.Board;
 import com.portfoli.domain.Notice;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.NoticeService;
@@ -21,6 +30,9 @@ public class NoticeController {
     NoticeController.logger.debug("NoticeController 객체 생성!");
   }
 
+  @Autowired
+  ServletContext servletContext;
+  
   @Autowired
   BoardService boardService;
 
@@ -39,6 +51,37 @@ public class NoticeController {
     model.addAttribute("notice", notice);
   }
 
-  
+  @GetMapping("form")
+  public void form() throws Exception {}
+
+  @PostMapping("add")
+  public String add(int noticeNumber, String title, String content, @RequestParam("attachment") MultipartFile attachment) throws Exception {
+    Board board = new Board();
+    board.setTitle(title);
+    board.setContent(content);
+    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    System.out.println(attachment);
+    
+    if (attachment.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/notice");
+      System.out.println(dirPath);
+      
+      String filename = UUID.randomUUID().toString();
+      attachment.transferTo(new File(dirPath + "/" + filename));
+      board.setAttachment(filename);
+    } else {
+      board.setAttachment(null);
+    }
+    
+    boardService.add(board);
+
+    Notice notice = new Notice();
+    notice.setBoard(board);
+    notice.setNoticeNumber(noticeNumber);
+    noticeService.insert(notice);
+    return "redirect:list";
+  }
+
+
 
 }
