@@ -8,15 +8,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @ComponentScan(value = "com.portfoli.web")
+@EnableWebMvc
 public class AppWebConfig {
 
   static Logger logger = LogManager.getLogger(AppWebConfig.class);
 
   public AppWebConfig() throws IOException {
-    logger.debug("[AppWebconfig.java] :: constructor called");
+    logger.info("[AppWebconfig.java] :: constructor called");
   }
 
   @Bean

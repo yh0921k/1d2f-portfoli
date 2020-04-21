@@ -20,6 +20,6 @@ public class AppConfig {
 
   public AppConfig() throws IOException {
     // Mybatis 설정 파일을 로딩할 때 사용할 입력 스트림 준비
-    logger.debug("[Appconfig.java] :: constructor called");
+    logger.info("[Appconfig.java] :: constructor called");
   }
 }

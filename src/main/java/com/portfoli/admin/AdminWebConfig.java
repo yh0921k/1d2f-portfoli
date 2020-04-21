@@ -18,7 +18,7 @@ public class AdminWebConfig {
   static Logger logger = LogManager.getLogger(AdminWebConfig.class);
 
   public AdminWebConfig() throws IOException {
-    logger.debug("[AdminWebconfig.java] :: constructor called");
+    logger.info("[AdminWebconfig.java] :: constructor called");
   }
 
   @Bean
