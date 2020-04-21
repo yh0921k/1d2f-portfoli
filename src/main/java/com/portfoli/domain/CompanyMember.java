@@ -5,19 +5,41 @@ import java.io.Serializable;
 public class CompanyMember extends Member implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  private int number, companyNumber;
   private String position;
-  private Company company;
 
   @Override
-  public String toString() {
-    return "CompanyMember [position=" + position + ", company=" + company + "]";
+  public int getNumber() {
+    return number;
+  }
+
+  @Override
+  public void setNumber(int number) {
+    this.number = number;
+  }
+
+  public int getCompanyNumber() {
+    return companyNumber;
+  }
+
+  public void setCompanyNumber(int companyNumber) {
+    this.companyNumber = companyNumber;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((company == null) ? 0 : company.hashCode());
+    result = prime * result + companyNumber;
+    result = prime * result + number;
     result = prime * result + ((position == null) ? 0 : position.hashCode());
     return result;
   }
@@ -31,10 +53,9 @@ public class CompanyMember extends Member implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     CompanyMember other = (CompanyMember) obj;
-    if (company == null) {
-      if (other.company != null)
-        return false;
-    } else if (!company.equals(other.company))
+    if (companyNumber != other.companyNumber)
+      return false;
+    if (number != other.number)
       return false;
     if (position == null) {
       if (other.position != null)
@@ -44,19 +65,11 @@ public class CompanyMember extends Member implements Serializable {
     return true;
   }
 
-  public String getPosition() {
-    return position;
+  @Override
+  public String toString() {
+    return "CompanyMember [number=" + number + ", companyNumber=" + companyNumber + ", position="
+        + position + "]";
   }
 
-  public void setPosition(String position) {
-    this.position = position;
-  }
 
-  public Company getCompany() {
-    return company;
-  }
-
-  public void setCompany(Company company) {
-    this.company = company;
-  }
 }

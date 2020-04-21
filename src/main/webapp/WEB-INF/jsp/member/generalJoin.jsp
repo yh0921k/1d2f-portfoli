@@ -40,7 +40,7 @@
         var password = document.getElementById("password").value;
         var checkPassword = document.getElementById("checkPassword").value;
 
-        if (password.length < 6 || checkPassword.length > 16) {
+        if (password.length < 6 || password.length > 16) {
           password = null;
           checkPassword = null;
           document.getElementById("same").innerHTML = null;
@@ -165,7 +165,7 @@
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="emailYN"
-										id="emailYN" value="2" /> <label
+										id="emailYN" value="0" /> <label
 										class="form-check-label" for="inlineRadio2">이메일
 										수신거부</label>
 								</div>
@@ -179,7 +179,7 @@
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="smsYN"
-										id="smsYN" value="2" /> <label
+										id="smsYN" value="0" /> <label
 										class="form-check-label" for="inlineRadio2">SMS
 										수신거부</label>
 								</div>
@@ -191,7 +191,7 @@
 								<button type="submit" class="btn btn-primary btn-block"
 									style="display: block; margin: 0 90px;">
 									회원가입</button>
-								<a href="../member/companyJoin"
+								<a href="../company/search"
 									style="color: graytext; display: block; margin: 10px 0px 0px 175px;">기업
 									회원 가입하기</a>
 							</div>
