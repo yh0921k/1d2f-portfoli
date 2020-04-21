@@ -1,0 +1,1 @@
+### WEB-INF/admin 디렉터리 유지
