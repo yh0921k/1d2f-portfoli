@@ -1,5 +1,7 @@
 package com.portfoli.web;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,11 @@ public class MemberController {
   static Logger logger = LogManager.getLogger(MemberController.class);
 
   public MemberController() {
-    logger.debug("GeneralMemeberController 객체 생성!");
+    MemberController.logger.debug("GeneralMemeberController 객체 생성!");
   }
+
+  @Autowired
+  ServletContext servletContext;
 
   @Autowired
   MemberService memberService;
@@ -40,10 +45,16 @@ public class MemberController {
   public String add(Member member, GeneralMember generalMember) throws Exception {
 
     if (memberService.add(member, generalMember) > 0) {
-      return "redirect:/index.html";
+      return "redirect:/";
     } else {
       throw new Exception("회원을 추가할 수 없습니다.");
     }
+  }
+
+  @GetMapping("generalMypage")
+  public void viewingMypage(HttpServletRequest request) {
+    Member member = (Member) request.getSession().getAttribute("loginUser");
+    System.out.println(member.toString());
   }
 
 
@@ -59,7 +70,7 @@ public class MemberController {
 
     Company company = companyService.getByBusinessRegistrationNumber(businessRegistrationNumber);
     if (memberService.add(member, companyMember, company.getNumber()) > 0) {
-      return "redirect:/index.html";
+      return "redirect:/";
     } else {
       throw new Exception("회원을 추가할 수 없습니다.");
     }

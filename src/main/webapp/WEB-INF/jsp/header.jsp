@@ -1051,8 +1051,8 @@
 					<!-- 로그인 전 -->
 
 					<c:if test="${empty loginUser}">
-						<li class="list-inline-item"><a class="nav-link"
-							href="app/member/generalJoin" style="text-decoration: none;">회원가입</a>
+						<li class="list-inline-item"><a class="nav-link text-secondary"
+							href="app/member/generalJoin" style="text-decoration: none; font-weight: bold;">회원가입</a>
 						</li>
 
 						<li
@@ -1137,17 +1137,15 @@
 
 									<!-- initials - no image -->
 									<!--
-                    <div data-initials="John Doe" data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
+                    <div data-initials=${loginUser.name} data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
                       <i class="fi fi-circle-spin fi-spin"></i>
                     </div>
                     -->
 
 									<!-- user detail -->
-									<span class="d-block font-weight-medium text-truncate fs--16">John
-										Doe</span> <span
-										class="d-block text-muted font-weight-medium text-truncate">john.doe@gmail.com</span>
-									<small class="d-block text-muted"><b>Last Login:</b>
-										2019-09-03 01:48</small>
+									<span class="d-block font-weight-medium text-truncate fs--16" ><a href="/portfoli/app/member/generalMypage" class="text-muted">${loginUser.name}</a></span> 
+									<!-- 구직중 버튼 -->
+										<span class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
 
 								</div>
 
@@ -1155,26 +1153,25 @@
 
 								<a href="#!" target="_blank"
 									class="dropdown-item text-truncate font-weight-medium">
-									Notes <small class="d-block text-muted">personal
+									일정 <small class="d-block text-muted">personal
 										encypted notes</small>
 								</a> <a href="#!" target="_blank"
 									class="dropdown-item text-truncate font-weight-medium"> <span
 									class="badge badge-success float-end font-weight-normal mt-1">3
-										new</span> Messages <small class="d-block text-muted">internal
+										new</span> 일정 <small class="d-block text-muted">internal
 										messaging system</small>
 								</a> <a href="#!" target="_blank"
 									class="dropdown-item text-truncate font-weight-medium"> <span
 									class="badge badge-danger float-end font-weight-normal mt-1">1
-										unpaid</span> Invoices <small class="d-block text-muted">montly
+										unpaid</span> 포트폴리오 <small class="d-block text-muted">montly
 										billing</small>
-								</a> <a href="#!"
+								</a> <a href="/portfoli/app/member/generalMypage"
 									class="dropdown-item text-truncate font-weight-medium">
-									Account Settings <small class="d-block text-muted">profile,
+									마이페이지 <small class="d-block text-muted">profile,
 										password and more...</small>
 								</a> <a href="#!"
 									class="dropdown-item text-truncate font-weight-medium">
-									Upgrade <small class="d-block text-muted">upgrade your
-										account</small>
+									Upgrade <small class="d-block text-muted">계정 업그레이드</small>
 								</a>
 
 								<div class="dropdown-divider mb-0"></div>
@@ -1266,12 +1263,8 @@
                     -->
 
                   <!-- user detail -->
-                  <span class="d-block font-weight-medium text-truncate fs--16">John
-                    Doe</span> <span
-                    class="d-block text-muted font-weight-medium text-truncate">john.doe@gmail.com</span>
-                  <small class="d-block text-muted"><b>Last Login:</b>
-                    2019-09-03 01:48</small>
-
+                  <span class="d-block font-weight-medium text-truncate fs--16"><a href="app/member/companyMypage" class="text-muted">${loginUser.name}</a></span> <span
+                    class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
                 </div>
 
                 <div class="dropdown-divider"></div>
