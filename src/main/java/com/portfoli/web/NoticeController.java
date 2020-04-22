@@ -32,7 +32,7 @@ public class NoticeController {
 
   @Autowired
   ServletContext servletContext;
-  
+
   @Autowired
   BoardService boardService;
 
@@ -42,6 +42,7 @@ public class NoticeController {
   @RequestMapping("list")
   public void list(Model model) throws Exception {
     List<Notice> notices = noticeService.list();
+
     model.addAttribute("list", notices);
   }
 
@@ -60,19 +61,16 @@ public class NoticeController {
     board.setTitle(title);
     board.setContent(content);
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
-    System.out.println(attachment);
-    
+
     if (attachment.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/notice");
-      System.out.println(dirPath);
-      
       String filename = UUID.randomUUID().toString();
       attachment.transferTo(new File(dirPath + "/" + filename));
       board.setAttachment(filename);
     } else {
       board.setAttachment(null);
     }
-    
+
     boardService.add(board);
 
     Notice notice = new Notice();
@@ -80,6 +78,40 @@ public class NoticeController {
     notice.setNoticeNumber(noticeNumber);
     noticeService.insert(notice);
     return "redirect:list";
+  }
+
+  @GetMapping("delete")
+  public String delete(int number) throws Exception {
+    noticeService.delete(number);
+    boardService.delete(number);
+    return "redirect:list";
+  }
+
+  @GetMapping("updateForm")
+  public void updateForm(Notice notice, Model model) throws Exception {
+    Notice item = noticeService.get(notice.getBoard().getNumber());
+    model.addAttribute("notice", item);
+  }
+  
+  
+  @PostMapping("update")
+  public String update(Notice notice, MultipartFile attachment) throws Exception {
+    Board board = notice.getBoard();
+
+    if (attachment.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/notice");
+      String filename = UUID.randomUUID().toString();
+
+      logger.debug(dirPath + ":" + filename);
+      attachment.transferTo(new File(dirPath + "/" + filename));
+      board.setAttachment(filename);
+    }
+    
+    if(boardService.update(board)) {
+      noticeService.update(notice);
+      return "redirect:list";
+    } else
+      throw new Exception("업데이트에 실패했습니다.");
   }
 
 

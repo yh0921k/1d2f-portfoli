@@ -1044,11 +1044,11 @@
               </li>
               
               <li class="list-inline-item" >
-                  <a class="nav-link scroll-to" href="http://localhost:9999/portfoli/app/generalMember/join.jsp" style="text-decoration: none;">회원가입</a>
+                  <a class="nav-link scroll-to" href="../member/generalJoin" style="text-decoration: none;">회원가입</a>
                 </li>
 
               <li class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-                <a target="_blank" href="http://localhost:9999/portfoli/app/generalMember/login.jsp" class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
+                <a target="_blank" href="../auth/loginForm" class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
               </li>
 
 					</ul>

@@ -130,19 +130,21 @@
 							-->
 							<div class="bg-white p-5 p-4-xl rounded-xl article-format">
 							
-					  <form action="updateForm" method="get">
+					  <form action="update" method="post" enctype="multipart/form-data">
             <c:if test="${not empty notice}">
             <input name="board.number" type="hidden" value="${notice.getBoard().getNumber()}"/>
             <table border='1' style="width: 100%;">
             <tr>
-              <td width="75%" style="padding: 10px;">유형번호 : ${notice.noticeNumber}<br>${notice.board.title}</td>
-              <td width="25%" style="padding: 10px; color:#313335;">${notice.board.registeredDate}</td>
+              <td width="75%" style="padding: 10px;">
+              유형번호:<input type="number" style="width: 50px" name="noticeNumber" value="${notice.noticeNumber}"/><br>
+              <textarea name="board.title"  style="border-color:pink; width: 100%; height: 100%">${notice.board.title}</textarea></td>
+              <td width="25%" style="padding: 10px; color:#313335;"><input readonly="readonly" name="board.registeredDate" type="date" value="${notice.board.registeredDate}"/></td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.board.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.board.number}</td>
+              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.board.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.board.number}</a></td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><textarea readonly="readonly" style="border-color:transparent; resize:none; width: 100%; height: 300px">${notice.board.content}</textarea></td>
+              <td colspan="2" style="padding: 10px;"><textarea style="border-color:pink" cols="100%" rows="30px" name="board.content">${notice.board.content}</textarea></td>
             </tr>
             <tr>
               <td colspan="2" style="padding: 10px;">
@@ -153,6 +155,9 @@
                  </c:forEach>
                  --%>
               </td>
+            </tr>
+            <tr>
+              <td colspan="2"><input type="file" name="attachment" /></td>
             </tr>
 
             <tr>

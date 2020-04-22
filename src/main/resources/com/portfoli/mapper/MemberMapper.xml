@@ -27,6 +27,14 @@
 		VALUES (#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
 		#{emailYN}, #{type})
 	</insert>
+	
+	<select id="findByEmailAndPassword" 
+    resultMap="MemberMap" 
+    parameterType="map">
+    SELECT member_no, type, id, name, email
+    FROM pf_members
+    WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password})
+  </select>
 
 
 </mapper>

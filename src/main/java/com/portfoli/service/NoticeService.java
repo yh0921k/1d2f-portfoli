@@ -9,6 +9,10 @@ public interface NoticeService {
 
   Notice get(int number) throws Exception;
   
-  int insert(Notice notice) throws Exception;
+  boolean insert(Notice notice) throws Exception;
+
+  boolean delete(int number) throws Exception;
+
+  boolean update(Notice notice) throws Exception;
 
 }

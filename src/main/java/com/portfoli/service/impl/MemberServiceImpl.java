@@ -66,11 +66,19 @@ public class MemberServiceImpl implements MemberService {
 
   // 로그인
   @Override
-  public GeneralMember get(String email, String password) throws Exception {
+  public Member get(String email, String password) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
     params.put("email", email);
     params.put("password", password);
-    return generalMemberDao.findByEmailAndPassword(params);
+    int type = memberDao.findByEmailAndPassword(params).getType();
+
+    if (type == 1) {
+      return generalMemberDao.findByEmailAndPassword(params);
+    } else if (type == 2) {
+      return companyMemberDao.findByEmailAndPassword(params);
+    } else {
+      throw new Exception("로그인 실패");
+    }
   }
 
 }

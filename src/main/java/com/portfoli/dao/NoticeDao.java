@@ -11,4 +11,8 @@ public interface NoticeDao {
   
   int insert(Notice notice) throws Exception;
 
+  int delete(int number) throws Exception;
+
+  int update(Notice notice) throws Exception;
+
 }

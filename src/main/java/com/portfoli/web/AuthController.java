@@ -1,6 +1,5 @@
 package com.portfoli.web;
 
-import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,10 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.portfoli.domain.GeneralMember;
+import com.portfoli.domain.Member;
 import com.portfoli.service.MemberService;
 
 @Controller
@@ -28,7 +28,7 @@ public class AuthController {
   MemberService memberService;
 
   @GetMapping("loginForm")
-  public void loginForm(HttpServletRequest request, Map<String, Object> model) throws Exception {
+  public void loginForm(HttpServletRequest request, Model model) throws Exception {
 
     String email = "";
     Cookie[] cookies = request.getCookies();
@@ -40,7 +40,7 @@ public class AuthController {
         }
       }
     }
-    model.put("email", email);
+    model.addAttribute("email", email);
   }
 
   @PostMapping("login")
@@ -56,10 +56,11 @@ public class AuthController {
 
     response.addCookie(cookie);
 
-    GeneralMember member = memberService.get(email, password);
+    Member member = memberService.get(email, password);
     System.out.println("----------------------------------------");
 
     if (member != null) {
+      System.out.println(member.toString());
       request.getSession().setAttribute("loginUser", member);
       request.setAttribute("refreshUrl", "2;url=../../index.html");
     } else {

@@ -49,7 +49,7 @@
     )
   </insert>
  
-   <update id="update" parameterType="Board">
+   <update id="update" parameterType="Board" useGeneratedKeys="true" keyColumn="board_no" keyProperty="number">
      UPDATE pf_board SET 
 	     registered_date = now()
 	     <if test="title!=null and title!=''">,title = #{title}</if>

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.portfoli.domain.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -144,14 +146,13 @@
             <tr>
               <!-- 공지사항 유형번호
               <td><a href="detail?number=${item.Board.number}">${item.noticeNumber}</a></td>
-               -->
+               -->  
               <td><a href="detail?number=${item.Board.number}">${item.Board.title}</a></td>
               <td><a href="detail?number=${item.Board.number}">${item.Board.content}</a></td>
               <td><a href="detail?number=${item.Board.number}">${item.Board.viewCount}</a></td>
               <td><a href="detail?number=${item.Board.number}">${item.Board.registeredDate}</a></td>
             </tr>
             </c:forEach>
-
                 
                 </table>
 

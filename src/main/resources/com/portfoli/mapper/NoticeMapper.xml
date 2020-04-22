@@ -55,6 +55,18 @@
     )
   </insert>
 
+  <delete id="delete" parameterType="int">
+    DELETE 
+      FROM pf_notice
+    WHERE board_no = #{number}
+  </delete>
+
+  <update id="update" parameterType="Notice">
+     UPDATE pf_notice SET
+       notice_no = #{noticeNumber}
+     WHERE board_no = #{board.number}
+  </update>
+
 </mapper>
 
 

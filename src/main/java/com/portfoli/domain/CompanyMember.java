@@ -67,8 +67,13 @@ public class CompanyMember extends Member implements Serializable {
 
   @Override
   public String toString() {
-    return "CompanyMember [number=" + number + ", companyNumber=" + companyNumber + ", position="
-        + position + "]";
+    return "CompanyMember [number=" + super.getNumber() + ", type=" + super.getType() + ", smsYN="
+        + super.getSmsYN() + ", emailYN=" + super.getEmailYN() + ", id=" + super.getId()
+        + ", password=" + super.getPassword() + ", name=" + super.getName() + ", postNumber="
+        + super.getPostNumber() + ", basicAddress=" + super.getBasicAddress() + ", detailAddress="
+        + super.getDetailAddress() + ", email=" + super.getEmail() + ", tel=" + super.getTel()
+        + ", createDate=" + super.getCreateDate() + ", type=" + super.getType() + ", companyNumber="
+        + companyNumber + ", position=" + position + "]";
   }
 
 

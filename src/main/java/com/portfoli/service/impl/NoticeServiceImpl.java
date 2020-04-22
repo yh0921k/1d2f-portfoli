@@ -27,14 +27,18 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public int insert(Notice notice) throws Exception {
-//    if(noticeDao.insert(notice.getBoard().getNumber()) ==0 )
-//      return 0;
-//    return 1;
-    
-    if (noticeDao.insert(notice) == 0)
-      return 0;
-    return 1;
+  public boolean insert(Notice notice) throws Exception {
+    return noticeDao.insert(notice) > 0;
+  }
+
+  @Override
+  public boolean delete(int number) throws Exception {
+    return noticeDao.delete(number) > 0;
+  }
+
+  @Override
+  public boolean update(Notice notice) throws Exception {
+    return noticeDao.update(notice) > 0;
   }
 
 
