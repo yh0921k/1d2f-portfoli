@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,18 +20,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <!-- preloading icon font is helping to speed up a little bit -->
 <link rel="preload"
-	href="http://localhost:9999/portfoli/resources/assets/fonts/flaticon/Flaticon.woff2" as="font"
-	type="font/woff2" crossorigin>
+	href="http://localhost:9999/portfoli/resources/assets/fonts/flaticon/Flaticon.woff2"
+	as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="http://localhost:9999/portfoli/resources/assets/css/core.min.css">
+<link rel="stylesheet"
+	href="http://localhost:9999/portfoli/resources/assets/css/core.min.css">
 <link rel="stylesheet"
 	href="http://localhost:9999/portfoli/resources/assets/css/vendor_bundle.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
 <!-- favicon -->
-<link rel="shortcut icon" href="http://localhost:9999/portfoli/favicon.ico">
-<link rel="apple-touch-icon" href="http://localhost:9999/portfoli/demo.files/logo/icon_512x512.png">
+<link rel="shortcut icon"
+	href="http://localhost:9999/portfoli/favicon.ico">
+<link rel="apple-touch-icon"
+	href="http://localhost:9999/portfoli/resources/demo.files/logo/icon_512x512.png">
 
 <link rel="manifest"
 	href="http://localhost:9999/portfoli/resources/assets/images/manifest/manifest.json">
@@ -264,7 +268,8 @@
 						<!-- 
                 Logo : height: 70px max
               -->
-						<a class="navbar-brand" href="http://localhost:9999/portfoli/index.html"> <img
+						<a class="navbar-brand" href="http://localhost:9999/portfoli">
+							<img
 							src="http://localhost:9999/portfoli/resources/assets/images/logo/logo.png"
 							width="110" height="32" alt="...">
 						</a>
@@ -1006,7 +1011,8 @@
 
 										<span class="float-start w--50 mr--20"> <img width="50"
 											height="50" class="img-fluid"
-											src="http://localhost:9999/portfoli/demo.files/svg/icons/menu_doc_1.svg" alt="...">
+											src="http://localhost:9999/portfoli/demo.files/svg/icons/menu_doc_1.svg"
+											alt="...">
 									</span> DOCUMENTATION <span
 										class="d-block text-white text-truncate fs--14"> Don't
 											get stuck! </span>
@@ -1022,7 +1028,8 @@
 
 										<span class="float-start w--50 mr--20"> <img width="50"
 											height="50" class="img-fluid"
-											src="http://localhost:9999/portfoli/demo.files/svg/icons/menu_doc_2.svg" alt="...">
+											src="http://localhost:9999/portfoli/demo.files/svg/icons/menu_doc_2.svg"
+											alt="...">
 									</span> CHANGELOG <span
 										class="d-block text-white text-truncate fs--14"> Smarty
 											Reborn Changes </span>
@@ -1031,25 +1038,276 @@
 
 
 
-						<!-- /NAVIGATION -->
-
-
+							<!-- /NAVIGATION -->
 					</div>
 
 
-					<li class="list-inline-item mx-1 dropdown">
-                <a href="#" aria-label="website search" class="btn-sow-search-toggler btn btn-sm rounded-circle btn-secondary">
-                  <i class="fi fi-search"></i>
-                </a>
-              </li>
-              
-              <li class="list-inline-item" >
-                  <a class="nav-link scroll-to" href="http://localhost:9999/portfoli/app/generalMember/join.jsp" style="text-decoration: none;">회원가입</a>
-                </li>
+					<li class="list-inline-item mx-1 dropdown"><a href="#"
+						aria-label="website search"
+						class="btn-sow-search-toggler btn btn-sm rounded-circle btn-secondary">
+							<i class="fi fi-search"></i>
+					</a></li>
 
-              <li class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-                <a target="_blank" href="http://localhost:9999/portfoli/app/generalMember/login.jsp" class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
-              </li>
+					<!-- 로그인 전 -->
+
+					<c:if test="${empty loginUser}">
+						<li class="list-inline-item"><a class="nav-link"
+							href="app/member/generalJoin" style="text-decoration: none;">회원가입</a>
+						</li>
+
+						<li
+							class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
+							<a target="_blank" href="app/auth/loginForm"
+							class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
+						</li>
+					</c:if>
+
+					<!-- 일반 회원 로그인 후 -->
+
+					<c:if test="${loginUser.type == '1'}">
+
+						<li class="list-inline-item ml--6 mr--6 dropdown">
+
+                <a href="#" id="dropdownMessageOptions" class="btn btn-sm rounded-circle btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                  
+                  <!-- badge -->
+                  <span class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0">3</span>
+
+                  <span class="group-icon">
+                    <i class="fi fi-envelope-2"></i>
+                    <i class="fi fi-close"></i>
+                  </span>
+                </a>
+
+                <div aria-labelledby="dropdownMessageOptions" class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+                  
+                  <div class="dropdown-header fs--14 py-3">
+
+                    <a href="#!" class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
+                      data-href="_ajax/admin_modal_message_write.html" 
+                      data-ajax-modal-size="modal-md" 
+                      data-ajax-modal-centered="false" 
+                      data-ajax-modal-backdrop="static">
+                      + WRITE
+                    </a>
+
+                    1 NEW MESSAGE
+
+                  </div>
+                  <div class="dropdown-divider"></div>
+
+                  <div class="max-h-50vh scrollable-vertical">
+
+
+						<li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a href="#"
+							id="dropdownAccountOptions"
+							class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+
+								<span class="group-icon m-0"> <i
+									class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
+							</span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}</span>
+						</a> <!--
+                  
+                  Dropdown Classes
+                    .dropdown-menu-dark     - dark dropdown (desktop only, will be white on mobile)
+                    .dropdown-menu-hover    - open on hover
+                    .dropdown-menu-clean    - no background color on hover
+                    .dropdown-menu-invert     - open dropdown in oposite direction (left|right, according to RTL|LTR)
+                    .dropdown-click-ignore    - keep dropdown open on inside click (useful on forms inside dropdown)
+
+                    Dropdown prefix icon (optional, if enabled in variables.scss)
+                      .prefix-link-icon .prefix-icon-dot    - link prefix
+                      .prefix-link-icon .prefix-icon-line   - link prefix
+                      .prefix-link-icon .prefix-icon-ico    - link prefix
+                      .prefix-link-icon .prefix-icon-arrow  - link prefix
+
+                      .prefix-icon-ignore           - ignore, do not use on a specific link
+
+                -->
+							<div aria-labelledby="dropdownAccountOptions"
+								class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+
+								<div class="dropdown-header fs--14 py-4">
+
+									<!-- profile image -->
+									<div
+										class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
+										style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
+
+									<!-- initials - no image -->
+									<!--
+                    <div data-initials="John Doe" data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
+                      <i class="fi fi-circle-spin fi-spin"></i>
+                    </div>
+                    -->
+
+									<!-- user detail -->
+									<span class="d-block font-weight-medium text-truncate fs--16">John
+										Doe</span> <span
+										class="d-block text-muted font-weight-medium text-truncate">john.doe@gmail.com</span>
+									<small class="d-block text-muted"><b>Last Login:</b>
+										2019-09-03 01:48</small>
+
+								</div>
+
+								<div class="dropdown-divider"></div>
+
+								<a href="#!" target="_blank"
+									class="dropdown-item text-truncate font-weight-medium">
+									Notes <small class="d-block text-muted">personal
+										encypted notes</small>
+								</a> <a href="#!" target="_blank"
+									class="dropdown-item text-truncate font-weight-medium"> <span
+									class="badge badge-success float-end font-weight-normal mt-1">3
+										new</span> Messages <small class="d-block text-muted">internal
+										messaging system</small>
+								</a> <a href="#!" target="_blank"
+									class="dropdown-item text-truncate font-weight-medium"> <span
+									class="badge badge-danger float-end font-weight-normal mt-1">1
+										unpaid</span> Invoices <small class="d-block text-muted">montly
+										billing</small>
+								</a> <a href="#!"
+									class="dropdown-item text-truncate font-weight-medium">
+									Account Settings <small class="d-block text-muted">profile,
+										password and more...</small>
+								</a> <a href="#!"
+									class="dropdown-item text-truncate font-weight-medium">
+									Upgrade <small class="d-block text-muted">upgrade your
+										account</small>
+								</a>
+
+								<div class="dropdown-divider mb-0"></div>
+
+								<a href="app/auth/logout"
+									class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+									<i class="fi fi-power float-start"></i> Log Out
+								</a>
+							</div></li>
+					</c:if>
+
+					<!-- 기업 회원 로그인 후 -->
+
+					<c:if test="${loginUser.type == '2'}">
+						<li class="list-inline-item ml--6 mr--6 dropdown">
+
+                <a href="#" id="dropdownMessageOptions" class="btn btn-sm rounded-circle btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                  
+                  <!-- badge -->
+                  <span class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0">3</span>
+
+                  <span class="group-icon">
+                    <i class="fi fi-envelope-2"></i>
+                    <i class="fi fi-close"></i>
+                  </span>
+                </a>
+
+                <div aria-labelledby="dropdownMessageOptions" class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+                  
+                  <div class="dropdown-header fs--14 py-3">
+
+                    <a href="#!" class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
+                      data-href="_ajax/admin_modal_message_write.html" 
+                      data-ajax-modal-size="modal-md" 
+                      data-ajax-modal-centered="false" 
+                      data-ajax-modal-backdrop="static">
+                      + WRITE
+                    </a>
+
+                    1 NEW MESSAGE
+
+                  </div>
+                  <div class="dropdown-divider"></div>
+
+                  <div class="max-h-50vh scrollable-vertical">
+
+
+            <li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a href="#"
+              id="dropdownAccountOptions"
+              class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+              data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+
+                <span class="group-icon m-0"> <i
+                  class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
+              </span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[기업]&nbsp;&nbsp;${loginUser.name}</span>
+            </a> <!--
+                  
+                  Dropdown Classes
+                    .dropdown-menu-dark     - dark dropdown (desktop only, will be white on mobile)
+                    .dropdown-menu-hover    - open on hover
+                    .dropdown-menu-clean    - no background color on hover
+                    .dropdown-menu-invert     - open dropdown in oposite direction (left|right, according to RTL|LTR)
+                    .dropdown-click-ignore    - keep dropdown open on inside click (useful on forms inside dropdown)
+
+                    Dropdown prefix icon (optional, if enabled in variables.scss)
+                      .prefix-link-icon .prefix-icon-dot    - link prefix
+                      .prefix-link-icon .prefix-icon-line   - link prefix
+                      .prefix-link-icon .prefix-icon-ico    - link prefix
+                      .prefix-link-icon .prefix-icon-arrow  - link prefix
+
+                      .prefix-icon-ignore           - ignore, do not use on a specific link
+
+                -->
+              <div aria-labelledby="dropdownAccountOptions"
+                class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+
+                <div class="dropdown-header fs--14 py-4">
+
+                  <!-- profile image -->
+                  <div
+                    class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
+                    style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
+
+                  <!-- initials - no image -->
+                  <!--
+                    <div data-initials="John Doe" data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
+                      <i class="fi fi-circle-spin fi-spin"></i>
+                    </div>
+                    -->
+
+                  <!-- user detail -->
+                  <span class="d-block font-weight-medium text-truncate fs--16">John
+                    Doe</span> <span
+                    class="d-block text-muted font-weight-medium text-truncate">john.doe@gmail.com</span>
+                  <small class="d-block text-muted"><b>Last Login:</b>
+                    2019-09-03 01:48</small>
+
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <a href="#!" target="_blank"
+                  class="dropdown-item text-truncate font-weight-medium">
+                  Notes <small class="d-block text-muted">personal
+                    encypted notes</small>
+                </a> <a href="#!" target="_blank"
+                  class="dropdown-item text-truncate font-weight-medium"> <span
+                  class="badge badge-success float-end font-weight-normal mt-1">3
+                    new</span> Messages <small class="d-block text-muted">internal
+                    messaging system</small>
+                </a> <a href="#!" target="_blank"
+                  class="dropdown-item text-truncate font-weight-medium"> <span
+                  class="badge badge-danger float-end font-weight-normal mt-1">1
+                    unpaid</span> Invoices <small class="d-block text-muted">montly
+                    billing</small>
+                </a> <a href="#!"
+                  class="dropdown-item text-truncate font-weight-medium">
+                  Account Settings <small class="d-block text-muted">profile,
+                    password and more...</small>
+                </a> <a href="#!"
+                  class="dropdown-item text-truncate font-weight-medium">
+                  Upgrade <small class="d-block text-muted">upgrade your
+                    account</small>
+                </a>
+
+                <div class="dropdown-divider mb-0"></div>
+
+                <a href="app/auth/logout"
+                  class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+                  <i class="fi fi-power float-start"></i> Log Out
+                </a>
+              </div></li>
+					</c:if>
 
 					</ul>
 					<!-- /OPTIONS -->
