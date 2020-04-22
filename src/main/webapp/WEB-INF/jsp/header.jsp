@@ -268,7 +268,7 @@
 						<!-- 
                 Logo : height: 70px max
               -->
-						<a class="navbar-brand" href="http://localhost:9999/portfoli">
+						<a class="navbar-brand" href="/portfoli">
 							<img
 							src="http://localhost:9999/portfoli/resources/assets/images/logo/logo.png"
 							width="110" height="32" alt="...">
@@ -1052,12 +1052,12 @@
 
 					<c:if test="${empty loginUser}">
 						<li class="list-inline-item"><a class="nav-link text-secondary"
-							href="app/member/generalJoin" style="text-decoration: none; font-weight: bold;">회원가입</a>
+							href="/portfoli/app/member/generalJoin" style="text-decoration: none; font-weight: bold;">회원가입</a>
 						</li>
 
 						<li
 							class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-							<a target="_blank" href="app/auth/loginForm"
+							<a target="_blank" href="/portfoli/app/auth/loginForm"
 							class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
 						</li>
 					</c:if>
@@ -1176,7 +1176,7 @@
 
 								<div class="dropdown-divider mb-0"></div>
 
-								<a href="app/auth/logout"
+								<a href="/portfoli/app/auth/logout"
 									class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
 									<i class="fi fi-power float-start"></i> Log Out
 								</a>
@@ -1263,7 +1263,7 @@
                     -->
 
                   <!-- user detail -->
-                  <span class="d-block font-weight-medium text-truncate fs--16"><a href="app/member/companyMypage" class="text-muted">${loginUser.name}</a></span> <span
+                  <span class="d-block font-weight-medium text-truncate fs--16"><a href="/portfoli/app/member/companyMypage" class="text-muted">${loginUser.name}</a></span> <span
                     class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
                 </div>
 
@@ -1295,7 +1295,7 @@
 
                 <div class="dropdown-divider mb-0"></div>
 
-                <a href="app/auth/logout"
+                <a href="/portfoli/app/auth/logout"
                   class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
                   <i class="fi fi-power float-start"></i> Log Out
                 </a>

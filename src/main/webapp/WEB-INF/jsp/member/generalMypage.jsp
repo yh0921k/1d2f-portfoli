@@ -47,11 +47,17 @@
 							수정하기 </a></li>
 				</ul></li>
 				
-				<li class="nav-item"><a class="nav-link "
-        href="/portfoli/app/message/inbox"> <i
-          class="fi fi-arrow-end m-0 fs--12"></i> <span
-          class="px-2 d-inline-block"> 쪽지함 </span>
-      </a></li>
+				<li class="nav-item font-weight-bold"><a
+        class="nav-link" href="#"> <span class="group-icon">
+            <i class="fi fi-arrow-end"></i> <i class="fi fi-arrow-down"></i>
+        </span> <span class="px-2 d-inline-block active font-weight-bold"> 쪽지함 </span>
+      </a>
+
+        <ul class="nav flex-column px-2 font-weight-bold">
+          <li class="nav-item"><a class="nav-link" href="/portfoli/app/message/sent"> 보낸 쪽지함 </a></li>
+          <li class="nav-item"><a class="nav-link" href="/portfoli/app/message/received"> 받은 쪽지함 </a></li>
+        </ul></li>
+				
       
 			<li class="nav-item"><a class="nav-link "
 				href="account-orders.html"> <i
