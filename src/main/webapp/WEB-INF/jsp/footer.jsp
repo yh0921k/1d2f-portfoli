@@ -162,7 +162,7 @@
     
         </div><!-- /#wrapper -->
 
-    <script src="http://localhost:9999/portfoli/http://localhost:9999/portfoli/resources/assets/js/core.min.js"></script>
+    <script src="http://localhost:9999/portfoli/resources/assets/js/core.min.js"></script>
     
   </body>
 </html>

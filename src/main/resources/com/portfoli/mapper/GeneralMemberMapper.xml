@@ -34,7 +34,7 @@
 	<select id="findByEmailAndPassword" 
     resultMap="GeneralMemberMap" 
     parameterType="map">
-    SELECT m.member_no, m.type, m.id, m.name, m.email, g.seeking_flag, g.membership, g.career
+    SELECT g.general_member_no, m.type, m.id, m.name, m.email, g.seeking_flag, g.membership, g.career
     FROM pf_members m JOIN pf_general_member g
     ON m.member_no = g.general_member_no
     WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
