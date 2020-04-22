@@ -62,18 +62,18 @@ public class AuthController {
     if (member != null) {
       System.out.println(member.toString());
       request.getSession().setAttribute("loginUser", member);
-      request.setAttribute("refreshUrl", "2;url=../../index.html");
+      return "redirect:/";
     } else {
       request.getSession().invalidate();
       request.setAttribute("refreshUrl", "2;url=login");
+      return null;
     }
-    return "auth/login";
   }
 
-  @RequestMapping("/auth/logout")
+  @GetMapping("logout")
   public String logout(HttpServletRequest request) {
     request.getSession().invalidate();
-    return "redirect:../../index.html";
+    return "redirect:/";
   }
 
 
