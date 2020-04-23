@@ -15,9 +15,8 @@
       <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
       <result column="attachment" property="attachment" /> <!-- 첨부파일 -->
     </association>
-
   </resultMap>
-
+  
   <select id="findAll" resultMap="NoticeMap">
     SELECT 
       n.notice_no, 
@@ -29,7 +28,7 @@
       b.attachment 
     from pf_notice n left outer join pf_board b 
     on n.board_no = b.board_no
-    order by board_no desc
+    order by n.board_no desc
   </select>
   
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">

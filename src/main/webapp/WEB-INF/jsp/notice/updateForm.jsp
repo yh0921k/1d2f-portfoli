@@ -52,9 +52,17 @@
             <table border='1' style="width: 100%;">
             <tr>
               <td width="75%" style="padding: 10px;">
-              유형번호:<input type="number" style=""width: 50px;" name='noticeNumber' value='${notice.noticeNumber}'/><br>
-              <textarea name="board.title"  style="resize:none; border-color:pink; width: 100%; height: 100%">${notice.board.title}</textarea></td>
-              <td width="25%" style="padding: 10px; color:#313335;"><input readonly="readonly" name="board.registeredDate" type="date" value="${notice.board.registeredDate}"/></td>
+              
+					    <select name="noticeNumber" style="height: 30px;">
+					        <option value="${category.noticeNumber}">[${category.noticeNumber}]${category.name}</option>
+					    <c:forEach items="${list}" var="item">
+					        <option value="${item.getNoticeNumber()}">[${item.getNoticeNumber()}]${item.getName()}</option>
+					    </c:forEach>
+					    <%--
+					     --%>
+					    </select>
+              <input name="board.title"  style="resize:none; border-color:pink; width: 80%; height: 100%" value="${notice.board.title}"/></td>
+              <td width="25%" style="padding: 10px; color:#313335;">${notice.board.registeredDate}</td>
             </tr>
             <tr>
               <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.board.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.board.number}</a></td>

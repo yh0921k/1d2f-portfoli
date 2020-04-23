@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Board;
 import com.portfoli.domain.Notice;
+import com.portfoli.domain.NoticeCategory;
 import com.portfoli.service.BoardService;
+import com.portfoli.service.NoticeCategoryService;
 import com.portfoli.service.NoticeService;
 
 @Controller
@@ -38,18 +40,26 @@ public class NoticeController {
 
   @Autowired
   NoticeService noticeService;
+  
+  @Autowired
+  NoticeCategoryService noticeCategoryService;
 
   @RequestMapping("list")
   public void list(Model model) throws Exception {
     List<Notice> notices = noticeService.list();
-
+    for(Notice n : notices) {
+      System.out.println("wow-->" + n);
+    }
     model.addAttribute("list", notices);
   }
 
   @RequestMapping("detail")
   public void detail(int number, Model model) throws Exception {
     Notice notice = noticeService.get(number);
+    int noticeNumber = notice.getNoticeNumber();
+    NoticeCategory noticeCategory =noticeCategoryService.get(noticeNumber);
     model.addAttribute("notice", notice);
+    model.addAttribute("categoryName", noticeCategory.getName());
   }
 
   @GetMapping("form")
@@ -91,6 +101,8 @@ public class NoticeController {
   public void updateForm(Notice notice, Model model) throws Exception {
     Notice item = noticeService.get(notice.getBoard().getNumber());
     model.addAttribute("notice", item);
+    model.addAttribute("list", noticeCategoryService.list());
+    model.addAttribute("category", noticeCategoryService.get(item.getNoticeNumber()));
   }
   
   

@@ -49,9 +49,10 @@
 					  <form action="updateForm" method="post">
             <c:if test="${not empty notice}">
             <input name="board.number" type="hidden" value="${notice.getBoard().getNumber()}"/>
+            <input name="board.number" type="hidden" value="${notice.noticeNumber}"/>
             <table border='1' style="width: 100%;">
             <tr>
-              <td width="75%" style="padding: 10px;">유형번호 : ${notice.noticeNumber}<br>${notice.board.title}</td>
+              <td width="75%" style="padding: 10px;">[${categoryName}] ${notice.board.title}</td>
               <td width="25%" style="padding: 10px; color:#313335;">${notice.board.registeredDate}</td>
             </tr>
             <tr>
