@@ -11,8 +11,10 @@ public interface NoticeService {
   
   boolean insert(Notice notice) throws Exception;
 
-  boolean delete(int number) throws Exception;
+  boolean delete(int boardNumber) throws Exception;
 
   boolean update(Notice notice) throws Exception;
+
+  boolean forceDelete(int noticeNumber) throws Exception;
 
 }

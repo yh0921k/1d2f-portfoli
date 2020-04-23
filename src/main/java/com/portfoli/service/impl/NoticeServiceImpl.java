@@ -32,13 +32,18 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public boolean delete(int number) throws Exception {
-    return noticeDao.delete(number) > 0;
+  public boolean delete(int boardNumber) throws Exception {
+    return noticeDao.delete(boardNumber) > 0;
   }
 
   @Override
   public boolean update(Notice notice) throws Exception {
     return noticeDao.update(notice) > 0;
+  }
+
+  @Override
+  public boolean forceDelete(int noticeNumber) throws Exception {
+    return noticeDao.forceDelete(noticeNumber) > 0;
   }
 
 

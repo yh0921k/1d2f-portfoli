@@ -1079,9 +1079,6 @@ ALTER TABLE pf_notice_category
       notice_no -- 공지사항분류번호
     );
 
-ALTER TABLE pf_notice_category
-  MODIFY COLUMN notice_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항분류번호';
-
 -- 일정(개인용)
 CREATE TABLE pf_schedule (
   schedule_no       INTEGER  NOT NULL COMMENT '일정번호', -- 일정번호

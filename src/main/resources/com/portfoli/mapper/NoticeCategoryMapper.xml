@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.NoticeCategoryDao">
+  <resultMap type="NoticeCategory" id="NoticeCategoryMap">
+    <id column="notice_no" property="noticeNumber" /> <!-- 게시글 분류번호-->
+    <result column="name" property="name" /> <!-- 게시글 분류명 -->
+  </resultMap>
+
+  <select id="findAll" resultMap="NoticeCategoryMap">
+    SELECT 
+      notice_no, 
+      name 
+    from pf_notice_category
+    ORDER BY notice_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="NoticeCategoryMap" parameterType="int">
+    SELECT 
+      notice_no, 
+      name 
+    from pf_notice_category
+    WHERE notice_no = #{noticeNumber}
+  </select>
+  
+  <insert id="insert" parameterType="NoticeCategory">
+    INSERT INTO pf_notice_category(
+      notice_no, 
+      name
+    )VALUES(
+      #{noticeNumber},
+      #{name}
+    );
+  </insert>
+
+  <delete id="delete" parameterType="int">
+    DELETE 
+      FROM pf_notice_category
+    WHERE notice_no = #{noticeNumber}
+  </delete>
+
+  <update id="update" parameterType="NoticeCategory">
+     UPDATE pf_notice_category SET
+       name = #{name}
+     WHERE notice_no = #{noticeNumber}
+  </update>
+
+</mapper>
+
+
+
+
+
+
+
