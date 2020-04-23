@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.HashMap;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +79,27 @@ public class MemberServiceImpl implements MemberService {
       return companyMemberDao.findByEmailAndPassword(params);
     } else {
       throw new Exception("로그인 실패");
+    }
+  }
+
+
+  @Override
+  public int update(Map<String, Object> generalMember) throws Exception {
+    if (generalMemberDao.updateProfilePicture(generalMember) > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+
+  @Override
+  public Member get(int number) throws Exception {
+    Member member = generalMemberDao.findByMemberNumber(number);
+    if ((member) != null) {
+      return member;
+    } else {
+      return null;
     }
   }
 
