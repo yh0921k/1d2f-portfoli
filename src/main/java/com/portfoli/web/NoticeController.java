@@ -87,7 +87,7 @@ public class NoticeController {
     return "redirect:list";
   }
 
-  @GetMapping("updateForm")
+  @PostMapping("updateForm")
   public void updateForm(Notice notice, Model model) throws Exception {
     Notice item = noticeService.get(notice.getBoard().getNumber());
     model.addAttribute("notice", item);
