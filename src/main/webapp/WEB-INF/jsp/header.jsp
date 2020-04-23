@@ -22,7 +22,7 @@
 <link rel="preload"
 	href="http://localhost:9999/portfoli/resources/assets/fonts/flaticon/Flaticon.woff2"
 	as="font" type="font/woff2" crossorigin>
-
+	
 <link rel="stylesheet"
 	href="http://localhost:9999/portfoli/resources/assets/css/core.min.css">
 <link rel="stylesheet"
@@ -268,8 +268,7 @@
 						<!-- 
                 Logo : height: 70px max
               -->
-						<a class="navbar-brand" href="/portfoli">
-							<img
+						<a class="navbar-brand" href="/portfoli"> <img
 							src="http://localhost:9999/portfoli/resources/assets/images/logo/logo.png"
 							width="110" height="32" alt="...">
 						</a>
@@ -1051,9 +1050,10 @@
 					<!-- 로그인 전 -->
 
 					<c:if test="${empty loginUser}">
-						<li class="list-inline-item"><a class="nav-link text-secondary"
-							href="/portfoli/app/member/generalJoin" style="text-decoration: none; font-weight: bold;">회원가입</a>
-						</li>
+						<li class="list-inline-item"><a
+							class="nav-link text-secondary"
+							href="/portfoli/app/member/generalJoin"
+							style="text-decoration: none; font-weight: bold;">회원가입</a></li>
 
 						<li
 							class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
@@ -1066,48 +1066,47 @@
 
 					<c:if test="${loginUser.type == '1'}">
 
-						<li class="list-inline-item ml--6 mr--6 dropdown">
-
-                <a href="#" id="dropdownMessageOptions" class="btn btn-sm rounded-circle btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-                  
-                  <!-- badge -->
-                  <span class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0">3</span>
-
-                  <span class="group-icon">
-                    <i class="fi fi-envelope-2"></i>
-                    <i class="fi fi-close"></i>
-                  </span>
-                </a>
-
-                <div aria-labelledby="dropdownMessageOptions" class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
-                  
-                  <div class="dropdown-header fs--14 py-3">
-
-                    <a href="#!" class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
-                      data-href="_ajax/admin_modal_message_write.html" 
-                      data-ajax-modal-size="modal-md" 
-                      data-ajax-modal-centered="false" 
-                      data-ajax-modal-backdrop="static">
-                      + WRITE
-                    </a>
-
-                    1 NEW MESSAGE
-
-                  </div>
-                  <div class="dropdown-divider"></div>
-
-                  <div class="max-h-50vh scrollable-vertical">
-
-
-						<li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a href="#"
-							id="dropdownAccountOptions"
-							class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+						<li class="list-inline-item ml--6 mr--6 dropdown"><a href="#"
+							id="dropdownMessageOptions"
+							class="btn btn-sm rounded-circle btn-light dropdown-toggle"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
 
-								<span class="group-icon m-0"> <i
-									class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
-							</span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}</span>
-						</a> <!--
+								<!-- badge --> <span
+								class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0">3</span>
+
+								<span class="group-icon"> <i class="fi fi-envelope-2"></i>
+									<i class="fi fi-close"></i>
+							</span>
+						</a>
+
+							<div aria-labelledby="dropdownMessageOptions"
+								class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+
+								<div class="dropdown-header fs--14 py-3">
+
+									<a href="#!"
+										class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
+										data-href="_ajax/admin_modal_message_write.html"
+										data-ajax-modal-size="modal-md"
+										data-ajax-modal-centered="false"
+										data-ajax-modal-backdrop="static"> + WRITE </a> 1 NEW MESSAGE
+
+								</div>
+								<div class="dropdown-divider"></div>
+
+								<div class="max-h-50vh scrollable-vertical">
+
+
+									<li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a
+										href="#" id="dropdownAccountOptions"
+										class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+										data-toggle="dropdown" aria-expanded="false"
+										aria-haspopup="true"> <span class="group-icon m-0">
+												<i class="fi w--15 fi-user-male"></i> <i
+												class="fi w--15 fi-close"></i>
+										</span> <span
+											class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name} </span>
+									</a> <!--
                   
                   Dropdown Classes
                     .dropdown-menu-dark     - dark dropdown (desktop only, will be white on mobile)
@@ -1125,109 +1124,115 @@
                       .prefix-icon-ignore           - ignore, do not use on a specific link
 
                 -->
-							<div aria-labelledby="dropdownAccountOptions"
-								class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+										<div aria-labelledby="dropdownAccountOptions"
+											class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
-								<div class="dropdown-header fs--14 py-4">
+											<div class="dropdown-header fs--14 py-4">
 
-									<!-- profile image -->
-									<div
-										class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
-										style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
+												<!-- profile image -->
+												<div
+													class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
+													style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
 
-									<!-- initials - no image -->
-									<!--
+												<!-- initials - no image -->
+												<!--
                     <div data-initials=${loginUser.name} data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
                       <i class="fi fi-circle-spin fi-spin"></i>
                     </div>
                     -->
 
-									<!-- user detail -->
-									<span class="d-block font-weight-medium text-truncate fs--16" ><a href="/portfoli/app/member/generalMypage" class="text-muted">${loginUser.name}</a></span> 
-									<!-- 구직중 버튼 -->
-										<span class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
+												<!-- user detail -->
+												<span
+													class="d-block font-weight-medium text-truncate fs--16"><a
+													href="/portfoli/app/member/generalMypage"
+													class="text-muted">${loginUser.name}</a>
+													
+													</span>
+												<span
+													class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
 
-								</div>
+											</div>
 
-								<div class="dropdown-divider"></div>
+											<div class="dropdown-divider"></div>
 
-								<a href="#!" target="_blank"
-									class="dropdown-item text-truncate font-weight-medium">
-									일정 <small class="d-block text-muted">personal
-										encypted notes</small>
-								</a> <a href="#!" target="_blank"
-									class="dropdown-item text-truncate font-weight-medium"> <span
-									class="badge badge-success float-end font-weight-normal mt-1">3
-										new</span> 일정 <small class="d-block text-muted">internal
-										messaging system</small>
-								</a> <a href="#!" target="_blank"
-									class="dropdown-item text-truncate font-weight-medium"> <span
-									class="badge badge-danger float-end font-weight-normal mt-1">1
-										unpaid</span> 포트폴리오 <small class="d-block text-muted">montly
-										billing</small>
-								</a> <a href="/portfoli/app/member/generalMypage"
-									class="dropdown-item text-truncate font-weight-medium">
-									마이페이지 <small class="d-block text-muted">profile,
-										password and more...</small>
-								</a> <a href="#!"
-									class="dropdown-item text-truncate font-weight-medium">
-									Upgrade <small class="d-block text-muted">계정 업그레이드</small>
-								</a>
+											<a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												일정 <small class="d-block text-muted">personal
+													encypted notes</small>
+											</a> <a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												<span
+												class="badge badge-success float-end font-weight-normal mt-1">3
+													new</span> 일정 <small class="d-block text-muted">internal
+													messaging system</small>
+											</a> <a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												<span
+												class="badge badge-danger float-end font-weight-normal mt-1">1
+													unpaid</span> 포트폴리오 <small class="d-block text-muted">montly
+													billing</small>
+											</a> <a href="/portfoli/app/member/generalMypage"
+												class="dropdown-item text-truncate font-weight-medium">
+												마이페이지 <small class="d-block text-muted">profile,
+													password and more...</small>
+											</a> <a href="#!"
+												class="dropdown-item text-truncate font-weight-medium">
+												Upgrade <small class="d-block text-muted">계정 업그레이드</small>
+											</a>
 
-								<div class="dropdown-divider mb-0"></div>
+											<div class="dropdown-divider mb-0"></div>
 
-								<a href="/portfoli/app/auth/logout"
-									class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
-									<i class="fi fi-power float-start"></i> Log Out
-								</a>
-							</div></li>
+											<a href="/portfoli/app/auth/logout"
+												class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+												<i class="fi fi-power float-start"></i> Log Out
+											</a>
+										</div></li>
 					</c:if>
 
 					<!-- 기업 회원 로그인 후 -->
 
 					<c:if test="${loginUser.type == '2'}">
-						<li class="list-inline-item ml--6 mr--6 dropdown">
+						<li class="list-inline-item ml--6 mr--6 dropdown"><a href="#"
+							id="dropdownMessageOptions"
+							class="btn btn-sm rounded-circle btn-light dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
 
-                <a href="#" id="dropdownMessageOptions" class="btn btn-sm rounded-circle btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-                  
-                  <!-- badge -->
-                  <span class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0">3</span>
+								<!-- badge --> <span
+								class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0">3</span>
 
-                  <span class="group-icon">
-                    <i class="fi fi-envelope-2"></i>
-                    <i class="fi fi-close"></i>
-                  </span>
-                </a>
+								<span class="group-icon"> <i class="fi fi-envelope-2"></i>
+									<i class="fi fi-close"></i>
+							</span>
+						</a>
 
-                <div aria-labelledby="dropdownMessageOptions" class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
-                  
-                  <div class="dropdown-header fs--14 py-3">
+							<div aria-labelledby="dropdownMessageOptions"
+								class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
-                    <a href="#!" class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
-                      data-href="_ajax/admin_modal_message_write.html" 
-                      data-ajax-modal-size="modal-md" 
-                      data-ajax-modal-centered="false" 
-                      data-ajax-modal-backdrop="static">
-                      + WRITE
-                    </a>
+								<div class="dropdown-header fs--14 py-3">
 
-                    1 NEW MESSAGE
+									<a href="#!"
+										class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
+										data-href="_ajax/admin_modal_message_write.html"
+										data-ajax-modal-size="modal-md"
+										data-ajax-modal-centered="false"
+										data-ajax-modal-backdrop="static"> + WRITE </a> 1 NEW MESSAGE
 
-                  </div>
-                  <div class="dropdown-divider"></div>
+								</div>
+								<div class="dropdown-divider"></div>
 
-                  <div class="max-h-50vh scrollable-vertical">
+								<div class="max-h-50vh scrollable-vertical">
 
 
-            <li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a href="#"
-              id="dropdownAccountOptions"
-              class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
-              data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-
-                <span class="group-icon m-0"> <i
-                  class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
-              </span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[기업]&nbsp;&nbsp;${loginUser.name}</span>
-            </a> <!--
+									<li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a
+										href="#" id="dropdownAccountOptions"
+										class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+										data-toggle="dropdown" aria-expanded="false"
+										aria-haspopup="true"> <span class="group-icon m-0">
+												<i class="fi w--15 fi-user-male"></i> <i
+												class="fi w--15 fi-close"></i>
+										</span> <span
+											class="fs--14 d-none d-sm-inline-block font-weight-medium">[기업]&nbsp;&nbsp;${loginUser.name}</span>
+									</a> <!--
                   
                   Dropdown Classes
                     .dropdown-menu-dark     - dark dropdown (desktop only, will be white on mobile)
@@ -1245,62 +1250,67 @@
                       .prefix-icon-ignore           - ignore, do not use on a specific link
 
                 -->
-              <div aria-labelledby="dropdownAccountOptions"
-                class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+										<div aria-labelledby="dropdownAccountOptions"
+											class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
-                <div class="dropdown-header fs--14 py-4">
+											<div class="dropdown-header fs--14 py-4">
 
-                  <!-- profile image -->
-                  <div
-                    class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
-                    style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
+												<!-- profile image -->
+												<div
+													class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
+													style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
 
-                  <!-- initials - no image -->
-                  <!--
+												<!-- initials - no image -->
+												<!--
                     <div data-initials="John Doe" data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
                       <i class="fi fi-circle-spin fi-spin"></i>
                     </div>
                     -->
 
-                  <!-- user detail -->
-                  <span class="d-block font-weight-medium text-truncate fs--16"><a href="/portfoli/app/member/companyMypage" class="text-muted">${loginUser.name}</a></span> <span
-                    class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
-                </div>
+												<!-- user detail -->
+												<span
+													class="d-block font-weight-medium text-truncate fs--16"><a
+													href="/portfoli/app/member/companyMypage"
+													class="text-muted">${loginUser.name}</a></span> <span
+													class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
+											</div>
 
-                <div class="dropdown-divider"></div>
+											<div class="dropdown-divider"></div>
 
-                <a href="#!" target="_blank"
-                  class="dropdown-item text-truncate font-weight-medium">
-                  Notes <small class="d-block text-muted">personal
-                    encypted notes</small>
-                </a> <a href="#!" target="_blank"
-                  class="dropdown-item text-truncate font-weight-medium"> <span
-                  class="badge badge-success float-end font-weight-normal mt-1">3
-                    new</span> Messages <small class="d-block text-muted">internal
-                    messaging system</small>
-                </a> <a href="#!" target="_blank"
-                  class="dropdown-item text-truncate font-weight-medium"> <span
-                  class="badge badge-danger float-end font-weight-normal mt-1">1
-                    unpaid</span> Invoices <small class="d-block text-muted">montly
-                    billing</small>
-                </a> <a href="#!"
-                  class="dropdown-item text-truncate font-weight-medium">
-                  Account Settings <small class="d-block text-muted">profile,
-                    password and more...</small>
-                </a> <a href="#!"
-                  class="dropdown-item text-truncate font-weight-medium">
-                  Upgrade <small class="d-block text-muted">upgrade your
-                    account</small>
-                </a>
+											<a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												Notes <small class="d-block text-muted">personal
+													encypted notes</small>
+											</a> <a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												<span
+												class="badge badge-success float-end font-weight-normal mt-1">3
+													new</span> Messages <small class="d-block text-muted">internal
+													messaging system</small>
+											</a> <a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												<span
+												class="badge badge-danger float-end font-weight-normal mt-1">1
+													unpaid</span> Invoices <small class="d-block text-muted">montly
+													billing</small>
+											</a> <a href="#!"
+												class="dropdown-item text-truncate font-weight-medium">
+												Account Settings <small class="d-block text-muted">profile,
+													password and more...</small>
+											</a> <a href="#!"
+												class="dropdown-item text-truncate font-weight-medium">
+												Upgrade <small class="d-block text-muted">upgrade
+													your account</small>
+											</a>
 
-                <div class="dropdown-divider mb-0"></div>
+											<div class="dropdown-divider mb-0"></div>
 
-                <a href="/portfoli/app/auth/logout"
-                  class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
-                  <i class="fi fi-power float-start"></i> Log Out
-                </a>
+											<a href="/portfoli/app/auth/logout"
+												class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+												<i class="fi fi-power float-start"></i> Log Out
+											</a>
 
-              </div></li>
+										</div></li>
 					</c:if>
 
 

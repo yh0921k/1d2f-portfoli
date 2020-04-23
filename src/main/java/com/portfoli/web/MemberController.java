@@ -1,5 +1,9 @@
 package com.portfoli.web;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Company;
 import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
@@ -52,10 +57,36 @@ public class MemberController {
   }
 
   @GetMapping("generalMypage")
-  public void viewingMypage(HttpServletRequest request) {
-    Member member = (Member) request.getSession().getAttribute("loginUser");
-    System.out.println(member.toString());
+  public void viewingMypage() throws Exception {}
+
+  @PostMapping("updatePic")
+  public String updatePic(HttpServletRequest request, Map<String, Object> generalMember,
+      MultipartFile photoFile) throws Exception {
+
+    generalMember = new HashMap<>();
+
+    String filename = null;
+
+    if (photoFile.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/member");
+      filename = UUID.randomUUID().toString();
+      photoFile.transferTo(new File(dirPath + "/" + filename));
+      generalMember.put("photoFilePath", filename);
+    }
+    generalMember.put("member_number",
+        ((Member) request.getSession().getAttribute("loginUser")).getNumber());
+
+    if (memberService.update(generalMember) > 0) {
+      GeneralMember loginUser = (GeneralMember) request.getSession().getAttribute("loginUser");
+      loginUser.setPhotoFilePath(filename);
+      request.setAttribute("loginUser", loginUser);
+
+      return "redirect:/app/member/generalMypage";
+    } else {
+      throw new Exception("사진 업로드 실패.");
+    }
   }
+
 
 
   // 기업회원
