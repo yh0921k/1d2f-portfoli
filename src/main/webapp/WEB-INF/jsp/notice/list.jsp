@@ -60,13 +60,10 @@
                 
             <c:forEach items="${list}" var="item">
             <tr>
-              <!-- 공지사항 유형번호
-              <td><a href="detail?number=${item.Board.number}">${item.noticeNumber}</a></td>
-               -->  
-              <td><a href="detail?number=${item.Board.number}">${item.Board.title}</a></td>
-              <td><a href="detail?number=${item.Board.number}">${item.Board.content}</a></td>
-              <td><a href="detail?number=${item.Board.number}">${item.Board.viewCount}</a></td>
-              <td><a href="detail?number=${item.Board.number}">${item.Board.registeredDate}</a></td>
+              <td><a href="detail?number=${item.number}">${item.title}</a></td>
+              <td><a href="detail?number=${item.number}">${item.content}</a></td>
+              <td><a href="detail?number=${item.number}">${item.viewCount}</a></td>
+              <td><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
             </tr>
             </c:forEach>
                 

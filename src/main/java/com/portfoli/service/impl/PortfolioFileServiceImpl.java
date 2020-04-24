@@ -16,8 +16,14 @@ public class PortfolioFileServiceImpl implements PortfolioFileService {
 
 
   @Override
-  public int add(PortfolioFile portfolioFile) throws Exception {
-    return portfolioFileDao.insert(portfolioFile);
+  public boolean add(PortfolioFile portfolioFile) throws Exception {
+    return portfolioFileDao.insert(portfolioFile) > 0;
+  }
+
+
+  @Override
+  public boolean delete(int boardNumber) throws Exception {
+    return portfolioFileDao.delete(boardNumber) > 0;
   }
 
 }

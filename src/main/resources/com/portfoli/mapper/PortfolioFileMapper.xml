@@ -16,6 +16,11 @@
     VALUES(#{boardNumber}, #{fileName}, #{filePath})
   </insert>
 
+  <delete id="delete" parameterType="int">
+    DELETE 
+      FROM pf_notice
+    WHERE board_no = #{number}
+  </delete>
 
 </mapper>
 

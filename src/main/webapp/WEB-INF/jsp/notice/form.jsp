@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
   <jsp:include page="../header.jsp"/>
 
@@ -49,7 +50,18 @@
 
                 <tr>
                  <td align="center">유형(no)</td>
-                 <td style="height:50px"><input type="number" rows="1" name='noticeNumber' style="width:100%;"></input></td>
+                 <td style="height:50px">
+                 
+                 
+              <select name="noticeNumber" style="height: 30px; width: 100%;">
+              <c:forEach items="${list}" var="item">
+                  <option value="${item.getNoticeNumber()}">[${item.getNoticeNumber()}]${item.getName()}</option>
+              </c:forEach>
+              <%--
+               --%>
+              </select>                
+                 
+                 </td>
                 </tr>
                 
                 <!-- 

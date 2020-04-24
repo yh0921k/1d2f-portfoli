@@ -48,7 +48,7 @@
 							
 					  <form action="update" method="post" enctype="multipart/form-data">
             <c:if test="${not empty notice}">
-            <input name="board.number" type="hidden" value="${notice.getBoard().getNumber()}"/>
+            <input name="number" type="hidden" value="${notice.getNumber()}"/>
             <table border='1' style="width: 100%;">
             <tr>
               <td width="75%" style="padding: 10px;">
@@ -61,33 +61,34 @@
 					    <%--
 					     --%>
 					    </select>
-              <input name="board.title"  style="resize:none; border-color:pink; width: 80%; height: 100%" value="${notice.board.title}"/></td>
-              <td width="25%" style="padding: 10px; color:#313335;">${notice.board.registeredDate}</td>
+              <input name="title"  style="resize:none; border-color:pink; width: 80%; height: 100%" value="${notice.title}"/></td>
+              <td width="25%" style="padding: 10px; color:#313335;">${notice.registeredDate}</td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.board.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.board.number}</a></td>
+              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</a></td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><textarea style="resize:none; border-color:pink" cols="100%" rows="30px" name="board.content">${notice.board.content}</textarea></td>
+              <td colspan="2" style="padding: 10px;"><textarea style="resize:none; border-color:pink" cols="100%" rows="30px" name="content">${notice.content}</textarea></td>
             </tr>
             <tr>
               <td colspan="2" style="padding: 10px;">
-                <img name="board.attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getBoard().getAttachment()}' height='80'/>
-                 <%-- pf_portfolio_file이 완성되면 그때 구현할 예정
+                 <%-- 
+                <img name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/>
+                 pf_portfolio_file이 완성되면 그때 구현할 예정
                  <c:forEach items="${notice.files}" var="photoFile">
-                 <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getBoard().attachment}' height='80'/>
+                 <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.attachment}' height='80'/>
                  </c:forEach>
                  --%>
               </td>
             </tr>
             <tr>
-              <td colspan="2"><input type="file" name="attachment" /></td>
+              <td colspan="2"><input type="file" name="file" /></td>
             </tr>
 
             <tr>
             <td colspan="2">
             <button>수정</button>
-            <a href="delete?number=${notice.board.number}">삭제</a>
+            <a href="delete?number=${notice.number}">강제삭제</a>
             </td>
             </tr>
             </table>

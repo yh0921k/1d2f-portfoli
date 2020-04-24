@@ -4,6 +4,8 @@ import com.portfoli.domain.PortfolioFile;
 
 public interface PortfolioFileService {
 
-  int add(PortfolioFile portfolioFile) throws Exception;
+  boolean add(PortfolioFile portfolioFile) throws Exception;
+
+  boolean delete(int number) throws Exception;
 
 }

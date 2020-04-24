@@ -21,6 +21,7 @@ import com.portfoli.domain.NoticeCategory;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.NoticeCategoryService;
 import com.portfoli.service.NoticeService;
+import com.portfoli.service.PortfolioFileService;
 
 @Controller
 @RequestMapping("/notice")
@@ -36,11 +37,14 @@ public class NoticeController {
   ServletContext servletContext;
 
   @Autowired
+  PortfolioFileService portfolioFileService;
+  
+  @Autowired
   BoardService boardService;
 
   @Autowired
   NoticeService noticeService;
-  
+
   @Autowired
   NoticeCategoryService noticeCategoryService;
 
@@ -53,73 +57,91 @@ public class NoticeController {
   @RequestMapping("detail")
   public void detail(int number, Model model) throws Exception {
     Notice notice = noticeService.get(number);
-    int noticeNumber = notice.getNoticeNumber();
-    NoticeCategory noticeCategory =noticeCategoryService.get(noticeNumber);
+    notice.setViewCount(notice.getViewCount()+1);
+    NoticeCategory noticeCategory =noticeCategoryService.get(notice.getNoticeNumber());
     model.addAttribute("notice", notice);
     model.addAttribute("categoryName", noticeCategory.getName());
   }
 
   @GetMapping("form")
-  public void form() throws Exception {}
+  public void form(Model model) throws Exception {
+    model.addAttribute("list", noticeCategoryService.list());
+  }
 
   @PostMapping("add")
   public String add(int noticeNumber, String title, String content, @RequestParam("attachment") MultipartFile attachment) throws Exception {
-    Board board = new Board();
-    board.setTitle(title);
-    board.setContent(content);
-    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    Notice notice = new Notice();
+    notice.setNoticeNumber(noticeNumber);
+    notice.setTitle(title);
+    notice.setContent(content);
+    notice.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     if (attachment.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/notice");
       String filename = UUID.randomUUID().toString();
       attachment.transferTo(new File(dirPath + "/" + filename));
-      board.setAttachment(filename);
+      notice.setAttachment(filename);
     } else {
-      board.setAttachment(null);
+      notice.setAttachment(null);
     }
 
-    boardService.add(board);
+    Board board = new Board();
+    board.setNumber(notice.getNumber());
+    board.setTitle(notice.getTitle());
+    board.setContent(notice.getContent());
+    board.setAttachment(notice.getAttachment());
+    board.setRegisteredDate(notice.getRegisteredDate());
+    board.setViewCount(notice.getViewCount());
 
-    Notice notice = new Notice();
-    notice.setBoard(board);
-    notice.setNoticeNumber(noticeNumber);
+    boardService.add(board);
+    notice.setNumber(board.getNumber());
     noticeService.insert(notice);
     return "redirect:list";
   }
 
   @GetMapping("delete")
   public String delete(int number) throws Exception {
-    noticeService.delete(number);
-    boardService.delete(number);
+    if(noticeService.delete(number)) {
+      portfolioFileService.delete(number);
+      boardService.delete(number);
     return "redirect:list";
+    } else
+      throw new Exception("삭제중 오류발생");
   }
 
   @PostMapping("updateForm")
   public void updateForm(Notice notice, Model model) throws Exception {
-    Notice item = noticeService.get(notice.getBoard().getNumber());
+    Notice item = noticeService.get(notice.getNumber());
     model.addAttribute("notice", item);
     model.addAttribute("list", noticeCategoryService.list());
     model.addAttribute("category", noticeCategoryService.get(item.getNoticeNumber()));
   }
-  
-  
-  @PostMapping("update")
-  public String update(Notice notice, MultipartFile attachment) throws Exception {
-    Board board = notice.getBoard();
 
-    if (attachment.getSize() > 0) {
+
+  @PostMapping("update")
+  public String update(Notice notice, MultipartFile file) throws Exception {
+
+    if (file.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/notice");
       String filename = UUID.randomUUID().toString();
 
       logger.debug(dirPath + ":" + filename);
-      attachment.transferTo(new File(dirPath + "/" + filename));
-      board.setAttachment(filename);
+      file.transferTo(new File(dirPath + "/" + filename));
+      notice.setAttachment(filename);
     }
-    
+
+    Board board = new Board();
+    board.setNumber(notice.getNumber());
+    board.setTitle(notice.getTitle());
+    board.setContent(notice.getContent());
+    board.setAttachment(notice.getAttachment());
+    board.setRegisteredDate(notice.getRegisteredDate());
+    board.setViewCount(notice.getViewCount());
+
     if(boardService.update(board)) {
       noticeService.update(notice);
       return "redirect:list";
-    } else
+    }else
       throw new Exception("업데이트에 실패했습니다.");
   }
 
