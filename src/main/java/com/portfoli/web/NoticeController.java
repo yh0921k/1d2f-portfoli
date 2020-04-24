@@ -47,9 +47,6 @@ public class NoticeController {
   @RequestMapping("list")
   public void list(Model model) throws Exception {
     List<Notice> notices = noticeService.list();
-    for(Notice n : notices) {
-      System.out.println("wow-->" + n);
-    }
     model.addAttribute("list", notices);
   }
 
