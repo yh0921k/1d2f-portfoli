@@ -35,16 +35,6 @@
 						
 						<div class="col-12 col-lg-8">
 
-							<!--
-								.article-format class will add some slightly formattings for a good text visuals. 
-								This is because most editors are not ready formatted for bootstrap
-								Blog content should come inside this container, as it is from database!
-								src/scss/_core/base/_typography.scss
-							-->
-							<!-- 
-							<div class="bg-white p-5 p-4-xs rounded-xl article-format">
-							 -->
-							 
 							 <form action="add" method="post" enctype="multipart/form-data">
                 <table border='1' style='width:100%'>
 
@@ -57,27 +47,10 @@
               <c:forEach items="${list}" var="item">
                   <option value="${item.getNoticeNumber()}">[${item.getNoticeNumber()}]${item.getName()}</option>
               </c:forEach>
-              <%--
-               --%>
               </select>                
                  
                  </td>
                 </tr>
-                
-                <!-- 
-                공지사항 테이블 완료후, 공지사항 유형 추가해야함
-                <form action="/action_page.php">
-							  <label for="cars">Choose a car:</label>
-							  <select id="cars" name="cars">
-						    <option value="volvo">Volvo</option>
-						    <option value="saab">Saab</option>
-						    <option value="fiat">Fiat</option>
-						    <option value="audi">Audi</option>
-							  </select>
-							  <input type="submit">
-							  </form>
-                 -->
-
                 
                 <tr>
                  <td align="center">제목</td>
@@ -91,10 +64,7 @@
                 
                 <tr>
                   <td colspan="2" align="center">
-                  ---
-                  <label>업로드</label>
                   <input type="file" name="attachment" />
-                  ---
                   </td>
                 </tr>
                 </table>

@@ -62,13 +62,21 @@
               <td colspan="2" style="padding: 10px;"><textarea readonly="readonly" style="border-color:transparent; resize:none; width: 100%; height: 300px">${notice.content}</textarea></td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;">
-                <img name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/>
+              <td colspan="2" style="padding: 10px;" align="center" >
+              <c:choose>
+              <c:when test="${not empty notice.attachment}">
+                <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/><br>
+                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' download="${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}.jpg" height='80'>첨부파일 다운로드</a>
                  <%-- pf_portfolio_file이 완성되면 그때 구현할 예정
                  <c:forEach items="${notice.files}" var="photoFile">
                  <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.attachment}' height='80'/>
                  </c:forEach>
                  --%>
+               </c:when>
+               <c:otherwise>
+               <span>첨부파일이 없습니다.</span>
+               </c:otherwise>
+               </c:choose>
               </td>
             </tr>
 

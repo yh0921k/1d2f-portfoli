@@ -344,16 +344,17 @@ INSERT INTO pf_major(major_no, name) VALUES(4,'송율리아');
 INSERT INTO pf_major(major_no, name) VALUES(5,'문국대');
   
 -- 공지사항분류 예제데이터 (pf_notice_category)
-INSERT INTO pf_notice_category (notice_no, name) VALUES(1, "제목1");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(2, "제목2");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(3, "제목3");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(4, "제목4");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(5, "제목5");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(6, "제목6");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(7, "제목7");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(8, "제목8");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(9, "제목9"); 
-INSERT INTO pf_notice_category (notice_no, name) VALUES(10, "제목10");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(0, "미분류");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(1, "로그인관련");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(2, "상품관련");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(3, "결제관련");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(4, "배송관련");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(5, "유형5");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(6, "유형6");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(7, "유형7");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(8, "유형8");
+INSERT INTO pf_notice_category (notice_no, name) VALUES(9, "유형9"); 
+INSERT INTO pf_notice_category (notice_no, name) VALUES(10, "유형10");
 
 -- 공지사항 예제데이터 (pf_notice)
 INSERT INTO pf_notice (board_no, notice_no) VALUES(11,1);
