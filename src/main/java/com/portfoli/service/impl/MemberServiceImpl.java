@@ -95,12 +95,13 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public Member get(int number) throws Exception {
-    Member member = generalMemberDao.findByMemberNumber(number);
+    Member member = memberDao.findByMemberNumber(number);
     if ((member) != null) {
       return member;
     } else {
       return null;
     }
   }
+
 
 }

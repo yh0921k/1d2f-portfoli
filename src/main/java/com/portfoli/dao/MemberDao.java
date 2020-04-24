@@ -9,4 +9,5 @@ public interface MemberDao {
 
   Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
 
+  Member findByMemberNumber(int userNumber) throws Exception;
 }

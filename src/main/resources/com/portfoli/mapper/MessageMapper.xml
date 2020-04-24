@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.MessageDao">
+  <resultMap type="Message" id="MessageMap">
+    <id column="message_no" property="number"/>
+    <result column="message_sender" property="senderNumber"/>
+    <result column="message_receiver" property="receiverNumber"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="send_date" property="sendDate"/>
+    <result column="receive_date" property="receiveDate"/>
+    <result column="message_sender_delete" property="senderDelete"/>
+    <result column="message_receiver_delete" property="receiverDelete"/>
+    
+    <association property="member" javaType="Member">
+      <id property="number" column="member_no"/>
+      <result property="id" column="id"/>
+    </association>
+
+    <collection property="files" ofType="MessageFile">
+      <id column="file_no" property="no"/>
+      <result column="file_name" property="fileName"/>
+      <result column="file_path" property="filePath"/>
+    </collection>
+  </resultMap>
+
+  <insert id="insert" parameterType="Message"
+  useGeneratedKeys="true" keyColumn="message_no" keyProperty="number">
+    insert into pf_message(
+      message_sender,
+      message_receiver,
+      title,
+      content,
+      message_sender_delete,
+      message_receiver_delete)
+    values(
+      #{senderNumber},
+      #{receiverNumber},
+      #{title},
+      #{content},
+      #{senderDelete},
+      #{receiverDelete})
+  </insert>
+
+    <!-- 보낸 쪽지함 -->
+    <select id="findAllBySenderNumber" resultMap="MessageMap" parameterType="int">
+    select
+      m.message_no,
+      m.message_sender,
+      m.message_receiver,
+      m.title,
+      m.send_date,
+      s.member_no,
+      s.id member_id
+    from pf_message m
+      join pf_members s on m.message_receiver=s.member_no
+    where
+      m.message_sender=#{userNumber}
+    order by m.send_date desc;
+  </select>
+
+  <!-- 받은 쪽지함 -->
+  <select id="findAllByReceiverNumber" resultMap="MessageMap" parameterType="int">
+    select
+      m.message_no,
+      m.message_sender,
+      m.message_receiver,
+      m.title,
+      m.send_date,
+      r.member_no,
+      r.id member_id
+    from pf_message m
+      join pf_members r on m.message_receiver=r.member_no
+    where
+      m.message_receiver=#{userNumber}
+    order by m.send_date desc;
+  </select>
+
+</mapper>
