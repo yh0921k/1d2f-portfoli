@@ -6,7 +6,7 @@
 <jsp:include page="../header.jsp" />
 
 <script>
-	
+
 </script>
 
 
@@ -143,23 +143,10 @@
 										<!-- avatar -->
 										<div class="col-12 col-md-4 col-xl-4 text-center">
 
-											<!-- 
-													Based on `SOW : File Upload` 
-													
-													For ajax:
-													documentation/plugins-sow-file-upload.html 
-												-->
 											<label
 												class="w--120 h--120 rounded-circle text-center position-relative d-inline-block cursor-pointer border border-secondary border-dashed bg-white">
 
-												<!-- remove button --> <a href="#"
-												class="js-file-upload-avatar-circle-remove hide position-absolute absolute-top w-100 z-index-3">
-													<span
-													class="d-inline-block btn btn-sm btn-pill bg-secondary text-white pt--4 pb--4 pl--10 pr--10 m--1 mt--n15"
-													title="remove" data-tooltip="tooltip"> <i
-														class="fi fi-close m-0"></i>
-												</span>
-											</a> <span
+										<span
 												class="z-index-2 js-file-input-avatar-circle-container d-block absolute-full z-index-1 hide-empty">
 													<!-- avatar container -->
 											</span> <!-- hidden input (out of viewport, or safari will ignore it) -->
@@ -179,6 +166,7 @@
 												data-file-btn-clear="a.js-file-upload-avatar-circle-remove"
 												data-file-preview-img-cover="true"
 												class="custom-file-input absolute-full">
+												
 												<c:if test="${empty loginUser.photoFilePath}">
 												<svg
 													class="fill-gray-500 rounded-circle m-4 z-index-0"
@@ -189,19 +177,13 @@
 														d="M55.467,46.526l-9.723-4.21c-0.23-0.115-0.485-0.396-0.704-0.771l6.525-0.005c0,0,0.377,0.037,0.962,0.037c1.073,0,2.638-0.122,4-0.707c0.817-0.352,1.425-1.047,1.669-1.907c0.246-0.868,0.09-1.787-0.426-2.523c-1.865-2.654-6.218-9.589-6.354-16.623c-0.003-0.121-0.397-12.083-12.21-12.18c-1.187,0.01-2.309,0.156-3.372,0.413c0.792,2.094,0.719,3.968,0.665,4.576v4.733c0.648,0.922,1,2.017,1,3.141v4c0,1.907-1.004,3.672-2.607,4.662c-0.748,2.022-1.738,3.911-2.949,5.621c-0.15,0.213-0.298,0.414-0.443,0.604v2.86c0,0.442,0.236,0.825,0.631,1.022l9.553,4.776c3.587,1.794,5.815,5.399,5.815,9.41V57.5H60v-3.697C60,50.711,58.282,47.933,55.467,46.526z"></path>
 													</svg>
 													</c:if>
+													
 													<c:if test="${not empty loginUser.photoFilePath}">
-													
-													
-													
-													
-													<!-- 사진 불러오기 -->
-													
-													
-													
+													<img class="rounded-circle img-thumbnail h--120 w--120" src='${pageContext.request.contextPath}/upload/member/${loginUser.photoFilePath}'><br>
 													</c:if>
 
 											</label> 
-											<button class="btn btn-outline-dark btn-pill mb-1 btn-sm" style="font-size: 13px">보내기</button>
+											<button class="btn btn-outline-dark btn-pill mb-1 btn-sm" data-toggle="tooltip" data-placement="bottom" style="font-size: 13px;" title="사진을 선택하지 않은 채 '보내기'를 누르시면 사진이 삭제됩니다.">보내기</button>
 											</form>
 
 										</div>
