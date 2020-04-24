@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.portfoli.dao.JobPostingFileDao">
+
+  <resultMap type="JobPostingFile" id="JobPostingFileMap">
+    <id column="job_posting_file_no"   property="jobPostingFileNumber"/>
+    <result column="file_path"  property="filePath"/>
+    <result column="job_posting_no"  property="jobPostingNumber"/>
+  </resultMap>
+    
+  <insert id="insert" parameterType="JobPosting">
+    insert into pf_job_posting_file(job_posting_no,file_path) 
+    values
+    <foreach collection="files" item="file" separator=",">
+      (#{jobPostingNumber}, #{file.filePath})
+    </foreach>
+  </insert>
+  
+  <select id="findAll" resultMap="JobPostingFileMap" parameterType="int">
+    select 
+      job_posting_file_no, 
+      job_posting_no, 
+      file_path
+    from 
+      pf_job_posting_file
+    where 
+      job_posting_no=#{jobPostingNumber}
+    order by 
+      job_posting_file_no asc
+  </select>
+
+  <delete id="deleteAll" parameterType="int">
+    delete from pf_job_posting_file
+    where job_posting_no=#{jobPostingNumber}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

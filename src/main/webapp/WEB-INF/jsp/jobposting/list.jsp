@@ -1,0 +1,48 @@
+<%@ page import="com.portfoli.domain.JobPosting"%>
+<%@ page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:include page="../header.jsp"/>
+
+  <h1>채용공고</h1>  
+ <form action='search' method='get'>
+  검색어: <input name='keyword' type='text'>
+ <button>검색</button>
+ </form>   
+  <hr>
+  
+  <table border='1'>
+  <tr>
+    <th>번호</th>
+    <th>제목</th>
+    <th>내용</th>
+    <th>최소경력</th>
+    <th>직무</th>
+    <th>연봉</th>
+    <th>시작일</th>
+    <th>마감일</th>
+    <th>조회수</th>
+  </tr>
+
+<c:forEach items="${list}" var="item">.
+    <tr>
+      <td>${item.jobPostingNumber}</td> 
+      <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td> 
+      <td>${item.content}</td>
+      <td>${item.minimumCareer}</td>
+      <td>${item.job}</td>
+      <td>${item.yearSalary}</td>
+      <td>${item.startDated}</td>
+      <td>${item.endDated}</td>
+      <td>${item.viewCount}</td>
+    </tr>
+</c:forEach>
+
+  </table>
+  <hr>
+<a href='form'>글쓰기</a><br>
+
+<jsp:include page="../footer.jsp"/>
