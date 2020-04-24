@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,6 +88,13 @@ public class MemberController {
     }
   }
 
+
+  @GetMapping("generalUpdate")
+  public void generalInfoUpdate(HttpServletRequest request, Model model) throws Exception {
+    GeneralMember generalMember = (GeneralMember) memberService.getGeneralMember(
+        ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
+    model.addAttribute("member", generalMember);
+  }
 
 
   // 기업회원

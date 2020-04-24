@@ -46,5 +46,14 @@
     WHERE general_member_no=#{member_number}
   </update>
   
+   <select id="findByGeneralMemberNumber" 
+    resultMap="GeneralMemberMap" 
+    parameterType="int">
+    SELECT *
+    FROM pf_members m JOIN pf_general_member g
+    ON m.member_no = g.general_member_no
+    WHERE m.member_no=#{no}
+  </select>
+  
   
 </mapper>

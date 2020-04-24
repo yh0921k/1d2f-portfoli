@@ -17,4 +17,6 @@ public interface MemberService {
 
   int update(Map<String, Object> generalMember) throws Exception;
 
+  GeneralMember getGeneralMember(int number) throws Exception;
+
 }

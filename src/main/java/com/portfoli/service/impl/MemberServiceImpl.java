@@ -94,10 +94,21 @@ public class MemberServiceImpl implements MemberService {
 
 
   @Override
-  public Member get(int number) throws Exception {
-    Member member = memberDao.findByMemberNumber(number);
-    if ((member) != null) {
-      return member;
+  public GeneralMember get(int number) throws Exception {
+    GeneralMember generalMember = generalMemberDao.findByGeneralMemberNumber(number);
+    if ((generalMember) != null) {
+      return generalMember;
+    } else {
+      return null;
+    }
+  }
+
+
+  @Override
+  public GeneralMember getGeneralMember(int number) throws Exception {
+    GeneralMember generalMember = generalMemberDao.findByGeneralMemberNumber(number);
+    if ((generalMember) != null) {
+      return generalMember;
     } else {
       return null;
     }

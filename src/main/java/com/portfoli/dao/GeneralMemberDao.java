@@ -9,7 +9,7 @@ public interface GeneralMemberDao {
 
   GeneralMember findByEmailAndPassword(Map<String, Object> params) throws Exception;
 
-  GeneralMember findByMemberNumber(int memberNumber) throws Exception;
+  GeneralMember findByGeneralMemberNumber(int generalMemberNumber) throws Exception;
 
   int updateProfilePicture(Map<String, Object> generalMember) throws Exception;
 
