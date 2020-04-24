@@ -51,6 +51,9 @@ dependencies {
     // jstl
     implementation 'jstl:jstl:1.2'
     
+    // Thumbnailator Library
+    implementation 'net.coobird:thumbnailator:0.4.11'
+    
     implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.5'
     
     // multipart 데이터 처리 라이브러리
