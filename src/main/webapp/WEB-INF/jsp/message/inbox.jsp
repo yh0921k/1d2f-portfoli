@@ -42,7 +42,7 @@
 					<ul class="nav flex-column px-2 font-weight-bold">
 						<li class="nav-item"><a class="nav-link" href="#"> 내 프로필
 								수정하기 </a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> 내 정보
+						<li class="nav-item"><a class="nav-link" href="/portfoli/app/member/generalUpdate"> 내 정보
 								수정하기 </a></li>
 					</ul></li>
 
@@ -54,9 +54,9 @@
 				</a>
 
 					<ul class="nav flex-column px-2 font-weight-bold">
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item font-weight-bold active"><a class="nav-link"
 							href="/portfoli/app/message/inbox"> 받은 쪽지함 </a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item font-weight-bold"><a class="nav-link"
 							href="/portfoli/app/message/sent"> 보낸 쪽지함 </a></li>
 					</ul></li>
 
@@ -196,7 +196,7 @@
 
 														<a class="dropdown-item text-truncate"
 															href="/portfoli/app/message/form"> <i
-															class="fi fi-arrow-right-3"></i> 답변
+															class="fi fi-arrow-right-3"></i> 답장
 														</a> <a href="#!"
 															class="dropdown-item text-truncate js-ajax-confirm"
 															data-href="/portfoli/app/message/inbox"
@@ -211,7 +211,7 @@
 															data-ajax-confirm-btn-no-icon="fi fi-close"
 															data-ajax-confirm-success-target="#message_id_1"
 															data-ajax-confirm-success-target-action="remove"> <i
-															class="fi fi-thrash text-danger"></i> Delete
+															class="fi fi-thrash text-danger"></i> 삭제
 														</a>
 
 													</div>
@@ -256,7 +256,7 @@
 										data-toggle="dropdown" aria-expanded="false"
 										aria-haspopup="true"> <span class="group-icon"> <i
 											class="fi fi-dots-vertical-full"></i> <i class="fi fi-close"></i>
-									</span> <span>Selected Items</span>
+									</span> <span>쪽지 선택하기</span>
 									</a>
 
 									<div

@@ -43,8 +43,8 @@
               <ul class="nav flex-column px-2 font-weight-bold">
                 <li class="nav-item"><a class="nav-link" href="#"> 내
                     프로필 수정하기 </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> 내 정보
-                    수정하기 </a></li>
+                <li class="nav-item"><a class="nav-link" href="/portfoli/app/member/generalUpdate">
+                내 정보  수정하기 </a></li>
               </ul></li>
 
             <li class="nav-item font-weight-bold active"><a class="nav-link"
@@ -55,9 +55,9 @@
             </a>
 
               <ul class="nav flex-column px-2 font-weight-bold">
-                <li class="nav-item"><a class="nav-link"
+                <li class="nav-item font-weight-bold"><a class="nav-link"
                   href="/portfoli/app/message/inbox"> 받은 쪽지함 </a></li>
-                <li class="nav-item"><a class="nav-link"
+                <li class="nav-item font-weight-bold active"><a class="nav-link"
                   href="/portfoli/app/message/sent"> 보낸 쪽지함 </a></li>
               </ul></li>
 
@@ -203,7 +203,7 @@
 													data-ajax-confirm-btn-no-icon="fi fi-close"
 													data-ajax-confirm-success-target="#message_id_1"
 													data-ajax-confirm-success-target-action="remove"> <i
-													class="fi fi-thrash text-danger"></i> Delete
+													class="fi fi-thrash text-danger"></i> 삭제
 												</a>
 
 											</div>
