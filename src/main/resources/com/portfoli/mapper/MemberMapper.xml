@@ -59,7 +59,7 @@
 	
 	<update id="updateDefaultInfo" parameterType="Member">
 		UPDATE pf_members
-		SET name=#{name}, id=#{id}, email=#{email}, tel=#{tel}
+		SET name=#{name}, id=#{id}, email=#{email}, tel=#{tel}, sms_yn=#{smsYN}, email_yn=#{emailYN}
 		WHERE member_no=#{number}
 	</update>
 	
