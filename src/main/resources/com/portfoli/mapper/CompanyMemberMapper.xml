@@ -42,5 +42,11 @@
     ON m.member_no = c.company_member_no
     WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
   </select>
+  
+   <delete id="delete" parameterType="int">
+  	DELETE 
+  	FROM pf_company_member
+  	WHERE company_member_no = #{memberNumber}
+  </delete>
     
 </mapper>

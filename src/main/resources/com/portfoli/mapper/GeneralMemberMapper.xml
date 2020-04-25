@@ -40,6 +40,15 @@
     WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
   </select>
   
+  <select id="getSessionByGNumber" 
+    resultMap="GeneralMemberMap" 
+    parameterType="int">
+    SELECT g.general_member_no, m.email, m.id, m.type, m.name, g.seeking_flag, g.membership, g.career, g.photo
+    FROM pf_members m JOIN pf_general_member g
+    ON m.member_no = g.general_member_no
+    WHERE m.member_no=#{no}
+  </select>
+  
    <update id="updateProfilePicture" parameterType="map">
     UPDATE pf_general_member
     SET photo=#{photoFilePath}
@@ -54,6 +63,12 @@
     ON m.member_no = g.general_member_no
     WHERE m.member_no=#{no}
   </select>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE 
+  	FROM pf_general_member
+  	WHERE general_member_no = #{memberNumber}
+  </delete>
   
   
 </mapper>

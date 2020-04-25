@@ -60,7 +60,6 @@ public class AuthController {
     System.out.println("----------------------------------------");
 
     if (member != null) {
-      System.out.println(member.toString());
       request.getSession().setAttribute("loginUser", member);
       return "redirect:/";
     } else {

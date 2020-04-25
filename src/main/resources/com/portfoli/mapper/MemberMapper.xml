@@ -8,7 +8,7 @@
 
 	<resultMap type="Member" id="MemberMap">
 		<id column="member_no" property="number" />
-		<result column="id" property="id"/>
+		<result column="id" property="id" />
 		<result column="pwd" property="password" />
 		<result column="name" property="name" />
 		<result column="post_no" property="postNumber" />
@@ -24,24 +24,49 @@
 
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
-		INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type)
-		VALUES (#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
+		INSERT INTO
+		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type)
+		VALUES
+		(#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
 		#{emailYN}, #{type})
 	</insert>
-	
-	<select id="findByEmailAndPassword" 
-    resultMap="MemberMap" 
-    parameterType="map">
-    SELECT member_no, type, id, name, email
-    FROM pf_members
-    WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password})
-  </select>
 
-  <select id="findByMemberNumber" 
-    resultMap="MemberMap" 
-    parameterType="int">
-    SELECT member_no, type, id, name, email
-    FROM pf_members
-    WHERE member_no=#{senderNumber}
-  </select>
+	<select id="findByEmailAndPassword" resultMap="MemberMap"
+		parameterType="map">
+		SELECT member_no, type, id, name, email
+		FROM pf_members
+		WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password})
+	</select>
+
+	<select id="findByMemberNumber" resultMap="MemberMap"
+		parameterType="int">
+		SELECT member_no, type, id, name, email
+		FROM pf_members
+		WHERE member_no=#{senderNumber}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM pf_members
+		WHERE member_no = #{memberNumber}
+	</delete>
+
+	<update id="updatePassword" parameterType="map">
+		UPDATE pf_members
+		SET pwd=password(#{newPassword})
+		WHERE member_no=#{memberNumber}
+	</update>
+	
+	<update id="updateDefaultInfo" parameterType="Member">
+		UPDATE pf_members
+		SET name=#{name}, id=#{id}, email=#{email}, tel=#{tel}
+		WHERE member_no=#{number}
+	</update>
+	
+	<update id="updateAddress" parameterType="Member">
+		UPDATE pf_members
+		SET post_no=#{postNumber}, basic_address=#{basicAddress}, detail_address=#{detailAddress}
+		WHERE member_no=#{number}
+	</update>
+
 </mapper>

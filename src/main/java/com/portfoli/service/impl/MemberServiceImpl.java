@@ -84,7 +84,7 @@ public class MemberServiceImpl implements MemberService {
 
 
   @Override
-  public int update(Map<String, Object> generalMember) throws Exception {
+  public int updateProfilePic(Map<String, Object> generalMember) throws Exception {
     if (generalMemberDao.updateProfilePicture(generalMember) > 0) {
       return 1;
     } else {
@@ -112,6 +112,77 @@ public class MemberServiceImpl implements MemberService {
     } else {
       return null;
     }
+  }
+
+
+  @Override
+  @Transactional
+  public int delete(int memberType, int memberNumber) throws Exception {
+    if(memberType == 1) {
+      if(generalMemberDao.delete(memberNumber) > 0) {
+        memberDao.delete(memberNumber);
+        return 1;
+      } else {
+        return 0;
+      }
+    } else if (memberType ==2 ) {
+      if(companyMemberDao.delete(memberNumber) > 0) {
+        memberDao.delete(memberNumber);
+        return 1;
+      } else {
+        return 0;
+      }
+    } else {
+      throw new Exception("회원 삭제 실패");
+    }
+  }
+
+
+  @Override
+  public int updatePassword(int memberNumber, String newPassword) throws Exception {
+    Map<String, Object> params = new HashMap<>();
+    params.put("memberNumber",  memberNumber);
+    params.put("newPassword", newPassword);
+    if(memberDao.updatePassword(params) >0) {
+      return 1;
+    }
+    return 0;
+  }
+
+
+  @Override
+  @Transactional
+  public int updateDefaultInfo(GeneralMember member) throws Exception {
+    Map<String, Object> params = new HashMap<>();
+    params.put("photoFilePath", member.getPhotoFilePath());
+    params.put("member_number", member.getNumber());
+    if (generalMemberDao.updateProfilePicture(params) > 0) {
+      if(memberDao.updateDefaultInfo(member) > 0) {
+        return 1;
+      }
+      return 0;
+    } else {
+      return 0;
+    }
+  }
+  
+  @Override
+  public GeneralMember getSessionInfo(int memberNumber) throws Exception {
+    
+    GeneralMember generalMember = generalMemberDao.getSessionByGNumber(memberNumber);
+    if(generalMember != null) {
+      return generalMember;
+    }
+    return null;
+  }
+
+
+  @Override
+  public int updateAddress(Member member) throws Exception {
+    if(memberDao.updateAddress(member) > 0) {
+      return 1;
+    }
+    return 0; 
   }
 
 

@@ -57,8 +57,10 @@ public class MemberController {
     }
   }
 
+
   @GetMapping("generalMypage")
   public void viewingMypage() throws Exception {}
+
 
   @PostMapping("updatePic")
   public String updatePic(HttpServletRequest request, Map<String, Object> generalMember,
@@ -77,7 +79,7 @@ public class MemberController {
     generalMember.put("member_number",
         ((Member) request.getSession().getAttribute("loginUser")).getNumber());
 
-    if (memberService.update(generalMember) > 0) {
+    if (memberService.updateProfilePic(generalMember) > 0) {
       GeneralMember loginUser = (GeneralMember) request.getSession().getAttribute("loginUser");
       loginUser.setPhotoFilePath(filename);
       request.setAttribute("loginUser", loginUser);
@@ -95,6 +97,35 @@ public class MemberController {
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
     model.addAttribute("member", generalMember);
   }
+
+  @PostMapping("updateDefaultInfo")
+  public String updateDefaultInfo(HttpServletRequest request, GeneralMember member,
+      MultipartFile photoFile) throws Exception {
+
+    // 사진 파일 처리
+    String filename = null;
+
+    if (photoFile.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/member");
+      filename = UUID.randomUUID().toString();
+      photoFile.transferTo(new File(dirPath + "/" + filename));
+      member.setPhotoFilePath(filename);
+    } else {
+      member.setPhotoFilePath(
+          ((GeneralMember) request.getSession().getAttribute("loginUser")).getPhotoFilePath());
+    }
+
+    int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
+    member.setNumber(memberNumber);
+
+    if (memberService.updateDefaultInfo(member) > 0) {
+      request.getSession().setAttribute("loginUser", memberService.getSessionInfo(memberNumber));
+      return "redirect:/app/member/generalUpdate";
+    } else {
+      throw new Exception("회원 정보 수정 실패");
+    }
+  }
+
 
 
   // 기업회원
@@ -114,6 +145,49 @@ public class MemberController {
       throw new Exception("회원을 추가할 수 없습니다.");
     }
   }
+
+
+
+  // 공통
+
+  @PostMapping("delete")
+  public String memberDelete(HttpServletRequest request) throws Exception {
+
+    int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
+    int memberType = ((Member) request.getSession().getAttribute("loginUser")).getType();
+
+    if (memberService.delete(memberType, memberNumber) > 0) {
+      request.getSession().invalidate();
+      return "redirect:/";
+    } else {
+      throw new Exception("회원 삭제 실패");
+    }
+  }
+
+  @PostMapping("updatePassword")
+  public String updatePassword(HttpServletRequest request, String newPassword) throws Exception {
+
+    int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
+
+    if (memberService.updatePassword(memberNumber, newPassword) > 0) {
+      return "redirect:/app/member/generalUpdate";
+    } else {
+      throw new Exception("비밀번호 수정 실패");
+    }
+  }
+  
+  @PostMapping("updateAddress")
+  public String updateAddress(HttpServletRequest request, Member member) throws Exception {
+
+    member.setNumber(((Member) request.getSession().getAttribute("loginUser")).getNumber());
+
+    if (memberService.updateAddress(member) > 0) {
+      return "redirect:/app/member/generalUpdate";
+    } else {
+      throw new Exception("주소 수정 실패 ");
+    }
+  }
+
 
 
 }

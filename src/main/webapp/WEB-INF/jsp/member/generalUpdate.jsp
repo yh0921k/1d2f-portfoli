@@ -171,7 +171,7 @@ function isSame() {
 
 							<!-- PERSONAL DETAIL -->
 							<div class="p-4 shadow-xs border bt-0 mb-4 bg-white">
-								<form method="post" action="generalUpdate" novalidate
+								<form method="post" action="updateDefaultInfo" novalidate
 									class="bs-validate" enctype="multipart/form-data">
 
 									<div class="row">
@@ -201,7 +201,7 @@ function isSame() {
 												</span>
 											</span> <!-- 
                               upload field 
-                            --> <input name="account_avatar" type="file"
+                            --> <input name="photoFile" type="file"
 												data-file-ext="jpg, png"
 												data-file-max-size-kb-per-file="5000"
 												data-file-ext-err-msg="Allowed:"
@@ -214,7 +214,8 @@ function isSame() {
 												data-file-preview-img-height="118"
 												data-file-btn-clear="a.js-file-upload-avatar-ajax-circle-remove-preadded"
 												data-file-preview-img-cover="true"
-												class="custom-file-input absolute-full"> <!-- avatar : : always under image -->
+												class="custom-file-input absolute-full"
+												value="${loginUser.photoFilePath}"> <!-- avatar : : always under image -->
 												<c:if test="${empty loginUser.photoFilePath}">
 													<svg class="fill-gray-500 rounded-circle m-4 z-index-0"
 														viewBox="0 0 60 60">
@@ -359,7 +360,7 @@ function isSame() {
 							</a>
 
 							<div id="user_edit_password" class="collapse" style="">
-								<form method="post" action="generalUpdateAddress">
+								<form method="post" action="updatePassword">
 
 									<div class="row mt-3">
 
@@ -367,16 +368,15 @@ function isSame() {
 
 											<div class="input-group-over">
 												<div class="form-label-group mb-3">
-													<input placeholder="Current Password"
-														id="account_current_password"
-														name="account_current_password" type="password"
-														class="form-control"> <label
-														for="account_current_password">현재 비밀번호</label>
+													<input placeholder="Current Password" id="currentPassword"
+														name="currentPassword" type="password"
+														class="form-control"> <label for="currentPassword">현재
+														비밀번호</label>
 												</div>
 
 												<!-- `SOW : Form Advanced` plugin used -->
 												<a href="#" class="btn fs--12 btn-password-type-toggle"
-													data-target="#account_current_password"> <span
+													data-target="#currentPassword"> <span
 													class="group-icon"> <i class="fi fi-eye m-0"></i> <i
 														class="fi fi-close m-0"></i>
 												</span>
@@ -389,17 +389,15 @@ function isSame() {
 
 											<div class="input-group-over">
 												<div class="form-label-group mb-3">
-													<input placeholder="New Password" id="account_new_password"
-														name="account_new_password" type="password"
-														class="form-control"> <label
-														for="account_new_password">새 비밀번호</label>
+													<input placeholder="New Password" id="newPassword"
+														name="newPassword" type="password" class="form-control">
+													<label for="newPassword">새 비밀번호</label>
 												</div>
 
 												<!-- `SOW : Form Advanced` plugin used -->
 												<a href="#" class="btn fs--12 btn-password-type-toggle"
-													data-target="#account_new_password"> <span
-													class="group-icon"> <i class="fi fi-eye m-0"></i> <i
-														class="fi fi-close m-0"></i>
+													data-target="#newPassword"> <span class="group-icon">
+														<i class="fi fi-eye m-0"></i> <i class="fi fi-close m-0"></i>
 												</span>
 												</a>
 											</div>
@@ -421,7 +419,7 @@ function isSame() {
 
 					<!-- DELETE ACCOUNT -->
 					<div class="clearfix mt--60">
-						<form method="post" action="generalDelete">
+						<form method="post" action="delete">
 
 							<div class="text-align-end">
 								<a href="#account_deactivate_confirm"
@@ -507,7 +505,7 @@ function isSame() {
 			<div class="row">
 
 				<div class="col">
-					<form method="post" action="generalUpdateAddress">
+					<form method="post" action="updateAddress">
 
 						<div class="col-12 col-sm-6 col-md-6">
 							<div class="form-label-group mb-3">
