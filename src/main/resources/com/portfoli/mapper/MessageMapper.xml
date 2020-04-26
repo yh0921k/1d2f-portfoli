@@ -46,7 +46,7 @@
   </insert>
 
     <!-- 보낸 쪽지함 -->
-    <select id="findAllBySenderNumber" resultMap="MessageMap" parameterType="int">
+    <select id="findAllBySenderNumber" resultMap="MessageMap" parameterType="map">
     select
       m.message_no,
       m.message_sender,
@@ -59,11 +59,12 @@
       join pf_members s on m.message_receiver=s.member_no
     where
       m.message_sender=#{userNumber}
-    order by m.send_date desc;
+    order by m.send_date desc
+    limit #{offset}, #{pageSize}
   </select>
 
   <!-- 받은 쪽지함 -->
-  <select id="findAllByReceiverNumber" resultMap="MessageMap" parameterType="int">
+  <select id="findAllByReceiverNumber" resultMap="MessageMap" parameterType="map">
     select
       m.message_no,
       m.message_sender,
@@ -76,7 +77,19 @@
       join pf_members r on m.message_receiver=r.member_no
     where
       m.message_receiver=#{userNumber}
-    order by m.send_date desc;
+    order by m.send_date desc
+    limit #{offset}, #{pageSize}
   </select>
 
+  <select id="countAllSent" resultType="int" parameterType="int">
+    select count(*)
+    from pf_message
+    where message_sender=#{userNumber}
+  </select>
+
+  <select id="countAllInbox" resultType="int" parameterType="int">
+    select count(*)
+    from pf_message
+    where message_receiver=#{userNumber}
+  </select>
 </mapper>

@@ -282,7 +282,7 @@
 											data-js-form-advanced-bulk-required-modal-btn-text-no="Cancel"
 											data-js-form-advanced-bulk-submit-without-confirmation="false"
 											data-js-form-advanced-form-id="#form_id"> <i
-											class="fi fi-thrash text-danger"></i> Delete
+											class="fi fi-thrash text-danger"></i> 삭제
 										</a>
 
 									</div>
@@ -296,29 +296,36 @@
 							<div class="col-12 col-xl-6">
 
 								<!-- pagination -->
-								<nav aria-label="pagination">
-									<ul
-										class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+                <nav aria-label="pagination">
+                  <ul
+                    class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
 
-										<li class="page-item disabled btn-pill "><a
-											class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-										</li>
+                    <c:if test="${page != startPage}">
+                      <li
+                        <c:if test="${pageNumber <= pageSize}"> class="page-item disabled btn-pill"</c:if>
+                        <c:if test="${pageNumber != '1'}"> class="page-item"</c:if>
+                        data-page="prev"><a class="page-link"
+                        href="/portfoli/app/message/inbox?pageNumber=${startPage - 1}"
+                        tabindex="-1" aria-disabled="true">Prev</a></li>
+                    </c:if>
 
-										<li class="page-item active" aria-current="page"><a
-											class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-										</li>
+                    <c:forEach begin="${startPage}" end="${endPage}" var="page">
+                      <li
+                        <c:if test="${page == pageNumber}"> class="page-item active"</c:if>
+                        data-page="${page}"><a class="page-link"
+                        href="/portfoli/app/message/inbox?pageNumber=${page}">${page}</a>
+                      </li>
+                    </c:forEach>
 
-										<li class="page-item"><a class="page-link" href="#">2</a>
-										</li>
+                      <li
+                        <c:if test="${endPage == totalPage}"> class="page-item disabled btn-pill"</c:if>
+                        <c:if test="${endPage < totalPage}"> class="page-item"</c:if>
+                        data-page="next"><a class="page-link"
+                        href="/portfoli/app/message/inbox?pageNumber=${endPage + 1}">Next</a>
+                      </li>
 
-										<li class="page-item"><a class="page-link" href="#">3</a>
-										</li>
-
-										<li class="page-item"><a class="page-link" href="#">Next</a>
-										</li>
-
-									</ul>
-								</nav>
+                  </ul>
+                </nav>
 								<!-- pagination -->
 
 							</div>
