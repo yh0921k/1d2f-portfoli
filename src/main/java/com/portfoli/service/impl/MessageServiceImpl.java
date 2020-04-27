@@ -1,5 +1,6 @@
 package com.portfoli.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,12 +34,34 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public List<Message> listSentMessage(int userNumber) throws Exception {
-    return messageDao.findAllBySenderNumber(userNumber);
+  public List<Message> listSentMessage(int userNumber, int pageNumber, int pageSize)
+      throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("userNumber", userNumber);
+    param.put("offset", (pageNumber - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    
+    return messageDao.findAllBySenderNumber(param);
   }
 
   @Override
-  public List<Message> listReceivedMessage(int userNumber) throws Exception {
-    return messageDao.findAllByReceiverNumber(userNumber);
+  public List<Message> listReceivedMessage(int userNumber, int pageNumber, int pageSize)
+      throws Exception {
+    HashMap<String, Object> param = new HashMap<>();
+    param.put("userNumber", userNumber);
+    param.put("offset", (pageNumber - 1) * pageSize);
+    param.put("pageSize", pageSize);
+
+    return messageDao.findAllByReceiverNumber(param);
+  }
+
+  @Override
+  public int sizeSent(int userNumber) throws Exception {
+    return messageDao.countAllSent(userNumber);
+  }
+
+  @Override
+  public int sizeInbox(int userNumber) throws Exception {
+    return messageDao.countAllInbox(userNumber);
   }
 }
