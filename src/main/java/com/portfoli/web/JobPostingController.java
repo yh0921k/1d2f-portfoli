@@ -17,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
 import com.portfoli.service.JobPostingService;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("/jobposting")
@@ -53,6 +56,17 @@ public class JobPostingController {
       String filename = UUID.randomUUID().toString();
       photoFile.transferTo(new File(dirPath + "/" + filename));
       files.add(new JobPostingFile().setFilePath(filename));
+
+      Thumbnails.of(dirPath + "/" + filename)//
+          .size(20, 20)//
+          .outputFormat("jpg")//
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_20x20";
+            }
+          });
+
     }
 
     if (files.size() == 0) {
