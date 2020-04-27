@@ -226,7 +226,7 @@ function isSame() {
                           </svg>
 												</c:if> <c:if test="${not empty loginUser.photoFilePath}">
 													<img class="rounded-circle img-thumbnail h--120 w--120"
-														src='${pageContext.request.contextPath}/portfoli/upload/member/${loginUser.photoFilePath}'>
+														src='${pageContext.request.getContextPath()}/upload/member/${loginUser.photoFilePath}'>
 													<br>
 												</c:if>
 											</label>

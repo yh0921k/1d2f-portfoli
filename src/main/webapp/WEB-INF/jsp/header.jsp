@@ -20,24 +20,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <!-- preloading icon font is helping to speed up a little bit -->
 <link rel="preload"
-	href="${pageContext.request.contextPath}/portfoli/resources/assets/fonts/flaticon/Flaticon.woff2"
+	href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2"
 	as="font" type="font/woff2" crossorigin>
 	
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/portfoli/resources/assets/css/core.min.css">
+	href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/portfoli/resources/assets/css/vendor_bundle.min.css">
+	href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
 <!-- favicon -->
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/portfoli/favicon.ico">
+	href="${pageContext.request.getContextPath()}/favicon.ico">
 <link rel="apple-touch-icon"
-	href="${pageContext.request.contextPath}/portfoli/resources/demo.files/logo/icon_512x512.png">
+	href="${pageContext.request.getContextPath()}/resources/demo.files/logo/icon_512x512.png">
 
 <link rel="manifest"
-	href="${pageContext.request.contextPath}/portfoli/resources/assets/images/manifest/manifest.json">
+	href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
 <meta name="theme-color" content="#377dff">
 
 </head>
@@ -269,7 +269,7 @@
                 Logo : height: 70px max
               -->
 						<a class="navbar-brand" href="/portfoli"> <img
-							src="${pageContext.request.contextPath}/portfoli/resources/assets/images/logo/logo.png"
+							src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo.png"
 							width="110" height="32" alt="...">
 						</a>
 
@@ -336,7 +336,7 @@
                   Logo : height: 70px max
                 -->
 							<a class="navbar-brand" href="index.html"> <img
-								src="${pageContext.request.contextPath}/portfoli/resources/assets/images/logo/logo_dark.svg"
+								src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo_dark.svg"
 								width="110" height="70" alt="...">
 							</a>
 
@@ -386,7 +386,7 @@
 								<!-- image -->
 								<div class="mb-4">
 									<img width="600" height="600" class="img-fluid"
-										src="${pageContext.request.contextPath}/portfoli/demo.files/svg/artworks/people_crossbrowser.svg"
+										src="${pageContext.request.getContextPath()}/demo.files/svg/artworks/people_crossbrowser.svg"
 										alt="...">
 								</div> <!-- search -->
 								<form method="get" action="#!search"
@@ -981,7 +981,7 @@
 
 													<div class="mt-4">
 														<img width="600" height="600" class="img-fluid"
-															src="${pageContext.request.contextPath}/portfoli/demo.files/svg/artworks/undraw_wireframing_nxyi.svg"
+															src="${pageContext.request.getContextPath()}/demo.files/svg/artworks/undraw_wireframing_nxyi.svg"
 															alt="...">
 													</div>
 
@@ -1010,7 +1010,7 @@
 
 										<span class="float-start w--50 mr--20"> <img width="50"
 											height="50" class="img-fluid"
-											src="${pageContext.request.contextPath}/portfoli/demo.files/svg/icons/menu_doc_1.svg"
+											src="${pageContext.request.getContextPath()}/demo.files/svg/icons/menu_doc_1.svg"
 											alt="...">
 									</span> DOCUMENTATION <span
 										class="d-block text-white text-truncate fs--14"> Don't
@@ -1027,7 +1027,7 @@
 
 										<span class="float-start w--50 mr--20"> <img width="50"
 											height="50" class="img-fluid"
-											src="${pageContext.request.contextPath}/portfoli/demo.files/svg/icons/menu_doc_2.svg"
+											src="${pageContext.request.getContextPath()}/demo.files/svg/icons/menu_doc_2.svg"
 											alt="...">
 									</span> CHANGELOG <span
 										class="d-block text-white text-truncate fs--14"> Smarty
