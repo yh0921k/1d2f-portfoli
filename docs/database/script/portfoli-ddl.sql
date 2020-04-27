@@ -396,7 +396,8 @@ CREATE TABLE pf_members (
   tel            VARCHAR(20)  NOT NULL COMMENT '연락처', -- 연락처
   create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
   sms_yn         INTEGER      NOT NULL COMMENT 'SMS수신동의여부', -- SMS수신동의여부
-  email_yn       INTEGER      NOT NULL COMMENT '이메일 수신 동의여부' -- 이메일 수신 동의여부
+  email_yn       INTEGER      NOT NULL COMMENT '이메일 수신 동의여부', -- 이메일 수신 동의여부
+  userkey        VARCHAR(20)  NULL     COMMENT '이메일인증' -- 이메일인증
 )
 COMMENT '회원';
 

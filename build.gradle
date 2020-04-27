@@ -58,4 +58,10 @@ dependencies {
     
     // multipart 데이터 처리 라이브러리
     implementation 'commons-fileupload:commons-fileupload:1.4'
+    
+    implementation 'org.springframework:spring-context-support:5.2.5.RELEASE'
+    
+    // javax.mail
+    implementation 'javax.mail:mail:1.4.7'
+    
 }

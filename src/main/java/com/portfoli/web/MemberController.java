@@ -22,6 +22,7 @@ import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.service.CompanyService;
 import com.portfoli.service.MemberService;
+import com.portfoli.service.UserMailSendService;
 
 @Controller
 @RequestMapping("member")
@@ -41,6 +42,9 @@ public class MemberController {
 
   @Autowired
   CompanyService companyService;
+  
+  @Autowired
+  private UserMailSendService mailsender;
 
   // 일반회원
 
@@ -48,9 +52,12 @@ public class MemberController {
   public void addForm() {}
 
   @PostMapping("generalJoin")
-  public String add(Member member, GeneralMember generalMember) throws Exception {
+  public String add(Member member, GeneralMember generalMember, HttpServletRequest request,
+      Model model) throws Exception {
 
     if (memberService.add(member, generalMember) > 0) {
+   // 인증 메일 보내기 메서드
+      mailsender.mailSendWithUserKey(member.getEmail(), member.getId(), member.getName(), request);
       return "redirect:/";
     } else {
       throw new Exception("회원을 추가할 수 없습니다.");
@@ -186,6 +193,20 @@ public class MemberController {
     } else {
       throw new Exception("주소 수정 실패 ");
     }
+  }
+  
+  @GetMapping("regSuccess")
+  public void regSuccess() {
+  }
+
+
+  @GetMapping(value = "key_alter")
+  public String key_alterConfirm(@RequestParam("user_id") String user_id,
+      @RequestParam("user_key") String key) {
+
+    mailsender.alter_userKey_service(user_id, key); // mailsender의 경우 @Autowired
+
+    return "redirect:/app/member/regSuccess";
   }
 
 

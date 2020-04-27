@@ -317,9 +317,7 @@ function isSame() {
 												<input type="checkbox" name="emailYN" value="1">
 												<i></i> 이메일 수신동의
 										</c:if> <c:if test="${member.emailYN==1}">
-												<input type="checkbox" name="emailYN"
-													value="1"
-													} checked>
+												<input type="checkbox" name="emailYN" value="1" } checked>
 												<i></i> 이메일 수신동의
                     </c:if>
 										</label> <label class="form-checkbox form-checkbox-primary mb-0">
@@ -327,8 +325,7 @@ function isSame() {
 												<input type="checkbox" name="smsYN" value="1">
 												<i></i> SMS 수신동의
 											</c:if> <c:if test="${member.smsYN==1}">
-												<input type="checkbox" name="smsYN"
-													value="1" checked>
+												<input type="checkbox" name="smsYN" value="1" checked>
 												<i></i> SMS 수신동의
                       </c:if>
 										</label>

@@ -103,52 +103,51 @@
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="아이디" name="id" type="text"
-								class="form-control" /> <label
-								for="account_id">아이디</label>
+								class="form-control" /> <label for="account_id">아이디</label>
 						</div>
 
 						<div class="input-group-over">
 							<div class="form-label-group mb-3">
 								<input required placeholder="이메일" name="email" type="email"
-									class="form-control" /> <label
-									for="account_email">이메일</label>
+									class="form-control" /> <label for="account_email">이메일</label>
 							</div>
-							<a href="#" class="btn fs--12 btn-password-type-toggle"
-								data-target="#email"> <span
-								class="group-icon"> <i class="fi fi-envelope m-0"></i> <i
-									class="fi fi-check m-0"></i>
-							</span>
+							<a id="email_edit_show" href="javascript:;" class="btn fs--13"
+								onclick="jQuery('#account_email').attr('readonly', false); jQuery('#email_edit_show, #email_edit_info').addClass('hide'); jQuery('#email_edit_hide, #email_edit_info').removeClass('hide');jQuery('#account_email').val('').focus();">
+								<i class="fi fi-pencil m-0"></i>
+							</a> <a id="email_edit_hide" href="javascript:;"
+								class="btn fs--12 hide"
+								onclick="jQuery('#account_email').attr('readonly', true); jQuery('#email_edit_show, #email_edit_info').removeClass('hide'); jQuery('#email_edit_hide, #email_edit_info').addClass('hide'); jQuery('#account_email').val('john.doe@gmail.com');">
+								<i class="fi fi-close m-0"></i>
 							</a>
 						</div>
+						<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">인증
+							이메일을 보냈습니다.</div>
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="비밀번호" name="password" id="password"
-								type="password" class="form-control" onchange="isSame()" />
-							<label for="account_password">비밀번호</label>
+								type="password" class="form-control" onchange="isSame()" /> <label
+								for="account_password">비밀번호</label>
 						</div>
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="비밀번호 확인" id="checkPassword"
-								type="password" class="form-control" onchange="isSame()" />
-							<label for="account_password">비밀번호 확인</label> <span id="same"></span>
+								type="password" class="form-control" onchange="isSame()" /> <label
+								for="account_password">비밀번호 확인</label> <span id="same"></span>
 						</div>
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="이름" name="name" type="text"
-								class="form-control" /> <label
-								for="account_name">이름</label>
+								class="form-control" /> <label for="account_name">이름</label>
 						</div>
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="연락처" name="tel" type="text"
-								class="form-control" /> <label
-								for="account_id">연락처</label>
+								class="form-control" /> <label for="account_id">연락처</label>
 						</div>
 
 						<div class="form-label-group mb-3">
 							<input placeholder="경력(년)" name="career" type="number"
-								class="form-control" /> <label
-								for="account_career">경력(년)</label>
+								class="form-control" /> <label for="account_career">경력(년)</label>
 						</div>
 
 						<div class="clearfix bg-light position-relative rounded p-4 mb-4">
@@ -160,28 +159,24 @@
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="emailYN"
 										id="emailYN" value="1" checked /> <label
-										class="form-check-label" for="inlineRadio1">이메일
-										수신동의</label>
+										class="form-check-label" for="inlineRadio1">이메일 수신동의</label>
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="emailYN"
-										id="emailYN" value="0" /> <label
-										class="form-check-label" for="inlineRadio2">이메일
-										수신거부</label>
+										id="emailYN" value="0" /> <label class="form-check-label"
+										for="inlineRadio2">이메일 수신거부</label>
 								</div>
 							</div>
 							<div style="display: block; margin: 0 87px;">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="smsYN"
 										id="smsYN" value="1" checked /> <label
-										class="form-check-label" for="inlineRadio1">SMS
-										수신동의</label>
+										class="form-check-label" for="inlineRadio1">SMS 수신동의</label>
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="smsYN"
-										id="smsYN" value="0" /> <label
-										class="form-check-label" for="inlineRadio2">SMS
-										수신거부</label>
+										id="smsYN" value="0" /> <label class="form-check-label"
+										for="inlineRadio2">SMS 수신거부</label>
 								</div>
 							</div>
 						</div>
@@ -189,8 +184,7 @@
 						<div class="row">
 							<div class="col-12 col-md-8">
 								<button type="submit" class="btn btn-primary btn-block"
-									style="display: block; margin: 0 90px;">
-									회원가입</button>
+									style="display: block; margin: 0 90px;">회원가입</button>
 								<a href="../company/search"
 									style="color: graytext; display: block; margin: 10px 0px 0px 175px;">기업
 									회원 가입하기</a>

@@ -20,6 +20,7 @@
 		<result column="sms_yn" property="smsYN" />
 		<result column="email_yn" property="emailYN" />
 		<result column="type" property="type" />
+		<result column="userkey" property="userkey" />
 	</resultMap>
 
 	<insert id="insert" parameterType="Member"
@@ -30,12 +31,24 @@
 		(#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
 		#{emailYN}, #{type})
 	</insert>
+	
+	<update id="putKey" parameterType="map">
+	 UPDATE pf_members 
+	 SET userkey=#{key}
+	 WHERE id=#{user_id}
+	</update>
+	
+	<update id="alter_userkey" parameterType="map">
+	 UPDATE pf_members
+	 SET userkey='Y'
+	 WHERE id=#{user_id} AND userkey=#{key}
+	</update>
 
 	<select id="findByEmailAndPassword" resultMap="MemberMap"
 		parameterType="map">
 		SELECT member_no, type, id, name, email
 		FROM pf_members
-		WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password})
+		WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password}) AND userkey='Y'
 	</select>
 
 	<select id="findByMemberNumber" resultMap="MemberMap"
