@@ -110,7 +110,6 @@ public class JobPostingController {
       int no, //
       JobPosting jobPosting, //
       MultipartFile[] jobPostingFiles) throws Exception {
-    System.out.println("111111111111111");
 
     jobPosting = jobPostingService.get(no);
 
@@ -120,10 +119,20 @@ public class JobPostingController {
       if (jobPostingFile.getSize() <= 0) {
         continue;
       }
-      System.out.println("22222222222222");
       String filename = UUID.randomUUID().toString();
       jobPostingFile.transferTo(new File(dirPath + "/" + filename));
       files.add(new JobPostingFile().setFilePath(filename));
+
+      Thumbnails.of(dirPath + "/" + filename)//
+          .size(20, 20)//
+          .outputFormat("jpg")//
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_20x20";
+            }
+          });
+
     }
 
     if (files.size() > 0) {
@@ -132,8 +141,6 @@ public class JobPostingController {
       jobPosting.setFiles(null);
     }
 
-
-    System.out.println("33333333333333333");
     jobPostingService.update(jobPosting);
     return "redirect:list";
   }
