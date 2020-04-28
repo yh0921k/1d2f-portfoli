@@ -118,15 +118,15 @@ public class MemberServiceImpl implements MemberService {
   @Override
   @Transactional
   public int delete(int memberType, int memberNumber) throws Exception {
-    if(memberType == 1) {
-      if(generalMemberDao.delete(memberNumber) > 0) {
+    if (memberType == 1) {
+      if (generalMemberDao.delete(memberNumber) > 0) {
         memberDao.delete(memberNumber);
         return 1;
       } else {
         return 0;
       }
-    } else if (memberType ==2 ) {
-      if(companyMemberDao.delete(memberNumber) > 0) {
+    } else if (memberType == 2) {
+      if (companyMemberDao.delete(memberNumber) > 0) {
         memberDao.delete(memberNumber);
         return 1;
       } else {
@@ -141,9 +141,9 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public int updatePassword(int memberNumber, String newPassword) throws Exception {
     Map<String, Object> params = new HashMap<>();
-    params.put("memberNumber",  memberNumber);
+    params.put("memberNumber", memberNumber);
     params.put("newPassword", newPassword);
-    if(memberDao.updatePassword(params) >0) {
+    if (memberDao.updatePassword(params) > 0) {
       return 1;
     }
     return 0;
@@ -157,7 +157,7 @@ public class MemberServiceImpl implements MemberService {
     params.put("photoFilePath", member.getPhotoFilePath());
     params.put("member_number", member.getNumber());
     if (generalMemberDao.updateProfilePicture(params) > 0) {
-      if(memberDao.updateDefaultInfo(member) > 0) {
+      if (memberDao.updateDefaultInfo(member) > 0) {
         return 1;
       }
       return 0;
@@ -165,12 +165,12 @@ public class MemberServiceImpl implements MemberService {
       return 0;
     }
   }
-  
+
   @Override
   public GeneralMember getSessionInfo(int memberNumber) throws Exception {
-    
+
     GeneralMember generalMember = generalMemberDao.getSessionByGNumber(memberNumber);
-    if(generalMember != null) {
+    if (generalMember != null) {
       return generalMember;
     }
     return null;
@@ -179,10 +179,19 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int updateAddress(Member member) throws Exception {
-    if(memberDao.updateAddress(member) > 0) {
+    if (memberDao.updateAddress(member) > 0) {
       return 1;
     }
-    return 0; 
+    return 0;
+  }
+
+
+  @Override
+  public int updateFlag(HashMap<String, Object> params) throws Exception {
+    if (generalMemberDao.updateFlag(params) > 0) {
+      return 1;
+    }
+    return 0;
   }
 
 

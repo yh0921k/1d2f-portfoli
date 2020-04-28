@@ -55,6 +55,12 @@
     WHERE general_member_no=#{member_number}
   </update>
   
+  <update id="updateFlag" parameterType="map">
+    UPDATE pf_general_member
+    SET seeking_flag=#{flag}
+    WHERE general_member_no=#{loginUser}
+  </update>
+  
    <select id="findByGeneralMemberNumber" 
     resultMap="GeneralMemberMap" 
     parameterType="int">

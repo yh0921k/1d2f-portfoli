@@ -134,6 +134,33 @@ public class MemberController {
   }
 
 
+  @GetMapping("updateFlag")
+  public String updateFlag(Member member, HttpServletRequest request) throws Exception {
+
+    GeneralMember loginUser = (GeneralMember) request.getSession().getAttribute("loginUser");
+
+    int flag = loginUser.getSeekingFlag();
+    if (flag == 0) {
+      flag = 1;
+    } else {
+      flag = 0;
+    }
+
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("loginUser", loginUser.getNumber());
+    params.put("flag", flag);
+
+    if (memberService.updateFlag(params) > 0) {
+      loginUser.setSeekingFlag(flag);
+      request.setAttribute("loginUser", loginUser);
+
+      return "redirect:/app/member/generalMypage";
+    } else {
+      throw new Exception("seekingFlag 업데이트 실패");
+    }
+
+  }
+
 
   // 기업회원
 

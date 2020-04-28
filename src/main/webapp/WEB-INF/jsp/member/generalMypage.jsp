@@ -190,11 +190,11 @@
 				<p>${loginUser.name}
 					&nbsp;
 					<c:if test="${loginUser.seekingFlag =='1'}">
-						<a class="btn btn-ghost btn-dark btn-pill mb-1 btn-sm" href="#"
+						<a class="btn btn-ghost btn-dark btn-pill mb-1 btn-sm" href="/portfoli/app/member/updateFlag"
 							role="button" style="font-size: 13px">구직중</a>
 					</c:if>
 					<c:if test="${loginUser.seekingFlag =='0'}">
-						<a class="btn btn-outline-dark btn-pill mb-1 btn-sm" href="#"
+						<a class="btn btn-outline-dark btn-pill mb-1 btn-sm" href="/portfoli/app/member/updateFlag"
 							role="button" style="font-size: 13px">재직중</a>
 					</c:if>
 				</p>
