@@ -42,7 +42,7 @@ public class MemberController {
 
   @Autowired
   CompanyService companyService;
-  
+
   @Autowired
   private UserMailSendService mailsender;
 
@@ -56,7 +56,7 @@ public class MemberController {
       Model model) throws Exception {
 
     if (memberService.add(member, generalMember) > 0) {
-   // 인증 메일 보내기 메서드
+      // 인증 메일 보내기 메서드
       mailsender.mailSendWithUserKey(member.getEmail(), member.getId(), member.getName(), request);
       return "redirect:/";
     } else {
@@ -100,7 +100,7 @@ public class MemberController {
 
   @GetMapping("generalUpdate")
   public void generalInfoUpdate(HttpServletRequest request, Model model) throws Exception {
-    GeneralMember generalMember = (GeneralMember) memberService.getGeneralMember(
+    GeneralMember generalMember = memberService.getGeneralMember(
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
     model.addAttribute("member", generalMember);
   }
@@ -142,11 +142,12 @@ public class MemberController {
 
   @PostMapping("companyJoin")
   public String companyAdd(Member member, CompanyMember companyMember,
-      @RequestParam("businessRegistrationNumber") String businessRegistrationNumber)
-      throws Exception {
+      @RequestParam("businessRegistrationNumber") String businessRegistrationNumber,
+      HttpServletRequest request) throws Exception {
 
     Company company = companyService.getByBusinessRegistrationNumber(businessRegistrationNumber);
     if (memberService.add(member, companyMember, company.getNumber()) > 0) {
+      mailsender.mailSendWithUserKey(member.getEmail(), member.getId(), member.getName(), request);
       return "redirect:/";
     } else {
       throw new Exception("회원을 추가할 수 없습니다.");
@@ -182,7 +183,7 @@ public class MemberController {
       throw new Exception("비밀번호 수정 실패");
     }
   }
-  
+
   @PostMapping("updateAddress")
   public String updateAddress(HttpServletRequest request, Member member) throws Exception {
 
@@ -194,10 +195,9 @@ public class MemberController {
       throw new Exception("주소 수정 실패 ");
     }
   }
-  
+
   @GetMapping("regSuccess")
-  public void regSuccess() {
-  }
+  public void regSuccess() {}
 
 
   @GetMapping(value = "key_alter")
