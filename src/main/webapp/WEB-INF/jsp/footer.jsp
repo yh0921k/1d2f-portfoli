@@ -163,6 +163,7 @@
         </div><!-- /#wrapper -->
 
     <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     
   </body>
 </html>
