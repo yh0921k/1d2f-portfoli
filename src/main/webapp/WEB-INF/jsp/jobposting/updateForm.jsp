@@ -25,7 +25,7 @@
 
 <p>
 <button>변경</button>
-<a href='update?no=${jobPosting.jobPostingNumber}'>변경</a>
+
 </p>
 </form>
 </c:if>
