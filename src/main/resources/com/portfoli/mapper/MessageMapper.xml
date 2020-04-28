@@ -16,8 +16,8 @@
     <result column="message_receiver_delete" property="receiverDelete"/>
     
     <association property="member" javaType="Member">
-      <id property="number" column="member_no"/>
-      <result property="id" column="id"/>
+      <id column="member_no" property="number"/>
+      <result column="id" property="id"/>
     </association>
 
     <collection property="files" ofType="MessageFile">
@@ -45,8 +45,8 @@
       #{receiverDelete})
   </insert>
 
-    <!-- 보낸 쪽지함 -->
-    <select id="findAllBySenderNumber" resultMap="MessageMap" parameterType="map">
+  <!-- 보낸 쪽지함 -->
+  <select id="findAllBySenderNumber" resultMap="MessageMap" parameterType="map">
     select
       m.message_no,
       m.message_sender,
@@ -91,5 +91,11 @@
     select count(*)
     from pf_message
     where message_receiver=#{userNumber}
+  </select>
+  
+  <select id="countNotRead" resultType="int" parameterType="int">
+    select count(*)
+    from pf_message
+    where receive_date IS NULL and message_receiver=#{userNumber};
   </select>
 </mapper>
