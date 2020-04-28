@@ -14,4 +14,6 @@ public interface MessageDao {
   int countAllSent(int userNumber) throws Exception;
 
   int countAllInbox(int userNumber) throws Exception;
+
+  int countNotRead(int userNumber) throws Exception;
 }
