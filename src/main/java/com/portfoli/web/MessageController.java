@@ -39,13 +39,14 @@ public class MessageController {
   // 테스트 url (세션 적용 전)
   // http://localhost:9999/portfoli/app/message/form?receiverNumber=1&senderNumber=2
   @GetMapping("form")
-  public void form(int senderNumber, int receiverNumber, Model model) throws Exception {
-    model.addAttribute("sender", memberService.get(senderNumber));
+  public void form(HttpServletRequest request, int receiverNumber, Model model) throws Exception {
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    model.addAttribute("loginUser", loginUser);
     model.addAttribute("receiver", memberService.get(receiverNumber));
   }
 
   @PostMapping("add")
-  public String add(Message message, MultipartFile[] messageFiles) throws Exception {
+  public String add(HttpServletRequest request, Message message, MultipartFile[] messageFiles) throws Exception {
     ArrayList<MessageFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/message");
     for (MultipartFile messageFile : messageFiles) {
@@ -67,7 +68,7 @@ public class MessageController {
 
     messageService.add(message);
 
-    return "redirect:/";
+    return "redirect:./inbox";
   }
 
   @GetMapping("sent")
@@ -123,7 +124,7 @@ public class MessageController {
       Member member = memberService.get(m.getSenderNumber());
       m.setMember(member);
     }
-    
+
     int size = messageService.sizeInbox(loginUser.getNumber());
     int totalPage = size / pageSize;
     if (size % pageSize > 0) {
@@ -140,7 +141,7 @@ public class MessageController {
     if (endPage > totalPage) {
       endPage = totalPage;
     }
-    
+
     model.addAttribute("inbox", inbox);
     model.addAttribute("pageNumber", pageNumber);
     model.addAttribute("pageSize", pageSize);

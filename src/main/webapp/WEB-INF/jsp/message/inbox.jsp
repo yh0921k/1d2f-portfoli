@@ -3,6 +3,10 @@
 	trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script>
+
+</script>
+
 <jsp:include page="../header.jsp" />
 
 <div class="row gutters-sm">
@@ -42,8 +46,8 @@
 					<ul class="nav flex-column px-2 font-weight-bold">
 						<li class="nav-item"><a class="nav-link" href="#"> 내 프로필
 								수정하기 </a></li>
-						<li class="nav-item"><a class="nav-link" href="/portfoli/app/member/generalUpdate"> 내 정보
-								수정하기 </a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/portfoli/app/member/generalUpdate"> 내 정보 수정하기 </a></li>
 					</ul></li>
 
 				<li class="nav-item font-weight-bold active"><a
@@ -54,8 +58,8 @@
 				</a>
 
 					<ul class="nav flex-column px-2 font-weight-bold">
-						<li class="nav-item font-weight-bold active"><a class="nav-link"
-							href="/portfoli/app/message/inbox"> 받은 쪽지함 </a></li>
+						<li class="nav-item font-weight-bold active"><a
+							class="nav-link" href="/portfoli/app/message/inbox"> 받은 쪽지함 </a></li>
 						<li class="nav-item font-weight-bold"><a class="nav-link"
 							href="/portfoli/app/message/sent"> 보낸 쪽지함 </a></li>
 					</ul></li>
@@ -159,9 +163,7 @@
 
 									<!-- message -->
 									<c:forEach items="${inbox}" var="item">
-
 										<tr id="message_id_1" class="text-dark">
-
 											<td class="hidden-lg-down"><label
 												class="form-checkbox form-checkbox-secondary float-start">
 													<input type="checkbox" name="item_id[]" value="1">
@@ -171,7 +173,6 @@
 											<td><span class="d-block font-weight-medium"><a
 													href="message-detail.html"
 													class="font-weight-medium text-muted mx-2 m-0-xs">${item.title}</a></span></td>
-
 											<td class="hidden-lg-down"><span
 												class="d-block text-muted">${item.member.id}</span></td>
 
@@ -190,16 +191,20 @@
 													</span>
 													</a>
 
-
 													<div
 														class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
 
-														<a class="dropdown-item text-truncate"
-															href="/portfoli/app/message/form"> <i
-															class="fi fi-arrow-right-3"></i> 답장
+														<a
+															href="form?receiverNumber=${item.member.number}"
+															class="js-ajax-modal dropdown-item text-truncate"
+															data-href="form?receiverNumber=${item.member.number}"
+															data-ajax-modal-size="modal-md"
+															data-ajax-modal-centered="true"
+															data-ajax-modal-backdrop="static"> <i
+															class="fi fi-arrow-right-3"></i> 답장하기
 														</a> <a href="#!"
 															class="dropdown-item text-truncate js-ajax-confirm"
-															data-href="/portfoli/app/message/inbox"
+															data-href="javascript:popup()"
 															data-ajax-confirm-body="Delete this message?"
 															data-ajax-confirm-mode="ajax"
 															data-ajax-confirm-method="GET"
@@ -296,36 +301,36 @@
 							<div class="col-12 col-xl-6">
 
 								<!-- pagination -->
-                <nav aria-label="pagination">
-                  <ul
-                    class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+								<nav aria-label="pagination">
+									<ul
+										class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
 
-                    <c:if test="${page != startPage}">
-                      <li
-                        <c:if test="${pageNumber <= pageSize}"> class="page-item disabled btn-pill"</c:if>
-                        <c:if test="${pageNumber != '1'}"> class="page-item"</c:if>
-                        data-page="prev"><a class="page-link"
-                        href="/portfoli/app/message/inbox?pageNumber=${startPage - 1}"
-                        tabindex="-1" aria-disabled="true">Prev</a></li>
-                    </c:if>
+										<c:if test="${page != startPage}">
+											<li
+												<c:if test="${pageNumber <= pageSize}"> class="page-item disabled btn-pill"</c:if>
+												<c:if test="${pageNumber != '1'}"> class="page-item"</c:if>
+												data-page="prev"><a class="page-link"
+												href="/portfoli/app/message/inbox?pageNumber=${startPage - 1}"
+												tabindex="-1" aria-disabled="true">Prev</a></li>
+										</c:if>
 
-                    <c:forEach begin="${startPage}" end="${endPage}" var="page">
-                      <li
-                        <c:if test="${page == pageNumber}"> class="page-item active"</c:if>
-                        data-page="${page}"><a class="page-link"
-                        href="/portfoli/app/message/inbox?pageNumber=${page}">${page}</a>
-                      </li>
-                    </c:forEach>
+										<c:forEach begin="${startPage}" end="${endPage}" var="page">
+											<li
+												<c:if test="${page == pageNumber}"> class="page-item active"</c:if>
+												data-page="${page}"><a class="page-link"
+												href="/portfoli/app/message/inbox?pageNumber=${page}">${page}</a>
+											</li>
+										</c:forEach>
 
-                      <li
-                        <c:if test="${endPage == totalPage}"> class="page-item disabled btn-pill"</c:if>
-                        <c:if test="${endPage < totalPage}"> class="page-item"</c:if>
-                        data-page="next"><a class="page-link"
-                        href="/portfoli/app/message/inbox?pageNumber=${endPage + 1}">Next</a>
-                      </li>
+										<li
+											<c:if test="${endPage == totalPage}"> class="page-item disabled btn-pill"</c:if>
+											<c:if test="${endPage < totalPage}"> class="page-item"</c:if>
+											data-page="next"><a class="page-link"
+											href="/portfoli/app/message/inbox?pageNumber=${endPage + 1}">Next</a>
+										</li>
 
-                  </ul>
-                </nav>
+									</ul>
+								</nav>
 								<!-- pagination -->
 
 							</div>
