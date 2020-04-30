@@ -2,9 +2,15 @@ package com.portfoli.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.config.TxNamespaceHandler;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.CompanyDao;
 import com.portfoli.dao.CompanyMemberDao;
@@ -27,12 +33,12 @@ public class MemberServiceImpl implements MemberService {
 
   public MemberServiceImpl(MemberDao memberDao, GeneralMemberDao generalMemberDao,
       CompanyMemberDao companyMemberDao, CompanyDao companyDao,
-      PlatformTransactionManager txManager) {
+      PlatformTransactionManager pftxManager) {
     this.memberDao = memberDao;
     this.generalMemberDao = generalMemberDao;
     this.companyMemberDao = companyMemberDao;
     this.companyDao = companyDao;
-    this.transactionTemplate = new TransactionTemplate(txManager);
+    this.transactionTemplate = new TransactionTemplate(pftxManager);
   }
 
 
@@ -118,28 +124,26 @@ public class MemberServiceImpl implements MemberService {
   @Override
   @Transactional
   public int delete(int memberType, int memberNumber, String currentPassword) throws Exception {
-    
+
     HashMap<String, Object> params = new HashMap<>();
     params.put("member_no", memberNumber);
     params.put("pwd", currentPassword);
-    
     if (memberType == 1) {
       if (generalMemberDao.delete(memberNumber) > 0) {
-        memberDao.delete(params);
+        if(memberDao.delete(params) == 0 ) {
+          throw new RuntimeException();
+        }
         return 1;
-      } else {
-        return 0;
-      }
+      } 
     } else if (memberType == 2) {
       if (companyMemberDao.delete(memberNumber) > 0) {
-        memberDao.delete(params);
+        if(memberDao.delete(params) == 0 ) {
+          throw new RuntimeException();
+        }
         return 1;
-      } else {
-        return 0;
       }
-    } else {
-      throw new Exception("회원 삭제 실패");
-    }
+    } 
+    return 0;
   }
 
 

@@ -460,7 +460,7 @@ function execPostCode() {
 											<div class="form-label-group mb-1">
 												<input placeholder="currentPassword"
 													id="currentPassword"
-													name="currenPassword" type="password"
+													name="currentPassword" type="password"
 													class="form-control"> <label
 													for="currentPassword">현재 비밀번호</label>
 											</div>
