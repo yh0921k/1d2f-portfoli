@@ -117,17 +117,22 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   @Transactional
-  public int delete(int memberType, int memberNumber) throws Exception {
+  public int delete(int memberType, int memberNumber, String currentPassword) throws Exception {
+    
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("member_no", memberNumber);
+    params.put("pwd", currentPassword);
+    
     if (memberType == 1) {
       if (generalMemberDao.delete(memberNumber) > 0) {
-        memberDao.delete(memberNumber);
+        memberDao.delete(params);
         return 1;
       } else {
         return 0;
       }
     } else if (memberType == 2) {
       if (companyMemberDao.delete(memberNumber) > 0) {
-        memberDao.delete(memberNumber);
+        memberDao.delete(params);
         return 1;
       } else {
         return 0;
@@ -139,11 +144,12 @@ public class MemberServiceImpl implements MemberService {
 
 
   @Override
-  public int updatePassword(int memberNumber, String newPassword) throws Exception {
+  public int updatePassword(int memberNumber, String newPassword, String password) throws Exception {
     Map<String, Object> params = new HashMap<>();
+    params.put("password", password);
     params.put("memberNumber", memberNumber);
     params.put("newPassword", newPassword);
-    if (memberDao.update(params) > 0) {
+    if (memberDao.updatePassword(params) > 0) {
       return 1;
     }
     return 0;

@@ -7,11 +7,11 @@ public interface MemberDao {
 
   int insert(Member member) throws Exception;
   
-  int delete(int memberNumber) throws Exception;
+  int delete(Map<String, Object> params) throws Exception;
   
   int updateDefaultInfo(Member member) throws Exception;
   
-  int update(Map<String, Object> params) throws Exception;
+  int updatePassword(Map<String, Object> params) throws Exception;
   
   int updateAddress(Member member) throws Exception;
 

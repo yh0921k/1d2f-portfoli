@@ -64,19 +64,18 @@
 		FROM pf_members
 		WHERE email=#{email}
 	</select>
-	
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="map">
 		DELETE
 		FROM pf_members
-		WHERE member_no = #{memberNumber}
+		WHERE member_no = #{member_no} AND pwd=PASSWORD(#{pwd})
 	</delete>
 
-	<update id="update" parameterType="map">
+	<update id="updatePassword" parameterType="map">
 		UPDATE pf_members
 		SET pwd=password(#{newPassword})
 		WHERE 
-		<if test="memberNumber != null">member_no=#{memberNumber}</if>
+		<if test="memberNumber != null">member_no=#{memberNumber} AND pwd=PASSWORD(#{password})</if>
 		<if test="email != null">email=#{email}</if>
 	</update>
 	

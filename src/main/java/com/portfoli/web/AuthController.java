@@ -89,7 +89,6 @@ public class AuthController {
     if(userEmail != null) {
       model.addAttribute("email", email);
       mailsender.findPassword(email);
-      model.addAttribute("message", "해당 이메일로 임시 비밀번호를 보냈습니다.");
       return "redirect:/";
     } else {
       model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");

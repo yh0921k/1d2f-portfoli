@@ -12,7 +12,7 @@ public interface MemberService {
 
   int add(Member member, CompanyMember companyMember, int companyNumber) throws Exception;
 
-  int delete(int memberType, int memberNumber) throws Exception;
+  int delete(int memberType, int memberNumber, String currentPassword) throws Exception;
 
   Member get(String email, String password) throws Exception;
 
@@ -22,7 +22,7 @@ public interface MemberService {
 
   int updateProfilePic(Map<String, Object> generalMember) throws Exception;
 
-  int updatePassword(int memberNumber, String newPassword) throws Exception;
+  int updatePassword(int memberNumber, String newPassword, String password) throws Exception;
 
   int updateAddress(Member member) throws Exception;
 

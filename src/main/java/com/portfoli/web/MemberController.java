@@ -186,12 +186,12 @@ public class MemberController {
   // 공통
 
   @PostMapping("delete")
-  public String memberDelete(HttpServletRequest request) throws Exception {
+  public String memberDelete(HttpServletRequest request, String currentPassword) throws Exception {
 
     int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
     int memberType = ((Member) request.getSession().getAttribute("loginUser")).getType();
 
-    if (memberService.delete(memberType, memberNumber) > 0) {
+    if (memberService.delete(memberType, memberNumber, currentPassword) > 0) {
       request.getSession().invalidate();
       return "redirect:/";
     } else {
@@ -200,11 +200,11 @@ public class MemberController {
   }
 
   @PostMapping("updatePassword")
-  public String updatePassword(HttpServletRequest request, String newPassword) throws Exception {
+  public String updatePassword(HttpServletRequest request, String newPassword, String password) throws Exception {
 
     int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
 
-    if (memberService.updatePassword(memberNumber, newPassword) > 0) {
+    if (memberService.updatePassword(memberNumber, newPassword, password) > 0) {
       return "redirect:/app/member/generalUpdate";
     } else {
       throw new Exception("비밀번호 수정 실패");

@@ -6,30 +6,7 @@
 <jsp:include page="../header.jsp" />
 
 <script>
-function isSame() {
-    var password = document.getElementById("password").value;
-    var checkPassword = document.getElementById("checkPassword").value;
 
-    if (password.length < 6 || password.length > 16) {
-      password = null;
-      checkPassword = null;
-      document.getElementById("same").innerHTML = null;
-      window.alert("비밀번호는 6글자 이상, 16글자 이하만 사용 가능합니다.");
-    } else {
-      if (password != "" && checkPassword != "") {
-        if (password === checkPassword) {
-          document.getElementById("same").innerHTML =
-            "비밀번호가 일치합니다.";
-          document.getElementById("same").style.color = "blue";
-        } else {
-          document.getElementById("same").innerHTML =
-            "비밀번호가 일치하지 않습니다.";
-          document.getElementById("same").style.color = "red";
-        }
-      }
-    }
-  }
-  
 function execPostCode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -400,12 +377,10 @@ function execPostCode() {
 									<div class="row mt-3">
 
 										<div class="col-12 col-sm-6 col-md-6">
-
 											<div class="input-group-over">
 												<div class="form-label-group mb-3">
-													<input placeholder="Current Password" id="currentPassword"
-														name="currentPassword" type="password"
-														class="form-control"> <label for="currentPassword">현재
+													<input required placeholder="password" id="password"
+														name="password" type="password" class="form-control"> <label for="password">현재
 														비밀번호</label>
 												</div>
 
@@ -417,7 +392,6 @@ function execPostCode() {
 												</span>
 												</a>
 											</div>
-
 										</div>
 
 										<div class="col-12 col-sm-6 col-md-6">
@@ -436,7 +410,6 @@ function execPostCode() {
 												</span>
 												</a>
 											</div>
-
 										</div>
 										<button type="submit" class="btn btn-primary ml-3">
 											<i class="fi fi-check"></i> 비밀번호 변경하기
@@ -485,11 +458,11 @@ function execPostCode() {
 
 										<div class="input-group-over">
 											<div class="form-label-group mb-1">
-												<input placeholder="Current Password"
-													id="account_del_current_password"
-													name="account_current_password" type="password"
+												<input placeholder="currentPassword"
+													id="currentPassword"
+													name="currenPassword" type="password"
 													class="form-control"> <label
-													for="account_del_current_password">현재 비밀번호</label>
+													for="currentPassword">현재 비밀번호</label>
 											</div>
 
 											<!-- `SOW : Form Advanced` plugin used -->
@@ -545,10 +518,11 @@ function execPostCode() {
 
 							<div class="input-group mb-3">
 								<input readonly type="text" class="form-control"
-									placeholder="우편번호" id="addr1" name="postNumber" value=${member.postNumber}>
+									placeholder="우편번호" id="addr1" name="postNumber"
+									value=${member.postNumber}>
 								<div class="input-group-append">
 									<button class="btn btn-outline-secondary" type="button"
-									 onclick="execPostCode();">검색</button>
+										onclick="execPostCode();">검색</button>
 								</div>
 							</div>
 
@@ -561,10 +535,9 @@ function execPostCode() {
 						</div>
 
 						<div class="form-label-group mb-3 ml-3">
-							<input placeholder="detailAddress" id="add3"
-								name="detailAddress" type="text" class="form-control"
-								value="${member.detailAddress}"> <label
-								for="detailAddress">상세 주소</label>
+							<input placeholder="detailAddress" id="add3" name="detailAddress"
+								type="text" class="form-control" value="${member.detailAddress}">
+							<label for="detailAddress">상세 주소</label>
 						</div>
 
 
