@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.portfoli.domain.Member;
 import com.portfoli.service.MemberService;
+import com.portfoli.service.UserMailSendService;
 
 @Controller
 @RequestMapping("auth")
@@ -26,6 +27,9 @@ public class AuthController {
 
   @Autowired
   MemberService memberService;
+  
+  @Autowired
+  private UserMailSendService mailsender;
 
   @GetMapping("loginForm")
   public void loginForm(HttpServletRequest request, Model model) throws Exception {
@@ -75,5 +79,22 @@ public class AuthController {
     return "redirect:/";
   }
 
+  @GetMapping("findPassword")
+  public void findPasswordForm() {}
 
+  @PostMapping("findPassword")
+  public String findPassword(String email, Model model) throws Exception{
+    String userEmail = memberService.getEmailByEmail(email);
+    
+    if(userEmail != null) {
+      model.addAttribute("email", email);
+      mailsender.findPassword(email);
+      model.addAttribute("message", "해당 이메일로 임시 비밀번호를 보냈습니다.");
+      return "redirect:/";
+    } else {
+      model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");
+      return "redirect:./";
+    }
+  }
+  
 }

@@ -140,7 +140,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
                   <label for="account_password">비밀번호를 입력해주세요</label>
                 </div>
 
-                <a href="#" class="btn fs--12">
+                <a href="findPassword" class="btn fs--12">
                   비밀번호를 잊어버리셨습니까?
                 </a>
               </div>

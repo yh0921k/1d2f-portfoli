@@ -143,7 +143,7 @@ public class MemberServiceImpl implements MemberService {
     Map<String, Object> params = new HashMap<>();
     params.put("memberNumber", memberNumber);
     params.put("newPassword", newPassword);
-    if (memberDao.updatePassword(params) > 0) {
+    if (memberDao.update(params) > 0) {
       return 1;
     }
     return 0;
@@ -193,6 +193,17 @@ public class MemberServiceImpl implements MemberService {
     }
     return 0;
   }
+
+
+  @Override
+  public String getEmailByEmail(String email) {
+    String userEmail = memberDao.getEmailByEmail(email);
+    if (userEmail != null) {
+      return userEmail;
+    } 
+    return null;
+  }
+  
 
 
 }

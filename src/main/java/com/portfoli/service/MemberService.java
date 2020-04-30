@@ -32,4 +32,6 @@ public interface MemberService {
 
   int updateFlag(HashMap<String, Object> params) throws Exception;
 
+  String getEmailByEmail(String email);
+
 }

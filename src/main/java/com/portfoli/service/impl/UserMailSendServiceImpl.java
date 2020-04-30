@@ -98,4 +98,27 @@ public class UserMailSendServiceImpl implements UserMailSendService {
 
   }
 
+  @Override
+  public void findPassword(String email) throws Exception {
+    
+    String password = getKey(true, 8);
+    
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("newPassword", password);
+    params.put("email", email);
+    memberDao.updatePassword(params);
+    MimeMessage mail = mailSender.createMimeMessage();
+    String htmlStr = "<h2>해당 계정의 임시 비밀번호가 발급되었습니다.<br><br>" + "<h3>" + password
+        + "</h3><br><p><a href='http://localhost:9999/portfoli/'>Portfoli 바로가기</a><br>(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+    try {
+      mail.setSubject("[본인인증] Portfoli: 임시 비밀번호를 보내드립니다.", "utf-8");
+      mail.setText(htmlStr, "utf-8", "html");
+      mail.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(email));
+      mailSender.send(mail);
+    } catch (MessagingException e) {
+      e.printStackTrace();
+    }
+    
+  }
+
 }

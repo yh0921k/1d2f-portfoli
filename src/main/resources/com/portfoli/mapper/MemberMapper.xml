@@ -57,6 +57,14 @@
 		FROM pf_members
 		WHERE member_no=#{senderNumber}
 	</select>
+	
+	<select id="getEmailByEmail" resultType="string"
+		parameterType="string">
+		SELECT email
+		FROM pf_members
+		WHERE email=#{email}
+	</select>
+	
 
 	<delete id="delete" parameterType="int">
 		DELETE
@@ -64,10 +72,12 @@
 		WHERE member_no = #{memberNumber}
 	</delete>
 
-	<update id="updatePassword" parameterType="map">
+	<update id="update" parameterType="map">
 		UPDATE pf_members
 		SET pwd=password(#{newPassword})
-		WHERE member_no=#{memberNumber}
+		WHERE 
+		<if test="memberNumber != null">member_no=#{memberNumber}</if>
+		<if test="email != null">email=#{email}</if>
 	</update>
 	
 	<update id="updateDefaultInfo" parameterType="Member">
@@ -81,5 +91,7 @@
 		SET post_no=#{postNumber}, basic_address=#{basicAddress}, detail_address=#{detailAddress}
 		WHERE member_no=#{number}
 	</update>
+	
+	
 
 </mapper>

@@ -11,4 +11,6 @@ public interface UserMailSendService {
 
   int alter_userKey_service(String user_id, String key);
 
+  void findPassword(String email) throws Exception;
+
 }
