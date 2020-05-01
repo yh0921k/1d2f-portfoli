@@ -19,7 +19,7 @@ public class BoardController {
   static Logger logger = LogManager.getLogger(BoardController.class);
 
   public BoardController() {
-    BoardController.logger.debug("NoticeController 객체 생성!");
+    logger.debug("NoticeController 객체 생성!");
   }
 
   @Autowired
@@ -54,8 +54,11 @@ public class BoardController {
 
   @GetMapping("delete")
   public String delete(int number) throws Exception {
-    if(boardService.delete(number))
+    System.out.println(number);
+    if(boardService.delete(number)) {
+      System.out.println(number);
       return "redirect:list";
+    }
     else
       throw new Exception("삭제할 게시물 정보가 유효하지 않습니다.");
   }

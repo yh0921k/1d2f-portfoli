@@ -4,65 +4,73 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <jsp:include page="../header.jsp"/>
 
-			<!-- PAGE TITLE -->
-			<section class="bg-white">
-				<div class="container py-1">
+      <!-- PAGE TITLE -->
+      <section class="bg-white">
+        <div class="container py-1">
 
-					<h1 class="h2">
-						공지사항
-					</h1>
+          <h1 class="h2">
+            공지사항
+          </h1>
 
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb fs--14">
               <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
               <li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
-						</ol>
-					</nav>
+            </ol>
+          </nav>
 
-				</div>
-			</section>
-			<!-- /PAGE TITLE -->
-
-
+        </div>
+      </section>
+      <!-- /PAGE TITLE -->
 
 
 
-			<!-- FAQ -->
-			<section>
-				<div class="container">
+  <style>
+    .lightGray{width: 100%; border:2px lightGray solid;}
+    .darkerGray{color:#313335;}
+    .firstTR{border-bottom:1px darkGray dashed;}
+    .padding{padding:10px; border:0px;}
+    .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
+    .photoInside{text-align: center}
+    .buttonTD{text-align: center}
+  </style>
 
-					<div class="row">
+      <!-- FAQ -->
+      <section>
+        <div class="container">
+
+          <div class="row">
 
           <%--왼쪽 noticebar부분 --%>
           <jsp:include page="sidebar.jsp" />          
-						
-						<div class="col-12 col-lg-8">
+            
+            <div class="col-12 col-lg-8">
 
-							<!--
-								.article-format class will add some slightly formattings for a good text visuals. 
-								This is because most editors are not ready formatted for bootstrap
-								Blog content should come inside this container, as it is from database!
-								src/scss/_core/base/_typography.scss
-							-->
-							<div class="bg-white p-5 p-4-xl rounded-xl article-format">
-							
-					  <form action="updateForm" method="post">
+              <!--
+                .article-format class will add some slightly formattings for a good text visuals. 
+                This is because most editors are not ready formatted for bootstrap
+                Blog content should come inside this container, as it is from database!
+                src/scss/_core/base/_typography.scss
+              -->
+              <div class="bg-white p-5 p-4-xl rounded-xl article-format">
+              
+            <form action="updateForm" method="post">
             <c:if test="${not empty notice}">
             <input name="number" type="hidden" value="${notice.getNumber()}"/>
             <input name="number" type="hidden" value="${notice.noticeNumber}"/>
-            <table border='1' style="width: 100%;">
-            <tr>
-              <td width="75%" style="padding: 10px;">[${categoryName}] ${notice.title}</td>
-              <td width="25%" style="padding: 10px; color:#313335;">${notice.registeredDate}</td>
+            <table class="lightGray">
+            <tr class="firstTR">
+              <td width="75%" class='padding'>[${categoryName}] ${notice.title}</td>
+              <td width="25%" class='padding darkerGray'>${notice.registeredDate}</td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><a href="detail?number=${notice.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</td>
+              <td colspan="2" class='padding'><a href="detail?number=${notice.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</td>
             </tr>
             <tr>
-              <td colspan="2" style="padding: 10px;"><textarea readonly="readonly" style="border-color:transparent; resize:none; width: 100%; height: 300px">${notice.content}</textarea></td>
+              <td colspan="2" class='padding'><textarea readonly="readonly" style="border-color:transparent; resize:none; width: 100%; height: 300px">${notice.content}</textarea></td>
             </tr>
-            <tr>
-              <td colspan="2" style="padding: 10px;" align="center" >
+            <tr class='photoTD'>
+              <td colspan="2"  class='photoInside'>
               <c:choose>
               <c:when test="${not empty notice.attachment}">
                 <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/><br>
@@ -81,27 +89,27 @@
             </tr>
 
             <tr>
-            <td colspan="2">
-            <button>수정</button>
-            <a href="delete?number=${notice.number}">삭제</a>
+            <td colspan="2" class='buttonTD'>
+            <button type="submit">수정</button>
             </td>
             </tr>
             </table>
             </c:if>
+            </form>
+            <button type="submit"  onclick='location.href="delete?number=${notice.number}"'>삭제</button>
             <c:if test="${empty notice}">
             값이 없습니다. 찡긋
             </c:if>
-            </form>
-							</div>
+              </div>
 
-						</div>
+            </div>
 
-					</div>
+          </div>
 
-				</div>
-			</section>
-			<!-- /FAQ -->
-
+        </div>
+      </section>
+      <!-- /FAQ -->
 
 
-		  <jsp:include page="../footer.jsp"/>
+
+      <jsp:include page="../footer.jsp"/>

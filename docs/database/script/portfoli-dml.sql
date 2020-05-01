@@ -404,20 +404,18 @@ INSERT INTO pf_recommendation(board_no, member_no) VALUES (3, 3);
 INSERT INTO pf_recommendation(board_no, member_no) VALUES (4, 4);
 INSERT INTO pf_recommendation(board_no, member_no) VALUES (5, 5);
 
--- 포트폴리오파일 예제데이터 (pf_portfolio_file)
-INSERT INTO pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+-- 포트폴리오파일 예제데이터 (pf_board_attachment)
+INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(1, 5, "file1.jpg", "c:\file1\file1.jpg");
-INSERT INTO pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(2, 13, "file2.jpg", "c:\file1\file2.jpg");
-INSERT INTO pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(3, 15, "file3.jpg", "c:\file1\file3.jpg");
-INSERT INTO pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(4, 20, "file4.jpg", "c:\file1\file4.jpg");
-INSERT INTO pf_portfolio_file(portfolio_file_no, board_no, file_name, file_path)
+INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(5, 30, "file5.jpg", "c:\file1\file5.jpg");
-
--------------------------------------------------------------------------------------------
-
+ 
 -- pf_job_posting 채용공고 (pf_company_member 인서트 후(완), pf_final_education인서트 후)
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,thumbnail,

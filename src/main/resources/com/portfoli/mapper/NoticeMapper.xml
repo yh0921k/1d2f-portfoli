@@ -12,20 +12,24 @@
     <result column="view_count" property="viewCount" /><!-- 조회수-->
     <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
     <result column="attachment" property="attachment" /> <!-- 첨부파일 -->
+    <result column="category_name" property="categoryName"/>
   </resultMap>
   
   <select id="findAll" resultMap="NoticeMap">
-    SELECT 
+    SELECT
       n.notice_no, 
       n.board_no,
-      b.title, 
+      c.name as category_name,
+      b.title,
       b.content, 
       b.view_count, 
       b.registered_date, 
       b.attachment
-    from pf_notice n left outer join pf_board b 
-    on n.board_no = b.board_no
-    order by n.board_no desc
+    FROM pf_notice n LEFT OUTER JOIN pf_notice_category c 
+    ON n.notice_no = c.notice_no 
+    LEFT OUTER JOIN pf_board b 
+    ON n.board_no = b.board_no 
+    order by n.board_no desc;
   </select>
   
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">
@@ -44,10 +48,10 @@
   
   <insert id="insert" parameterType="Notice">
     INSERT INTO pf_notice (
-      board_no
+      board_no, notice_no
       )
     VALUES(
-      #{number}
+      #{number}, #{noticeNumber}
     )
   </insert>
 
@@ -57,20 +61,17 @@
     WHERE board_no = #{number}
   </delete>
   
-  <delete id="forceDelete" parameterType="int">
-    DELETE 
-      FROM pf_notice
-    WHERE notice_no = #{number}
-  </delete>
-
   <update id="update" parameterType="Notice">
-     UPDATE pf_notice SET
+     UPDATE pf_notice
+     <set>
        notice_no = #{noticeNumber}
+     <if test="noticeNumber != null and noticeNumber != ''">
+     </if>
+     </set>
      WHERE board_no = #{number}
   </update>
 
 </mapper>
-
 
 
 

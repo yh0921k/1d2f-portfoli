@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS pf_attachments RESTRICT;
 DROP TABLE IF EXISTS pf_job_posting_file RESTRICT;
 
 -- 포트폴리오파일
-DROP TABLE IF EXISTS pf_portfolio_file RESTRICT;
+DROP TABLE IF EXISTS pf_board_attachment RESTRICT;
 
 -- 분야
 DROP TABLE IF EXISTS pf_field RESTRICT;
@@ -536,23 +536,23 @@ ALTER TABLE pf_job_posting_file
   MODIFY COLUMN job_posting_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '채용공고첨부파일번호';
 
 -- 포트폴리오파일
-CREATE TABLE pf_portfolio_file (
-  portfolio_file_no INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
-  board_no          INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
-  file_name         VARCHAR(255) NOT NULL COMMENT '파일명', -- 파일명
-  file_path         VARCHAR(255) NOT NULL COMMENT '파일경로' -- 파일경로
+CREATE TABLE pf_board_attachment (
+  attachment_no  INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
+  board_no       INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
+  file_name      VARCHAR(255) NOT NULL COMMENT '파일명', -- 파일명
+  file_path      VARCHAR(255) NOT NULL COMMENT '파일경로' -- 파일경로
 )
 COMMENT '포트폴리오파일';
 
 -- 포트폴리오파일
-ALTER TABLE pf_portfolio_file
-  ADD CONSTRAINT PK_pf_portfolio_file -- 포트폴리오파일 기본키
+ALTER TABLE pf_board_attachment
+  ADD CONSTRAINT PK_pf_board_attachment -- 포트폴리오파일 기본키
     PRIMARY KEY (
-      portfolio_file_no -- 파일번호
+      attachment_no -- 파일번호
     );
 
-ALTER TABLE pf_portfolio_file
-  MODIFY COLUMN portfolio_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '파일번호';
+ALTER TABLE pf_board_attachment
+  MODIFY COLUMN attachment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '파일번호';
 
 -- 분야
 CREATE TABLE pf_field (
@@ -1432,8 +1432,8 @@ ALTER TABLE pf_job_posting_file
     );
 
 -- 포트폴리오파일
-ALTER TABLE pf_portfolio_file
-  ADD CONSTRAINT FK_pf_board_TO_pf_portfolio_file -- 게시글 -> 포트폴리오파일
+ALTER TABLE pf_board_attachment
+  ADD CONSTRAINT FK_pf_board_TO_pf_board_attachment -- 게시글 -> 포트폴리오파일
     FOREIGN KEY (
       board_no -- 게시글번호
     )

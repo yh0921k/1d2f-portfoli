@@ -18,10 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Board;
 import com.portfoli.domain.Notice;
 import com.portfoli.domain.NoticeCategory;
+import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.NoticeCategoryService;
 import com.portfoli.service.NoticeService;
-import com.portfoli.service.PortfolioFileService;
 
 @Controller
 @RequestMapping("/notice")
@@ -37,8 +37,8 @@ public class NoticeController {
   ServletContext servletContext;
 
   @Autowired
-  PortfolioFileService portfolioFileService;
-  
+  BoardAttachmentService boardAttachmentService;
+
   @Autowired
   BoardService boardService;
 
@@ -57,7 +57,9 @@ public class NoticeController {
   @RequestMapping("detail")
   public void detail(int number, Model model) throws Exception {
     Notice notice = noticeService.get(number);
-    notice.setViewCount(notice.getViewCount()+1);
+    Board board = boardService.get(number);
+    board.setViewCount(board.getViewCount() + 1);
+    boardService.update(board);
     NoticeCategory noticeCategory =noticeCategoryService.get(notice.getNoticeNumber());
     model.addAttribute("notice", notice);
     model.addAttribute("categoryName", noticeCategory.getName());
@@ -102,9 +104,9 @@ public class NoticeController {
   @GetMapping("delete")
   public String delete(int number) throws Exception {
     if(noticeService.delete(number)) {
-      portfolioFileService.delete(number);
+      //boardAttachmentService.delete(number);
       boardService.delete(number);
-    return "redirect:list";
+      return "redirect:list";
     } else
       throw new Exception("삭제중 오류발생");
   }
@@ -119,7 +121,7 @@ public class NoticeController {
 
 
   @PostMapping("update")
-  public String update(Notice notice, MultipartFile file) throws Exception {
+  public String update(int originalNoticeNumber, Notice notice, MultipartFile file) throws Exception {
 
     if (file.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/notice");
@@ -139,7 +141,9 @@ public class NoticeController {
     board.setViewCount(notice.getViewCount());
 
     if(boardService.update(board)) {
-      noticeService.update(notice);
+      if(notice.getNoticeNumber() != originalNoticeNumber) {
+        noticeService.update(notice);
+      }
       return "redirect:list";
     }else
       throw new Exception("업데이트에 실패했습니다.");
