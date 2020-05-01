@@ -1062,43 +1062,50 @@
             </li>
           </c:if>
 
-          <!-- 일반 회원 로그인 후 -->
+    <!-- 일반 회원 로그인 후 -->
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-    var wsUri = "ws://localhost:9999/portfoli/app/message/alert";
-    function send_message() {
-        console.log('trying socket connection');
+    function sendMessage() {
+      console.log('trying socket connection');
+      var wsUri = "ws://" + window.location.host + "/portfoli/app/message/alert";
+        if (wsUri == "ws://localhost:9999/portfoli/app/message/alert") {
         websocket = new WebSocket(wsUri);
+
+        } else {
+        wsUri = "ws://121.132.195.172:8080/portfoli/app/message/alert";
+        websocket = new WebSocket(wsUri);
+        }
+
         websocket.onopen = function(evt) {
-            console.log('connection opened');
-            onOpen(evt);
+          console.log('connection opened');
+          onOpen(evt);
         };
         websocket.onmessage = function(evt) {
-            console.log("Received Message : " + evt.data);
-            onMessage(evt);
+          console.log("received message : " + evt.data);
+          onMessage(evt);
         };
         websocket.onerror = function(evt) {
-            console.log('error : ' + err);
-            onError(evt);
+          console.log('error : ' + err);
+          onError(evt);
+        };
+        websocket.onclose = function(evt) {
+          console.log("WebSocket is closed now.");
         };
     }
    
-    function onOpen(evt) 
-    {
-       websocket.send("${loginUser.number}");
+    function onOpen(evt) {
+      websocket.send("${loginUser.number}");
     }
-
     function onMessage(evt) {
-        $('#count').append(evt.data);
+      $('#count').append(evt.data);
     }
-
     function onError(evt) {
     }
-
-    $(document).ready(function(){
-        send_message();
+    
+    $(document).ready(function() {
+        sendMessage();
     });
-        </script>
+    </script>
           <c:if test="${loginUser.type == '1'}">
 
             <li class="list-inline-item ml--6 mr--6 dropdown"><a href="#"
@@ -1117,20 +1124,40 @@
               <div aria-labelledby="dropdownMessageOptions"
                 class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
-                <div class="dropdown-header fs--14 py-3">
-
-                  <a href="#!"
-                    class="js-ajax-modal btn btn-sm btn-primary btn-soft b-0 px-2 py-1 m-0 fs--12 mt--n3 float-end"
-                    data-href="_ajax/admin_modal_message_write.html"
-                    data-ajax-modal-size="modal-md"
-                    data-ajax-modal-centered="false"
-                    data-ajax-modal-backdrop="static"> + WRITE </a> 1 NEW MESSAGE
-
-                </div>
                 <div class="dropdown-divider"></div>
-
                 <div class="max-h-50vh scrollable-vertical">
-
+<c:forEach items="${recentMessages}" var="item">
+                  <a href="#!" class="clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light">
+                      <!-- <c:if test="${empty item.receiveDate}">
+                      <span class="badge badge-success float-end font-weight-normal mt-1">new</span>
+                      </c:if> -->
+                      <!-- image -->
+                      <c:if test="${empty item.member.photoFilePath}">
+                      <div class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start" style="background-image:url('')"></div>
+                      </c:if>
+                      <c:if test="${not empty item.member.photoFilePath}">
+                      <div class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start" style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${item.member.photoFilePath}')"></div>
+                      </c:if>
+                      <!-- sender -->
+                      <strong class="d-block text-truncate">${item.member.id}</strong>
+                      <!-- subject -->
+                      <p class="fs--14 m-0 text-truncate font-weight-normal">
+                        ${item.title}
+                      </p>
+                      <!-- date -->
+                      <small class="d-block fs--11 text-muted">
+                      <fmt:formatDate var="sendDate" value="${item.sendDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
+                        ${sendDate}
+                      </small>
+                  </a>
+                </c:forEach>
+                
+                <div class="dropdown-divider mb-0"></div>
+                <a href="/portfoli/app/message/inbox" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+                    <i class="fi fi-arrow-end fs--11"></i>
+                    <span class="d-inline-block pl-2 pr-2">받은 쪽지함 가기</span>
+                  </a>
+                </div>
 
                   <li class="list-inline-item ml--6 mr--6 dropdown-menu-hover"><a
                     href="#" id="dropdownAccountOptions"

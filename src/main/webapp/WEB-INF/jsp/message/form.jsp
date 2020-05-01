@@ -68,16 +68,24 @@
 		</div>
 
 		<!-- Message : Body -->
-		<div class="form-label-group mb-3">
-			<textarea name='content'
-        class="medium-editor bg-white border rounded p-3 w-100 min-h-200"
-        data-placeholder="내용을 입력해주세요." data-lng-save="Save"
+    <div class="position-relative">
+      <span class="js-form-advanced-limit-info badge badge-warning hide animate-bouncein position-absolute absolute-top m--2">
+              최대 300자까지 작성할 수 있습니다.
+      </span>
+      <textarea name='content'
+        class="js-form-advanced-char-count-up form-control w-100 min-h-200
+        h--200 border scrollable-vertical p--15 rounded"
+        data-output-target=".js-form-advanced-char-total2" maxlength="300"
+        placeholder="내용을 입력해주세요." data-lng-save="Save"
         data-lng-clear="Clear" data-lng-link="Paste or type a link"
         data-btn-picker="true" data-btn-bold="true" data-btn-italic="true"
         data-btn-underline="true" data-btn-link="true" data-btn-h1="false"
         data-btn-h2="false" data-btn-h3="true" data-btn-h4="true"
         data-btn-h5="true" data-btn-h6="true" data-btn-unordered="true"
         data-btn-ordered="true"></textarea>
+      <div class="fs--12 text-muted text-align-end mt--3">
+              글자 수: <span class="js-form-advanced-char-total2">0</span> / 300
+      </div>
 		</div>
 
 		<!-- Message : Attachments -->
@@ -88,7 +96,7 @@
 				<!-- remove button -->
 				<a href="#"
 					class="js-file-input-btn-multiple-list-static-remove hide btn btn-sm btn-secondary float-end mb-2">
-					<i class="fi fi-close"></i> Clear
+					<i class="fi fi-close"></i> 초기화
 				</a>
 
 				<!-- upload button -->
@@ -98,7 +106,7 @@
 	<input name="messageFiles"
 					multiple="" type="file" data-file-ext="jpg, png, gif, bmp" data-file-max-size-kb-per-file="3000"
             data-file-max-size-kb-total="9000" data-file-max-total-files="3"
-            data-file-ext-err-msg="허용되는 파일 확장자"
+            data-file-ext-err-msg="허용되는 파일 확장자: "
             data-file-exist-err-msg="이미 등록된 파일입니다."
             data-file-size-err-item-msg="최대 파일 크기를 초과했습니다."
             data-file-size-err-total-msg="최대 파일 크기를 초과했습니다."
@@ -127,7 +135,7 @@
 			</div>
 
 		</div>
-		<small class="d-block text-muted mb-3 mt-1">허용되는 파일 확장자: jpg, png, gif, bmp</small>
+		<small class="d-block text-muted mb-3 mt-1">최대 3MB의 이미지 파일만 전송 가능합니다.</small>
 		<!-- /Message : Attachments -->
 
 	</div>

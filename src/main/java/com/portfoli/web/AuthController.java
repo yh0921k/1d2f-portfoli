@@ -1,5 +1,6 @@
 package com.portfoli.web;
 
+import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.portfoli.domain.Member;
+import com.portfoli.domain.Message;
 import com.portfoli.service.MemberService;
+import com.portfoli.service.MessageService;
 import com.portfoli.service.UserMailSendService;
 
 @Controller
@@ -27,9 +30,12 @@ public class AuthController {
 
   @Autowired
   MemberService memberService;
-  
+
   @Autowired
   private UserMailSendService mailsender;
+
+  @Autowired
+  MessageService messageService;
 
   @GetMapping("loginForm")
   public void loginForm(HttpServletRequest request, Model model) throws Exception {
@@ -65,7 +71,16 @@ public class AuthController {
 
     if (member != null) {
       request.getSession().setAttribute("loginUser", member);
+
+      List<Message> recentMessages = messageService.listReceivedMessage(member.getNumber(), 1, 5);
+      for (Message m : recentMessages) {
+        Member sender = memberService.get(m.getSenderNumber());
+        m.setMember(sender);
+      }
+      request.getSession().setAttribute("recentMessages", recentMessages);
+
       return "redirect:/";
+
     } else {
       request.getSession().invalidate();
       request.setAttribute("refreshUrl", "2;url=login");
@@ -85,7 +100,7 @@ public class AuthController {
   @PostMapping("findPassword")
   public String findPassword(String email, Model model) throws Exception{
     String userEmail = memberService.getEmailByEmail(email);
-    
+
     if(userEmail != null) {
       model.addAttribute("email", email);
       mailsender.findPassword(email);
@@ -95,5 +110,5 @@ public class AuthController {
       return "redirect:./";
     }
   }
-  
+
 }
