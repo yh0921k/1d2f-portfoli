@@ -1212,7 +1212,7 @@
                           password and more...</small>
                       </a> <a href="#!"
                         class="dropdown-item text-truncate font-weight-medium">
-                        Upgrade <small class="d-block text-muted">계정 업그레이드</small>
+                        멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
                       </a>
 
                       <div class="dropdown-divider mb-0"></div>
