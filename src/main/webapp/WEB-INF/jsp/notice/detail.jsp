@@ -1,4 +1,4 @@
-<%@page import="com.portfoli.domain.Notice"%>
+ <%@page import="com.portfoli.domain.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -74,7 +74,7 @@
               <c:choose>
               <c:when test="${not empty notice.attachment}">
                 <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/><br>
-                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' download="${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}.jpg" height='80'>첨부파일 다운로드</a>
+                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' download="${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}" height='80'>첨부파일 다운로드</a>
                  <%-- pf_portfolio_file이 완성되면 그때 구현할 예정
                  <c:forEach items="${notice.files}" var="photoFile">
                  <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.attachment}' height='80'/>

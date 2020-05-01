@@ -77,10 +77,11 @@ public class NoticeController {
     notice.setTitle(title);
     notice.setContent(content);
     notice.setRegisteredDate(new Date(System.currentTimeMillis()));
-
+    
     if (attachment.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/notice");
-      String filename = UUID.randomUUID().toString();
+      String filename = UUID.randomUUID().toString() + attachment.getOriginalFilename();
+      System.out.println("filename" + filename);
       attachment.transferTo(new File(dirPath + "/" + filename));
       notice.setAttachment(filename);
     } else {
@@ -125,7 +126,7 @@ public class NoticeController {
 
     if (file.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/notice");
-      String filename = UUID.randomUUID().toString();
+      String filename = UUID.randomUUID().toString() + file.getOriginalFilename();
 
       logger.debug(dirPath + ":" + filename);
       file.transferTo(new File(dirPath + "/" + filename));
