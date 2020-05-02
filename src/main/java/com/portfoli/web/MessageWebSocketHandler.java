@@ -45,8 +45,11 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
     Map<String, Object> httpSession = session.getAttributes();
     Member loginUser = (Member) httpSession.get("loginUser");
 
-    userSessions.get(getUserId(session))
-        .sendMessage(
-            new TextMessage(String.valueOf(messageDao.countNotRead(loginUser.getNumber()))));
+    int count = messageDao.countNotRead(loginUser.getNumber());
+    if (count == 0) {
+      return;
+    }
+
+    userSessions.get(getUserId(session)).sendMessage(new TextMessage(String.valueOf(count)));
   }
 }
