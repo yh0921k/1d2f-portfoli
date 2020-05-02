@@ -53,6 +53,7 @@
       m.message_receiver,
       m.title,
       m.send_date,
+      m.receive_date,
       s.member_no,
       s.id member_id
     from pf_message m
@@ -71,6 +72,7 @@
       m.message_receiver,
       m.title,
       m.send_date,
+      m.receive_date,
       r.member_no,
       r.id member_id
     from pf_message m
