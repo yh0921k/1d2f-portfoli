@@ -1126,28 +1126,34 @@
                 class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
                 <div class="dropdown-divider"></div>
-                <div class="max-h-50vh">
-                <c:forEach items="${recentMessages}" var="item">
-                  <a href="#!" class="clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light">
+                <div class="max-h-75vh">
+                <c:forEach items="${recentMessages}" var="recentMessage">
+                  <a
+                    href="/portfoli/app/message/inbox/detail?number=${recentMessage.number}"
+                    class="js-ajax-modal clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light"
+                    data-href="/portfoli/app/message/inbox/detail?number=${recentMessage.number}"
+                    data-ajax-modal-size="modal-md"
+                    data-ajax-modal-centered="true"
+                    data-ajax-modal-backdrop="static">
                       <span class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
-                      <c:if test="${not empty item.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
+                      <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
                      
                       <!-- image -->
-                      <c:if test="${empty item.member.photoFilePath}">
+                      <c:if test="${empty recentMessage.member.photoFilePath}">
                       <div class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start" style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
                       </c:if>
-                      <c:if test="${not empty item.member.photoFilePath}">
+                      <c:if test="${not empty recentMessage.member.photoFilePath}">
                       <div class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start" style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${item.member.photoFilePath}')"></div>
                       </c:if>
                       <!-- sender -->
-                      <strong class="d-block text-truncate">${item.member.id}</strong>
+                      <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
                       <!-- title -->
                       <p class="fs--14 m-0 text-truncate font-weight-normal">
-                        ${item.title}
+                        ${recentMessage.title}
                       </p>
                       <!-- date -->
                       <small class="d-block fs--11 text-muted">
-                      <fmt:formatDate var="sendDate" value="${item.sendDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
+                      <fmt:formatDate var="sendDate" value="${recentMessage.sendDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
                         ${sendDate}
                       </small>
                   </a>

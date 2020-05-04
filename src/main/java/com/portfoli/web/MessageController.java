@@ -36,8 +36,6 @@ public class MessageController {
   @Autowired
   MemberService memberService;
 
-  // 테스트 url (세션 적용 전)
-  // http://localhost:9999/portfoli/app/message/form?receiverNumber=1&senderNumber=2
   @GetMapping("form")
   public void form(HttpServletRequest request, int receiverNumber, Model model) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
@@ -46,7 +44,8 @@ public class MessageController {
   }
 
   @PostMapping("add")
-  public String add(HttpServletRequest request, Message message, MultipartFile[] messageFiles) throws Exception {
+  public String add(HttpServletRequest request, Message message, MultipartFile[] messageFiles)
+      throws Exception {
     ArrayList<MessageFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/message");
     for (MultipartFile messageFile : messageFiles) {
@@ -148,5 +147,25 @@ public class MessageController {
     model.addAttribute("totalPage", totalPage);
     model.addAttribute("startPage", startPage);
     model.addAttribute("endPage", endPage);
+  }
+
+  @GetMapping("inbox/detail")
+  public String inboxDetail(int number, Model model) throws Exception {
+    Message message = messageService.get(number);
+    message.setMember(memberService.get(message.getSenderNumber()));
+
+    model.addAttribute("message", message);
+
+    return "message/inboxDetail";
+  }
+
+  @GetMapping("sent/detail")
+  public String sentDetail(int number, Model model) throws Exception {
+    Message message = messageService.get(number);
+    message.setMember(memberService.get(message.getReceiverNumber()));
+
+    model.addAttribute("message", message);
+
+    return "message/sentDetail";
   }
 }

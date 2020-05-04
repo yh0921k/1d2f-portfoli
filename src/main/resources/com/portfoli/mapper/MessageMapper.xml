@@ -94,10 +94,35 @@
     from pf_message
     where message_receiver=#{userNumber}
   </select>
-  
+ 
   <select id="countNotRead" resultType="int" parameterType="int">
     select count(*)
     from pf_message
-    where receive_date IS NULL and message_receiver=#{userNumber};
+    where receive_date IS NULL and message_receiver=#{userNumber}
   </select>
+
+  <select id="findByMessageNumber" resultMap="MessageMap" parameterType="int">
+    select
+      m.message_no,
+      m.message_sender,
+      m.message_receiver,
+      m.title,
+      m.content,
+      m.send_date,
+      m.receive_date,
+      r.member_no,
+      r.id member_id,
+      f.file_name,
+      f.file_path
+    from pf_message m
+      join pf_members r on m.message_receiver=r.member_no
+      left outer join pf_attachments f on m.message_no=f.message_no
+    where
+      m.message_no=#{number}
+  </select>
+
+  <update id="updateRead" parameterType="Message">
+    update pf_message set
+      receive_date=now()
+  </update>
 </mapper>
