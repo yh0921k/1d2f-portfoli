@@ -22,6 +22,21 @@
     order by attachment_no desc
   </select>
 
+  <select id="findByNo" resultMap="BoardAttachmentMap" parameterType="int">
+    SELECT
+      b.board_no, 
+      b.title, 
+      b.content, 
+      b.view_count, 
+      b.registered_date, 
+      a.attachment_no, 
+      a.file_name, 
+      a.file_path 
+    FROM pf_board_attachment a LEFT OUTER JOIN pf_board b 
+    ON a.board_no = b.board_no 
+    WHERE b.board_no = #{boardNumber}
+  </select>
+
   <insert id="insert" parameterType="BoardAttachment">
     INSERT INTO pf_board_attachment (board_no, file_name, file_path)
     VALUES(#{boardNumber}, #{fileName}, #{filePath})
@@ -44,6 +59,7 @@
       file_path = #{filePath}
     </if>
     </set>
+    WHERE board_no = #{boardNumber}
   </update>
 
 </mapper>

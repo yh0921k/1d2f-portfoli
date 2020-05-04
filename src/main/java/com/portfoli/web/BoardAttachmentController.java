@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.BoardAttachment;
 import com.portfoli.service.BoardAttachmentService;
+import com.portfoli.service.BoardService;
 
 @Controller
 @RequestMapping("boardAttachment")
@@ -25,6 +26,9 @@ public class BoardAttachmentController {
   @Autowired
   ServletContext servletContext;
 
+  @Autowired
+  BoardService boardService;
+  
   @Autowired
   BoardAttachmentService boardAttachmentService;
 
@@ -40,39 +44,40 @@ public class BoardAttachmentController {
 
   @RequestMapping("form")
   public void form() throws Exception {}
-  
+
   @RequestMapping(value = "add")
   public String add(BoardAttachment boardAttachment, // w/ boardNumber
       @RequestParam("filePaths") MultipartFile[] filePaths) throws Exception {
-    
+
     String dirPath = servletContext.getRealPath("/upload/boardAttachment");
     for(MultipartFile filePath : filePaths) {
-      if(filePath.getSize() < 0) {
+      if(filePath.getSize() <= 0) {
         continue;
       }
-      
-//      [suffix를 추출하는 대신 originalFileName을 활용하기로 결정]
-//      String[] contentType = filePath.getContentType().split("/");
-//      String suffix = "";
-//      if(contentType[0].equals("image")) {
-//        suffix = contentType[1];
-//      } else {
-//        suffix = contentType[1];
-//      }
-      
+
+      //      [suffix를 추출하는 대신 originalFileName을 활용하기로 결정]
+      //      String[] contentType = filePath.getContentType().split("/");
+      //      String suffix = "";
+      //      if(contentType[0].equals("image")) {
+      //        suffix = contentType[1];
+      //      } else {
+      //        suffix = contentType[1];
+      //      }
+
       String filename = String.format("%s___%s",
           UUID.randomUUID().toString(), filePath.getOriginalFilename());
-      
+
       boardAttachment.setFilePath(dirPath + "/" + filename);
       boardAttachment.setFileName(filename);
-      
+
       filePath.transferTo(new File(dirPath + "/" + filename));
       boardAttachmentService.add(boardAttachment);
     }
     return "redirect:list";
   }
-  
-  
+
+
+
 
 
 }

@@ -25,15 +25,7 @@
 
 
 
-  <style>
-    .lightGray{width: 100%; border:2px lightGray solid;}
-    .darkerGray{color:#313335;}
-    .firstTR{border-bottom:1px darkGray dashed;}
-    .padding{padding:10px; border:0px;}
-    .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
-    .photoInside{text-align: center}
-    .buttonTD{text-align: center}
-  </style>
+
 
       <!-- FAQ -->
       <section>
@@ -57,7 +49,7 @@
             <form action="updateForm" method="post">
             <c:if test="${not empty notice}">
             <input name="number" type="hidden" value="${notice.getNumber()}"/>
-            <input name="number" type="hidden" value="${notice.noticeNumber}"/>
+            <input name="number" type="hidden" value="${notice.categoryNumber}"/>
             <table class="lightGray">
             <tr class="firstTR">
               <td width="75%" class='padding'>[${categoryName}] ${notice.title}</td>
@@ -72,14 +64,12 @@
             <tr class='photoTD'>
               <td colspan="2"  class='photoInside'>
               <c:choose>
-              <c:when test="${not empty notice.attachment}">
-                <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/><br>
-                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' download="${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}" height='80'>첨부파일 다운로드</a>
-                 <%-- pf_portfolio_file이 완성되면 그때 구현할 예정
-                 <c:forEach items="${notice.files}" var="photoFile">
-                 <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.attachment}' height='80'/>
-                 </c:forEach>
-                 --%>
+              <c:when test="${not empty attachment}">
+              <c:forEach items='${attachment}' var='item'>
+                <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${item.getFileName()}' height='80'/><br>
+                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/notice/${item.getFileName()}' download="${pageContext.servletContext.contextPath}/upload/notice/${item.getFileName()}" height='80'>첨부파일 다운로드</a>
+                <br>
+               </c:forEach>
                </c:when>
                <c:otherwise>
                <span>첨부파일이 없습니다.</span>
@@ -110,6 +100,14 @@
       </section>
       <!-- /FAQ -->
 
-
+  <style>
+    .lightGray{width: 100%; border:2px lightGray solid;}
+    .darkerGray{color:#313335;}
+    .firstTR{border-bottom:1px darkGray dashed;}
+    .padding{padding:10px; border:0px;}
+    .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
+    .photoInside{text-align: center}
+    .buttonTD{text-align: center}
+  </style>
 
       <jsp:include page="../footer.jsp"/>

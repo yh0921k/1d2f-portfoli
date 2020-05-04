@@ -7,7 +7,7 @@ public interface NoticeService {
 
   List<Notice> list() throws Exception;
 
-  Notice get(int number) throws Exception;
+  Notice get(int boardNumber) throws Exception;
   
   boolean insert(Notice notice) throws Exception;
 

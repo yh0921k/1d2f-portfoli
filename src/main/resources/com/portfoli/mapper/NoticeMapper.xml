@@ -5,28 +5,26 @@
 
 <mapper namespace="com.portfoli.dao.NoticeDao">
   <resultMap type="Notice" id="NoticeMap">
-    <id column="notice_no" property="noticeNumber" /> <!-- 게시글번호 -->
+    <id column="category_no" property="categoryNumber" /> <!-- 게시글번호 -->
     <id column="board_no" property="number" /><!-- 공지사항분류번호-->
     <result column="title" property="title" /><!-- 제목-->
     <result column="content" property="content" /><!-- 내용-->
     <result column="view_count" property="viewCount" /><!-- 조회수-->
     <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
-    <result column="attachment" property="attachment" /> <!-- 첨부파일 -->
     <result column="category_name" property="categoryName"/>
   </resultMap>
   
   <select id="findAll" resultMap="NoticeMap">
     SELECT
-      n.notice_no, 
+      n.category_no, 
       n.board_no,
       c.name as category_name,
       b.title,
       b.content, 
       b.view_count, 
-      b.registered_date, 
-      b.attachment
+      b.registered_date
     FROM pf_notice n LEFT OUTER JOIN pf_notice_category c 
-    ON n.notice_no = c.notice_no 
+    ON n.category_no = c.category_no 
     LEFT OUTER JOIN pf_board b 
     ON n.board_no = b.board_no 
     order by n.board_no desc;
@@ -34,13 +32,12 @@
   
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">
     SELECT 
-      n.notice_no, 
+      n.category_no, 
       n.board_no,
       b.title, 
       b.content, 
       b.view_count, 
-      b.registered_date, 
-      b.attachment 
+      b.registered_date
     from pf_notice n left outer join pf_board b 
     on n.board_no = b.board_no
     WHERE n.board_no = #{boardNumber}
@@ -48,10 +45,10 @@
   
   <insert id="insert" parameterType="Notice">
     INSERT INTO pf_notice (
-      board_no, notice_no
+      board_no, category_no
       )
     VALUES(
-      #{number}, #{noticeNumber}
+      #{number}, #{categoryNumber}
     )
   </insert>
 
@@ -64,8 +61,8 @@
   <update id="update" parameterType="Notice">
      UPDATE pf_notice
      <set>
-       notice_no = #{noticeNumber}
-     <if test="noticeNumber != null and noticeNumber != ''">
+       category_no = #{categoryNumber}
+     <if test="categoryNumber != null and categoryNumber != ''">
      </if>
      </set>
      WHERE board_no = #{number}

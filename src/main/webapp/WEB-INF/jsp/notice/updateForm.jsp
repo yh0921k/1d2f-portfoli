@@ -60,24 +60,24 @@
               
             <form action="update" method="post" enctype="multipart/form-data">
             <c:if test="${not empty notice}">
-            <input name="originalNoticeNumber" type=hidden value="${notice.getNoticeNumber()}"/>
+            <input name="originalNoticeNumber" type=hidden value="${notice.getCategoryNumber()}"/>
             <input name="number" type="hidden" value="${notice.getNumber()}"/>
             <table class='lightGray'>
             <tr class='firstTR'>
               <td width="75%" class='padding'>
               
               <select name="noticeNumber" class='optPadding'>
-              <option value="${category.getNoticeNumber()}">${category.getName()}</option>
+              <option value="${category.getCategoryNumber()}">${category.getName()}</option>
               <option disabled="disabled">-------------------</option>
               <c:forEach items="${list}" var="item">
               <c:choose>
-              <c:when test="${category.noticeNumber eq item.getNoticeNumber()}">
+              <c:when test="${category.categoryNumber eq item.getCategoryNumber()}">
               <%--
               <option style="background-color: Silver;font-weight: bold;" value="${item.getNoticeNumber()}">${item.getName()}</option>
                --%>
               </c:when>
               <c:otherwise>
-              <option value="${item.getNoticeNumber()}">${item.getName()}</option>
+              <option value="${item.getCategoryNumber()}">${item.getName()}</option>
               </c:otherwise>
               </c:choose>
               </c:forEach>
@@ -96,14 +96,13 @@
               </td>
             </tr>
             <tr class='photoTD'>
-                 <%-- 
-                <img name="attachment" src='${pageContext.servletContext.contextPath}/upload/notice/${notice.getAttachment()}' height='80'/>
-                 pf_portfolio_file이 완성되면 그때 구현할 예정
-                 <c:forEach items="${notice.files}" var="photoFile">
-                 <img src='${pageContext.servletContext.contextPath}/upload/notice/${notice.attachment}' height='80'/>
-                 </c:forEach>
-                 --%>
-              <td colspan='3' class='photoInside'><input type="file" name="file" /></td>
+              <td colspan="2" align="center">
+              <input type="file" name="files" />
+              <input type="file" name="files" />
+              <input type="file" name="files" />
+              <input type="file" name="files" />
+              <input type="file" name="files" />
+              </td>
             </tr>
 
             <tr>

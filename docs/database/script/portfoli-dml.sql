@@ -74,8 +74,8 @@ INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (3,"제목3","내용3",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (4,"제목4","내용4",3, "2020-04-01 00:00:00");
-INSERT INTO pf_board (board_no, title, content, view_count, registered_date, attachment)
-VALUES (5,"제목5","내용5",3, "2020-04-01 00:00:00", 1);
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (5,"제목5","내용5",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (6,"제목6","내용6",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
@@ -124,8 +124,8 @@ INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (28,"제목28","내용28",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (29,"제목29","내용29",3, "2020-04-01 00:00:00");
-INSERT INTO pf_board (board_no, title, content, view_count, registered_date, attachment)
-VALUES (30,"제목30","내용30",3, "2020-04-01 00:00:00", 4);
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (30,"제목30","내용30",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
  VALUES(31, "제목31", "내용31", 3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
@@ -134,8 +134,8 @@ INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (33,"제목33","내용33",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (34,"제목34","내용34",3, "2020-04-01 00:00:00");
-INSERT INTO pf_board (board_no, title, content, view_count, registered_date, attachment)
-VALUES (35,"제목35","내용35",3, "2020-04-01 00:00:00", 5);
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (35,"제목35","내용35",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (36,"제목36","내용36",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
@@ -344,29 +344,29 @@ INSERT INTO pf_major(major_no, name) VALUES(4,'송율리아');
 INSERT INTO pf_major(major_no, name) VALUES(5,'문국대');
   
 -- 공지사항분류 예제데이터 (pf_notice_category)
-INSERT INTO pf_notice_category (notice_no, name) VALUES(0, "미분류");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(1, "로그인관련");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(2, "상품관련");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(3, "결제관련");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(4, "배송관련");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(5, "유형5");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(6, "유형6");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(7, "유형7");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(8, "유형8");
-INSERT INTO pf_notice_category (notice_no, name) VALUES(9, "유형9"); 
-INSERT INTO pf_notice_category (notice_no, name) VALUES(10, "유형10");
+INSERT INTO pf_notice_category (category_no, name) VALUES(0, "미분류");
+INSERT INTO pf_notice_category (category_no, name) VALUES(1, "로그인관련");
+INSERT INTO pf_notice_category (category_no, name) VALUES(2, "상품관련");
+INSERT INTO pf_notice_category (category_no, name) VALUES(3, "결제관련");
+INSERT INTO pf_notice_category (category_no, name) VALUES(4, "배송관련");
+INSERT INTO pf_notice_category (category_no, name) VALUES(5, "유형5");
+INSERT INTO pf_notice_category (category_no, name) VALUES(6, "유형6");
+INSERT INTO pf_notice_category (category_no, name) VALUES(7, "유형7");
+INSERT INTO pf_notice_category (category_no, name) VALUES(8, "유형8");
+INSERT INTO pf_notice_category (category_no, name) VALUES(9, "유형9"); 
+INSERT INTO pf_notice_category (category_no, name) VALUES(10, "유형10");
 
 -- 공지사항 예제데이터 (pf_notice)
-INSERT INTO pf_notice (board_no, notice_no) VALUES(11,1);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(12,2);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(13,3);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(14,4);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(15,5);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(16,6);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(17,7);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(18,8);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(19,9);
-INSERT INTO pf_notice (board_no, notice_no) VALUES(20,10);
+INSERT INTO pf_notice (board_no, category_no) VALUES(11,1);
+INSERT INTO pf_notice (board_no, category_no) VALUES(12,2);
+INSERT INTO pf_notice (board_no, category_no) VALUES(13,3);
+INSERT INTO pf_notice (board_no, category_no) VALUES(14,4);
+INSERT INTO pf_notice (board_no, category_no) VALUES(15,5);
+INSERT INTO pf_notice (board_no, category_no) VALUES(16,6);
+INSERT INTO pf_notice (board_no, category_no) VALUES(17,7);
+INSERT INTO pf_notice (board_no, category_no) VALUES(18,8);
+INSERT INTO pf_notice (board_no, category_no) VALUES(19,9);
+INSERT INTO pf_notice (board_no, category_no) VALUES(20,10);
 
 -- 질문분류 예제데이터 (pf_question_class)
 INSERT INTO pf_question_class(question_no, category) VALUES(1, "질문유형1");

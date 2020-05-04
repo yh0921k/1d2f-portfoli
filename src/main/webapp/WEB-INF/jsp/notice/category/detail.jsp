@@ -51,7 +51,7 @@
             <table border='1' style="width: 100%;">
             <tr>
               <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value="카테고리 번호"/></td>
-              <td width="70%"><input readonly="readonly" style="border-color:transparent; resize:none;" name="noticeNumber" value='${category.noticeNumber}'/></td>
+              <td width="70%"><input readonly="readonly" style="border-color:transparent; resize:none;" name="categoryNumber" value='${category.categoryNumber}'/></td>
             </tr>
             <tr>
               <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value='카테고리 내용'/></td>
@@ -61,7 +61,7 @@
             <td colspan="2">
             <button>수정</button>
             <span>←←←←←강제삭제: 수정버튼 클릭+강제삭제</span>
-            <input type="button" onclick="location.href='delete?noticeNumber=${category.noticeNumber}'" value="삭제"/>
+            <input type="button" onclick="location.href='delete?categoryNumber=${category.categoryNumber}'" value="삭제"/>
             </td>
             </tr>
             </table>

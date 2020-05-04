@@ -5,15 +5,19 @@ import java.io.Serializable;
 public class NoticeCategory implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private int noticeNumber;
+  private int categoryNumber;
   private String name;
   
+  @Override
+  public String toString() {
+    return "NoticeCategory [categoryNumber=" + categoryNumber + ", name=" + name + "]";
+  }
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + categoryNumber;
     result = prime * result + ((name == null) ? 0 : name.hashCode());
-    result = prime * result + noticeNumber;
     return result;
   }
   @Override
@@ -25,24 +29,20 @@ public class NoticeCategory implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     NoticeCategory other = (NoticeCategory) obj;
+    if (categoryNumber != other.categoryNumber)
+      return false;
     if (name == null) {
       if (other.name != null)
         return false;
     } else if (!name.equals(other.name))
       return false;
-    if (noticeNumber != other.noticeNumber)
-      return false;
     return true;
   }
-  @Override
-  public String toString() {
-    return "NoticeCategory [noticeNumber=" + noticeNumber + ", name=" + name + "]";
+  public int getCategoryNumber() {
+    return categoryNumber;
   }
-  public int getNoticeNumber() {
-    return noticeNumber;
-  }
-  public void setNoticeNumber(int noticeNumber) {
-    this.noticeNumber = noticeNumber;
+  public void setCategoryNumber(int categoryNumber) {
+    this.categoryNumber = categoryNumber;
   }
   public String getName() {
     return name;
@@ -50,6 +50,7 @@ public class NoticeCategory implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
+
 
   
 

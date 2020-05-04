@@ -45,7 +45,7 @@
                  
               <select name="noticeNumber" style="height: 30px; width: 100%;">
               <c:forEach items="${list}" var="item">
-                  <option value="${item.getNoticeNumber()}">[${item.getNoticeNumber()}]${item.getName()}</option>
+                  <option value="${item.getCategoryNumber()}">[${item.getCategoryNumber()}]${item.getName()}</option>
               </c:forEach>
               </select>                
                  
@@ -64,7 +64,11 @@
                 
                 <tr>
                   <td colspan="2" align="center">
-                  <input type="file" name="attachment" />
+                  <input type="file" name="files" />
+                  <input type="file" name="files" />
+                  <input type="file" name="files" />
+                  <input type="file" name="files" />
+                  <input type="file" name="files" />
                   </td>
                 </tr>
                 </table>
