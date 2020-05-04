@@ -82,9 +82,7 @@ public class AuthController {
       return "redirect:/";
 
     } else {
-      request.getSession().invalidate();
-      request.setAttribute("refreshUrl", "2;url=login");
-      return null;
+      throw new Exception("로그인에 실패하였습니다. <br>아이디 혹은 비밀번호를 확인해주세요.");
     }
   }
 
@@ -106,8 +104,7 @@ public class AuthController {
       mailsender.findPassword(email);
       return "redirect:/";
     } else {
-      model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");
-      return "redirect:./";
+      throw new Exception("해당 이메일은 가입된 이메일이 아닙니다.");
     }
   }
 

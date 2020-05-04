@@ -2,15 +2,9 @@ package com.portfoli.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.config.TxNamespaceHandler;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.CompanyDao;
 import com.portfoli.dao.CompanyMemberDao;
@@ -77,14 +71,17 @@ public class MemberServiceImpl implements MemberService {
     HashMap<String, Object> params = new HashMap<>();
     params.put("email", email);
     params.put("password", password);
-    int type = memberDao.findByEmailAndPassword(params).getType();
 
-    if (type == 1) {
-      return generalMemberDao.findByEmailAndPassword(params);
-    } else if (type == 2) {
-      return companyMemberDao.findByEmailAndPassword(params);
-    } else {
-      throw new Exception("로그인 실패");
+    try {
+      int type = memberDao.findByEmailAndPassword(params).getType();
+
+      if (type == 1) {
+        return generalMemberDao.findByEmailAndPassword(params);
+      } else {
+        return companyMemberDao.findByEmailAndPassword(params);
+      }
+    } catch (Exception e) {
+      throw new Exception("로그인에 실패하였습니다. <br>아이디 혹은 비밀번호를 확인해주세요.");
     }
   }
 

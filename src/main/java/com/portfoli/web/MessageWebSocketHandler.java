@@ -19,19 +19,21 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
   MessageDao messageDao;
 
   @Override
-  public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
-      throws Exception {
+  public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
     super.afterConnectionClosed(session, status);
   }
 
   @Override
-  public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-    userSessions.put(getUserId(session), session);
+  public void afterConnectionEstablished(WebSocketSession session) {
+    String userNo = getUserId(session);
+    if (userNo != null) {
+      userSessions.put(getUserId(session), session);
+    }
   }
 
   private String getUserId(WebSocketSession session) {
     Map<String, Object> httpSession = session.getAttributes();
-    
+
     Member loginUser = (Member) httpSession.get("loginUser");
     if (loginUser != null) {
       return String.valueOf(loginUser.getNumber());
@@ -45,11 +47,12 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
     Map<String, Object> httpSession = session.getAttributes();
     Member loginUser = (Member) httpSession.get("loginUser");
 
-    int count = messageDao.countNotRead(loginUser.getNumber());
-    if (count == 0) {
-      return;
+    int count = 0;
+    if (loginUser != null) {
+      count = messageDao.countNotRead(loginUser.getNumber());
+      if (count != 0) {
+        userSessions.get(getUserId(session)).sendMessage(new TextMessage(String.valueOf(count)));
+      }
     }
-
-    userSessions.get(getUserId(session)).sendMessage(new TextMessage(String.valueOf(count)));
   }
 }
