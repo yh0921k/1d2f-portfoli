@@ -10,11 +10,10 @@
 		<result column="content" property="content" />
 		<result column="view_count" property="viewCount" />
 		<result column="registered_date" property="registeredDate" />
-		<result column="attachment" property="attachment" />
 	</resultMap>
 
   <sql id="select">
-    SELECT board_no, title, content, view_count, registered_date, attachment
+    SELECT board_no, title, content, view_count, registered_date
     FROM pf_board
   </sql>
 
@@ -33,19 +32,12 @@
 	    title, 
 	    content, 
 	    view_count, 
-	    registered_date, 
-	    attachment)
+	    registered_date)
     VALUES(
 	    #{title},
 	    #{content}, 
 	    #{viewCount}, 
-	    now(), 
-      <if test="attachment!=null and attachment!=''">
-	    #{attachment}
-	    </if>
-	    <if test="attachment==null or attachment == ''">
-	    null
-	    </if>
+	    now()
     )
   </insert>
  
@@ -55,7 +47,6 @@
 	     <if test="title!=null and title!=''">,title = #{title}</if>
 	     <if test="content!=null and content!=''">,content = #{content}</if>
 	     <if test="viewCount!=null and viewCount!=''">,view_count = #{viewCount}</if>
-	     <if test="attachment!=null and attachment!=''">,attachment = #{attachment}</if>
      WHERE board_no = #{number}
   </update>
 

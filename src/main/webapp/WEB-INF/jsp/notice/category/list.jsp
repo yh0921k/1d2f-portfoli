@@ -54,8 +54,8 @@
                 
             <c:forEach items="${list}" var="item">
             <tr>
-              <td><a href="detail?number=${item.noticeNumber}">${item.noticeNumber}</a></td>
-              <td><a href="detail?number=${item.noticeNumber}">${item.name}</a></td>
+              <td><a href="detail?number=${item.categoryNumber}">${item.categoryNumber}</a></td>
+              <td><a href="detail?number=${item.categoryNumber}">${item.name}</a></td>
             </tr>
             </c:forEach>
                 

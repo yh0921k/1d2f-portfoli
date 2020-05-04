@@ -52,7 +52,7 @@
             
             <tr>
               <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value="공지사항 카테고리 번호"/></td>
-              <td width="70%"><input style="resize:none; border-color:pink; width: 100%;" name="noticeNumber" value="${category.noticeNumber}"/></td>
+              <td width="70%"><input style="resize:none; border-color:pink; width: 100%;" name="categoryNumber" value="${category.categoryNumber}"/></td>
             </tr>
             <tr>
               <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value="공지사항 카테고리 내용"/></td>
@@ -62,7 +62,7 @@
             <tr>
             <td colspan="2">
             <button>확인</button>
-            <input type="button" onclick="location.href='forceDelete?noticeNumber=${category.noticeNumber}'" value="삭제"/>
+            <input type="button" onclick="location.href='forceDelete?categoryNumber=${category.categoryNumber}'" value="삭제"/>
             </td>
             </tr>
             </table>

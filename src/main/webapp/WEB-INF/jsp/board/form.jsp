@@ -112,8 +112,16 @@
 						</div>
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="첨부파일" name="attachment" type="text"
+							<input required placeholder="첨부파일" name="filePaths" type="file"
 								class="form-control"> <label for="account_id">첨부파일</label>
+              <input required placeholder="첨부파일" name="filePaths" type="file"
+                class="form-control"> <label for="account_id">첨부파일</label>
+              <input required placeholder="첨부파일" name="filePaths" type="file"
+                class="form-control"> <label for="account_id">첨부파일</label>
+              <input required placeholder="첨부파일" name="filePaths" type="file"
+                class="form-control"> <label for="account_id">첨부파일</label>
+              <input required placeholder="첨부파일" name="filePaths" type="file"
+                class="form-control"> <label for="account_id">첨부파일</label>
 						</div>
 
 						<div class="clearfix bg-light position-relative rounded p-4 mb-4">

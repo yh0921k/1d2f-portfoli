@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 public class Notice extends Board implements Serializable {
   private static final long serialVersionUID = 1L;
-  private int noticeNumber;
+  private int categoryNumber;
   private String categoryName;
   
   @Override
   public String toString() {
-    return "Notice [noticeNumber=" + noticeNumber + ", categoryName=" + categoryName + "]";
+    return "Notice [categoryNumber=" + categoryNumber + ", categoryName=" + categoryName + "]";
   }
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
+    result = prime * result + categoryNumber;
     result = prime * result + ((categoryName == null) ? 0 : categoryName.hashCode());
-    result = prime * result + noticeNumber;
     return result;
   }
   @Override
@@ -28,20 +28,20 @@ public class Notice extends Board implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Notice other = (Notice) obj;
+    if (categoryNumber != other.categoryNumber)
+      return false;
     if (categoryName == null) {
       if (other.categoryName != null)
         return false;
     } else if (!categoryName.equals(other.categoryName))
       return false;
-    if (noticeNumber != other.noticeNumber)
-      return false;
     return true;
   }
-  public int getNoticeNumber() {
-    return noticeNumber;
+  public int getCategoryNumber() {
+    return categoryNumber;
   }
-  public void setNoticeNumber(int noticeNumber) {
-    this.noticeNumber = noticeNumber;
+  public void setCategoryNumber(int categoryNumber) {
+    this.categoryNumber = categoryNumber;
   }
   public String getCategoryName() {
     return categoryName;
@@ -49,7 +49,6 @@ public class Notice extends Board implements Serializable {
   public void setCategoryName(String categoryName) {
     this.categoryName = categoryName;
   }
-
   
 
   

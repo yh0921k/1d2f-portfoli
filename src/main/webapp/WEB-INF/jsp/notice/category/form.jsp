@@ -51,7 +51,7 @@
 
                 <tr>
                  <td align="center">카테고리 번호</td>
-                 <td style="height:50px"><input type="number" name='noticeNumber' style="width:100%;"></input></td>
+                 <td style="height:50px"><input type="number" name='categoryNumber' style="width:100%;"></input></td>
                 </tr>
                 
                 <!-- 

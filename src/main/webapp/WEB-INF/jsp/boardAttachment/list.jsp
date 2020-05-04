@@ -80,10 +80,10 @@
 
             <c:forEach items="${list}" var="item">
             <tr>
-              <th><a href="detail?number=${item.attachmentNumber}">${item.attachmentNumber}</a></th>
-              <th><a href="detail?number=${item.attachmentNumber}">${item.boardNumber}</a></th>
-              <th><a href="detail?number=${item.attachmentNumber}">${item.fileName}</a></th>
-              <th><a href="detail?number=${item.attachmentNumber}">${item.filePath}</a></th>
+              <th><a href="detail?number=${item.boardNumber}">${item.attachmentNumber}</a></th>
+              <th><a href="detail?number=${item.boardNumber}">${item.boardNumber}</a></th>
+              <th><a href="detail?number=${item.boardNumber}">${item.fileName}</a></th>
+              <th><a href="detail?number=${item.boardNumber}">${item.filePath}</a></th>
             </tr>
             </c:forEach>
           </table>
