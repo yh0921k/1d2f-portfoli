@@ -114,24 +114,27 @@
   parameterType="string">
   <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
   select
-   job_posting_no,
-   title,
-   content,
-   minimum_career,
-   start_dated,
-   end_dated,
-   job,
-   year_salary
+   j.job_posting_no,
+   j.title,
+   j.content,
+   j.minimum_career,
+   j.start_dated,
+   j.end_dated,
+   j.job,
+   j.year_salary,
+   j.view_count,
+   f.file_path
   from
-   pf_job_posting
+   pf_job_posting j
+   left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
   where
-   title like #{keywordPattern}
-   or content like #{keywordPattern}
-   or minimum_career like #{keywordPattern}
-   or start_dated like #{keywordPattern}
-   or end_dated like #{keywordPattern}
-   or job like #{keywordPattern}
-   or year_salary like #{keywordPattern}
+   j.title like #{keywordPattern}
+   or j.content like #{keywordPattern}
+   or j.minimum_career like #{keywordPattern}
+   or j.start_dated like #{keywordPattern}
+   or j.end_dated like #{keywordPattern}
+   or j.job like #{keywordPattern}
+   or j.year_salary like #{keywordPattern}
   </select>
   
 </mapper>
