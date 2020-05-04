@@ -10,6 +10,7 @@
   <h1>공고 검색 결과</h1>
   <table border='1'>
   <tr>
+    <th>사진</th>
     <th>번호</th>
     <th>제목</th>
     <th>내용</th>
@@ -21,8 +22,11 @@
     <th>조회수</th>
   </tr>
 
-<c:forEach items="${list}" var="item">.
+<c:forEach items="${list}" var="item">
     <tr>
+      <td><c:forEach items="${item.files}" var="jobPostingFile">
+      <img src="../../upload/jobposting/${jobPostingFile.filePath}_20x20.jpg">
+      </c:forEach></td>
       <td>${item.jobPostingNumber}</td> 
       <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td> 
       <td>${item.content}</td>
