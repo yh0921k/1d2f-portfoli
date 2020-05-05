@@ -3,7 +3,6 @@ package com.portfoli.web;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Message;
 import com.portfoli.domain.MessageFile;
@@ -36,8 +36,6 @@ public class MessageController {
   @Autowired
   MemberService memberService;
 
-  // 테스트 url (세션 적용 전)
-  // http://localhost:9999/portfoli/app/message/form?receiverNumber=1&senderNumber=2
   @GetMapping("form")
   public void form(HttpServletRequest request, int receiverNumber, Model model) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
@@ -46,25 +44,25 @@ public class MessageController {
   }
 
   @PostMapping("add")
-  public String add(HttpServletRequest request, Message message, MultipartFile[] messageFiles) throws Exception {
-    ArrayList<MessageFile> files = new ArrayList<>();
+  public String add(Message message, MultipartHttpServletRequest request) throws Exception {
     String dirPath = servletContext.getRealPath("/upload/message");
-    for (MultipartFile messageFile : messageFiles) {
-      if (messageFile.getSize() > 0) {
-        MessageFile mFile = new MessageFile();
-        String randomName = UUID.randomUUID().toString();
-        String filePath = dirPath + "/" + randomName;
+    List<MessageFile> messageFiles = new ArrayList<>();
+    List<MultipartFile> fileList = request.getFiles("messageFiles[]");
+    for (MultipartFile file : fileList) {
+      MessageFile messageFile = new MessageFile();
+      String fileName =
+          String.format("%d_%s", System.currentTimeMillis(), file.getOriginalFilename());
 
-        mFile.setFileName(messageFile.getOriginalFilename());
-        mFile.setFilePath(filePath);
+      messageFile.setMessageNumber(message.getNumber());
+      messageFile.setFileName(file.getOriginalFilename());
+      messageFile.setFilePath(fileName);
 
-        messageFile.transferTo(new File(filePath));
+      file.transferTo(new File(dirPath + "/" + fileName));
 
-        files.add(mFile);
-      }
+      messageFiles.add(messageFile);
     }
 
-    message.setFiles(files);
+    message.setFiles(messageFiles);
 
     messageService.add(message);
 
@@ -148,5 +146,25 @@ public class MessageController {
     model.addAttribute("totalPage", totalPage);
     model.addAttribute("startPage", startPage);
     model.addAttribute("endPage", endPage);
+  }
+
+  @GetMapping("sent/detail")
+  public String sentDetail(int number, Model model) throws Exception {
+    Message message = messageService.get(number);
+    message.setMember(memberService.get(message.getReceiverNumber()));
+
+    model.addAttribute("message", message);
+
+    return "message/sentDetail";
+  }
+
+  @GetMapping("inbox/detail")
+  public String inboxDetail(int number, Model model) throws Exception {
+    Message message = messageService.get(number);
+    message.setMember(memberService.get(message.getSenderNumber()));
+
+    model.addAttribute("message", message);
+
+    return "message/inboxDetail";
   }
 }

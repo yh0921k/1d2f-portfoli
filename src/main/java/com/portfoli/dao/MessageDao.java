@@ -16,4 +16,8 @@ public interface MessageDao {
   int countAllInbox(int userNumber) throws Exception;
 
   int countNotRead(int userNumber) throws Exception;
+
+  Message findByMessageNumber(int number) throws Exception;
+
+  void updateRead(Message message) throws Exception;
 }

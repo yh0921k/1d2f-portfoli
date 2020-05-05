@@ -64,4 +64,13 @@ public class MessageServiceImpl implements MessageService {
   public int sizeInbox(int userNumber) throws Exception {
     return messageDao.countAllInbox(userNumber);
   }
+
+  @Transactional
+  @Override
+  public Message get(int number) throws Exception {
+    Message message = messageDao.findByMessageNumber(number);
+    messageDao.updateRead(message);
+
+    return message;
+  }
 }

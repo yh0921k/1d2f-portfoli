@@ -13,4 +13,6 @@ public interface MessageService {
   int sizeSent(int userNumber) throws Exception;
 
   int sizeInbox(int userNumber) throws Exception;
+
+  Message get(int number) throws Exception;
 }
