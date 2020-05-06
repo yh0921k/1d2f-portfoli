@@ -67,4 +67,6 @@ dependencies {
     // javax.mail
     implementation 'javax.mail:mail:1.4.7'
     
+    // json
+    implementation 'org.apache.tomcat:tomcat-util:9.0.16'
 }

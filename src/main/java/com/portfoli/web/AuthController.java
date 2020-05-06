@@ -1,9 +1,13 @@
 package com.portfoli.web;
 
+import java.math.BigInteger;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,9 @@ public class AuthController {
 
   static Logger logger = LogManager.getLogger(MemberController.class);
 
+  private String NAVER_CLIENT_ID = "ot_V9PT1hKadV9ukCY0L";
+  private String NAVER_CLI_SECRET = "Nz4UvLDJco";
+
   public AuthController() {
     MemberController.logger.debug("AuthController 객체 생성!");
   }
@@ -38,7 +45,8 @@ public class AuthController {
   MessageService messageService;
 
   @GetMapping("loginForm")
-  public void loginForm(HttpServletRequest request, Model model) throws Exception {
+  public void loginForm(HttpSession session, HttpServletRequest request, Model model)
+      throws Exception {
 
     String email = "";
     Cookie[] cookies = request.getCookies();
@@ -49,6 +57,17 @@ public class AuthController {
           break;
         }
       }
+      // naver
+      String redirectURI =
+          URLEncoder.encode("http://localhost:9999/portfoli/app/auth/naverLogin", "UTF-8");
+      SecureRandom random = new SecureRandom();
+      String state = new BigInteger(130, random).toString();
+      String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+      apiURL += String.format("&client_id=%s&redirect_uri=%s&state=%s", NAVER_CLIENT_ID,
+          redirectURI, state);
+      session.setAttribute("state", state);
+
+      model.addAttribute("apiURL", apiURL);
     }
     model.addAttribute("email", email);
   }
@@ -87,8 +106,8 @@ public class AuthController {
   }
 
   @GetMapping("logout")
-  public String logout(HttpServletRequest request) {
-    request.getSession().invalidate();
+  public String logout(HttpSession session) {
+    session.invalidate();
     return "redirect:/";
   }
 
@@ -96,10 +115,10 @@ public class AuthController {
   public void findPasswordForm() {}
 
   @PostMapping("findPassword")
-  public String findPassword(String email, Model model) throws Exception{
+  public String findPassword(String email, Model model) throws Exception {
     String userEmail = memberService.getEmailByEmail(email);
 
-    if(userEmail != null) {
+    if (userEmail != null) {
       model.addAttribute("email", email);
       mailsender.findPassword(email);
       return "redirect:/";
