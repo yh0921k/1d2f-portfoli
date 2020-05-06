@@ -30,6 +30,7 @@ public class AuthController {
 
   private String NAVER_CLIENT_ID = "ot_V9PT1hKadV9ukCY0L";
   private String NAVER_CLI_SECRET = "Nz4UvLDJco";
+  private String NAVER_CALLBACK = "http://localhost:9999/portfoli/app/auth/naverLogin";
 
   public AuthController() {
     MemberController.logger.debug("AuthController 객체 생성!");
@@ -58,16 +59,14 @@ public class AuthController {
         }
       }
       // naver
-      String redirectURI =
-          URLEncoder.encode("http://localhost:9999/portfoli/app/auth/naverLogin", "UTF-8");
+      String redirectURI = URLEncoder.encode(NAVER_CALLBACK, "UTF-8");
       SecureRandom random = new SecureRandom();
       String state = new BigInteger(130, random).toString();
-      String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-      apiURL += String.format("&client_id=%s&redirect_uri=%s&state=%s", NAVER_CLIENT_ID,
+      String naverApiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+      naverApiURL += String.format("&client_id=%s&redirect_uri=%s&state=%s", NAVER_CLIENT_ID,
           redirectURI, state);
       session.setAttribute("state", state);
-
-      model.addAttribute("apiURL", apiURL);
+      model.addAttribute("naverApiURL", naverApiURL);
     }
     model.addAttribute("email", email);
   }

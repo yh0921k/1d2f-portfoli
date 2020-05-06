@@ -85,7 +85,7 @@
 							</div>
 
 							<div class="col-6 mt-2">
-								<a href="${apiURL}"> <img class="transition-hover-top" height="45" width="222"
+								<a href="${naverApiURL}"> <img class="transition-hover-top" height="45" width="222"
 									src="../../resources/assets/images/naver_green.PNG" /></a>
 							</div>
 

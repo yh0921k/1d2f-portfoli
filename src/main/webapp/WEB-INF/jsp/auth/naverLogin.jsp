@@ -20,6 +20,10 @@
 
 				<h1>콜백 페이지</h1>
 				<pre>${res}</pre>
+				<!-- {"access_token":"AAAANW11XYX1ItTWOT_X7cGe7cXrCwOqjEuBpQraNSMxytGYYdxPtljATy18q21-A57xi1jZQDs34pSOp0OsU6aisxI",
+				      "refresh_token":"UUW4qcNpTh2zezvpoYuDayLzjH0v1Rarb78XvlprhFKTVzgz4dgmAOAiikQDNsC2pPqoHheyA0UuKsPZWeuKXfbsaomgwTulfGunWUHfisqe4ie",
+				      "token_type":"bearer",
+				      "expires_in":"3600"} -->
 				<a href="/portfoli">go to main page</a>
 
 
