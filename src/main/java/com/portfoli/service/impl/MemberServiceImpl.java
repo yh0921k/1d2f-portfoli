@@ -14,6 +14,7 @@ import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.service.MemberService;
+import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 @Component
 public class MemberServiceImpl implements MemberService {
@@ -127,25 +128,26 @@ public class MemberServiceImpl implements MemberService {
     params.put("pwd", currentPassword);
     if (memberType == 1) {
       if (generalMemberDao.delete(memberNumber) > 0) {
-        if(memberDao.delete(params) == 0 ) {
-          throw new RuntimeException();
-        }
-        return 1;
-      } 
-    } else if (memberType == 2) {
-      if (companyMemberDao.delete(memberNumber) > 0) {
-        if(memberDao.delete(params) == 0 ) {
+        if (memberDao.delete(params) == 0) {
           throw new RuntimeException();
         }
         return 1;
       }
-    } 
+    } else if (memberType == 2) {
+      if (companyMemberDao.delete(memberNumber) > 0) {
+        if (memberDao.delete(params) == 0) {
+          throw new RuntimeException();
+        }
+        return 1;
+      }
+    }
     return 0;
   }
 
 
   @Override
-  public int updatePassword(int memberNumber, String newPassword, String password) throws Exception {
+  public int updatePassword(int memberNumber, String newPassword, String password)
+      throws Exception {
     Map<String, Object> params = new HashMap<>();
     params.put("password", password);
     params.put("memberNumber", memberNumber);
@@ -207,10 +209,27 @@ public class MemberServiceImpl implements MemberService {
     String userEmail = memberDao.getEmailByEmail(email);
     if (userEmail != null) {
       return userEmail;
-    } 
+    }
     return null;
   }
-  
+
+  // OAuth
+  @Override
+  public Member findMemberByOtherProvider(String provider, String email) throws Exception {
+    try {
+    Map<String, Object> params = new HashMap<>();
+    params.put("provider", provider);
+    params.put("email", email);
+    Member member = memberDao.getMemberByOtherProvider(params);
+    if(member != null) {
+      return generalMemberDao.findByEmailAndPassword(params);
+    } 
+    return null;
+    }catch (Exception e) {
+      throw new Exception("네이버 연동 로그인 실패");
+    }
+  }
+
 
 
 }

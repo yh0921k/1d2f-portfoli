@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.portfoli.domain.GeneralMember;
+import com.portfoli.domain.Member;
+import com.portfoli.domain.Message;
 import com.portfoli.service.MemberService;
+import com.portfoli.service.MessageService;
 
 @Controller
 @RequestMapping("auth")
@@ -27,7 +32,8 @@ public class NaverLoginController {
 
   @Autowired
   MemberService memberService;
-
+  @Autowired
+  MessageService messageService;
 
   // 콜백 페이지 컨트롤러
 
@@ -44,11 +50,7 @@ public class NaverLoginController {
     apiURL += "&redirect_uri=" + redirectURI;
     apiURL += "&code=" + code;
     apiURL += "&state=" + state;
-    System.out.println("apiURL=" + apiURL);
-    // https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&
-    // client_id=ot_V9PT1hKadV9ukCY0L&
-    // client_secret=Nz4UvLDJco&
-    // redirect_uri=http%3A%2F%2Flocalhost%3A9999%2Fportfoli%2Fapp%2Fauth%2FnaverLogin&code=JaflaTye4Tn120EXBj&state=622242814364045709463103594870533505902
+    // System.out.println("apiURL=" + apiURL);
     String access_token = "";
     String refresh_token = "";
 
@@ -58,7 +60,7 @@ public class NaverLoginController {
       con.setRequestMethod("GET");
       int responseCode = con.getResponseCode();
       BufferedReader br;
-      System.out.print("responseCode=" + responseCode);
+      // System.out.print("responseCode=" + responseCode);
       if (responseCode == 200) { // 정상 호출
         br = new BufferedReader(new InputStreamReader(con.getInputStream()));
       } else { // 에러 발생
@@ -71,14 +73,15 @@ public class NaverLoginController {
       }
       br.close();
       if (responseCode == 200) {
-        System.out.println(res.toString());
+        // System.out.println(res.toString());
 
         Map<String, Object> parsedJson = new JSONParser(res.toString()).parseObject();
-        System.out.println(parsedJson);
+        // System.out.println(parsedJson);
 
         access_token = (String) parsedJson.get("access_token");
         refresh_token = (String) parsedJson.get("refresh_token");
-        System.out.println(parsedJson.get("access_token") + ", " + parsedJson.get("refresh_token"));
+        // System.out.println(parsedJson.get("access_token") + ", " +
+        // parsedJson.get("refresh_token"));
       }
 
       if (access_token != null) { // access_token을 잘 받아왔다면
@@ -103,26 +106,72 @@ public class NaverLoginController {
 
       // ------회원 정보 불러오기
 
-      System.out.println("res.toString()=>" + res.toString());
-
       Map<String, Object> parsedJson = new JSONParser(res.toString()).parseObject();
-      System.out.println("parsedJson=>" + parsedJson);
-
       Map<String, Object> userInfo = (Map<String, Object>) parsedJson.get("response");
 
       String naverCode = userInfo.get("id").toString();
       String email = userInfo.get("email").toString();
       String name = userInfo.get("name").toString();
-      String profile_image = userInfo.get("profile_image").toString();
-      System.out.println(naverCode + ", " + email + ", " + name + ", " + profile_image);
+      System.out.println(naverCode + ", " + email + ", " + name);
 
-      System.out.println();
+      Member member = memberService.findMemberByOtherProvider("naver", email);
+
+      // 네이버-이메일 일치 고객 로그인
+      if (member != null) {
+        session.setAttribute("loginUser", member);
+
+        List<Message> recentMessages = messageService.listReceivedMessage(member.getNumber(), 1, 5);
+        for (Message m : recentMessages) {
+          Member sender = memberService.get(m.getSenderNumber());
+          m.setMember(sender);
+        }
+        session.setAttribute("recentMessages", recentMessages);
+
+      } else {
+        String existEmail = memberService.getEmailByEmail(email);
+        // 해당 이메일 부재 -> 회원가입
+        if (existEmail == null) {
+          Member newMember = new Member();
+          newMember.setName(name);
+          newMember.setEmail(email);
+          newMember.setProvider("naver");
+          newMember.setPassword(naverCode);
+          newMember.setType(1);
+          int idx = email.indexOf("@");
+          newMember.setId("naver_" + email.substring(0, idx));
+          newMember.setSmsYN(0);
+          newMember.setEmailYN(0);
+          GeneralMember newGeneralMember = new GeneralMember();
+          newGeneralMember.setSeekingFlag(1);
+          newGeneralMember.setMembereship("none");
+
+          if (memberService.add(newMember, newGeneralMember) > 0) {
+            member = memberService.findMemberByOtherProvider("naver", email);
+            session.setAttribute("loginUser", member);
+            List<Message> recentMessages =
+                messageService.listReceivedMessage(member.getNumber(), 1, 5);
+            for (Message m : recentMessages) {
+              Member sender = memberService.get(m.getSenderNumber());
+              m.setMember(sender);
+            }
+            session.setAttribute("recentMessages", recentMessages);
+
+          } else {
+            throw new Exception("네이버 연동 실패");
+          }
+
+          // 해당 아이디 존재 -> 연동?
+        } else {
+
+
+
+        }
+      }
+
     } catch (Exception e) {
       System.out.println(e);
     }
 
   }
-
-
 
 }

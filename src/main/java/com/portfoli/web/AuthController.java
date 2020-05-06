@@ -29,7 +29,6 @@ public class AuthController {
   static Logger logger = LogManager.getLogger(MemberController.class);
 
   private String NAVER_CLIENT_ID = "ot_V9PT1hKadV9ukCY0L";
-  private String NAVER_CLI_SECRET = "Nz4UvLDJco";
   private String NAVER_CALLBACK = "http://localhost:9999/portfoli/app/auth/naverLogin";
 
   public AuthController() {
@@ -85,8 +84,7 @@ public class AuthController {
     response.addCookie(cookie);
 
     Member member = memberService.get(email, password);
-    System.out.println("----------------------------------------");
-
+    
     if (member != null) {
       request.getSession().setAttribute("loginUser", member);
 

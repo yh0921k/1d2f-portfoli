@@ -26,10 +26,10 @@
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
 		INSERT INTO
-		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type)
+		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, provider)
 		VALUES
 		(#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
-		#{emailYN}, #{type})
+		#{emailYN}, #{type}, #{provider})
 	</insert>
 	
 	<update id="putKey" parameterType="map">
@@ -63,6 +63,13 @@
 		SELECT email
 		FROM pf_members
 		WHERE email=#{email}
+	</select>
+	
+	<select id="getMemberByOtherProvider" resultMap="MemberMap"
+		parameterType="map">
+		SELECT member_no, type, id, name, email
+		FROM pf_members
+		WHERE email=#{email} AND provider=#{provider}
 	</select>
 
 	<delete id="delete" parameterType="map">

@@ -34,4 +34,6 @@ public interface MemberService {
 
   String getEmailByEmail(String email);
 
+  Member findMemberByOtherProvider(String provider, String email) throws Exception;
+
 }

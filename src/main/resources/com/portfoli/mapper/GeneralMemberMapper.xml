@@ -13,68 +13,70 @@
 		<result column="membership" property="membereship" />
 		<result column="career" property="career" />
 		<result column="pwd" property="password" />
-    <result column="name" property="name" />
-    <result column="post_no" property="postNumber" />
-    <result column="basic_address" property="basicAddress" />
-    <result column="detail_address" property="detailAddress" />
-    <result column="email" property="email" />
-    <result column="tel" property="tel" />
-    <result column="create_date" property="createDate" />
-    <result column="sms_yn" property="smsYN" />
-    <result column="email_yn" property="emailYN" />
-    <result column="type" property="type" />
+		<result column="name" property="name" />
+		<result column="post_no" property="postNumber" />
+		<result column="basic_address" property="basicAddress" />
+		<result column="detail_address" property="detailAddress" />
+		<result column="email" property="email" />
+		<result column="tel" property="tel" />
+		<result column="create_date" property="createDate" />
+		<result column="sms_yn" property="smsYN" />
+		<result column="email_yn" property="emailYN" />
+		<result column="type" property="type" />
 	</resultMap>
 
 	<insert id="insert" parameterType="GeneralMember">
-		INSERT INTO pf_general_member(general_member_no, seeking_flag, membership,
+		INSERT INTO
+		pf_general_member(general_member_no, seeking_flag, membership,
 		career)
 		VALUES(#{number}, 1, 'none', #{career})
 	</insert>
-	
-	<select id="findByEmailAndPassword" 
-    resultMap="GeneralMemberMap" 
-    parameterType="map">
-    SELECT g.general_member_no, m.email, m.id, m.type, m.name, g.seeking_flag, g.membership, g.career, g.photo
-    FROM pf_members m JOIN pf_general_member g
-    ON m.member_no = g.general_member_no
-    WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
-  </select>
-  
-  <select id="getSessionByGNumber" 
-    resultMap="GeneralMemberMap" 
-    parameterType="int">
-    SELECT g.general_member_no, m.email, m.id, m.type, m.name, g.seeking_flag, g.membership, g.career, g.photo
-    FROM pf_members m JOIN pf_general_member g
-    ON m.member_no = g.general_member_no
-    WHERE m.member_no=#{no}
-  </select>
-  
-   <update id="updateProfilePicture" parameterType="map">
-    UPDATE pf_general_member
-    SET photo=#{photoFilePath}
-    WHERE general_member_no=#{member_number}
-  </update>
-  
-  <update id="updateFlag" parameterType="map">
-    UPDATE pf_general_member
-    SET seeking_flag=#{flag}
-    WHERE general_member_no=#{loginUser}
-  </update>
-  
-   <select id="findByGeneralMemberNumber" 
-    resultMap="GeneralMemberMap" 
-    parameterType="int">
-    SELECT *
-    FROM pf_members m JOIN pf_general_member g
-    ON m.member_no = g.general_member_no
-    WHERE m.member_no=#{no}
-  </select>
-  
-  <delete id="delete" parameterType="int">
-  	DELETE 
-  	FROM pf_general_member
-  	WHERE general_member_no = #{memberNumber}
-  </delete>
-  
-  
+
+	<select id="findByEmailAndPassword" resultMap="GeneralMemberMap"
+		parameterType="map">
+		SELECT g.general_member_no, m.email, m.id, m.type, m.name,
+		g.seeking_flag, g.membership, g.career, g.photo
+		FROM pf_members m JOIN pf_general_member g
+		ON m.member_no = g.general_member_no
+		<if test="password != null">WHERE (m.id=#{email} OR m.email=#{email}) AND
+			m.pwd=password(#{password})</if>
+		<if test="provider != null">WHERE m.email=#{email} AND m.provider=#{provider}</if>
+	</select>
+
+	<select id="getSessionByGNumber" resultMap="GeneralMemberMap"
+		parameterType="int">
+		SELECT g.general_member_no, m.email, m.id, m.type, m.name, g.seeking_flag,
+		g.membership, g.career, g.photo
+		FROM pf_members m JOIN pf_general_member g
+		ON m.member_no = g.general_member_no
+		WHERE m.member_no=#{no}
+	</select>
+
+	<update id="updateProfilePicture" parameterType="map">
+		UPDATE pf_general_member
+		SET photo=#{photoFilePath}
+		WHERE general_member_no=#{member_number}
+	</update>
+
+	<update id="updateFlag" parameterType="map">
+		UPDATE pf_general_member
+		SET seeking_flag=#{flag}
+		WHERE general_member_no=#{loginUser}
+	</update>
+
+	<select id="findByGeneralMemberNumber"
+		resultMap="GeneralMemberMap" parameterType="int">
+		SELECT *
+		FROM pf_members m JOIN pf_general_member g
+		ON m.member_no = g.general_member_no
+		WHERE m.member_no=#{no}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM pf_general_member
+		WHERE general_member_no = #{memberNumber}
+	</delete>
+
+
 </mapper>

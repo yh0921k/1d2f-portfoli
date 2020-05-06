@@ -24,5 +24,7 @@ public interface MemberDao {
   int alter_userkey(Map<String, Object> params); // 유저 인증키 Y로 바꿔주는 메서드
 
   String getEmailByEmail(String email);
+
+  Member getMemberByOtherProvider(Map<String, Object> params);
   
 }
