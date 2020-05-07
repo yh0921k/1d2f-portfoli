@@ -58,20 +58,17 @@ public class JobPostingController {
       files.add(new JobPostingFile().setFilePath(filename));
 
       Thumbnails.of(dirPath + "/" + filename)//
-          .size(20, 20)//
+          .size(300, 300)//
           .outputFormat("jpg")//
           .toFiles(new Rename() {
             @Override
             public String apply(String name, ThumbnailParameter param) {
-              return name + "_20x20";
+              return name + "_300x300";
             }
           });
 
     }
 
-    if (files.size() == 0) {
-      throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
-    }
     jobPosting.setFiles(files);
     System.out.println(jobPosting + "2222");
     jobPostingService.add(jobPosting);
@@ -124,12 +121,12 @@ public class JobPostingController {
       files.add(new JobPostingFile().setFilePath(filename));
 
       Thumbnails.of(dirPath + "/" + filename)//
-          .size(20, 20)//
+          .size(300, 300)//
           .outputFormat("jpg")//
           .toFiles(new Rename() {
             @Override
             public String apply(String name, ThumbnailParameter param) {
-              return name + "_20x20";
+              return name + "_300x300";
             }
           });
 
