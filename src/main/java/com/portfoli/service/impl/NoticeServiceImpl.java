@@ -42,8 +42,8 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public boolean forceDelete(int noticeNumber) throws Exception {
-    return noticeDao.forceDelete(noticeNumber) > 0;
+  public List<Notice> getByCategoryNumber(int categoryNumber) throws Exception {
+    return noticeDao.findByCategoryNumber(categoryNumber);
   }
 
 

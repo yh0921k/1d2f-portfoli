@@ -87,7 +87,14 @@
 							<th><a href="detail?number=${item.number}">${item.content}</a></th>
 							<th><a href="detail?number=${item.number}">${item.viewCount}</a></th>
 							<th><a href="detail?number=${item.number}">${item.registeredDate}</a></th>
-							<th><a href="detail?number=${item.number}">${item.attachment}</a></th>
+							
+							<th>
+							<c:forEach items="${attachment}" var="attch">
+							<c:if test="${attch.boardNumber eq item.number}">
+							O
+							</c:if>
+							</c:forEach>
+							</th>
 						</tr>
             </c:forEach>
 					</table>

@@ -73,54 +73,79 @@
 
 
 
-    <form action="updateForm" method="post">
+<form action="updateForm" method="post">
 <c:if test="${not empty requestScope.board}">
 <table>
   <tr>
-	<td style="color:white">번호:</td>
-	<td> <input type="text" readonly name="number" value="${board.number}"></input></td>
-	</tr>
+  <td class='lightGray'>번호:</td>
+  <td> <input type="text" readonly name="number" value="${board.number}"></input></td>
+  </tr>
   <tr>
-  <td style="color:white">제목:</td>
+  <td class='lightGray'>제목:</td>
   <td> <input type="text" name="title" value="${board.title}"></input></td>
   </tr>
   <tr>
-  <td style="color:white"> 내용:</td>
+  <td class='lightGray'> 내용:</td>
   <td> <input type="text" name="content" value="${board.content}"></input></td>
   </tr>
   <tr>
-	<td style="color:white">등록일:</td>
-	<td> <input type="text" readonly name="registeredDate" value="${board.registeredDate}"></input></td>
+  <td class='lightGray'>등록일:</td>
+  <td> <input type="text" readonly name="registeredDate" value="${board.registeredDate}"></input></td>
   </tr>
   <tr>
-  <td style="color:white"> 조회수:</td>
+  <td class='lightGray'"> 조회수:</td>
   <td><input type="text" name="viewCount" value="${board.viewCount}"></input></td>
   </tr>
+  
   <tr>
-  <td style="color:white"> 첨부파일:</td>
-  <td><input type="text" name="attachment" value="${board.attachment}"></input></td>
+  <!-- 첨부파일번호 -->
+  <input type="hidden" value='${item.attachmentNumber}'/>
   </tr>
-</c:if>
-<c:if test="${empty requestScope.board}">
-<table>
-  <tr><td>해당 게시물이 없습니다.</td></tr>
-</c:if>
-	
-	<tr>
-	<td>
-		<a href='delete?number=${board.number}'>삭제</a> ..
+  <c:forEach items="${list}" var="item">
+  <tr>
+  <td colspan="2" align="center" class='photoTD'>
+     <c:choose>
+     <c:when test="${not empty item}">
+       <img style="margin: 0" alt="첨부파일" src='${pageContext.servletContext.contextPath}/upload/boardAttachment/${item.getFileName()}' height='80'/><br>
+       <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/boardAttachment/${item.getFileName()}' download="${pageContext.servletContext.contextPath}/upload/boardAttachment/${item.getFileName()}" height='80'>첨부파일 다운로드</a>
+       <br>
+      </c:when>
+      <c:otherwise>
+      <span>첨부파일이 없습니다.</span>
+      </c:otherwise>
+      </c:choose>
+  
+  </td>
+  </tr>
+  </c:forEach>
+  
+  <tr>
+  <td>
+    <a href='delete?number=${board.number}'>삭제</a> ..
     <button>변경</button>
     </form> ..
     <a href='list'>게시글 목록으로 돌아가기</a>
   </td>
   </tr>
+  </table>
+</c:if>
+<c:if test="${empty requestScope.board}">
+<table>
+  <tr><td>해당 게시물이 없습니다.</td></tr>
 </table>
-
-
+</c:if>
 
     </div>
   </div>
   <!-- /#wrapper -->
-  <script src="../../resources/assets/js/core.min.js"></script>
+    <style type="text/css">
+    .lightGray{border:2px lightGray solid; background-color: lightGray;}
+    .darkerGray{color:#313335;}
+    .firstTR{border-bottom:1px darkGray dashed;}
+    .padding{padding:10px; border:0px;}
+    .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
+    .photoInside{text-align: center}
+    .buttonTD{text-align: center}
+  </style>  <script src="../../resources/assets/js/core.min.js"></script>
 </body>
 </html>

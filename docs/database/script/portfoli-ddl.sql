@@ -422,7 +422,7 @@ ALTER TABLE pf_members
 -- 공지사항
 CREATE TABLE pf_notice (
   board_no  INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
-  notice_no INTEGER NULL     COMMENT '공지사항분류번호' -- 공지사항분류번호
+  category_no INTEGER NULL     COMMENT '공지사항분류번호' -- 공지사항분류번호
 )
 COMMENT '공지사항';
 
@@ -873,8 +873,7 @@ CREATE TABLE pf_board (
   title           VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content         TEXT         NOT NULL COMMENT '내용', -- 내용
   view_count      INTEGER      NOT NULL COMMENT '조회수', -- 조회수
-  registered_date DATETIME     NOT NULL COMMENT '등록일', -- 등록일
-  attachment      VARCHAR(255) NULL     COMMENT '첨부파일' -- 첨부파일
+  registered_date DATETIME     NOT NULL COMMENT '등록일' -- 등록일
 )
 COMMENT '게시글';
 
@@ -1069,7 +1068,7 @@ ALTER TABLE pf_following
 
 -- 공지사항분류
 CREATE TABLE pf_notice_category (
-  notice_no INTEGER      NOT NULL COMMENT '공지사항분류번호', -- 공지사항분류번호
+  category_no INTEGER      NOT NULL COMMENT '공지사항분류번호', -- 공지사항분류번호
   name      VARCHAR(255) NOT NULL COMMENT '분류명' -- 분류명
 )
 COMMENT '공지사항분류';
@@ -1078,7 +1077,7 @@ COMMENT '공지사항분류';
 ALTER TABLE pf_notice_category
   ADD CONSTRAINT PK_pf_notice_category -- 공지사항분류 기본키
     PRIMARY KEY (
-      notice_no -- 공지사항분류번호
+      category_no -- 공지사항분류번호
     );
 
 -- 일정(개인용)
@@ -1366,10 +1365,10 @@ ALTER TABLE pf_notice
 ALTER TABLE pf_notice
   ADD CONSTRAINT FK_pf_notice_category_TO_pf_notice -- 공지사항분류 -> 공지사항
     FOREIGN KEY (
-      notice_no -- 공지사항분류번호
+      category_no -- 공지사항분류번호
     )
     REFERENCES pf_notice_category ( -- 공지사항분류
-      notice_no -- 공지사항분류번호
+      category_no -- 공지사항분류번호
     );
 
 -- 알림
