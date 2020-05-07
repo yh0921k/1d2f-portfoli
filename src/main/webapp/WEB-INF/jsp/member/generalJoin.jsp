@@ -102,13 +102,13 @@
               -->
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="아이디" name="id" type="text"
+							<input required placeholder="아이디*" name="id" type="text"
 								class="form-control" /> <label for="account_id">아이디</label>
 						</div>
 
 						<div class="input-group-over">
 							<div class="form-label-group mb-3">
-								<input required placeholder="이메일" name="email" type="email"
+								<input required placeholder="이메일*" name="email" type="email"
 									class="form-control" /> <label for="account_email">이메일</label>
 							</div>
 							<a id="email_edit_show" href="javascript:;" class="btn fs--13"
@@ -120,28 +120,27 @@
 								<i class="fi fi-close m-0"></i>
 							</a>
 						</div>
-						<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">인증
-							이메일을 보냈습니다.</div>
+						<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">회원가입 후 해당 이메일로 이메일 인증을 진행 해 주세요.</div>
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="비밀번호" name="password" id="password"
+							<input required placeholder="비밀번호*" name="password" id="password"
 								type="password" class="form-control" onchange="isSame()" /> <label
 								for="account_password">비밀번호</label>
 						</div>
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="비밀번호 확인" id="checkPassword"
+							<input required placeholder="비밀번호 확인*" id="checkPassword"
 								type="password" class="form-control" onchange="isSame()" /> <label
 								for="account_password">비밀번호 확인</label> <span id="same"></span>
 						</div>
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="이름" name="name" type="text"
+							<input required placeholder="이름*" name="name" type="text"
 								class="form-control" /> <label for="account_name">이름</label>
 						</div>
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="연락처" name="tel" type="text"
+							<input placeholder="연락처" name="tel" type="text"
 								class="form-control" /> <label for="account_id">연락처</label>
 						</div>
 

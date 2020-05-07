@@ -23,6 +23,8 @@
 				class="col-12 col-sm-12 offset-sm-0 col-md-8 offset-md-2 col-lg-6 offset-lg-0 order-2 order-lg-1 mb-5">
 
 				<h2 class="h4 mb-4 font-weight-normal ml-4 text-muted">${error}</h2>
+				<!-- <h2 class="h4 mb-4 font-weight-normal ml-4 text-muted">${requestScope['javax.servlet.error.message']}</h2> -->
+				
 				<div class="p-4 p-0-xs rounded" data-aos="fade-in"
 					data-aos-delay="150">
 					<hr>

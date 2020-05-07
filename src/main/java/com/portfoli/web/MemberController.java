@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.Company;
 import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
@@ -52,13 +53,17 @@ public class MemberController {
   public void addForm() {}
 
   @PostMapping("generalJoin")
-  public String add(Member member, GeneralMember generalMember, HttpServletRequest request,
+  public ModelAndView add(Member member, GeneralMember generalMember, HttpServletRequest request,
       Model model) throws Exception {
 
     if (memberService.add(member, generalMember) > 0) {
+      ModelAndView mv = new ModelAndView();
+      mv.addObject("message1", "입력하신 이메일로 이메일 인증 메일을 발송하였습니다.");
+      mv.addObject("message2", "인증 후 로그인하실 수 있습니다.");
+      mv.setViewName("messageView");
       // 인증 메일 보내기 메서드
       mailsender.mailSendWithUserKey(member.getEmail(), member.getId(), member.getName(), request);
-      return "redirect:/";
+      return mv;
     } else {
       throw new Exception("회원을 추가할 수 없습니다.");
     }
@@ -200,7 +205,8 @@ public class MemberController {
   }
 
   @PostMapping("updatePassword")
-  public String updatePassword(HttpServletRequest request, String newPassword, String password) throws Exception {
+  public String updatePassword(HttpServletRequest request, String newPassword, String password)
+      throws Exception {
 
     int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
 

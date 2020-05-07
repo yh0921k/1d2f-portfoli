@@ -311,7 +311,7 @@ function execPostCode() {
 												<div class="col-12 col-sm-6 col-md-6">
 
 													<div class="form-label-group mb-3">
-														<input required placeholder="tel" id="tel" name="tel"
+														<input placeholder="tel" id="tel" name="tel"
 															type="text" class="form-control" value=${member.tel}>
 														<label for="tel">연락처</label>
 													</div>

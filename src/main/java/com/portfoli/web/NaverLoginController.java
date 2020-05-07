@@ -15,7 +15,9 @@ import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Message;
@@ -37,6 +39,7 @@ public class NaverLoginController {
 
   // 콜백 페이지 컨트롤러
 
+  @SuppressWarnings("unused")
   @RequestMapping("naverLogin")
   public void naverCallback(HttpSession session, HttpServletRequest request, Model model)
       throws IOException, ParseException {
@@ -160,16 +163,30 @@ public class NaverLoginController {
             throw new Exception("네이버 연동 실패");
           }
 
-          // 해당 아이디 존재 -> 연동?
+          // 해당 이메일 아이디 존재 -> 연동?
         } else {
-
-
+          request.setAttribute("provider_", "NAVER");
+          request.setAttribute("email_", existEmail);
 
         }
       }
 
     } catch (Exception e) {
       System.out.println(e);
+    }
+
+  }
+
+  @PostMapping("linking")
+  private ModelAndView linking(String provider, String email) throws Exception {
+    if (memberService.updateProvider(provider, email) > 0) {
+      ModelAndView mv = new ModelAndView();
+      mv.addObject("message1", "기존 계정에 네이버 계정이 연동되었습니다.");
+      mv.addObject("message2", "앞으로는 네이버 계정으로 로그인 해 주세요!");
+      mv.setViewName("messageView");
+      return mv;
+    } else {
+      throw new Exception("네이버 연동 실패");
     }
 
   }

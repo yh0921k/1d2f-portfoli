@@ -36,4 +36,6 @@ public interface MemberService {
 
   Member findMemberByOtherProvider(String provider, String email) throws Exception;
 
+  int updateProvider(String provider, String email);
+
 }

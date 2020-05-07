@@ -14,7 +14,6 @@ import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.service.MemberService;
-import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 @Component
 public class MemberServiceImpl implements MemberService {
@@ -217,16 +216,30 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Member findMemberByOtherProvider(String provider, String email) throws Exception {
     try {
+      Map<String, Object> params = new HashMap<>();
+      params.put("provider", provider);
+      params.put("email", email);
+      Member member = memberDao.getMemberByOtherProvider(params);
+      if (member != null) {
+        return generalMemberDao.findByEmailAndPassword(params);
+      }
+      return null;
+    } catch (Exception e) {
+      throw new Exception(provider + " 연동 로그인 실패");
+    }
+  }
+
+
+  @Override
+  public int updateProvider(String provider, String email) {
     Map<String, Object> params = new HashMap<>();
     params.put("provider", provider);
     params.put("email", email);
-    Member member = memberDao.getMemberByOtherProvider(params);
-    if(member != null) {
-      return generalMemberDao.findByEmailAndPassword(params);
-    } 
-    return null;
-    }catch (Exception e) {
-      throw new Exception("네이버 연동 로그인 실패");
+
+    if (memberDao.updateProviderByEmail(params) > 0) {
+      return 1;
+    } else {
+      return 0;
     }
   }
 

@@ -84,7 +84,7 @@ public class AuthController {
     response.addCookie(cookie);
 
     Member member = memberService.get(email, password);
-    
+
     if (member != null) {
       request.getSession().setAttribute("loginUser", member);
 
