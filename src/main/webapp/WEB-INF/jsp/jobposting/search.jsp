@@ -25,7 +25,7 @@
 <c:forEach items="${list}" var="item">
     <tr>
       <td><c:forEach items="${item.files}" var="jobPostingFile">
-      <img src="../../upload/jobposting/${jobPostingFile.filePath}_20x20.jpg">
+      <img src="../../upload/jobposting/${jobPostingFile.filePath}_300x300.jpg">
       </c:forEach></td>
       <td>${item.jobPostingNumber}</td> 
       <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td> 
