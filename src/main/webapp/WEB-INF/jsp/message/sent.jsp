@@ -161,15 +161,10 @@
                           <i></i>
                       </label></td>
 
-                      <td><span class="d-block font-weight-medium">
-                      <a
-                          href="/portfoli/app/message/sent/detail?number=${message.number}"
-                          class="js-ajax-modal font-weight-medium text-muted mx-2 m-0-xs"
-                          data-href="/portfoli/app/message/sent/detail?number=${message.number}"
-                          data-ajax-modal-size="modal-md"
-                          data-ajax-modal-centered="true"
-                          data-ajax-modal-backdrop="static"> ${message.title} </a>
-                      </span></td>
+                      <td>
+                      <a href="/portfoli/app/message/sent/detail?number=${message.number}"
+                      class="font-weight-medium text-muted mx-2 m-0-xs"> ${message.title} </a>
+                      </td>
                       <td class="hidden-lg-down"><span class="d-block text-muted">${message.member.id}</span></td>
                       <td class="hidden-lg-down"><span class="d-block text-muted"><fmt:formatDate var="sendDate" value="${message.sendDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
                         ${sendDate}</span></td>

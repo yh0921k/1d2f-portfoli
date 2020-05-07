@@ -15,4 +15,8 @@ public interface MessageService {
   int sizeInbox(int userNumber) throws Exception;
 
   Message get(int number) throws Exception;
+
+  void deleteReceivedMessage(Message message) throws Exception;
+
+  void deleteSentMessage(Message message) throws Exception;
 }

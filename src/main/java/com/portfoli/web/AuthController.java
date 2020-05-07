@@ -93,7 +93,7 @@ public class AuthController {
         Member sender = memberService.get(m.getSenderNumber());
         m.setMember(sender);
       }
-      request.getSession().setAttribute("recentMessages", recentMessages);
+      request.getSession().setAttribute("inbox", recentMessages);
 
       return "redirect:/";
 

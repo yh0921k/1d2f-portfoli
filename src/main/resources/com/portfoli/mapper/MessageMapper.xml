@@ -59,7 +59,7 @@
     from pf_message m
       join pf_members s on m.message_receiver=s.member_no
     where
-      m.message_sender=#{userNumber}
+      m.message_sender=#{userNumber} and m.message_sender_delete=0
     order by m.send_date desc
     limit #{offset}, #{pageSize}
   </select>
@@ -78,7 +78,7 @@
     from pf_message m
       join pf_members r on m.message_receiver=r.member_no
     where
-      m.message_receiver=#{userNumber}
+      m.message_receiver=#{userNumber} and m.message_receiver_delete=0
     order by m.send_date desc
     limit #{offset}, #{pageSize}
   </select>
@@ -86,13 +86,13 @@
   <select id="countAllSent" resultType="int" parameterType="int">
     select count(*)
     from pf_message
-    where message_sender=#{userNumber}
+    where message_sender=#{userNumber} and message_sender_delete=0
   </select>
 
   <select id="countAllInbox" resultType="int" parameterType="int">
     select count(*)
     from pf_message
-    where message_receiver=#{userNumber}
+    where message_receiver=#{userNumber} and message_receiver_delete=0
   </select>
  
   <select id="countNotRead" resultType="int" parameterType="int">
@@ -125,4 +125,21 @@
     update pf_message set
       receive_date=now()
   </update>
+
+  <update id="updateSenderDeleteFlag" parameterType="Message">
+    update pf_message set
+      message_sender_delete=1
+    where message_no=#{number}
+  </update>
+
+  <update id="updateReceiverDeleteFlag" parameterType="Message">
+    update pf_message set
+      message_receiver_delete=1
+    where message_no=#{number}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pf_message
+    where message_no=#{number}
+  </delete>
 </mapper>

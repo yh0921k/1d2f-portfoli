@@ -20,4 +20,10 @@ public interface MessageDao {
   Message findByMessageNumber(int number) throws Exception;
 
   void updateRead(Message message) throws Exception;
+
+  void updateSenderDeleteFlag(Message message) throws Exception;
+
+  void updateReceiverDeleteFlag(Message message) throws Exception;
+
+  void delete(int number) throws Exception;
 }

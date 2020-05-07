@@ -132,7 +132,7 @@
                     -->
             <!-- value populated by js -->
 
-            <div class="table-responsive">
+            <div id="inbox" class="table-responsive">
               <table class="table table-align-middle border-bottom mb-6">
 
                 <thead>
@@ -153,24 +153,20 @@
 
                   <!-- message -->
                   <c:forEach items="${inbox}" var="message">
-                    <tr id="message_id_1" class="text-dark">
+                    <tr id="message_id_${message.number}" class="text-dark">
                       <td class="hidden-lg-down"><label
                         class="form-checkbox form-checkbox-secondary float-start">
                           <input type="checkbox" name="item_id[]" value="1">
                           <i></i>
                       </label></td>
 
-                      <td><span class="d-block font-weight-medium"> <a
-                          href="/portfoli/app/message/inbox/detail?number=${message.number}"
-                          class="js-ajax-modal font-weight-medium text-muted mx-2 m-0-xs"
-                          data-href="/portfoli/app/message/inbox/detail?number=${message.number}"
-                          data-ajax-modal-size="modal-md"
-                          data-ajax-modal-centered="true"
-                          data-ajax-modal-backdrop="static"> ${message.title} </a>
-                      </span></td>
+                      <td><a href="/portfoli/app/message/inbox/detail?number=${message.number}"
+                      class="font-weight-medium text-muted mx-2 m-0-xs"> ${message.title} </a>
+                      </td>
                       <td class="hidden-lg-down"><span
                         class="d-block text-muted"> ${message.member.id} </span></td>
-                      <td class="hidden-lg-down"><span class="d-block text-muted"><fmt:formatDate var="sendDate" value="${message.sendDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
+                      <td class="hidden-lg-down"><span class="d-block text-muted">
+                      <fmt:formatDate var="sendDate" value="${message.sendDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
                         ${sendDate}</span></td>
                       <td class="text-align-end">
                         <div class="dropdown">
@@ -192,18 +188,19 @@
                               data-ajax-modal-backdrop="static"> <i
                               class="fi fi-arrow-right-3"></i> 답장하기
                             </a> <a href="#!"
-                              class="dropdown-item text-truncate js-ajax-confirm"
-                              data-href="javascript:popup()"
-                              data-ajax-confirm-body="Delete this message?"
+                              class="js-ajax-confirm dropdown-item text-truncate"
+                              data-href="/portfoli/app/message/inbox/delete?number=${message.number}"
+                              data-ajax-confirm-title="쪽지 삭제"
+                              data-ajax-confirm-body="쪽지를 삭제하시겠습니까?"
                               data-ajax-confirm-mode="ajax"
                               data-ajax-confirm-method="GET"
                               data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
-                              data-ajax-confirm-btn-yes-text="Delete"
+                              data-ajax-confirm-btn-yes-text="삭제"
                               data-ajax-confirm-btn-yes-icon="fi fi-check"
                               data-ajax-confirm-btn-no-class="btn-sm btn-light"
-                              data-ajax-confirm-btn-no-text="Cancel"
+                              data-ajax-confirm-btn-no-text="닫기"
                               data-ajax-confirm-btn-no-icon="fi fi-close"
-                              data-ajax-confirm-success-target="#message_id_1"
+                              data-ajax-confirm-success-target="#message_id_${message.number}"
                               data-ajax-confirm-success-target-action="remove"> <i
                               class="fi fi-thrash text-danger"></i> 삭제
                             </a>

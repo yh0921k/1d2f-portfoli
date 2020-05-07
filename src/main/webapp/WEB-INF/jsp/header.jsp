@@ -1127,11 +1127,11 @@
 
                 <div class="dropdown-divider"></div>
                 <div class="max-h-75vh">
-                <c:forEach items="${recentMessages}" var="recentMessage">
+                <c:forEach items="${inbox}" var="recentMessage">
                   <a
-                    href="/portfoli/app/message/inbox/detail?number=${recentMessage.number}"
+                    href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
                     class="js-ajax-modal clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light"
-                    data-href="/portfoli/app/message/inbox/detail?number=${recentMessage.number}"
+                    data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
                     data-ajax-modal-size="modal-md"
                     data-ajax-modal-centered="true"
                     data-ajax-modal-backdrop="static">

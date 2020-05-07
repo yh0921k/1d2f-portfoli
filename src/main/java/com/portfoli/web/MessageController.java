@@ -140,7 +140,8 @@ public class MessageController {
       endPage = totalPage;
     }
 
-    model.addAttribute("inbox", inbox);
+    request.getSession().setAttribute("inbox", inbox);
+
     model.addAttribute("pageNumber", pageNumber);
     model.addAttribute("pageSize", pageSize);
     model.addAttribute("totalPage", totalPage);
@@ -151,6 +152,9 @@ public class MessageController {
   @GetMapping("sent/detail")
   public String sentDetail(int number, Model model) throws Exception {
     Message message = messageService.get(number);
+    if (message.getSenderDelete() == 1) {
+      throw new Exception("존재하지 않는 쪽지입니다.");
+    }
     message.setMember(memberService.get(message.getReceiverNumber()));
 
     model.addAttribute("message", message);
@@ -161,10 +165,44 @@ public class MessageController {
   @GetMapping("inbox/detail")
   public String inboxDetail(int number, Model model) throws Exception {
     Message message = messageService.get(number);
+    if (message.getReceiverDelete() == 1) {
+      throw new Exception("존재하지 않는 쪽지입니다.");
+    }
+
     message.setMember(memberService.get(message.getSenderNumber()));
 
     model.addAttribute("message", message);
 
     return "message/inboxDetail";
+  }
+
+  @GetMapping("inbox/modal")
+  public String inboxModal(int number, Model model) throws Exception {
+    Message message = messageService.get(number);
+    if (message.getReceiverDelete() == 1) {
+      throw new Exception("존재하지 않는 쪽지입니다.");
+    }
+
+    message.setMember(memberService.get(message.getSenderNumber()));
+
+    model.addAttribute("message", message);
+
+    return "message/inboxModal";
+  }
+
+  @GetMapping("sent/delete")
+  public String deleteSentMessage(int number) throws Exception {
+    Message message = messageService.get(number);
+    messageService.deleteSentMessage(message);
+
+    return "redirect:sent";
+  }
+
+  @GetMapping("inbox/delete")
+  public String deleteReceivedMessage(int number) throws Exception {
+    Message message = messageService.get(number);
+    messageService.deleteReceivedMessage(message);
+
+    return "redirect:inbox";
   }
 }

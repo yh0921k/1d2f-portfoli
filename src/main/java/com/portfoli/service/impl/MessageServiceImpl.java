@@ -73,4 +73,24 @@ public class MessageServiceImpl implements MessageService {
 
     return message;
   }
+
+  @Override
+  public void deleteReceivedMessage(Message message) throws Exception {
+    messageDao.updateReceiverDeleteFlag(message);
+    message.setReceiverDelete(1);
+
+    if (message.getSenderDelete() == 1) {
+      messageDao.delete(message.getNumber());
+    }
+  }
+
+  @Override
+  public void deleteSentMessage(Message message) throws Exception {
+    messageDao.updateSenderDeleteFlag(message);
+    message.setSenderDelete(1);
+
+    if (message.getReceiverDelete() == 1) {
+      messageDao.delete(message.getNumber());
+    }
+  }
 }
