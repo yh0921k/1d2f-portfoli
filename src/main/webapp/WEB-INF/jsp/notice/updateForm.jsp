@@ -5,8 +5,8 @@
   <jsp:include page="../header.jsp"/>
 
       <!-- PAGE TITLE -->
-      <section class="bg-white">
-        <div class="container py-1">
+      <section class="bg-white" style="padding: 30px 0px;">
+      <div class="container py-1">
 
           <h1 class="h2">
             공지사항
@@ -30,7 +30,7 @@
     .lightGray{width: 100%; border:2px lightGray solid;}
     .darkerGray{color:#313335;}
     .firstTR{border-bottom:1px darkGray dashed;}
-    .padding{padding:10px; border:0px;}
+    .padding{padding:10px; border-right: 2px solid lightGray;}
     .optPadding{height: 30px; padding: 0px 5px;}
     .pinkPadding{resize:none; border-color:pink; width: 80%; height: 100%}
     .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
@@ -40,7 +40,7 @@
   </style>
   
       <!-- FAQ -->
-      <section>
+      <section style="padding: 50px 0px;">
         <div class="container">
 
           <div class="row">
@@ -87,7 +87,7 @@
               <input name="title"  class='pinkPadding' value="${notice.title}"/></td>
               <td width="25%" class='padding darkerGray'>${notice.registeredDate}</td>
             </tr>
-              <tr>
+            <tr>
               <td colspan="2" class='padding'><a href="detail?number=${notice.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</a></td>
             </tr>
             <tr>

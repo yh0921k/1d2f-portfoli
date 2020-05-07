@@ -5,7 +5,7 @@
   <jsp:include page="../header.jsp"/>
 
       <!-- PAGE TITLE -->
-      <section class="bg-white">
+      <section class="bg-white" style="padding: 30px 0px;">
         <div class="container py-1">
 
           <h1 class="h2">
@@ -28,7 +28,7 @@
 
 
       <!-- FAQ -->
-      <section>
+      <section style="padding: 50px 0px;">
         <div class="container">
 
           <div class="row">

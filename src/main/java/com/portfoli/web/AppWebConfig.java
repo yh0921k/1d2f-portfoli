@@ -35,7 +35,7 @@ public class AppWebConfig {
     CommonsMultipartResolver mr = new CommonsMultipartResolver();
     mr.setMaxUploadSize(10000000);
     mr.setMaxInMemorySize(2000000);
-    mr.setMaxUploadSizePerFile(5000000);
+    mr.setMaxUploadSizePerFile(10000000);
     return mr;
   }
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.annotation.MultipartConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import com.portfoli.service.BoardService;
 
 @Controller
 @RequestMapping("boardAttachment")
-//@MultipartConfig(maxFileSize = 10000000)
+@MultipartConfig(maxFileSize = 10000000)
 public class BoardAttachmentController {
 
   static Logger logger = LogManager.getLogger(BoardAttachmentController.class);
@@ -28,7 +29,7 @@ public class BoardAttachmentController {
 
   @Autowired
   BoardService boardService;
-  
+
   @Autowired
   BoardAttachmentService boardAttachmentService;
 
