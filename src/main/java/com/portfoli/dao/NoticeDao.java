@@ -7,6 +7,8 @@ public interface NoticeDao {
 
   List<Notice> findAll() throws Exception;
 
+  List<Notice> findAll(Notice notice) throws Exception;
+  
   List<Notice> findByCategoryNumber(int categoryNumber) throws Exception;
 
   Notice findByNo(int number) throws Exception;
@@ -16,6 +18,10 @@ public interface NoticeDao {
   int delete(int boardNumber) throws Exception;
 
   int update(Notice notice) throws Exception;
+
+  int selectListCnt() throws Exception;
+
+
 
 
 }

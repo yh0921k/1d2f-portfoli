@@ -6,6 +6,10 @@ public class Notice extends Board implements Serializable {
   private static final long serialVersionUID = 1L;
   private int categoryNumber;
   private String categoryName;
+  @SuppressWarnings("unused")
+  private int startIndex;
+  @SuppressWarnings("unused")
+  private int pageSize;
   
   @Override
   public String toString() {
@@ -49,6 +53,14 @@ public class Notice extends Board implements Serializable {
   public void setCategoryName(String categoryName) {
     this.categoryName = categoryName;
   }
+  public void setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+  }
+  public void setCntPerPage(int pageSize) {
+    this.pageSize = pageSize;
+  }
+  
+  
   
 
   

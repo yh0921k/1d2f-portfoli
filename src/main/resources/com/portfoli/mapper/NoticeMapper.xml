@@ -14,7 +14,7 @@
     <result column="category_name" property="categoryName"/>
   </resultMap>
   
-  <select id="findAll" resultMap="NoticeMap">
+  <select id="findAll" resultMap="NoticeMap" parameterType="Notice">
     SELECT
       n.category_no, 
       n.board_no,
@@ -27,7 +27,14 @@
     ON n.category_no = c.category_no 
     LEFT OUTER JOIN pf_board b 
     ON n.board_no = b.board_no 
-    order by n.board_no desc;
+    order by b.registered_date desc, n.board_no desc
+    limit ${startIndex}, ${pageSize}
+  </select>
+  
+  <select id="selectListCnt" resultType="int" parameterType="int">
+    SELECT 
+      count(*)
+    from pf_notice
   </select>
   
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">

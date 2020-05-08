@@ -22,6 +22,11 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
+  public List<Notice> list(Notice notice) throws Exception {
+    return noticeDao.findAll(notice);
+  }
+  
+  @Override
   public Notice get(int number) throws Exception {
     return noticeDao.findByNo(number);
   }
@@ -45,6 +50,13 @@ public class NoticeServiceImpl implements NoticeService {
   public List<Notice> getByCategoryNumber(int categoryNumber) throws Exception {
     return noticeDao.findByCategoryNumber(categoryNumber);
   }
+
+  @Override
+  public int selectListCnt(Notice notice) throws Exception {
+    return noticeDao.selectListCnt();
+  }
+
+
 
 
 

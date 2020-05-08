@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,7 @@ import com.portfoli.domain.Board;
 import com.portfoli.domain.BoardAttachment;
 import com.portfoli.domain.Notice;
 import com.portfoli.domain.NoticeCategory;
+import com.portfoli.domain.Pagination;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.NoticeCategoryService;
@@ -53,8 +56,24 @@ public class NoticeController {
   NoticeCategoryService noticeCategoryService;
 
   @RequestMapping("list")
-  public void list(Model model) throws Exception {
-    List<Notice> notices = noticeService.list();
+  public void list(@ModelAttribute("notice") Notice notice,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
+
+    // 전체리스트 개수
+    int listCnt = noticeService.selectListCnt(notice);
+
+    Pagination pagination = new Pagination(listCnt, curPage);
+    pagination.setPageSize(10);// 한페이지에 노출할 게시글 수
+    
+    notice.setStartIndex(pagination.getStartIndex());
+    notice.setCntPerPage(pagination.getPageSize());
+    
+    // 전체리스트 출력
+    model.addAttribute("listCnt", listCnt);
+    model.addAttribute("pagination", pagination);
+    
+    List<Notice> notices = noticeService.list(notice);
     model.addAttribute("list", notices);
   }
 
