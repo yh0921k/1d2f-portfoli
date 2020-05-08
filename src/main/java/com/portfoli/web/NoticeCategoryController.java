@@ -17,7 +17,7 @@ import com.portfoli.service.NoticeService;
 @Controller
 @RequestMapping("/notice/category")
 public class NoticeCategoryController {
-
+  
   static Logger logger = LogManager.getLogger(NoticeCategoryController.class);
 
   public NoticeCategoryController() {

@@ -7,6 +7,8 @@ public interface NoticeService {
 
   List<Notice> list() throws Exception;
 
+  List<Notice> list(Notice notice) throws Exception;
+
   Notice get(int boardNumber) throws Exception;
   
   boolean insert(Notice notice) throws Exception;
@@ -16,5 +18,9 @@ public interface NoticeService {
   boolean update(Notice notice) throws Exception;
 
   boolean forceDelete(int noticeNumber) throws Exception;
+
+  int selectListCnt(Notice notice) throws Exception;
+
+
 
 }
