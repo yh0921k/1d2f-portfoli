@@ -6,9 +6,7 @@ public class Notice extends Board implements Serializable {
   private static final long serialVersionUID = 1L;
   private int categoryNumber;
   private String categoryName;
-  @SuppressWarnings("unused")
   private int startIndex;
-  @SuppressWarnings("unused")
   private int pageSize;
   
   @Override
@@ -44,26 +42,35 @@ public class Notice extends Board implements Serializable {
   public int getCategoryNumber() {
     return categoryNumber;
   }
-  public void setCategoryNumber(int categoryNumber) {
+  public Notice setCategoryNumber(int categoryNumber) {
     this.categoryNumber = categoryNumber;
+    return this;
   }
   public String getCategoryName() {
     return categoryName;
   }
-  public void setCategoryName(String categoryName) {
+  public Notice setCategoryName(String categoryName) {
     this.categoryName = categoryName;
+    return this;
   }
-  public void setStartIndex(int startIndex) {
+  public Notice setStartIndex(int startIndex) {
     this.startIndex = startIndex;
+    return this;
   }
-  public void setCntPerPage(int pageSize) {
+  public Notice setCntPerPage(int pageSize) {
     this.pageSize = pageSize;
+    return this;
   }
-  
-  
-  
-
-  
+  public int getPageSize() {
+    return pageSize;
+  }
+  public Notice setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+    return this;
+  }
+  public int getStartIndex() {
+    return startIndex;
+  }
   
   
 

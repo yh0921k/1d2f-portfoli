@@ -41,14 +41,16 @@ public class NoticeCategory implements Serializable {
   public int getCategoryNumber() {
     return categoryNumber;
   }
-  public void setCategoryNumber(int categoryNumber) {
+  public NoticeCategory setCategoryNumber(int categoryNumber) {
     this.categoryNumber = categoryNumber;
+    return this;
   }
   public String getName() {
     return name;
   }
-  public void setName(String name) {
+  public NoticeCategory setName(String name) {
     this.name = name;
+    return this;
   }
 
 
