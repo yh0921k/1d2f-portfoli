@@ -80,6 +80,14 @@
      </set>
      WHERE board_no = #{number}
   </update>
+  
+  <update id="updateCategory" parameterType="Map">
+     UPDATE pf_notice
+     <set>
+       category_no = #{targetCategoryNumber}
+     </set>
+     WHERE category_no = #{sourceCategoryNumber}
+  </update>
 
 </mapper>
 

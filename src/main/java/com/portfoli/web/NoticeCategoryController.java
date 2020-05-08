@@ -1,6 +1,8 @@
 package com.portfoli.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +19,7 @@ import com.portfoli.service.NoticeService;
 @Controller
 @RequestMapping("/notice/category")
 public class NoticeCategoryController {
-  
+
   static Logger logger = LogManager.getLogger(NoticeCategoryController.class);
 
   public NoticeCategoryController() {
@@ -58,14 +60,36 @@ public class NoticeCategoryController {
   @GetMapping("delete")
   public String delete(int categoryNumber) throws Exception {
     try {
-    NoticeCategory noticeCategory = noticeCategoryService.get(categoryNumber);
-    noticeCategoryService.delete(categoryNumber);
-    logger.debug(String.format("게시물 분류 삭제: [%d번] %s", categoryNumber, noticeCategory.getName()));
-    return "redirect:list";
+      NoticeCategory noticeCategory = noticeCategoryService.get(categoryNumber);
+      noticeCategoryService.delete(categoryNumber);
+      logger.debug(String.format("게시물 분류 삭제: [%d번] %s", categoryNumber, noticeCategory.getName()));
+      return "redirect:list";
     } catch(Exception e) {
       throw new IllegalStateException("해당 분류번호의 게시물이 있어 삭제할 수 없습니다.");
     }
   }
+
+  @GetMapping("forceDelete")
+  public String forceDelete(int categoryNumber) throws Exception {
+    try {
+      // 9번 분류의 공지사항을 0번(미분류)로 변경(9번 카테고리를 지우는 경우)
+      // UPDATE pf_notice SET category_no = 0 WHERE category_no = 9;
+      Map<String, Integer> map = new HashMap<>();
+      map.put("targetCategoryNumber", 0);
+      map.put("sourceCategoryNumber", categoryNumber);
+      noticeService.update(map);
+      
+      NoticeCategory noticeCategory = noticeCategoryService.get(categoryNumber);
+      // 9번 분류 카테고리 삭제
+      // DELETE FROM pf_notice_category WHERE category_no = 9;
+      noticeCategoryService.delete(categoryNumber);
+      logger.debug(String.format("게시물 분류 삭제: [%d번] %s", categoryNumber, noticeCategory.getName()));
+      return "redirect:list";
+    } catch(Exception e) {
+      throw new IllegalStateException("해당 분류번호의 게시물이 있어 삭제할 수 없습니다.");
+    }
+  }
+
   @PostMapping("updateForm")
   public void updateForm(NoticeCategory noticeCategory, Model model) throws Exception {
     NoticeCategory item = noticeCategoryService.get(noticeCategory.getCategoryNumber());

@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.NoticeDao;
@@ -54,6 +55,11 @@ public class NoticeServiceImpl implements NoticeService {
   @Override
   public int selectListCnt(Notice notice) throws Exception {
     return noticeDao.selectListCnt();
+  }
+
+  @Override
+  public int update(Map<String, Integer> map) throws Exception {
+    return noticeDao.updateCategory(map);
   }
 
 

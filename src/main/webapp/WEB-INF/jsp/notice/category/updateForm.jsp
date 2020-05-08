@@ -62,7 +62,7 @@
             <tr>
             <td colspan="2">
             <button>확인</button>
-            <input type="button" onclick="location.href='forceDelete?categoryNumber=${category.categoryNumber}'" value="삭제"/>
+            <input type="button" onclick="warning(${category.categoryNumber})" value="강제삭제"/>
             </td>
             </tr>
             </table>
@@ -81,6 +81,28 @@
 			</section>
 			<!-- /FAQ -->
 
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script>
+  function warning(e){
+	  var bool = Swal.fire({
+		  timer:15000000,
+		  title: '해당 카테고리에 분류된 공지사항은 "미분류"로 변경됩니다.',
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#d33',
+		  cancelButtonColor: '#006400',
+		  confirmButtonText: '삭제',
+		  cancelButtonText: '취소'
+		}).then((result) => {
+		  if (result.value) {
+		    location.href='forceDelete?categoryNumber=${category.categoryNumber}'
+		    Swal.fire({
+		    	  title: '삭제완료',
+		          timer:15000000
+		    	  })
+		  }
+		})
+  }
+  </script>
 
 		  <jsp:include page="../../footer.jsp"/>

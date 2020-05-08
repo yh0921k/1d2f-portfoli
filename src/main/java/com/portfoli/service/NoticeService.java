@@ -1,6 +1,7 @@
 package com.portfoli.service;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Notice;
 
 public interface NoticeService {
@@ -20,6 +21,8 @@ public interface NoticeService {
   boolean update(Notice notice) throws Exception;
 
   int selectListCnt(Notice notice) throws Exception;
+
+  int update(Map<String, Integer> map) throws Exception;
 
 
 
