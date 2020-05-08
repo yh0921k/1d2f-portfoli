@@ -9,6 +9,8 @@ public interface JobPostingDao {
 
   public List<JobPosting> findAll() throws Exception;
 
+  public List<JobPosting> findMore(int lastNo) throws Exception;
+
   public JobPosting findByNo(int no) throws Exception;
 
   public int update(JobPosting jobPosting) throws Exception;

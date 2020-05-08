@@ -65,9 +65,34 @@
      pf_job_posting j
      left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
    where 
-     end_dated > now()
+     end_dated > now() 
   order by
-  j.job_posting_no desc
+    j.job_posting_no desc 
+  limit 0, 5
+  </select>
+  
+  <select id="findMore" resultMap="JobPostingMap" parameterType="int">
+  <![CDATA[
+   select
+     j.job_posting_no,
+     j.title,
+     j.content,
+     j.minimum_career,
+     j.job,
+     j.year_salary,
+     j.start_dated,
+     j.end_dated,
+     j.view_count,
+     f.file_path
+   from
+     pf_job_posting j
+     left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+   where 
+     end_dated > now() and j.job_posting_no < #{lastNo}
+  order by
+    j.job_posting_no desc 
+  limit 0, 5
+  ]]>
   </select>
      
 
