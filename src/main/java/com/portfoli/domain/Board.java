@@ -59,32 +59,45 @@ public /*abstract*/ class Board implements java.io.Serializable{
   public int getNumber() {
     return number;
   }
-  public void setNumber(int number) {
+  public Board setNumber(int number) {
     this.number = number;
+    return this;
   }
   public String getTitle() {
     return title;
   }
-  public void setTitle(String title) {
+  public Board setTitle(String title) {
     this.title = title;
+    return this;
   }
   public String getContent() {
     return content;
   }
-  public void setContent(String content) {
+  public Board setContent(String content) {
     this.content = content;
+    return this;
   }
   public int getViewCount() {
     return viewCount;
   }
-  public void setViewCount(int viewCount) {
+  public Board setViewCount(int viewCount) {
     this.viewCount = viewCount;
+    return this;
   }
   public Date getRegisteredDate() {
     return registeredDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
+  public Board setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+    return this;
+  }
+  public Board setBoard(Board board) {
+    this.number = board.number;
+    this.title = board.title;
+    this.content = board.content;
+    this.viewCount = board.viewCount;
+    this.registeredDate = board.registeredDate;
+    return this;
   }
 
   

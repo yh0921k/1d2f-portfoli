@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS pf_province_city RESTRICT;
 DROP TABLE IF EXISTS pf_recommendation RESTRICT;
 
 -- 질문분류
-DROP TABLE IF EXISTS pf_question_class RESTRICT;
+DROP TABLE IF EXISTS pf_question_category RESTRICT;
 
 -- 신고분류
 DROP TABLE IF EXISTS pf_report_class RESTRICT;
@@ -219,7 +219,7 @@ ALTER TABLE pf_portfolio
     );
 
 ALTER TABLE pf_portfolio
-  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '포트폴리오게시글번호';
+  MODIFY COLUMN board_no INTEGER NOT NULL COMMENT '포트폴리오게시글번호';
 
 -- 채용공고
 CREATE TABLE pf_job_posting (
@@ -891,7 +891,7 @@ ALTER TABLE pf_board
 CREATE TABLE pf_qna (
   board_no           INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
   member_no          INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
-  question_no        INTEGER  NOT NULL COMMENT '질문분류번호', -- 질문분류번호
+  category_no        INTEGER  NOT NULL COMMENT '질문분류번호', -- 질문분류번호
   readable           INTEGER  NOT NULL COMMENT '비밀글여부', -- 비밀글여부
   email_notification INTEGER  NOT NULL COMMENT '이메일답변알림여부', -- 이메일답변알림여부
   sms_notification   INTEGER  NOT NULL COMMENT '문자답변알림여부', -- 문자답변알림여부
@@ -908,7 +908,7 @@ ALTER TABLE pf_qna
     );
 
 ALTER TABLE pf_qna
-  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
+  MODIFY COLUMN board_no INTEGER NOT NULL COMMENT '게시글번호';
 
 -- 기업
 CREATE TABLE pf_company (
@@ -1018,21 +1018,21 @@ ALTER TABLE pf_recommendation
   MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
 
 -- 질문분류
-CREATE TABLE pf_question_class (
-  question_no INTEGER      NOT NULL COMMENT '질문분류번호', -- 질문분류번호
-  category    VARCHAR(255) NOT NULL COMMENT '질문분류명' -- 질문분류명
+CREATE TABLE pf_question_category (
+  category_no INTEGER      NOT NULL COMMENT '질문분류번호', -- 질문분류번호
+  name    VARCHAR(255) NOT NULL COMMENT '질문분류명' -- 질문분류명
 )
 COMMENT '질문분류';
 
 -- 질문분류
-ALTER TABLE pf_question_class
-  ADD CONSTRAINT PK_pf_question_class -- 질문분류 기본키
+ALTER TABLE pf_question_category
+  ADD CONSTRAINT PK_pf_question_category -- 질문분류 기본키
     PRIMARY KEY (
-      question_no -- 질문분류번호
+      category_no -- 질문분류번호
     );
 
-ALTER TABLE pf_question_class
-  MODIFY COLUMN question_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문분류번호';
+ALTER TABLE pf_question_category
+  MODIFY COLUMN category_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문분류번호';
 
 -- 신고분류
 CREATE TABLE pf_report_class (
@@ -1655,12 +1655,12 @@ ALTER TABLE pf_qna
 
 -- QNA질문
 ALTER TABLE pf_qna
-  ADD CONSTRAINT FK_pf_question_class_TO_pf_qna -- 질문분류 -> QNA질문
+  ADD CONSTRAINT FK_pf_question_category_TO_pf_qna -- 질문분류 -> QNA질문
     FOREIGN KEY (
-      question_no -- 질문분류번호
+      category_no -- 질문분류번호
     )
-    REFERENCES pf_question_class ( -- 질문분류
-      question_no -- 질문분류번호
+    REFERENCES pf_question_category ( -- 질문분류
+      category_no -- 질문분류번호
     );
 
 -- 회원기업공고지원
