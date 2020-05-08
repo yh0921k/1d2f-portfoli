@@ -49,6 +49,14 @@
     on n.board_no = b.board_no
     WHERE n.board_no = #{boardNumber}
   </select>
+
+  <select id="findByCategoryNumber" resultMap="NoticeMap" parameterType="int">
+    SELECT
+      *
+    FROM pf_notice 
+    WHERE category_no = ${categoryNumber}
+  </select>
+
   
   <insert id="insert" parameterType="Notice">
     INSERT INTO pf_notice (
@@ -69,8 +77,6 @@
      UPDATE pf_notice
      <set>
        category_no = #{categoryNumber}
-     <if test="categoryNumber != null and categoryNumber != ''">
-     </if>
      </set>
      WHERE board_no = #{number}
   </update>

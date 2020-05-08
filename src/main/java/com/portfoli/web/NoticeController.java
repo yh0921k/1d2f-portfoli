@@ -163,8 +163,11 @@ public class NoticeController {
   public String update(int originalNoticeNumber, Notice notice,
       @RequestParam("files") MultipartFile[] files) throws Exception {
 
-    if(files[0] !=null) {
-      boardAttachmentService.delete(notice.getNumber());
+    for(MultipartFile file : files) {
+      // file의 사이즈가 0이 이상인경우 (첨부파일이 있는 경우), 첨부파일을 수정하기위해 기존 파일을 삭제한다.
+      if(file.getSize() > 0) {
+        boardAttachmentService.delete(notice.getNumber());
+      }
     }
 
     String dirPath = servletContext.getRealPath("/upload/notice");

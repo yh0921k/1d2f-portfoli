@@ -29,7 +29,7 @@ public class NoticeCategoryController {
 
   @Autowired
   NoticeService noticeService;
-  
+
   @Autowired
   NoticeCategoryService noticeCategoryService;
 
@@ -66,7 +66,6 @@ public class NoticeCategoryController {
       throw new IllegalStateException("해당 분류번호의 게시물이 있어 삭제할 수 없습니다.");
     }
   }
-  
   @PostMapping("updateForm")
   public void updateForm(NoticeCategory noticeCategory, Model model) throws Exception {
     NoticeCategory item = noticeCategoryService.get(noticeCategory.getCategoryNumber());

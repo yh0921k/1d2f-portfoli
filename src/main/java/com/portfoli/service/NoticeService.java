@@ -11,13 +11,13 @@ public interface NoticeService {
 
   Notice get(int boardNumber) throws Exception;
   
+  List<Notice> getByCategoryNumber(int categoryNumber) throws Exception;
+
   boolean insert(Notice notice) throws Exception;
 
   boolean delete(int boardNumber) throws Exception;
 
   boolean update(Notice notice) throws Exception;
-
-  boolean forceDelete(int noticeNumber) throws Exception;
 
   int selectListCnt(Notice notice) throws Exception;
 
