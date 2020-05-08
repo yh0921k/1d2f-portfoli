@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
@@ -89,6 +90,12 @@ public class JobPostingController {
   @GetMapping("list")
   public void list(Model model) throws Exception {
     List<JobPosting> jobPostings = jobPostingService.list();
+    model.addAttribute("list", jobPostings);
+  }
+
+  @GetMapping("list2")
+  public void list2(@RequestParam(defaultValue = "1") int lastNo, Model model) throws Exception {
+    List<JobPosting> jobPostings = jobPostingService.list2(lastNo);
     model.addAttribute("list", jobPostings);
   }
 
