@@ -152,12 +152,6 @@
               </c:forEach>
               <div class="float-end">
                 <a href="#"
-                  class="js-ajax-modal btn btn-sm btn-outline-success btn-pill"
-                  data-href="/portfoli/app/message/form?receiverNumber=${message.senderNumber}"
-                  data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
-                  data-ajax-modal-backdrop="static"> <i
-                  class="fi fi-arrow-right-3"></i> 답장하기
-                </a> <a href="#"
                   data-href="/portfoli/app/message/sent/delete?number=${message.number}"
                   class="js-ajax-confirm btn btn-sm btn-outline-danger btn-pill rounded-circle"
                   data-ajax-confirm-mode="ajax"
@@ -172,7 +166,7 @@
                   data-ajax-confirm-btn-no-class="btn-sm btn-light"
                   data-ajax-confirm-btn-no-text="닫기"
                   data-ajax-confirm-btn-no-icon="fi fi-close"
-                  data-ajax-confirm-callback-function=""> <i
+                  data-ajax-confirm-callback-function="deleteCallback"> <i
                   class="fi fi-thrash"></i>
                 </a>
               </div>
@@ -189,5 +183,12 @@
     </div>
   </div>
 </div>
+
+<script>
+function deleteCallback() {
+  location.href = "./";
+}
+
+</script>
 
 <jsp:include page="../footer.jsp" />

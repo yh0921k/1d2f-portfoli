@@ -150,7 +150,7 @@
                   </span>
                 </div>
               </c:forEach>
-              <div class="float-end">
+              <div class="float-end float-bottom" style="margin-top: 200px;">
                 <a href="#"
                   class="js-ajax-modal btn btn-sm btn-outline-success btn-pill"
                   data-href="/portfoli/app/message/form?receiverNumber=${message.senderNumber}"
@@ -172,7 +172,7 @@
                   data-ajax-confirm-btn-no-class="btn-sm btn-light"
                   data-ajax-confirm-btn-no-text="닫기"
                   data-ajax-confirm-btn-no-icon="fi fi-close"
-                  data-ajax-confirm-callback-function=""> <i
+                  data-ajax-confirm-callback-function="deleteCallback"> <i
                   class="fi fi-thrash"></i>
                 </a>
               </div>
@@ -189,5 +189,11 @@
     </div>
   </div>
 </div>
+
+<script>
+function deleteCallback() {
+  location.href = "./";
+}
+</script>
 
 <jsp:include page="../footer.jsp" />

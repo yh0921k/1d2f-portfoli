@@ -44,29 +44,29 @@ public class MessageController {
   }
 
   @PostMapping("add")
-  public String add(Message message, MultipartHttpServletRequest request) throws Exception {
+  public void add(Message message, MultipartHttpServletRequest request) throws Exception {
     String dirPath = servletContext.getRealPath("/upload/message");
     List<MessageFile> messageFiles = new ArrayList<>();
     List<MultipartFile> fileList = request.getFiles("messageFiles[]");
     for (MultipartFile file : fileList) {
-      MessageFile messageFile = new MessageFile();
-      String fileName =
-          String.format("%d_%s", System.currentTimeMillis(), file.getOriginalFilename());
+      if (file.getSize() > 0) {
+        MessageFile messageFile = new MessageFile();
+        String fileName =
+            String.format("%d_%s", System.currentTimeMillis(), file.getOriginalFilename());
 
-      messageFile.setMessageNumber(message.getNumber());
-      messageFile.setFileName(file.getOriginalFilename());
-      messageFile.setFilePath(fileName);
+        messageFile.setMessageNumber(message.getNumber());
+        messageFile.setFileName(file.getOriginalFilename());
+        messageFile.setFilePath(fileName);
 
-      file.transferTo(new File(dirPath + "/" + fileName));
+        file.transferTo(new File(dirPath + "/" + fileName));
 
-      messageFiles.add(messageFile);
+        messageFiles.add(messageFile);
+      }
     }
 
     message.setFiles(messageFiles);
 
     messageService.add(message);
-
-    return "redirect:./inbox";
   }
 
   @GetMapping("sent")
@@ -191,18 +191,14 @@ public class MessageController {
   }
 
   @GetMapping("sent/delete")
-  public String deleteSentMessage(int number) throws Exception {
+  public void deleteSentMessage(int number) throws Exception {
     Message message = messageService.get(number);
     messageService.deleteSentMessage(message);
-
-    return "redirect:sent";
   }
 
   @GetMapping("inbox/delete")
-  public String deleteReceivedMessage(int number) throws Exception {
+  public void deleteReceivedMessage(int number) throws Exception {
     Message message = messageService.get(number);
     messageService.deleteReceivedMessage(message);
-
-    return "redirect:inbox";
   }
 }
