@@ -10,7 +10,7 @@
 <h1>채용공고</h1>
 <div id="searchForm" text-align:center;>
 <form action='search' method='get'>
-	검색어: <input name='keyword' type='text'>
+	검색어: <input id='keyword' name='keyword' type='text'>
 	<button>검색</button>
 </form>
 </div>
@@ -58,7 +58,7 @@
 </div>
 
 
-
+<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -76,6 +76,17 @@ tag1.onclick = function() {
 	tbody.innerHTML = tbody.innerHTML + xhr.responseText;
 
 };
+
+ $(document).ready(function() {
+	 $("#keyword").keyup(function() {
+		 var k = $(this).val();
+		 $("#listTable > tbody > tr").hide();
+		 
+		 var temp = $("#listTable > tbody > tr > td:nth-child(2n+1):contains('"+ k +"')");
+   $(temp).parent().show();
+		 })
+	 
+ })
 
 </script>
 
