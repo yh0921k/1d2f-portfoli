@@ -51,18 +51,18 @@
             <table border='1' style="width: 100%;">
             
             <tr>
-              <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value="공지사항 카테고리 번호"/></td>
-              <td width="70%"><input style="resize:none; border-color:pink; width: 100%;" name="categoryNumber" value="${category.categoryNumber}"/></td>
+              <td class="TD" width="30%">카테고리 번호</td>
+              <td class="TD2" width="70%"><input style="resize:none; border-color:pink; width: 100%;" name="categoryNumber" value="${category.categoryNumber}"/></td>
             </tr>
             <tr>
-              <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value="공지사항 카테고리 내용"/></td>
-              <td width="70%"><input style="resize:none; border-color:pink; width: 100%;" name="name" value="${category.name}"/></td>
+              <td class="TD" width="30%">카테고리 내용</td>
+              <td class="TD2" width="70%"><input style="resize:none; border-color:pink; width: 100%;" name="name" value="${category.name}"/></td>
             </tr>
             <tr>
-            <tr>
-            <td colspan="2">
-            <button>확인</button>
-            <input type="button" onclick="warning(${category.categoryNumber})" value="강제삭제"/>
+            <tr style="background-color: lightGray">
+            <td class="padding" colspan="2">
+            <button>수정완료</button>
+            <input style="float: right;" type="button" onclick="warning(${category.categoryNumber})" value="강제삭제"/>
             </td>
             </tr>
             </table>
@@ -118,8 +118,18 @@
 		    )
 		  }
 		})
-	  
   }
-  </script>
 
+  </script>
+  <style>
+    .TD{
+      padding: 10px 0px; text-align: center;
+    }
+    .TD2{
+      padding: 10px 10px;
+    }
+    .padding{
+      padding:5px 5px;
+    }
+    </style>
 		  <jsp:include page="../../footer.jsp"/>

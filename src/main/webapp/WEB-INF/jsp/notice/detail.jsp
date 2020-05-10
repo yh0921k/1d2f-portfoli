@@ -53,13 +53,13 @@
             <table class="lightGray">
             <tr class="firstTR">
               <td width="75%" class='padding'>[${categoryName}] ${notice.title}</td>
-              <td width="25%" class='padding darkerGray'>${notice.registeredDate}</td>
+              <td width="25%" align="center" class='padding darkerGray'>${notice.registeredDate}</td>
             </tr>
             <tr>
               <td colspan="2" class='padding'><a href="detail?number=${notice.number}">url : localhost:9999/portfoli/app/notice/detail?number=${notice.number}</td>
             </tr>
             <tr>
-              <td colspan="2" class='padding'><textarea readonly="readonly" style="border-color:transparent; resize:none; width: 100%; height: 300px">${notice.content}</textarea></td>
+              <td colspan="2" class='textAR'><textarea readonly="readonly" class="textAR_in">${notice.content}</textarea></td>
             </tr>
             <tr class='photoTD'>
               <td colspan="2"  class='photoInside'>
@@ -80,13 +80,13 @@
 
             <tr>
             <td colspan="2" class='buttonTD'>
-            <button type="submit">수정</button>
+            <button style="font-size: small" type="submit">수정(M)</button>
+            <button style="font-size: small" type="submit"  onclick='move(event)'>삭제(D)</button>
             </td>
             </tr>
             </table>
             </c:if>
             </form>
-            <button type="submit"  onclick='location.href="delete?number=${notice.number}"'>삭제</button>
             <c:if test="${empty notice}">
             값이 없습니다. 찡긋
             </c:if>
@@ -108,6 +108,14 @@
     .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
     .photoInside{text-align: center}
     .buttonTD{text-align: center}
+    .textAR{padding:0px 5px;}
+    .textAR_in{border-color:transparent; resize:none; width: 100%; height: 450px;}
   </style>
+  <script>
+  function move(e) {
+	  e.preventDefault();
+	  location.href = "delete?number=" + ${notice.number};
+  }
+  </script>
 
       <jsp:include page="../footer.jsp"/>

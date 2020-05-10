@@ -4,22 +4,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.portfoli.domain.NoticeCategory;
+import com.portfoli.domain.Pagination;
 import com.portfoli.service.NoticeCategoryService;
 import com.portfoli.service.NoticeService;
 
 @Controller
 @RequestMapping("/notice/category")
 public class NoticeCategoryController {
-
+  final int pageSize = 10;
   static Logger logger = LogManager.getLogger(NoticeCategoryController.class);
 
   public NoticeCategoryController() {
@@ -36,9 +40,24 @@ public class NoticeCategoryController {
   NoticeCategoryService noticeCategoryService;
 
   @RequestMapping("list")
-  public void list(Model model) throws Exception {
-    List<NoticeCategory> categories = noticeCategoryService.list();
+  public void list(@ModelAttribute("notice") NoticeCategory noticeCategory,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
 
+    // 전체리스트 개수
+    int listCnt = noticeCategoryService.selectListCnt(noticeCategory);
+
+    Pagination pagination = new Pagination(listCnt, curPage);
+    pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+
+    noticeCategory.setStartIndex(pagination.getStartIndex());
+    noticeCategory.setPageSize(pagination.getPageSize());
+
+    // 전체리스트 출력
+    model.addAttribute("listCnt", listCnt);
+    model.addAttribute("pagination", pagination);
+
+    List<NoticeCategory> categories = noticeCategoryService.list(noticeCategory);
     model.addAttribute("list", categories);
   }
 
@@ -78,7 +97,7 @@ public class NoticeCategoryController {
       map.put("targetCategoryNumber", 0);
       map.put("sourceCategoryNumber", categoryNumber);
       noticeService.update(map);
-      
+
       NoticeCategory noticeCategory = noticeCategoryService.get(categoryNumber);
       // 9번 분류 카테고리 삭제
       // DELETE FROM pf_notice_category WHERE category_no = 9;

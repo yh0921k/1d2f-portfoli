@@ -9,15 +9,17 @@ public /*abstract*/ class Board implements java.io.Serializable{
   String content;
   int viewCount;
   Date registeredDate;
-  
+  protected int startIndex;
+  protected int pageSize;
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((content == null) ? 0 : content.hashCode());
+    result = prime * result + (content == null ? 0 : content.hashCode());
     result = prime * result + number;
-    result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
-    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    result = prime * result + (registeredDate == null ? 0 : registeredDate.hashCode());
+    result = prime * result + (title == null ? 0 : title.hashCode());
     result = prime * result + viewCount;
     return result;
   }
@@ -99,8 +101,22 @@ public /*abstract*/ class Board implements java.io.Serializable{
     this.registeredDate = board.registeredDate;
     return this;
   }
+  public int getPageSize() {
+    return pageSize;
+  }
+  public Board setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+    return this;
+  }
+  public int getStartIndex() {
+    return startIndex;
+  }
+  public Board setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+    return this;
+  }
 
-  
+
 
 
 

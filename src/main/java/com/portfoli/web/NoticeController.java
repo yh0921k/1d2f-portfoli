@@ -33,7 +33,7 @@ import com.portfoli.service.NoticeService;
 @RequestMapping("/notice")
 @MultipartConfig(maxFileSize = 100000000)
 public class NoticeController {
-
+  final int pageSize = 10;
   static Logger logger = LogManager.getLogger(NoticeController.class);
 
   public NoticeController() {
@@ -64,10 +64,10 @@ public class NoticeController {
     int listCnt = noticeService.selectListCnt(notice);
 
     Pagination pagination = new Pagination(listCnt, curPage);
-    pagination.setPageSize(10);// 한페이지에 노출할 게시글 수
+    pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
 
     notice.setStartIndex(pagination.getStartIndex());
-    notice.setCntPerPage(pagination.getPageSize());
+    notice.setPageSize(pagination.getPageSize());
 
     // 전체리스트 출력
     model.addAttribute("listCnt", listCnt);

@@ -355,6 +355,9 @@ INSERT INTO pf_notice_category (category_no, name) VALUES(7, "유형7");
 INSERT INTO pf_notice_category (category_no, name) VALUES(8, "유형8");
 INSERT INTO pf_notice_category (category_no, name) VALUES(9, "유형9"); 
 INSERT INTO pf_notice_category (category_no, name) VALUES(10, "유형10");
+INSERT INTO pf_notice_category (category_no, name) VALUES(11, "유형11");
+INSERT INTO pf_notice_category (category_no, name) VALUES(12, "유형12");
+INSERT INTO pf_notice_category (category_no, name) VALUES(13, "유형13");
 
 -- 공지사항 예제데이터 (pf_notice)
 INSERT INTO pf_notice (board_no, category_no) VALUES(11,1);

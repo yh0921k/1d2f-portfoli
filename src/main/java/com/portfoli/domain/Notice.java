@@ -6,9 +6,7 @@ public class Notice extends Board implements Serializable {
   private static final long serialVersionUID = 1L;
   private int categoryNumber;
   private String categoryName;
-  private int startIndex;
-  private int pageSize;
-  
+
   @Override
   public String toString() {
     return "Notice [categoryNumber=" + categoryNumber + ", categoryName=" + categoryName + "]";
@@ -18,7 +16,7 @@ public class Notice extends Board implements Serializable {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + categoryNumber;
-    result = prime * result + ((categoryName == null) ? 0 : categoryName.hashCode());
+    result = prime * result + (categoryName == null ? 0 : categoryName.hashCode());
     return result;
   }
   @Override
@@ -53,29 +51,20 @@ public class Notice extends Board implements Serializable {
     this.categoryName = categoryName;
     return this;
   }
-  public Notice setStartIndex(int startIndex) {
-    this.startIndex = startIndex;
-    return this;
-  }
-  public Notice setCntPerPage(int pageSize) {
-    this.pageSize = pageSize;
-    return this;
-  }
-  public int getPageSize() {
-    return pageSize;
-  }
+  @Override
   public Notice setPageSize(int pageSize) {
     this.pageSize = pageSize;
     return this;
   }
-  public int getStartIndex() {
-    return startIndex;
+  @Override
+  public Notice setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+    return this;
   }
-  
-  
 
-  
-  
+
+
+
 
 
 

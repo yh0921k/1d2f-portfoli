@@ -67,8 +67,14 @@
                     <input type="file" name="files" class="files" onclick="plus(event)"/><br>
                   </td>
                 </tr>
+                <tr style="background-color: white">
+                  <td colspan="2" align="center">
+		                <button>글쓰기</button>
+		                <button onclick="move(event)">취소</button>
+                  </td>
+                </tr>
                 </table>
-                <button>글쓰기</button>
+                
                 </form>
                 
 
@@ -122,6 +128,11 @@
     function plus(e) {
       e.stopImmediatePropagation();
     }
+    
+    function move(e) {
+        e.preventDefault();
+        location.href = "list";
+      }
   </script>
   
 		  <jsp:include page="../footer.jsp"/>

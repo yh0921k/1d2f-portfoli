@@ -28,7 +28,9 @@
     LEFT OUTER JOIN pf_board b 
     ON n.board_no = b.board_no 
     order by b.registered_date desc, n.board_no desc
+    <if test="startIndex != null and startIndex != ''">
     limit ${startIndex}, ${pageSize}
+    </if>
   </select>
   
   <select id="selectListCnt" resultType="int" parameterType="int">
