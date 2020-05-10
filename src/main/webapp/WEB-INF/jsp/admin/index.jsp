@@ -16,7 +16,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/">
         <!-- preloading icon font is helping to speed up a little bit -->
-        <link rel="preload" href="assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>
 
         <!-- non block rendering : page speed : js = polyfill for old browsers missing `preload` -->
         <link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="demo.files/logo/icon_512x512.png">
 
-    <link rel="manifest" href="assets/images/manifest/manifest.json">
+    <link rel="manifest" href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
     <meta name="theme-color" content="#377dff">
 
   </head>
@@ -105,286 +105,19 @@
 
 
             </div>
-
-
-
-
             <!-- NAVIGATION -->
-            <div class="collapse navbar-collapse" id="navbarMainNav">
-
-
-
-              <!-- MOBILE MENU NAVBAR -->
-              <div class="navbar-xs d-none">
-
-                <!-- mobile menu button : close -->
-                <button class="navbar-toggler pt-0" type="button" data-toggle="collapse" data-target="#navbarMainNav" aria-controls="navbarMainNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <svg width="20" viewBox="0 0 20 20">
-                    <path d="M 20.7895 0.977 L 19.3752 -0.4364 L 10.081 8.8522 L 0.7869 -0.4364 L -0.6274 0.977 L 8.6668 10.2656 L -0.6274 19.5542 L 0.7869 20.9676 L 10.081 11.679 L 19.3752 20.9676 L 20.7895 19.5542 L 11.4953 10.2656 L 20.7895 0.977 Z"></path>
-                  </svg>
-                </button>
-
-                <!-- 
-                  Optional Mobile Menu Logo 
-                  Logo : height: 70px max
-                -->
-                <a class="navbar-brand px-4" href="adminindex.jsp">
-                  <img src="${pageContext.request.getContextPath()}/resources/assets/images/logo/adminlogo.png" width="110" height="70" alt="...">
-                </a>
-
-              </div>
-              <!-- /MOBILE MENU NAVBAR -->
-
-
-
-              <!-- Dropdowns -->
-              <ul class="navbar-nav align-items-center">
-
-                <!--  -->
-                <li class="nav-item dropdown">
-
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="mainNavHome">
-                    Shortcuts
-                  </a>
-
-                  <ul class="dropdown-menu dropdown-menu-clean" aria-labelledby="mainNavHome">
-
-                    <li class="dropdown-item dropdown">
-                      <a class="dropdown-link" href="#!" data-toggle="dropdown">
-                        <i class="fi fi-cart-1"></i>
-                        Orders
-                      </a>
-
-                      <ul class="dropdown-menu dropdown-menu-hover shadow-lg b-0 m-0">
-                        <li class="dropdown-item">
-                          <a class="dropdown-link" href="#!">
-                            <i class="fi fi-plus"></i>
-                            Create Order
-                          </a>
-                        </li>
-                        <li class="dropdown-item">
-                          <a class="dropdown-link" href="#!">
-                            <i class="fi fi-list-checked"></i>
-                            List Orders
-                          </a>
-                        </li>
-                        <li class="dropdown-item">
-                          <a class="dropdown-link" href="#!">
-                            <i class="fi fi-box"></i>
-                            Archived Orders
-                          </a>
-                        </li>
-                        <li class="dropdown-item">
-                          <a class="dropdown-link" href="#!">
-                            <i class="fi fi-close"></i>
-                            Canceled Orders
-                          </a>
-                        </li>
-                      </ul>
-
-                    </li>
-                    <li class="dropdown-item">
-                      <a class="dropdown-link" href="#!">
-                        <i class="fi fi-user-plus"></i>
-                        Create Account
-                      </a>
-                    </li>
-                    <li class="dropdown-item">
-                      <a class="dropdown-link" href="#!">
-                        <i class="fi fi-users"></i>
-                        Manage Users
-                      </a>
-                    </li>
-                    <li class="dropdown-item">
-                      <a class="dropdown-link" href="#!">
-                        <i class="fi fi-graph"></i>
-                        Reports
-                      </a>
-                    </li>
-                    <li class="dropdown-item">
-                      <a class="dropdown-link" href="#!">
-                        <i class="fi fi-task-list"></i>
-                        Tasks
-                      </a>
-                    </li>
-                  </ul>
-
-                </li>
-
-                <li class="nav-item dropdown dropdown-mega">
-
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="mainMegaNav">
-                    Mega
-                  </a>
-
-                  <ul class="dropdown-menu" aria-labelledby="mainMegaNav">
-                    <li class="dropdown-item bg-transparent">
-                      
-                      <!-- 
-                        for 5 columns:  
-                        .col-md-5th   -instead of-   .col-md-3 
-                      -->
-                      <div class="row col-border-md">
-
-                        <div class="col-12 col-md-3">
-
-                          <h3 class="h6 text-muted text-uppercase fs--14 mb-3">ACCOUNT OPTIONS</h3>
-                          <ul>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 1</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 2</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 3</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 4</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 5</a>
-                            </li>
-
-                          </ul>
-
-                        </div>
-
-                        <div class="col-12 col-md-3">
-
-                          <h3 class="h6 text-muted text-uppercase fs--14 mb-3">ECOMMERCE SETTINGS</h3>
-                          <ul>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 1</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 2</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 3</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 4</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 5</a>
-                            </li>
-
-                          </ul>
-
-                        </div>
-
-                        <div class="col-12 col-md-3">
-
-                          <h3 class="h6 text-muted text-uppercase fs--14 mb-3">QUICK TOOLS</h3>
-                          <ul>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 1</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 2</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 3</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 4</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 5</a>
-                            </li>
-
-                          </ul>
-
-                        </div>
-
-                        <div class="col-12 col-md-3">
-
-                          <h3 class="h6 text-muted text-uppercase fs--14 mb-3">ACCOUNT OPTIONS</h3>
-                          <ul>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 1</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 2</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 3</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 4</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                              <a class="dropdown-link" href="#!">Option 5</a>
-                            </li>
-
-                          </ul>
-
-                        </div>
-
-                      </div>
-
-                    </li>
-                  </ul>
-
-                </li>
-
-
-                <!--  -->
-                <li class="nav-item">
-                  
-                  <a class="nav-link px-1" href="#!">
-                    <span class="py-2 px-3 rounded">
-                      <i class="fi fi-squared-dots"></i>
-                      <span>Apps</span>
-                    </span>
-                  </a>
-
-                </li>
-
-
-              </ul>
-              <!-- /Dropdowns -->
-
-            </div>
             <!-- /NAVIGATION -->
-
-
-
 
             <!-- OPTIONS -->
             <ul class="list-inline list-unstyled mb-0 d-flex align-items-end">
 
               <!-- account -->
               <li class="list-inline-item ml--6 mr--6 dropdown">
-
-                <a href="#" id="dropdownAccountOptions" class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-                  
+                <span id="sessionExpire" style="margin-right:50px;">세션 만료 : ${expire }초 남음</span>
+                <a href="loginForm" id="dropdownAccountOptions" class="btn btn-sm btn-light btn-pill pl--12 pr--12">
                   <span class="group-icon m-0">
                     <i class="fi w--15 fi-power"></i>
-                    <i class="fi w--15 fi-close"></i>
                   </span>
-
                   <span class="fs--14 d-none d-sm-inline-block font-weight-medium">Log out</span>
                 </a>
 
@@ -407,12 +140,12 @@
                       .prefix-icon-ignore           - ignore, do not use on a specific link
 
                 -->
-                <div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+<!--                 <div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300"> -->
                   
-                  <div class="dropdown-header fs--14 py-4">
+<!--                   <div class="dropdown-header fs--14 py-4"> -->
 
                     <!-- profile image -->
-                    <div class="w--60 h--60 rounded-circle bg-light bg-cover float-start" style="background-image:url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
+<!--                     <div class="w--60 h--60 rounded-circle bg-light bg-cover float-start" style="background-image:url('../../html_frontend/demo.files/images/icons/user80.png')"></div> -->
                     
                     <!-- initials - no image -->
                     <!--
@@ -422,48 +155,48 @@
                     -->
 
                     <!-- user detail -->
-                    <span class="d-block font-weight-medium text-truncate fs--16">John Doe</span>
-                    <span class="d-block text-muted font-weight-medium text-truncate">john.doe@gmail.com</span>
-                    <small class="d-block text-muted"><b>Last Login:</b> 2019-09-03 01:48</small>
+<!--                     <span class="d-block font-weight-medium text-truncate fs--16">John Doe</span> -->
+<!--                     <span class="d-block text-muted font-weight-medium text-truncate">john.doe@gmail.com</span> -->
+<!--                     <small class="d-block text-muted"><b>Last Login:</b> 2019-09-03 01:48</small> -->
 
-                  </div>
+<!--                   </div> -->
 
-                  <div class="dropdown-divider"></div>
+<!--                   <div class="dropdown-divider"></div> -->
 
-                  <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium">
-                    Notes
-                    <small class="d-block text-muted">personal encypted notes</small>
-                  </a>
+<!--                   <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium"> -->
+<!--                     Notes -->
+<!--                     <small class="d-block text-muted">personal encypted notes</small> -->
+<!--                   </a> -->
 
-                  <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium">
-                    <span class="badge badge-success float-end font-weight-normal mt-1">3 new</span>
-                    Messages
-                    <small class="d-block text-muted">internal messaging system</small>
-                  </a>
+<!--                   <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium"> -->
+<!--                     <span class="badge badge-success float-end font-weight-normal mt-1">3 new</span> -->
+<!--                     Messages -->
+<!--                     <small class="d-block text-muted">internal messaging system</small> -->
+<!--                   </a> -->
 
-                  <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium">
-                    <span class="badge badge-danger float-end font-weight-normal mt-1">1 unpaid</span>
-                    Invoices
-                    <small class="d-block text-muted">montly billing</small>
-                  </a>
+<!--                   <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium"> -->
+<!--                     <span class="badge badge-danger float-end font-weight-normal mt-1">1 unpaid</span> -->
+<!--                     Invoices -->
+<!--                     <small class="d-block text-muted">montly billing</small> -->
+<!--                   </a> -->
 
-                  <a href="#!" class="dropdown-item text-truncate font-weight-medium">
-                    Account Settings
-                    <small class="d-block text-muted">profile, password and more...</small>
-                  </a>
+<!--                   <a href="#!" class="dropdown-item text-truncate font-weight-medium"> -->
+<!--                     Account Settings -->
+<!--                     <small class="d-block text-muted">profile, password and more...</small> -->
+<!--                   </a> -->
 
-                  <a href="#!" class="dropdown-item text-truncate font-weight-medium">
-                    Upgrade
-                    <small class="d-block text-muted">upgrade your account</small>
-                  </a>
+<!--                   <a href="#!" class="dropdown-item text-truncate font-weight-medium"> -->
+<!--                     Upgrade -->
+<!--                     <small class="d-block text-muted">upgrade your account</small> -->
+<!--                   </a> -->
 
-                  <div class="dropdown-divider mb-0"></div>
+<!--                   <div class="dropdown-divider mb-0"></div> -->
 
-                  <a href="#!" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
-                    <i class="fi fi-power float-start"></i>
-                    Log Out
-                  </a>
-                </div>
+<!--                   <a href="#!" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3"> -->
+<!--                     <i class="fi fi-power float-start"></i> -->
+<!--                     Log Out -->
+<!--                   </a> -->
+<!--                 </div> -->
 
               </li>
 
@@ -495,7 +228,7 @@
             <div class="clearfix d-flex justify-content-between">
 
               <!-- Logo : height: 60px max -->
-              <a class="w-100 align-self-center navbar-brand p-3" href="adminindex.jsp">
+              <a class="w-100 align-self-center navbar-brand p-3" href="adminIndex.jsp">
                 <img src="${pageContext.request.getContextPath()}/resources/assets/images/logo/adminlogo.png" width="220" height="40" alt="...">
               </a>
 
@@ -517,131 +250,44 @@
               .nav-deep-hover   hover background slightly different
               .nav-deep-bordered  bordered links
             -->
+            
             <nav class="nav-deep nav-deep-dark nav-deep-hover fs--15 pb-5">
-              <ul class="nav flex-column">
-
-                <li class="nav-item">
-                  <a class="nav-link js-ajax" href="#">
-                    <i class="fi fi-menu-dots"></i>
-                    <b>Dashboard</b>
-                  </a>
-                </li>
-
-
+              <ul style="height:25px"></ul>
+              <ul class="nav flex-column"> 
                 <li class="nav-item active">
                   <a class="nav-link" href="#">
-                    <span class="group-icon float-end">
-                      <i class="fi fi-arrow-end-slim"></i>
-                      <i class="fi fi-arrow-down-slim"></i>
-                    </span>
                     <i class="fi fi-user-male"></i>
                     <!-- <span class="badge badge-warning float-end fs--11 mt-1">new</span> -->
                     회원 관리
-                  </a>
-                
-                  <ul class="nav flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link js-ajax" href="#">
-                        하위 목록
-                      </a>
-                    </li>
-                  </ul>
-
+                  </a>    
 
                   <li class="nav-item">
                     <a class="nav-link" href="#">
-                      <span class="group-icon float-end">
-                        <i class="fi fi-arrow-end-slim"></i>
-                        <i class="fi fi-arrow-down-slim"></i>
-                      </span>
                       <i class="fi fi-task-list"></i>
                       게시글 관리
                     </a>
-
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link js-ajax" href="#">
-                          하위 목록
-                        </a>
-                      </li>
-                    </ul>
                   </li>
-
 
                   <li class="nav-item">
                     <a class="nav-link" href="#">
-                      <span class="group-icon float-end">
-                        <i class="fi fi-arrow-end-slim"></i>
-                        <i class="fi fi-arrow-down-slim"></i>
-                      </span>
                       <i class="fi fi-support"></i>
                       문의 및 신고처리
                     </a>
-
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link js-ajax" href="#">
-                          <span class="badge float-end font-weight-light mt--3 text-gray-400">0건</span>
-                          하위 목록
-                        </a>
-                      </li>
-                      <li class="nav-item pl--15 pr--15">
-                        <div class="bg-diff text-gray-500 fs--13 p-2 rounded">
-                          box
-                        </div>
-                      </li>
-                    </ul>
                   </li>
 
 
                   <li class="nav-item">
                     <a class="nav-link" href="#">
-                      <span class="group-icon float-end">
-                        <i class="fi fi-arrow-end-slim"></i>
-                        <i class="fi fi-arrow-down-slim"></i>
-                      </span>
                                                    💰　결제 관리
                     </a>
-
-                    <ul class="nav flex-column">
-
-                      <li class="nav-item">
-                        <a class="nav-link js-ajax" href="#">
-                          하위 목록
-                        </a>
-                      </li>
-                    </ul>
                   </li>
 
 
                   <li class="nav-item">
                     <a class="nav-link" href="#">
-                      <span class="group-icon float-end">
-                        <i class="fi fi-arrow-end-slim"></i>
-                        <i class="fi fi-arrow-down-slim"></i>
-                      </span>
                       <i class="fi fi-image"></i>
                       배너 관리
                     </a>
-
-                    <ul class="nav flex-column">
-                      <li class="nav-item active">
-                        <a class="nav-link js-ajax" href="#">
-                          <span class="group-icon float-end">
-                            <i class="fi fi-arrow-end-slim"></i>
-                            <i class="fi fi-arrow-down-slim"></i>
-                          </span>
-                          하위 목록
-                        </a>
-                        <ul class="nav flex-column">
-                          <li class="nav-item active">
-                            <a class="nav-link" href="#">
-                              하위 속 하위 목록
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
                   </li>
 
 
@@ -652,57 +298,26 @@
                 <li class="nav-item">
                   <a class="nav-link js-ajax" href="#">
                     <i class="nav-icon fi fi-folder-full"><!-- main icon --></i>
-                    <span class="group-icon float-end">
-                      <i class="fi fi-arrow-end-slim"></i>
-                      <i class="fi fi-arrow-down-slim"></i>
-                    </span>
                     Log
                   </a>
-                  <ul class="nav flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">
-                        하위 목록
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 
                 <li class="nav-item">
                   <a class="nav-link js-ajax" href="#">
                     <i class="nav-icon fi fi-graph"><!-- main icon --></i>
-                    <span class="group-icon float-end">
-                      <i class="fi fi-arrow-end-slim"></i>
-                      <i class="fi fi-arrow-down-slim"></i>
-                    </span>
                     통계
                   </a>
-                  <ul class="nav flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">
-                        하위 목록
-                      </a>
-                    </li>
-                  </ul>
                 </li>
-
 
                 <li class="nav-title mt-5">
-                  <h6 class="fs--15 mb-1 text-white font-weight-normal">Admin Layouts</h6>
+                  <h6 class="fs--15 mb-1 text-white font-weight-normal">Settings</h6>
                 </li>
-
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="#">
-                    <i class="nav-icon fi fi-check text-success"><!-- main icon --></i>
-                    <span class="badge opacity-2 font-weight-light float-end fs--11 mt-1">1</span>
-                    default
-                  </a>
-                </li>
-
+ 
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <i class="nav-icon fi fi-shape-star"><!-- main icon --></i>
-                    <span class="badge opacity-2 font-weight-light float-end fs--11 mt-1">2</span>
-                    default
+                    <span class="badge opacity-2 font-weight-light float-end fs--11 mt-1">1</span>
+                    설정
                   </a>
                 </li>
               </ul>
@@ -711,34 +326,115 @@
           </div>
         </aside>
         <!-- /SIDEBAR -->
-
-        <!-- MIDDLE -->
-        <div id="middle" class="flex-fill">
-
-          <div class="page-title shadow-xs">
-
-            <h1 class="h5 pt-2 mb-0 font-weight-normal">
-              Layout : Sidebar : Dark
-            </h1>
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb breadcrumb-sublime fs--13 pb-2">
-                <li class="breadcrumb-item">
-                  <a href="index.html" class="js-ajax">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">
-                  Layout
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Sidebar
-                </li>
-              </ol>
-            </nav>
-
-          </div>
-
+        
+        <!-- Contents Body -->
+        <div class="col-12 mb-3">
+  <!-- start:portlet -->
+  <div class="portlet">
+    <div class="portlet-body">
+      <div class="container py-6">
+        <!--
+          data-autofill="false|hover|click" 
+          data-enable-paging="true"       false = show all, no pagination
+          data-items-per-page="10|15|30|50|100" 
+        -->
+        <div id="rand_yjK_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div class="row mb-3">
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+        <div id="rand_yjK_filter" class="dataTables_filter">
+        <label><input type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="rand_yjK"></label>
         </div>
-        <!-- /MIDDLE -->
+        <div class="dataTables_length" id="rand_yjK_length">
+        <label><select name="rand_yjK_length" aria-controls="rand_yjK" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="100">100</option><option value="-1">All</option></select></label></div>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
+        <div class="dt-buttons btn-group flex-wrap">
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-12">
+        <table class="table-datatable table table-bordered table-hover table-striped js-datatableified dataTable dtr-inline" data-lng-empty="No data available in table" data-lng-page-info="Showing _START_ to _END_ of _TOTAL_ entries" data-lng-filtered="(filtered from _MAX_ total entries)" data-lng-loading="Loading..." data-lng-processing="Processing..." data-lng-search="Search..." data-lng-norecords="No matching records found" data-lng-sort-ascending=": activate to sort column ascending" data-lng-sort-descending=": activate to sort column descending" data-lng-column-visibility="Column Visibility" data-lng-csv="CSV" data-lng-pdf="PDF" data-lng-xls="XLS" data-lng-copy="Copy" data-lng-print="Print" data-lng-all="All" data-main-search="true" data-column-search="false" data-row-reorder="false" data-col-reorder="true" data-responsive="true" data-header-fixed="true" data-select-onclick="true" data-enable-paging="true" data-enable-col-sorting="true" data-autofill="false" data-group="false" data-items-per-page="10" data-lng-export="<i class='fi fi-squared-dots fs--18 line-height-1'></i>" dara-export-pdf-disable-mobile="true" data-export="[&quot;csv&quot;, &quot;pdf&quot;, &quot;xls&quot;]" data-options="[&quot;copy&quot;, &quot;print&quot;]" id="rand_yjK" role="grid" aria-describedby="rand_yjK_info" style="width: 1168px;">
+        <thead>
+            <tr role="row">
+            <th class="sorting_asc" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="0" style="width: 200px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">날짜</th>
+            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="1" style="width: 300px;" aria-label="Position: activate to sort column ascending">요청</th>
+            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="2" style="width: 150px;" aria-label="Office: activate to sort column ascending">ID</th>
+            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="3" style="width: 200px;" aria-label="Age: activate to sort column ascending">IP주소</th>
+          </thead>
+          
+          <tbody>       
+          <tr role="row" class="odd">
+              <td tabindex="0" class="sorting_1">Airi Satou</td>
+              <td>Accountant</td>
+              <td>Tokyo</td>
+              <td>33</td>
+            </tr><tr role="row" class="even">
+              <td class="sorting_1" tabindex="0">Angelica Ramos</td>
+              <td>Chief Executive Officer (CEO)</td>
+              <td>London</td>
+              <td>47</td>
+            </tr><tr role="row" class="odd">
+              <td tabindex="0" class="sorting_1">Ashton Cox</td>
+              <td>Junior Technical Author</td>
+              <td>San Francisco</td>
+              <td>66</td>
+            </tr><tr role="row" class="even">
+              <td class="sorting_1" tabindex="0">Bradley Greer</td>
+              <td>Software Engineer</td>
+              <td>London</td>
+              <td>41</td>
+            </tr><tr role="row" class="odd">
+              <td class="sorting_1" tabindex="0">Brenden Wagner</td>
+              <td>Software Engineer</td>
+              <td>San Francisco</td>
+              <td>28</td>
+            </tr><tr role="row" class="even">
+              <td tabindex="0" class="sorting_1">Brielle Williamson</td>
+              <td>Integration Specialist</td>
+              <td>New York</td>
+              <td>61</td>
+            </tr><tr role="row" class="odd">
+              <td class="sorting_1" tabindex="0">Bruno Nash</td>
+              <td>Software Engineer</td>
+              <td>London</td>
+              <td>38</td>
+            </tr><tr role="row" class="even">
+              <td class="sorting_1" tabindex="0">Caesar Vance</td>
+              <td>Pre-Sales Support</td>
+              <td>New York</td>
+              <td>21</td>
+            </tr><tr role="row" class="odd">
+              <td class="sorting_1" tabindex="0">Cara Stevens</td>
+              <td>Sales Assistant</td>
+              <td>New York</td>
+              <td>46</td>
+            </tr><tr role="row" class="even">
+              <td tabindex="0" class="sorting_1">Cedric Kelly</td>
+              <td>Senior Javascript Developer</td>
+              <td>Edinburgh</td>
+              <td>22</td>
+            </tr></tbody>
+          <tfoot>
+            <tr>
+            <th rowspan="1" colspan="1">날짜</th>
+            <th rowspan="1" colspan="1">요청</th>
+            <th rowspan="1" colspan="1">ID</th>
+            <th rowspan="1" colspan="1">IP주소</th>
+            </tr>
+          </tfoot>
+        </table></div></div>
+        <div class="row">
+        <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="rand_yjK_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="rand_yjK_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="rand_yjK_previous"><a href="#" aria-controls="rand_yjK" data-dt-idx="0" tabindex="0" class="page-link"><i class="fi fi-arrow-start fs--13"></i></a></li><li class="paginate_button page-item active"><a href="#" aria-controls="rand_yjK" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="rand_yjK" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="rand_yjK" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="rand_yjK" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="rand_yjK" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="rand_yjK" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="rand_yjK_next"><a href="#" aria-controls="rand_yjK" data-dt-idx="7" tabindex="0" class="page-link"><i class="fi fi-arrow-end fs--13"></i></a></li></ul></div></div></div></div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- end:portlet -->
+
+</div>        
 
       </div>
 
@@ -814,7 +510,20 @@
 
     <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
 
-    <div id="page_js_files"><!-- specific page javascript files here --></div>
-
+    <div id="page_js_files">specific page javascript files here</div>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script>
+	    $(document).ready(function() { 
+	    	var expireTime = ${expire};
+	      setInterval(function() {
+	        $("#sessionExpire").html("세션 만료 : " + --expireTime + "초 남음");
+	        
+	        if(expireTime == 0) {
+	        	window.location.href="loginForm";
+	        }
+	        
+	      }, 1000);
+	    });
+    </script>
   </body>
 </html>
