@@ -1,4 +1,4 @@
-package com.portfoli.admin;
+package com.portfoli.domain;
 
 import java.io.Serializable;
 
