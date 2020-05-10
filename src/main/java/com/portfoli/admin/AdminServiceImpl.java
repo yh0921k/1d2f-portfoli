@@ -1,6 +1,7 @@
 package com.portfoli.admin;
 
 import java.util.HashMap;
+import org.springframework.stereotype.Component;
 
 @Component
 public class AdminServiceImpl implements AdminService {
