@@ -355,6 +355,9 @@ INSERT INTO pf_notice_category (category_no, name) VALUES(7, "유형7");
 INSERT INTO pf_notice_category (category_no, name) VALUES(8, "유형8");
 INSERT INTO pf_notice_category (category_no, name) VALUES(9, "유형9"); 
 INSERT INTO pf_notice_category (category_no, name) VALUES(10, "유형10");
+INSERT INTO pf_notice_category (category_no, name) VALUES(11, "유형11");
+INSERT INTO pf_notice_category (category_no, name) VALUES(12, "유형12");
+INSERT INTO pf_notice_category (category_no, name) VALUES(13, "유형13");
 
 -- 공지사항 예제데이터 (pf_notice)
 INSERT INTO pf_notice (board_no, category_no) VALUES(11,1);
@@ -368,33 +371,33 @@ INSERT INTO pf_notice (board_no, category_no) VALUES(18,8);
 INSERT INTO pf_notice (board_no, category_no) VALUES(19,9);
 INSERT INTO pf_notice (board_no, category_no) VALUES(20,10);
 
--- 질문분류 예제데이터 (pf_question_class)
-INSERT INTO pf_question_class(question_no, category) VALUES(1, "질문유형1");
-INSERT INTO pf_question_class(question_no, category) VALUES(2, "질문유형2");
-INSERT INTO pf_question_class(question_no, category) VALUES(3, "질문유형3");
-INSERT INTO pf_question_class(question_no, category) VALUES(4, "질문유형4");
-INSERT INTO pf_question_class(question_no, category) VALUES(5, "질문유형5");
+-- 질문분류 예제데이터 (pf_question_category)
+INSERT INTO pf_question_category(category_no, name) VALUES(1, "질문유형1");
+INSERT INTO pf_question_category(category_no, name) VALUES(2, "질문유형2");
+INSERT INTO pf_question_category(category_no, name) VALUES(3, "질문유형3");
+INSERT INTO pf_question_category(category_no, name) VALUES(4, "질문유형4");
+INSERT INTO pf_question_category(category_no, name) VALUES(5, "질문유형5");
 
 -- qna질문 예제데이터 (pf_qna)
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(21, 1, 5, 1, 1, 1, "내용입니다", "2020-04-01 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(22, 2, 1, 1, 0, 1, "내용입니다", "2020-04-01 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(23, 3, 1, 0, 1, 0, "내용입니다", "2020-04-01 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(24, 4, 2, 0, 0, 0, "내용입니다", "2020-04-01 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(25, 5, 2, 0, 0, 0, "내용입니다", "2020-04-02 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(26, 6, 2, 0, 1, 1, "내용입니다", "2020-04-02 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(27, 7, 3, 1, 1, 0, "내용입니다", "2020-04-02 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(28, 8, 3, 0, 0, 1, "내용입니다", "2020-04-02 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(29, 9, 3, 0, 0, 0, "내용입니다", "2020-04-02 00:00:00");
-INSERT INTO pf_qna(board_no, member_no, question_no, readable, email_notification, sms_notification, content, answer_date)
+INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(30,10,4, 1, 1, 1, "내용입니다", "2020-04-01 00:00:00");
 
 -- 게시글추천 예제데이터 (pf_recommendation)

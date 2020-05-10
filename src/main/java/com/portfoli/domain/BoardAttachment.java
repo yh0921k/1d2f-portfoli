@@ -51,26 +51,30 @@ public class BoardAttachment implements Serializable {
   public int getAttachmentNumber() {
     return attachmentNumber;
   }
-  public void setAttachmentNumber(int attachmentNumber) {
+  public BoardAttachment setAttachmentNumber(int attachmentNumber) {
     this.attachmentNumber = attachmentNumber;
+    return this;
   }
   public int getBoardNumber() {
     return boardNumber;
   }
-  public void setBoardNumber(int boardNumber) {
+  public BoardAttachment setBoardNumber(int boardNumber) {
     this.boardNumber = boardNumber;
+    return this;
   }
   public String getFileName() {
     return fileName;
   }
-  public void setFileName(String fileName) {
+  public BoardAttachment setFileName(String fileName) {
     this.fileName = fileName;
+    return this;
   }
   public String getFilePath() {
     return filePath;
   }
-  public void setFilePath(String filePath) {
+  public BoardAttachment setFilePath(String filePath) {
     this.filePath = filePath;
+    return this;
   }
 
   

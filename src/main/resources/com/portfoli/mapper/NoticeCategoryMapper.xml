@@ -9,12 +9,21 @@
     <result column="name" property="name" /> <!-- 게시글 분류명 -->
   </resultMap>
 
-  <select id="findAll" resultMap="NoticeCategoryMap">
+  <select id="findAll" resultMap="NoticeCategoryMap" parameterType="NoticeCategory">
     SELECT 
       category_no, 
       name 
     from pf_notice_category
     ORDER BY category_no asc
+    <if test="startIndex != null and startIndex != ''">
+    limit ${startIndex}, ${pageSize}
+    </if>
+  </select>
+
+    <select id="selectListCnt" resultType="int" parameterType="int">
+    SELECT 
+      count(*)
+    from pf_notice_category
   </select>
   
   <select id="findByNo" resultMap="NoticeCategoryMap" parameterType="int">

@@ -1,6 +1,7 @@
 package com.portfoli.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Notice;
 
 public interface NoticeDao {
@@ -20,6 +21,8 @@ public interface NoticeDao {
   int update(Notice notice) throws Exception;
 
   int selectListCnt() throws Exception;
+
+  int updateCategory(Map<String, Integer> map) throws Exception;
 
 
 

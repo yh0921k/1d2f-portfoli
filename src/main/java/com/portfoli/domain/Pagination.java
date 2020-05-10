@@ -63,13 +63,15 @@ public class Pagination {
     setStartIndex(curPage);
   }
 
-  public void setPageCnt(int listCnt) {
+  public Pagination setPageCnt(int listCnt) {
     this.pageCnt = (int) Math.ceil(listCnt*1.0/pageSize);
+    return this;
   }
-  public void setRangeCnt(int pageCnt) {
+  public Pagination setRangeCnt(int pageCnt) {
     this.rangeCnt = (int) Math.ceil(pageCnt*1.0/rangeSize);
+    return this;
   }
-  public void rangeSetting(int curPage){
+  public Pagination rangeSetting(int curPage){
 
     setCurRange(curPage);
     this.startPage = (curRange - 1) * rangeSize + 1;
@@ -81,12 +83,15 @@ public class Pagination {
 
     this.prevPage = curPage - 1;
     this.nextPage = curPage + 1;
+    return this;
   }
-  public void setCurRange(int curPage) {
+  public Pagination setCurRange(int curPage) {
     this.curRange = (curPage-1)/rangeSize + 1;
+    return this;
   }
-  public void setStartIndex(int curPage) {
+  public Pagination setStartIndex(int curPage) {
     this.startIndex = (curPage-1) * pageSize;
+    return this;
   }
 
 
@@ -94,7 +99,7 @@ public class Pagination {
     return pageSize;
   }
 
-  public void setPageSize(int pageSize) {
+  public Pagination setPageSize(int pageSize) {
     this.pageSize = pageSize;
 
     /** 1. 총 페이지 수 **/
@@ -106,62 +111,70 @@ public class Pagination {
 
     /** DB 질의를 위한 startIndex 설정 **/
     setStartIndex(curPage);
+    return this;
   }
 
   public int getRangeSize() {
     return rangeSize;
   }
 
-  public void setRangeSize(int rangeSize) {
+  public Pagination setRangeSize(int rangeSize) {
     this.rangeSize = rangeSize;
+    return this;
   }
 
   public int getCurPage() {
     return curPage;
   }
 
-  public void setCurPage(int curPage) {
+  public Pagination setCurPage(int curPage) {
     this.curPage = curPage;
+    return this;
   }
 
   public int getListCnt() {
     return listCnt;
   }
 
-  public void setListCnt(int listCnt) {
+  public Pagination setListCnt(int listCnt) {
     this.listCnt = listCnt;
+    return this;
   }
 
   public int getStartPage() {
     return startPage;
   }
 
-  public void setStartPage(int startPage) {
+  public Pagination setStartPage(int startPage) {
     this.startPage = startPage;
+    return this;
   }
 
   public int getEndPage() {
     return endPage;
   }
 
-  public void setEndPage(int endPage) {
+  public Pagination setEndPage(int endPage) {
     this.endPage = endPage;
+    return this;
   }
 
   public int getPrevPage() {
     return prevPage;
   }
 
-  public void setPrevPage(int prevPage) {
+  public Pagination setPrevPage(int prevPage) {
     this.prevPage = prevPage;
+    return this;
   }
 
   public int getNextPage() {
     return nextPage;
   }
 
-  public void setNextPage(int nextPage) {
+  public Pagination setNextPage(int nextPage) {
     this.nextPage = nextPage;
+    return this;
   }
 
   public int getCurRange() {

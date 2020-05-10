@@ -42,21 +42,21 @@
                 src/scss/_core/base/_typography.scss
               -->
               <div class="bg-white p-5 p-4-xl rounded-xl article-format">
-              <button onclick="location.href='form'">공지사항 파워추가</button>
+              <button style="float: right; font-size: small" onclick="location.href='form'">글쓰기(+)</button>
                 <table border='1' style="width: 100%">
-                <tr>
-                  <td width="15%">유형</td>
-                  <td width="55%">제목</td>
-                  <td width="15%">등록일</td>
-                  <td width="15%">조회수</td>
+                <tr style="background-color: #e8e8e8;">
+                  <td style="padding: 10px 0px;" width="15%" align="center">유 형</td>
+                  <td style="padding: 10px 0px;" width="55%" align="center">제  목</td>
+                  <td style="padding: 10px 0px;" width="15%" align="center">등록일</td>
+                  <td style="padding: 10px 0px;" width="15%" align="center">조회수</td>
                 </tr>
                 
             <c:forEach items="${list}" var="item">
             <tr>
-              <td><a href="detail?number=${item.number}">${item.categoryName}</a></td>
-              <td><a href="detail?number=${item.number}">${item.title}</a></td>
-              <td><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
-              <td><a href="detail?number=${item.number}">${item.viewCount}</a></td>
+              <td style="padding: 5px 5px;"><a href="detail?number=${item.number}">${item.categoryName}</a></td>
+              <td style="padding: 5px 5px;"><a href="detail?number=${item.number}">${item.title}</a></td>
+              <td align="center"><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
+              <td style="padding: 5px 5px;"><a href="detail?number=${item.number}">${item.viewCount}</a></td>
             </tr>
             </c:forEach>
                 

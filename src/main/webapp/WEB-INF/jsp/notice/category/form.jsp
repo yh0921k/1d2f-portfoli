@@ -46,8 +46,9 @@
 							<div class="bg-white p-5 p-4-xs rounded-xl article-format">
 							 -->
 							 
+							 <h1>공지사항 카테고리 등록</h1>
 							 <form action="add" method="post" enctype="multipart/form-data">
-                <table border='1' style='width:100%'>
+                <table border='1' style='width:50%'>
 
                 <tr>
                  <td align="center">카테고리 번호</td>

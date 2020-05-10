@@ -7,7 +7,9 @@ public class NoticeCategory implements Serializable {
 
   private int categoryNumber;
   private String name;
-  
+  private int startIndex;
+  private int pageSize;
+
   @Override
   public String toString() {
     return "NoticeCategory [categoryNumber=" + categoryNumber + ", name=" + name + "]";
@@ -17,7 +19,7 @@ public class NoticeCategory implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + categoryNumber;
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + (name == null ? 0 : name.hashCode());
     return result;
   }
   @Override
@@ -41,21 +43,38 @@ public class NoticeCategory implements Serializable {
   public int getCategoryNumber() {
     return categoryNumber;
   }
-  public void setCategoryNumber(int categoryNumber) {
+  public NoticeCategory setCategoryNumber(int categoryNumber) {
     this.categoryNumber = categoryNumber;
+    return this;
   }
   public String getName() {
     return name;
   }
-  public void setName(String name) {
+  public NoticeCategory setName(String name) {
     this.name = name;
+    return this;
+  }
+  public int getPageSize() {
+    return pageSize;
+  }
+  public NoticeCategory setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+    return this;
+  }
+  public int getStartIndex() {
+    return startIndex;
+  }
+  public NoticeCategory setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+    return this;
   }
 
 
-  
 
-  
-  
+
+
+
+
 
 
 

@@ -32,6 +32,11 @@ public class NoticeCategoryServiceImpl implements NoticeCategoryService {
   }
 
   @Override
+  public List<NoticeCategory> list(NoticeCategory noticeCategory) throws Exception {
+    return noticeCategoryDao.findAll(noticeCategory);
+  }
+
+  @Override
   public NoticeCategory get(int number) throws Exception {
     return noticeCategoryDao.findByNo(number);
   }
@@ -39,6 +44,11 @@ public class NoticeCategoryServiceImpl implements NoticeCategoryService {
   @Override
   public boolean delete(int number) throws Exception {
     return noticeCategoryDao.delete(number) > 0;
+  }
+
+  @Override
+  public int selectListCnt(NoticeCategory noticeCategory) throws Exception {
+    return noticeCategoryDao.selectListCnt();
   }
 
 

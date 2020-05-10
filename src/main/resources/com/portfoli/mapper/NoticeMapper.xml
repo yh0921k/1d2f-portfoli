@@ -28,7 +28,9 @@
     LEFT OUTER JOIN pf_board b 
     ON n.board_no = b.board_no 
     order by b.registered_date desc, n.board_no desc
+    <if test="startIndex != null and startIndex != ''">
     limit ${startIndex}, ${pageSize}
+    </if>
   </select>
   
   <select id="selectListCnt" resultType="int" parameterType="int">
@@ -79,6 +81,14 @@
        category_no = #{categoryNumber}
      </set>
      WHERE board_no = #{number}
+  </update>
+  
+  <update id="updateCategory" parameterType="Map">
+     UPDATE pf_notice
+     <set>
+       category_no = #{targetCategoryNumber}
+     </set>
+     WHERE category_no = #{sourceCategoryNumber}
   </update>
 
 </mapper>

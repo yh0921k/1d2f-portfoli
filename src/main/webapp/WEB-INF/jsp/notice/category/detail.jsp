@@ -50,18 +50,21 @@
             <c:if test="${not empty category}">
             <table border='1' style="width: 100%;">
             <tr>
-              <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value="카테고리 번호"/></td>
-              <td width="70%"><input readonly="readonly" style="border-color:transparent; resize:none;" name="categoryNumber" value='${category.categoryNumber}'/></td>
+              <td class="TD" width="30%">카테고리 번호</td>
+              <td class="TD2" width="70%">
+              <input value=${category.categoryNumber} readonly="readonly" style="border-color:transparent; resize:none;" name="categoryNumber"/>
+              </td>
             </tr>
             <tr>
-              <td width="30%"><input readonly="readonly" style="border-color:transparent; resize:none;" value='카테고리 내용'/></td>
-              <td width="70%"><input readonly="readonly" style="border-color:transparent; resize:none;" name="name" value='${category.name}'/></td>
+              <td class="TD" width="30%">카테고리 내용</td>
+              <td class="TD2" width="70%"><input readonly="readonly" style="border-color:transparent; resize:none;" name="name" value='${category.name}'/></td>
             </tr>
             <tr>
-            <td colspan="2">
-            <button>수정</button>
-            <span>←←←←←강제삭제: 수정버튼 클릭+강제삭제</span>
-            <input type="button" onclick="location.href='delete?categoryNumber=${category.categoryNumber}'" value="삭제"/>
+            <td class="padding" colspan="2" align="left" style="background-color: lightGray">
+            <button>수정 (혹은 강제삭제)</button>
+            <div style="display: inline-block; float:right;">
+              <input type="button" onclick="location.href='delete?categoryNumber=${category.categoryNumber}'" value="삭제"/>
+            </div>
             </td>
             </tr>
             </table>
@@ -82,4 +85,15 @@
 
 
 
+  <style>
+    .TD{
+      padding: 10px 0px; text-align: center;
+    }
+    .TD2{
+      padding: 10px 10px;
+    }
+    .padding{
+      padding:5px 5px;
+    }
+  </style>
 		  <jsp:include page="../../footer.jsp"/>

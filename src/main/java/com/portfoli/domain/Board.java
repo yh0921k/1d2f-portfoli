@@ -9,15 +9,17 @@ public /*abstract*/ class Board implements java.io.Serializable{
   String content;
   int viewCount;
   Date registeredDate;
-  
+  protected int startIndex;
+  protected int pageSize;
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((content == null) ? 0 : content.hashCode());
+    result = prime * result + (content == null ? 0 : content.hashCode());
     result = prime * result + number;
-    result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
-    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    result = prime * result + (registeredDate == null ? 0 : registeredDate.hashCode());
+    result = prime * result + (title == null ? 0 : title.hashCode());
     result = prime * result + viewCount;
     return result;
   }
@@ -59,35 +61,62 @@ public /*abstract*/ class Board implements java.io.Serializable{
   public int getNumber() {
     return number;
   }
-  public void setNumber(int number) {
+  public Board setNumber(int number) {
     this.number = number;
+    return this;
   }
   public String getTitle() {
     return title;
   }
-  public void setTitle(String title) {
+  public Board setTitle(String title) {
     this.title = title;
+    return this;
   }
   public String getContent() {
     return content;
   }
-  public void setContent(String content) {
+  public Board setContent(String content) {
     this.content = content;
+    return this;
   }
   public int getViewCount() {
     return viewCount;
   }
-  public void setViewCount(int viewCount) {
+  public Board setViewCount(int viewCount) {
     this.viewCount = viewCount;
+    return this;
   }
   public Date getRegisteredDate() {
     return registeredDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
+  public Board setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+    return this;
+  }
+  public Board setBoard(Board board) {
+    this.number = board.number;
+    this.title = board.title;
+    this.content = board.content;
+    this.viewCount = board.viewCount;
+    this.registeredDate = board.registeredDate;
+    return this;
+  }
+  public int getPageSize() {
+    return pageSize;
+  }
+  public Board setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+    return this;
+  }
+  public int getStartIndex() {
+    return startIndex;
+  }
+  public Board setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+    return this;
   }
 
-  
+
 
 
 
