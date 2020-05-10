@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Configuration status="INFO">
+<Configuration status="DEBUG">
 	<Appenders>
 		<Console name="console" target="SYSTEM_OUT">
 			<PatternLayout
 				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
 		</Console>
+		
+		<RollingFile name="file" fileName="C:/Users/kyh/eclipse-workspace/workspace01/.metadata/.plugins\org.eclipse.wst.server.core/tmp0/wtpwebapps/portfoli/WEB-INF/log/portfoli.log" filePattern="C:/Users/kyh/eclipse-workspace/workspace01/.metadata/.plugins\org.eclipse.wst.server.core/tmp0/wtpwebapps/portfoli/WEB-INF/log/logs/portfoli_%d{yyyy-MM-dd}_%i.log">
+	   <PatternLayout pattern="%msg%n" />
+	   <Policies>
+	    <SizeBasedTriggeringPolicy size="10MB" /> <!-- 10MB 용량이 초과시 DefaultRolloverStrategy 정책만큼 넘버링 -->      
+	    <TimeBasedTriggeringPolicy module="true" interval="1" /><!-- 일별 로그 파일 생성-->
+	   </Policies>
+	   <DefaultRolloverStrategy max="500" fileIndex="min" /><!-- 롤링 파일 500개 까지 생성 -->
+  </RollingFile>
+  
 	</Appenders>
 
 	<Loggers>
@@ -14,8 +24,12 @@
 			<AppenderRef ref="console" />
 		</Logger>
 
-		<Root level="info" additivity="false">
+		<Root level="debug" additivity="false">
 			<AppenderRef ref="console" />
 		</Root>
+    
+    <Logger name="runMode" level="info" additivity="false">
+            <AppenderRef ref="file"/>
+    </Logger>
 	</Loggers>
 </Configuration>

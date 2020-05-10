@@ -27,6 +27,8 @@ public class AppWebConfig {
         "/WEB-INF/jsp/", // prefix
         ".jsp" // suffix
     );
+    vr.setOrder(2);
+    logger.info("[viewResolver] : " + vr.toString());
     return vr;
   }
 

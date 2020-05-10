@@ -5,15 +5,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @ComponentScan(value = "com.portfoli.admin")
 @EnableWebMvc
-public class AdminWebConfig {
+public class AdminWebConfig implements WebMvcConfigurer {
 
   static Logger logger = LogManager.getLogger(AdminWebConfig.class);
 
@@ -22,20 +23,20 @@ public class AdminWebConfig {
   }
 
   @Bean
-  public ViewResolver viewResolver() {
-    InternalResourceViewResolver vr = new InternalResourceViewResolver( //
-        "/WEB-INF/admin/", // prefix
-        ".jsp" // suffix
-    );
+  public ViewResolver adminViewResolver() {
+    UrlBasedViewResolver vr = new UrlBasedViewResolver();
+    vr.setPrefix("/WEB-INF/jsp/");
+    vr.setSuffix(".jsp");
+    vr.setOrder(1);
+    vr.setViewClass(JstlView.class);
+    logger.info("[adminViewResolver] : " + vr.toString());
     return vr;
   }
 
-  @Bean
-  public MultipartResolver multipartResolver() {
-    CommonsMultipartResolver mr = new CommonsMultipartResolver();
-    mr.setMaxUploadSize(10000000);
-    mr.setMaxInMemorySize(2000000);
-    mr.setMaxUploadSizePerFile(5000000);
-    return mr;
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new AdminControllerInterceptor())//
+        .addPathPatterns("/admin/**"); //
+    // .excludePathPatterns();
   }
 }
