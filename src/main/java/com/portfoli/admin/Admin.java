@@ -9,7 +9,7 @@ public class Admin implements Serializable {
   String id;
   String password;
   String ipAddress;
-  String AccessTime;
+  String accessTime;
 
   public int getNumber() {
     return number;
@@ -44,18 +44,18 @@ public class Admin implements Serializable {
   }
 
   public String getAccessTime() {
-    return AccessTime;
+    return accessTime;
   }
 
   public void setAccessTime(String accessTime) {
-    AccessTime = accessTime;
+    this.accessTime = accessTime;
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((AccessTime == null) ? 0 : AccessTime.hashCode());
+    result = prime * result + ((accessTime == null) ? 0 : accessTime.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
     result = prime * result + ((ipAddress == null) ? 0 : ipAddress.hashCode());
     result = prime * result + number;
@@ -72,10 +72,10 @@ public class Admin implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Admin other = (Admin) obj;
-    if (AccessTime == null) {
-      if (other.AccessTime != null)
+    if (accessTime == null) {
+      if (other.accessTime != null)
         return false;
-    } else if (!AccessTime.equals(other.AccessTime))
+    } else if (!accessTime.equals(other.accessTime))
       return false;
     if (id == null) {
       if (other.id != null)
@@ -100,6 +100,6 @@ public class Admin implements Serializable {
   @Override
   public String toString() {
     return "Admin [number=" + number + ", id=" + id + ", password=" + password + ", ipAddress="
-        + ipAddress + ", AccessTime=" + AccessTime + "]";
+        + ipAddress + ", AccessTime=" + accessTime + "]";
   }
 }
