@@ -128,14 +128,14 @@ public class MemberServiceImpl implements MemberService {
     if (memberType == 1) {
       if (generalMemberDao.delete(memberNumber) > 0) {
         if (memberDao.delete(params) == 0) {
-          throw new RuntimeException();
+          throw new RuntimeException("회원 삭제 실패. 비밀번호를 확인해 주세요.");
         }
         return 1;
       }
     } else if (memberType == 2) {
       if (companyMemberDao.delete(memberNumber) > 0) {
         if (memberDao.delete(params) == 0) {
-          throw new RuntimeException();
+          throw new RuntimeException("회원 삭제 실패. 비밀번호를 확인해 주세요.");
         }
         return 1;
       }

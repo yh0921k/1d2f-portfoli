@@ -173,14 +173,18 @@ public class MemberController {
   public void companyAddForm() {}
 
   @PostMapping("companyJoin")
-  public String companyAdd(Member member, CompanyMember companyMember,
+  public ModelAndView companyAdd(Member member, CompanyMember companyMember,
       @RequestParam("businessRegistrationNumber") String businessRegistrationNumber,
       HttpServletRequest request) throws Exception {
 
     Company company = companyService.getByBusinessRegistrationNumber(businessRegistrationNumber);
     if (memberService.add(member, companyMember, company.getNumber()) > 0) {
+      ModelAndView mv = new ModelAndView();
+      mv.addObject("message1", "입력하신 이메일로 이메일 인증 메일을 발송하였습니다.");
+      mv.addObject("message2", "인증 후 로그인하실 수 있습니다.");
+      mv.setViewName("messageView");
       mailsender.mailSendWithUserKey(member.getEmail(), member.getId(), member.getName(), request);
-      return "redirect:/";
+      return mv;
     } else {
       throw new Exception("회원을 추가할 수 없습니다.");
     }
@@ -200,7 +204,7 @@ public class MemberController {
       request.getSession().invalidate();
       return "redirect:/";
     } else {
-      throw new Exception("회원 삭제 실패");
+      throw new Exception("회원 삭제 실패. 비밀번호를 확인해 주세요.");
     }
   }
 

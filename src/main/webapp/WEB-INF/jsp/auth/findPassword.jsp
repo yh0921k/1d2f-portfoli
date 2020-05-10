@@ -81,18 +81,14 @@
 
 
 					<!-- optional class: .form-control-pill -->
-					<form novalidate action="#" method="POST"
-						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600">
-
-						<!--
-							<p class="text-danger">
-								Ups! Please check again
-							</p>
-							-->
+					<form action="findPassword" method="POST"
+						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600"
+						data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
+						data-error-toast-delay="3000"
+						data-error-toast-position="top-right" data-error-scroll-up="true" >
 
 						<div class="form-label-group mb-3">
-							<input required placeholder="Email" id="email"
-								name="email" type="email" class="form-control">
+							<input required placeholder="Email" id="email" name="email" type="email" class="form-control">
 							<label for="email">이메일</label>
 						</div>
 

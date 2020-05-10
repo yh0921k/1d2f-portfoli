@@ -59,6 +59,19 @@
           }
         }
       }
+      
+      function check() {
+  		
+  		var check = document.getElementById('same').innerHTML;
+  		
+  		  if(check==='비밀번호가 일치합니다.') {
+  		    return true;
+  		  }else{
+  		    alert("비밀번호를 확인해 주세요.");
+  		    return false;
+  		  }
+  	}
+      
     </script>
 
 <meta name="theme-color" content="#377dff" />
@@ -94,7 +107,7 @@
 						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600"
 						data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
 						data-error-toast-delay="3000"
-						data-error-toast-position="top-right" data-error-scroll-up="true">
+						data-error-toast-position="top-right" data-error-scroll-up="true" onsubmit="return check();">
 						<!--
               <p class="text-danger">
                 Ups! Please check again
@@ -150,8 +163,7 @@
 								<i class="fi fi-close m-0"></i>
 							</a>
 						</div>
-						<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">인증
-							이메일을 보냈습니다.</div>
+						<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">해당 이메일로 이메일 인증을 진행 해 주세요.</div>
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="비밀번호" name="password" id="password"
@@ -203,8 +215,8 @@
 
 						<div class="row">
 							<div class="col-12 col-md-8">
-								<button type="submit" class="btn btn-primary btn-block"
-									style="display: block; margin: 0 90px;">회원가입</button>
+								<input type="submit" class="btn btn-primary btn-block"
+									style="display: block; margin: 0 90px;" value="회원가입">
 
 							</div>
 

@@ -6,7 +6,6 @@
 <jsp:include page="../header.jsp" />
 
 <script>
-
 function execPostCode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -45,7 +44,19 @@ function execPostCode() {
     }).open();
 }
 
-  
+function check() {
+	
+	var delete1 = document.getElementById('requiredDelete1').checked;
+	var delete2 = document.getElementById('requiredDelete2').checked;
+	var delete3 = document.getElementById('requiredDelete3').checked;
+	  if(delete1&& delete2&&delete3) {
+	    return true;
+	  }else{
+	    alert("탈퇴 안내에 모두 동의해 주세요.");
+	    return false;
+	  }
+}
+
 </script>
 
 <meta name="theme-color" content="#377dff">
@@ -97,11 +108,10 @@ function execPostCode() {
 						</a>
 
 							<ul class="nav flex-column px-2 font-weight-bold">
-								<li class="nav-item font-weight-bold"><a class="nav-link"
-									href="#"> 내 프로필 수정하기 </a></li>
-								<li class="nav-item font-weight-bold active"><a
+								<li class="nav-item active"><a
 									class="nav-link" href="/portfoli/app/member/generalUpdate">
 										내 정보 수정하기 </a></li>
+								<li class="nav-item"><a class="nav-link" href="#"> 멤버쉽 </a></li>
 							</ul></li>
 
 						<li class="nav-item font-weight-bold"><a class="nav-link"
@@ -118,7 +128,6 @@ function execPostCode() {
 									href="/portfoli/app/message/sent"> 보낸 쪽지함 </a></li>
 							</ul></li>
 
-
 						<li class="nav-item"><a class="nav-link "
 							href="account-orders.html"> <i
 								class="fi fi-arrow-end m-0 fs--12"></i> <span
@@ -129,12 +138,6 @@ function execPostCode() {
 							href="account-favourites.html"> <i
 								class="fi fi-arrow-end m-0 fs--12"></i> <span
 								class="px-2 d-inline-block"> 포트폴리오 관리 </span>
-						</a></li>
-
-						<li class="nav-item"><a class="nav-link "
-							href="account-settings.html"> <i
-								class="fi fi-arrow-end m-0 fs--12"></i> <span
-								class="px-2 d-inline-block"> 멤버쉽 </span>
 						</a></li>
 
 
@@ -174,6 +177,9 @@ function execPostCode() {
 
 						<li class="nav-item"><a class="nav-link nav-link-remember"
 							data-toggle="tab" href="#tab_address">주소</a></li>
+
+						<li class="nav-item"><a class="nav-link nav-link-remember"
+							data-toggle="tab" href="#tab_profile">프로필</a></li>
 					</ul>
 
 
@@ -311,9 +317,9 @@ function execPostCode() {
 												<div class="col-12 col-sm-6 col-md-6">
 
 													<div class="form-label-group mb-3">
-														<input placeholder="tel" id="tel" name="tel"
-															type="text" class="form-control" value=${member.tel}>
-														<label for="tel">연락처</label>
+														<input placeholder="tel" id="tel" name="tel" type="text"
+															class="form-control" value=${member.tel}> <label
+															for="tel">연락처</label>
 													</div>
 
 												</div>
@@ -364,9 +370,8 @@ function execPostCode() {
 						<div class="p-4 shadow-xs rounded mb-4 bg-white">
 							<a href="#user_edit_password"
 								class="btn-toggle btn fs--14 btn-light collapsed"
-								data-toggle="collapse" aria-expanded="false"
-								onclick="jQuery('#user_password_current, #user_password_new').val('');">
-								<span class="group-icon float-start"> <i
+								data-toggle="collapse" aria-expanded="false" onclick=""> <span
+								class="group-icon float-start"> <i
 									class="fi fi-arrow-down"></i> <i class="fi fi-close"></i>
 							</span> &nbsp; 비밀번호 변경
 							</a>
@@ -380,8 +385,8 @@ function execPostCode() {
 											<div class="input-group-over">
 												<div class="form-label-group mb-3">
 													<input required placeholder="password" id="password"
-														name="password" type="password" class="form-control"> <label for="password">현재
-														비밀번호</label>
+														name="password" type="password" class="form-control">
+													<label for="password">현재 비밀번호</label>
 												</div>
 
 												<!-- `SOW : Form Advanced` plugin used -->
@@ -419,66 +424,95 @@ function execPostCode() {
 							</div>
 
 						</div>
-
 					</div>
-					<!-- /PASSWORD -->
 
+					<!-- /PASSWORD -->
 
 
 					<!-- DELETE ACCOUNT -->
 					<div class="clearfix mt--60">
-						<form method="post" action="delete">
+						<form method="post" action="delete" onsubmit="return check();">
 
 							<div class="text-align-end">
+
 								<a href="#account_deactivate_confirm"
 									class="text-gray-500 text-decoration-none font-light collapsed"
-									data-toggle="collapse" aria-expanded="false"
-									onclick="jQuery('#user_password_current, #user_password_new').val('');">
-									<span class="group-icon fs--13"> <i
-										class="fi fi-arrow-down"></i> <i class="fi fi-close"></i>
+									data-toggle="collapse" aria-expanded="false" onclick=""> <span
+									class="group-icon fs--13"> <i class="fi fi-arrow-down"></i>
+										<i class="fi fi-close"></i>
 								</span> <span class="pl-2 pr-2"> 회원 탈퇴하기 </span>
 								</a>
 							</div>
 
-
 							<div id="account_deactivate_confirm" class="collapse" style="">
+
+								<div class="alert b-0 bg-primary-soft mt-3 mb-5 p-4 clearfix">
+									<label
+										class="form-switch form-switch-pill form-switch-primary d-block">
+										<input type="checkbox" value="0" id="requiredDelete1"><i
+										data-on="OK" data-off="no"></i> <span class="h6">Portfoli아이디
+											이용복구 불가 안내</span>
+										<p>
+											<br>- 회원탈퇴 진행 시, 기존 아이디를 재사용하거나 복구할 수 없습니다. <br>
+											신중히 선택하신 후 결정해 주세요.
+										</p>
+									</label>
+								</div>
+
+								<div class="alert b-0 bg-primary-soft mt-3 mb-5 p-4 clearfix">
+									<label
+										class="form-switch form-switch-pill form-switch-primary d-block">
+										<input type="checkbox" value="0" id="requiredDelete2">
+										<i data-on="OK" data-off="no"></i> <span class="h6">개인
+											정보 및 서비스 이용기록 삭제 안내</span>
+										<p>
+											<br>- 결제내역, 채용정보, 쪽지 등 모든 서비스 이용기록이 삭제되며, 삭제된 데이터는 복구되지
+											않습니다. <br> 필요한 데이터는 미리 백업해 주세요.
+										</p>
+									</label>
+								</div>
+
+								<div class="alert b-0 bg-primary-soft mt-3 mb-5 p-4 clearfix">
+									<label
+										class="form-switch form-switch-pill form-switch-primary d-block">
+										<input type="checkbox" value="0" id="requiredDelete3">
+										<i data-on="OK" data-off="no"></i> <span class="h6">등록한
+											게시글 삭제 불가 안내</span>
+										<p>
+											<br>- 포트폴리오, Q&A 등 삭제를 원하는 게시글이 있다면 반드시 회원 탈퇴 전에 삭제해
+											주세요.
+										</p>
+
+
+									</label>
+
+								</div>
 
 								<div class="alert b-0 bg-danger-soft mt-3 mb-5 p-4 clearfix">
 
-									<p>주의: 한 번 지워진 계정은 복구할 수 없습니다. 다시 한 번 생각해주세요.</p>
+									<p class="text-center">주의: 한 번 지워진 계정은 복구할 수 없습니다. 다시 한 번
+										생각해주세요.</p>
 
 
 									<i
 										class="arrow arrow-lg arrow-bottom arrow-center border-danger-soft"></i>
 								</div>
-
 								<div class="row mb--60">
 
 									<div class="col-12 offset-lg-2 col-lg-7">
 
-										<div class="input-group-over">
-											<div class="form-label-group mb-1">
-												<input placeholder="currentPassword"
-													id="currentPassword"
-													name="currentPassword" type="password"
-													class="form-control"> <label
-													for="currentPassword">현재 비밀번호</label>
-											</div>
 
-											<!-- `SOW : Form Advanced` plugin used -->
-											<a href="#" class="btn fs--12 btn-password-type-toggle"
-												data-target="#account_del_current_password"> <span
-												class="group-icon"> <i class="fi fi-eye m-0"></i> <i
-													class="fi fi-close m-0"></i>
-											</span>
-											</a>
-										</div>
+										<div class="form-label-group mb-1">
+											<input required placeholder="currentPassword"
+												id="currentPassword" name="currentPassword" type="password"
+												class="form-control"> <label for="currentPassword">현재
+												비밀번호</label>
 
-										<div class="mt--7 fs--13 text-muted mb--30 ">회원 탈퇴를 하기
-											위해 비밀번호를 한 번 더 입력해주세요.</div>
-										<button type="submit" class="btn btn-danger btn-block">
-											<i class="fi fi-check"></i> 탈퇴하기
-										</button>
+											<div class="mt--7 fs--13 text-muted mb--30 ">회원 탈퇴를 하기
+												위해 비밀번호를 한 번 더 입력해주세요.</div>
+
+											<input type="submit" class="btn btn-danger btn-block"
+												value="탈퇴하기">
 						</form>
 
 					</div>
@@ -495,9 +529,8 @@ function execPostCode() {
 
 
 
-
 	</div>
-
+	</div>
 
 	<!-- ADDRESSES TAB -->
 	<div id="tab_address" class="tab-pane border bt-0 p-4 shadow-xs">
@@ -554,6 +587,51 @@ function execPostCode() {
 		<!-- /address -->
 
 	</div>
+	</div>
+
+	<!-- PROFILE TAB -->
+	<div id="tab_profile" class="tab-pane border bt-0 p-4 shadow-xs">
+		<p>* 하기 정보는 모두에게 노출되는 정보입니다.</p>
+
+
+
+
+
+		<!-- profile -->
+		<div class="d-block shadow-xs rounded p-4 mb-2">
+			<div class="row">
+
+				<div class="col">
+					<form method="post" action="updateProfile">
+
+
+						<div class="form-label-group mb-3 ml-3">
+							<input placeholder="final-education" type="text"
+								class="form-control"> <label for="">학력</label>
+						</div>
+
+						<div class="form-label-group mb-3 ml-3">
+							<input placeholder="cert" type="text" class="form-control">
+							<label for="">자격증/면허</label>
+						</div>
+
+						<div class="form-label-group mb-3 ml-3">
+							<input placeholder="Skill" type="text" class="form-control">
+							<label for="">기술/틀</label>
+						</div>
+
+
+						<div class="border-top pt-4 mt-1">
+
+							<button type="submit" class="btn btn-primary">
+								<i class="fi fi-check"></i> 수정하기
+							</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+		<!-- /profile -->
 
 	</div>
 
@@ -562,175 +640,188 @@ function execPostCode() {
 	</div>
 
 	</div>
+
+	</div>
+
 	<!-------------------------------------------- /contents -------------------------------------------------->
 
 	</div>
 	</div>
 </section>
 
- <!-- footer -->
-          <footer id="footer" class="footer-dark">
-            <div class="container">
-    
-              <div class="row">
-                
-                <div class="col-12 col-md-6 col-lg-4 text-center-xs p-0 py-5 px-3">
-    
-                  <!-- logo -->
-                  <span class="h--70 mt--n20 d-inline-flex align-items-center">
-                    <img src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo.png" width="110" height="32" alt="...">
-                  </span>
-    
-                  <p class="lead" style="font-size: medium;">
-                    대표자: 1d2f<br>
-                    주소: 서울특별시 서초구 서초동 서초대로74길 33<br>
-                    사업자 등록번호: 123-45-678910<br>
-                    개인정보보호 책임자: 1d2f
-                  </p>
-    
-                  <div class="mt-4"> 
-    
-                    <a href="#!" class="btn btn-sm btn-facebook transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="facebook page">
-                      <i class="fi fi-social-facebook"></i> 
-                    </a>
-    
-                    <a href="#!" class="btn btn-sm btn-twitter transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="twitter page">
-                      <i class="fi fi-social-twitter"></i> 
-                    </a>
-    
-                    <a href="#!" class="btn btn-sm btn-linkedin transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="linkedin page">
-                      <i class="fi fi-social-linkedin"></i> 
-                    </a>
-    
-                    <a href="#!" class="btn btn-sm btn-youtube transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="youtube page">
-                      <i class="fi fi-social-youtube"></i> 
-                    </a>
-    
-                  </div>
-    
-                </div>
-    
-    
-                <div class="col-12 col-md-6 col-lg-5 py-5 text-center-xs">
-    
-                  <h4 class="h5">Support</h4>
-    
-                  <div class="row">
-                    <div class="col-12 col-lg-6">
-    
-                      <ul class="mt-4 mb-0 list-unstyled p-0 block-xs"> 
-                        <li><a href="contact-1.html">Contact</a></li> 
-                        <li><a href="about-us-1.html">About Us</a></li> 
-                        <li><a href="page-terms-and-conditions.html">이용약관</a></li> 
-                      </ul>
-    
-                    </div>
-    
-                    <div class="col-12 col-lg-6">
-    
-                      <ul class="mt-4 mb-0 list-unstyled p-0 block-xs"> 
-                        <li><a href="#!">FAQ</a></li> 
-                        <li><a href="#!">QNA</a></li> 
-                        <li><a href="/portfoli/app/notice/list">고객센터</a></li> 
-                      </ul>
-    
-                    </div>
-    
-                  </div>
-    
-                </div>
-    
-    
-    
-    
-                <div class="col-12 col-md-6 col-lg-3 py-5 text-center-xs">
-    
-                  <h4 class="h5">Contact</h4>
-    
-                  <div class="mt-4">
-    
-                    <ul class="list-unstyled m-0">
-    
-                      <li class="list-item py-2">
-    
-                        <a href="tel:+01-555-5555" class="clearfix py-1 h3 mb-0 d-inline-block font-weight-medium text-info">
-                          <i class="float-start fi fi-phone h4"></i> 1577-1677
-                        </a>
-    
-                      </li>
-    
-                      <li class="list-item py-2">
-    
-                        <a href="mailto:info@mycomany.com" class="clearfix py-1 h5 d-inline-block font-weight-medium text-warning">
-                          <i class="float-start fi fi-envelope h4 mt--n5"></i> portfoli@portfoli.com
-                        </a>
-    
-                      </li>
-    
-                    </ul>
-    
-                    <!--<p>
+<!-- footer -->
+<footer id="footer" class="footer-dark">
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-12 col-md-6 col-lg-4 text-center-xs p-0 py-5 px-3">
+
+				<!-- logo -->
+				<span class="h--70 mt--n20 d-inline-flex align-items-center">
+					<img
+					src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo.png"
+					width="110" height="32" alt="...">
+				</span>
+
+				<p class="lead" style="font-size: medium;">
+					대표자: 1d2f<br> 주소: 서울특별시 서초구 서초동 서초대로74길 33<br> 사업자 등록번호:
+					123-45-678910<br> 개인정보보호 책임자: 1d2f
+				</p>
+
+				<div class="mt-4">
+
+					<a href="#!"
+						class="btn btn-sm btn-facebook transition-hover-top mb-2 rounded-circle"
+						rel="noopener" aria-label="facebook page"> <i
+						class="fi fi-social-facebook"></i>
+					</a> <a href="#!"
+						class="btn btn-sm btn-twitter transition-hover-top mb-2 rounded-circle"
+						rel="noopener" aria-label="twitter page"> <i
+						class="fi fi-social-twitter"></i>
+					</a> <a href="#!"
+						class="btn btn-sm btn-linkedin transition-hover-top mb-2 rounded-circle"
+						rel="noopener" aria-label="linkedin page"> <i
+						class="fi fi-social-linkedin"></i>
+					</a> <a href="#!"
+						class="btn btn-sm btn-youtube transition-hover-top mb-2 rounded-circle"
+						rel="noopener" aria-label="youtube page"> <i
+						class="fi fi-social-youtube"></i>
+					</a>
+
+				</div>
+
+			</div>
+
+
+			<div class="col-12 col-md-6 col-lg-5 py-5 text-center-xs">
+
+				<h4 class="h5">Support</h4>
+
+				<div class="row">
+					<div class="col-12 col-lg-6">
+
+						<ul class="mt-4 mb-0 list-unstyled p-0 block-xs">
+							<li><a href="contact-1.html">Contact</a></li>
+							<li><a href="about-us-1.html">About Us</a></li>
+							<li><a href="page-terms-and-conditions.html">이용약관</a></li>
+						</ul>
+
+					</div>
+
+					<div class="col-12 col-lg-6">
+
+						<ul class="mt-4 mb-0 list-unstyled p-0 block-xs">
+							<li><a href="#!">FAQ</a></li>
+							<li><a href="#!">QNA</a></li>
+							<li><a href="/portfoli/app/notice/list">고객센터</a></li>
+						</ul>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+
+			<div class="col-12 col-md-6 col-lg-3 py-5 text-center-xs">
+
+				<h4 class="h5">Contact</h4>
+
+				<div class="mt-4">
+
+					<ul class="list-unstyled m-0">
+
+						<li class="list-item py-2"><a href="tel:+01-555-5555"
+							class="clearfix py-1 h3 mb-0 d-inline-block font-weight-medium text-info">
+								<i class="float-start fi fi-phone h4"></i> 1577-1677
+						</a></li>
+
+						<li class="list-item py-2"><a href="mailto:info@mycomany.com"
+							class="clearfix py-1 h5 d-inline-block font-weight-medium text-warning">
+								<i class="float-start fi fi-envelope h4 mt--n5"></i>
+								portfoli@portfoli.com
+						</a></li>
+
+					</ul>
+
+					<!--<p>
                       If you have questions, or you want more information, our team is available for you 24/24.
                     </p>-->
-    
-                  </div>
-    
-    
-                </div>
-    
-    
-              </div>
-    
-            </div>
-    
-            <div class="bg-distinct py-3 clearfix">
-    
-              <div class="container clearfix font-weight-light text-center-xs">
-    
-                <div class="fs--14 py-2 float-start float-none-xs m-0-xs">
-                  &copy; Portfoli Inc.
-                </div>
-    
-                <ul class="list-inline mb-0 mt-2 float-end float-none-xs m-0-xs"> 
-                  <li class="list-inline-item m-0"> 
-                    <img width="38" height="24" class="lazy" data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/visa.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="visa credit card icon">
-                  </li> 
-    
-                  <li class="list-inline-item m-0"> 
-                    <img width="38" height="24" class="lazy" data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/mastercard.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="mastercard credit card icon">
-                  </li> 
-    
-                  <li class="list-inline-item m-0"> 
-                    <img width="38" height="24" class="lazy" data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/discover.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="discover credit card icon">
-                  </li>
-    
-                  <li class="list-inline-item m-0"> 
-                    <img width="38" height="24" class="lazy" data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/amazon.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="amazon credit card icon">
-                  </li>
-                  
-                  <li class="list-inline-item m-0"> 
-                    <img width="38" height="24" class="lazy" data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/paypal.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="paypal credit card icon">
-                  </li>
-    
-                  <li class="list-inline-item m-0"> 
-                    <img width="38" height="24" class="lazy" data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/skrill.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="skrill credit card icon">
-                  </li>
-    
-                  <!-- more vendors on assets/images/credit_card/ -->
-    
-                </ul>
-    
-              </div>
-            </div>
-    
-          </footer>
-          <!-- /Footer -->
-    
-    
-        </div><!-- /#wrapper -->
 
-    <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    
-  </body>
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<div class="bg-distinct py-3 clearfix">
+
+		<div class="container clearfix font-weight-light text-center-xs">
+
+			<div class="fs--14 py-2 float-start float-none-xs m-0-xs">
+				&copy; Portfoli Inc.</div>
+
+			<ul class="list-inline mb-0 mt-2 float-end float-none-xs m-0-xs">
+				<li class="list-inline-item m-0"><img width="38" height="24"
+					class="lazy"
+					data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/visa.svg"
+					src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+					alt="visa credit card icon"></li>
+
+				<li class="list-inline-item m-0"><img width="38" height="24"
+					class="lazy"
+					data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/mastercard.svg"
+					src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+					alt="mastercard credit card icon"></li>
+
+				<li class="list-inline-item m-0"><img width="38" height="24"
+					class="lazy"
+					data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/discover.svg"
+					src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+					alt="discover credit card icon"></li>
+
+				<li class="list-inline-item m-0"><img width="38" height="24"
+					class="lazy"
+					data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/amazon.svg"
+					src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+					alt="amazon credit card icon"></li>
+
+				<li class="list-inline-item m-0"><img width="38" height="24"
+					class="lazy"
+					data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/paypal.svg"
+					src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+					alt="paypal credit card icon"></li>
+
+				<li class="list-inline-item m-0"><img width="38" height="24"
+					class="lazy"
+					data-src="${pageContext.request.getContextPath()}/resources/assets/images/credit_card/skrill.svg"
+					src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+					alt="skrill credit card icon"></li>
+
+				<!-- more vendors on assets/images/credit_card/ -->
+
+			</ul>
+
+		</div>
+	</div>
+
+</footer>
+<!-- /Footer -->
+
+
+</div>
+<!-- /#wrapper -->
+
+<script
+	src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+</body>
 </html>
