@@ -45,11 +45,12 @@
 								src/scss/_core/base/_typography.scss
 							-->
 							<div class="bg-white p-5 p-4-xl rounded-xl article-format">
-							<button onclick="location.href='form'">공지사항 분류 추가</button>
+							<h1>공지사항 카테고리 관리</h1>
+							<button onclick="location.href='form'">공지사항 카테고리 추가</button>
                 <table border='1' style="width: 100%">
                 <tr>
-                  <td width="35%">공지사항 분류번호</td>
-                  <td width="65%">공지사항 분류내용</td>
+                  <td width="35%">공지사항 카테고리 번호</td>
+                  <td width="65%">공지사항 카테고리명</td>
                 </tr>
                 
             <c:forEach items="${list}" var="item">

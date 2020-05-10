@@ -84,24 +84,41 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script>
   function warning(e){
-	  var bool = Swal.fire({
-		  timer:15000000,
-		  title: '해당 카테고리에 분류된 공지사항은 "미분류"로 변경됩니다.',
+	  
+	  const swalWithBootstrapButtons = Swal.mixin({
+		  customClass: {
+		    confirmButton: 'btn btn-success',
+		    cancelButton: 'btn btn-danger'
+		  },
+		  buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+		  title: '정말 삭제하시겠습니까?',
+		  text: "되돌릴 수 없는 작업입니다.",
 		  icon: 'warning',
 		  showCancelButton: true,
-		  confirmButtonColor: '#d33',
-		  cancelButtonColor: '#006400',
 		  confirmButtonText: '삭제',
-		  cancelButtonText: '취소'
+		  cancelButtonText: '취소',
+		  reverseButtons: true
 		}).then((result) => {
 		  if (result.value) {
-		    location.href='forceDelete?categoryNumber=${category.categoryNumber}'
-		    Swal.fire({
-		    	  title: '삭제완료',
-		          timer:15000000
-		    	  })
+		    swalWithBootstrapButtons.fire({
+		      title:'삭제완료',
+		      onClose: () => {
+		    	    location.href='forceDelete?categoryNumber=${category.categoryNumber}'
+		    	    clearInterval(timerInterval)
+		    	  }
+		    })
+		  } else if (
+		    result.dismiss === Swal.DismissReason.cancel
+		  ) {
+		    swalWithBootstrapButtons.fire(
+		      '취소'
+		    )
 		  }
 		})
+	  
   }
   </script>
 

@@ -65,14 +65,14 @@ public class NoticeController {
 
     Pagination pagination = new Pagination(listCnt, curPage);
     pagination.setPageSize(10);// 한페이지에 노출할 게시글 수
-    
+
     notice.setStartIndex(pagination.getStartIndex());
     notice.setCntPerPage(pagination.getPageSize());
-    
+
     // 전체리스트 출력
     model.addAttribute("listCnt", listCnt);
     model.addAttribute("pagination", pagination);
-    
+
     List<Notice> notices = noticeService.list(notice);
     model.addAttribute("list", notices);
   }

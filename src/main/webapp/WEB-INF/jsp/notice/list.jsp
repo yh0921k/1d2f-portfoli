@@ -42,7 +42,7 @@
                 src/scss/_core/base/_typography.scss
               -->
               <div class="bg-white p-5 p-4-xl rounded-xl article-format">
-              <button onclick="location.href='form'">공지사항 파워추가</button>
+              <button onclick="location.href='form'">공지사항 추가</button>
                 <table border='1' style="width: 100%">
                 <tr>
                   <td width="15%">유형</td>

@@ -52,7 +52,7 @@
             <table class='lightGray'>
             <tr class='firstTR'>
               <td width="75%" class='padding'>
-	              <select name="noticeNumber" class='optPadding'>
+	              <select name="categoryNumber" class='optPadding'>
 	              <option value="${category.getCategoryNumber()}">${category.getName()}</option>
 	              <option disabled="disabled">-------------------</option>
 	              <c:forEach items="${list}" var="item">
