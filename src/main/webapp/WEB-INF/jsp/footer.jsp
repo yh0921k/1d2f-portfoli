@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
   
           <!-- footer -->
-          <footer id="footer" class="footer-dark">
+          <footer id="footer" class="footer-dark position-relative">
             <div class="container">
     
               <div class="row">

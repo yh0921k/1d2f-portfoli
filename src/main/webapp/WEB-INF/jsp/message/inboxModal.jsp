@@ -33,7 +33,7 @@
     <!-- MESSAGE -->
     <h5 class="mt-3 mb-4">${message.title}</h5>
 
-    <p>${message.content}</p>
+    <p style="white-space:pre;">${message.content}</p>
 
     <c:forEach items="${message.files}" var="messageFile">
       <div

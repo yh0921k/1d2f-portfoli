@@ -5,8 +5,7 @@
 
 <form novalidate class="bs-validate js-ajax"
   action="/portfoli/app/message/add" method="post"
-  enctype="multipart/form-data"
-  data-modal-autoclose-on-success="true"
+  enctype="multipart/form-data" data-modal-autoclose-on-success="true"
   data-modal-autoclose-on-success-delay="200"
   data-ajax-update-url="false" data-ajax-show-loading-icon="true"
   data-success-toast-text="<i class='fi fi-check float-start'></i> ${receiver.id}님께 전송하였습니다!"
@@ -43,11 +42,12 @@
      -->
     <div class="form-label-group mb-3 mt-3">
       <input type="text" value="${receiver.id}" readOnly
-        class="form-control"> <label for="message_subject">받는 사람</label>
+        class="form-control"> <label for="message_subject">받는
+        사람</label>
     </div>
 
     <div class="form-label-group mb-3 mt-3">
-      <input placeholder="제목" name="title" type="text" class="form-control">
+      <input required placeholder="제목" name="title" type="text" class="form-control">
       <label for="message_subject">제목</label>
     </div>
 
@@ -56,7 +56,7 @@
       <span
         class="js-form-advanced-limit-info badge badge-warning hide animate-bouncein position-absolute absolute-top m--2">
         최대 300자까지 작성할 수 있습니다. </span>
-      <textarea name="content"
+      <textarea required name="content" id="textarea"
         class="js-form-advanced-char-count-up form-control w-100 min-h-200
         h--200 border scrollable-vertical p--15 rounded"
         data-output-target=".js-form-advanced-char-total2" maxlength="300"
@@ -102,7 +102,8 @@
           data-file-preview-list-type="list"
           data-file-preview-class="bg-white mb-1 p--2 rounded border overflow-hidden"
           class="custom-file-input absolute-full"> <span
-          class="group-icon"> <i class="fi fi-arrow-upload"></i> <i class="fi fi-circle-spin fi-spin"></i>
+          class="group-icon"> <i class="fi fi-arrow-upload"></i> <i
+            class="fi fi-circle-spin fi-spin"></i>
         </span> <span>파일 첨부하기</span>
         </label>
       </div>
@@ -113,7 +114,8 @@
         <!-- container -->
       </div>
     </div>
-    <small class="d-block text-muted mb-3 mt-1">최대 4MB의 이미지 파일만 전송 가능합니다.</small>
+    <small class="d-block text-muted mb-3 mt-1">최대 4MB의 이미지 파일만 전송
+      가능합니다.</small>
     <!-- /Message : Attachments -->
   </div>
 
