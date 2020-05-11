@@ -5,34 +5,65 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>공고 변경</h1>
 
 <c:if test="${not empty jobPosting}">
-<form action='update' method='post' enctype='multipart/form-data'>
-<input name='no' readonly type='hidden' value='${jobPosting.jobPostingNumber}'><br>
-공고제목: <input name='title' type='text' value='${jobPosting.title}'><br>
-내용:<br>
-<textarea name='content' rows='5' cols='60'>${jobPosting.content}</textarea><br>
-최소경력: <input name='minimumCareer' type='number' value='${jobPosting.minimumCareer}'><br>
-직무: <input name='job' type='text' value='${jobPosting.job}'><br>
-연봉: <input name='yearSalary' type='number' value='${jobPosting.yearSalary}'><br>
-시작일: <input name='startDated' type='date' value='${jobPosting.startDated}'><br>
-마감일: <input name='endDated' type='date' value='${jobPosting.endDated}'><br>
 
-<hr>
-사진: <input name='jobPostingFiles' type='file'><br>
-사진: <input name='jobPostingFiles' type='file'><br>
+<div class="container">
+<h1>공고 변경</h1>
+<form action='update' method='post' enctype='multipart/form-data'>
+
+<input name='no' readonly type='hidden' value='${jobPosting.jobPostingNumber}'><br>
+
+<div class="col-sm-13">
+제목* <input name='title' placeholder="제목" class="form-control" type='text' value='${jobPosting.title}'><br>
+</div>
+
+<div class="col-sm-13">
+내용* <textarea name='content' class="form-control" rows='5' cols='60'>${jobPosting.content}</textarea><br>
+</div>
+
+<div class="col-sm-13">
+<input name='minimumCareer' placeholder="최소경력(숫자만 입력가능)" type='number' class="form-control" value='${jobPosting.minimumCareer}'><br>
+</div>
+
+<div class="col-sm-13">
+<input name='job' placeholder="직무" class="form-control" type='text' value='${jobPosting.job}'><br>
+</div>
+
+
+<!-- <input name='yearSalary' type='number' value='${jobPosting.yearSalary}'><br> -->
+시작일<input name='startDated' type='date' class="form-control" value='${jobPosting.startDated}'><br>
+마감일<input name='endDated' type='date' class="form-control" value='${jobPosting.endDated}'><br>
+
+이미지 첨부<input name='jobPostingFiles' type='file' class="form-control"><br>
 
 <p>
-<button>변경</button>
-
+<button id="cBtn" class="btn btn-primary btn-lg btn-block">변경</button>
 </p>
+</div>
 </form>
 </c:if>
 
 <c:if test="${empty jobPosting}">
 <p>해당 게시글이 없습니다.</p>
 </c:if>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script>
+var cBtn = document.getElementById("cBtn");
+
+cBtn.onclick = function() {
+	Swal.fire({
+        title: '변경되었습니다.',
+        icon: 'success',
+         
+        confirmButtonText: '확인'
+      })
+};
+
+
+</script>
 
 <jsp:include page="../footer.jsp"/>
     
