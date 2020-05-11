@@ -239,7 +239,7 @@
 								<li class="nav-item"><a href="app/portfolio/list" id="portfolio"
 									class="nav-link dropdown-toggle nav-link-caret-hide"
 									style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
-								<li class="nav-item"><a href="#" id="info"
+								<li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
 									class="nav-link dropdown-toggle nav-link-caret-hide"
 									style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
 								<li class="nav-item"><a href="#" id="recommendInfo"
