@@ -17,7 +17,7 @@ import com.portfoli.service.AdminService;
 public class AdminController {
 
   static Logger logger = LogManager.getLogger(AdminController.class);
-  final static int EXPIRETIME = 3600;
+  final static int EXPIRETIME = 10;
 
   @Autowired
   ServletContext servletContext;
@@ -51,9 +51,8 @@ public class AdminController {
       session.setAttribute("expire", EXPIRETIME);
       session.setMaxInactiveInterval(EXPIRETIME);
       return "admin/index";
-
     } else {
-      throw new Exception("fail");
+      return "admin/loginForm";
     }
   }
 }
