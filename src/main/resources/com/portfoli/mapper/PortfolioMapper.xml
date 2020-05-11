@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.PortfolioDao">
+  <resultMap type="Portfolio" id="PortfolioMap">
+    <id column="board_no" property="number" /><!-- 게시글번호-->
+    <result column="title" property="title" /><!-- 제목-->
+    <result column="content" property="content" /><!-- 내용-->
+    <result column="view_count" property="viewCount" /><!-- 조회수-->
+    <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
+    
+    <result column="general_member_no" property="generalMemberNumber" /><!-- 일반회원번호 -->
+    <result column="homepage" property="homepage" /><!-- 홈페이지 -->
+    <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
+    <result column="recommended_count" property="recommendedCount" /><!-- 추천수 -->
+    <result column="readable" property="readable" /><!-- 공개여부 -->
+    <result column="member_name" property="memberName" /><!-- 작성자명 -->
+    <result column="general_member_no" property="memberNumber" /><!-- 작성자번호 -->
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="PortfolioMap" parameterType="Portfolio">
+	  SELECT
+	    p.board_no,
+	    p.general_member_no,
+	    p.homepage,
+	    p.thumbnail,
+	    p.recommended_count,
+	    p.readable,
+	    b.board_no,
+	    b.title,
+	    b.content,
+	    b.view_count,
+	    b.registered_date,
+	    g.general_member_no,
+	    m.name member_name
+	  FROM pf_portfolio p LEFT OUTER JOIN pf_board b 
+	  ON p.board_no = b.board_no
+	  LEFT OUTER JOIN pf_general_member g
+	  ON g.general_member_no = p.general_member_no
+	  LEFT OUTER JOIN pf_members m
+    ON m.member_no = g.general_member_no
+	  ORDER BY b.registered_date desc,
+	  p.recommended_count desc
+    <if test="startIndex != null and startIndex != ''">
+    limit ${startIndex}, ${pageSize}
+    </if>
+  </select>
+  
+  <select id="selectListCnt" resultType="int" parameterType="int">
+    SELECT 
+      count(*)
+    from pf_portfolio
+  </select>
+  
+  <select id="findByNo" resultMap="PortfolioMap" parameterType="int">
+      SELECT
+      p.board_no,
+      p.general_member_no,
+      p.homepage,
+      p.thumbnail,
+      p.recommended_count,
+      p.readable,
+      b.board_no,
+      b.title,
+      b.content,
+      b.view_count,
+      b.registered_date,
+      g.general_member_no,
+      m.name member_name
+    FROM pf_portfolio p LEFT OUTER JOIN pf_board b 
+    ON p.board_no = b.board_no
+    LEFT OUTER JOIN pf_general_member g
+    ON g.general_member_no = p.general_member_no
+    LEFT OUTER JOIN pf_members m
+    ON m.member_no = g.general_member_no
+    WHERE p.board_no = ${boardNumber}
+  </select>
+
+  <!-- 
+  <select id="findByCategoryNumber" resultMap="NoticeMap" parameterType="int">
+    SELECT
+      *
+    FROM pf_notice 
+    WHERE category_no = ${categoryNumber}
+  </select>
+
+  
+  <insert id="insert" parameterType="Notice">
+    INSERT INTO pf_notice (
+      board_no, category_no
+      )
+    VALUES(
+      #{number}, #{categoryNumber}
+    )
+  </insert>
+
+  <delete id="delete" parameterType="int">
+    DELETE 
+      FROM pf_notice
+    WHERE board_no = #{number}
+  </delete>
+  
+  <update id="update" parameterType="Notice">
+     UPDATE pf_notice
+     <set>
+       category_no = #{categoryNumber}
+     </set>
+     WHERE board_no = #{number}
+  </update>
+  
+  <update id="updateCategory" parameterType="Map">
+     UPDATE pf_notice
+     <set>
+       category_no = #{targetCategoryNumber}
+     </set>
+     WHERE category_no = #{sourceCategoryNumber}
+  </update>
+   -->
+</mapper>
+
+
+
+
+
+
