@@ -19,4 +19,6 @@ public interface JobPostingService {
 
   void update(JobPosting jobPosting) throws Exception;
 
+  int plusCnt(int jobPostingNumber) throws Exception;
+
 }

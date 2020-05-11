@@ -7,26 +7,27 @@
 
 <jsp:include page="../header.jsp" />
 
-<h1>채용공고</h1>
-<div id="searchForm" text-align:center;>
-<form action='search' method='get'>
-	검색어: <input id='keyword' name='keyword' type='text'>
-	<button>검색</button>
+
+<div class="container">
+<h1>채용정보</h1>
+<div id="searchForm" style="text-align:right">
+<form action='search' method='get' >
+	<input id='keyword' name='keyword' type='text' >
+	<button>검색</button> 
 </form>
 </div>
 <hr>
 
-<div class="container">
-<table id="listTable" border='1' class="table table-striped table-hover">
-
+<div style="text-align:center">
+<table id="listTable" class="table table-striped table-hover">
 	<thead>
-	  <th>사진</th>
-		<th>번호</th>
+	  <th></th>
+		<th>no</th>
 		<th>제목</th>
 		<th>내용</th>
-		<th>최소경력</th>
-		<th>직무</th>
-		<th>연봉</th>
+		<!--  <th>최소경력</th>-->
+		<!--  <th>직무</th> -->
+		<!--  <th>연봉</th> -->
 		<th>시작일</th>
 		<th>마감일</th>
 		<th>조회수</th>
@@ -41,9 +42,9 @@
 			<td>${item.jobPostingNumber}</td>			
 			<td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
 			<td>${item.content}</td>
-			<td>${item.minimumCareer}</td>
-			<td>${item.job}</td>
-			<td>${item.yearSalary}</td>
+			<!-- <td>${item.minimumCareer}</td> -->
+			<!-- <td>${item.job}</td> -->
+			<!-- <td>${item.yearSalary}</td> -->
 			<td>${item.startDated}</td>
 			<td>${item.endDated}</td>
 			<td>${item.viewCount}</td>
@@ -51,10 +52,15 @@
 	</c:forEach>
   </tbody>
 </table>
+</div>
+
 <button id="moreListBtn" class="btn btn-primary btn-lg btn-block">더보기</button>
 
 <hr>
+<div style="text-align:right">
 <a href='form' class="btn btn-primary pull-right">글쓰기</a>
+</div>
+<br>
 </div>
 
 

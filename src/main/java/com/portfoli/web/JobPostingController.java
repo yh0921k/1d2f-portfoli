@@ -83,7 +83,8 @@ public class JobPostingController {
   }
 
   @GetMapping("detail")
-  public void detail(int no, Model model) throws Exception {
+  public void detail(@RequestParam(defaultValue = "1") int no, Model model) throws Exception {
+    jobPostingService.plusCnt(no);
     model.addAttribute("jobPosting", jobPostingService.get(no));
   }
 

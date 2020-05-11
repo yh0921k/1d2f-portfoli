@@ -19,4 +19,6 @@ public interface JobPostingDao {
 
   List<JobPosting> findByKeyword(String keyword) throws Exception;
 
+  int plusCnt(int jobPostingNumber) throws Exception;
+
 }

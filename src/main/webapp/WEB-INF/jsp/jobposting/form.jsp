@@ -3,36 +3,44 @@
 
 <jsp:include page="../header.jsp" />
 
-<h1>채용공고등록</h1>
-<form action='add' id="form1" method='post'
-	enctype='multipart/form-data'>
-	
-	<div class="col-sm-10">
-	<input id="title" placeholder="제목" class="form-control" name='title' type='text'><br>
-	</div>
-		 
-	 <div class="col-sm-10">
-	<textarea id="content" placeholder="내용" class="form-control" name='content' rows='10' cols='60'></textarea>
-	</div>
-	
-	<div class="col-sm-3">
-	<input id="minimumCareer" placeholder="최소경력(숫자만 입력가능)" name='minimumCareer'
-		type='number'><br>
+
+<div class="container">
+	<h1>채용공고등록</h1>
+	<form action='add' id="form1" method='post'
+		enctype='multipart/form-data'>
+
+		
+		<div class="col-sm-13">
+		제목*  <input id="title" placeholder="제목" class="form-control" name='title'
+				type='text'><br>
 		</div>
 
-	<div class="col-sm-10">
-	<input placeholder="직무" id="job" name='job' type='text'
-	class="form-control" /> <label for="job"></label>
-	</div>
+		
+		<div class="col-sm-13">
+		내용*	<textarea id="content" placeholder="내용" class="form-control"
+				name='content' rows='10' cols='60'></textarea>
+		</div>
+    <br>
 
-	연봉(숫자만 입력가능): <input id="yearSalary" name='yearSalary' type='number'>만원<br>
-	시작일: <input id="startDated" name='startDated' type='date'><br>
-	마감일: <input id="endDated" name='endDated' type='date'><br>
-	<hr>
-	사진: <input id="jobPostingFiles" name='jobPostingFiles' type='file'><br>
-	사진: <input id="jobPostingFiles" name='jobPostingFiles' type='file'><br>
-	<button id="btn1" class="btn btn-primary pull-right">등록</button>
+		<div class="col-sm-13">
+			<input id="minimumCareer" placeholder="최소경력(숫자만 입력가능)"
+				name='minimumCareer' type='number' class="form-control"><br>
+		</div>
+
+		<div class="col-sm-13">
+			<input placeholder="직무" id="job" name='job' type='text'
+				class="form-control" /> <label for="job"></label>
+		</div>
+
+		<!-- 연봉(숫자만 입력가능): <input id="yearSalary" name='yearSalary' type='number' class="form-control">만원<br> -->
+		시작일*<input id="startDated" name='startDated' type='date' class="form-control"><br>
+		마감일*<input id="endDated" name='endDated' type='date' class="form-control"><br>
+		이미지 첨부*<input id="jobPostingFiles" name='jobPostingFiles' type='file' class="form-control"><br>
+
+		<button id="btn1" class="btn btn-primary btn-lg btn-block">등록</button>
+</div>
 </form>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
@@ -63,7 +71,7 @@ document.querySelector("#form1").onsubmit = () => {
 	    }
 	
 	var regExp = /^[0-9]+$/; //정수 유효성 검사코드
-	
+	<!--
 	var minimumCareer = document.querySelector("#minimumCareer");
 	if (!regExp.test(minimumCareer.value)) {
 		Swal.fire({
@@ -73,7 +81,8 @@ document.querySelector("#form1").onsubmit = () => {
 	        })
 	    return false;
 	  }
-	
+	-->
+	<!--
 	var job = document.querySelector("#job");
 	if (job.value == "") {
 		Swal.fire({
@@ -83,7 +92,8 @@ document.querySelector("#form1").onsubmit = () => {
           })
 	      return false;
 	    }
-	
+	-->
+	<!--
 	var yearSalary = document.querySelector("#yearSalary");
 	if (!regExp.test(yearSalary.value)) {
 		Swal.fire({
@@ -93,7 +103,7 @@ document.querySelector("#form1").onsubmit = () => {
           })
 	      return false;
 	    }
-	
+	-->
 	
 	var startDated = document.querySelector("#startDated");
 	if (startDated.value == "") {
