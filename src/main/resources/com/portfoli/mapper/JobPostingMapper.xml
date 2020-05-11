@@ -38,7 +38,8 @@
   job,
   year_salary,
   start_dated,
-  end_dated)
+  end_dated,
+  view_count)
   values(
   #{title},
   #{content},
@@ -46,7 +47,8 @@
   #{job},
   #{yearSalary},
   #{startDated},
-  #{endDated})
+  #{endDated},
+  0)
   </insert>
 
   <select id="findAll" resultMap="JobPostingMap">
@@ -70,6 +72,12 @@
     j.job_posting_no desc 
   limit 0, 5
   </select>
+  
+  <update id="plusCnt" parameterType="int">
+    update pf_job_posting
+    set
+    view_count = view_count + 1 where job_posting_no = #{jobPostingNumber}
+  </update>
   
   <select id="findMore" resultMap="JobPostingMap" parameterType="int">
   <![CDATA[
