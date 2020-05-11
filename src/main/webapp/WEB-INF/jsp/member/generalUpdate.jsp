@@ -5,60 +5,6 @@
 
 <jsp:include page="../header.jsp" />
 
-<script>
-function execPostCode() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-           // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-           var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-           var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-           // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-           // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-           if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-               extraRoadAddr += data.bname;
-           }
-           // 건물명이 있고, 공동주택일 경우 추가한다.
-           if(data.buildingName !== '' && data.apartment === 'Y'){
-              extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-           }
-           // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-           if(extraRoadAddr !== ''){
-               extraRoadAddr = ' (' + extraRoadAddr + ')';
-           }
-           // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-           if(fullRoadAddr !== ''){
-               fullRoadAddr += extraRoadAddr;
-           }
-
-           // 우편번호와 주소 정보를 해당 필드에 넣는다.
-           console.log(data.zonecode);
-           console.log(fullRoadAddr);
-           
-           document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
-           document.getElementById('addr2').value = fullRoadAddr;
-       }
-    }).open();
-}
-
-function check() {
-	
-	var delete1 = document.getElementById('requiredDelete1').checked;
-	var delete2 = document.getElementById('requiredDelete2').checked;
-	var delete3 = document.getElementById('requiredDelete3').checked;
-	  if(delete1&& delete2&&delete3) {
-	    return true;
-	  }else{
-	    alert("탈퇴 안내에 모두 동의해 주세요.");
-	    return false;
-	  }
-}
-
-</script>
-
 <meta name="theme-color" content="#377dff">
 
 <!-- PAGE TITLE -->
@@ -108,10 +54,10 @@ function check() {
 						</a>
 
 							<ul class="nav flex-column px-2 font-weight-bold">
-								<li class="nav-item active"><a
-									class="nav-link" href="/portfoli/app/member/generalUpdate">
-										내 정보 수정하기 </a></li>
-								<li class="nav-item"><a class="nav-link" href="#"> 멤버쉽 </a></li>
+								<li class="nav-item active"><a class="nav-link"
+									href="/portfoli/app/member/generalUpdate"> 내 정보 수정하기 </a></li>
+								<li class="nav-item"><a class="nav-link" href="#"> 멤버쉽
+								</a></li>
 							</ul></li>
 
 						<li class="nav-item font-weight-bold"><a class="nav-link"
@@ -609,8 +555,28 @@ function check() {
 							<input placeholder="final-education" type="text"
 								class="form-control"> <label for="">학력</label>
 						</div>
+<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">* 학교 구분을 선택하지 않으면 기본값은 '대학교'입니다.</p>
+						<div class="form-label-group input-group mb-3 ml-3">
+							<input type="text" id="word" class="form-control"
+								placeholder="school" aria-label="검색어를 입력해 주세요."
+								onkeyup="search(this);"><label for="">학교</label>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary dropdown-toggle mr-3"
+									type="button" data-toggle="dropdown" id="schoolCat"
+									aria-haspopup="true" aria-expanded="false">학교 구분</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" onclick="catSchool('초등학교')">초등학교</a> <a
+										class="dropdown-item" onclick="catSchool('중학교')">중학교</a> <a
+										class="dropdown-item" onclick="catSchool('고등학교')">고등학교</a><a
+										class="dropdown-item" onclick="catSchool('대학교')">대학교</a>
+								</div>
+							</div>
+						</div>
+						<ul class="list-group list-group-flush ml-3 mr-3" id="schoolList"></ul>
+						<!-- 검색리스트가 나타나는 영역 -->
 
-						<div class="form-label-group mb-3 ml-3">
+
+						<div class="form-label-group mt-3 mb-3 ml-3">
 							<input placeholder="cert" type="text" class="form-control">
 							<label for="">자격증/면허</label>
 						</div>
@@ -821,6 +787,8 @@ function check() {
 
 <script
 	src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
+<script
+	src="${pageContext.request.getContextPath()}/resources/assets/js/generalUpdate.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 </body>
