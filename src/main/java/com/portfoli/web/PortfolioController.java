@@ -38,7 +38,7 @@ public class PortfolioController {
 
   @Autowired
   MemberService memberService;
-  
+
   @Autowired
   BoardAttachmentService boardAttachmentService;
 
@@ -69,12 +69,8 @@ public class PortfolioController {
     // 작성자 정보
     GeneralMember gmem = memberService.getGeneralMember(portfolio.getNumber());
     model.addAttribute("generalMember", gmem);
-    
+
     List<Portfolio> portfolios = portfolioService.list();
-    System.out.println("왕창나와라");
-    for(Portfolio p : portfolios) {
-      System.out.println(p);
-    }
     model.addAttribute("list", portfolios);
   }
 

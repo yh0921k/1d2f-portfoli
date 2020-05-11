@@ -9,13 +9,13 @@
         <div class="container py-1">
 
           <h1 class="h2">
-            공지사항
+            포트폴리오 게시판
           </h1>
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb fs--14">
               <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="list">포트폴리오 게시판</a></li>
             </ol>
           </nav>
 
@@ -45,7 +45,14 @@
             <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
             <table class="lightGray">
             <tr class="firstTR">
-              <td width="75%" class='padding'>"${portfolio.memberName}"님의 포트폴리오 : ${portfolio.title}</td>
+              <td width="75%" class='padding'>
+              <c:if test="${portfolio.seekingFlag == 1}">
+              "${portfolio.id}"님의 포트폴리오 : (구직중)${portfolio.title}
+              </c:if>
+              <c:if test="${portfolio.seekingFlag != 1}">
+              "${portfolio.id}"님의 포트폴리오 : (재직중)${portfolio.title}
+              </c:if>
+              </td>
               <td width="25%" align="center" class='padding darkerGray'>${portfolio.registeredDate}</td>
             </tr>
             <tr>
