@@ -76,4 +76,10 @@ public class JobPostingServiceImpl implements JobPostingService {
   public List<JobPosting> search(String keyword) throws Exception {
     return jobPostingDao.findByKeyword(keyword);
   }
+
+  @Override
+  public int plusCnt(int jobPostingNumber) throws Exception {
+    System.out.println("plusCnt 호출!");
+    return jobPostingDao.plusCnt(jobPostingNumber);
+  }
 }
