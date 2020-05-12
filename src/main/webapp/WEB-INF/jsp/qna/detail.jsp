@@ -61,7 +61,7 @@
 					<div align="right" class="container-fluid">
 						<a href="/portfoli/app/qna/update?no="><button type="button"
 								class="btn btn-outline-secondary btn-pill btn-sm">수정</button></a>
-						<a href="/portfoli/app/qna/delete?no="><button type="button"
+						<a href="/portfoli/app/qna/delete?no=${qna.number}"><button type="button"
 								class="btn btn-outline-secondary btn-pill btn-sm ml-2">삭제</button></a>
 					</div>
 				</div>

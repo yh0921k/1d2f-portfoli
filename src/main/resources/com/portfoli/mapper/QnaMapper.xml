@@ -55,6 +55,12 @@
 		ON q.board_no = b.board_no
 		WHERE b.board_no = #{no}
 	</select>
+	
+	<delete id="delete">
+		DELETE 
+		FROM pf_qna
+		WHERE board_no=#{no}
+	</delete>
 
 
 </mapper>

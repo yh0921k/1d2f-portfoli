@@ -8,5 +8,7 @@ public interface QnaService {
   List<Qna> list() throws Exception;
 
   Qna get(int no) throws Exception;
+
+  void delete(int boardNo) throws Exception;
   
 }

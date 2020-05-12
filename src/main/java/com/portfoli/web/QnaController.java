@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.portfoli.domain.Board;
 import com.portfoli.domain.Qna;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
@@ -66,6 +65,12 @@ public class QnaController {
     qna.setViewCount(viewCount);
     boardService.addViewCount(params);
     model.addAttribute("qna", qna);
+  }
+  
+  @GetMapping("delete")
+  public String delete(int no) throws Exception {
+    qnaService.delete(no);
+    return "redirect:/app/qna/list";
   }
 
 

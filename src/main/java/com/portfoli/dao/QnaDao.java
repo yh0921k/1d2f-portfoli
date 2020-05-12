@@ -11,4 +11,6 @@ public interface QnaDao {
 
   int updateViewCount(int viewCount);
 
+  int delete(int boardNo);
+
 }
