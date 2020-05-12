@@ -18,7 +18,6 @@ public class MessageServiceImpl implements MessageService {
   @Autowired MessageDao messageDao;
   @Autowired MessageFileDao messageFileDao;
 
-  @Transactional
   @Override
   public int add(Message message) throws Exception {
     if (messageDao.insert(message) == 0) {
@@ -40,7 +39,7 @@ public class MessageServiceImpl implements MessageService {
     param.put("userNumber", userNumber);
     param.put("offset", (pageNumber - 1) * pageSize);
     param.put("pageSize", pageSize);
-    
+
     return messageDao.findAllBySenderNumber(param);
   }
 
@@ -80,6 +79,10 @@ public class MessageServiceImpl implements MessageService {
     message.setReceiverDelete(1);
 
     if (message.getSenderDelete() == 1) {
+      if (message.getFiles() != null) {
+        messageFileDao.delete(message.getNumber());
+      }
+
       messageDao.delete(message.getNumber());
     }
   }
@@ -90,6 +93,10 @@ public class MessageServiceImpl implements MessageService {
     message.setSenderDelete(1);
 
     if (message.getReceiverDelete() == 1) {
+      if (message.getFiles() != null) {
+        messageFileDao.delete(message.getNumber());
+      }
+
       messageDao.delete(message.getNumber());
     }
   }

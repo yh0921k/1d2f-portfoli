@@ -54,7 +54,6 @@ public class MessageController {
         String fileName =
             String.format("%d_%s", System.currentTimeMillis(), file.getOriginalFilename());
 
-        messageFile.setMessageNumber(message.getNumber());
         messageFile.setFileName(file.getOriginalFilename());
         messageFile.setFilePath(fileName);
 

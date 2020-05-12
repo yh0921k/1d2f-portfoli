@@ -54,6 +54,8 @@
       m.title,
       m.send_date,
       m.receive_date,
+      m.message_sender_delete,
+      m.message_receiver_delete,
       s.member_no,
       s.id member_id
     from pf_message m
@@ -73,6 +75,8 @@
       m.title,
       m.send_date,
       m.receive_date,
+      m.message_sender_delete,
+      m.message_receiver_delete,
       r.member_no,
       r.id member_id
     from pf_message m
@@ -110,6 +114,8 @@
       m.content,
       m.send_date,
       m.receive_date,
+      m.message_sender_delete,
+      m.message_receiver_delete,
       r.member_no,
       r.id member_id,
       f.file_name,
@@ -124,6 +130,7 @@
   <update id="updateRead" parameterType="Message">
     update pf_message set
       receive_date=now()
+    where message_no=#{number}
   </update>
 
   <update id="updateSenderDeleteFlag" parameterType="Message">
