@@ -57,9 +57,13 @@
 <button id="moreListBtn" class="btn btn-primary btn-lg btn-block">더보기</button>
 
 <hr>
+
+<c:if test="${not empty loginUser}">
 <div style="text-align:right">
 <a href='form' class="btn btn-primary pull-right">글쓰기</a>
 </div>
+</c:if>
+
 <br>
 </div>
 
