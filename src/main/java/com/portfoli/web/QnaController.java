@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.portfoli.domain.Member;
+import com.portfoli.domain.Board;
 import com.portfoli.domain.Qna;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
@@ -50,17 +50,22 @@ public class QnaController {
   public void list(Model model) throws Exception {
     List<Qna> qnas = qnaService.list();
     for(Qna qna : qnas) {
-      System.out.println(qna);
-      Member m = memberService.getM(qna.getMemberNumber());
-      System.out.println(m);
-      qna.setWriter(m.getName());
+      qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
     }
     model.addAttribute("qnas", qnas);
   }
   
   @GetMapping("detail")
-  public void detail(Model model) throws Exception {
-    
+  public void detail(Model model, int no) throws Exception {
+    Map<String, Object> params = new HashMap<>();
+    Qna qna = qnaService.get(no);
+    int viewCount = qna.getViewCount()+1;
+    params.put("viewCount", viewCount);
+    params.put("boardNo", no);
+    qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
+    qna.setViewCount(viewCount);
+    boardService.addViewCount(params);
+    model.addAttribute("qna", qna);
   }
 
 

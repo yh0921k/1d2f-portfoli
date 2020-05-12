@@ -1,6 +1,7 @@
 package com.portfoli.service;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Board;
 
 public interface BoardService {
@@ -15,5 +16,6 @@ public interface BoardService {
 
   boolean update(Board board) throws Exception;
 
+  void addViewCount(Map<String, Object> params) throws Exception;
 
 }

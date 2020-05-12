@@ -7,4 +7,8 @@ public interface QnaDao {
 
   List<Qna> findAll();
 
+  Qna findByNo(int no);
+
+  int updateViewCount(int viewCount);
+
 }

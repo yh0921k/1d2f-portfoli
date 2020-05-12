@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import com.portfoli.dao.BoardDao;
 import com.portfoli.domain.Board;
@@ -37,6 +38,14 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public boolean update(Board board) throws Exception {
     return boardDao.update(board) > 0;
+  }
+
+  @Override
+  public void addViewCount(Map<String, Object> params) throws Exception {
+    if(boardDao.updateViewCount(params) < 0) {
+      throw new Exception();
+    }
+    
   }
 
 

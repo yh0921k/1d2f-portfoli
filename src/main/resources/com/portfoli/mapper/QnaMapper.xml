@@ -38,6 +38,24 @@
 		ON q.board_no = b.board_no
 		ORDER BY b.registered_date DESC, b.board_no DESC
 	</select>
+	
+	<select id="findByNo" resultMap="QnaMap" parameterType="int">
+		SELECT 
+		q.member_no,
+		b.board_no,
+		c.name,
+		b.title,
+		b.view_count,
+		b.registered_date,
+		b.content
+		FROM pf_qna q
+		JOIN pf_question_category c
+		ON c.category_no = q.category_no
+		JOIN pf_board b
+		ON q.board_no = b.board_no
+		WHERE b.board_no = #{no}
+	</select>
+
 
 </mapper>
 

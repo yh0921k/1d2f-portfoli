@@ -31,4 +31,15 @@ public class QnaServiceImpl implements QnaService{
     return qnaList;
   }
 
+  @Override
+  public Qna get(int no) throws Exception {
+    Qna qna = qnaDao.findByNo(no);
+    if(qna == null) {
+      throw new Exception("해당 번호의 게시글이 존재하지 않습니다.");
+    }
+    return qna;
+  }
+
+
+
 }

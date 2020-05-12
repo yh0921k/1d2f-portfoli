@@ -54,9 +54,33 @@
 			<!--------------------------------------------- /nav bar ------------------------------------------------>
 
 			<!-------------------------------------------- contents -------------------------------------------------->
+			<div class="portlet" style="width: 65%;">
 
+				<div class="portlet-header">
+					<h1 class="d-none d-lg-block m--3">Q&A</h1>
+					<div align="right" class="container-fluid">
+						<a href="/portfoli/app/qna/update?no="><button type="button"
+								class="btn btn-outline-secondary btn-pill btn-sm">수정</button></a>
+						<a href="/portfoli/app/qna/delete?no="><button type="button"
+								class="btn btn-outline-secondary btn-pill btn-sm ml-2">삭제</button></a>
+					</div>
+				</div>
+				
+				<input name="boardNo" type="hidden" value="${qna.number}">
+				<p class="text-gray-900 mb-1 ml-3">카테고리 : ${qna.category.name}</p>
+				<p class="text-gray-900 mb-1 ml-3">작성자 : ${qna.writer}</p>
+				<p class="text-gray-900 mb-1 ml-3">작성일시 : ${qna.registeredDate}</p>
+				<p class="text-gray-900 mb-1 ml-3">조회수 : ${qna.viewCount}</p>
 
+				<p class="text-gray-900 mb-1 ml-3">제목 : ${qna.title}</p>
 
+				<p class="text-gray-900 mb-1 ml-3">내용 :</p>
+				<div class="border m-3" style="min-height: 300px;">
+					<p style="white-space: pre-wrap;" class="text-gray-900"> ${qna.content}</p>
+				</div>
+
+			</div>
+			</div>
 			<!-------------------------------------------- /contents -------------------------------------------------->
 		</div>
 	</div>
