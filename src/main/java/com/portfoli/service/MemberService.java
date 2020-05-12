@@ -17,6 +17,8 @@ public interface MemberService {
   Member get(String email, String password) throws Exception;
 
   Member get(int number) throws Exception;
+  
+  Member getM(int number) throws Exception;
 
   int updateDefaultInfo(GeneralMember member) throws Exception;
 

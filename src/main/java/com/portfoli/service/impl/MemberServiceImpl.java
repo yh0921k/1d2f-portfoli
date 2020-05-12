@@ -105,6 +105,16 @@ public class MemberServiceImpl implements MemberService {
       return null;
     }
   }
+  
+  @Override
+  public Member getM(int number) throws Exception {
+    Member member = memberDao.findByMemberNumber(number);
+    if ((member) != null) {
+      return member;
+    } else {
+      return null;
+    }
+  }
 
 
   @Override

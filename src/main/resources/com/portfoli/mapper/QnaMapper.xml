@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.QnaDao">
+
+	<resultMap type="Qna" id="QnaMap">
+		<id column="board_no" property="number" />
+		<result column="member_no" property="memberNumber" />
+		<result column="category_no" property="categoryNumber" />
+		<result column="readable" property="readable" />
+		<result column="email_notification" property="emailNoti" />
+		<result column="sms_notification" property="smsNoti" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="view_count" property="viewCount" />
+		<result column="registered_date" property="registeredDate" />
+		<association property="category" javaType="QnaCategory">
+			<id column="category_no" property="number" />
+			<result column="name" property="name" />
+		</association>
+	</resultMap>
+
+	<select id="findAll" resultMap="QnaMap">
+		SELECT
+		q.readable,
+		q.member_no,
+		b.board_no,
+		c.name,
+		b.title,
+		b.view_count,
+		b.registered_date
+		FROM pf_qna q
+		JOIN pf_question_category c
+		ON c.category_no = q.category_no
+		JOIN pf_board b
+		ON q.board_no = b.board_no
+		ORDER BY b.registered_date DESC, b.board_no DESC
+	</select>
+
+</mapper>
+
+
+
+
+
+
+

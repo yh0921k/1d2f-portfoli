@@ -182,8 +182,6 @@ public class MessageController {
       throw new Exception("존재하지 않는 쪽지입니다.");
     }
 
-    message.setMember(memberService.get(message.getSenderNumber()));
-
     model.addAttribute("message", message);
 
     return "message/inboxModal";
