@@ -6,6 +6,7 @@
 
 <jsp:include page="../header.jsp" />
 
+<section>
   <div class="container-fluid">
     <div class="row">
     
@@ -294,5 +295,6 @@
     </div>
   </div>
   </div>
+  </section>
 
   <jsp:include page="../footer.jsp" />

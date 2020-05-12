@@ -4,11 +4,6 @@
 
 <jsp:include page="../header.jsp" />
 
-<script>
-
-</script>
-
-
 <section>
 
 	<div class="container-fluid">
@@ -40,17 +35,18 @@
 					<ul id="nav_responsive"
 						class="nav flex-column d-none d-lg-block font-weight-bold ">
 
-						<li class="nav-item font-weight-bold"><a
-							class="nav-link" href="#"> <span class="group-icon"> <i
+						<li class="nav-item font-weight-bold"><a class="nav-link"
+							href="#"> <span class="group-icon"> <i
 									class="fi fi-arrow-end"></i> <i class="fi fi-arrow-down"></i>
 							</span> <span class="px-2 d-inline-block active font-weight-bold">
 									내 정보 </span>
 						</a>
 
 							<ul class="nav flex-column px-2 font-weight-bold">
-								<li class="nav-item"><a class="nav-link" href="/portfoli/app/member/generalUpdate"> 내 정보
-										수정하기 </a></li>
-								<li class="nav-item"><a class="nav-link" href="#"> 멤버쉽 </a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/portfoli/app/member/generalUpdate"> 내 정보 수정하기 </a></li>
+								<li class="nav-item"><a class="nav-link" href="#"> 멤버쉽
+								</a></li>
 							</ul></li>
 
 						<li class="nav-item font-weight-bold"><a class="nav-link"
@@ -182,12 +178,14 @@
 				<p>${loginUser.name}
 					&nbsp;
 					<c:if test="${loginUser.seekingFlag =='1'}">
-						<a class="btn btn-ghost btn-dark btn-pill mb-1 btn-sm" href="/portfoli/app/member/updateFlag"
-							role="button" style="font-size: 13px">구직중</a>
+						<a class="btn btn-ghost btn-dark btn-pill mb-1 btn-sm"
+							href="/portfoli/app/member/updateFlag" role="button"
+							style="font-size: 13px">구직중</a>
 					</c:if>
 					<c:if test="${loginUser.seekingFlag =='0'}">
-						<a class="btn btn-outline-dark btn-pill mb-1 btn-sm" href="/portfoli/app/member/updateFlag"
-							role="button" style="font-size: 13px">재직중</a>
+						<a class="btn btn-outline-dark btn-pill mb-1 btn-sm"
+							href="/portfoli/app/member/updateFlag" role="button"
+							style="font-size: 13px">재직중</a>
 					</c:if>
 				</p>
 				<p>${loginUser.email}</p>
@@ -214,7 +212,9 @@
 	</div>
 </section>
 
-
+<script>
+	
+</script>
 
 
 <jsp:include page="../footer.jsp" />

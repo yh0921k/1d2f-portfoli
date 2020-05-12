@@ -7,15 +7,9 @@
 
 <meta name="theme-color" content="#377dff">
 
-<!-- PAGE TITLE -->
-<section class="bg-light p--0 ">
-	<div class="container py-4">
-		<h1 class="h3">내 정보 수정하기</h1>
-	</div>
-</section>
 <!-- /PAGE TITLE -->
 
-<section class=" pt--20">
+<section>
 
 	<div class="container-fluid">
 

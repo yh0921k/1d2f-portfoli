@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="../header.jsp" />
+<section>
 
 <div class="container-fluid">
   <div class="row">
@@ -303,5 +304,5 @@
       </div>
     </div>
   </div>
-
+</section>
   <jsp:include page="../footer.jsp" />
