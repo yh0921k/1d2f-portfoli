@@ -12,7 +12,7 @@ import com.portfoli.domain.Admin;
 
 public class AdminControllerInterceptor implements HandlerInterceptor {
 
-  static Logger logger2 = LogManager.getLogger("runMode");
+  static Logger logger = LogManager.getLogger("runMode");
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -36,11 +36,11 @@ public class AdminControllerInterceptor implements HandlerInterceptor {
           : request.getRemoteAddr();
       url = request.getContextPath() + "/" + modelAndView.getViewName();
       user = ((Admin) request.getSession().getAttribute("admin")).getId();
-      logger2.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
+      logger.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
     } catch (Exception e) {
       if (user == null)
         user = "default";
-      logger2.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
+      logger.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
     }
   }
 

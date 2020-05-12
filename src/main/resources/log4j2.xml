@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Configuration status="DEBUG">
+  <Properties>
+  <Property name="portfoli">portfoli</Property>
+  </Properties>
 	<Appenders>
 		<Console name="console" target="SYSTEM_OUT">
 			<PatternLayout
 				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
 		</Console>
 		
-		<RollingFile name="file" fileName="C:/Users/kyh/eclipse-workspace/workspace01/.metadata/.plugins\org.eclipse.wst.server.core/tmp0/wtpwebapps/portfoli/WEB-INF/log/portfoli.log" filePattern="C:/Users/kyh/eclipse-workspace/workspace01/.metadata/.plugins\org.eclipse.wst.server.core/tmp0/wtpwebapps/portfoli/WEB-INF/log/logs/portfoli_%d{yyyy-MM-dd}_%i.log">
+		<RollingFile name="file" fileName="/WEB-INF/log2/${portfoli}.log" filePattern="/WEB-INF/log2/logs/${portfoli}_%d{yyyy-MM-dd}_%i.log">
 	   <PatternLayout pattern="%msg%n" />
 	   <Policies>
 	    <SizeBasedTriggeringPolicy size="10MB" /> <!-- 10MB 용량이 초과시 DefaultRolloverStrategy 정책만큼 넘버링 -->      
