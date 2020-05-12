@@ -44,9 +44,8 @@
    <update id="update" parameterType="Board" useGeneratedKeys="true" keyColumn="board_no" keyProperty="number">
      UPDATE pf_board
      <set>
-	     registered_date = now()
 	     <if test="title!=null and title!=''">,title = #{title}</if>
-	     <if test="content!=null and content!=''">,content = #{content}</if>
+	     <if test="content!=null and content!=''">,registered_date = now(), content = #{content}</if>
 	     <if test="viewCount!=null and viewCount!=''">,view_count = #{viewCount}</if>
      WHERE board_no = #{number}
      </set>

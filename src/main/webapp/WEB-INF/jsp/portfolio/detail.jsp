@@ -1,4 +1,5 @@
- <%@page import="com.portfoli.domain.Portfolio"%>
+ <%@page import="com.portfoli.domain.BoardAttachment"%>
+<%@page import="com.portfoli.domain.Portfolio"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -64,12 +65,44 @@
             <tr class='photoTD'>
               <td colspan="2"  class='photoInside'>
               <c:choose>
-              <c:when test="${not empty attachment}">
-              <c:forEach items='${attachment}' var='item'>
-                <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.getFileName()}' height='80'/><br>
-                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.getFileName()}' download="${pageContext.servletContext.contextPath}/upload/portfolio/${item.getFileName()}" height='80'>첨부파일 다운로드</a>
+              <c:when test="${portfolio.thumbnail != null}">
+                ${item.thumbnail}
+                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' download="${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}" height='80'>
+                <img style="margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg' height='80'/><br>
+                </a>
                 <br>
-               </c:forEach>
+               </c:when>
+               <c:otherwise>
+               <span>썸네일이 없습니다.</span>
+               </c:otherwise>
+               </c:choose>
+              </td>
+            </tr>
+            <tr class='photoTD'>
+              <td colspan="2"  class='photoInside'>
+              <c:choose>
+              <c:when test="${not empty attachment}">
+              
+              <jsp:useBean id="attachment"  type="java.util.List<BoardAttachment>" class="java.util.ArrayList" scope="request"/>  
+              
+              <%
+              for(BoardAttachment item : attachment) {
+                if(item.getFileName().endsWith(".jpg") || item.getFileName().endsWith(".jpeg") || item.getFileName().endsWith(".png") ) {
+              %>
+                <a style='margin: 0' href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' download='${item.fileName}' height='80'>
+                <img style='margin: 0' alt='첨부파일' name='attachment' src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' height='80'/>
+                </a><br>
+                <%
+                } else {
+                %>
+                <a style='margin: 0' href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' download='${item.fileName}' height='80'>
+                ${item.fileName}
+                </a><br>
+                <%
+                }
+              }
+                %>
+                <br>
                </c:when>
                <c:otherwise>
                <span>첨부파일이 없습니다.</span>

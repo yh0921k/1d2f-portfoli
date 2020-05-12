@@ -93,6 +93,9 @@ public /*abstract*/ class Board implements java.io.Serializable{
     this.registeredDate = registeredDate;
     return this;
   }
+  public Board getBoard() {
+    return new Board().setBoard(this);
+  }
   public Board setBoard(Board board) {
     this.number = board.number;
     this.title = board.title;

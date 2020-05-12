@@ -1,6 +1,8 @@
 package com.portfoli.web;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -12,15 +14,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Board;
 import com.portfoli.domain.BoardAttachment;
-import com.portfoli.domain.GeneralMember;
+import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
 import com.portfoli.domain.Portfolio;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.PortfolioService;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("/portfolio")
@@ -49,29 +55,39 @@ public class PortfolioController {
   PortfolioService portfolioService;
 
   @RequestMapping("list")
-  public void list(@ModelAttribute("portfolio") Portfolio portfolio,
+  public String list(@ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
-    // 전체리스트 개수
-    int listCnt = portfolioService.selectListCnt(portfolio);
+    Object mem = request.getSession().getAttribute("loginUser");
 
-    Pagination pagination = new Pagination(listCnt, curPage);
-    pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+    if(mem == null) {
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    } else {
 
-    portfolio.setStartIndex(pagination.getStartIndex());
-    portfolio.setPageSize(pagination.getPageSize());
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
-    // 전체리스트 출력
-    model.addAttribute("listCnt", listCnt);
-    model.addAttribute("pagination", pagination);
+      // 전체리스트 개수
+      int listCnt = portfolioService.selectListCnt(portfolio);
 
-    // 작성자 정보
-    GeneralMember gmem = memberService.getGeneralMember(portfolio.getNumber());
-    model.addAttribute("generalMember", gmem);
+      Pagination pagination = new Pagination(listCnt, curPage);
+      pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
 
-    List<Portfolio> portfolios = portfolioService.list();
-    model.addAttribute("list", portfolios);
+      portfolio.setStartIndex(pagination.getStartIndex());
+      portfolio.setPageSize(pagination.getPageSize());
+
+      // 전체리스트 출력
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("pagination", pagination);
+
+      // 작성자 정보
+      model.addAttribute("generalMember", member);
+
+      List<Portfolio> portfolios = portfolioService.list(portfolio);
+      model.addAttribute("list", portfolios);
+      return "/portfolio/list";
+    }
   }
 
   @RequestMapping("detail")
@@ -85,6 +101,75 @@ public class PortfolioController {
 
     model.addAttribute("portfolio", portfolio);
     model.addAttribute("attachment", boardAttachment);
+  }
+  @RequestMapping("form")
+  public void form() throws Exception {}
+
+  @RequestMapping("add")
+  public String add(Portfolio portfolio, HttpServletRequest request, Model model,
+      @RequestParam("thumb") MultipartFile thumb,
+      @RequestParam("files") MultipartFile[] files) throws Exception {
+
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null) {
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    } else {
+
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+
+      // Board 객체 추가(pf_board)
+      Board board = new Board();
+      board = portfolio.getBoard();
+      boardService.add(board);
+      portfolio.setBoard(board); // board_no 값 다시 집어넣기
+
+      // BoardAttachment 객체 추가(pf_board_attachment)
+      String dirPath = servletContext.getRealPath("/upload/portfolio");
+      for(MultipartFile file : files) {
+        if (file.getSize() <= 0) {
+          continue;
+        } else {
+          String filename = UUID.randomUUID().toString() + "___" + file.getOriginalFilename();
+          String filepath = dirPath + "/" + filename;
+          file.transferTo(new File(filepath));
+
+          BoardAttachment boardAttachment = new BoardAttachment();
+          boardAttachment.setBoardNumber(board.getNumber());
+          boardAttachment.setFileName(filename);
+          boardAttachment.setFilePath(filepath);
+          boardAttachmentService.add(boardAttachment);
+        }
+      }
+      // Portfolio 입력
+      // Portfolio 입력 중에서 thumbnail 정보입력
+      dirPath = servletContext.getRealPath("/upload/portfolio");
+      if (thumb.getSize() > 0) {
+        String filename = UUID.randomUUID().toString() + "___" + thumb.getOriginalFilename();
+        String filepath = dirPath + "/" + filename;
+        thumb.transferTo(new File(filepath));
+
+        Thumbnails.of(dirPath + "/" + filename)//
+        .size(300, 300)//
+        .outputFormat("jpg")//
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_300x300";
+          }
+        });
+        portfolio.setThumbnail(filename);
+
+        // Portfolio 입력 중에서 작성자 정보입력
+        portfolio.setGeneralMemberNumber(member.getNumber());
+        portfolio.setMemberName(member.getName());
+
+        portfolioService.insert(portfolio);
+      }
+
+      return "redirect:list";
+    }
   }
 
 

@@ -5,7 +5,7 @@ import com.portfoli.domain.Portfolio;
 
 public interface PortfolioDao {
 
-  List<Portfolio> findAll() throws Exception;
+  List<Portfolio> findAll(Portfolio portfolio) throws Exception;
 
   Portfolio findByNo(int boardNumber) throws Exception;
 

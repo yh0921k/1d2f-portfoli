@@ -17,9 +17,7 @@
     <result column="recommended_count" property="recommendedCount" /><!-- 추천수 -->
     <result column="readable" property="readable" /><!-- 공개여부 -->
     <result column="member_name" property="memberName" /><!-- 작성자명 -->
-    <result column="general_member_no" property="memberNumber" /><!-- 작성자번호 -->
-    <result column="file_name" property="fileName" /><!-- 첨부파일명 -->
-    <result column="file_path" property="filePath" /><!-- 첨부파일경로 -->
+    
     <result column="id" property="id" /><!-- 아이디 -->
     <result column="seeking_flag" property="seekingFlag" /><!-- 재직여부 -->
   </resultMap>
@@ -38,7 +36,6 @@
 	    b.content,
 	    b.view_count,
 	    b.registered_date,
-	    g.general_member_no,
 	    m.name member_name
 	  FROM pf_portfolio p LEFT OUTER JOIN pf_board b 
 	  ON p.board_no = b.board_no
@@ -76,21 +73,16 @@
       b.content,
       b.view_count,
       b.registered_date,
-      g.general_member_no,
       m.name member_name,
-      m.id, <!-- id값  -->
-      g.seeking_flag, <!-- 구직여부 -->
-      a.file_name,
-      a.file_path
+      m.id, -- id값  --
+      g.seeking_flag -- 구직여부 --
     FROM pf_portfolio p LEFT OUTER JOIN pf_board b 
     ON p.board_no = b.board_no
     LEFT OUTER JOIN pf_general_member g
     ON g.general_member_no = p.general_member_no
     LEFT OUTER JOIN pf_members m
     ON m.member_no = g.general_member_no
-    LEFT OUTER JOIN pf_board_attachment a
-    ON b.board_no = a.board_no
-    WHERE p.board_no = ${boardNumber}
+    WHERE p.board_no = #{boardNumber}
   </select>
 
   <!-- 
@@ -100,17 +92,27 @@
     FROM pf_notice 
     WHERE category_no = ${categoryNumber}
   </select>
-
+  -->
   
-  <insert id="insert" parameterType="Notice">
-    INSERT INTO pf_notice (
-      board_no, category_no
+  <insert id="insert" parameterType="Portfolio">
+    INSERT INTO pf_portfolio (
+      board_no,
+      general_member_no,
+      homepage,
+      thumbnail,
+      recommended_count,
+      readable
       )
     VALUES(
-      #{number}, #{categoryNumber}
+      #{number},
+      #{generalMemberNumber},
+      #{homepage},
+      #{thumbnail},
+      #{recommendedCount},
+      #{readable}
     )
   </insert>
-
+  <!--
   <delete id="delete" parameterType="int">
     DELETE 
       FROM pf_notice
