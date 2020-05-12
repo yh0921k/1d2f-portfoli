@@ -49,7 +49,7 @@
 
 
 		<!-- HEADER -->
-		<header id="header" class="shadow-xs bg-gradient-dark">
+		<header id="header" class="shadow-xs bg-gradient-dark z-index-9999">
 
 			<!-- TOP BAR -->
 			<div id="top_bar" class="bg-gradient-dark fs--14">
