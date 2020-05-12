@@ -6,12 +6,11 @@
 
 <jsp:include page="../header.jsp" />
 
-<section>
 <div class="container-fluid">
   <div class="row">
 
     <!--------------------------------------- nav bar ----------------------------------------------->
-    <div class="col-lg-3 mb-5 h--600 border-right ml--20">
+    <div class="col-lg-3 mb-5 h--600 border-right ml--20 mt--20">
 
       <!-- CATEGORIES -->
       <nav class="nav-deep nav-deep-light mb-2 ">
@@ -27,7 +26,7 @@
         </button>
 
         <!-- desktop only -->
-        <h3 class="h5 pt-3 pb-3 m-0 d-none d-lg-block">My Page</h3>
+        <h3 class="h3 pt-3 pb-3 m-0 d-none d-lg-block ml-3">My Page</h3>
 
 
         <!-- navigation -->
@@ -89,7 +88,7 @@
 
     <!--------------------------------------------- /nav bar ------------------------------------------------>
 
-    <div class="col-lg-8">
+    <div class="col-lg-8 mt--20">
       <div id="middle" class="flex-fill">
         <div class="page-title bg-transparent b-0">
           <h1 class="h3 mt-3 mb-3 px-3 font-weight-normal">받은 쪽지함</h1>
@@ -189,7 +188,6 @@
     </div>
   </div>
 </div>
-</section>
 
 <script>
 function deleteCallback() {
