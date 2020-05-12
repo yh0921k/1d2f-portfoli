@@ -236,10 +236,12 @@
 
 							<!-- documentation -->
 							<c:if test="${loginUser.type=='1' or loginUser.type==null}">
-								<li class="nav-item"><a href="/portfoli/app/portfolio/list" id="portfolio"
+								<li class="nav-item"><a href="/portfoli/app/portfolio/list"
+									id="portfolio"
 									class="nav-link dropdown-toggle nav-link-caret-hide"
 									style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
-								<li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
+								<li class="nav-item"><a
+									href="/portfoli/app/jobposting/list" id="info"
 									class="nav-link dropdown-toggle nav-link-caret-hide"
 									style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
 								<li class="nav-item"><a href="#" id="recommendInfo"
@@ -249,7 +251,7 @@
 									class="nav-link dropdown-toggle nav-link-caret-hide"
 									style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
 							</c:if>
-							
+
 							<c:if test="${loginUser.type=='2'}">
 								<li class="nav-item"><a href="#" id="portfolio"
 									class="nav-link dropdown-toggle nav-link-caret-hide"
@@ -292,47 +294,48 @@
 					<!-- 일반 회원 로그인 후 -->
 					<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 					<script type="text/javascript">
-    function sendMessage() {
-      console.log('trying socket connection');
-      var wsUri = "ws://" + window.location.host + "/portfoli/app/message/alert";
-        if (wsUri == "ws://localhost:9999/portfoli/app/message/alert") {
-        websocket = new WebSocket(wsUri);
+						function sendMessage() {
+							console.log('trying socket connection');
+							var wsUri = "ws://" + window.location.host
+									+ "/portfoli/app/message/alert";
+							if (wsUri == "ws://localhost:9999/portfoli/app/message/alert") {
+								websocket = new WebSocket(wsUri);
 
-        } else {
-        wsUri = "ws://121.132.195.172:8080/portfoli/app/message/alert";
-        websocket = new WebSocket(wsUri);
-        }
+							} else {
+								wsUri = "ws://121.132.195.172:8080/portfoli/app/message/alert";
+								websocket = new WebSocket(wsUri);
+							}
 
-        websocket.onopen = function(evt) {
-          console.log('connection opened');
-          onOpen(evt);
-        };
-        websocket.onmessage = function(evt) {
-          console.log("received message : " + evt.data);
-          onMessage(evt);
-        };
-        websocket.onerror = function(evt) {
-          console.log('error : ' + err);
-          onError(evt);
-        };
-        websocket.onclose = function(evt) {
-          console.log("WebSocket is closed now.");
-        };
-    }
-   
-    function onOpen(evt) {
-      websocket.send("${loginUser.number}");
-    }
-    function onMessage(evt) {
-      $('#count').append(evt.data);
-    }
-    function onError(evt) {
-    }
-    
-    $(document).ready(function() {
-        sendMessage();
-    });
-    </script>
+							websocket.onopen = function(evt) {
+								console.log('connection opened');
+								onOpen(evt);
+							};
+							websocket.onmessage = function(evt) {
+								console.log("received message : " + evt.data);
+								onMessage(evt);
+							};
+							websocket.onerror = function(evt) {
+								console.log('error : ' + err);
+								onError(evt);
+							};
+							websocket.onclose = function(evt) {
+								console.log("WebSocket is closed now.");
+							};
+						}
+
+						function onOpen(evt) {
+							websocket.send("${loginUser.number}");
+						}
+						function onMessage(evt) {
+							$('#count').append(evt.data);
+						}
+						function onError(evt) {
+						}
+
+						$(document).ready(function() {
+							sendMessage();
+						});
+					</script>
 					<c:if test="${loginUser.type == '1'}">
 
 						<li class="list-inline-item ml--6 mr--6 dropdown"><a href="#"
@@ -411,51 +414,56 @@
 											<!-- profile image -->
 											<div
 												class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
-												style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
-
-											<!-- initials - no image -->
-											<!--
+												<c:if test="${empty loginUser.photoFilePath}">
+												style="background-image: url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
+												</c:if>
+												<c:if test="${not empty loginUser.photoFilePath}">
+												style="background-image: url('${pageContext.request.getContextPath()}/upload/member/${loginUser.photoFilePath}')"></div>
+												</c:if>
+												<!-- initials - no image -->
+												<!--
                     <div data-initials=${loginUser.name} data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
                       <i class="fi fi-circle-spin fi-spin"></i>
                     </div>
                     -->
 
-											<!-- user detail -->
-											<span class="d-block font-weight-medium text-truncate fs--16"><a
-												href="/portfoli/app/member/generalMypage" class="text-muted">${loginUser.name}</a>
+												<!-- user detail -->
+												<span
+													class="d-block font-weight-medium text-truncate fs--16"><a
+													href="/portfoli/app/member/generalMypage"
+													class="text-muted">${loginUser.name}</a> </span> <span
+													class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
 
-											</span> <span
-												class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
+											</div>
 
-										</div>
+											<div class="dropdown-divider" style="z-index: 200;"></div>
 
-										<div class="dropdown-divider" style="z-index: 200;"></div>
+											<a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												<span
+												class="badge badge-success float-end font-weight-normal mt-1">3
+													new</span> 일정 <small class="d-block text-muted">internal
+													messaging system</small>
+											</a> <a href="#!" target="_blank"
+												class="dropdown-item text-truncate font-weight-medium">
+												포트폴리오 <small class="d-block text-muted">montly
+													billing</small>
+											</a> <a href="/portfoli/app/member/generalMypage"
+												class="dropdown-item text-truncate font-weight-medium">
+												마이페이지 <small class="d-block text-muted">profile,
+													password and more...</small>
+											</a> <a href="#!"
+												class="dropdown-item text-truncate font-weight-medium">
+												멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
+											</a>
 
-										<a href="#!" target="_blank"
-											class="dropdown-item text-truncate font-weight-medium"> <span
-											class="badge badge-success float-end font-weight-normal mt-1">3
-												new</span> 일정 <small class="d-block text-muted">internal
-												messaging system</small>
-										</a> <a href="#!" target="_blank"
-											class="dropdown-item text-truncate font-weight-medium">
-											포트폴리오 <small class="d-block text-muted">montly
-												billing</small>
-										</a> <a href="/portfoli/app/member/generalMypage"
-											class="dropdown-item text-truncate font-weight-medium">
-											마이페이지 <small class="d-block text-muted">profile,
-												password and more...</small>
-										</a> <a href="#!"
-											class="dropdown-item text-truncate font-weight-medium">
-											멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
-										</a>
+											<div class="dropdown-divider mb-0"></div>
 
-										<div class="dropdown-divider mb-0"></div>
-
-										<a href="/portfoli/app/auth/logout"
-											class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
-											<i class="fi fi-power float-start"></i> Log Out
-										</a>
-									</div></li>
+											<a href="/portfoli/app/auth/logout"
+												class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+												<i class="fi fi-power float-start"></i> Log Out
+											</a>
+										</div></li>
 					</c:if>
 
 					<!-- 기업 회원 로그인 후 -->
@@ -477,27 +485,33 @@
 								class="dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
 								<div class="dropdown-divider"></div>
-								<div class="max-h-50vh">
-									<c:forEach items="${recentMessages}" var="item">
-										<a href="#!"
-											class="clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light">
-											<span
-											class="badge badge-success float-end font-weight-normal mt-1"
-											<c:if test="${not empty item.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
+								<div class="max-h-75vh">
+									<c:forEach items="${inbox}" var="recentMessage">
+										<a
+											href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+											class="js-ajax-modal clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light"
+											data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+											data-ajax-modal-size="modal-md"
+											data-ajax-modal-centered="true"
+											data-ajax-modal-backdrop="static"> <span
+											class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
+											<c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
 											<!-- image --> <c:if
-												test="${empty item.member.photoFilePath}">
+												test="${empty recentMessage.member.photoFilePath}">
 												<div
 													class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
 													style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
-											</c:if> <c:if test="${not empty item.member.photoFilePath}">
+											</c:if> <c:if test="${not empty recentMessage.member.photoFilePath}">
 												<div
 													class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
 													style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${item.member.photoFilePath}')"></div>
-											</c:if> <!-- sender --> <strong class="d-block text-truncate">${item.member.id}</strong>
-											<p class="fs--14 m-0 text-truncate font-weight-normal">${item.title}</p>
-											<!-- date --> <small class="d-block fs--11 text-muted">
-												<fmt:formatDate var="sendDate" value="${item.sendDate}"
+											</c:if> <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
+											<!-- title -->
+											<p class="fs--14 m-0 text-truncate font-weight-normal">
+												${recentMessage.title}</p> <!-- date --> <small
+											class="d-block fs--11 text-muted"> <fmt:formatDate
+													var="sendDate" value="${recentMessage.sendDate}"
 													pattern="yyyy.MM.dd HH:mm:ss" /> ${sendDate}
 										</small>
 										</a>
@@ -520,72 +534,57 @@
 											class="fi w--15 fi-close"></i>
 									</span> <span
 										class="fs--14 d-none d-sm-inline-block font-weight-medium">[기업]&nbsp;&nbsp;${loginUser.name}</span>
-								</a> <!--
-                  
-       
-                    <div aria-labelledby="dropdownAccountOptions"
-                      class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+								</a>
 
-                      <div class="dropdown-header fs--14 py-4">
 
-                        <!-- profile image -->
-									<div
-										class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
-										style="background-image: url('../../html_frontend/demo.files/images/icons/user80.png')"></div>
+									<div aria-labelledby="dropdownAccountOptions"
+										class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
-									<!-- initials - no image --> <!--
+										<div class="dropdown-header fs--14 py-4">
+
+											<!-- profile image -->
+											<div
+												class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
+												style="background-image: url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
+
+											<!-- initials - no image -->
+											<!--
                     <div data-initials="John Doe" data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
                       <i class="fi fi-circle-spin fi-spin"></i>
                     </div>
-                    --> <!-- user detail --> <span
-									class="d-block font-weight-medium text-truncate fs--16"><a
-										href="/portfoli/app/member/companyMypage" class="text-muted">${loginUser.name}</a></span>
-									<span
-									class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
-							</div>
+                    -->
+											<!-- user detail -->
+											<span class="d-block font-weight-medium text-truncate fs--16"><a
+												href="/portfoli/app/member/companyMypage" class="text-muted">${loginUser.name}</a></span>
+											<span
+												class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
+										</div>
 
-							<div class="dropdown-divider"></div> <a href="#!" target="_blank"
-							class="dropdown-item text-truncate font-weight-medium"> Notes
-								<small class="d-block text-muted">personal encypted
-									notes</small>
-						</a> <a href="#!" target="_blank"
-							class="dropdown-item text-truncate font-weight-medium"> <span
-								class="badge badge-success float-end font-weight-normal mt-1">3
-									new</span> Messages <small class="d-block text-muted">internal
-									messaging system</small>
-						</a> <a href="#!" target="_blank"
-							class="dropdown-item text-truncate font-weight-medium"> <span
-								class="badge badge-danger float-end font-weight-normal mt-1">1
-									unpaid</span> Invoices <small class="d-block text-muted">montly
-									billing</small>
-						</a> <a href="#!"
-							class="dropdown-item text-truncate font-weight-medium">
-								Account Settings <small class="d-block text-muted">profile,
-									password and more...</small>
-						</a> <a href="#!"
-							class="dropdown-item text-truncate font-weight-medium">
-								Upgrade <small class="d-block text-muted">upgrade your
-									account</small>
-						</a>
+										<div class="dropdown-divider"></div>
+										
+										<a href="/portfoli/app/member/generalMypage"
+												class="dropdown-item text-truncate font-weight-medium">
+												마이페이지 <small class="d-block text-muted">profile,
+													password and more...</small>
+											</a>
+											
+										<div class="dropdown-divider mb-0"></div>
+										<a href="/portfoli/app/auth/logout"
+											class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+											<i class="fi fi-power float-start"></i> Log Out
+										</a>
+									</div></li>
+					</c:if>
 
-							<div class="dropdown-divider mb-0"></div> <a
-							href="/portfoli/app/auth/logout"
-							class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
-								<i class="fi fi-power float-start"></i> Log Out
-						</a>
+
+					</ul>
+					<!-- /OPTIONS -->
+
+
+
+				</nav>
 			</div>
-			</li>
-			</c:if>
+			<!-- /NAVBAR -->
 
-
-			</ul>
-			<!-- /OPTIONS -->
-
-
-
-			</nav>
-	</div>
-	<!-- /NAVBAR -->
-
-	</header>
-	<!-- /HEADER -->
+		</header>
+		<!-- /HEADER -->
