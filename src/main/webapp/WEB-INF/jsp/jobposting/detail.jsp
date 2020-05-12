@@ -30,11 +30,12 @@ ${jobPosting.content}<br>
 조회수: ${jobPosting.viewCount}<br>
 <hr>
   
-
+<c:if test="${not empty loginUser}">
 <p>
 <a href='updateForm?no=${jobPosting.jobPostingNumber}' class="btn btn-primary pull-right">수정</a>
 <a href='delete?no=${jobPosting.jobPostingNumber}' id="delBtn" class="btn btn-primary pull-right">삭제</a>
 </p>
+</c:if>
 
 </div>
 </c:if>
