@@ -13,11 +13,10 @@ import com.portfoli.domain.Admin;
 import com.portfoli.service.AdminService;
 
 @Controller
-@RequestMapping("admin")
 public class AdminController {
 
   static Logger logger = LogManager.getLogger(AdminController.class);
-  final static int EXPIRETIME = 10;
+  final static int EXPIRETIME = 180;
 
   @Autowired
   ServletContext servletContext;
@@ -30,19 +29,22 @@ public class AdminController {
   }
 
   @GetMapping("loginForm")
-  public void loginForm() throws Exception {
-    logger.info("AdminController::loginForm() called");
+  public void loginForm(HttpSession session) throws Exception {
+    session.invalidate();
   }
 
   @GetMapping("logout")
   public String logout(HttpSession session) throws Exception {
-    session.invalidate();
     return "loginForm";
   }
 
-  @RequestMapping("login")
+  @RequestMapping("index")
   public String login(HttpServletRequest request, String id, String password) throws Exception {
     logger.info("AdminController::login() called");
+
+    if (request.getSession().getAttribute("admin") != null) {
+      return "index";
+    }
 
     Admin admin = adminService.get(id, password);
     if (admin != null) {
@@ -50,9 +52,9 @@ public class AdminController {
       session.setAttribute("admin", admin);
       session.setAttribute("expire", EXPIRETIME);
       session.setMaxInactiveInterval(EXPIRETIME);
-      return "admin/index";
+      return "index";
     } else {
-      return "admin/loginForm";
+      return "loginForm";
     }
   }
 }
