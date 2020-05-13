@@ -13,6 +13,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+node_modules/
+package-lock.json
 
 # External tool builders
 .externalToolBuilders/

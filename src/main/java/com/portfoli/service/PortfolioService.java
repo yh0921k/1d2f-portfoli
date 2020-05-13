@@ -5,10 +5,10 @@ import com.portfoli.domain.Portfolio;
 
 public interface PortfolioService {
 
-  List<Portfolio> list() throws Exception;
+  List<Portfolio> list(Portfolio portfolio) throws Exception;
 
   Portfolio get(int boardNumber) throws Exception;
-  
+
   List<Portfolio> getByMemberNumber(int generalMemberNumber) throws Exception;
 
   boolean insert(Portfolio portfolio) throws Exception;
@@ -19,7 +19,7 @@ public interface PortfolioService {
 
   int selectListCnt(Portfolio portfolio) throws Exception;
 
-//  int update(Map<String, Integer> map) throws Exception;
+  //  int update(Map<String, Integer> map) throws Exception;
 
 
 

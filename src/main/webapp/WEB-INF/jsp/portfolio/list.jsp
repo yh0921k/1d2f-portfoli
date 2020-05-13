@@ -44,7 +44,7 @@
                 <tr style="background-color: #e8e8e8;">
                   <td class="padding10_0" width="15%" align="center">작성자</td>
                   <td class="padding10_0" width="55%" align="center">제  목</td>
-                  <td class="padding10_0" width="15%" align="center">등록일</td>
+                  <td class="padding10_0" width="15%" align="center">추천수</td>
                   <td class="padding10_0" width="15%" align="center">조회수</td>
                 </tr>
                 
@@ -52,7 +52,7 @@
             <tr>
               <td class="padding10_10"><a href="detail?number=${item.number}">${item.memberName}</a></td>
               <td class="padding10_10"><a href="detail?number=${item.number}">${item.title}</a></td>
-              <td align="center"><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
+              <td align="center"><a href="detail?number=${item.number}">${item.recommendedCount}</a></td>
               <td class="padding10_10"><a href="detail?number=${item.number}">${item.viewCount}</a></td>
             </tr>
             </c:forEach>

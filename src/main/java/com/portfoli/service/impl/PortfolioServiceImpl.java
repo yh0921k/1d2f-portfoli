@@ -15,10 +15,10 @@ public class PortfolioServiceImpl implements PortfolioService {
   public PortfolioServiceImpl(PortfolioDao portfolioDao) {
     this.portfolioDao = portfolioDao;
   }
-  
+
   @Override
-  public List<Portfolio> list() throws Exception {
-    return portfolioDao.findAll();
+  public List<Portfolio> list(Portfolio portfolio) throws Exception {
+    return portfolioDao.findAll(portfolio);
   }
 
   @Override

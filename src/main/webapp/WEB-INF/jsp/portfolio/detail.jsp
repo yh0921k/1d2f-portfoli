@@ -1,4 +1,5 @@
- <%@page import="com.portfoli.domain.Portfolio"%>
+ <%@page import="com.portfoli.domain.BoardAttachment"%>
+<%@page import="com.portfoli.domain.Portfolio"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,13 +10,13 @@
         <div class="container py-1">
 
           <h1 class="h2">
-            공지사항
+            포트폴리오 게시판
           </h1>
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb fs--14">
               <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="list">포트폴리오 게시판</a></li>
             </ol>
           </nav>
 
@@ -32,7 +33,7 @@
 
             <div class="col-12 col-lg-8">
 
-              <!--
+              <!--x
                 .article-format class will add some slightly formattings for a good text visuals. 
                 This is because most editors are not ready formatted for bootstrap
                 Blog content should come inside this container, as it is from database!
@@ -45,7 +46,14 @@
             <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
             <table class="lightGray">
             <tr class="firstTR">
-              <td width="75%" class='padding'>"${portfolio.memberName}"님의 포트폴리오 : ${portfolio.title}</td>
+              <td width="75%" class='padding'>
+              <c:if test="${portfolio.seekingFlag == 1}">
+              "${portfolio.id}"님의 포트폴리오 : (구직중)${portfolio.title}
+              </c:if>
+              <c:if test="${portfolio.seekingFlag != 1}">
+              "${portfolio.id}"님의 포트폴리오 : (재직중)${portfolio.title}
+              </c:if>
+              </td>
               <td width="25%" align="center" class='padding darkerGray'>${portfolio.registeredDate}</td>
             </tr>
             <tr>
@@ -57,12 +65,46 @@
             <tr class='photoTD'>
               <td colspan="2"  class='photoInside'>
               <c:choose>
-              <c:when test="${not empty attachment}">
-              <c:forEach items='${attachment}' var='item'>
-                <img style="margin: 0" alt="첨부파일" name="attachment" src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.getFileName()}' height='80'/><br>
-                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.getFileName()}' download="${pageContext.servletContext.contextPath}/upload/portfolio/${item.getFileName()}" height='80'>첨부파일 다운로드</a>
+              <c:when test="${portfolio.thumbnail != null}">
+                ${item.thumbnail}
+                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' height='80'>
+                <img style="margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg' height='80'/><br>
+                </a>
                 <br>
-               </c:forEach>
+               </c:when>
+               <c:otherwise>
+               <span>썸네일이 없습니다.</span>
+               </c:otherwise>
+               </c:choose>
+              </td>
+            </tr>
+            <tr class='photoTD'>
+              <td colspan="2"  class='photoInside'>
+              <c:choose>
+              
+              <c:when test="${not empty attachment}">
+              <c:forEach items="${attachment}" var="item">
+              <c:set var="name" value="${item.fileName}" />
+              <div style="display:inline-block; padding:5px 5px; margin:5px 5px; border: 3px outset white; height: 110px;">
+                <div style="font-size: small">
+                ${item.filePath}
+                </div>
+                <div>
+                <a target="_blank" download="${item.filePath}" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' style='margin: 0'>
+                    <c:choose>
+			                <c:when test="${item.fileName.endsWith('.jpg') || item.fileName.endsWith('.png') || item.fileName.endsWith('.jpeg') || item.fileName.endsWith('.gif') }">
+		                   <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' height="80px"/><br>
+                       
+			                </c:when>
+			                <c:otherwise>
+			                 <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/resources/assets/images/file_icon.png' height="80px"/><br>
+			                </c:otherwise>
+		                </c:choose>
+                </a>
+                </div>
+              </div>
+              </c:forEach>
+                <br>
                </c:when>
                <c:otherwise>
                <span>첨부파일이 없습니다.</span>
@@ -74,7 +116,7 @@
             <tr>
             <td colspan="2" class='buttonTD'>
             <button style="font-size: small" type="submit">수정(M)</button>
-            <button style="font-size: small" type="submit"  onclick='move(event)'>삭제(D)</button>
+            <button style="font-size: small" type="submit"  id="deleteButton"onclick='move(event)'>삭제(D)</button>
             </td>
             </tr>
             </table>
@@ -109,6 +151,7 @@
 	  e.preventDefault();
 	  location.href = "delete?number=" + ${portfolio.number};
   }
+  
   </script>
 
       <jsp:include page="../footer.jsp"/>
