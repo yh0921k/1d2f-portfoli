@@ -16,7 +16,6 @@ import com.portfoli.service.AdminService;
 public class AdminController {
 
   static Logger logger = LogManager.getLogger(AdminController.class);
-  final static int EXPIRETIME = 180;
 
   @Autowired
   ServletContext servletContext;
@@ -37,22 +36,25 @@ public class AdminController {
   public String logout(HttpSession session) throws Exception {
     return "loginForm";
   }
+  
+  @GetMapping("contentsHome")
+  public void contentsHome() throws Exception {
+    
+  }
 
-  @RequestMapping("index")
+  @RequestMapping("mainForm")
   public String login(HttpServletRequest request, String id, String password) throws Exception {
     logger.info("AdminController::login() called");
 
     if (request.getSession().getAttribute("admin") != null) {
-      return "index";
+      return "mainForm";
     }
 
     Admin admin = adminService.get(id, password);
     if (admin != null) {
       HttpSession session = request.getSession();
       session.setAttribute("admin", admin);
-      session.setAttribute("expire", EXPIRETIME);
-      session.setMaxInactiveInterval(EXPIRETIME);
-      return "index";
+      return "mainForm";
     } else {
       return "loginForm";
     }
