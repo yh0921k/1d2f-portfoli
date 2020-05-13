@@ -17,7 +17,6 @@
 		<result column="start_dated" property="startDated" />
 		<result column="end_dated" property="endDated" />
 		<result column="job" property="job" />
-		<result column="thumbnail" property="thumnail" />
 		<result column="year_salary" property="yearSalary" />
 		<result column="readable" property="readable" />
 		<result column="minimum_education_no" property="minimumEducationNumber" />
@@ -39,7 +38,13 @@
   year_salary,
   start_dated,
   end_dated,
-  view_count)
+  view_count,
+  company_member_no,
+  work_place_no,
+  posting_registration,
+  readable,
+  minimum_education_no,
+  employment_stat_no)
   values(
   #{title},
   #{content},
@@ -48,7 +53,13 @@
   #{yearSalary},
   #{startDated},
   #{endDated},
-  0)
+  0,
+  6,
+  1,
+  now(),
+  1,
+  1,
+  1)
   </insert>
 
   <select id="findAll" resultMap="JobPostingMap">
