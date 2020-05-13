@@ -13,11 +13,14 @@ import com.portfoli.domain.Admin;
 public class AdminControllerInterceptor implements HandlerInterceptor {
 
   static Logger logger = LogManager.getLogger("runMode");
+  final static int EXPIRETIME = 300;
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
     System.out.println("AdminControllerInterceptor.preHandle()");
+    request.getSession().setAttribute("expire", EXPIRETIME);
+    request.getSession().setMaxInactiveInterval(EXPIRETIME);
     return true;
   }
 
@@ -48,5 +51,6 @@ public class AdminControllerInterceptor implements HandlerInterceptor {
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
       Object handler, Exception ex) throws Exception {
     System.out.println("AdminControllerInterceptor.afterCompletion()");
+   
   }
 }
