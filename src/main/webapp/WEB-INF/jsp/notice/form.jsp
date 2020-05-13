@@ -3,39 +3,61 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
   <jsp:include page="../header.jsp"/>
+<div class="container-fluid">
+  <div class="row">
+    <!--------------------------------------- nav bar ----------------------------------------------->
 
-			<!-- PAGE TITLE -->
-      <section class="bg-white" style="padding: 30px 0px;">
-				<div class="container py-1">
+    <div class="col-lg-3 mb-5 h--600 border-right ml--20 mr-5 mt--20">
+      <!-- CATEGORIES -->
+      <nav class="nav-deep nav-deep-light mb-2">
+        <!-- mobile only -->
+        <button
+          class="clearfix btn btn-toggle btn-sm btn-block text-align-left shadow-md border rounded mb-1 d-block d-lg-none"
+          data-target="#nav_responsive"
+          data-toggle-container-class="d-none d-sm-block bg-white shadow-md border animate-fadein rounded p-3">
+          <span class="group-icon px-2 py-2 float-start"> <i
+            class="fi fi-bars-2"></i> <i class="fi fi-close"></i>
+          </span> <span class="h5 py-2 m-0 float-start"> Customer Center </span>
+        </button>
 
-					<h1 class="h2">
-						고객센터
-					</h1>
+        <!-- desktop only -->
+        <h3 class="h3 pt-3 pb-3 m-0 d-none d-lg-block ml-3">Customer
+          Center</h3>
+        <!-- navigation -->
+        <ul id="nav_responsive"
+          class="nav flex-column d-none d-lg-block font-weight-bold">
 
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="#!">portfoli</a></li>
-							<li class="breadcrumb-item active" aria-current="page">고객센터</li>
-						</ol>
-					</nav>
+          <li class="nav-item active mb-2"><a class="nav-link" href="/portfoli/app/notice/list"> <span class="px-2 d-inline-block"> 공지사항 </span>
+          </a></li>
 
-				</div>
-			</section>
-			<!-- /PAGE TITLE -->
+          <li class="nav-item mb-2"><a class="nav-link" href="/portfoli/app/faq/list"> <span class="px-2 d-inline-block"> FAQ </span>
+          </a></li>
+
+          <li class="nav-item mb-2"><a class="nav-link" href="/portfoli/app/qna/list"> <span class="px-2 d-inline-block"> Q&A </span>
+          </a></li>
+ 
 
 
-			<!-- FAQ -->
-      <section style="padding: 50px 0px;">
-        <div class="container">
+        </ul>
+      </nav>
+    </div>
+    <!--------------------------------------------- /nav bar ------------------------------------------------>
+    <!-------------------------------------------- contents -------------------------------------------------->
+    <div class="portlet mt--20" style="width: 65%;">
 
-          <div class="row">
+	 <form action="add" method="post" enctype="multipart/form-data">
+      <div class="portlet-header">
+        <h1 class="d-none d-lg-block m--3">공지사항</h1>
+        <div align="right">
+          <button class="btn btn-outline-secondary btn-pill btn-sm" 
+                  onclick="location.href='form'">글쓰기(+)</button>
+          <button class="btn btn-outline-secondary btn-pill btn-sm" 
+                  onclick="move(event)">취소</button>
+        </div>
+        
+      </div>
 
-          <%--왼쪽 noticebar부분 --%>
-          <jsp:include page="sidebar.jsp" />
-						
-						<div class="col-12 col-lg-8">
-
-							 <form action="add" method="post" enctype="multipart/form-data">
+      <div class="table-responsive rounded" style="min-height: 500px;">
                 <table class="lightGray">
 
                 <tr class="firstTR" >
@@ -67,26 +89,14 @@
                     <input type="file" name="files" class="files" onclick="plus(event)"/><br>
                   </td>
                 </tr>
-                <tr style="background-color: white">
-                  <td colspan="2" align="center">
-		                <button>글쓰기</button>
-		                <button onclick="move(event)">취소</button>
-                  </td>
-                </tr>
                 </table>
-                
+                </div>
                 </form>
-                
 
 							</div>
 
 						</div>
 				  </div>
-
-
-			</section>
-			<!-- /FAQ -->
-
   <style>
     .lightGray{width: 100%; border:2px lightGray solid;}
     .darkerGray{color:#313335;}

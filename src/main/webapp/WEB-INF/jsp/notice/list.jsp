@@ -5,114 +5,129 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <jsp:include page="../header.jsp"/>
 
-      <!-- PAGE TITLE -->
-      <section class="bg-white" style="padding: 30px 0px;">
-        <div class="container py-1">
+<div class="container-fluid">
+  <div class="row">
+    <!--------------------------------------- nav bar ----------------------------------------------->
 
-          <h1 class="h2">
-            고객센터
-          </h1>
+    <div class="col-lg-3 mb-5 h--600 border-right ml--20 mr-5 mt--20">
+      <!-- CATEGORIES -->
+      <nav class="nav-deep nav-deep-light mb-2">
+        <!-- mobile only -->
+        <button
+          class="clearfix btn btn-toggle btn-sm btn-block text-align-left shadow-md border rounded mb-1 d-block d-lg-none"
+          data-target="#nav_responsive"
+          data-toggle-container-class="d-none d-sm-block bg-white shadow-md border animate-fadein rounded p-3">
+          <span class="group-icon px-2 py-2 float-start"> <i
+            class="fi fi-bars-2"></i> <i class="fi fi-close"></i>
+          </span> <span class="h5 py-2 m-0 float-start"> Customer Center </span>
+        </button>
 
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb fs--14">
-              <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
-            </ol>
-          </nav>
+        <!-- desktop only -->
+        <h3 class="h3 pt-3 pb-3 m-0 d-none d-lg-block ml-3">Customer
+          Center</h3>
+        <!-- navigation -->
+        <ul id="nav_responsive"
+          class="nav flex-column d-none d-lg-block font-weight-bold">
 
+          <li class="nav-item active mb-2"><a class="nav-link" href="/portfoli/app/notice/list"> <span class="px-2 d-inline-block"> 공지사항 </span>
+          </a></li>
+
+          <li class="nav-item mb-2"><a class="nav-link" href="/portfoli/app/faq/list"> <span class="px-2 d-inline-block"> FAQ </span>
+          </a></li>
+
+          <li class="nav-item mb-2"><a class="nav-link" href="/portfoli/app/qna/list"> <span class="px-2 d-inline-block"> Q&A </span>
+          </a></li>
+ 
+
+
+        </ul>
+      </nav>
+    </div>
+    <!--------------------------------------------- /nav bar ------------------------------------------------>
+    
+    <!-------------------------------------------- contents -------------------------------------------------->
+    <div class="portlet mt--20" style="width: 65%;">
+
+      <div class="portlet-header">
+        <h1 class="d-none d-lg-block m--3">공지사항</h1>
+        <div align="right">
+          <button class="btn btn-outline-secondary btn-pill btn-sm" 
+                  onclick="location.href='form'">글쓰기(+)</button>
         </div>
-      </section>
-      <!-- /PAGE TITLE -->
+      </div>
 
-      <!-- FAQ -->
-      <section style="padding: 50px 0px;">
-        <div class="container">
+      <div class="table-responsive rounded" style="min-height: 500px;">
 
-          <div class="row">
-
-          <%--왼쪽 noticebar부분 --%>
-          <jsp:include page="sidebar.jsp" />
-            
-            <div class="col-12 col-lg-8">
-
-              <!--
-                .article-format class will add some slightly formattings for a good text visuals. 
-                This is because most editors are not ready formatted for bootstrap
-                Blog content should come inside this container, as it is from database!
-                src/scss/_core/base/_typography.scss
-              -->
-              <div class="bg-white p-5 p-4-xl rounded-xl article-format">
-              <button style="float: right; font-size: small" onclick="location.href='form'">글쓰기(+)</button>
-                <table border='1' style="width: 100%">
-                <tr style="background-color: #e8e8e8;">
-                  <td style="padding: 10px 0px;" width="15%" align="center">유 형</td>
-                  <td style="padding: 10px 0px;" width="55%" align="center">제  목</td>
-                  <td style="padding: 10px 0px;" width="15%" align="center">등록일</td>
-                  <td style="padding: 10px 0px;" width="15%" align="center">조회수</td>
-                </tr>
+        <table class="table m-0">
+          <thead>
+            <tr>
+              <th class="b-0 w--200" style="font-size: large">카테고리</th>
+              <th class="b-0" style="font-size: large;">제목</th>
+              <th class="b-0 w--150" style="font-size: large;">등록일</th>
+              <th class="b-0 w--100" style="font-size: large;">조회수</th>
+            </tr>
+          </thead>
                 
+          <tbody>
             <c:forEach items="${list}" var="item">
             <tr>
-              <td style="padding: 5px 5px;"><a href="detail?number=${item.number}">${item.categoryName}</a></td>
-              <td style="padding: 5px 5px;"><a href="detail?number=${item.number}">${item.title}</a></td>
-              <td align="center"><a href="detail?number=${item.number}">${item.registeredDate}</a></td>
-              <td style="padding: 5px 5px;"><a href="detail?number=${item.number}">${item.viewCount}</a></td>
+              <td><a class="text-gray-900" href="detail?number=${item.number}">${item.categoryName}</a></td>
+              <td><a class="text-gray-900" href="detail?number=${item.number}">${item.title}</a></td>
+              <td><a class="text-gray-900" href="detail?number=${item.number}">${item.registeredDate}</a></td>
+              <td><a class="text-gray-900" href="detail?number=${item.number}">${item.viewCount}</a></td>
             </tr>
             </c:forEach>
-                
-                </table>
-                <br>
+          </tbody>
+        </table>
+        
+      </div>
+    <!-------------------------------------------- contents -------------------------------------------------->
+
+    <!-------------------------------------------- 페이징부분 -------------------------------------------------->
+<div class="col-12 col-xl-7">
+ <nav aria-label="pagination">
+   <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+   
+   
+  <li
+     <c:if test="${pagination.curRange ne 1}"> class="page-item disabled btn-pill"</c:if>
+     <c:if test="${pagination.curPage ne 1}"> class="page-item"</c:if>
+     data-page="prev">
+
+    <a class="page-link"
+                href="/portfoli/app/notice/list?pageNumber=${startPage - 1}"
+                tabindex="-1" aria-disabled="true" onClick="fn_paging('${pagination.prevPage}')">Prev</a></li>
 
 
-              <!-- 페이징 부분 -->
-                <div align="center">
-                    <c:if test="${pagination.curRange ne 1}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging(1)">[처음]</a> 
-                    </c:if>
-                    <c:if test="${pagination.curPage ne 1}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pagination.prevPage}')">[이전]</a> 
-                    </c:if>
-                    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
-                        <c:choose>
-                            <c:when test="${pageNum eq  pagination.curPage}">
-                                <div style="display:inline-block; font-weight: bold; margin:0px 5px;"><a href="#" onClick="fn_paging('${pageNum}')">${pageNum}</a></div> 
-                            </c:when>
-                            <c:otherwise>
-                                <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pageNum}')">${pageNum}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                    <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pagination.nextPage}')">[다음]</a> 
-                    </c:if>
-                    <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pagination.pageCnt}')">[끝]</a> 
-                    </c:if>
-                </div>
-                
-                <div align="center">
-                    총 게시글 수 : ${pagination.listCnt} / 총 페이지 수 : ${pagination.pageCnt} / 현재 페이지 : ${pagination.curPage} / 현재 블럭 : ${pagination.curRange} / 총 블럭 수 : ${pagination.rangeCnt}
-                </div>
-
-
-
-
-                
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-      <!-- /FAQ -->
+    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
+      <li
+        <c:if test="${pageNum eq pagination.curPage}">
+        class="page-item active"
+        </c:if>
+        data-page="${pageNum}"><a class="page-link"
+        href="/portfoli/app/notice/list?curPage=${pageNum}">${pageNum}</a></li>
+    </c:forEach>
+    
+    
+    <li
+      <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}"> class="page-item disabled btn-pill"</c:if>
+      <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}"> class="page-item"</c:if>
+      data-page="next">
+      <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="/portfoli/app/notice/list?pageNumber=${endPage + 1}">Next</a>
+    </li>
+  </ul>
+          
+ </nav>
+</div>
+</div>
+</div>
+</div>
+    <!-------------------------------------------- 페이징부분 -------------------------------------------------->
 
   <script>
   function fn_paging(curPage) {
-	  location.href = "list?curPage=" + curPage;
-	  }
+    location.href = "list?curPage=" + curPage;
+    }
   </script>
-
+           
       <jsp:include page="../footer.jsp"/>

@@ -126,14 +126,15 @@ public class NoticeController {
       if (file.getSize() <= 0) {
         continue;
       } else {
-        String filename = UUID.randomUUID().toString() + file.getOriginalFilename();
+        String[] originalFilename = file.getOriginalFilename().split("___");
+        String filename = UUID.randomUUID().toString() + "___" + file.getOriginalFilename();
         String filepath = dirPath + "/" + filename;
         file.transferTo(new File(filepath));
 
         BoardAttachment boardAttachment = new BoardAttachment();
         boardAttachment.setBoardNumber(board.getNumber());
         boardAttachment.setFileName(filename);
-        boardAttachment.setFilePath(filepath);
+        boardAttachment.setFilePath(originalFilename[originalFilename.length-1]);
         boardAttachmentService.add(boardAttachment);
       }
     }
@@ -176,14 +177,15 @@ public class NoticeController {
       if (file.getSize() <= 0) {
         continue;
       } else {
-        String filename = UUID.randomUUID().toString() + file.getOriginalFilename();
+        String[] originalFilename = file.getOriginalFilename().split("___");
+        String filename = UUID.randomUUID().toString() + "___" + file.getOriginalFilename();
         String filepath = dirPath + "/" + filename;
         file.transferTo(new File(filepath));
 
         BoardAttachment boardAttachment = new BoardAttachment();
         boardAttachment.setBoardNumber(notice.getNumber());
         boardAttachment.setFileName(filename);
-        boardAttachment.setFilePath(filepath);
+        boardAttachment.setFilePath(originalFilename[originalFilename.length-1]);
         boardAttachmentService.add(boardAttachment);
       }
     }
