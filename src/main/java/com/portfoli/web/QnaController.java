@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.Qna;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
@@ -38,7 +43,7 @@ public class QnaController {
 
   @Autowired
   QnaService qnaService;
-  
+
   @Autowired
   MemberService memberService;
 
@@ -48,25 +53,50 @@ public class QnaController {
   @GetMapping("list")
   public void list(Model model) throws Exception {
     List<Qna> qnas = qnaService.list();
-    for(Qna qna : qnas) {
+    for (Qna qna : qnas) {
       qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
     }
     model.addAttribute("qnas", qnas);
   }
-  
+
   @GetMapping("detail")
-  public void detail(Model model, int no) throws Exception {
+  public ModelAndView detail(HttpServletRequest request, HttpServletResponse response,
+      HttpSession session, int no) throws Exception {
     Map<String, Object> params = new HashMap<>();
+    ModelAndView mv = new ModelAndView();
     Qna qna = qnaService.get(no);
-    int viewCount = qna.getViewCount()+1;
-    params.put("viewCount", viewCount);
-    params.put("boardNo", no);
-    qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
-    qna.setViewCount(viewCount);
-    boardService.addViewCount(params);
-    model.addAttribute("qna", qna);
+
+    // 새로고침 조회수 막기
+    Cookie[] cookies = request.getCookies();
+    Cookie viewCookie = null;
+
+    if (cookies != null && cookies.length > 0) {
+      for (int i = 0; i < cookies.length; i++) {
+        if (cookies[i].getName().contentEquals("cookie" + no)) {
+          viewCookie = cookies[i];
+        }
+      }
+    }
+
+    if (qna != null) {
+      qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
+      mv.addObject("qna", qna);
+
+      if (viewCookie == null) {
+        Cookie newCookie = new Cookie("cookie" + no, "|" + no + "|");
+        response.addCookie(newCookie);
+
+        int viewCount = qna.getViewCount() + 1;
+        params.put("viewCount", viewCount);
+        params.put("boardNo", no);
+        boardService.addViewCount(params);
+      }
+    }
+    return mv;
+
+
   }
-  
+
   @GetMapping("delete")
   public String delete(int no) throws Exception {
     qnaService.delete(no);
