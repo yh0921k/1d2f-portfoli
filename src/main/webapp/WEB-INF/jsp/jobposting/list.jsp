@@ -8,8 +8,8 @@
 <jsp:include page="../header.jsp" />
 
 
-<div class="container">
-<h1>채용정보</h1>
+<div class="container" style="text-align:center">
+<h1 style="text-align:left">채용정보</h1>
 <div id="searchForm" style="text-align:right">
 <form action='search' method='get' >
 	<input id='keyword' name='keyword' type='text' >
@@ -18,7 +18,7 @@
 </div>
 <hr>
 
-<div style="text-align:center">
+<div>
 <table id="listTable" class="table table-striped table-hover">
 	<thead>
 	  <th></th>
@@ -28,8 +28,9 @@
 		<!--  <th>최소경력</th>-->
 		<!--  <th>직무</th> -->
 		<!--  <th>연봉</th> -->
-		<th>시작일</th>
-		<th>마감일</th>
+		<!-- <th>시작일</th> -->
+		<!-- <th>마감일</th> -->
+		<th>등록일</th>
 		<th>조회수</th>
 	</thead>
 
@@ -45,8 +46,9 @@
 			<!-- <td>${item.minimumCareer}</td> -->
 			<!-- <td>${item.job}</td> -->
 			<!-- <td>${item.yearSalary}</td> -->
-			<td>${item.startDated}</td>
-			<td>${item.endDated}</td>
+			<!-- <td>${item.startDated}</td> -->
+			<!-- <td>${item.endDated}</td> -->
+			<td>${item.postingRegistration}</td>
 			<td>${item.viewCount}</td>
 		</tr>
 	</c:forEach>
@@ -63,7 +65,8 @@
 <a href='form' class="btn btn-primary pull-right">글쓰기</a>
 </div>
 </c:if>
-
+<br>
+<br>
 <br>
 </div>
 
