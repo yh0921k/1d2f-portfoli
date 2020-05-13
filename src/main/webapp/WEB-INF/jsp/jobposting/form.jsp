@@ -6,9 +6,7 @@
 
 <div class="container">
 	<h1>채용공고등록</h1>
-	<form action='add' id="form1" method='post'
-		enctype='multipart/form-data'>
-
+	<form action='add' id="form1" method='post' enctype='multipart/form-data'>
 		
 		<div class="col-sm-13">
 		제목*  <input id="title" placeholder="제목" class="form-control" name='title'
@@ -38,8 +36,8 @@
 		이미지 첨부*<input id="jobPostingFiles" name='jobPostingFiles' type='file' class="form-control"><br>
 
 		<button id="btn1" class="btn btn-primary btn-lg btn-block">등록</button>
-</div>
 </form>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -104,7 +102,6 @@ document.querySelector("#form1").onsubmit = () => {
 	      return false;
 	    }
 	-->
-	
 	var startDated = document.querySelector("#startDated");
 	if (startDated.value == "") {
 		Swal.fire({

@@ -19,13 +19,11 @@ public class JobPosting implements Serializable {
   private Date startDated;
   private Date endDated;
   private String job;
-  private String thumnail;
   private int yearSalary;
   private int readable;
   private int minimumEducationNumber;
   private int employmentStatNumber;
   List<JobPostingFile> files;
-
 
   @Override
   public String toString() {
@@ -33,11 +31,11 @@ public class JobPosting implements Serializable {
         + companyMemberNumber + ", title=" + title + ", content=" + content + ", workPlaceNumber="
         + workPlaceNumber + ", minimumCareer=" + minimumCareer + ", viewCount=" + viewCount
         + ", postingRegistration=" + postingRegistration + ", startDated=" + startDated
-        + ", endDated=" + endDated + ", job=" + job + ", thumnail=" + thumnail + ", yearSalary="
-        + yearSalary + ", readable=" + readable + ", minimumEducationNumber="
-        + minimumEducationNumber + ", employmentStatNumber=" + employmentStatNumber + ", files="
-        + files + "]";
+        + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
+        + readable + ", minimumEducationNumber=" + minimumEducationNumber
+        + ", employmentStatNumber=" + employmentStatNumber + ", files=" + files + "]";
   }
+
 
 
   @Override
@@ -56,13 +54,14 @@ public class JobPosting implements Serializable {
     result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
     result = prime * result + readable;
     result = prime * result + ((startDated == null) ? 0 : startDated.hashCode());
-    result = prime * result + ((thumnail == null) ? 0 : thumnail.hashCode());
     result = prime * result + ((title == null) ? 0 : title.hashCode());
     result = prime * result + viewCount;
     result = prime * result + workPlaceNumber;
     result = prime * result + yearSalary;
     return result;
   }
+
+
 
   @Override
   public boolean equals(Object obj) {
@@ -115,11 +114,6 @@ public class JobPosting implements Serializable {
         return false;
     } else if (!startDated.equals(other.startDated))
       return false;
-    if (thumnail == null) {
-      if (other.thumnail != null)
-        return false;
-    } else if (!thumnail.equals(other.thumnail))
-      return false;
     if (title == null) {
       if (other.title != null)
         return false;
@@ -133,6 +127,7 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
+
 
 
   public int getJobPostingNumber() {
@@ -221,14 +216,6 @@ public class JobPosting implements Serializable {
 
   public void setJob(String job) {
     this.job = job;
-  }
-
-  public String getThumnail() {
-    return thumnail;
-  }
-
-  public void setThumnail(String thumnail) {
-    this.thumnail = thumnail;
   }
 
   public int getYearSalary() {

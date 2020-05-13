@@ -39,7 +39,9 @@ ${jobPosting.content}<br>
 
 </div>
 </c:if>
-
+<br>
+<br>
+<br>
 <c:if test="${empty jobPosting}">
 <p>해당 공고가 없습니다.</p>
 </c:if>

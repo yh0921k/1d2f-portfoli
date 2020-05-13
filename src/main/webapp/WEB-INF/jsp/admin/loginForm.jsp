@@ -63,7 +63,7 @@
 
 
 						<!-- optional class: .form-control-pill -->
-						<form novalidate action="index" method="POST" class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600">
+						<form novalidate action="mainForm" method="POST" class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600">
 
 							<!--
 							<p class="text-danger">
@@ -76,7 +76,7 @@
 								<label for="id">ID</label>
 							</div>
 
-							<div class="input-group-over">
+							<div class="input-group-over"> 
 								<div class="form-label-group mb-3">
 									<input required placeholder="Password" id="password" name="password" type="password" class="form-control">
 									<label for="password">Password</label>

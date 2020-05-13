@@ -14,11 +14,12 @@
       <td>${item.jobPostingNumber}</td>     
       <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
       <td>${item.content}</td>
-      <td>${item.minimumCareer}</td>
-      <td>${item.job}</td>
-      <td>${item.yearSalary}</td>
-      <td>${item.startDated}</td>
-      <td>${item.endDated}</td>
+      <!-- <td>${item.minimumCareer}</td> -->
+      <!--  <td>${item.job}</td> -->
+      <!-- <td>${item.yearSalary}</td> --> 
+      <!-- <td>${item.startDated}</td> -->
+      <!-- <td>${item.endDated}</td> -->
+      <td>${item.postingRegistration}</td>
       <td>${item.viewCount}</td>
     </tr>
   </c:forEach>
