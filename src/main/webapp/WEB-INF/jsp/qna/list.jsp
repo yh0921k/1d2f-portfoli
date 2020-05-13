@@ -80,11 +80,11 @@
 							<tr>
 								<td>${qna.category.name}</td>
 								<c:if test="${qna.readable == 1}">
-									<td><a href="detail?no=${qna.number}"
+									<td><a href="/portfoli/app/qna/detail?no=${qna.number}"
 										class="text-gray-900">${qna.title}</td>
 								</c:if>
 								<c:if test="${qna.readable == 0}">
-									<td><a href="detail?no=${qna.number}"
+									<td><a href="/portfoli/app/qna/detail?no=${qna.number}"
 										class="text-gray-900">${qna.title}<i
 											class="fa fa-lock ml-3"></i></td>
 								</c:if>
@@ -124,6 +124,7 @@
 							data-page="next"><a class="page-link"
 							href="/portfoli/app/qna/list?pageNumber=${endPage + 1}">Next</a>
 						</li>
+
 					</ul>
 				</nav>
 			</div>

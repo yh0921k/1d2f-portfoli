@@ -1,5 +1,6 @@
 package com.portfoli.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -23,9 +24,14 @@ public class QnaServiceImpl implements QnaService {
     this.transactionTemplate = new TransactionTemplate(pftxManager);
   }
 
+
   @Override
-  public List<Qna> list() throws Exception {
-    List<Qna> qnaList = qnaDao.findAll();
+  public List<Qna> list(int pageNumber, int pageSize) throws Exception {
+    HashMap<String, Object> param = new HashMap<>();
+    param.put("offset", (pageNumber - 1) * pageSize);
+    param.put("pageSize", pageSize);
+
+    List<Qna> qnaList = qnaDao.findAll(param);
     if (qnaList.size() < 0) {
       throw new Exception("Q&A 불러오기 실패");
     }
@@ -79,6 +85,12 @@ public class QnaServiceImpl implements QnaService {
       throw new Exception("QNA 등록 실패");
     }
 
+  }
+
+
+  @Override
+  public int selectListCnt() throws Exception {
+    return qnaDao.count();
   }
 
 

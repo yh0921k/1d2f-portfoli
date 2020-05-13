@@ -39,6 +39,7 @@
 		ON q.board_no = b.board_no
 		ORDER BY b.registered_date DESC,
 		b.board_no DESC
+		LIMIT #{offset}, #{pageSize}
 	</select>
 
 	<select id="findByNo" resultMap="QnaMap" parameterType="int">
@@ -59,6 +60,11 @@
 		WHERE b.board_no
 		= #{no}
 	</select>
+	
+	<select id="count" resultType="int">
+    SELECT count(*)
+    FROM pf_qna 
+  </select>
 
 	<delete id="delete">
 		DELETE
@@ -78,6 +84,8 @@
     (board_no, member_no, category_no, readable, email_notification)
     VALUES(#{number}, #{memberNumber}, #{category.number}, #{readable}, #{emailNoti})
 	</insert>
+	
+	
 
 
 </mapper>
