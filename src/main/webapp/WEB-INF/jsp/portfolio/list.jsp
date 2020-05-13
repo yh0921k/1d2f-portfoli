@@ -59,37 +59,90 @@
                 
                 </table>
                 <br>
-
-
-              <!-- 페이징 부분 -->
-                <div align="center">
-                    <c:if test="${pagination.curRange ne 1}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging(1)">[처음]</a> 
-                    </c:if>
-                    <c:if test="${pagination.curPage ne 1}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pagination.prevPage}')">[이전]</a> 
-                    </c:if>
-                    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
-                        <c:choose>
-                            <c:when test="${pageNum eq  pagination.curPage}">
-                                <div style="display:inline-block; font-weight: bold; margin:0px 5px;"><a href="#" onClick="fn_paging('${pageNum}')">${pageNum}</a></div> 
-                            </c:when>
-                            <c:otherwise>
-                                <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pageNum}')">${pageNum}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                    <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pagination.nextPage}')">[다음]</a> 
-                    </c:if>
-                    <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-                        <a style="display:inline-block; margin:0px 5px;" href="#" onClick="fn_paging('${pagination.pageCnt}')">[끝]</a> 
-                    </c:if>
-                </div>
                 
-                <div align="center">
-                    총 게시글 수 : ${pagination.listCnt} / 총 페이지 수 : ${pagination.pageCnt} / 현재 페이지 : ${pagination.curPage} / 현재 블럭 : ${pagination.curRange} / 총 블럭 수 : ${pagination.rangeCnt}
-                </div>
+<%--
+<div class="row">
+
+  <div class="col-12 col-lg-4 mb-4">
+
+    <!-- 
+      overlay image area 
+      .overlay-dark -or- overlay-light
+      .overlay-opacity-[0-9]
+    -->
+    <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white" style="background-image:url('../demo.files/images/unsplash/brooke-cagle-g1Kr4Ozfoac-unsplash.jpg')">
+
+      <!-- lines, looks like through a glass -->
+      <div class="absolute-full w-100 overflow-hidden">
+        <img class="img-fluid" width="2000" height="2000" src="../assets/images/masks/shape-line-lense.svg" alt="...">
+      </div>
+
+      <div class="card-body font-weight-light mt--60">
+
+        <div class="d-table">
+          <div class="d-table-cell align-bottom">
+
+            <img src="assets/images/logo/logo_light.svg" width="110" height="70" alt="...">
+
+            <p>
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+
+            <p class="text-warning fs--13">
+              FIGHTING TOGETHER FOR THE BETTER!
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+--%>
+
+
+    <!-------------------------------------------- 페이징부분 -------------------------------------------------->
+<div class="col-12 col-xl-8">
+ <nav aria-label="pagination">
+   <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+  
+          <!-- prev부분 -->
+     <c:if test="${pagination.curPage == 1}"> 
+       <li class="page-item disabled btn-pill" data-page="prev">
+       <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging(1)">Prev</a></li>
+     </c:if>
+     <c:if test="${pagination.curPage != 1}"> 
+       <li class="page-item" data-page="prev">
+       <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging('${pagination.prevPage}')">Prev</a></li>
+     </c:if>
+
+          <!-- 중간 numbering 부분 -->
+    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
+      <c:if test="${pageNum == pagination.curPage}">
+        <li class="page-item active" data-page="${pageNum}">
+          <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+        </li>
+      </c:if>
+      <c:if test="${pageNum != pagination.curPage}">
+        <li data-page="${pageNum}">
+          <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+        </li>
+      </c:if>
+    </c:forEach>
+    
+          <!-- next 부분 -->
+      <c:if test="${pagination.curPage != pagination.rangeCnt && pagination.rangeCnt > 0}">
+        <li class="page-item disabled btn-pill" data-page="next">
+          <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
+        </li>
+      </c:if>
+      <c:if test="${pagination.curPage == pagination.rangeCnt}"> 
+        <li class="page-item" data-page="next">
+          <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
+        </li>
+      </c:if>
+    </ul>
+   </nav>
+  </div>
+    <!-------------------------------------------- 페이징부분 -------------------------------------------------->
 
               </div>
 
