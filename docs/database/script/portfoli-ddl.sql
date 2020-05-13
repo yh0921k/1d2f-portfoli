@@ -230,11 +230,10 @@ CREATE TABLE pf_job_posting (
   work_place_no        INTEGER      NOT NULL COMMENT '근무지번호', -- 근무지번호
   minimum_career       INTEGER      NULL     COMMENT '최소경력년수', -- 최소경력년수
   view_count           INTEGER      NOT NULL COMMENT '조회수', -- 조회수
-  posting_registration DATETIME     NOT NULL COMMENT '등록일', -- 등록일
+  posting_registration TIMESTAMP DEFAULT NOW() COMMENT '등록일', -- 등록일
   start_dated          DATETIME     NOT NULL COMMENT '시작일', -- 시작일
   end_dated            DATETIME     NOT NULL COMMENT '마감일', -- 마감일
   job                  TEXT         NOT NULL COMMENT '직무', -- 직무
-  thumbnail            VARCHAR(255) NOT NULL COMMENT '섬네일', -- 섬네일
   year_salary          INTEGER      NULL     COMMENT '연봉', -- 연봉
   readable             INTEGER      NOT NULL COMMENT '공개여부', -- 공개여부
   minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
