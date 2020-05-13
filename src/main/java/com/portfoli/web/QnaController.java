@@ -14,12 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.portfoli.domain.Member;
 import com.portfoli.domain.Qna;
+import com.portfoli.domain.QnaCategory;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.MemberService;
+import com.portfoli.service.QnaCategoryService;
 import com.portfoli.service.QnaService;
 
 
@@ -46,6 +50,9 @@ public class QnaController {
 
   @Autowired
   MemberService memberService;
+
+  @Autowired
+  QnaCategoryService qnaCategoryService;
 
   // @Autowired
   // private UserMailSendService mailsender;
@@ -94,12 +101,42 @@ public class QnaController {
     }
     return mv;
 
-
   }
 
   @GetMapping("delete")
   public String delete(int no) throws Exception {
     qnaService.delete(no);
+    return "redirect:/app/qna/list";
+  }
+
+  @GetMapping("update")
+  public void updateForm(Model model, int no) throws Exception {
+    Qna qna = qnaService.get(no);
+    List<QnaCategory> categories = qnaCategoryService.get();
+    qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
+    model.addAttribute("qna", qna);
+    model.addAttribute("categories", categories);
+  }
+
+  @PostMapping("update")
+  public String update(Qna qna) throws Exception {
+    int no = qna.getNumber();
+    qnaService.update(qna);
+    return "redirect:/app/qna/detail?no=" + no;
+  }
+
+  @GetMapping("add")
+  public void addForm(Model model) throws Exception {
+    List<QnaCategory> categories = qnaCategoryService.get();
+    model.addAttribute("categories", categories);
+  }
+
+  @PostMapping("add")
+  public String add(Qna qna, HttpServletRequest request) throws Exception {
+    Member m = (Member) request.getSession().getAttribute("loginUser");
+    int no = m.getNumber();
+    qna.setMemberNumber(no);
+    qnaService.add(qna);
     return "redirect:/app/qna/list";
   }
 

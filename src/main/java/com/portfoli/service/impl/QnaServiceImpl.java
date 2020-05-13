@@ -11,22 +11,22 @@ import com.portfoli.domain.Qna;
 import com.portfoli.service.QnaService;
 
 @Component
-public class QnaServiceImpl implements QnaService{
-  
+public class QnaServiceImpl implements QnaService {
+
   BoardDao boardDao;
   QnaDao qnaDao;
   TransactionTemplate transactionTemplate;
-  
+
   public QnaServiceImpl(BoardDao boardDao, QnaDao qnaDao, PlatformTransactionManager pftxManager) {
     this.boardDao = boardDao;
-    this.qnaDao=qnaDao;
+    this.qnaDao = qnaDao;
     this.transactionTemplate = new TransactionTemplate(pftxManager);
   }
 
   @Override
   public List<Qna> list() throws Exception {
     List<Qna> qnaList = qnaDao.findAll();
-    if(qnaList.size() < 0 ) {
+    if (qnaList.size() < 0) {
       throw new Exception("Q&A 불러오기 실패");
     }
     return qnaList;
@@ -35,7 +35,7 @@ public class QnaServiceImpl implements QnaService{
   @Override
   public Qna get(int no) throws Exception {
     Qna qna = qnaDao.findByNo(no);
-    if(qna == null) {
+    if (qna == null) {
       throw new Exception("해당 번호의 게시글이 존재하지 않습니다.");
     }
     return qna;
@@ -44,14 +44,41 @@ public class QnaServiceImpl implements QnaService{
   @Transactional
   @Override
   public void delete(int boardNo) throws Exception {
-    if(qnaDao.delete(boardNo) > 0) {
-      if(boardDao.delete(boardNo) < 0) {
+    if (qnaDao.delete(boardNo) > 0) {
+      if (boardDao.delete(boardNo) < 0) {
         throw new Exception("게시글 삭제 실패");
       }
     } else {
       throw new Exception("게시글 삭제 실패");
     }
-    
+
+  }
+
+  @Transactional
+  @Override
+  public void update(Qna qna) throws Exception {
+    if (boardDao.update(qna) > 0) {
+      if (qnaDao.update(qna) < 0) {
+        throw new Exception("QNA 수정 실패");
+      }
+    } else {
+      throw new Exception("QNA 수정 실패");
+    }
+
+  }
+
+  @Transactional
+  @Override
+  public void add(Qna qna) throws Exception {
+    if (boardDao.insert(qna) > 0) {
+      qna.setNumber(qna.getNumber());
+      if (qnaDao.insert(qna) < 0) {
+        throw new Exception("QNA 등록 실패");
+      }
+    } else {
+      throw new Exception("QNA 등록 실패");
+    }
+
   }
 
 

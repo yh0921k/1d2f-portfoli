@@ -53,34 +53,51 @@
 		<!--------------------------------------------- /nav bar ------------------------------------------------>
 
 		<!-------------------------------------------- contents -------------------------------------------------->
-		<div class="portlet mt--20" style="width: 65%;">
+		<div class="portlet mt--20 p-3" style="width: 65%;">
 
 			<div class="portlet-header">
-				<h1 class="d-none d-lg-block m--3">Q&A</h1>
-				<div align="right" class="container-fluid">
-					<a href="/portfoli/app/qna/update?no=${qna.number}"><button type="button"
-							class="btn btn-outline-secondary btn-pill btn-sm">수정</button></a> <a
-						href="/portfoli/app/qna/delete?no=${qna.number}"><button
-							type="button"
-							class="btn btn-outline-secondary btn-pill btn-sm ml-2">삭제</button></a>
+				<h1 class="d-none d-lg-block">Q&A</h1>
+
+			</div>
+			<form action="update" method="post">
+				<input type="hidden" name="number" value="${qna.number}">
+				<div class="row">
+					<span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">카테고리
+						: </span> <select id="select_options2" name="category.number"
+						class="form-control form-control-sm col-md-3">
+						<c:forEach items="${categories}" var="category">
+							<c:if test="${qna.category.name == category.name}">
+								<option value="${category.number}" selected="selected">${category.name}</option>
+							</c:if>
+							<c:if test="${qna.category.name != category.name}">
+								<option value="${category.number}">${category.name}</option>
+							</c:if>
+						</c:forEach>
+					</select>
 				</div>
-			</div>
-			<p class="text-gray-900 mb-1 ml-3">카테고리 : ${qna.category.name}</p>
-			<p class="text-gray-900 mb-1 ml-3">작성자 : ${qna.writer}</p>
-			<p class="text-gray-900 mb-1 ml-3">작성일시 : ${qna.registeredDate}</p>
-			<p class="text-gray-900 mb-1 ml-3">조회수 : ${qna.viewCount}</p>
+				<p class="text-gray-900 mb-1 ml-3">작성자 : ${qna.writer}</p>
+				<p class="text-gray-900 mb-1 ml-3">작성일시 : ${qna.registeredDate}</p>
+				<p class="text-gray-900 mb-1 ml-3">조회수 : ${qna.viewCount}</p>
+				<div class="container-fluid">
+					<span class="text-gray-900">제목 : </span> <input required type="text"
+						class="form-label-group form-control-clean col-md-11 mt--5"
+						name="title" value="${qna.title}">
 
-			<p class="text-gray-900 mb-1 ml-3">제목 : ${qna.title}</p>
+					<p class="text-gray-900 mt-3">내용 :</p>
 
-			<p class="text-gray-900 mb-1 ml-3">내용 :</p>
-			<div class="border m-3 p-3" style="min-height: 300px;">
-				<p style="white-space: pre-wrap;" class="text-gray-900">${qna.content}</p>
-			</div>
+					<textarea required placeholder="문의하실 내용을 적어주세요." id="description"
+						name="content" class="form-control" rows="6">${qna.content}</textarea>
+					<div align="right" class="container-fluid">
+						<button type="submit"
+							class="btn btn-outline-secondary btn-pill btn-sm mt-3">
+							수정하기</button>
 
+					</div>
+				</div>
+			</form>
 		</div>
+		<!-------------------------------------------- /contents -------------------------------------------------->
 	</div>
-	<!-------------------------------------------- /contents -------------------------------------------------->
-</div>
 </div>
 
 <jsp:include page="../footer.jsp" />

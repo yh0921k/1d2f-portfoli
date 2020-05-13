@@ -13,4 +13,8 @@ public interface QnaDao {
 
   int delete(int boardNo);
 
+  int update(Qna qna);
+
+  int insert(Qna qna);
+
 }
