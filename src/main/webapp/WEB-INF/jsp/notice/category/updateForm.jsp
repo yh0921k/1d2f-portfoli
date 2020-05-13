@@ -81,7 +81,7 @@
 			</section>
 			<!-- /FAQ -->
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
   function warning(e){
 	  

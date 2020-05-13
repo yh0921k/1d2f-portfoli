@@ -60,9 +60,8 @@
                 </tr>
                 
                 <tr class = "photoTD padding">
-                <%-- filePar : 첨부파일 개수 늘리는 부분 --%>
                   <td colspan="2" align="center">
-                    <input type="file" name="thumb" class="files"/><br>
+                    <input type="file" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
                   </td>
                 </tr>
                 <tr class = "photoTD padding">
@@ -119,7 +118,10 @@
       newNode.setAttribute("class", "files");
       newNode.setAttribute("onclick", "plus(event)");
       
-      var filePar = document.querySelector("#filePar");
+      // input file 할때 확장자를 선택할 경우
+      // newNode.setAttribute("accept", ".gif, .jpg, .jpeg, .png");
+      
+      document.querySelector("#filePar");
       console.log(filePar);
       console.log(newNode);
       filePar.appendChild(newNode);

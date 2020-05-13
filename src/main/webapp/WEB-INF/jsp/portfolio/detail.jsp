@@ -33,7 +33,7 @@
 
             <div class="col-12 col-lg-8">
 
-              <!--
+              <!--x
                 .article-format class will add some slightly formattings for a good text visuals. 
                 This is because most editors are not ready formatted for bootstrap
                 Blog content should come inside this container, as it is from database!
@@ -67,7 +67,7 @@
               <c:choose>
               <c:when test="${portfolio.thumbnail != null}">
                 ${item.thumbnail}
-                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' download="${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}" height='80'>
+                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' height='80'>
                 <img style="margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg' height='80'/><br>
                 </a>
                 <br>
@@ -81,27 +81,29 @@
             <tr class='photoTD'>
               <td colspan="2"  class='photoInside'>
               <c:choose>
+              
               <c:when test="${not empty attachment}">
-              
-              <jsp:useBean id="attachment"  type="java.util.List<BoardAttachment>" class="java.util.ArrayList" scope="request"/>  
-              
-              <%
-              for(BoardAttachment item : attachment) {
-                if(item.getFileName().endsWith(".jpg") || item.getFileName().endsWith(".jpeg") || item.getFileName().endsWith(".png") ) {
-              %>
-                <a style='margin: 0' href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' download='${item.fileName}' height='80'>
-                <img style='margin: 0' alt='첨부파일' name='attachment' src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' height='80'/>
-                </a><br>
-                <%
-                } else {
-                %>
-                <a style='margin: 0' href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' download='${item.fileName}' height='80'>
-                ${item.fileName}
-                </a><br>
-                <%
-                }
-              }
-                %>
+              <c:forEach items="${attachment}" var="item">
+              <c:set var="name" value="${item.fileName}" />
+              <div style="display:inline-block; padding:5px 5px; margin:5px 5px; border: 3px outset white; height: 110px;">
+                <div style="font-size: small">
+                ${item.filePath}
+                </div>
+                <div>
+                <a target="_blank" download="${item.filePath}" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' style='margin: 0'>
+                    <c:choose>
+			                <c:when test="${item.fileName.endsWith('.jpg') || item.fileName.endsWith('.png') || item.fileName.endsWith('.jpeg') || item.fileName.endsWith('.gif') }">
+		                   <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' height="80px"/><br>
+                       
+			                </c:when>
+			                <c:otherwise>
+			                 <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/resources/assets/images/file_icon.png' height="80px"/><br>
+			                </c:otherwise>
+		                </c:choose>
+                </a>
+                </div>
+              </div>
+              </c:forEach>
                 <br>
                </c:when>
                <c:otherwise>
@@ -114,7 +116,7 @@
             <tr>
             <td colspan="2" class='buttonTD'>
             <button style="font-size: small" type="submit">수정(M)</button>
-            <button style="font-size: small" type="submit"  onclick='move(event)'>삭제(D)</button>
+            <button style="font-size: small" type="submit"  id="deleteButton"onclick='move(event)'>삭제(D)</button>
             </td>
             </tr>
             </table>
@@ -149,6 +151,7 @@
 	  e.preventDefault();
 	  location.href = "delete?number=" + ${portfolio.number};
   }
+  
   </script>
 
       <jsp:include page="../footer.jsp"/>

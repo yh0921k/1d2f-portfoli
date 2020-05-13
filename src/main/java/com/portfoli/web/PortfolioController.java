@@ -61,10 +61,10 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null) {
+    if(mem == null)
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
       //      return "redirect:/";
-    } else {
+    else {
 
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
@@ -86,21 +86,36 @@ public class PortfolioController {
 
       List<Portfolio> portfolios = portfolioService.list(portfolio);
       model.addAttribute("list", portfolios);
-      return "/portfolio/list";
+      return "portfolio/list";
     }
   }
 
   @RequestMapping("detail")
-  public void detail(int number, Model model) throws Exception {
-    Portfolio portfolio = portfolioService.get(number);
-    Board board = boardService.get(number);
-    List<BoardAttachment> boardAttachment = boardAttachmentService.get(number);
+  public String detail(int number, HttpServletRequest request, Model model) throws Exception {
 
-    board.setViewCount(board.getViewCount() + 1);
-    boardService.update(board);
+    Object mem = request.getSession().getAttribute("loginUser");
 
-    model.addAttribute("portfolio", portfolio);
-    model.addAttribute("attachment", boardAttachment);
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    else {
+      Portfolio portfolio = portfolioService.get(number);
+      Board board = boardService.get(number);
+      List<BoardAttachment> boardAttachment = boardAttachmentService.get(number);
+
+      for(BoardAttachment attch : boardAttachment) {
+        String[] split = attch.getFileName().split("___");
+        attch.setFilePath(split[split.length-1]);
+      }
+      
+      board.setViewCount(board.getViewCount() + 1);
+      boardService.update(board);
+
+      model.addAttribute("portfolio", portfolio);
+      model.addAttribute("attachment", boardAttachment);
+      
+      return "portfolio/detail";
+    }
   }
   @RequestMapping("form")
   public void form() throws Exception {}
@@ -112,10 +127,10 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null) {
+    if(mem == null)
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
       //      return "redirect:/";
-    } else {
+    else {
 
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
