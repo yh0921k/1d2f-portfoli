@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!-- Contents Body -->
- <div class="col-12 mb-3" style="padding:0;">
-  <!-- start:portlet -->
-  <div class="portlet">
-    <div class="portlet-body">
-      <div class="container py-6">
+<div id="middle" class="flex-fill">
+  <div class="page-title shadow-xs">
+  </div>
+  <section class="rounded mb-3 ">
+    <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">Log 조회</div>
         <!--
           data-autofill="false|hover|click" 
           data-enable-paging="true"       false = show all, no pagination
@@ -80,5 +79,25 @@
     </div>  
 
   </div>
-  <!-- end:portlet -->
 </div>        
+</section>
+</div>
+
+<script>
+$(document).ready(function() { 
+  $("#keyword").keyup(function() { 
+    var k = $(this).val(); 
+      console.log(k);
+        $("#logTable > tbody > tr").hide(); // tr 태그 전부 숨김
+
+          var temp = $("#logTable > tbody > tr > td:nth-child(n):contains('" + k + "')"); 
+          $(temp).css("color","red");
+          console.log(typeof(temp));
+          console.log(temp);
+          if(k=="") {
+            $(temp).css("color","black");
+          }
+          $(temp).parent().show();
+  });
+});
+</script>

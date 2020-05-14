@@ -63,7 +63,7 @@
 
 
 						<!-- optional class: .form-control-pill -->
-						<form novalidate action="mainForm" method="POST" class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600">
+						<form novalidate action="login" method="POST" class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600">
 
 							<!--
 							<p class="text-danger">

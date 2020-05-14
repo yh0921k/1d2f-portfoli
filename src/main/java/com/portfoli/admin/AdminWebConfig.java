@@ -10,6 +10,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @ComponentScan(value = "com.portfoli.admin")
 @EnableWebMvc
@@ -32,21 +35,43 @@ public class AdminWebConfig implements WebMvcConfigurer {
   // return vr;
   // }
 
+  // Tiles View를 사용할 Resolver 추가
+  @Bean
+  public TilesConfigurer tilesConfigurer() {
+    TilesConfigurer configurer = new TilesConfigurer();
+    configurer.setDefinitions("/WEB-INF/defs/tiles.xml");
+    return configurer;
+  }
+
+  @Bean
+  public ViewResolver tilesViewResolver() {
+    UrlBasedViewResolver vr = new UrlBasedViewResolver();
+
+    // Tiles 설정에 따라 템플릿을 실행할 뷰 처리기를 등록한다.
+    vr.setViewClass(TilesView.class);
+
+    // 뷰 리졸버의 우선 순위를 InternalResourceViewResolver보다 우선하게 한다.
+    vr.setOrder(1);
+
+    return vr;
+  }
+
   @Bean
   public ViewResolver viewResolver() {
-    InternalResourceViewResolver vr = new InternalResourceViewResolver( //
+    InternalResourceViewResolver vr = new InternalResourceViewResolver(
         "/WEB-INF/jsp/admin/", // prefix
         ".jsp" // suffix
-    );
-    // vr.setOrder(2);
-    // logger.info("[viewResolver] : " + vr.toString());
+        );
+
+    vr.setOrder(2);
+
     return vr;
   }
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new AdminControllerInterceptor())//
-        .addPathPatterns("/**"); //
+    registry.addInterceptor(new AdminControllerInterceptor())
+    .addPathPatterns("/**");
     // .excludePathPatterns();
   }
 }

@@ -13,6 +13,7 @@ import com.portfoli.domain.Admin;
 import com.portfoli.service.AdminService;
 
 @Controller
+@RequestMapping("auth")
 public class AdminController {
 
   static Logger logger = LogManager.getLogger(AdminController.class);
@@ -36,27 +37,25 @@ public class AdminController {
   public String logout(HttpSession session) throws Exception {
     return "loginForm";
   }
-  
-  @GetMapping("contentsHome")
-  public void contentsHome() throws Exception {
-    
-  }
 
-  @RequestMapping("mainForm")
+  @RequestMapping("login")
   public String login(HttpServletRequest request, String id, String password) throws Exception {
     logger.info("AdminController::login() called");
 
     if (request.getSession().getAttribute("admin") != null) {
-      return "mainForm";
+      return "redirect:index";
     }
 
     Admin admin = adminService.get(id, password);
     if (admin != null) {
       HttpSession session = request.getSession();
       session.setAttribute("admin", admin);
-      return "mainForm";
+      return "redirect:index";
     } else {
       return "loginForm";
     }
   }
+
+  @GetMapping("index")
+  public void index() throws Exception {}
 }
