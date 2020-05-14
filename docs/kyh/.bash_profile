@@ -8,3 +8,6 @@ color_option="%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset)
 alias log="git log --graph --abbrev-commit --decorate --format=format:'$color_option' --all"
 
 alias init="rm -rf ./1d2f-portfoli/ && git clone https://github.com/yh0921k/1d2f-portfoli.git && cd ./1d2f-portfoli && clean"
+alias commit="git commit --verbose"
+alias push="git push origin master"
+alias status="git status -s"
