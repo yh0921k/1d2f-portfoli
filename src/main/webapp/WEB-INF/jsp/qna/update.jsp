@@ -79,7 +79,8 @@
 				<p class="text-gray-900 mb-1 ml-3">작성일시 : ${qna.registeredDate}</p>
 				<p class="text-gray-900 mb-1 ml-3">조회수 : ${qna.viewCount}</p>
 				<div class="container-fluid">
-					<span class="text-gray-900">제목 : </span> <input required type="text"
+					<span class="text-gray-900">제목 : </span> <input required
+						type="text"
 						class="form-label-group form-control-clean col-md-11 mt--5"
 						name="title" value="${qna.title}">
 
@@ -87,6 +88,31 @@
 
 					<textarea required placeholder="문의하실 내용을 적어주세요." id="description"
 						name="content" class="form-control" rows="6">${qna.content}</textarea>
+
+					<div class="row">
+						<label
+							class="form-switch form-switch-pill form-switch-primary d-block mt-3  ml-3">
+							<c:if test="${qna.readable == '1'}">
+								<input type="checkbox" id="readable" name="readable" checked>
+							</c:if> <c:if test="${qna.readable == '0'}">
+								<input type="checkbox" id="readable" name="readable">
+							</c:if> <i data-on="OK" data-off="NO"></i> <span class="h6">게시글
+								공개 여부</span>
+						</label>
+						<div class="custom-control custom-checkbox mt-3 ml--30">
+							<c:if test="${qna.emailNoti == '1'}">
+								<input type="checkbox" class="custom-control-input"
+									id="emailNoti" name="emailNoti" checked>
+							</c:if>
+							<c:if test="${qna.emailNoti == '0'}">
+								<input type="checkbox" class="custom-control-input"
+									id="emailNoti" name="emailNoti">
+							</c:if>
+							<label class="custom-control-label" for="emailNoti">답변 완료
+								시 이메일 발송</label>
+						</div>
+					</div>
+
 					<div align="right" class="container-fluid">
 						<button type="submit"
 							class="btn btn-outline-secondary btn-pill btn-sm mt-3">
@@ -101,3 +127,11 @@
 </div>
 
 <jsp:include page="../footer.jsp" />
+
+<script>
+	
+function checkbox()
+$('input[type="checkbox"]').change(function(){
+    this.value = (Number(this.checked));
+});
+</script>

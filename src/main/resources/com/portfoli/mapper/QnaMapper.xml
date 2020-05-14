@@ -50,7 +50,9 @@
 		b.title,
 		b.view_count,
 		b.registered_date,
-		b.content
+		b.content,
+		q.email_notification,
+		q.readable
 		FROM pf_qna q
 		JOIN pf_question_category c
 		ON c.category_no =

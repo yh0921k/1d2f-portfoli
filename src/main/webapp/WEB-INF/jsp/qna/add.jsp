@@ -107,10 +107,11 @@
 		<!-------------------------------------------- /contents -------------------------------------------------->
 	</div>
 </div>
+
+<jsp:include page="../footer.jsp" />
+
 <script>
 $('input[type="checkbox"]').change(function(){
     this.value = (Number(this.checked));
 });
 </script>
-
-<jsp:include page="../footer.jsp" />
