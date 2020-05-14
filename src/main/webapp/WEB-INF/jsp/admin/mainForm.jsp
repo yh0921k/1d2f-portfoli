@@ -59,7 +59,7 @@
         
         .header-match-aside-primary
       -->
-      <header id="header">
+      <header id="header" class="bg-dark">
 		<jsp:include page="header.jsp"/>
       </header>
       
@@ -106,6 +106,24 @@
         	    xhr.send();
         	});
         });
+    </script>
+    <script>
+    $(document).ready(function() { 
+      $("#keyword").keyup(function() { 
+          var k = $(this).val(); 
+          console.log(k);
+          $("#logTable > tbody > tr").hide(); // tr 태그 전부 숨김
+
+          var temp = $("#logTable > tbody > tr > td:nth-child(n):contains('" + k + "')"); 
+          $(temp).css("color","red");
+          console.log(typeof(temp));
+          console.log(temp);
+          if(k=="") {
+            $(temp).css("color","black");
+          }
+          $(temp).parent().show();
+      });
+    });
     </script>
   </body>
 </html>
