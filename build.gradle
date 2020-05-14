@@ -69,4 +69,7 @@ dependencies {
     
     // json
     implementation 'org.apache.tomcat:tomcat-util:9.0.16'
+    
+    // Tiles 라이브러리 
+    implementation 'org.apache.tiles:tiles-jsp:3.0.8'
 }

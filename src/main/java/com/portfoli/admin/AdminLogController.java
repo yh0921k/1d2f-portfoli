@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.portfoli.service.AdminLogService;
 
-@Controller("log")
+@Controller
+@RequestMapping("log")
 public class AdminLogController {
 
   static Logger logger = LogManager.getLogger(AdminLogController.class);
@@ -32,6 +34,7 @@ public class AdminLogController {
     String filepath = System.getProperty("catalina.base") + "/logs/portfoli.log";
     // int startLine = (int) (request.getAttribute("startLine"));
     // int moreLine = (int) (request.getAttribute("moreLine"));
+
     model.addAttribute("loglist", adminLogService.get(filepath, 0, 10));
   }
 
