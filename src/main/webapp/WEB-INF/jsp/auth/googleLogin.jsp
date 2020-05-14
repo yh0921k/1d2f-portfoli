@@ -26,7 +26,7 @@ if (existEmail === null || existEmail === '') {
 				<div class="row">
 
 					<div class="col-12 col-md-6 mt-4 ml-4">
-						<form action="naverLinking" method="POST">
+						<form action="googleLinking" method="POST">
 							<input name="provider" type="hidden" value=${provider_}> <input
 								name="email" type="hidden" value=${email_}>
 							<button type="submit" class="btn btn-primary btn-block">

@@ -177,7 +177,7 @@ public class NaverLoginController {
 
   }
 
-  @PostMapping("linking")
+  @PostMapping("naverLinking")
   private ModelAndView linking(String provider, String email) throws Exception {
     if (memberService.updateProvider(provider, email) > 0) {
       ModelAndView mv = new ModelAndView();
