@@ -11,3 +11,4 @@ alias init="rm -rf ./1d2f-portfoli/ && git clone https://github.com/yh0921k/1d2f
 alias commit="git commit --verbose"
 alias push="git push origin master"
 alias status="git status -s"
+alias delete="git branch -D kyh-dev"
