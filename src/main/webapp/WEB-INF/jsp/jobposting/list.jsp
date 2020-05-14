@@ -8,12 +8,16 @@
 <jsp:include page="../header.jsp" />
 
 
-<div class="container" style="text-align:center">
+<div class="container" style="text-align:center" >
 <h1 style="text-align:left">채용정보</h1>
 <div id="searchForm" style="text-align:right">
 <form action='search' method='get' >
 	<input id='keyword' name='keyword' type='text' >
-	<button>검색</button> 
+	
+	<button aria-label="Global Search" type="submit"
+                  class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
+                  <i class="fi fi-search fs--20"></i>
+                </button>
 </form>
 </div>
 <hr>
@@ -25,11 +29,6 @@
 		<th>no</th>
 		<th>제목</th>
 		<th>내용</th>
-		<!--  <th>최소경력</th>-->
-		<!--  <th>직무</th> -->
-		<!--  <th>연봉</th> -->
-		<!-- <th>시작일</th> -->
-		<!-- <th>마감일</th> -->
 		<th>등록일</th>
 		<th>조회수</th>
 	</thead>
@@ -38,16 +37,11 @@
 	<c:forEach items="${list}" var="item" varStatus="status">
     <tr id="tList">
     <td><a href='detail?no=${item.jobPostingNumber}'><c:forEach items="${item.files}" var="jobPostingFile">
-      <img src="../../upload/jobposting/${jobPostingFile.filePath}_300x300.jpg" width="200" height="200">
+      <img src="../../upload/jobposting/${jobPostingFile.filePath}_300x300.jpg" width="100" height="100">
       </c:forEach></td>
 			<td>${item.jobPostingNumber}</td>			
 			<td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
 			<td>${item.content}</td>
-			<!-- <td>${item.minimumCareer}</td> -->
-			<!-- <td>${item.job}</td> -->
-			<!-- <td>${item.yearSalary}</td> -->
-			<!-- <td>${item.startDated}</td> -->
-			<!-- <td>${item.endDated}</td> -->
 			<td>${item.postingRegistration}</td>
 			<td>${item.viewCount}</td>
 		</tr>
@@ -56,13 +50,13 @@
 </table>
 </div>
 
-<button id="moreListBtn" class="btn btn-primary btn-lg btn-block">더보기</button>
+<button id="moreListBtn" class="btn btn-outline-dark btn-pill mb-1 btn-block">더보기</button>
 
 <hr>
 
 <c:if test="${not empty loginUser}">
 <div style="text-align:right">
-<a href='form' class="btn btn-primary pull-right">글쓰기</a>
+<a href='form' class="btn btn-outline-dark btn-pill mb-1">글쓰기</a>
 </div>
 </c:if>
 <br>
