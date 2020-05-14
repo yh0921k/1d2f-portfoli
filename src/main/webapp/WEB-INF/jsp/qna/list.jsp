@@ -97,7 +97,7 @@
 				</table>
 
 			</div>
-			<div class="col-12 col-xl-6">
+			<div class="col-12 col-xl-7">
 				<nav aria-label="pagination">
 					<ul
 						class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
