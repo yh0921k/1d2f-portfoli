@@ -80,7 +80,10 @@
                 </a>
               </div>
               
-              <div class="g-signin2 col-6" data-onsuccess="onSignIn"></div>
+              <div class="col-6 btn btn-sm btn-block bg-googleplay transition-hover-top text-white" onclick="google();"> <i>G</i> google
+              </div>
+              
+              <div class="g-signin2 col-6" data-onsuccess="onSignIn" style="display: none;"></div>
 
               <div class="col-6 mt-2">
                 <a href="${naverApiURL}"> <img class="transition-hover-top"
@@ -128,6 +131,10 @@
   <!-- /#wrapper -->
 
   <script>
+  
+  function google() {
+	  $(".abcRioButton").trigger("click");
+  }
 
   function onSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
