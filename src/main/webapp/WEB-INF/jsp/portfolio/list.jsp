@@ -24,82 +24,54 @@
       </section>
       <!-- /PAGE TITLE -->
 
-      <!-- FAQ -->
-      <section style="padding: 50px 0px;">
-        <div class="container">
-
-          <div class="row">
-
-            <div class="col-12 col-lg-8">
-
-              <!--
-                .article-format class will add some slightly formattings for a good text visuals. 
-                This is because most editors are not ready formatted for bootstrap
-                Blog content should come inside this container, as it is from database!
-                src/scss/_core/base/_typography.scss
-              -->
-              <div class="bg-white p-5 p-4-xl rounded-xl article-format">
-              <button style="float: right; font-size: small" onclick="location.href='form'">글쓰기(+)</button>
-                <table border='1' style="width: 100%">
-                <tr style="background-color: #e8e8e8;">
-                  <td class="padding10_0" width="15%" align="center">작성자</td>
-                  <td class="padding10_0" width="55%" align="center">제  목</td>
-                  <td class="padding10_0" width="15%" align="center">추천수</td>
-                  <td class="padding10_0" width="15%" align="center">조회수</td>
-                </tr>
-                
-            <c:forEach items="${list}" var="item">
-            <tr>
-              <td class="padding10_10"><a href="detail?number=${item.number}">${item.memberName}</a></td>
-              <td class="padding10_10"><a href="detail?number=${item.number}">${item.title}</a></td>
-              <td align="center"><a href="detail?number=${item.number}">${item.recommendedCount}</a></td>
-              <td class="padding10_10"><a href="detail?number=${item.number}">${item.viewCount}</a></td>
-            </tr>
-            </c:forEach>
-                
-                </table>
-                <br>
-                
-<%--
+<!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
+  <div align="center"> <button style="font-size: small" onclick="location.href='form'">글쓰기(+)</button>
 <div class="row">
-
-  <div class="col-12 col-lg-4 mb-4">
-
-    <!-- 
-      overlay image area 
-      .overlay-dark -or- overlay-light
-      .overlay-opacity-[0-9]
-    -->
-    <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white" style="background-image:url('../demo.files/images/unsplash/brooke-cagle-g1Kr4Ozfoac-unsplash.jpg')">
-
-      <!-- lines, looks like through a glass -->
-      <div class="absolute-full w-100 overflow-hidden">
-        <img class="img-fluid" width="2000" height="2000" src="../assets/images/masks/shape-line-lense.svg" alt="...">
-      </div>
-
+  <c:forEach items="${list}" var="item">
+  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;" onclick="location.href='detail?number=${item.number}'">
+    <c:if test="${item.thumbnail != null}">
+      <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
+           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
+    </c:if>
+    <c:if test="${item.thumbnail == null}">
+      <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white" 
+           style="background-image: url('../../resources/assets/images/background/black.png');">
+    </c:if>
+    
       <div class="card-body font-weight-light mt--60">
 
         <div class="d-table">
           <div class="d-table-cell align-bottom">
 
-            <img src="assets/images/logo/logo_light.svg" width="110" height="70" alt="...">
-
             <p>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
+              ${item.title}
             </p>
-
             <p class="text-warning fs--13">
-              FIGHTING TOGETHER FOR THE BETTER!
+              ${item.id}
             </p>
 
           </div>
         </div>
 
       </div>
---%>
 
+      <div class="card-footer bg-transparent b-0">
+        <hr class="border-light opacity-2">
+        
+        <span class="float-end fs--14 p-2">
+          ${item.getRecommendedCount()}
+        </span>
 
-    <!-------------------------------------------- 페이징부분 -------------------------------------------------->
+        <a href="#" class="btn btn-sm btn-warning opacity-8">
+          ${item.getViewCount()}
+        </a>
+      </div>
+      
+      </div>
+    </div>
+    </c:forEach>
+<!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
+<!-------------------------------------------- 페이징부분 -------------------------------------------->
 <div class="col-12 col-xl-8">
  <nav aria-label="pagination">
    <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
@@ -142,24 +114,17 @@
     </ul>
    </nav>
   </div>
-    <!-------------------------------------------- 페이징부분 -------------------------------------------------->
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-      <!-- /FAQ -->
-
+</div>
+<!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>
   function fn_paging(curPage) {
 	  location.href = "list?curPage=" + curPage;
 	  }
   </script>
   <style>
+    .cursor {
+      cursor: pointer;
+    }
     .padding10_0{
       padding: 10px 0px;
     }

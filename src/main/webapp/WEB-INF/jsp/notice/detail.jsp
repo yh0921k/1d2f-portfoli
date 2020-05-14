@@ -125,8 +125,7 @@
   
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
-  
-  function warning(e){
+  function warning(){
 	    
 	    const swalWithBootstrapButtons = Swal.mixin({
 	      customClass: {

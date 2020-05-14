@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -83,12 +84,19 @@ public class PortfolioController {
 
       // 작성자 정보
       model.addAttribute("generalMember", member);
-
       List<Portfolio> portfolios = portfolioService.list(portfolio);
       model.addAttribute("list", portfolios);
+      
       return "portfolio/list";
     }
   }
+  
+  @PostMapping("updateForm")
+  public void updateForm(Portfolio portfolio, Model model) throws Exception {
+    Portfolio item = portfolioService.get(portfolio.getNumber());
+    model.addAttribute("portfolio", item);
+  }
+  
 
   @RequestMapping("detail")
   public String detail(int number, HttpServletRequest request, Model model) throws Exception {
@@ -101,19 +109,20 @@ public class PortfolioController {
     else {
       Portfolio portfolio = portfolioService.get(number);
       Board board = boardService.get(number);
+      
+      // 다운로드시, 원 파일명을 받기 위해
       List<BoardAttachment> boardAttachment = boardAttachmentService.get(number);
-
       for(BoardAttachment attch : boardAttachment) {
         String[] split = attch.getFileName().split("___");
         attch.setFilePath(split[split.length-1]);
       }
       
-      board.setViewCount(board.getViewCount() + 1);
+      // 조회할때마다 입력날짜가 바뀌지 않게 하기 위해
+      board.setViewCount(board.getViewCount() + 1).setContent(null);
       boardService.update(board);
-
+      
       model.addAttribute("portfolio", portfolio);
       model.addAttribute("attachment", boardAttachment);
-      
       return "portfolio/detail";
     }
   }
@@ -184,6 +193,18 @@ public class PortfolioController {
       }
 
       return "redirect:list";
+    }
+  }
+  
+  @RequestMapping("delete")
+  public String delete(int number) throws Exception {
+    try {
+      portfolioService.delete(number);
+      boardAttachmentService.delete(number);
+      boardService.delete(number);
+      return "redirect:list";
+    } catch(Exception e) {
+      throw new Exception("삭제중 오류발생");
     }
   }
 

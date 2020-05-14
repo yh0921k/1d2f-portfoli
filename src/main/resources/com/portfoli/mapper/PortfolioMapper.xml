@@ -36,12 +36,13 @@
 	    b.content,
 	    b.view_count,
 	    b.registered_date,
-	    m.name member_name
-	  FROM pf_portfolio p LEFT OUTER JOIN pf_board b 
+	    m.name member_name,
+	    m.id -- id값  --
+	  FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
 	  ON p.board_no = b.board_no
-	  LEFT OUTER JOIN pf_general_member g
+	  LEFT OUTER JOIN pf_general_member as g
 	  ON g.general_member_no = p.general_member_no
-	  LEFT OUTER JOIN pf_members m
+	  LEFT OUTER JOIN pf_members as m
     ON m.member_no = g.general_member_no
 	  WHERE p.readable = 1
 	  ORDER BY b.registered_date desc,
@@ -85,15 +86,6 @@
     WHERE p.board_no = #{boardNumber}
   </select>
 
-  <!-- 
-  <select id="findByCategoryNumber" resultMap="NoticeMap" parameterType="int">
-    SELECT
-      *
-    FROM pf_notice 
-    WHERE category_no = ${categoryNumber}
-  </select>
-  -->
-  
   <insert id="insert" parameterType="Portfolio">
     INSERT INTO pf_portfolio (
       board_no,
@@ -112,28 +104,23 @@
       #{readable}
     )
   </insert>
-  <!--
   <delete id="delete" parameterType="int">
     DELETE 
-      FROM pf_notice
+      FROM pf_portfolio
     WHERE board_no = #{number}
   </delete>
   
-  <update id="update" parameterType="Notice">
-     UPDATE pf_notice
+  <update id="update" parameterType="Portfolio">
+     UPDATE pf_portfolio
      <set>
-       category_no = #{categoryNumber}
+     <if test="homepage != null and homepage != ''"> homepage = #{homepage}, </if>
+     <if test="thumbnail != null and thumbnail != ''"> thumbnail = #{thumbnail}, </if>
+     <if test="recommended_count != null and recommended_count != ''"> recommended_count = #{recommendedCount}, </if>
+     <if test="readable != null and readable != ''"> readable = #{readable} </if>
      </set>
      WHERE board_no = #{number}
   </update>
-  
-  <update id="updateCategory" parameterType="Map">
-     UPDATE pf_notice
-     <set>
-       category_no = #{targetCategoryNumber}
-     </set>
-     WHERE category_no = #{sourceCategoryNumber}
-  </update>
+  <!--
    -->
 </mapper>
 

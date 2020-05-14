@@ -33,12 +33,6 @@
 
             <div class="col-12 col-lg-8">
 
-              <!--x
-                .article-format class will add some slightly formattings for a good text visuals. 
-                This is because most editors are not ready formatted for bootstrap
-                Blog content should come inside this container, as it is from database!
-                src/scss/_core/base/_typography.scss
-              -->
               <div class="bg-white p-5 p-4-xl rounded-xl article-format">
               
             <form action="updateForm" method="post">
@@ -116,7 +110,7 @@
             <tr>
             <td colspan="2" class='buttonTD'>
             <button style="font-size: small" type="submit">수정(M)</button>
-            <button style="font-size: small" type="submit"  id="deleteButton"onclick='move(event)'>삭제(D)</button>
+            <button style="font-size: small" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
             </td>
             </tr>
             </table>
@@ -126,7 +120,6 @@
             값이 없습니다. 찡긋
             </c:if>
               </div>
-
             </div>
 
           </div>
@@ -146,12 +139,45 @@
     .textAR{padding:0px 5px;}
     .textAR_in{border-color:transparent; resize:none; width: 100%; height: 450px;}
   </style>
-  <script>
-  function move(e) {
-	  e.preventDefault();
-	  location.href = "delete?number=" + ${portfolio.number};
-  }
+  <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   
+  <script>
+  function warning(){
+      console.log(${portfolio.number});
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: '정말 삭제하시겠습니까?',
+        text: "되돌릴 수 없는 작업입니다.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire({
+            title:'삭제완료',
+            onClose: () => {
+            	location.href = "delete?number=" + ${portfolio.number};
+                clearInterval(timerInterval)
+              }
+          })
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '취소'
+          )
+        }
+      })
+    }
   </script>
 
       <jsp:include page="../footer.jsp"/>
