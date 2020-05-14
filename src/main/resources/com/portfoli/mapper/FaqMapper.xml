@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.FaqDao">
+
+	<resultMap type="Faq" id="FaqMap">
+		<id column="board_no" property="number" />
+		<result column="readable" property="readable" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="view_count" property="viewCount" />
+		<result column="registered_date" property="registeredDate" />
+    <result column="answer_content" property="answerContent" />
+    <result column="answer_date" property="answerDate" />
+		<association property="category" javaType="QnaCategory">
+			<id column="category_no" property="number" />
+			<result column="name" property="name" />
+		</association>
+	</resultMap>
+
+	<select id="findAll" resultMap="FaqMap">
+		SELECT
+		f.readable,
+		f.category_no,
+		b.board_no,
+		c.name,
+		b.title,
+		b.view_count,
+		b.registered_date
+		FROM pf_faq f
+		LEFT OUTER JOIN pf_question_category c
+		ON c.category_no = f.category_no
+		LEFT OUTER JOIN
+		pf_board b
+		ON f.board_no = b.board_no
+    -- WHERE f.readable = 1  관리자용이 아닌경우 넣기 --
+    ORDER BY b.registered_date DESC,
+    b.board_no DESC
+		LIMIT #{offset}, #{pageSize}
+	</select>
+
+	<select id="findByNo" resultMap="FaqMap" parameterType="int">
+		SELECT
+		f.answer_content,
+		f.answer_date,
+		f.readable,
+		b.board_no,
+		c.name,
+		b.title,
+		b.view_count,
+		b.registered_date,
+		b.content
+		FROM pf_faq f
+		JOIN pf_question_category c
+		ON c.category_no =f.category_no
+		JOIN pf_board b
+		ON f.board_no = b.board_no
+		WHERE b.board_no = #{no}
+	</select>
+	
+	<select id="selectListCnt" resultType="int" parameterType="Faq">
+    SELECT 
+      count(*)
+    FROM pf_faq 
+    -- WHERE readable = 1  관리자용이 아닌경우 넣기 --
+  </select>
+  
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM pf_faq
+		WHERE board_no=#{number}
+	</delete>
+
+	<update id="update" parameterType="Qna">
+		UPDATE pf_faq
+		<set>
+		  answer_content = #{answerContent},
+		  answer_date = now(),
+		  <if test="category.number != null and category.number != ''"> category_no = #{category.number}, </if>
+      <if test="readable != null and readable != ''"> readable = #{readable}, </if>
+    </set>
+		WHERE board_no = #{number}
+	</update>
+<!-- 
+-->
+
+	<insert id="insert" parameterType="Faq">
+    INSERT 
+    INTO pf_faq
+    (board_no, category_no, readable, answer_content)
+    VALUES(#{number}, #{category.number}, #{readable}, #{answerContent})
+	</insert>
+
+</mapper>
+
+
+
+
+
+
+

@@ -57,6 +57,12 @@
     WHERE board_no = #{number}
   </delete>
 
+  <update id="updateViewCount" parameterType="map">
+    UPDATE pf_board
+    SET view_count = #{viewCount}
+    WHERE board_no = #{boardNo}
+  </update>
+
 </mapper>
 
 
