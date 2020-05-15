@@ -324,10 +324,13 @@ ALTER TABLE pf_admin
 CREATE TABLE pf_banner (
   banner_no     INTEGER      NOT NULL COMMENT '배너번호', -- 배너번호
   company_no    INTEGER      NOT NULL COMMENT '기업번호', -- 기업번호
+  title         VARCHAR(40)  NOT NULL COMMENT '제목', -- 제목
   image         VARCHAR(255) NOT NULL COMMENT '이미지', -- 이미지
   url           VARCHAR(255) NOT NULL COMMENT '연결URL', -- 연결URL
-  register_date DATETIME     NOT NULL COMMENT '등록일', -- 등록일
-  end_date      DATETIME     NOT NULL COMMENT '마감일' -- 마감일
+  register_date DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
+  start_date    DATETIME     NOT NULL COMMENT '시작일', -- 시작일
+  end_date      DATETIME     NOT NULL COMMENT '마감일', -- 마감일
+  activate      INTEGER      NOT NULL COMMENT '게시여부' -- 게시여부
 )
 COMMENT '배너';
 
