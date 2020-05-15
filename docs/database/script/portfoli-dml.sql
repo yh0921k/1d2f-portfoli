@@ -213,6 +213,74 @@ INSERT INTO pf_certificate(certificate_no, agency, name) VALUES(2290, '한국산
 INSERT INTO pf_certificate(certificate_no, agency, name) VALUES(2434, '한국산업인력공단', '시각디자인산업기사');
 INSERT INTO pf_certificate(certificate_no, agency, name) VALUES(1790, '한국산업인력공단', '시각디자인기사');
 
+-- 기사 1XXX
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1511, '한국산업인력공단', '포장기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1500, '한국산업인력공단', '품질경영기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1512, '한국산업인력공단', '제품디자인기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1982, '한국산업인력공단', '컬러리스트기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1630, '한국산업인력공단', '건축기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1632, '한국산업인력공단', '건축설비기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1282, '한국산업인력공단', '실내건축기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1250, '한국산업인력공단', '토목기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1750, '한국산업인력공단', '건축재료시험기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1390, '한국산업인력공단', '지적기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1550, '한국산업인력공단', '응용지질기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1380, '한국산업인력공단', '측량및지형공간정보기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1048, '한국산업인력공단', '콘크리트기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1370, '한국산업인력공단', '조경기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1350, '한국산업인력공단', '도시계획기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1150, '한국산업인력공단', '전기기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1160, '한국산업인력공단', '전기공사기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1513, '한국산업인력공단', '광학기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1321, '한국산업인력공단', '전자계산기기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1170, '한국산업인력공단', '전자기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1121, '한국산업인력공단', '임베디드기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1194, '한국방송통신전파진흥원', '방송통신기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1200, '한국방송통신전파진흥원', '무선설비기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1195, '한국방송통신전파진흥원', '전파전자통신기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (1192, '한국방송통신전파진흥원', '정보통신기사');
+
+-- 기술사 0XXX
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0760, '한국산업인력공단', '공장관리기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0960, '한국산업인력공단', '제품디자인기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0872, '한국산업인력공단', '기계기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0210, '한국산업인력공단', '화공기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0250, '한국산업인력공단', '전기응용기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0432, '한국산업인력공단', '전기철도기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0301, '한국산업인력공단', '전자응용기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0601, '한국산업인력공단', '정보관리기술사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (0622, '한국산업인력공단', '컴퓨터시스템응용기술사');
+
+-- 산업기사 2XXX
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2432, '한국산업인력공단', '제품디자인산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2025, '한국산업인력공단', '컴퓨터응용가공산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2011, '한국산업인력공단', '기계조립산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2140, '한국산업인력공단', '전기산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2150, '한국산업인력공단', '전기공사산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2036, '한국산업인력공단', '전기철도산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2324, '한국산업인력공단', '전자계산기제어산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2170, '한국산업인력공단', '전자산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2193, '한국산업인력공단', '사무자동화산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2325, '한국산업인력공단', '정보보안산업기사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (2194, '한국방송통신전파진흥원', '방송통신산업기사');
+
+-- 기능장 3XXX
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (3380, '한국산업인력공단', '전기기능장');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (3410, '한국산업인력공단', '전자기기기능장');
+
+-- 기능사 6-7XXX
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (7798, '한국산업인력공단', '웹디자인기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6793, '한국산업인력공단', '제품응용모델링기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (7796, '한국산업인력공단', '컴퓨터그래픽스운용기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6012, '한국산업인력공단', '컴퓨터응용선반기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6032, '한국산업인력공단', '컴퓨터응용밀링기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (7780, '한국산업인력공단', '전기기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6801, '한국산업인력공단', '전자계산기기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6790, '한국산업인력공단', '전자기기기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6785, '한국산업인력공단', '전자캐드기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6892, '한국산업인력공단', '정보기기운용기능사');
+INSERT INTO pf_certificate(certificate_no, agency, name) VALUES (6921, '한국산업인력공단', '정보처리기능사');
+
 -- 일반회원자격증 예제 데이터
 INSERT INTO pf_general_member_certification(general_member_no, certificate_no, issue_date) VALUES(1, 1322, '2019-5-5');
 INSERT INTO pf_general_member_certification(general_member_no, certificate_no, issue_date) VALUES(2, 1325, '2020-4-4');
