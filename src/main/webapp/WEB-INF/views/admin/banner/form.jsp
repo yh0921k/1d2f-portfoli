@@ -108,7 +108,7 @@
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
                       data-disable-auto-update-input="false"
-                      data-date-format="YYYY/MM/DD HH:mm"
+                      data-date-format="YYYY-MM-DD HH:mm"
                       data-quick-locale='{
                         "lang_apply"  : "Apply",
                         "lang_cancel" : "Cancel",
@@ -126,7 +126,7 @@
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
                       data-disable-auto-update-input="true"
-                      data-date-format="YYYY/MM/DD HH:mm"
+                      data-date-format="YYYY-MM-DD HH:mm"
                       data-quick-locale='{
                         "lang_apply"  : "Apply",
                         "lang_cancel" : "Cancel",

@@ -19,7 +19,7 @@
   <insert id="insert" parameterType="Banner">
     insert into pf_banner(company_no, title, image, url, start_date, end_date, activate)
     values
-    (#{companyNumber}, #{title}, #{filePath}, #{url}, #{startDate}, #{endDate}, #{activateYN})
+    (#{companyNumber}, #{title}, #{filePath}, #{url}, STR_TO_DATE(#{startDate}, '%Y-%m-%d %H:%i'), STR_TO_DATE(#{endDate}, '%Y-%m-%d %H:%i'), #{activateYN})
   </insert>
 
   <select id="findAllActivated" resultMap="BannerMap">
@@ -66,9 +66,9 @@
       <if test="title != null and title != ''">title=#{title},</if>
       <if test="filePath != null and filePath != ''">image=#{filePath},</if>
       <if test="url != null and url != ''">url=#{url},</if>
-      <if test="startDate != null">start_date=#{startDate},</if>
-      <if test="endDate != null">end_date=#{endDate},</if>
-      activate=#{activateYN}
+      <if test="startDate != null != ''">start_date=STR_TO_DATE(#{startDate}, '%Y-%m-%d %H:%i'),</if>
+      <if test="endDate != null != ''">end_date=STR_TO_DATE(#{endDate}, '%Y-%m-%d %H:%i'),</if>
+      <if test="activateYN != null">activate=#{activateYN}</if>
     </set>
     where banner_no=#{number}
   </update>

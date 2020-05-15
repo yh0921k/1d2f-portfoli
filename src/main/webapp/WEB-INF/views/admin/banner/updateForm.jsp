@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"
   trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="middle" class="flex-fill">
   <!-- 
@@ -53,7 +53,7 @@
               <tr>
                 <th scope="row">제목</th>
                 <td><input type="text" name="title" id="title"
-                  class="form-control-sm form-control-clean" placeholder="${banner.title}"></td>
+                  class="form-control-sm form-control-clean" value="${banner.title}"></td>
               </tr>
               <tr>
                 <th scope="row">배너이미지</th>
@@ -89,17 +89,17 @@
               <tr>
                 <th scope="row">링크 URL</th>
                 <td><input type="text" name="url"
-                  class="form-control form-control-sm" placeholder="${banner.url}"></td>
+                  class="form-control form-control-sm" value="${banner.url}"></td>
               </tr>
               <tr>
                 <th scope="row">기간</th>
                 <td><div class="form-label-group">
-                    <input autocomplete="off" type="text"
+                    <input autocomplete="off" type="text" value="${fn:substring(banner.startDate, 0, 16)}"
                       class="form-control form-control-sm rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
                       data-disable-auto-update-input="true"
-                      data-date-format="YYYY/MM/DD HH:mm"
+                      data-date-format="YYYY-MM-DD HH:mm"
                       data-quick-locale='{
                         "lang_apply"  : "Apply",
                         "lang_cancel" : "Cancel",
@@ -107,18 +107,17 @@
                         "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                       }'
                       placeholder="시작일" name="startDate" id="startDate"> <label for="startDate">
-                      <fmt:formatDate var="startDate"
-                        value="${banner.startDate}" pattern="yyyy.MM.dd HH:mm"/> ${startDate} </label>
+                      시작일 </label>
                   </div>
                   <div class="form-label-group">
                     <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
-                    <input autocomplete="off" type="text"
-                      class="form-control rangepicker"
+                    <input autocomplete="off" type="text" value="${fn:substring(banner.endDate, 0, 16)}"
+                      class="form-control form-control-sm rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
                       data-disable-auto-update-input="true"
-                      data-date-format="YYYY/MM/DD HH:mm"
+                      data-date-format="YYYY-MM-DD HH:mm"
                       data-quick-locale='{
                         "lang_apply"  : "Apply",
                         "lang_cancel" : "Cancel",
@@ -126,8 +125,7 @@
                         "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                       }'
                       placeholder="마감일" name="endDate" id="endDate"> <label for="endDate">
-                      <fmt:formatDate var="endDate"
-                        value="${banner.endDate}" pattern="yyyy.MM.dd HH:mm"/> ${endDate} </label>
+                      마감일 </label>
                       <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
                   </div></td>

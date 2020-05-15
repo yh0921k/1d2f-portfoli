@@ -42,6 +42,8 @@ public class BannerController {
 
   @PostMapping("add")
   public void add(Banner banner, MultipartFile image) throws Exception {
+    System.out.println(banner.getStartDate());
+    System.out.println(banner.getEndDate());
     if (image.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/banner");
       String fileName = UUID.randomUUID().toString();
@@ -91,8 +93,9 @@ public class BannerController {
       String fileName = UUID.randomUUID().toString();
       image.transferTo(new File(dirPath + "/" + fileName));
       banner.setFilePath(fileName);
-      bannerService.update(banner);
     }
+
+    bannerService.update(banner);
   }
 
   @GetMapping("delete")

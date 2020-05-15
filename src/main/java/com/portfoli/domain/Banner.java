@@ -1,7 +1,7 @@
 package com.portfoli.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Banner implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -12,8 +12,8 @@ public class Banner implements Serializable {
   private String filePath;
   private String url;
   private Date registeredDate;
-  private Date startDate;
-  private Date endDate;
+  private String startDate;
+  private String endDate;
   private boolean activateYN;
 
   @Override
@@ -71,19 +71,19 @@ public class Banner implements Serializable {
     this.registeredDate = registeredDate;
   }
 
-  public Date getStartDate() {
+  public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
 
-  public Date getEndDate() {
+  public String getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
 

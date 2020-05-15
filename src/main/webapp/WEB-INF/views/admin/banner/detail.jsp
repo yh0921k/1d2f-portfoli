@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="middle" class="flex-fill">
   <!-- 
@@ -39,6 +39,12 @@
               </td>
             </tr>
             <tr>
+              <th scope="row">제목</th>
+              <td>
+              <span class="d-block text-muted text-truncate font-weight-medium pt-1">${banner.title}</span>
+              </td>
+            </tr>
+            <tr>
               <th scope="row">배너이미지</th>
               <td><label
                 class="rounded text-center position-relative d-block cursor-pointer border border-secondary border-dashed">
@@ -64,10 +70,9 @@
             </tr>
             <tr>
               <th scope="row">게시 기간</th>
-              <td><fmt:formatDate var="startDate"
-                  value="${banner.startDate}" pattern="yyyy.MM.dd HH:mm" /> <fmt:formatDate
-                  var="endDate" value="${banner.startDate}"
-                  pattern="yyyy.MM.dd HH:mm" /> ${startDate} ~ ${endDate} <!-- <div class="form-label-group">
+              <td> <span class="d-block text-muted text-truncate">
+              ${fn:substring(banner.startDate, 0, 16)} ~ ${fn:substring(banner.endDate, 0, 16)} </span>
+                  <!-- <div class="form-label-group">
                     <input autocomplete="off" type="text"
                       class="form-control form-control-sm rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
@@ -101,7 +106,8 @@
                       placeholder="마감일" name="endDate" id="endDate"> <label
                       for="endDate">마감일</label> <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
-                  </div></td> -->
+                  </div> -->
+                  </td>
             </tr>
           </table>
         </div>
