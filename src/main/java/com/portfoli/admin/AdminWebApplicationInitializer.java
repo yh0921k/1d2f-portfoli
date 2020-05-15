@@ -3,6 +3,7 @@ package com.portfoli.admin;
 import javax.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import com.portfoli.filter.AdminURLFilter;
 
 public class AdminWebApplicationInitializer
     extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -29,7 +30,7 @@ public class AdminWebApplicationInitializer
 
   @Override
   protected Filter[] getServletFilters() {
-    return new Filter[] {new CharacterEncodingFilter("UTF-8")};
+    return new Filter[] {new CharacterEncodingFilter("UTF-8"), new AdminURLFilter()};
   }
 }
 
