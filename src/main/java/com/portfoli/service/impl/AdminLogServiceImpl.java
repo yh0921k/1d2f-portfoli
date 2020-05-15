@@ -67,30 +67,26 @@ public class AdminLogServiceImpl implements AdminLogService {
         // System.out.println("list called");
         buffer.deleteCharAt(buffer.length() - 1);
 
-        System.out.println(new String(buffer));
         m = p.matcher(new String(buffer));
-        System.out.println(m.matches());
-        System.out.println(m.group(1));
-        System.out.println(m.group(2));
-        System.out.println(m.group(3));
-        System.out.println(m.group(4));
-        System.out.println(m.group(5));
+        m.matches();
+        // System.out.println(m.matches());
+        // System.out.println(m.group(1)); // ...
         log = new AdminLog(m.group(1), m.group(2), m.group(3), m.group(4), m.group(5));
         list.add(log);
       }
 
     } catch (EOFException e) {
-      System.out.println("Log file read complete");
+      System.out.println("[AdminLogServiceImpl.java] :: reach end of file");
     } finally {
       file.close();
     }
 
     // 리스트 역순 정렬 및 출력 테스트
     Collections.reverse(list);
-    System.out.println(list.size());
-    for (AdminLog l : list) {
-      System.out.println(l);
-    }
+    // System.out.println(list.size());
+    // for (AdminLog l : list) {
+    // System.out.println(l);
+    // }
     return list;
   }
 }
