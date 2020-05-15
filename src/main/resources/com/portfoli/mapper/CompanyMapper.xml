@@ -4,32 +4,43 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.portfoli.dao.CompanyDao">
-	<resultMap type="Company" id="CompanyMap">
+  <resultMap type="Company" id="CompanyMap">
     <id column="company_no" property="number"/>
-    <id column="business_registration_no" property="businessRegistrationNumber"/>
-    <id column="name" property="name"/>
-    <id column="tel" property="tel"/>
-    <id column="representative" property="representative"/>
-	</resultMap>
-	
-	<insert id="insert" parameterType="Company"
-	useGeneratedKeys="true" keyColumn="company_no" keyProperty="number">
-	  insert into pf_company(
-	    business_registration_no,
-	    name,
-	    tel,
-	    representative)
-	  values(
-	    #{businessRegistrationNumber},
-	    #{name},
-	    #{tel}, 
-	    #{representative})
-	</insert>
-	
-	<select id="findByBusinessRegistrationNumber" resultMap="CompanyMap" parameterType="string">
+    <result column="business_registration_no" property="businessRegistrationNumber"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="representative" property="representative"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="Company"
+  useGeneratedKeys="true" keyColumn="company_no" keyProperty="number">
+    insert into pf_company(
+      business_registration_no,
+      name,
+      tel,
+      representative)
+    values(
+      #{businessRegistrationNumber},
+      #{name},
+      #{tel}, 
+      #{representative})
+  </insert>
+
+  <select id="findByBusinessRegistrationNumber" resultMap="CompanyMap" parameterType="string">
     SELECT *
     FROM pf_company
     WHERE business_registration_no=#{businessRegistrationNumber}
   </select>
-  
+
+  <select id="findAllByKeyword" resultMap="CompanyMap" parameterType="string">
+    SELECT company_no, name
+    FROM pf_company
+    WHERE name LIKE CONCAT('%',#{keyword},'%')
+  </select>
+
+  <select id="findByNumber" resultMap="CompanyMap" parameterType="int">
+    SELECT *
+    FROM pf_company
+    WHERE company_no=#{number}
+  </select>
 </mapper>

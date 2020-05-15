@@ -1,5 +1,6 @@
 package com.portfoli.service;
 
+import java.util.List;
 import com.portfoli.domain.Company;
 
 public interface CompanyService {
@@ -8,4 +9,7 @@ public interface CompanyService {
 
   Company getByBusinessRegistrationNumber(String businessRegistrationNumber) throws Exception;
 
+  List<Company> searchList(String keyword) throws Exception;
+
+  Company get(int number) throws Exception;
 }
