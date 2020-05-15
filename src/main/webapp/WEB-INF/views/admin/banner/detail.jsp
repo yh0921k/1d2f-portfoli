@@ -75,11 +75,11 @@
                       data-disable-auto-update-input="false"
                       data-date-format="YYYY/MM/DD HH:mm"
                       data-quick-locale='{
-      "lang_apply"  : "Apply",
-      "lang_cancel" : "Cancel",
-      "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-    }'
+                      "lang_apply"  : "Apply",
+                      "lang_cancel" : "Cancel",
+                      "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                      "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+                    }'
                       placeholder="시작일" name="startDate" id="startDate"> <label
                       for="startDate">시작일</label>
                   </div>
@@ -93,11 +93,11 @@
                       data-disable-auto-update-input="true"
                       data-date-format="YYYY/MM/DD HH:mm"
                       data-quick-locale='{
-      "lang_apply"  : "Apply",
-      "lang_cancel" : "Cancel",
-      "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-    }'
+                        "lang_apply"  : "Apply",
+                        "lang_cancel" : "Cancel",
+                        "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+                      }'
                       placeholder="마감일" name="endDate" id="endDate"> <label
                       for="endDate">마감일</label> <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
@@ -107,8 +107,9 @@
         </div>
         <div class="text-center">
           <button type="button"
-            class="btn btn-sm btn-success btn-soft btn-pill mb-1">
-            <i class="fi fi-check"></i>수정
+            class="btn btn-sm btn-success btn-soft btn-pill mb-1"
+            onClick='location.href="/portfoli/admin/banner/updateForm?number=${banner.number}"'>
+            <i class="fi fi-check"></i> 수정
           </button>
           <button type="button"
             class="btn btn-sm btn-light btn-soft btn-pill mb-1"

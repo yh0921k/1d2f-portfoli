@@ -59,4 +59,17 @@
     from pf_banner
     where banner_no=#{number}
   </select>
+
+  <update id="update" parameterType="Banner">
+    update pf_banner
+    <set>
+      <if test="title != null and title != ''">title=#{title},</if>
+      <if test="filePath != null and filePath != ''">image=#{filePath},</if>
+      <if test="url != null and url != ''">url=#{url},</if>
+      <if test="startDate != null">start_date=#{startDate},</if>
+      <if test="endDate != null">end_date=#{endDate},</if>
+      activate=#{activateYN}
+    </set>
+    where banner_no=#{number}
+  </update>
 </mapper>

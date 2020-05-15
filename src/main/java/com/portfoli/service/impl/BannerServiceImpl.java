@@ -31,4 +31,9 @@ public class BannerServiceImpl implements BannerService {
   public Banner get(int number) throws Exception {
     return bannerDao.findByNumber(number);
   }
+
+  @Override
+  public int update(Banner banner) throws Exception {
+    return bannerDao.update(banner);
+  }
 }

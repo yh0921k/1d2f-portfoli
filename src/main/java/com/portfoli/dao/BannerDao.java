@@ -11,4 +11,6 @@ public interface BannerDao {
   List<Banner> findAllNotActivated() throws Exception;
 
   Banner findByNumber(int number) throws Exception;
+
+  int update(Banner banner) throws Exception;
 }
