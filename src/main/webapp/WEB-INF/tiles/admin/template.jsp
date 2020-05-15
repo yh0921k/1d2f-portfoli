@@ -41,7 +41,7 @@ var expireTime = ${expire};
         $("#sessionExpire").html("세션 만료 : " + --expireTime + "초 남음");
 
           if(expireTime == 0) {
-            window.location.href="loginForm";
+            window.location.href="../";
           }
     }, 1000);
   });
