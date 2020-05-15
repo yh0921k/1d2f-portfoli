@@ -12,7 +12,7 @@
 <h4>채용정보 변경</h4>
 <form action='update' method='post' enctype='multipart/form-data'>
 
-<input name='no' readonly type='hidden' value='${jobPosting.jobPostingNumber}'><br>
+<input name='jobPostingNumber' type='hidden' value='${jobPosting.jobPostingNumber}'><br>
 
 <div class="col-sm-13">
 제목* <input name='title' placeholder="제목" class="form-control" type='text' value='${jobPosting.title}'><br>
