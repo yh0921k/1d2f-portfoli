@@ -29,12 +29,15 @@ public class AdminController {
   }
 
   @GetMapping("loginForm")
-  public void loginForm(HttpSession session) throws Exception {
-    session.invalidate();
+  public void loginForm(HttpServletRequest request, HttpSession session) throws Exception {
+    System.out.println("loginForm");
+    request.getSession().invalidate();
+    System.out.println("loginForm after invalidate()");
   }
 
   @GetMapping("logout")
-  public String logout(HttpSession session) throws Exception {
+  public String logout() throws Exception {
+    System.out.println("logout");
     return "loginForm";
   }
 
