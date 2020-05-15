@@ -8,6 +8,7 @@
 <jsp:include page="../header.jsp" />
 
 
+
 <div class="container" style="text-align:center" >
 <h1 style="text-align:left">채용정보</h1>
 <div id="searchForm" style="text-align:right">
@@ -20,6 +21,9 @@
                 </button>
 </form>
 </div>
+<p style="text-align:left">
+전체  (<c:out value="${listCnt}"/>) 건
+<p>
 <hr>
 
 <div>
