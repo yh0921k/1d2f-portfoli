@@ -112,11 +112,8 @@ public class JobPostingController {
 
   @PostMapping("update")
   public String update(//
-      int no, //
       JobPosting jobPosting, //
       MultipartFile[] jobPostingFiles) throws Exception {
-
-    jobPosting = jobPostingService.get(no);
 
     ArrayList<JobPostingFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/jobposting");

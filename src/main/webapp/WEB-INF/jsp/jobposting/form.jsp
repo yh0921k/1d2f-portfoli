@@ -22,7 +22,8 @@
 		</div>  
 		-->
 		
-		<textarea id="content" name='content' rows='10' cols='40'  class="markdown-editor"
+		<textarea id="content" name='content' rows='10' cols='40'  class="markdown-editor" 
+		autocomplete="off"
   data-toolbar='["bold", "italic", "strikethrough", "|", "heading-1", "heading-2", "heading-3", "|", "image", "link", "|", "unordered-list", "ordered-list", "quote", "|", "guide", "|", "preview"]'
   data-status='["autosave", "lines", "words", "cursor"]' 
 
