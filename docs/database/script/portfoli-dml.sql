@@ -401,7 +401,7 @@ INSERT INTO pf_bookmark(board_no, member_no) VALUES(35, 8);
 INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(1,'정규직');
 INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(2,'계약직');
 INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(3,'인턴');
-INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(4,'경력직');
+INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(4,'프리랜서');
 INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(5,'파견직');
 
 -- pf_major 전공 데이터
