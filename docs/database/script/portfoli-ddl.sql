@@ -237,7 +237,8 @@ CREATE TABLE pf_job_posting (
   year_salary          INTEGER      NULL     COMMENT '연봉', -- 연봉
   readable             INTEGER      NOT NULL COMMENT '공개여부', -- 공개여부
   minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
-  employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
+  
+ment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
 )
 COMMENT '채용공고';
 
@@ -825,9 +826,6 @@ CREATE UNIQUE INDEX UIX_pf_employment_status
   ON pf_employment_status ( -- 고용형태
     employment_stat_name ASC -- 고용형태이름
   );
-
-ALTER TABLE pf_employment_status
-  MODIFY COLUMN employment_stat_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '고용형태번호';
 
 -- 기업요구전공
 CREATE TABLE pf_company_required_major (
