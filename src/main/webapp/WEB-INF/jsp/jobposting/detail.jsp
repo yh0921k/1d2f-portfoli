@@ -9,21 +9,29 @@
 <c:if test="${not empty jobPosting}">
 <div class="container" style="width:100%; height:1900px;">
 <br>
-<h2>${jobPosting.title}<br></h2><br>
+<h5>채용정보</h5>
+<div style="width:100%;">
+<h4>${jobPosting.title}<br></h4>
 <hr>
 
-<div style="width:100%;">
 <div style="width:50%;">
 <h5>지원자격</h5>
 <font>경력 : </font><strong>${jobPosting.minimumCareer} 년 이상 </strong>
 </div>
+<br>
+
 <div style="width:50%;">
 <h5>근무조건</h5>
 <font>직무 : </font><strong>${jobPosting.job}</strong>
 </div>
+<br>
+
+<p style="text-align:right; font-color:black;">조회수: ${jobPosting.viewCount}<br></p>
 </div>
 
 <br>
+
+
 
 <hr>
 <h3>상세요강</h3>
@@ -50,7 +58,7 @@
 마감일 | ${jobPosting.endDated}<br>
 </div>
 <hr>  
-조회수: ${jobPosting.viewCount}<br>
+<button class="btn btn-outline-dark btn-lg">지원하기</button>
                        
 <c:if test="${not empty loginUser}">
 <div style="text-align:right">
@@ -60,9 +68,9 @@
 <a href='delete?no=${jobPosting.jobPostingNumber}' id="delBtn" class="btn btn-outline-dark btn-pill mb-1">삭제</a>
 </div>
 </c:if>
-
 </div>
 </c:if>
+<br>
 <br>
 <br>
 <br>
