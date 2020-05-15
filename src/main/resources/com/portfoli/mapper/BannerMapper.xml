@@ -21,4 +21,27 @@
     values
     (#{companyNumber}, #{title}, #{filePath}, #{url}, #{startDate}, #{endDate}, #{activateYN})
   </insert>
+
+  <select id="findAllActivated" resultMap="BannerMap">
+    select
+      banner_no,
+      title,
+      start_date,
+      end_date,
+      activate
+    from pf_banner
+    where activate=1
+  </select>
+
+  <select id="findAllNotActivated" resultMap="BannerMap">
+    select
+      banner_no,
+      title,
+      start_date,
+      end_date,
+      activate
+    from pf_banner
+    where activate=0
+    order by end_date desc
+  </select>
 </mapper>

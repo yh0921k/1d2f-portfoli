@@ -47,7 +47,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="fi fi-image"></i>
+          <a class="nav-link" href="/portfoli/admin/banner/list"> <i class="fi fi-image"></i>
             배너 관리
           </a>
         </li>

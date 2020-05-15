@@ -63,4 +63,10 @@ public class BannerController {
 
     return jsonString;
   }
+
+  @GetMapping("list")
+  public void list(Model model) throws Exception {
+    model.addAttribute("activatedList", bannerService.activatedList());
+    model.addAttribute("notActivatedList", bannerService.notActivatedList());
+  }
 }

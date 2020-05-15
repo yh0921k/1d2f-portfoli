@@ -1,5 +1,6 @@
 package com.portfoli.service.impl;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.portfoli.dao.BannerDao;
@@ -14,5 +15,15 @@ public class BannerServiceImpl implements BannerService {
   @Override
   public int add(Banner banner) throws Exception {
     return bannerDao.insert(banner);
+  }
+
+  @Override
+  public List<Banner> activatedList() throws Exception {
+    return bannerDao.findAllActivated();
+  }
+
+  @Override
+  public List<Banner> notActivatedList() throws Exception {
+    return bannerDao.findAllNotActivated();
   }
 }
