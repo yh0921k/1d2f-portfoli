@@ -112,8 +112,14 @@
             <i class="fi fi-check"></i> 수정
           </button>
           <button type="button"
+            class="btn btn-sm btn-danger btn-soft btn-pill mb-1"
+            onClick='location.href="/portfoli/admin/banner/delete?number=${banner.number}"'>
+            <i class="fi fi-check"></i> 삭제
+          </button>
+          <button type="button"
             class="btn btn-sm btn-light btn-soft btn-pill mb-1"
-            onClick='location.href="/portfoli/admin/banner/list"'>뒤로</button>
+            onClick='location.href="/portfoli/admin/banner/list"'>뒤로
+          </button>
         </div>
 
       </div>

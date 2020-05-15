@@ -72,4 +72,9 @@
     </set>
     where banner_no=#{number}
   </update>
+
+  <delete id="delete" parameterType="int">
+    delete from pf_banner
+    where banner_no=#{number}
+  </delete>
 </mapper>

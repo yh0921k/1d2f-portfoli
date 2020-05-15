@@ -36,4 +36,9 @@ public class BannerServiceImpl implements BannerService {
   public int update(Banner banner) throws Exception {
     return bannerDao.update(banner);
   }
+
+  @Override
+  public int delete(int number) throws Exception {
+    return bannerDao.delete(number);
+  }
 }

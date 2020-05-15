@@ -13,4 +13,6 @@ public interface BannerDao {
   Banner findByNumber(int number) throws Exception;
 
   int update(Banner banner) throws Exception;
+
+  int delete(int number) throws Exception;
 }

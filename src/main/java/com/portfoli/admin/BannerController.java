@@ -94,4 +94,13 @@ public class BannerController {
       bannerService.update(banner);
     }
   }
+
+  @GetMapping("delete")
+  public String delete(int number) throws Exception {
+    if (bannerService.delete(number) > 0) {
+      return "redirect:list";
+    } else {
+      throw new Exception("삭제할 배너 번호가 유효하지 않습니다.");
+    }
+  }
 }
