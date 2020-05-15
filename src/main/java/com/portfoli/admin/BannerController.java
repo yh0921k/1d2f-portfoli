@@ -73,9 +73,34 @@ public class BannerController {
   @GetMapping("detail")
   public void detail(int number, Model model) throws Exception {
     Banner banner = bannerService.get(number);
-    System.out.println(banner);
     model.addAttribute("company", companyService.get(banner.getCompanyNumber()));
-    System.out.println(companyService.get(banner.getCompanyNumber()));
     model.addAttribute("banner", banner);
+  }
+
+  @GetMapping("updateForm")
+  public void updateForm(int number, Model model) throws Exception {
+    Banner banner = bannerService.get(number);
+    model.addAttribute("company", companyService.get(banner.getCompanyNumber()));
+    model.addAttribute("banner", banner);
+  }
+
+  @PostMapping("update")
+  public void update(Banner banner, MultipartFile image) throws Exception {
+    if (image.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/banner");
+      String fileName = UUID.randomUUID().toString();
+      image.transferTo(new File(dirPath + "/" + fileName));
+      banner.setFilePath(fileName);
+      bannerService.update(banner);
+    }
+  }
+
+  @GetMapping("delete")
+  public String delete(int number) throws Exception {
+    if (bannerService.delete(number) > 0) {
+      return "redirect:list";
+    } else {
+      throw new Exception("삭제할 배너 번호가 유효하지 않습니다.");
+    }
   }
 }

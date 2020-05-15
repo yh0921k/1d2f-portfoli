@@ -11,4 +11,8 @@ public interface BannerService {
   List<Banner> notActivatedList() throws Exception;
 
   Banner get(int number) throws Exception;
+
+  int update(Banner banner) throws Exception;
+
+  int delete(int number) throws Exception;
 }

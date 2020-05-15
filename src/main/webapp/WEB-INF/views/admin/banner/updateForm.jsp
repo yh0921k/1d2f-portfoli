@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"
   trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div id="middle" class="flex-fill">
   <!-- 
@@ -18,8 +19,7 @@
   <section class="rounded mb-3">
     <!-- header -->
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-      배너 등록 <small class="fs--11 text-muted d-block mt-1">
-      등록할 기업을 선택해주세요.</small>
+      배너 수정 <small class="fs--11 text-muted d-block mt-1"> - </small>
     </div>
     <!-- /header -->
 
@@ -27,27 +27,33 @@
     <div class="row gutters-sm">
       <div class="col-12 col-lg-7 col-xl-9 mb-5">
         <!-- Search form -->
-        <form novalidate class="bs-validate js-ajax"
-  action="/portfoli/admin/banner/add" method="post"
-  enctype="multipart/form-data" data-modal-autoclose-on-success="true"
-  data-modal-autoclose-on-success-delay="200"
-  data-ajax-update-url="false" data-ajax-show-loading-icon="true"
-  data-success-toast-text="<i class='fi fi-check float-start'></i> 배너 등록이 완료되었습니다."
-  data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> 빈 칸을 모두 입력해주세요."
-  data-error-toast-delay="3000" data-error-toast-position="bottom-center"
-  data-error-scroll-ignore="true" data-ajax-callback-function="redirect">
-          <input type="hidden" name="companyNumber">
+        <form class="js-ajax"
+          action="/portfoli/admin/banner/update" method="post"
+          enctype="multipart/form-data" data-modal-autoclose-on-success="true"
+          data-modal-autoclose-on-success-delay="200"
+          data-ajax-update-url="false" data-ajax-show-loading-icon="true"
+          data-success-toast-text="<i class='fi fi-check float-start'></i> 배너 수정을 완료하였습니다."
+          data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> 빈 칸을 모두 입력해주세요."
+          data-error-toast-delay="3000" data-error-toast-position="bottom-center"
+          data-error-scroll-ignore="true" data-ajax-callback-function="redirect">
+          <input type="hidden" name="number" value="${banner.number}">
           <div class="table-responsive" style="overflow: visible;">
             <table class="table table-sm">
               <tr>
-                <th scope="row">기업명</th>
-                <td><input type="text" id="searchInput"
-                  class="form-control-sm form-control-clean" placeholder="기업명 검색"></td>
+                <th scope="row">기업</th>
+                <td><table class="table table-bordered table-hover table-striped">
+                  <tr>
+                    <td>${company.name}</td>
+                    <td>${company.tel}</td>
+                    <td>${company.representative}</td>
+                  </tr>
+                </table>
+                </td>
               </tr>
               <tr>
                 <th scope="row">제목</th>
                 <td><input type="text" name="title" id="title"
-                  class="form-control-sm form-control-clean" placeholder="제목"></td>
+                  class="form-control-sm form-control-clean" placeholder="${banner.title}"></td>
               </tr>
               <tr>
                 <th scope="row">배너이미지</th>
@@ -57,8 +63,7 @@
                     class="js-file-input-showcase-remove hide position-absolute absolute-top text-align-start w--600 z-index-3">
                       <span
                       class="d-inline-block btn btn-sm bg-secondary text-white pt--4 pb--4 pl--10 pr--10 m--1"
-                      title="remove image" data-tooltip="tooltip"> <i
-                        class="fi fi-close m-0"></i>
+                      title="remove image" data-tooltip="tooltip"> <i class="fi fi-close m-0"></i>
                     </span>
                   </a> <span
                     class="z-index-2 js-file-input-showcase-container d-block absolute-full z-index-1 hide-empty">
@@ -77,28 +82,14 @@
                     data-file-preview-img-cover="true"
                     class="custom-file-input absolute-full">
 
-                    <div class="absolute-full">
-                      <div class="d-table">
-                        <div class="d-table-cell align-middle text-center">
-
-                          <i class="fi fi-image fs--30 text-muted"></i> <small
-                            class="d-block text-muted"> <b>이미지를 등록해주세요. </b> <span
-                            class="d-block mt-1"> 1160*220px의 이미지 파일을 지원합니다. </span>
-                          </small>
-
-                        </div>
-                      </div>
-                    </div> <!-- ratio maintained using a `blank` image --> <img
-                    class="w--600 h--120"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                    alt="...">
-
+                  <img class="w--600 h--120" alt="banner"
+                    src="${pageContext.servletContext.contextPath}/upload/banner/${banner.filePath}">
                 </label></td>
               </tr>
               <tr>
                 <th scope="row">링크 URL</th>
-                <td><input required type="text" name="url"
-                  class="form-control form-control-sm" placeholder="http://"></td>
+                <td><input type="text" name="url"
+                  class="form-control form-control-sm" placeholder="${banner.url}"></td>
               </tr>
               <tr>
                 <th scope="row">기간</th>
@@ -107,7 +98,7 @@
                       class="form-control form-control-sm rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
-                      data-disable-auto-update-input="false"
+                      data-disable-auto-update-input="true"
                       data-date-format="YYYY/MM/DD HH:mm"
                       data-quick-locale='{
                         "lang_apply"  : "Apply",
@@ -115,13 +106,14 @@
                         "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                       }'
-                      placeholder="시작일" name="startDate" id="startDate"> <label
-                      for="startDate">시작일</label>
+                      placeholder="시작일" name="startDate" id="startDate"> <label for="startDate">
+                      <fmt:formatDate var="startDate"
+                        value="${banner.startDate}" pattern="yyyy.MM.dd HH:mm"/> ${startDate} </label>
                   </div>
                   <div class="form-label-group">
                     <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
-                    <input required autocomplete="off" type="text"
+                    <input autocomplete="off" type="text"
                       class="form-control rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
@@ -133,8 +125,10 @@
                         "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                       }'
-                      placeholder="마감일" name="endDate" id="endDate"> <label
-                      for="endDate">마감일</label> <a href="#"
+                      placeholder="마감일" name="endDate" id="endDate"> <label for="endDate">
+                      <fmt:formatDate var="endDate"
+                        value="${banner.endDate}" pattern="yyyy.MM.dd HH:mm"/> ${endDate} </label>
+                      <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
                   </div></td>
               </tr>
@@ -156,13 +150,13 @@
             </table>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-sm btn-primary btn-soft">
-              <i class="fi fi-check"></i> 등록
-            </button>
-            <button type="button"
-              class="btn btn-sm btn-light btn-soft btn-pill mb-1"
-              onClick='location.href="/portfoli/admin/banner/list"'> 뒤로
-            </button>
+          <button type="submit" class="btn btn-sm btn-primary btn-soft">
+            <i class="fi fi-check"></i> 수정
+          </button>
+          <button type="button"
+            class="btn btn-sm btn-light btn-soft btn-pill mb-1"
+            onClick='location.href="/portfoli/admin/banner/detail?number=${banner.number}"'> 뒤로
+          </button>
           </div>
         </form>
 
@@ -170,46 +164,6 @@
     </div>
   </section>
 </div>
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$(function() {
-  $("#searchInput").autocomplete({
-    source : function(request, response) {
-      $.ajax({
-        type : "post",
-        data : {
-          term : request.term
-        },
-        dataType : "json",
-        url : "/portfoli/admin/banner/json",
-        success : function(data) {
-          console.log("success" + JSON.stringify(data));
-          response($.map(data, function(item) {
-            return {
-              label : item.name,
-              value : item.name,
-              companyNo : item.number
-            }
-          }));
-        }
-      });
-    },
-    select : function(event, ui) {
-      $("input[name=companyNumber]").val(ui.item.companyNo);
-      console.log(ui);
-    },
-    focus : function(event, ui) {
-      return false;
-    },
-    minLength : 1,
-    autoFocus : true,
-    close : function(event) {
-      console.log(event);
-    }
-  });
-});
-</script>
 
 <script>
 function redirect() {
