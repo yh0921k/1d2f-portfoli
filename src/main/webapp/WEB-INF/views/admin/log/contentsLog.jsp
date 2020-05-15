@@ -17,9 +17,16 @@
         <div id="rand_yjK_filter" class="dataTables_filter">
         <label><input id="keyword" type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="rand_yjK"></label>
         </div>
-<!--         <div class="dataTables_length" id="rand_yjK_length"> -->
-<!--         <label><select name="rand_yjK_length" aria-controls="rand_yjK" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="100">100</option><option value="-1">All</option></select></label></div> -->
-<!--         </div> -->
+        
+        <div class="dataTables_length" id="rand_yjK_length">
+        <label>
+        <select id="moreSelect" name="rand_yjK_length" aria-controls="rand_yjK" class="custom-select custom-select-sm form-control form-control-sm">
+        <option id="more10" value="10">10</option>        
+        <option id="more50" value="50">50</option>
+        <option id="more100" value="100">100</option>        
+        </select></label></div>
+        </div>
+        
         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
         <div class="dt-buttons btn-group flex-wrap">
         </div>
@@ -31,7 +38,7 @@
         <thead>
             <tr role="row">
             <th class="sorting_asc" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="0" style="width: 200px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Date</th>
-            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="1" style="width: 300px;" aria-label="Time: activate to sort column ascending">Time</th>
+            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="1" style="width: 200px;" aria-label="Time: activate to sort column ascending">Time</th>
             <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="2" style="width: 150px;" aria-label="IP Address: activate to sort column ascending">IP Address</th>
             <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="3" style="width: 200px;" aria-label="User: activate to sort column ascending">User</th>
             <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="4" style="width: 200px;" aria-label="Request: activate to sort column ascending">Request</th>
@@ -86,10 +93,10 @@
 <script>
 $(document).ready(function() { 
   $("#keyword").keyup(function() { 
+    $("#logTable > tbody > tr > td").css("color","black");
     var k = $(this).val(); 
       console.log(k);
         $("#logTable > tbody > tr").hide(); // tr 태그 전부 숨김
-
           var temp = $("#logTable > tbody > tr > td:nth-child(n):contains('" + k + "')"); 
           $(temp).css("color","red");
           console.log(typeof(temp));
@@ -98,6 +105,23 @@ $(document).ready(function() {
             $(temp).css("color","black");
           }
           $(temp).parent().show();
-  });
+  }); 
 });
+// $(document).ready(function() { 
+//   $("#moreSelect").change(function() { 
+//     var moreSelect = $("#moreSelect").val();
+//     var xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = () => {
+//         if (xhr.readyState == 4) {
+//             if (xhr.status == 200) {
+//               document.querySelector("#wrapper-contents-page").innerHTML = xhr.responseText;
+//             }
+//         }
+//     };
+//     console.log(document.URL);
+//     console.log(this.id + "?moreSelect=" + moreSelect);
+//     xhr.open("GET",  document.URL, true);
+//     xhr.send();
+//   });
+// });
 </script>

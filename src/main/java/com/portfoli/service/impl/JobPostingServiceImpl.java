@@ -45,6 +45,11 @@ public class JobPostingServiceImpl implements JobPostingService {
     return jobPostingDao.findMore(lastNo);
   }
 
+  @Override
+  public int ListCnt(JobPosting jobPosting) throws Exception {
+    return jobPostingDao.ListCnt();
+  }
+
   @Transactional
   @Override
   public void delete(int no) throws Exception {

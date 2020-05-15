@@ -9,21 +9,29 @@
 <c:if test="${not empty jobPosting}">
 <div class="container" style="width:100%; height:1900px;">
 <br>
-<h2>${jobPosting.title}<br></h2><br>
+<h5>채용정보</h5>
+<div style="width:100%;">
+<h4>${jobPosting.title}<br></h4>
 <hr>
 
-<div style="width:100%;">
 <div style="width:50%;">
 <h5>지원자격</h5>
 <font>경력 : </font><strong>${jobPosting.minimumCareer} 년 이상 </strong>
 </div>
+<br>
+
 <div style="width:50%;">
 <h5>근무조건</h5>
 <font>직무 : </font><strong>${jobPosting.job}</strong>
 </div>
+<br>
+
+<p style="text-align:right; font-color:black;">조회수: ${jobPosting.viewCount}<br></p>
 </div>
 
 <br>
+
+
 
 <hr>
 <h3>상세요강</h3>
@@ -42,16 +50,15 @@
 
 <hr>
 
- <div style="text-align:center; width:25%; height:180px;">
+ <div style="text-align:center; width:25%; height:180px; padding:5px;">
 <h4>남은시간</h4>
 <p id="timer" style="text-clolor:red"></p>      
                       
 시작일 | ${jobPosting.startDated}<br>
 마감일 | ${jobPosting.endDated}<br>
 </div>
-
 <hr>  
-조회수: ${jobPosting.viewCount}<br>
+<button class="btn btn-outline-dark btn-lg">지원하기</button>
                        
 <c:if test="${not empty loginUser}">
 <div style="text-align:right">
@@ -61,9 +68,9 @@
 <a href='delete?no=${jobPosting.jobPostingNumber}' id="delBtn" class="btn btn-outline-dark btn-pill mb-1">삭제</a>
 </div>
 </c:if>
-
 </div>
 </c:if>
+<br>
 <br>
 <br>
 <br>
@@ -109,7 +116,7 @@ function msg_time() {
 	  
 	  m = result - 1 + "일  " + hours + ":" +  miniutes + ":" + seconds ; // 남은 시간 text형태로 변경
   
-  document.all.timer.innerHTML = "<b><font color='red' size='7px'>" + m + "</font></b>";   // div 영역에 보여줌
+  document.all.timer.innerHTML = "<b><font color='red' size='6px'>" + m + "</font></b>";   // div 영역에 보여줌
   
   
   if (RemainDate < 0) {      
