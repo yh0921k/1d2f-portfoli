@@ -1,6 +1,5 @@
 package com.portfoli.admin;
 
-import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -30,8 +29,9 @@ public class AdminLogController {
 
   @GetMapping("contentsLog")
   public void contentsLog(HttpServletRequest request, Model model) throws Exception {
-    System.out.println(new Date(System.currentTimeMillis()).toString());
+    // System.out.println(new Date(System.currentTimeMillis()).toString());
     String filepath = System.getProperty("catalina.base") + "/logs/portfoli.log";
+    System.out.println("LogFile : " + filepath);
     // int startLine = (int) (request.getAttribute("startLine"));
     // int moreLine = (int) (request.getAttribute("moreLine"));
 

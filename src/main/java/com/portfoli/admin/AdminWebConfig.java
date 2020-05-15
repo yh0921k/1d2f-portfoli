@@ -60,10 +60,9 @@ public class AdminWebConfig implements WebMvcConfigurer {
 
   @Bean
   public ViewResolver viewResolver() {
-    InternalResourceViewResolver vr = new InternalResourceViewResolver(
-        "/WEB-INF/jsp/admin/", // prefix
+    InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/jsp/admin/", // prefix
         ".jsp" // suffix
-        );
+    );
 
     vr.setOrder(2);
 
@@ -72,9 +71,9 @@ public class AdminWebConfig implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new AdminControllerInterceptor())
-    .addPathPatterns("/**");
-    // .excludePathPatterns();
+    registry.addInterceptor(new AdminControllerInterceptor()).addPathPatterns("/**");
+    registry.addInterceptor(new AdminAuthInterceptor()).addPathPatterns("/*/*")
+        .excludePathPatterns("/auth/loginForm").excludePathPatterns("/auth/login");
   }
 
   @Bean

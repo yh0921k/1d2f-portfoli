@@ -22,8 +22,6 @@ public class AdminURLFilter implements Filter {
     String requestURI = httpRequest.getRequestURI();
     String adminBaseURI = httpRequest.getContextPath() + httpRequest.getServletPath();
 
-    System.out.println(requestURI);
-    System.out.println(adminBaseURI);
     if (requestURI.equals(adminBaseURI) || requestURI.equals(adminBaseURI + "/")) {
       if (httpRequest.getSession().getAttribute("admin") == null) {
         httpResponse.sendRedirect(adminBaseURI + "/auth/loginForm");
