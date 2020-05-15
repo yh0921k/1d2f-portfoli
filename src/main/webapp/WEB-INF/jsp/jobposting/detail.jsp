@@ -42,14 +42,13 @@
 
 <hr>
 
- <div style="text-align:center; width:25%; height:180px;">
+ <div style="text-align:center; width:25%; height:180px; padding:5px;">
 <h4>남은시간</h4>
 <p id="timer" style="text-clolor:red"></p>      
                       
 시작일 | ${jobPosting.startDated}<br>
 마감일 | ${jobPosting.endDated}<br>
 </div>
-
 <hr>  
 조회수: ${jobPosting.viewCount}<br>
                        
@@ -109,7 +108,7 @@ function msg_time() {
 	  
 	  m = result - 1 + "일  " + hours + ":" +  miniutes + ":" + seconds ; // 남은 시간 text형태로 변경
   
-  document.all.timer.innerHTML = "<b><font color='red' size='7px'>" + m + "</font></b>";   // div 영역에 보여줌
+  document.all.timer.innerHTML = "<b><font color='red' size='6px'>" + m + "</font></b>";   // div 영역에 보여줌
   
   
   if (RemainDate < 0) {      
