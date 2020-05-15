@@ -1,5 +1,6 @@
 package com.portfoli.service.impl;
 
+import java.util.List;
 import org.springframework.stereotype.Component;
 import com.portfoli.dao.CompanyDao;
 import com.portfoli.domain.Company;
@@ -31,6 +32,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
   }
 
-
-
+  @Override
+  public List<Company> searchList(String keyword) throws Exception {
+    return companyDAO.findAllByKeyword(keyword);
+  }
 }
