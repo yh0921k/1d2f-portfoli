@@ -37,4 +37,10 @@
     FROM pf_company
     WHERE name LIKE CONCAT('%',#{keyword},'%')
   </select>
+
+  <select id="findByNumber" resultMap="CompanyMap" parameterType="int">
+    SELECT *
+    FROM pf_company
+    WHERE company_no=#{number}
+  </select>
 </mapper>

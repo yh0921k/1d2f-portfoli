@@ -26,4 +26,9 @@ public class BannerServiceImpl implements BannerService {
   public List<Banner> notActivatedList() throws Exception {
     return bannerDao.findAllNotActivated();
   }
+
+  @Override
+  public Banner get(int number) throws Exception {
+    return bannerDao.findByNumber(number);
+  }
 }

@@ -9,4 +9,6 @@ public interface BannerDao {
   List<Banner> findAllActivated() throws Exception;
 
   List<Banner> findAllNotActivated() throws Exception;
+
+  Banner findByNumber(int number) throws Exception;
 }

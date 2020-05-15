@@ -69,4 +69,13 @@ public class BannerController {
     model.addAttribute("activatedList", bannerService.activatedList());
     model.addAttribute("notActivatedList", bannerService.notActivatedList());
   }
+
+  @GetMapping("detail")
+  public void detail(int number, Model model) throws Exception {
+    Banner banner = bannerService.get(number);
+    System.out.println(banner);
+    model.addAttribute("company", companyService.get(banner.getCompanyNumber()));
+    System.out.println(companyService.get(banner.getCompanyNumber()));
+    model.addAttribute("banner", banner);
+  }
 }

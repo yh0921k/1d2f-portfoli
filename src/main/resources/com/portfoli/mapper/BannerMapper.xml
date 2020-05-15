@@ -44,4 +44,19 @@
     where activate=0
     order by end_date desc
   </select>
+
+  <select id="findByNumber" resultMap="BannerMap" parameterType="int">
+    select
+      banner_no,
+      company_no,
+      title,
+      image,
+      url,
+      register_date,
+      start_date,
+      end_date,
+      activate
+    from pf_banner
+    where banner_no=#{number}
+  </select>
 </mapper>

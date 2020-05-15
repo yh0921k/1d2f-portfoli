@@ -9,4 +9,6 @@ public interface CompanyDao {
   Company findByBusinessRegistrationNumber(String businessRegistrationNumber) throws Exception;
 
   List<Company> findAllByKeyword(String keyword) throws Exception;
+
+  Company findByNumber(int number) throws Exception;
 }

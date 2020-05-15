@@ -36,4 +36,9 @@ public class CompanyServiceImpl implements CompanyService {
   public List<Company> searchList(String keyword) throws Exception {
     return companyDAO.findAllByKeyword(keyword);
   }
+
+  @Override
+  public Company get(int number) throws Exception {
+    return companyDAO.findByNumber(number);
+  }
 }

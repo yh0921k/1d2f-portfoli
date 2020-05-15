@@ -31,7 +31,7 @@
         <!-- account -->
         <li class="list-inline-item ml--6 mr--6 dropdown"> <span id="sessionExpire" role="alert"
           style="margin-right: 50px; color: #dddddd">세션 만료 : ${expire}초 남음</span>
-          <a href="loginForm" id="dropdownAccountOptions" class="btn btn-sm btn-dark btn-pill pl--12 pr--12">
+          <a href="/portfoli/admin/auth/loginForm" id="dropdownAccountOptions" class="btn btn-sm btn-dark btn-pill pl--12 pr--12">
           <span class="group-icon m-0"> <i class="fi w--15 fi-power"></i>
           </span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">Log out</span>
         </a> </li>
