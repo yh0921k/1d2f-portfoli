@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.GeneralMemberCertificationDao">
+
+	<resultMap type="GeneralMemberCertification" id="GeneralMemberCertificationMap">
+		<id column="general_member_no" property="memberNumber" />
+		<id column="certificate_no" property="certificateNumber" />
+		<result column="issue_date" property="issueDate" />
+		<result column="expire_date" property="expireDate" />
+		<association property="certificate" javaType="Certificate">
+			<id column="certificate_no" property="certificateNumber" />
+			<result column="name" property="name" />
+			<result column="agency" property="agency" />
+		</association>
+	</resultMap>
+
+	<select id="findCerts" parameterType="int" resultMap="GeneralMemberCertificationMap">
+	SELECT *
+	FROM pf_general_member_certification m
+	JOIN pf_certificate c 
+	ON m.certificate_no=c.certificate_no
+	WHERE general_member_no=#{memberNumber}
+	</select>
+
+
+</mapper>

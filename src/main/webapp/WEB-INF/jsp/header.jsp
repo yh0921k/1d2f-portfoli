@@ -9,37 +9,31 @@
 <title>Portfoli</title>
 <meta name="description" content="...">
 
-<meta name="viewport"
-	content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
+<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
-<!-- up to 10% speed up for external res -->
 <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- preloading icon font is helping to speed up a little bit -->
 <link rel="preload"
 	href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2"
 	as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet"
-	href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
 <!-- favicon -->
-<link rel="shortcut icon"
-	href="${pageContext.request.getContextPath()}/favicon.ico">
-<link rel="apple-touch-icon"
-	href="${pageContext.request.getContextPath()}/resources/demo.files/logo/icon_512x512.png">
+<link rel="shortcut icon" href="${pageContext.request.getContextPath()}/favicon.ico">
+<link rel="apple-touch-icon" href="${pageContext.request.getContextPath()}/resources/demo.files/logo/icon_512x512.png">
+<link rel="manifest" href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
 
-<link rel="manifest"
-	href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <meta name="theme-color" content="#377dff">
 
 </head>
@@ -292,7 +286,6 @@
 					</c:if>
 
 					<!-- 일반 회원 로그인 후 -->
-					<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 					<script type="text/javascript">
 						function sendMessage() {
 							console.log('trying socket connection');

@@ -2,6 +2,7 @@ package com.portfoli.web;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
@@ -20,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.Company;
 import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
+import com.portfoli.domain.GeneralMemberCertification;
 import com.portfoli.domain.Member;
+import com.portfoli.service.CertificateService;
 import com.portfoli.service.CompanyService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.UserMailSendService;
@@ -43,6 +46,9 @@ public class MemberController {
 
   @Autowired
   CompanyService companyService;
+
+  @Autowired
+  CertificateService certificateService;
 
   @Autowired
   private UserMailSendService mailsender;
@@ -107,7 +113,13 @@ public class MemberController {
   public void generalInfoUpdate(HttpServletRequest request, Model model) throws Exception {
     GeneralMember generalMember = memberService.getGeneralMember(
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
+    List<GeneralMemberCertification> memberCerts = certificateService.getMemberCerts(
+        ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
+    for (GeneralMemberCertification cert : memberCerts) {
+      System.out.println(cert);
+    }
     model.addAttribute("member", generalMember);
+    model.addAttribute("memberCerts", memberCerts);
   }
 
   @PostMapping("updateDefaultInfo")
