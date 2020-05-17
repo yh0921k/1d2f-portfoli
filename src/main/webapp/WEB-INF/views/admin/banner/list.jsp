@@ -37,7 +37,32 @@
           <span class="d-block text-muted text-truncate font-weight-medium pt-1">
             게시중인 배너 </span>
         </div>
+<div class="nestable dd"
+  data-nestable-max-depth="3" 
 
+  data-update-delete-with-childs="false"
+  data-update-delete-with-childs-error="Please move or delete childs first!" 
+  data-update-delete-params="['action','delete']['section','shop_category']" 
+
+  data-ajax-update-url="POST" 
+  data-ajax-update-params="['action','reorder']['section','shop_category']" 
+
+  data-update-toast-success="Order Saved!" 
+  data-update-toast-position="top-center" 
+>
+  <ol class="dd-list">
+  <c:forEach items="${activatedList}" var="postedBanner">
+    <li class="dd-item dd-has-options dd-handle-custom" data-id="${postedBanner.order}">
+      <div class="dd-content text-truncate">
+      <a href="/portfoli/admin/banner/detail?number=${postedBanner.number}">
+        <span class="font-weight-medium text-muted mx-2 m-0-xs">${postedBanner.title} </span></a>
+      </div>
+      <div class="dd-handle fi fi-list"></div>
+    </li>
+  </c:forEach>
+  </ol>
+</div>
+        <!-- 
         <div class="list-group sortable" data-sort-swap="true">
           <c:forEach items="${activatedList}" var="postedBanner">
             <div class="list-group-item">
@@ -46,6 +71,7 @@
             </div>
           </c:forEach>
         </div>
+         -->
         <!-- /Activate List -->
 
         <!-- NotActivate List -->
