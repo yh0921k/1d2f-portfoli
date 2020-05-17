@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import com.portfoli.domain.EmploymentStatus;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
+import com.portfoli.service.EmploymentStatusService;
 import com.portfoli.service.JobPostingService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -35,12 +37,18 @@ public class JobPostingController {
   @Autowired
   JobPostingService jobPostingService;
 
+  @Autowired
+  EmploymentStatusService employmentStatusService;
+
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
   }
 
   @GetMapping("form")
-  public void form() throws Exception {}
+  public void addForm(Model model) throws Exception {
+    List<EmploymentStatus> employmentStatus = employmentStatusService.get();
+    model.addAttribute("employmentStatus", employmentStatus);
+  }
 
   @PostMapping("add")
   public String add(//
@@ -112,7 +120,9 @@ public class JobPostingController {
 
   @GetMapping("updateForm")
   public void updateForm(int no, Model model) throws Exception {
+    List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     model.addAttribute("jobPosting", jobPostingService.get(no));
+    model.addAttribute("employmentStatus", employmentStatus);
   }
 
   @PostMapping("update")

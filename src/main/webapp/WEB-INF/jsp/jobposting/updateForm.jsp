@@ -17,6 +17,23 @@
 <div class="col-sm-13">
 제목* <input name='title' placeholder="제목" class="form-control" type='text' value='${jobPosting.title}'><br>
 </div>
+
+<div class="row">
+          <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">고용형태
+            : </span> <select id="select_options2" name="employmentStatus.number"
+            class="form-control form-control-sm col-md-3">
+            <c:forEach items="${employmentStatus}" var="employmentStatus">
+              <c:if test="${jobPosting.employmentStatus.name == employmentStatus.name}">
+                <option value="${employmentStatus.number}" selected="selected">${employmentStatus.name}</option>
+              </c:if>
+              <c:if test="${jobPosting.employmentStatus.name != employmentStatus.name}">
+                <option value="${employmentStatus.number}">${employmentStatus.name}</option>
+              </c:if>
+            </c:forEach>
+          </select>
+        </div>
+
+
 <textarea id="content" name='content' rows='10' cols='40'  class="markdown-editor"
   data-toolbar='["bold", "italic", "strikethrough", "|", "heading-1", "heading-2", "heading-3", "|", "image", "link", "|", "unordered-list", "ordered-list", "quote", "|", "guide", "|", "preview"]'
   data-status='["autosave", "lines", "words", "cursor"]' 

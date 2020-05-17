@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../header.jsp" />
 
@@ -7,20 +8,22 @@
 <div class="container">
 	<h1>채용공고등록</h1>
 	<form action='add' id="form1" method='post' enctype='multipart/form-data'>
-		
+	
+		  <div class="row">
+          <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">고용형태
+            : </span> <select id="select_options2" name="employmentStatus.number"
+            class="form-control form-control-sm col-md-3">
+            <c:forEach items="${employmentStatus}" var="employmentStatus">
+              <option value="${employmentStatus.number}">${employmentStatus.name}</option>
+            </c:forEach>
+          </select>
+        </div>
 		
 		<div class="col-sm-13">
 		<label for="title">제목 *</label>
 		  <input id="title" placeholder="제목" autocomplete="off" class="form-control" name='title'
 				type='text'><br>
 		</div>
-
-	<!-- 	
-		<div class="col-sm-13">
-		내용*	<textarea id="content" placeholder="내용" class="form-control"
-				name='content' rows='10' cols='60'></textarea>
-		</div>  
-		-->
 		
 		<textarea id="content" name='content' rows='10' cols='40'  class="markdown-editor" 
 		autocomplete="off"

@@ -11,7 +11,8 @@
     <td><a href='detail?no=${item.jobPostingNumber}'><c:forEach items="${item.files}" var="jobPostingFile">
       <img src="../../upload/jobposting/${jobPostingFile.filePath}_300x300.jpg" width="200" height="200">
       </c:forEach></td>
-      <td>${item.jobPostingNumber}</td>     
+      <td>${item.jobPostingNumber}</td>
+      <td>${item.employmentStatus.name}</td>     
       <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
       <td>${item.content}</td>
       <!-- <td>${item.minimumCareer}</td> -->

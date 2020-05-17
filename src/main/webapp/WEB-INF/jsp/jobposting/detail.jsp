@@ -16,22 +16,20 @@
 
 <div style="width:50%;">
 <h5>지원자격</h5>
-<font>경력 : </font><strong>${jobPosting.minimumCareer} 년 이상 </strong>
+<p class="text-gray-900 mb-1 ml-3">경력 : ${jobPosting.minimumCareer} 년 이상</p>
 </div>
 <br>
 
 <div style="width:50%;">
 <h5>근무조건</h5>
-<font>직무 : </font><strong>${jobPosting.job}</strong>
+<p class="text-gray-900 mb-1 ml-3">직무 : ${jobPosting.job}</p>
+<p class="text-gray-900 mb-1 ml-3">고용형태 : ${jobPosting.employmentStatus.name}</p>
 </div>
 <br>
-
 <p style="text-align:right; font-color:black;">조회수: ${jobPosting.viewCount}<br></p>
 </div>
 
 <br>
-
-
 
 <hr>
 <h3>상세요강</h3>
@@ -70,6 +68,8 @@
 </c:if>
 </div>
 </c:if>
+<br>
+<br>
 <br>
 <br>
 <br>
