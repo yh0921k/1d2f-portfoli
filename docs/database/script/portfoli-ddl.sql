@@ -162,6 +162,9 @@ DROP TABLE IF EXISTS pf_handle_class RESTRICT;
 -- 결제수단
 DROP TABLE IF EXISTS pf_payment_method RESTRICT;
 
+-- FAQ 자주묻는질문
+DROP TABLE IF EXISTS pf_faq RESTRICT;
+
 -- 일반회원
 CREATE TABLE pf_general_member (
   general_member_no INTEGER      NOT NULL COMMENT '일반회원번호', -- 일반회원번호
@@ -1151,6 +1154,23 @@ ALTER TABLE pf_payment_method
 ALTER TABLE pf_payment_method
   MODIFY COLUMN payment_method_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제수단번호';
 
+-- FAQ 자주묻는질문
+CREATE TABLE pf_faq (
+  board_no       INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
+  category_no    INTEGER  NOT NULL COMMENT '질문분류번호', -- 질문분류번호
+  readable       INTEGER  NOT NULL COMMENT '비밀글여부', -- 비밀글여부
+  answer_content TEXT     NULL COMMENT '답변내용', -- 답변내용
+  answer_date    DATETIME NULL COMMENT '답변일' -- 답변일
+)
+COMMENT 'FAQ 자주묻는질문';
+
+-- FAQ 자주묻는질문
+ALTER TABLE pf_faq
+  ADD CONSTRAINT PK_pf_faq -- FAQ 자주묻는질문 기본키
+    PRIMARY KEY (
+      board_no -- 게시글번호
+    );
+
 -- 일반회원
 ALTER TABLE pf_general_member
   ADD CONSTRAINT FK_pf_members_TO_pf_general_member -- 회원 -> 일반회원
@@ -1752,3 +1772,25 @@ ALTER TABLE pf_schedule
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
     );
+
+
+-- FAQ 자주묻는질문
+ALTER TABLE pf_faq
+  ADD CONSTRAINT FK_pf_board_TO_pf_faq -- 게시글 -> FAQ 자주묻는질문
+    FOREIGN KEY (
+      board_no -- 게시글번호
+    )
+    REFERENCES pf_board ( -- 게시글
+      board_no -- 게시글번호
+    );
+
+-- FAQ 자주묻는질문
+ALTER TABLE pf_faq
+  ADD CONSTRAINT FK_pf_question_category_TO_pf_faq -- 질문분류 -> FAQ 자주묻는질문
+    FOREIGN KEY (
+      category_no -- 질문분류번호
+    )
+    REFERENCES pf_question_category ( -- 질문분류
+      category_no -- 질문분류번호
+    );
+

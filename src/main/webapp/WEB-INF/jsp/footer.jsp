@@ -62,7 +62,7 @@
                     <div class="col-12 col-lg-6">
     
                       <ul class="mt-4 mb-0 list-unstyled p-0 block-xs"> 
-                        <li><a href="#!">FAQ</a></li> 
+                        <li><a href="/portfoli/app/faq/list">FAQ</a></li> 
                         <li><a href="/portfoli/app/qna/list">QNA</a></li> 
                         <li><a href="/portfoli/app/notice/list">고객센터</a></li> 
                       </ul>

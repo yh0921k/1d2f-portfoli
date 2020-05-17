@@ -145,7 +145,27 @@ VALUES (38,"제목38","내용38",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (39,"제목39","내용39",3, "2020-04-01 00:00:00");
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
-VALUES (40,"제목40","내용40",3, "2020-04-01 00:00:00");
+VALUES (40,"제목40","내용40",3, "2020-04-02 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+ VALUES(41,"제목41","내용41", 3, "2020-04-03 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+ VALUES(42,"제목42","내용42", 0, "2020-04-04 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (43,"제목43","내용43",3, "2020-04-05 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (44,"제목44","내용44",3, "2020-04-06 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (45,"제목45","내용45",3, "2020-04-06 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (46,"제목46","내용46",3, "2020-04-06 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (47,"제목47","내용47",3, "2020-04-07 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (48,"제목48","내용48",3, "2020-04-07 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (49,"제목49","내용49",3, "2020-04-07 00:00:00");
+INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
+VALUES (50,"제목50","내용50",3, "2020-04-07 00:00:00");
 
 -- 일반회원 예제 데이터
 INSERT INTO pf_general_member(general_member_no, seeking_flag, photo, membership, career) VALUES (1, 1, 'photo2394823jfshf.jpg', 'Portfoli Pro', 5);
@@ -467,6 +487,28 @@ INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notificatio
 VALUES(29, 9, 3, 0, 0, 0, "내용입니다", "2020-04-02 00:00:00");
 INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, content, answer_date)
 VALUES(30,10,4, 1, 1, 1, "내용입니다", "2020-04-01 00:00:00");
+
+-- faq 질문 예제데이터 (pf_faq)
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(41, 5, 1, "내용입니다", "2020-05-01 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(42, 1, 1, "내용입니다", "2020-05-01 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(43, 1, 0, "내용입니다", "2020-05-01 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(44, 2, 0, "내용입니다", "2020-05-01 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(45, 2, 0, "내용입니다", "2020-05-02 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(46, 2, 0, "내용입니다", "2020-05-02 00:00:00");
+INSERT INTO pf_faq(board_no,  category_no, readable, answer_content, answer_date)
+VALUES(47, 3, 1, "내용입니다", "2020-05-02 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(48, 3, 0, "내용입니다", "2020-05-02 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(49, 3, 0, "내용입니다", "2020-05-02 00:00:00");
+INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
+VALUES(50, 4, 1, "내용입니다", "2020-05-01 00:00:00");
 
 -- 게시글추천 예제데이터 (pf_recommendation)
 INSERT INTO pf_recommendation(board_no, member_no) VALUES (1, 1);
