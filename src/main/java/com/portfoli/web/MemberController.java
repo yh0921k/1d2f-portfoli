@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.Company;
@@ -256,6 +258,19 @@ public class MemberController {
     mailsender.alter_userKey_service(user_id, key); // mailsender의 경우 @Autowired
 
     return "redirect:/app/member/regSuccess";
+  }
+
+  @ResponseBody
+  @RequestMapping(value = "checkEmail", method = RequestMethod.POST)
+  public String checkSignup(HttpServletRequest request, Model model) {
+    String email = request.getParameter("email");
+    System.out.println("--------------------------------" + email);
+    String searchedEmail = memberService.getEmailByEmail(email);
+    if(searchedEmail != null) {
+      return "1";
+    } else {
+      return "0";
+    }
   }
 
 

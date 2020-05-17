@@ -31,47 +31,9 @@
 <link rel="shortcut icon"
 	href="http://localhost:9999/portfoli/favicon.ico" />
 <link rel="apple-touch-icon" href="demo.files/logo/icon_512x512.png" />
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="manifest"
 	href="../../resources/assets/images/manifest/manifest.json" />
-
-<script>
-      function isSame() {
-        var password = document.getElementById("password").value;
-        var checkPassword = document.getElementById("checkPassword").value;
-
-        if (password.length < 6 || password.length > 16) {
-          password = null;
-          checkPassword = null;
-          document.getElementById("same").innerHTML = null;
-          window.alert("비밀번호는 6글자 이상, 16글자 이하만 사용 가능합니다.");
-        } else {
-          if (password != "" && checkPassword != "") {
-            if (password === checkPassword) {
-              document.getElementById("same").innerHTML =
-                "비밀번호가 일치합니다.";
-              document.getElementById("same").style.color = "blue";
-            } else {
-              document.getElementById("same").innerHTML =
-                "비밀번호가 일치하지 않습니다.";
-              document.getElementById("same").style.color = "red";
-            }
-          }
-        }
-      }
-      
-      function check() {
-    		
-    		var check = document.getElementById('same').innerHTML;
-    		
-    		  if(check==='비밀번호가 일치합니다.') {
-    		    return true;
-    		  }else{
-    		    alert("비밀번호를 확인해 주세요.");
-    		    return false;
-    		  }
-    	}
-</script>
 
 <meta name="theme-color" content="#377dff" />
 </head>
@@ -106,12 +68,9 @@
 						class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600"
 						data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
 						data-error-toast-delay="3000"
-						data-error-toast-position="top-right" data-error-scroll-up="true" onsubmit="return check();">
-						<!--
-              <p class="text-danger">
-                Ups! Please check again
-              </p>
-              -->
+						data-error-toast-position="top-right" data-error-scroll-up="true"
+						onsubmit="return check();">
+
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="아이디*" name="id" type="text"
@@ -120,20 +79,14 @@
 
 						<div class="input-group-over">
 							<div class="form-label-group mb-3">
-								<input required placeholder="이메일*" name="email" type="email"
-									class="form-control" /> <label for="account_email">이메일</label>
+								<input required placeholder="이메일*" id="email" name="email"
+									type="email" class="form-control" /> <label
+									for="account_email">이메일</label>
 							</div>
 							<a id="email_edit_show" href="javascript:;" class="btn fs--13"
-								onclick="jQuery('#account_email').attr('readonly', false); jQuery('#email_edit_show, #email_edit_info').addClass('hide'); jQuery('#email_edit_hide, #email_edit_info').removeClass('hide');jQuery('#account_email').val('').focus();">
-								<i class="fi fi-pencil m-0"></i>
-							</a> <a id="email_edit_hide" href="javascript:;"
-								class="btn fs--12 hide"
-								onclick="jQuery('#account_email').attr('readonly', true); jQuery('#email_edit_show, #email_edit_info').removeClass('hide'); jQuery('#email_edit_hide, #email_edit_info').addClass('hide'); jQuery('#account_email').val('john.doe@gmail.com');">
-								<i class="fi fi-close m-0"></i>
+								onclick=""> <i class="fi fi-check m-0"></i>
 							</a>
 						</div>
-						<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">회원가입
-							후 해당 이메일로 이메일 인증을 진행 해 주세요.</div>
 
 						<div class="form-label-group mb-3">
 							<input required placeholder="비밀번호*" name="password" id="password"
@@ -144,7 +97,8 @@
 						<div class="form-label-group mb-3">
 							<input required placeholder="비밀번호 확인*" id="checkPassword"
 								type="password" class="form-control" onchange="isSame()" /> <label
-								for="account_password">비밀번호 확인</label> <span id="same"></span>
+								for="account_password">비밀번호 확인</label>
+							<p id="same"></p>
 						</div>
 
 						<div class="form-label-group mb-3">
@@ -154,7 +108,7 @@
 
 						<div class="form-label-group mb-3">
 							<input placeholder="연락처" name="tel" type="text"
-								class="form-control" /> <label for="account_id">연락처</label>
+								class="form-control phoneNumber" /> <label for="account_id">연락처</label>
 						</div>
 
 						<div class="form-label-group mb-3">
@@ -196,8 +150,8 @@
 						<div class="row">
 							<div class="col-12 col-md-8">
 								<input type="submit" class="btn btn-primary btn-block"
-									style="display: block; margin: 0 90px;" value="회원가입">
-								<a href="../company/search"
+									style="display: block; margin: 0 90px;" value="회원가입"> <a
+									href="../company/search"
 									style="color: graytext; display: block; margin: 10px 0px 0px 175px;">기업
 									회원 가입하기</a>
 							</div>
@@ -215,6 +169,101 @@
 	</div>
 	<!-- /#wrapper -->
 
-	<script src="../../resources/assets/js/core.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+
+	$(document).ready(function(){ 
+		$('#email_edit_show').on('click', function(){
+			
+			if (document.getElementById("email").value == '') {
+				Swal.fire({
+					  icon: 'error',
+					  title: '이메일을 입력해주세요'
+					})
+			} else {
+			$.ajax({ 
+				type: 'POST',
+				url: 'checkEmail', 
+				data: { 
+					"email" : $('#email').val() 
+				}, 
+				success: function(data){ 
+					if($.trim(data) == 1){ 
+						Swal.fire({
+						  icon: 'error',
+						  title: '중복된 이메일',
+						  text: '다른 이메일을 입력해주세요.',
+						})
+					} else { 
+						Swal.fire(
+								'사용 가능한 이메일',
+								'',
+								'success'
+							)
+					} 
+				} 
+			}); 
+			}
+		}); 
+	});
+	
+      function isSame() {
+        var password = document.getElementById("password").value;
+        var checkPassword = document.getElementById("checkPassword").value;
+
+        if (password.length < 6 || password.length > 16) {
+          password = null;
+          checkPassword = null;
+          document.getElementById("same").innerHTML = null;
+          Swal.fire({
+        	  icon: 'error',
+        	  text: '비밀번호는 6글자 이상, 16글자 이하만 사용 가능합니다.'
+        	})
+        } else {
+          if (password != "" && checkPassword != "") {
+            if (password === checkPassword) {
+              document.getElementById("same").innerHTML =
+                "비밀번호가 일치합니다.";
+              document.getElementById("same").style.color = "blue";
+            } else {
+              document.getElementById("same").innerHTML =
+                "비밀번호가 일치하지 않습니다.";
+              document.getElementById("same").style.color = "red";
+            }
+          }
+        }
+      }
+      
+      function check() {
+    		var check = document.getElementById('same').innerHTML;
+    		  if(check==='비밀번호가 일치합니다.') {
+    			  Swal.fire({
+    				  icon: 'success',
+    				  title: '회원가입 완료',
+    				  text: '해당 이메일로 이메일 인증을 진행하여 주십시오.',
+    				  showConfirmButton: true,
+    				  timer: 1500
+    				})
+    		    return true;
+    		  }else{
+    			  Swal.fire({
+    	        	  icon: 'error',
+    	        	  text: '비밀번호를 확인해 주세요.'
+    	        	})
+    		    return false;
+    		  }
+    	}
+      
+
+
+$(document).on("keyup", ".phoneNumber", function() { 
+	$(this).val( 
+			$(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-") 
+			); 
+});
+
+</script>
+
+<script src="../../resources/assets/js/core.min.js"></script>
 </body>
 </html>
