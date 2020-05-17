@@ -7,7 +7,6 @@ import java.util.List;;
 public class JobPosting implements Serializable {
   private static final long serialVersionUID = 1L;
 
-
   private int jobPostingNumber;
   private int companyMemberNumber;
   private String title;
@@ -22,7 +21,7 @@ public class JobPosting implements Serializable {
   private int yearSalary;
   private int readable;
   private int minimumEducationNumber;
-  private int employmentStatNumber;
+  private EmploymentStatus employmentStatus;
   List<JobPostingFile> files;
 
   @Override
@@ -32,11 +31,9 @@ public class JobPosting implements Serializable {
         + workPlaceNumber + ", minimumCareer=" + minimumCareer + ", viewCount=" + viewCount
         + ", postingRegistration=" + postingRegistration + ", startDated=" + startDated
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
-        + readable + ", minimumEducationNumber=" + minimumEducationNumber
-        + ", employmentStatNumber=" + employmentStatNumber + ", files=" + files + "]";
+        + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
+        + employmentStatus + ", files=" + files + "]";
   }
-
-
 
   @Override
   public int hashCode() {
@@ -44,7 +41,7 @@ public class JobPosting implements Serializable {
     int result = 1;
     result = prime * result + companyMemberNumber;
     result = prime * result + ((content == null) ? 0 : content.hashCode());
-    result = prime * result + employmentStatNumber;
+    result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
     result = prime * result + ((endDated == null) ? 0 : endDated.hashCode());
     result = prime * result + ((files == null) ? 0 : files.hashCode());
     result = prime * result + ((job == null) ? 0 : job.hashCode());
@@ -60,8 +57,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
-
 
   @Override
   public boolean equals(Object obj) {
@@ -79,7 +74,10 @@ public class JobPosting implements Serializable {
         return false;
     } else if (!content.equals(other.content))
       return false;
-    if (employmentStatNumber != other.employmentStatNumber)
+    if (employmentStatus == null) {
+      if (other.employmentStatus != null)
+        return false;
+    } else if (!employmentStatus.equals(other.employmentStatus))
       return false;
     if (endDated == null) {
       if (other.endDated != null)
@@ -127,8 +125,6 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
-
-
 
   public int getJobPostingNumber() {
     return jobPostingNumber;
@@ -242,12 +238,12 @@ public class JobPosting implements Serializable {
     this.minimumEducationNumber = minimumEducationNumber;
   }
 
-  public int getEmploymentStatNumber() {
-    return employmentStatNumber;
+  public EmploymentStatus getEmploymentStatus() {
+    return employmentStatus;
   }
 
-  public void setEmploymentStatNumber(int employmentStatNumber) {
-    this.employmentStatNumber = employmentStatNumber;
+  public void setEmploymentStatus(EmploymentStatus employmentStatus) {
+    this.employmentStatus = employmentStatus;
   }
 
   public List<JobPostingFile> getFiles() {
@@ -257,6 +253,7 @@ public class JobPosting implements Serializable {
   public void setFiles(List<JobPostingFile> files) {
     this.files = files;
   }
+
 
 
 }

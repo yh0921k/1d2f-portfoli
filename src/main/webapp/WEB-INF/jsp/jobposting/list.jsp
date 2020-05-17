@@ -31,6 +31,7 @@
 	<thead>
 	  <th></th>
 		<th>no</th>
+		<th>고용형태</th>
 		<th>제목</th>
 		<th>내용</th>
 		<th>등록일</th>
@@ -43,7 +44,8 @@
     <td><a href='detail?no=${item.jobPostingNumber}'><c:forEach items="${item.files}" var="jobPostingFile">
       <img src="../../upload/jobposting/${jobPostingFile.filePath}_300x300.jpg" width="100" height="100">
       </c:forEach></td>
-			<td>${item.jobPostingNumber}</td>			
+			<td>${item.jobPostingNumber}</td>
+			<td>${item.employmentStatus.name}</td>			
 			<td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
 			<td>${item.content}</td>
 			<td>${item.postingRegistration}</td>

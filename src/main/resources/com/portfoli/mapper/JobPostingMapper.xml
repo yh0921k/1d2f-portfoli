@@ -20,12 +20,17 @@
     <result column="year_salary" property="yearSalary" />
     <result column="readable" property="readable" />
     <result column="minimum_education_no" property="minimumEducationNumber" />
-    <result column="employment_stat_no" property="employmentStatNumber" />
+    
+    <association property="employmentStatus" javaType="EmploymentStatus">
+    <id column="employment_stat_no" property="number"/>
+    <result column="employment_stat_name" property="name"/>
+    </association>
     
     <collection property="files" ofType="JobPostingFile">
       <id column="job_posting_file_no" property="jobPostingFileNumber"/>
       <result column="file_path"  property="filePath"/>
     </collection>
+    
   </resultMap>
   
   <insert id="insert" parameterType="JobPosting" 
@@ -59,7 +64,7 @@
   now(),
   1,
   1,
-  1)
+  #{employmentStatus.number})
   </insert>
 
   <select id="findAll" resultMap="JobPostingMap">
@@ -74,10 +79,15 @@
      j.end_dated,
      j.view_count,
      j.posting_registration,
-     f.file_path
+     f.file_path,
+     e.employment_stat_name
    from
      pf_job_posting j
-     left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+     left outer join
+     pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+     join
+     pf_employment_status e
+     ON j.employment_stat_no = e.employment_stat_no
    where 
      j.end_dated > now() 
   order by
@@ -104,10 +114,15 @@
      j.end_dated,
      j.view_count,
      j.posting_registration,
-     f.file_path
+     f.file_path,
+     e.employment_stat_name
    from
      pf_job_posting j
-     left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+     left outer join
+     pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+     join
+     pf_employment_status e
+     ON j.employment_stat_no = e.employment_stat_no
    where 
      end_dated > now() and j.job_posting_no < #{lastNo}
   order by
@@ -134,9 +149,13 @@
      j.start_dated,
      j.end_dated,
      j.view_count,
-     f.file_path
+     f.file_path,
+     e.employment_stat_name
    from pf_job_posting j
-     left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+     left outer join
+     pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+     join pf_employment_status e
+     on j.employment_stat_no = e.employment_stat_no
    where
    j.job_posting_no=#{jobPostingNumber}
   </select>
@@ -150,7 +169,8 @@
   <if test="job != null and job != ''">job=#{job},</if>
   <if test="yearSalary > 0">year_salary=#{yearSalary},</if>
   <if test="startDated != null">start_dated=#{startDated},</if>
-  <if test="endDated != null">end_dated=#{endDated}</if>  
+  <if test="endDated != null">end_dated=#{endDated},</if>
+  <if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number}</if>  
   </set>
    where job_posting_no=#{jobPostingNumber}
   </update>
@@ -175,10 +195,14 @@
    j.job,
    j.year_salary,
    j.view_count,
-   f.file_path
+   f.file_path,
+   e.employment_stat_name
   from
    pf_job_posting j
-   left outer join pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+   left outer join
+   pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+   join pf_employment_status e
+   on j.employment_stat_no = e.employment_stat_no
   where
    j.title like #{keywordPattern}
    or j.content like #{keywordPattern}
@@ -187,6 +211,7 @@
    or j.end_dated like #{keywordPattern}
    or j.job like #{keywordPattern}
    or j.year_salary like #{keywordPattern}
+   or e.employment_stat_name like #{keywordPattern}
   </select>
   
 </mapper>
