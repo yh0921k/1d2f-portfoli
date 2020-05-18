@@ -29,4 +29,8 @@
   <definition name="auth/loginForm" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/auth/loginForm.jsp"/>
   </definition>
+  
+  <definition name="log/moreContentsLog" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
+  </definition>
 </tiles-definitions>

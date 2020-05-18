@@ -13,7 +13,7 @@ import com.portfoli.domain.Admin;
 public class AdminControllerInterceptor implements HandlerInterceptor {
 
   static Logger logger = LogManager.getLogger("runMode");
-  final static int EXPIRETIME = 30;
+  final static int EXPIRETIME = 600;
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
