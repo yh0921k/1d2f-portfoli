@@ -20,12 +20,14 @@
         
         <div class="dataTables_length" id="rand_yjK_length">
         <label>
-        <select id="moreSelect" name="rand_yjK_length" aria-controls="rand_yjK" class="custom-select custom-select-sm form-control form-control-sm">
+        <select id="moreLine" name="rand_yjK_length" aria-controls="rand_yjK" class="custom-select custom-select-sm form-control form-control-sm">
         <option id="more10" value="10">10</option>        
         <option id="more50" value="50">50</option>
         <option id="more100" value="100">100</option>        
         </select></label></div>
         </div>
+        
+       
         
         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
         <div class="dt-buttons btn-group flex-wrap">
@@ -35,12 +37,12 @@
         <div class="row">
         <div class="col-sm-12">
         <table id="logTable" class="table-datatable table table-bordered table-hover table-striped js-datatableified dataTable dtr-inline" data-lng-empty="No data available in table" data-lng-page-info="Showing _START_ to _END_ of _TOTAL_ entries" data-lng-filtered="(filtered from _MAX_ total entries)" data-lng-loading="Loading..." data-lng-processing="Processing..." data-lng-search="Search..." data-lng-norecords="No matching records found" data-lng-sort-ascending=": activate to sort column ascending" data-lng-sort-descending=": activate to sort column descending" data-lng-column-visibility="Column Visibility" data-lng-csv="CSV" data-lng-pdf="PDF" data-lng-xls="XLS" data-lng-copy="Copy" data-lng-print="Print" data-lng-all="All" data-main-search="true" data-column-search="false" data-row-reorder="false" data-col-reorder="true" data-responsive="true" data-header-fixed="true" data-select-onclick="true" data-enable-paging="true" data-enable-col-sorting="true" data-autofill="false" data-group="false" data-items-per-page="10" data-lng-export="<i class='fi fi-squared-dots fs--18 line-height-1'></i>" dara-export-pdf-disable-mobile="true" data-export="[&quot;csv&quot;, &quot;pdf&quot;, &quot;xls&quot;]" data-options="[&quot;copy&quot;, &quot;print&quot;]" id="rand_yjK" role="grid" aria-describedby="rand_yjK_info" style="width: 1168px;">
-        <thead>
+          <thead>
             <tr role="row">
-            <th class="sorting_asc" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="0" style="width: 200px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Date</th>
-            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="1" style="width: 200px;" aria-label="Time: activate to sort column ascending">Time</th>
+            <th class="sorting_asc" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="0" style="width: 150px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Date</th>
+            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="1" style="width: 150px;" aria-label="Time: activate to sort column ascending">Time</th>
             <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="2" style="width: 150px;" aria-label="IP Address: activate to sort column ascending">IP Address</th>
-            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="3" style="width: 200px;" aria-label="User: activate to sort column ascending">User</th>
+            <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="3" style="width: 150px;" aria-label="User: activate to sort column ascending">User</th>
             <th class="sorting" tabindex="0" aria-controls="rand_yjK" rowspan="1" colspan="1" data-column-index="4" style="width: 200px;" aria-label="Request: activate to sort column ascending">Request</th>
           </thead>
           
@@ -84,6 +86,10 @@
 
 <!--       </div> -->
     </div>  
+    
+    <div stype="float:left">
+        <a id="readMore" href="#" class="btn btn-outline-dark btn-block">LOAD MORE</a>
+    </div>
 
   </div>
 </div>        
@@ -107,21 +113,38 @@ $(document).ready(function() {
           $(temp).parent().show();
   }); 
 });
-// $(document).ready(function() { 
-//   $("#moreSelect").change(function() { 
-//     var moreSelect = $("#moreSelect").val();
-//     var xhr = new XMLHttpRequest();
-//     xhr.onreadystatechange = () => {
-//         if (xhr.readyState == 4) {
-//             if (xhr.status == 200) {
-//               document.querySelector("#wrapper-contents-page").innerHTML = xhr.responseText;
-//             }
-//         }
-//     };
-//     console.log(document.URL);
-//     console.log(this.id + "?moreSelect=" + moreSelect);
-//     xhr.open("GET",  document.URL, true);
-//     xhr.send();
-//   });
-// });
+$(document).ready(function() { 
+  $("#moreLine").change(function() { 
+	  var moreLine = $("#moreLine").val();
+    console.log("contentsLog?" + this.id + "=" + moreLine);
+    window.location.href =  "contentsLog?" + this.id + "=" + moreLine;
+  });
+});
+
+$(document).ready(function() {
+  var loadLast = 0;
+  $("#readMore").click(function() { 
+	  
+	  loadLast += Number($("#moreLine").val());
+	  console.log(loadLast);
+
+	  var xhr = new XMLHttpRequest();
+	  xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+            	$("#logTable > tbody > tr:last").after(xhr.responseText);
+            }
+        }
+    };
+	  xhr.open('GET', 'moreContentsLog?startLine=' + loadLast + "&moreLine=" + $("#moreLine").val(), true);
+	  xhr.send();
+	  
+  });
+});
+	
+	
+window.onload = function() {
+  var moreOption = "#more" + ${moreLine};
+  $(moreOption).attr("selected", "selected");
+};
 </script>
