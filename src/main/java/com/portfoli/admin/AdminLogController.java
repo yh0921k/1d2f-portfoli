@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.portfoli.service.AdminLogService;
 
 @Controller
@@ -28,14 +29,27 @@ public class AdminLogController {
   }
 
   @GetMapping("contentsLog")
-  public void contentsLog(HttpServletRequest request, Model model) throws Exception {
+  public void contentsLog(@RequestParam(defaultValue = "10") int moreLine,
+      @RequestParam(defaultValue = "0") int startLine, HttpServletRequest request, Model model)
+      throws Exception {
     // System.out.println(new Date(System.currentTimeMillis()).toString());
     String filepath = System.getProperty("catalina.base") + "/logs/portfoli.log";
     System.out.println("LogFile : " + filepath);
-    // int startLine = (int) (request.getAttribute("startLine"));
-    // int moreLine = (int) (request.getAttribute("moreLine"));
 
-    model.addAttribute("loglist", adminLogService.get(filepath, 0, 10));
+    model.addAttribute("moreLine", moreLine);
+    model.addAttribute("loglist", adminLogService.get(filepath, startLine, moreLine));
+  }
+
+  @GetMapping("moreContentsLog")
+  public void moreContentsLog(@RequestParam(defaultValue = "10") int moreLine,
+      @RequestParam(defaultValue = "0") int startLine, HttpServletRequest request, Model model)
+      throws Exception {
+    // System.out.println(new Date(System.currentTimeMillis()).toString());
+    String filepath = System.getProperty("catalina.base") + "/logs/portfoli.log";
+    System.out.println("LogFile : " + filepath);
+
+    model.addAttribute("moreLine", moreLine);
+    model.addAttribute("loglist", adminLogService.get(filepath, startLine, moreLine));
   }
 
   // @RequestMapping("index")
