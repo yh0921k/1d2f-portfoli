@@ -239,7 +239,8 @@ CREATE TABLE pf_job_posting (
   job                  TEXT         NOT NULL COMMENT '직무', -- 직무
   year_salary          INTEGER      NULL     COMMENT '연봉', -- 연봉
   readable             INTEGER      NOT NULL COMMENT '공개여부', -- 공개여부
-  minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호' -- 최소학력번호
+  minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
+  employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
 )
 COMMENT '채용공고';
 
@@ -1237,6 +1238,16 @@ ALTER TABLE pf_job_posting
     )
     REFERENCES pf_final_education ( -- 학력
       education_no -- 학력번호
+    );
+    
+-- 채용공고
+ALTER TABLE pf_job_posting
+  ADD CONSTRAINT FK_pf_employment_status_TO_pf_job_posting -- 고용형태 -> 채용공고
+    FOREIGN KEY (
+      employment_stat_no -- 고용형태번호
+    )
+    REFERENCES pf_employment_status ( -- 고용형태
+      employment_stat_no -- 고용형태번호
     );
 
 -- 채용공고
