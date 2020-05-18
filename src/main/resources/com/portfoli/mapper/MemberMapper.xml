@@ -65,6 +65,13 @@
 		WHERE email=#{email}
 	</select>
 	
+	 <select id="findProviderByEmail" resultType="string"
+    parameterType="string">
+    SELECT provider
+    FROM pf_members
+    WHERE email=#{email}
+  </select>
+	
 	<select id="getMemberByOtherProvider" resultMap="MemberMap"
 		parameterType="map">
 		SELECT member_no, type, id, name, email

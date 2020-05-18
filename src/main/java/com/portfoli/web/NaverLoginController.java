@@ -132,6 +132,7 @@ public class NaverLoginController {
 
       } else {
         String existEmail = memberService.getEmailByEmail(email);
+        String provider = memberService.getProviderByEmail(email);
         // 해당 이메일 부재 -> 회원가입
         if (existEmail == null) {
           Member newMember = new Member();
@@ -165,7 +166,7 @@ public class NaverLoginController {
 
           // 해당 이메일 아이디 존재 -> 연동?
         } else {
-          request.setAttribute("provider_", "NAVER");
+          request.setAttribute("provider_", provider);
           request.setAttribute("email_", existEmail);
 
         }

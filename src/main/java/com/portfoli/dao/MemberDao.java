@@ -29,4 +29,6 @@ public interface MemberDao {
 
   int updateProviderByEmail(Map<String, Object> params);
 
+  String findProviderByEmail(String email);
+
 }

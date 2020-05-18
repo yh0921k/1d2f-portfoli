@@ -105,7 +105,7 @@ public class MemberServiceImpl implements MemberService {
       return null;
     }
   }
-  
+
   @Override
   public Member getM(int number) throws Exception {
     Member member = memberDao.findByMemberNumber(number);
@@ -251,6 +251,12 @@ public class MemberServiceImpl implements MemberService {
     } else {
       return 0;
     }
+  }
+
+
+  @Override
+  public String getProviderByEmail(String email) throws Exception {
+    return memberDao.findProviderByEmail(email);
   }
 
 

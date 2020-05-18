@@ -17,7 +17,7 @@ public interface MemberService {
   Member get(String email, String password) throws Exception;
 
   Member get(int number) throws Exception;
-  
+
   Member getM(int number) throws Exception;
 
   int updateDefaultInfo(GeneralMember member) throws Exception;
@@ -39,5 +39,7 @@ public interface MemberService {
   Member findMemberByOtherProvider(String provider, String email) throws Exception;
 
   int updateProvider(String provider, String email);
+
+  String getProviderByEmail(String email) throws Exception;
 
 }
