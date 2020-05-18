@@ -16,10 +16,15 @@
     <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
     <result column="recommended_count" property="recommendedCount" /><!-- 추천수 -->
     <result column="readable" property="readable" /><!-- 공개여부 -->
-    <result column="member_name" property="memberName" /><!-- 작성자명 -->
     
-    <result column="id" property="id" /><!-- 아이디 -->
-    <result column="seeking_flag" property="seekingFlag" /><!-- 재직여부 -->
+    <association property="member" javaType="GeneralMember">
+      <id column="id" property="id" /><!-- 아이디 -->
+      <result column="name" property="name" /><!-- 이름 -->
+      <result column="seeking_flag" property="seekingFlag" /><!-- 재직여부 -->
+      <result column="photo" property="photoFilePath" /><!-- 프로필사진 -->
+      <result column="membership" property="membership" /><!-- 멤버십 -->
+      <result column="email" property="email" /><!-- 이메일 -->
+    </association>
   </resultMap>
   
   
@@ -36,8 +41,12 @@
 	    b.content,
 	    b.view_count,
 	    b.registered_date,
-	    m.name member_name,
-	    m.id -- id값  --
+      m.id,  -- id값  --
+	    m.name, -- 이름 --
+	    m.email, -- 이메일 --
+	    g.seeking_flag,  -- 재직여부 --
+	    g.photo,  -- 사진경로 --
+	    g.membership  -- 멤버십 --
 	  FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
 	  ON p.board_no = b.board_no
 	  LEFT OUTER JOIN pf_general_member as g
@@ -50,8 +59,6 @@
     <if test="startIndex != null and startIndex != ''">
     limit ${startIndex}, ${pageSize}
     </if>
-	  <!-- 
-     -->
   </select>
   
   <select id="selectListCnt" resultType="int" parameterType="int">
@@ -62,7 +69,7 @@
   </select>
   
   <select id="findByNo" resultMap="PortfolioMap" parameterType="int">
-      SELECT
+    SELECT
       p.board_no,
       p.general_member_no,
       p.homepage,
@@ -74,14 +81,17 @@
       b.content,
       b.view_count,
       b.registered_date,
-      m.name member_name,
-      m.id, -- id값  --
-      g.seeking_flag -- 구직여부 --
-    FROM pf_portfolio p LEFT OUTER JOIN pf_board b 
+      m.id,  -- id값  --
+      m.name, -- 이름 --
+      m.email, -- 이메일 --
+      g.seeking_flag,  -- 재직여부 --
+      g.photo,  -- 사진경로 --
+      g.membership  -- 멤버십 --
+    FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
     ON p.board_no = b.board_no
-    LEFT OUTER JOIN pf_general_member g
+    LEFT OUTER JOIN pf_general_member as g
     ON g.general_member_no = p.general_member_no
-    LEFT OUTER JOIN pf_members m
+    LEFT OUTER JOIN pf_members as m
     ON m.member_no = g.general_member_no
     WHERE p.board_no = #{boardNumber}
   </select>

@@ -117,6 +117,8 @@ public class PortfolioController {
         attch.setFilePath(split[split.length-1]);
       }
       
+      model.addAttribute("membership", portfolio.getMember().getMembereship());
+      
       // 조회할때마다 입력날짜가 바뀌지 않게 하기 위해
       board.setViewCount(board.getViewCount() + 1).setContent(null);
       boardService.update(board);
@@ -187,7 +189,6 @@ public class PortfolioController {
 
         // Portfolio 입력 중에서 작성자 정보입력
         portfolio.setGeneralMemberNumber(member.getNumber());
-        portfolio.setMemberName(member.getName());
 
         portfolioService.insert(portfolio);
       }

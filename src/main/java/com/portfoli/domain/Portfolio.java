@@ -7,9 +7,61 @@ public class Portfolio extends Board implements java.io.Serializable{
   String thumbnail;
   int recommendedCount;
   int readable;
-  String memberName; //작성자명
-  String id;       // 아이디
-  int seekingFlag; // 구직여부
+  // 작성자의 id, 이름, 재직여부, 프로필사진, 멤버십, 이메일을 보관함
+  GeneralMember member;
+  
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + generalMemberNumber;
+    result = prime * result + ((homepage == null) ? 0 : homepage.hashCode());
+    result = prime * result + ((member == null) ? 0 : member.hashCode());
+    result = prime * result + readable;
+    result = prime * result + recommendedCount;
+    result = prime * result + ((thumbnail == null) ? 0 : thumbnail.hashCode());
+    return result;
+  }
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Portfolio other = (Portfolio) obj;
+    if (generalMemberNumber != other.generalMemberNumber)
+      return false;
+    if (homepage == null) {
+      if (other.homepage != null)
+        return false;
+    } else if (!homepage.equals(other.homepage))
+      return false;
+    if (member == null) {
+      if (other.member != null)
+        return false;
+    } else if (!member.equals(other.member))
+      return false;
+    if (readable != other.readable)
+      return false;
+    if (recommendedCount != other.recommendedCount)
+      return false;
+    if (thumbnail == null) {
+      if (other.thumbnail != null)
+        return false;
+    } else if (!thumbnail.equals(other.thumbnail))
+      return false;
+    return true;
+  }
+  @Override
+  public String toString() {
+    return "Portfolio [generalMemberNumber=" + generalMemberNumber + ", homepage=" + homepage
+        + ", thumbnail=" + thumbnail + ", recommendedCount=" + recommendedCount + ", readable="
+        + readable + ", member=" + member + ", number=" + number + ", title=" + title + ", content="
+        + content + ", viewCount=" + viewCount + ", registeredDate=" + registeredDate
+        + ", startIndex=" + startIndex + ", pageSize=" + pageSize + "]";
+  }
 
   public int getGeneralMemberNumber() {
     return generalMemberNumber;
@@ -46,29 +98,13 @@ public class Portfolio extends Board implements java.io.Serializable{
     this.readable = readable;
     return this;
   }
-  public String getMemberName() {
-    return memberName;
+  public GeneralMember getMember() {
+    return member;
   }
-  public Portfolio setMemberName(String memberName) {
-    this.memberName = memberName;
+  public Portfolio setMember(GeneralMember member) {
+    this.member = member;
     return this;
   }
-  public String getId() {
-    return id;
-  }
-  public Portfolio setId(String id) {
-    this.id = id;
-    return this;
-  }
-  public int getSeekingFlag() {
-    return seekingFlag;
-  }
-  public Portfolio setSeekingFlag(int seekingFlag) {
-    this.seekingFlag = seekingFlag;
-    return this;
-  }
-
-
 
 
 
