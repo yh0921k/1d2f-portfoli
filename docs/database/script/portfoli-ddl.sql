@@ -866,9 +866,6 @@ ALTER TABLE pf_company_required_certificate
       job_posting_no  -- 채용공고번호
     );
 
-ALTER TABLE pf_company_required_certificate
-  MODIFY COLUMN certificate_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '자격증번호';
-
 -- 게시글
 CREATE TABLE pf_board (
   board_no        INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
