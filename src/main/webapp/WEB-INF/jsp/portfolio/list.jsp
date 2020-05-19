@@ -25,6 +25,7 @@
       <!-- /PAGE TITLE -->
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
+<div class="container">
 <div align="center"> <button style="font-size: small" onclick="location.href='form'">글쓰기(+)</button>
 <div class="row">
   <c:forEach items="${list}" var="item">
@@ -36,7 +37,7 @@
   data-ajax-modal-centered="true" 
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
-  class="js-ajax-modal">
+  class="js-ajax-modal ">
 <!-- 테스트코드 -->
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
@@ -124,6 +125,7 @@
 	    </ul>
 	   </nav>
 	  </div>
+</div>
 </div>
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>

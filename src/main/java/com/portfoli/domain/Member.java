@@ -238,4 +238,6 @@ public class Member implements Serializable {
         + ", createDate=" + createDate + "]";
   }
 
+
+
 }
