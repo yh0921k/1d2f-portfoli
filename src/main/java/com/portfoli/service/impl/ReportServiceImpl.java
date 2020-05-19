@@ -59,6 +59,11 @@ public class ReportServiceImpl implements ReportService {
   }
 
   @Override
+  public Report get(int number) throws Exception {
+    return reportDao.findByNumber(number);
+  }
+
+  @Override
   public List<ReportCategory> reportCategorie() throws Exception {
     return reportCategoryDao.findAll();
   }

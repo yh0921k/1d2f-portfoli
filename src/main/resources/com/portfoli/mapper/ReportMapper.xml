@@ -41,7 +41,7 @@
   insert into pf_report(board_no, reporter_no, target_no, report_class_no)
   values(#{number}, #{reporterNumber}, #{targetNumber}, #{reportCategory.number})
   </insert>
-  
+
   <select id="findAllByReporterNumber" resultMap="ReportMap" parameterType="map">
     select
       b.board_no,
@@ -51,19 +51,37 @@
       b.view_count,
       c.report_class
     from pf_report r
-    join pf_report_class c
-    on r.report_class_no=c.report_class_no
-    join pf_board b
-    on r.board_no = b.board_no
+    join pf_report_class c on r.report_class_no=c.report_class_no
+    join pf_board b on r.board_no = b.board_no
     where
       r.reporter_no=#{userNumber}
     order by b.registered_date desc
     limit #{offset}, #{pageSize}
   </select>
-  
+
   <select id="count" resultType="int" parameterType="int">
     select count(*)
     from pf_report
     where reporter_no=#{userNumber}
+  </select>
+
+  <select id="findByNumber" resultMap="ReportMap" parameterType="int">
+    select
+    r.target_no,
+    m.id member_id,
+    b.board_no,
+    c.report_class,
+    b.title,
+    b.content,
+    b.registered_date,
+    b.view_count,
+    f.file_name,
+    f.file_path
+    from pf_report r
+    join pf_report_class c on r.report_class_no=c.report_class_no
+    join pf_members m on r.target_no=m.member_no
+    join pf_board b on r.board_no=b.board_no
+    left outer join pf_board_attachment f on b.board_no=f.board_no
+    where b.board_no=#{number}
   </select>
 </mapper>

@@ -11,5 +11,7 @@ public interface ReportService {
 
   int listCount(int userNumber) throws Exception;
 
+  Report get(int number) throws Exception;
+
   List<ReportCategory> reportCategorie() throws Exception;
 }
