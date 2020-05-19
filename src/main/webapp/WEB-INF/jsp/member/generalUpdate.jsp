@@ -301,66 +301,69 @@
 					<!-- /PERSONAL DETAIL -->
 
 
-
 					<!-- PASSWORD -->
-					<div class="p-4 shadow-xs rounded mb-4 bg-white">
-						<a href="#user_edit_password"
-							class="btn-toggle btn fs--14 btn-light collapsed"
-							data-toggle="collapse" aria-expanded="false" onclick=""> <span
-							class="group-icon float-start"> <i
-								class="fi fi-arrow-down"></i> <i class="fi fi-close"></i>
-						</span> &nbsp; 비밀번호 변경
-						</a>
+					<c:if test="${empty member.provider}">
+						<div class="p-4 shadow-xs rounded mb-4 bg-white">
+							<a href="#user_edit_password"
+								class="btn-toggle btn fs--14 btn-light collapsed"
+								data-toggle="collapse" aria-expanded="false" onclick=""> <span
+								class="group-icon float-start"> <i
+									class="fi fi-arrow-down"></i> <i class="fi fi-close"></i>
+							</span> &nbsp; 비밀번호 변경
+							</a>
 
-						<div id="user_edit_password" class="collapse" style="">
-							<form method="post" action="updatePassword">
+							<div id="user_edit_password" class="collapse" style="">
+								<form method="post" action="updatePassword">
 
-								<div class="row mt-3">
+									<div class="row mt-3">
 
-									<div class="col-12 col-sm-6 col-md-6">
-										<div class="input-group-over">
-											<div class="form-label-group mb-3">
-												<input required placeholder="password" id="password"
-													name="password" type="password" class="form-control">
-												<label for="password">현재 비밀번호</label>
+										<div class="col-12 col-sm-6 col-md-6">
+											<div class="input-group-over">
+												<div class="form-label-group mb-3">
+													<input required placeholder="password" id="password"
+														name="password" type="password" class="form-control">
+													<label for="password">현재 비밀번호</label>
+												</div>
+
+												<!-- `SOW : Form Advanced` plugin used -->
+												<a href="#" class="btn fs--12 btn-password-type-toggle"
+													data-target="#currentPassword"> <span
+													class="group-icon"> <i class="fi fi-eye m-0"></i> <i
+														class="fi fi-close m-0"></i>
+												</span>
+												</a>
 											</div>
-
-											<!-- `SOW : Form Advanced` plugin used -->
-											<a href="#" class="btn fs--12 btn-password-type-toggle"
-												data-target="#currentPassword"> <span class="group-icon">
-													<i class="fi fi-eye m-0"></i> <i class="fi fi-close m-0"></i>
-											</span>
-											</a>
 										</div>
-									</div>
 
-									<div class="col-12 col-sm-6 col-md-6">
+										<div class="col-12 col-sm-6 col-md-6">
 
-										<div class="input-group-over">
-											<div class="form-label-group mb-3">
-												<input placeholder="New Password" id="newPassword"
-													name="newPassword" type="password" class="form-control">
-												<label for="newPassword">새 비밀번호</label>
+											<div class="input-group-over">
+												<div class="form-label-group mb-3">
+													<input placeholder="New Password" id="newPassword"
+														name="newPassword" type="password" class="form-control">
+													<label for="newPassword">새 비밀번호</label>
+												</div>
+
+												<!-- `SOW : Form Advanced` plugin used -->
+												<a href="#" class="btn fs--12 btn-password-type-toggle"
+													data-target="#newPassword"> <span class="group-icon">
+														<i class="fi fi-eye m-0"></i> <i class="fi fi-close m-0"></i>
+												</span>
+												</a>
 											</div>
-
-											<!-- `SOW : Form Advanced` plugin used -->
-											<a href="#" class="btn fs--12 btn-password-type-toggle"
-												data-target="#newPassword"> <span class="group-icon">
-													<i class="fi fi-eye m-0"></i> <i class="fi fi-close m-0"></i>
-											</span>
-											</a>
 										</div>
-									</div>
-									<button type="submit" class="btn btn-primary ml-3">
-										<i class="fi fi-check"></i> 비밀번호 변경하기
-									</button>
-							</form>
+										<button type="submit" class="btn btn-primary ml-3">
+											<i class="fi fi-check"></i> 비밀번호 변경하기
+										</button>
+								</form>
+
+							</div>
 
 						</div>
-
-					</div>
-				</div>
-
+				</c:if>
+				<c:if test="${empty member.provider}">
+				</div> 
+				</c:if>
 				<!-- /PASSWORD -->
 
 
@@ -580,14 +583,23 @@
 								</tr>
 							</thead>
 							<tbody id="certsList">
-							<c:forEach items="${memberCerts}" var="cert">
-							<tr>
-							<td><input readonly type='text' class='form-control form-control-sm' name='name' value='${cert.certificate.name}'></td>
-							<td><input required type='text' class='form-control form-control-sm' name='issueDate' value='${cert.issueDate}'/></td>
-							<td><input type='text' class='form-control form-control-sm' name='expireDate' value='${cert.expireDate}'/></td>
-							<td><button type='button' onclick='deleteLine(this)' style='padding: 0; border: none; background: none;'><i class='fi fi-close'></i></button></td>
-							</tr>
-							</c:forEach>
+								<c:forEach items="${memberCerts}" var="cert">
+									<tr>
+										<td><input readonly type='text'
+											class='form-control form-control-sm' name='name'
+											value='${cert.certificate.name}'></td>
+										<td><input required type='text'
+											class='form-control form-control-sm' name='issueDate'
+											value='${cert.issueDate}' /></td>
+										<td><input type='text'
+											class='form-control form-control-sm' name='expireDate'
+											value='${cert.expireDate}' /></td>
+										<td><button type='button' onclick='deleteLine(this)'
+												style='padding: 0; border: none; background: none;'>
+												<i class='fi fi-close'></i>
+											</button></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
