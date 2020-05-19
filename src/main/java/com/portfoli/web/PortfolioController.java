@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Board;
 import com.portfoli.domain.BoardAttachment;
+import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
 import com.portfoli.domain.Portfolio;
@@ -97,6 +98,72 @@ public class PortfolioController {
     model.addAttribute("portfolio", item);
   }
   
+  @PostMapping("update")
+  public String updateForm(HttpServletRequest request, Portfolio portfolio,
+      @RequestParam("thumb") MultipartFile thumb,
+      @RequestParam("files") MultipartFile[] files) throws Exception {
+    
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    else {
+
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+
+      // Board 객체 수정(pf_board)
+      Board board = new Board();
+      board = portfolio.getBoard();
+      boardService.update(board);
+      portfolio.setBoard(board); // board_no 값 다시 집어넣기
+
+      // BoardAttachment 객체 추가(pf_board_attachment)
+      String dirPath = servletContext.getRealPath("/upload/portfolio");
+      for(MultipartFile file : files) {
+        if (file.getSize() <= 0) {
+          continue;
+        } else {
+          String filename = UUID.randomUUID().toString() + "___" + file.getOriginalFilename();
+          String filepath = dirPath + "/" + filename;
+          file.transferTo(new File(filepath));
+
+          BoardAttachment boardAttachment = new BoardAttachment();
+          boardAttachment.setBoardNumber(board.getNumber());
+          boardAttachment.setFileName(filename);
+          boardAttachment.setFilePath(filepath);
+          boardAttachmentService.add(boardAttachment);
+        }
+      }
+      // Portfolio 입력
+      // Portfolio 입력 중에서 thumbnail 정보입력
+      dirPath = servletContext.getRealPath("/upload/portfolio");
+      if (thumb.getSize() > 0) {
+        String filename = UUID.randomUUID().toString() + "___" + thumb.getOriginalFilename();
+        String filepath = dirPath + "/" + filename;
+        thumb.transferTo(new File(filepath));
+
+        Thumbnails.of(dirPath + "/" + filename)//
+        .size(300, 300)//
+        .outputFormat("jpg")//
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_300x300";
+          }
+        });
+        portfolio.setThumbnail(filename);
+
+        // Portfolio 입력 중에서 작성자 정보입력
+        portfolio.getMember().setNumber(member.getNumber());
+
+        portfolioService.update(portfolio);
+      }
+
+      return "redirect:list";
+    }
+  }
+  
 
   @RequestMapping("detail")
   public String detail(int number, HttpServletRequest request, Model model) throws Exception {
@@ -143,7 +210,8 @@ public class PortfolioController {
       //      return "redirect:/";
     else {
 
-      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
+      portfolio.setMember(member);
 
       // Board 객체 추가(pf_board)
       Board board = new Board();
@@ -188,11 +256,10 @@ public class PortfolioController {
         portfolio.setThumbnail(filename);
 
         // Portfolio 입력 중에서 작성자 정보입력
-        portfolio.setGeneralMemberNumber(member.getNumber());
-
-        portfolioService.insert(portfolio);
+        portfolio.getMember().setNumber(member.getNumber());
       }
-
+      
+      portfolioService.insert(portfolio);
       return "redirect:list";
     }
   }

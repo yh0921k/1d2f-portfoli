@@ -32,7 +32,8 @@
 
             <div class="col-12 col-lg-12">
 
-               <form action="add" method="post" enctype="multipart/form-data">
+               <form action="update" method="post" enctype="multipart/form-data">
+               <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
                 <table class="lightGray">
 
                 <tr class="firstTR" >

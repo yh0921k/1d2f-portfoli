@@ -4,48 +4,39 @@
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-
-<div class="row">
-  <div class="col-4">
-  <form action="updateForm" method="post"> <!-- 이식중 -->
-  <input name="number" type="hidden" value="${portfolio.getNumber()}"/><!-- 이식중 -->
-    <div class="max-w-300 text-center pb--30">
+<form action="updateForm" method="post" >
+<div class="row scrollable-vertical scrollable-styled-dark" style="max-height:600px">
+  <div class="col-3" style="background-color: #a1a8ae">
+  <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
+    <div class="max-w-250 text-center">
     
-                      <!-- avatar -->
-                  <div class="col-12 col-md-3 text-center" style="padding:25px 25px;">
-
-                    <label
-                      class="w--300 h--300 rounded-circle text-center position-relative d-inline-block cursor-pointer border border-secondary border-dashed bg-white">
-                      <!-- preadded image --> 
-                      <span class="z-index-2 js-file-input-avatar-ajax-circle-container-preadded d-block absolute-full z-index-1">
-                      <span style="background-image: url('demo.files/images/unsplash/team/thumb_330/michael-dam-mEZ3PoFGs_k-unsplash.jpg')"
-                            class="js-file-input-item d-inline-block position-relative overflow-hidden text-center rounded-circle m-0 p-0 animate-bouncein bg-cover w-100 h-100">
-                      </span>
-                      </span> 
-                     <!-- avatar : : always under image -->
-                      <c:if test="${empty loginUser.photoFilePath}">
-                        <svg class="fill-gray-500 rounded-circle m-4 z-index-0"
-                          viewBox="0 0 120 120">
-                            <path
-                            d="M41.014,45.389l-9.553-4.776C30.56,40.162,30,39.256,30,38.248v-3.381c0.229-0.28,0.47-0.599,0.719-0.951c1.239-1.75,2.232-3.698,2.954-5.799C35.084,27.47,36,26.075,36,24.5v-4c0-0.963-0.36-1.896-1-2.625v-5.319c0.056-0.55,0.276-3.824-2.092-6.525C30.854,3.688,27.521,2.5,23,2.5s-7.854,1.188-9.908,3.53c-2.368,2.701-2.148,5.976-2.092,6.525v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C1.801,46.924,0,49.958,0,53.262V57.5h46v-4.043C46,50.018,44.089,46.927,41.014,45.389z"></path>
-                            <path
-                            d="M55.467,46.526l-9.723-4.21c-0.23-0.115-0.485-0.396-0.704-0.771l6.525-0.005c0,0,0.377,0.037,0.962,0.037c1.073,0,2.638-0.122,4-0.707c0.817-0.352,1.425-1.047,1.669-1.907c0.246-0.868,0.09-1.787-0.426-2.523c-1.865-2.654-6.218-9.589-6.354-16.623c-0.003-0.121-0.397-12.083-12.21-12.18c-1.187,0.01-2.309,0.156-3.372,0.413c0.792,2.094,0.719,3.968,0.665,4.576v4.733c0.648,0.922,1,2.017,1,3.141v4c0,1.907-1.004,3.672-2.607,4.662c-0.748,2.022-1.738,3.911-2.949,5.621c-0.15,0.213-0.298,0.414-0.443,0.604v2.86c0,0.442,0.236,0.825,0.631,1.022l9.553,4.776c3.587,1.794,5.815,5.399,5.815,9.41V57.5H60v-3.697C60,50.711,58.282,47.933,55.467,46.526z"></path>
-                          </svg>
-                      </c:if> <c:if test="${not empty loginUser.photoFilePath}">
-                        <img class="rounded-circle img-thumbnail h--300 w--300"
-                          src='${pageContext.servletContext.contextPath}/upload/member/${portfolio.member.photoFilePath}'>
-                        <br>
-                      </c:if>
-                    </label>
-
-                  </div>
-                  <!-- /avatar -->
+          <!-- avatar -->
+        <label class="w--250 h--250 rounded-circle text-center position-relative 
+        d-inline-block cursor-pointer border border-secondary border-dashed bg-white" style="margin:25px 0px">
+          <!-- preadded image --> 
+          <span class="z-index-2 js-file-input-avatar-ajax-circle-container-preadded d-block absolute-full z-index-1">
+          <span style="background-image: url('demo.files/images/unsplash/team/thumb_330/michael-dam-mEZ3PoFGs_k-unsplash.jpg')"
+                class="js-file-input-item d-inline-block position-relative overflow-hidden text-center rounded-circle m-0 p-0 animate-bouncein bg-cover w-100 h-100">
+          </span>
+          </span> 
+         <!-- avatar : : always under image -->
+          <c:if test="${empty loginUser.photoFilePath}">
+            <svg class="fill-gray-600 rounded-circle m-4 z-index-0" viewBox="-20 -20 100 100">
+                <path d="M41.014,45.389l-9.553-4.776C30.56,40.162,30,39.256,30,38.248v-3.381c0.229-0.28,0.47-0.599,0.719-0.951c1.239-1.75,2.232-3.698,2.954-5.799C35.084,27.47,36,26.075,36,24.5v-4c0-0.963-0.36-1.896-1-2.625v-5.319c0.056-0.55,0.276-3.824-2.092-6.525C30.854,3.688,27.521,2.5,23,2.5s-7.854,1.188-9.908,3.53c-2.368,2.701-2.148,5.976-2.092,6.525v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C1.801,46.924,0,49.958,0,53.262V57.5h46v-4.043C46,50.018,44.089,46.927,41.014,45.389z"></path>
+                <path d="M55.467,46.526l-9.723-4.21c-0.23-0.115-0.485-0.396-0.704-0.771l6.525-0.005c0,0,0.377,0.037,0.962,0.037c1.073,0,2.638-0.122,4-0.707c0.817-0.352,1.425-1.047,1.669-1.907c0.246-0.868,0.09-1.787-0.426-2.523c-1.865-2.654-6.218-9.589-6.354-16.623c-0.003-0.121-0.397-12.083-12.21-12.18c-1.187,0.01-2.309,0.156-3.372,0.413c0.792,2.094,0.719,3.968,0.665,4.576v4.733c0.648,0.922,1,2.017,1,3.141v4c0,1.907-1.004,3.672-2.607,4.662c-0.748,2.022-1.738,3.911-2.949,5.621c-0.15,0.213-0.298,0.414-0.443,0.604v2.86c0,0.442,0.236,0.825,0.631,1.022l9.553,4.776c3.587,1.794,5.815,5.399,5.815,9.41V57.5H60v-3.697C60,50.711,58.282,47.933,55.467,46.526z"></path>
+              </svg>
+          </c:if>
+          <c:if test="${not empty loginUser.photoFilePath}">
+            <img class="rounded-circle img-thumbnail h--250 w--250"
+              src='${pageContext.servletContext.contextPath}/upload/member/${portfolio.member.photoFilePath}'>
+            <br>
+          </c:if>
+        </label>
+      <!-- /avatar -->
     </div>
 
     <div id="list-example" class="list-group list-group-flush">
-      <a class="list-group-item list-group-item-action rounded active" href="#list-item-1">
+      <a class="list-group-item list-group-item-action rounded" style="font-size: 0.8em" style="padding:.5em 1.25em">
         <div class="badge badge-success badge-soft badge-ico-sm rounded-circle float-start">
           <i class="fi fi-check"></i>
         </div>
@@ -58,13 +49,13 @@
               (재직중)
               </c:if>
       </a>
-      <a class="list-group-item list-group-item-action pt-4 pb-4 rounded" href="#list-item-2">
+      <a class="list-group-item list-group-item-action rounded" style="font-size: 0.8em">
         <div class="badge badge-primary badge-soft badge-ico-sm rounded-circle float-start">
           <i class="fi fi-check"></i>
         </div>
         ${portfolio.member.email}
       </a>
-      <a class="list-group-item list-group-item-action pt-4 pb-4 rounded" href="#list-item-3">
+      <a class="list-group-item list-group-item-action rounded" style="font-size: 0.8em">
         <div class="badge badge-warning badge-soft badge-ico-sm rounded-circle float-start">
           <i class="fi fi-check"></i>
         </div>
@@ -77,29 +68,57 @@
         </c:otherwise>
         </c:choose>
       </a>
-      <a class="list-group-item list-group-item-action pt-4 pb-4 rounded" href="#list-item-4">
+      <a class="list-group-item list-group-item-action rounded" style="font-size: 0.8em">
         <div class="badge badge-info badge-soft badge-ico-sm rounded-circle float-start">
           <i class="fi fi-check"></i>
         </div>
-        ${portfolio.registeredDate}
+        등록일 : ${portfolio.registeredDate}
+      </a>
+      <a class="list-group-item list-group-item-action" style="font-size: 0.8em">
+      <div style="display: inline-block; margin:0px">
+        <div style="font-size: 1em; margin-left:10px" class="badge badge-white badge-soft badge-ico-sm float-start">
+        <i class="fi fi-chat" style="font-style: normal;"> 문자</i>
+        </div>
+        <div style="font-size: 1em; margin-left:70px" class="badge badge-white badge-soft badge-ico-sm float-start">
+        <i class="fi fi-envelope-2" style="font-style: normal;"> 메일</i>
+        <%--
+        링크 예정
+        ${portfolio.member...}
+        --%>
+        </div>
+      </div>
       </a>
     </div>
+  </div>
 
-    </div>
+  <div class="col-9">
+    <div style="width:95%; position: relative; margin:25px" data-spy="scroll" data-target="#list-example" 
+         data-offset="0" class="scrollable-vertical scrollable-styled-dark">
 
-  <div class="col-8">
-    <div style="margin:25px" data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollable-vertical scrollable-styled-dark">
-
+      <%-- 헤드부분 --%>
+      <div>
       <%-- 제목 --%>
-      <h4><i class="fi fi-shield-ok"></i>   ${portfolio.title}</h4>
+      <textarea style="font-weight:bold;font-size:large; border: 0px; resize: none" readonly="readonly" rows="auto" cols="83%">${portfolio.title}</textarea>
+
       
+      <%-- 아이콘 --%>
+      <div style="float: right; top: -46px; position: relative; margin-right: 100px;">
+	      <div style="position: relative;display: inline-block;margin: 0px 80px;" align="center">
+	      <i class="fi fi-eye"> </i> <br>
+	      ${portfolio.viewCount}
+	      </div>
+        <div style="position: relative; display: inline-block;" align="center">
+	      <i class="fi fi-heart-empty"> </i> <br>
+	      ${portfolio.recommendedCount}
+	      </div>
+      </div>
+      </div>
+      <hr>
       <%-- url 복사 버튼 --%>
       <a href="#" onclick="urlClipCopy()">url 복사</a>
       
       <%-- 내용 --%>
-      <pre style="display:block; width:95%; height:auto; border:0px ;display:inline-block; resize: none;">
-          ${portfolio.content}
-      </pre>
+      <textarea style="border: 0px; resize: none" readonly="readonly" rows="auto" cols="90%">${portfolio.content}</textarea>
       <br>
       <%--섬네일 --%>
               <c:if test="${portfolio.thumbnail != null}">
@@ -141,13 +160,20 @@
                <span>첨부파일이 없습니다.</span>
                </c:otherwise>
                </c:choose>
+            <div style="position: relative; margin: 10% 35%;">
+            <button style="font-size: small" type="submit">수정(M)</button>
+            <button style="font-size: small" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
+            </div>
     </div>
   </div>
 </div>
-            <button style="font-size: small" type="submit">수정(M)</button>
-            <button style="font-size: small" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
+</form>
 
   <style>
+  .modal-dialog.modal-md.modal-xl.modal-dialog-centered > .modal-content {
+    margin-top: 6rem!important;
+    height: 600px;
+  }
     .lightGray{width: 100%; border:2px lightGray solid;}
     .darkerGray{color:#313335;}
     .firstTR{border-bottom:1px darkGray dashed;}
@@ -158,9 +184,10 @@
     .textAR{padding:0px 5px;}
     .textAR_in{border-color:transparent; resize:none; width: 100%; height: 450px;}
   </style>
+  <%--
   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+   --%>
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
-  
   <script>
   function urlClipCopy() {
 	  var f = document.clipboard.url;

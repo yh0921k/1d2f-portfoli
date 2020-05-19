@@ -2,7 +2,6 @@ package com.portfoli.domain;
 
 public class Portfolio extends Board implements java.io.Serializable{
   private static final long serialVersionUID = 1L;
-  int generalMemberNumber;
   String homepage;
   String thumbnail;
   int recommendedCount;
@@ -14,7 +13,6 @@ public class Portfolio extends Board implements java.io.Serializable{
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + generalMemberNumber;
     result = prime * result + ((homepage == null) ? 0 : homepage.hashCode());
     result = prime * result + ((member == null) ? 0 : member.hashCode());
     result = prime * result + readable;
@@ -31,8 +29,6 @@ public class Portfolio extends Board implements java.io.Serializable{
     if (getClass() != obj.getClass())
       return false;
     Portfolio other = (Portfolio) obj;
-    if (generalMemberNumber != other.generalMemberNumber)
-      return false;
     if (homepage == null) {
       if (other.homepage != null)
         return false;
@@ -56,20 +52,13 @@ public class Portfolio extends Board implements java.io.Serializable{
   }
   @Override
   public String toString() {
-    return "Portfolio [generalMemberNumber=" + generalMemberNumber + ", homepage=" + homepage
+    return "Portfolio [homepage=" + homepage
         + ", thumbnail=" + thumbnail + ", recommendedCount=" + recommendedCount + ", readable="
         + readable + ", member=" + member + ", number=" + number + ", title=" + title + ", content="
         + content + ", viewCount=" + viewCount + ", registeredDate=" + registeredDate
         + ", startIndex=" + startIndex + ", pageSize=" + pageSize + "]";
   }
 
-  public int getGeneralMemberNumber() {
-    return generalMemberNumber;
-  }
-  public Portfolio setGeneralMemberNumber(int generalMemberNumber) {
-    this.generalMemberNumber = generalMemberNumber;
-    return this;
-  }
   public String getHomepage() {
     return homepage;
   }

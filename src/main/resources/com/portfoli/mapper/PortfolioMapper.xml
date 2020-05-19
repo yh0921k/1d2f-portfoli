@@ -11,14 +11,14 @@
     <result column="view_count" property="viewCount" /><!-- 조회수-->
     <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
     
-    <result column="general_member_no" property="generalMemberNumber" /><!-- 일반회원번호 -->
     <result column="homepage" property="homepage" /><!-- 홈페이지 -->
     <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
     <result column="recommended_count" property="recommendedCount" /><!-- 추천수 -->
     <result column="readable" property="readable" /><!-- 공개여부 -->
     
     <association property="member" javaType="GeneralMember">
-      <id column="id" property="id" /><!-- 아이디 -->
+      <id column="member_no" property="number" /><!-- 아이디 -->
+      <result column="id" property="id" /><!-- 아이디 -->
       <result column="name" property="name" /><!-- 이름 -->
       <result column="seeking_flag" property="seekingFlag" /><!-- 재직여부 -->
       <result column="photo" property="photoFilePath" /><!-- 프로필사진 -->
@@ -31,7 +31,6 @@
   <select id="findAll" resultMap="PortfolioMap" parameterType="Portfolio">
 	  SELECT
 	    p.board_no,
-	    p.general_member_no,
 	    p.homepage,
 	    p.thumbnail,
 	    p.recommended_count,
@@ -41,6 +40,7 @@
 	    b.content,
 	    b.view_count,
 	    b.registered_date,
+      m.member_no,  -- 회원번호  --
       m.id,  -- id값  --
 	    m.name, -- 이름 --
 	    m.email, -- 이메일 --
@@ -71,7 +71,6 @@
   <select id="findByNo" resultMap="PortfolioMap" parameterType="int">
     SELECT
       p.board_no,
-      p.general_member_no,
       p.homepage,
       p.thumbnail,
       p.recommended_count,
@@ -81,6 +80,7 @@
       b.content,
       b.view_count,
       b.registered_date,
+      m.member_no,  -- 회원번호  --
       m.id,  -- id값  --
       m.name, -- 이름 --
       m.email, -- 이메일 --
@@ -107,7 +107,7 @@
       )
     VALUES(
       #{number},
-      #{generalMemberNumber},
+      #{member.number},
       #{homepage},
       #{thumbnail},
       #{recommendedCount},

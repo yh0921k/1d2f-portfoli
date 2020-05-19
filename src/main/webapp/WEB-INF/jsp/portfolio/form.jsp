@@ -51,7 +51,7 @@
                 
                 <tr class="firstTR">
                  <td align="center">제목</td>
-                 <td style="height:50px" class="smallPadding"><textarea rows="1" name='title' style='resize: none; width:100%;'></textarea></td>
+                 <td style="height:50px" class="smallPadding"><input maxlength="24" name='title' style='resize: none; width:100%;'></input></td>
                 </tr>
                 
                 <tr height="500" class="firstTR">
