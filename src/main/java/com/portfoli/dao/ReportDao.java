@@ -10,4 +10,6 @@ public interface ReportDao {
   List<Report> findAllByReporterNumber(Map<String, Object> param) throws Exception;
 
   int count(int userNumber) throws Exception;
+
+  Report findByNumber(int number) throws Exception;
 }
