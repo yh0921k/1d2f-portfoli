@@ -582,8 +582,8 @@
 							<tbody id="certsList">
 							<c:forEach items="${memberCerts}" var="cert">
 							<tr>
-							<td><input readonly type='text' class='form-control form-control-sm' value='${cert.certificate.name}'></td>
-							<td><input type='text' class='form-control form-control-sm' name='issueDate' value='${cert.issueDate}'/></td>
+							<td><input readonly type='text' class='form-control form-control-sm' name='name' value='${cert.certificate.name}'></td>
+							<td><input required type='text' class='form-control form-control-sm' name='issueDate' value='${cert.issueDate}'/></td>
 							<td><input type='text' class='form-control form-control-sm' name='expireDate' value='${cert.expireDate}'/></td>
 							<td><button type='button' onclick='deleteLine(this)' style='padding: 0; border: none; background: none;'><i class='fi fi-close'></i></button></td>
 							</tr>

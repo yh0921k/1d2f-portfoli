@@ -37,7 +37,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id"
 	content="918378045290-rmpud779f5h155ifo0mrvj08edqtqdt2.apps.googleusercontent.com">
-
 </head>
 
 <body>
@@ -75,15 +74,18 @@
 
 							<!-- <div class="col-6">
 								<div class="btn btn-sm btn-block btn-facebook transition-hover-top" onclick="facebook();"> <i class="fi fi-social-facebook"></i>facebook</a></div>
-							</div> -->
+							</div>   -->
 
-							<div class="col-6">
+							<div class="col-6 mb-1">
 								<script type="text/javascript"></script>
-								<fb:login-button scope="public_profile,email"
-									onlogin="checkLoginState();"></fb:login-button>
+								<div class="fb-login-button transition-hover-top"
+									data-width="220px" data-max-rows="1" data-size="large"
+									data-button-type="login_with" data-auto-logout-link="false"
+									data-use-continue-as="true" data-scope="public_profile,email"
+									onlogin="checkLoginState();"></div>
 							</div>
 
-							<div class="col-6">
+							<div class="col-6 mb-1">
 								<div
 									class="btn btn-sm btn-block bg-googleplay transition-hover-top text-white"
 									onclick="google();">
@@ -93,9 +95,9 @@
 							<div class="g-signin2 col-6" data-onsuccess="onSignIn"
 								style="display: none;"></div>
 
-							<div class="col-6 mt-2">
+							<div class="col-6">
 								<a href="${naverApiURL}"> <img class="transition-hover-top"
-									height="45" width="222"
+									width="240" height="42"
 									src="../../resources/assets/images/naver_green.PNG" /></a>
 							</div>
 
@@ -158,7 +160,7 @@
 		}
 		//
 		function facebook() {
-			$("#facebook").trigger("click");
+			console.log("facebook()");
 		}
 
 		//

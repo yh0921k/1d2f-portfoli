@@ -1,7 +1,6 @@
 package com.portfoli.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public class GeneralMemberCertification implements Serializable {
 
@@ -9,7 +8,7 @@ public class GeneralMemberCertification implements Serializable {
 
   int memberNumber;
   int certificateNumber;
-  Date issueDate, expireDate;
+  String issueDate, expireDate;
   Certificate certificate;
 
   public int getMemberNumber() {
@@ -28,19 +27,19 @@ public class GeneralMemberCertification implements Serializable {
     this.certificateNumber = certificateNumber;
   }
 
-  public Date getIssueDate() {
-    return issueDate;
+  public String getIssueDate() {
+    return issueDate.substring(0, 10);
   }
 
-  public void setIssueDate(Date issueDate) {
+  public void setIssueDate(String issueDate) {
     this.issueDate = issueDate;
   }
 
-  public Date getExpireDate() {
-    return expireDate;
+  public String getExpireDate() {
+    return expireDate.substring(0, 10);
   }
 
-  public void setExpireDate(Date expireDate) {
+  public void setExpireDate(String expireDate) {
     this.expireDate = expireDate;
   }
 
@@ -101,5 +100,6 @@ public class GeneralMemberCertification implements Serializable {
         + certificateNumber + ", issueDate=" + issueDate + ", expireDate=" + expireDate
         + ", certificate=" + certificate + "]";
   }
+
 
 }

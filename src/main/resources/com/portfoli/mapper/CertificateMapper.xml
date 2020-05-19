@@ -14,6 +14,12 @@
 		SELECT name
 		FROM pf_certificate
 	</select>
+	
+	<select id="findByName" parameterType="string" resultMap="CertificateMap">
+    SELECT *
+    FROM pf_certificate
+    WHERE name = #{name}
+  </select>
 
 
 </mapper>

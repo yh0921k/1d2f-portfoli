@@ -185,7 +185,7 @@ $(function() {
 							$("#certsList")
 									.append(
 											"<tr>"
-													+ "<td><input readonly type='text' class='form-control form-control-sm' value="
+													+ "<td><input readonly type='text' class='form-control form-control-sm' name='name' value="
 													+ ui.item.value
 													+ "></td>"
 													+ "<td><input type='text' class='form-control form-control-sm' name='issueDate' value=''/></td>"
@@ -199,6 +199,7 @@ $(function() {
 										dateFormat : "yy-mm-dd",
 										changeYear : "true"
 									});
+							$('input[name=issueDate]').attr('required', 'required');
 							$(document).find("input[name=expireDate]")
 									.removeClass('hasDatepicker').datepicker({
 										dateFormat : "yy-mm-dd",
