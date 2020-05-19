@@ -76,20 +76,16 @@
 								<div class="btn btn-sm btn-block btn-facebook transition-hover-top" onclick="facebook();"> <i class="fi fi-social-facebook"></i>facebook</a></div>
 							</div>   -->
 
-<div class="col-6">
+							<div class="col-6 mb-1">
 								<script type="text/javascript"></script>
 								<div class="fb-login-button transition-hover-top"
-								  data-width="220px"
-								  data-max-rows="1"
-								  data-size="large" 
-								  data-button-type="login_with" 
-								  data-auto-logout-link="false" 
-								  data-use-continue-as="true" 
-								  data-scope="public_profile,email" 
-								  onlogin="checkLoginState();"></div>
-</div>
+									data-width="220px" data-max-rows="1" data-size="large"
+									data-button-type="login_with" data-auto-logout-link="false"
+									data-use-continue-as="true" data-scope="public_profile,email"
+									onlogin="checkLoginState();"></div>
+							</div>
 
-							<div class="col-6">
+							<div class="col-6 mb-1">
 								<div
 									class="btn btn-sm btn-block bg-googleplay transition-hover-top text-white"
 									onclick="google();">
@@ -99,9 +95,11 @@
 							<div class="g-signin2 col-6" data-onsuccess="onSignIn"
 								style="display: none;"></div>
 
-	   <div class="col-6">
-								<a href="${naverApiURL}"> <img class="transition-hover-top" width="240" height="42" src="../../resources/assets/images/naver_green.PNG" /></a>
-</div>
+							<div class="col-6">
+								<a href="${naverApiURL}"> <img class="transition-hover-top"
+									width="240" height="42"
+									src="../../resources/assets/images/naver_green.PNG" /></a>
+							</div>
 
 						</div>
 						<div class="form-label-group mb-3">
