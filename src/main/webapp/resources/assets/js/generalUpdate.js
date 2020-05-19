@@ -214,6 +214,8 @@ $(function() {
 
 });
 
+$("input").filter("[value=null]").val("");
+
 // 엔터 막기
 $('input[type="text"]').keydown(function() {
 	if (event.keyCode === 13) {

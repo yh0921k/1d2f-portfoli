@@ -36,7 +36,11 @@ public class GeneralMemberCertification implements Serializable {
   }
 
   public String getExpireDate() {
+    if(expireDate != null) {
     return expireDate.substring(0, 10);
+    } else {
+      return "";
+    }
   }
 
   public void setExpireDate(String expireDate) {
