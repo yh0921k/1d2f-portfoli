@@ -2,6 +2,7 @@ package com.portfoli.web;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -64,5 +65,41 @@ public class ReportController {
     report.setAttachments(attachments);
 
     reportService.add(report);
+  }
+
+  @GetMapping("list")
+  public void list(
+      HttpServletRequest request,
+      @RequestParam(defaultValue = "1") int pageNumber,
+      @RequestParam(defaultValue = "5") int pageSize,
+      Model model) throws Exception {
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+
+    List<Report> list =
+        reportService.list(loginUser.getNumber(), pageNumber, pageSize);
+
+    int size = reportService.listCount(loginUser.getNumber());
+    int totalPage = size / pageSize;
+    if (size % pageSize > 0) {
+      totalPage++;
+    }
+
+    if (pageNumber < 1 || pageNumber > totalPage) {
+      pageNumber = 1;
+    }
+
+    int endPage = (int) Math.ceil(pageNumber / (double) pageSize) * pageSize;
+    int startPage = endPage - pageSize + 1;
+
+    if (endPage > totalPage) {
+      endPage = totalPage;
+    }
+
+    model.addAttribute("list", list);
+    model.addAttribute("pageNumber", pageNumber);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("totalPage", totalPage);
+    model.addAttribute("startPage", startPage);
+    model.addAttribute("endPage", endPage);
   }
 }

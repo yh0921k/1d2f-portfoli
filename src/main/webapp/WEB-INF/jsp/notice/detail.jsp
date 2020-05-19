@@ -37,6 +37,9 @@
           <li class="nav-item mb-2"><a class="nav-link" href="/portfoli/app/qna/list"> <span class="px-2 d-inline-block"> Q&A </span>
           </a></li>
 
+          <li class="nav-item mb-2"><a class="nav-link" href="/portfoli/app/report/list"> <span class="px-2 d-inline-block"> 신고 </span>
+          </a></li>
+
         </ul>
       </nav>
     </div>
