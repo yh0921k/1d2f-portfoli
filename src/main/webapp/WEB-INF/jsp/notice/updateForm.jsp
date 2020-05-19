@@ -110,7 +110,7 @@
   });
   
     function plus(e) {
-    	e.stopImmediatePropagation();
+      e.stopImmediatePropagation();
     }
     
     

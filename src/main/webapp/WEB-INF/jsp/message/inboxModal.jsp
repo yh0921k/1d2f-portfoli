@@ -22,7 +22,7 @@
 <div class="modal-body p--10">
   <div class="container">
     <span class="d-block text-muted text-truncate font-weight-medium pt-1">
-      보낸 사람: ${message.member.id} &nbsp; <a href="#" class="link-muted">신고</a>
+      보낸 사람: ${message.member.id}
     </span> <small class="d-block"> <fmt:formatDate var="sendDate"
         value="${message.sendDate}" pattern="yyyy.MM.dd HH:mm:ss" />
       ${sendDate}

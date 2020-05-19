@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.ReportCategoryDao">
+  <resultMap type="ReportCategory" id="ReportCategoryMap">
+    <id column="report_class_no" property="number"/>
+    <result column="report_class" property="category"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="ReportCategoryMap">
+    select *
+    from pf_report_class
+  </select>
+</mapper>

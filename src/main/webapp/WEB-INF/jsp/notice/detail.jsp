@@ -101,27 +101,27 @@
   
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
-	  var td = document.querySelector(".photoDiv");
-	  
-	  td.addEventListener("click", function(e) {
-	      e.stopImmediatePropagation();
-	      this.style.height = 'auto';
-	      
-	      var br = document.createElement("br");
-	      
-	      var newNode = document.createElement("input");
-	      newNode.type="file";
-	      newNode.name="files";
-	      newNode.setAttribute("class", "files");
-	      newNode.setAttribute("onclick", "plus(event)");
-	      
-	      var filePar = document.querySelector("#filePar");
-	      console.log(filePar);
-	      console.log(newNode);
-	      filePar.appendChild(newNode);
-	      filePar.appendChild(br);
-	      
-	  });
+    var td = document.querySelector(".photoDiv");
+    
+    td.addEventListener("click", function(e) {
+        e.stopImmediatePropagation();
+        this.style.height = 'auto';
+        
+        var br = document.createElement("br");
+        
+        var newNode = document.createElement("input");
+        newNode.type="file";
+        newNode.name="files";
+        newNode.setAttribute("class", "files");
+        newNode.setAttribute("onclick", "plus(event)");
+        
+        var filePar = document.querySelector("#filePar");
+        console.log(filePar);
+        console.log(newNode);
+        filePar.appendChild(newNode);
+        filePar.appendChild(br);
+        
+    });
   
     function plus(e) {
       e.stopImmediatePropagation();
@@ -135,41 +135,41 @@
   
   
   function warning(){
-	    
-	    const swalWithBootstrapButtons = Swal.mixin({
-	      customClass: {
-	        confirmButton: 'btn btn-success',
-	        cancelButton: 'btn btn-danger'
-	      },
-	      buttonsStyling: false
-	    })
+      
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
 
-	    swalWithBootstrapButtons.fire({
-	      title: '정말 삭제하시겠습니까?',
-	      text: "되돌릴 수 없는 작업입니다.",
-	      icon: 'warning',
-	      showCancelButton: true,
-	      confirmButtonText: '삭제',
-	      cancelButtonText: '취소',
-	      reverseButtons: true
-	    }).then((result) => {
-	      if (result.value) {
-	        swalWithBootstrapButtons.fire({
-	          title:'삭제완료',
-	          onClose: () => {
-	        	  location.href = 'delete?number=' + ${notice.number}
-	              clearInterval(timerInterval)
-	            }
-	        })
-	      } else if (
-	        result.dismiss === Swal.DismissReason.cancel
-	      ) {
-	        swalWithBootstrapButtons.fire(
-	          '취소'
-	        )
-	      }
-	    })
-	  }
+      swalWithBootstrapButtons.fire({
+        title: '정말 삭제하시겠습니까?',
+        text: "되돌릴 수 없는 작업입니다.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire({
+            title:'삭제완료',
+            onClose: () => {
+              location.href = 'delete?number=' + ${notice.number}
+                clearInterval(timerInterval)
+              }
+          })
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            '취소'
+          )
+        }
+      })
+    }
   </script>
 
       <jsp:include page="../footer.jsp"/>

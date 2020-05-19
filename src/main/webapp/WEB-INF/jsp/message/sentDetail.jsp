@@ -101,7 +101,12 @@
             <div class="float-start">
               <span
                 class="d-block text-muted text-truncate font-weight-medium pt-2">
-                받는 사람: ${message.member.id} &nbsp; <a href="" class="link-muted">신고</a>
+                받는 사람: ${message.member.id} &nbsp; <a href="#"
+                  class="js-ajax-modal link-muted"
+                  data-href="/portfoli/app/report/form?number=${message.receiverNumber}"
+                  data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
+                  data-ajax-modal-backdrop="static"> 신고 
+                  </a>
               </span> <small class="d-block"> <fmt:formatDate var="sendDate"
                   value="${message.sendDate}" pattern="yyyy.MM.dd HH:mm:ss" />
                 ${sendDate}

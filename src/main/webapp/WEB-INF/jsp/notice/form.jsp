@@ -26,11 +26,11 @@
         <div class="row">
           <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">카테고리 : </span>
             
-	         <select id="select_options2" name="noticeNumber" class="form-control form-control-sm col-md-3">
-	         <c:forEach items="${list}" var="item">
-	             <option value="${item.getCategoryNumber()}">[${item.getCategoryNumber()}]${item.getName()}</option>
-	         </c:forEach>
-	         </select>                
+           <select id="select_options2" name="noticeNumber" class="form-control form-control-sm col-md-3">
+           <c:forEach items="${list}" var="item">
+               <option value="${item.getCategoryNumber()}">[${item.getCategoryNumber()}]${item.getName()}</option>
+           </c:forEach>
+           </select>                
 
         </div>
         <div class="container-fluid">
@@ -109,4 +109,4 @@
       }
   </script>
   
-		  <jsp:include page="../footer.jsp"/>
+      <jsp:include page="../footer.jsp"/>
