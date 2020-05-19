@@ -15,12 +15,14 @@ public class Banner implements Serializable {
   private String startDate;
   private String endDate;
   private boolean activateYN;
+  private int order;
 
   @Override
   public String toString() {
     return "Banner [number=" + number + ", companyNumber=" + companyNumber + ", title=" + title
         + ", filePath=" + filePath + ", url=" + url + ", registeredDate=" + registeredDate
-        + ", startDate=" + startDate + ", endDate=" + endDate + ", activateYN=" + activateYN + "]";
+        + ", startDate=" + startDate + ", endDate=" + endDate + ", activateYN=" + activateYN
+        + ", order=" + order + "]";
   }
 
   public int getNumber() {
@@ -95,6 +97,14 @@ public class Banner implements Serializable {
     this.activateYN = activateYN;
   }
 
+  public int getOrder() {
+    return order;
+  }
+
+  public void setOrder(int order) {
+    this.order = order;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -104,6 +114,7 @@ public class Banner implements Serializable {
     result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
     result = prime * result + ((filePath == null) ? 0 : filePath.hashCode());
     result = prime * result + number;
+    result = prime * result + order;
     result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
     result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
     result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -135,6 +146,8 @@ public class Banner implements Serializable {
     } else if (!filePath.equals(other.filePath))
       return false;
     if (number != other.number)
+      return false;
+    if (order != other.order)
       return false;
     if (registeredDate == null) {
       if (other.registeredDate != null)
