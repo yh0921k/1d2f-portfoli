@@ -4,9 +4,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.portfoli.dao.GeneralMemberCertificationDao">
+<mapper
+	namespace="com.portfoli.dao.GeneralMemberCertificationDao">
 
-	<resultMap type="GeneralMemberCertification" id="GeneralMemberCertificationMap">
+	<resultMap type="GeneralMemberCertification"
+		id="GeneralMemberCertificationMap">
 		<id column="general_member_no" property="memberNumber" />
 		<id column="certificate_no" property="certificateNumber" />
 		<result column="issue_date" property="issueDate" />
@@ -18,13 +20,30 @@
 		</association>
 	</resultMap>
 
-	<select id="findCerts" parameterType="int" resultMap="GeneralMemberCertificationMap">
-	SELECT *
-	FROM pf_general_member_certification m
-	JOIN pf_certificate c 
-	ON m.certificate_no=c.certificate_no
-	WHERE general_member_no=#{memberNumber}
+	<select id="findCerts" parameterType="int"
+		resultMap="GeneralMemberCertificationMap">
+		SELECT *
+		FROM pf_general_member_certification m
+		JOIN pf_certificate c
+		ON m.certificate_no=c.certificate_no
+		WHERE general_member_no=#{memberNumber}
+		ORDER BY issue_date ASC;
 	</select>
+	
+	<delete id="deleteAll" parameterType="int">
+	 DELETE 
+	 FROM pf_general_member_certification
+	 WHERE general_member_no=#{memberNumber}
+	</delete>
+
+	<insert id="insertCertsByMemberNumber" parameterType="java.util.Map">
+		INSERT INTO pf_general_member_certification
+		(general_member_no, certificate_no, issue_date, expire_date)
+		VALUES
+		<foreach item="item" index="index" collection="list" separator=" , ">
+			(#{item.memberNumber}, #{item.certificateNumber}, #{item.issueDate}, null)
+		</foreach>
+	</insert>
 
 
 </mapper>

@@ -1,12 +1,14 @@
 package com.portfoli.web;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.portfoli.domain.Certificate;
 import com.portfoli.domain.Company;
 import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
@@ -117,9 +120,6 @@ public class MemberController {
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
     List<GeneralMemberCertification> memberCerts = certificateService.getMemberCerts(
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
-    for (GeneralMemberCertification cert : memberCerts) {
-      System.out.println(cert);
-    }
     model.addAttribute("member", generalMember);
     model.addAttribute("memberCerts", memberCerts);
   }
@@ -178,6 +178,32 @@ public class MemberController {
       throw new Exception("seekingFlag 업데이트 실패");
     }
 
+  }
+
+  @PostMapping("updateProfile")
+  public String updateProfile(HttpServletRequest request, HttpSession session) throws Exception {
+    int memberNumber = ((Member) session.getAttribute("loginUser")).getNumber();
+    String[] name = request.getParameterValues("name");
+    String[] issueDate = request.getParameterValues("issueDate");
+    String[] expireDate = request.getParameterValues("expireDate");
+    List<GeneralMemberCertification> certs = new ArrayList<>();
+
+    for (int i = 0; i < name.length; i++) {
+      GeneralMemberCertification memCert = new GeneralMemberCertification();
+      Certificate cert = certificateService.getByName(name[i]);
+
+      memCert.setCertificate(cert);
+      memCert.setCertificateNumber(cert.getCertificateNumber());
+      memCert.setMemberNumber(memberNumber);
+      memCert.setIssueDate(issueDate[i]);
+      memCert.setExpireDate(expireDate[i]);
+      certs.add(memCert);
+      System.out.println("------------------------" + memCert);
+    }
+
+    certificateService.insertCertsByMemberNumber(certs, memberNumber);
+
+    return "redirect:/app/member/generalUpdate";
   }
 
 
@@ -264,9 +290,8 @@ public class MemberController {
   @RequestMapping(value = "checkEmail", method = RequestMethod.POST)
   public String checkSignup(HttpServletRequest request, Model model) {
     String email = request.getParameter("email");
-    System.out.println("--------------------------------" + email);
     String searchedEmail = memberService.getEmailByEmail(email);
-    if(searchedEmail != null) {
+    if (searchedEmail != null) {
       return "1";
     } else {
       return "0";
