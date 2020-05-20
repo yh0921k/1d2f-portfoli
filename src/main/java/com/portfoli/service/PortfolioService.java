@@ -19,6 +19,8 @@ public interface PortfolioService {
 
   int selectListCnt(Portfolio portfolio) throws Exception;
 
+  int selectMyListCnt(int generalMemberNumber) throws Exception;
+
   //  int update(Map<String, Integer> map) throws Exception;
 
 

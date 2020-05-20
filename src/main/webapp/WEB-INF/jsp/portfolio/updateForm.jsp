@@ -63,7 +63,32 @@
                 
                 <tr height="500" class="firstTR">
                 <td align="center">내용</td>
-                <td style="height:300px;" class="smallPadding"><textarea name='content' style="resize: none; width:100%; height:100%;">${portfolio.content}</textarea></td>
+                <td style="height:300px;" class="smallPadding">
+                <textarea name='content'
+                          class="summernote-editor"
+												  data-placeholder="Type yout text here..." 
+												  data-min-height="500" 
+												  data-max-height="1000" 
+												  data-focus="true" 
+												  data-lang="en-US"
+												  
+												  data-ajax-url="_ajax/demo.summernote.php" 
+                          data-ajax-params="['action','update']['param2','files']" 
+												  
+												  data-toolbar='[
+												      ["style", ["style"]],
+												      ["font", ["bold", "italic", "underline", "clear"]],
+												      ["fontname", ["fontname"]],
+												      ["color", ["color"]],
+												      ["para", ["ul", "ol", "paragraph"]],
+												      ["height", ["height"]],
+												      ["table", ["table"]],
+												      ["insert", ["link", "picture", "hr"]],
+												      ["view", ["fullscreen", "codeview"]],
+												      ["help", ["help"]]
+												    ]'></textarea>
+                
+					      </td>
                 </tr>
                 
                 <tr class = "photoTD padding">
