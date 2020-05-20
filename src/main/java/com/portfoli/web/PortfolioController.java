@@ -56,8 +56,44 @@ public class PortfolioController {
   @Autowired
   PortfolioService portfolioService;
 
-  @RequestMapping("list")
+  @RequestMapping("mylist")
   public String list(@ModelAttribute("portfolio") Portfolio portfolio,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
+
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    else {
+
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+      
+      // 전체리스트 개수
+      int listCnt = portfolioService.selectMyListCnt(member.getNumber());
+
+      Pagination pagination = new Pagination(listCnt, curPage);
+      pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+
+      portfolio.setStartIndex(pagination.getStartIndex());
+      portfolio.setPageSize(pagination.getPageSize());
+
+      // 전체리스트 출력
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("pagination", pagination);
+
+      // 작성자 정보
+      model.addAttribute("generalMember", member);
+      List<Portfolio> portfolios = portfolioService.getByMemberNumber(member.getNumber());
+      model.addAttribute("list", portfolios);
+      return "portfolio/mylist";
+    }
+  }
+
+
+  @RequestMapping("list")
+  public String mylist(@ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -91,6 +127,7 @@ public class PortfolioController {
       return "portfolio/list";
     }
   }
+  
   
   @PostMapping("updateForm")
   public void updateForm(Portfolio portfolio, Model model) throws Exception {
@@ -174,6 +211,9 @@ public class PortfolioController {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
       //      return "redirect:/";
     else {
+      
+      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
+      
       Portfolio portfolio = portfolioService.get(number);
       Board board = boardService.get(number);
       
@@ -192,6 +232,10 @@ public class PortfolioController {
       
       model.addAttribute("portfolio", portfolio);
       model.addAttribute("attachment", boardAttachment);
+      
+      if(portfolio.getMember().getNumber() == member.getNumber()) {
+        model.addAttribute("modifiable", true);
+      }
       return "portfolio/detail";
     }
   }

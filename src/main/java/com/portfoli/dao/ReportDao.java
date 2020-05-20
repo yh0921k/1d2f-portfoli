@@ -11,5 +11,9 @@ public interface ReportDao {
 
   int count(int userNumber) throws Exception;
 
+  List<Report> findAllForAdmin(Map<String, Object> param) throws Exception;
+
+  int adminCount() throws Exception;
+
   Report findByNumber(int number) throws Exception;
 }

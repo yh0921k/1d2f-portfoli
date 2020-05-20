@@ -1,5 +1,7 @@
 package com.portfoli.admin;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -29,11 +31,22 @@ public class AdminLogController {
   }
 
   @GetMapping("contentsLog")
-  public void contentsLog(@RequestParam(defaultValue = "10") int moreLine,
+  public void contentsLog(String logDate, @RequestParam(defaultValue = "10") int moreLine,
       @RequestParam(defaultValue = "0") int startLine, HttpServletRequest request, Model model)
       throws Exception {
-    // System.out.println(new Date(System.currentTimeMillis()).toString());
-    String filepath = System.getProperty("catalina.base") + "/logs/portfoli.log";
+    // @RequestParam(defaultValue = "today") @DateTimeFormat(pattern = "yyyy-MM-dd") Date logDate,
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    String today = format.format(new Date(System.currentTimeMillis()));
+    System.out.println("today = " + today);
+    System.out.println("date = " + logDate);
+    String filepath = System.getProperty("catalina.base");
+    if (logDate == null || logDate.equals(today)) {
+      model.addAttribute("logDate", today);
+      filepath += "/logs/portfoli.log";
+    } else {
+      model.addAttribute("logDate", logDate);
+      filepath += "/logs/portfoli_" + logDate + "_1.log";
+    }
     System.out.println("LogFile : " + filepath);
 
     model.addAttribute("moreLine", moreLine);
@@ -41,34 +54,24 @@ public class AdminLogController {
   }
 
   @GetMapping("moreContentsLog")
-  public void moreContentsLog(@RequestParam(defaultValue = "10") int moreLine,
+  public void moreContentsLog(String logDate, @RequestParam(defaultValue = "10") int moreLine,
       @RequestParam(defaultValue = "0") int startLine, HttpServletRequest request, Model model)
       throws Exception {
-    // System.out.println(new Date(System.currentTimeMillis()).toString());
-    String filepath = System.getProperty("catalina.base") + "/logs/portfoli.log";
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    String today = format.format(new Date(System.currentTimeMillis()));
+    System.out.println("today = " + today);
+    System.out.println("date = " + logDate);
+    String filepath = System.getProperty("catalina.base");
+    if (logDate == null || logDate.equals(today)) {
+      model.addAttribute("logDate", today);
+      filepath += "/logs/portfoli.log";
+    } else {
+      model.addAttribute("logDate", logDate);
+      filepath += "/logs/portfoli_" + logDate + "_1.log";
+    }
     System.out.println("LogFile : " + filepath);
 
     model.addAttribute("moreLine", moreLine);
     model.addAttribute("loglist", adminLogService.get(filepath, startLine, moreLine));
   }
-
-  // @RequestMapping("index")
-  // public String login(HttpServletRequest request, String id, String password) throws Exception {
-  // logger.info("AdminController::login() called");
-  //
-  // if (request.getSession().getAttribute("admin") != null) {
-  // return "index";
-  // }
-  //
-  // //Admin admin = adminService.get(id, password);
-  // if (admin != null) {
-  // HttpSession session = request.getSession();
-  // session.setAttribute("admin", admin);
-  // session.setAttribute("expire", EXPIRETIME);
-  // session.setMaxInactiveInterval(EXPIRETIME);
-  // return "index";
-  // } else {
-  // return "loginForm";
-  // }
-  // }
 }

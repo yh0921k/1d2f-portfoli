@@ -6,7 +6,7 @@
 
 <form action="updateForm" method="post" >
 <div class="row scrollable-vertical scrollable-styled-dark" style="max-height:600px">
-  <div class="col-3" style="background-color: #a1a8ae">
+  <div class="col-3" style="background-color: #a1a8ae; min-height:600px;">
   <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
     <div class="max-w-250 text-center">
     
@@ -91,14 +91,17 @@
     </div>
   </div>
 
-  <div class="col-9">
+  <div class="col-9" style="min-height:600px;">
     <div style="width:95%; position: relative; margin:25px" data-spy="scroll" data-target="#list-example" 
          data-offset="0" class="scrollable-vertical scrollable-styled-dark">
 
       <%-- 헤드부분 --%>
       <div>
       <%-- 제목 --%>
-      <textarea style="font-weight:bold;font-size:large; border: 0px; resize: none" readonly="readonly" rows="auto" cols="83%">${portfolio.title}</textarea>
+      <textarea style="font-weight:bold;font-size:large; border: 0px; resize: none" 
+                readonly="readonly" 
+                rows="auto" 
+                cols="83%">${portfolio.title}</textarea>
 
       
       <%-- 아이콘 --%>
@@ -118,7 +121,11 @@
       <a href="#" onclick="urlClipCopy()">url 복사</a>
       
       <%-- 내용 --%>
-      <textarea style="border: 0px; resize: none" readonly="readonly" rows="auto" cols="90%">${portfolio.content}</textarea>
+      <textarea style="border-top: 1px solid gray; resize: none" 
+                readonly="readonly" 
+                name="content"
+                rows="auto" cols="90%" 
+                class="summernote-editor">${portfolio.content}</textarea>
       <br>
       <%--섬네일 --%>
               <c:if test="${portfolio.thumbnail != null}">
@@ -160,10 +167,12 @@
                <span>첨부파일이 없습니다.</span>
                </c:otherwise>
                </c:choose>
+            <c:if test="${modifiable == true}">
             <div style="position: relative; margin: 10% 35%;">
             <button style="font-size: small" type="submit">수정(M)</button>
             <button style="font-size: small" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
             </div>
+            </c:if>
     </div>
   </div>
 </div>
@@ -184,9 +193,6 @@
     .textAR{padding:0px 5px;}
     .textAR_in{border-color:transparent; resize:none; width: 100%; height: 450px;}
   </style>
-  <%--
-  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-   --%>
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
   function urlClipCopy() {

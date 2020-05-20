@@ -86,10 +86,10 @@ public class MemberController {
 
 
   @PostMapping("updatePic")
-  public String updatePic(HttpServletRequest request, Map<String, Object> generalMember,
+  public String updatePic(HttpServletRequest request, Map<String, Object> member,
       MultipartFile photoFile) throws Exception {
 
-    generalMember = new HashMap<>();
+    member = new HashMap<>();
 
     String filename = null;
 
@@ -97,12 +97,12 @@ public class MemberController {
       String dirPath = servletContext.getRealPath("/upload/member");
       filename = UUID.randomUUID().toString();
       photoFile.transferTo(new File(dirPath + "/" + filename));
-      generalMember.put("photoFilePath", filename);
+      member.put("photoFilePath", filename);
     }
-    generalMember.put("member_number",
-        ((Member) request.getSession().getAttribute("loginUser")).getNumber());
+    member.put("number",
+        ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
 
-    if (memberService.updateProfilePic(generalMember) > 0) {
+    if (memberService.updateProfilePic(member) > 0) {
       GeneralMember loginUser = (GeneralMember) request.getSession().getAttribute("loginUser");
       loginUser.setPhotoFilePath(filename);
       request.setAttribute("loginUser", loginUser);
@@ -138,13 +138,15 @@ public class MemberController {
       member.setPhotoFilePath(filename);
     } else {
       member.setPhotoFilePath(
-          ((GeneralMember) request.getSession().getAttribute("loginUser")).getPhotoFilePath());
+          ((Member) request.getSession().getAttribute("loginUser")).getPhotoFilePath());
+      System.out.println("1-1");
     }
-
+    System.out.println("1-2");
     int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
     member.setNumber(memberNumber);
-
+    System.out.println("2전");
     if (memberService.updateDefaultInfo(member) > 0) {
+      System.out.println("updateDefault됨");
       request.getSession().setAttribute("loginUser", memberService.getSessionInfo(memberNumber));
       return "redirect:/app/member/generalUpdate";
     } else {

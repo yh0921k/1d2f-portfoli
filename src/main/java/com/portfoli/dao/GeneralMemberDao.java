@@ -16,8 +16,6 @@ public interface GeneralMemberDao {
 
   GeneralMember getSessionByGNumber(int generalMemberNumber) throws Exception;
 
-  int updateProfilePicture(Map<String, Object> generalMember) throws Exception;
-
   int updateFlag(HashMap<String, Object> params) throws Exception;
 
 }

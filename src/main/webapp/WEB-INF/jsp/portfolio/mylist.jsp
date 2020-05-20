@@ -3,33 +3,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
   <jsp:include page="../header.jsp"/>
+  
+  <div class="container-fluid">
 
-      <!-- PAGE TITLE -->
-      <section class="bg-white" style="padding: 30px 0px;">
-        <div class="container py-1">
-
-          <h1 class="h2">
-            포트폴리오 게시판
-          </h1>
-
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb fs--14">
-              <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="list">포트폴리오 게시판</a></li>
-            </ol>
-          </nav>
-
-        </div>
-      </section>
-      <!-- /PAGE TITLE -->
+    <div class="row">
+<!--------------------------------------- nav bar ----------------------------------------------->
+  <jsp:include page="../member/sidebar.jsp"/>
+<!--------------------------------------- nav bar ----------------------------------------------->
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
-<div class="container">
+
+<!-- 
+<button class="btn btn-outline-secondary btn-pill btn-sm" 
+        onclick="location.href='form'">리스트형</button>
+<button class="btn btn-outline-secondary btn-pill btn-sm" 
+        onclick="location.href='form'">네모형</button>
+ -->
+
+
+<div class="container" style="width: 65%;">
+    <div class="portlet mt--20"  >
+
+      <div class="portlet-header">
+        <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
+        <div align="right">
+          <button class="btn btn-outline-secondary btn-pill btn-sm" 
+                  onclick="location.href='form'">글쓰기(+)</button>
+        </div>
+      </div>
+
+      <div class="table-responsive rounded" style="min-height: 500px;">
+
+        <table class="table m-0">
+          <thead>
+            <tr>
+              <th class="b-0" style="font-size: large;">순번</th>
+              <th class="b-0" style="font-size: large;">제목</th>
+              <th class="b-0 w--150" style="font-size: large;">등록일</th>
+              <th class="b-0 w--200" style="font-size: large">추천수</th>
+              <th class="b-0 w--100" style="font-size: large;">조회수</th>
+            </tr>
+          </thead>
+                
+          <tbody>
+            <c:forEach items="${list}" var="item" varStatus="status">
+  
+            <tr 
+  data-href="detail?number=${item.number}" 
+  data-ajax-modal-size="modal-xl" 
+  data-ajax-modal-centered="true" 
+  data-ajax-modal-callback-function=""
+  data-ajax-modal-backdrop="" 
+  class="js-ajax-modal ">
+              <td>${status.getCount()}</td>
+              <td>${item.title}</td>
+              <td>${item.registeredDate}</td>
+              <td>${item.getRecommendedCount()}</td>
+              <td>${item.viewCount}</td>
+            </tr>
+            
+            </c:forEach>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+
+
+
 <div class="row">
   <c:forEach items="${list}" var="item">
-  
-<!-- 테스트코드 -->
 <a href="#"
   data-href="detail?number=${item.number}" 
   data-ajax-modal-size="modal-xl" 
@@ -41,10 +86,10 @@
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
-           style="max-height:600px;background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
+           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
     </c:if>
     <c:if test="${item.thumbnail == null}">
-           style="max-height:600px;background-image: url('../../resources/assets/images/background/black.png');">
+           style="background-image: url('../../resources/assets/images/background/black.png');">
     </c:if>
     
     <!-- 제목, 아이디 -->
@@ -79,7 +124,9 @@
     </div>
     </a>
     </c:forEach>
-  </div>
+</div>
+    
+</div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
 	<div class="col-12 col-xl-12">
@@ -124,6 +171,7 @@
 	    </ul>
 	   </nav>
 	  </div>
+</div>
 </div>
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>

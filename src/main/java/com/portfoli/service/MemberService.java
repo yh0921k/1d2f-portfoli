@@ -18,11 +18,9 @@ public interface MemberService {
 
   Member get(int number) throws Exception;
 
-  Member getM(int number) throws Exception;
-
   int updateDefaultInfo(GeneralMember member) throws Exception;
 
-  int updateProfilePic(Map<String, Object> generalMember) throws Exception;
+  int updateProfilePic(Map<String, Object> member) throws Exception;
 
   int updatePassword(int memberNumber, String newPassword, String password) throws Exception;
 
@@ -30,7 +28,7 @@ public interface MemberService {
 
   GeneralMember getGeneralMember(int number) throws Exception;
 
-  GeneralMember getSessionInfo(int memberNumber) throws Exception;
+  GeneralMember getSessionInfo(int number) throws Exception;
 
   int updateFlag(HashMap<String, Object> params) throws Exception;
 

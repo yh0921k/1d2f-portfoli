@@ -13,5 +13,9 @@ public interface ReportService {
 
   Report get(int number) throws Exception;
 
+  List<Report> adminList(int pageNumber, int pageSize) throws Exception;
+
+  int adminListCount() throws Exception;
+
   List<ReportCategory> reportCategorie() throws Exception;
 }

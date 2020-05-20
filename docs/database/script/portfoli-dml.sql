@@ -168,8 +168,8 @@ INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
 VALUES (50,"제목50","내용50",3, "2020-04-07 00:00:00");
 
 -- 일반회원 예제 데이터
-INSERT INTO pf_general_member(general_member_no, seeking_flag, photo, membership, career) VALUES (1, 1, 'photo2394823jfshf.jpg', 'Portfoli Pro', 5);
-INSERT INTO pf_general_member(general_member_no, seeking_flag, photo, membership, career) VALUES (2, 1, 'photo2dfsadf23jfshf.jpg', 'Portfoli Basic', 2);
+INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, career) VALUES (1, 1, 'Portfoli Pro', 5);
+INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, career) VALUES (2, 1, 'Portfoli Basic', 2);
 INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, career) VALUES (3, 1, 'none', 4);
 INSERT INTO pf_general_member(general_member_no, seeking_flag, membership) VALUES (4, 0, 'Portfoli Pro');
 INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, career) VALUES (5, 1, 'Portfoli Basic', 1);

@@ -28,6 +28,7 @@
   </resultMap>
   
   
+  <!-- 전체 포트폴리오 리스트 추출 (페이징처리)-->
   <select id="findAll" resultMap="PortfolioMap" parameterType="Portfolio">
 	  SELECT
 	    p.board_no,
@@ -61,11 +62,49 @@
     </if>
   </select>
   
+  <!-- 사용자별 포트폴리오 리스트 추출 -->
+  <select id="findByMember" resultMap="PortfolioMap" parameterType="int">
+    SELECT
+      p.board_no,
+      p.homepage,
+      p.thumbnail,
+      p.recommended_count,
+      p.readable,
+      b.board_no,
+      b.title,
+      b.content,
+      b.view_count,
+      b.registered_date,
+      m.member_no,  -- 회원번호  --
+      m.id,  -- id값  --
+      m.name, -- 이름 --
+      m.email, -- 이메일 --
+      g.seeking_flag,  -- 재직여부 --
+      g.photo,  -- 사진경로 --
+      g.membership  -- 멤버십 --
+    FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
+    ON p.board_no = b.board_no
+    LEFT OUTER JOIN pf_general_member as g
+    ON g.general_member_no = p.general_member_no
+    LEFT OUTER JOIN pf_members as m
+    ON m.member_no = g.general_member_no
+    WHERE m.member_no = ${number}
+  </select>
+   
   <select id="selectListCnt" resultType="int" parameterType="int">
     SELECT 
       count(*)
     from pf_portfolio
     WHERE readable = 1
+  </select>
+  
+  <select id="selectMyListCnt" resultType="int" parameterType="int">
+	  SELECT 
+	    count(*) 
+	  from pf_portfolio p 
+	  LEFT OUTER JOIN pf_general_member m 
+	  ON p.general_member_no = m.general_member_no
+	  WHERE p.general_member_no = ${number}
   </select>
   
   <select id="findByNo" resultMap="PortfolioMap" parameterType="int">
