@@ -367,7 +367,7 @@
 											</c:if> <c:if test="${not empty recentMessage.member.photoFilePath}">
 												<div
 													class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
-													style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${item.member.photoFilePath}')"></div>
+													style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${recentMessage.member.photoFilePath}')"></div>
 											</c:if> <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
 											<!-- title -->
 											<p class="fs--14 m-0 text-truncate font-weight-normal">
