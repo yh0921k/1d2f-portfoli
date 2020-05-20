@@ -66,7 +66,7 @@
                 <td style="height:300px;" class="smallPadding">
                 <textarea name='content'
                           class="summernote-editor"
-												  data-placeholder="Type yout text here..." 
+												  data-placeholder="${portfolio.content}" 
 												  data-min-height="500" 
 												  data-max-height="1000" 
 												  data-focus="true" 

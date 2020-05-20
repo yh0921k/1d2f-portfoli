@@ -123,6 +123,7 @@
       <%-- 내용 --%>
       <textarea style="border-top: 1px solid gray; resize: none" 
                 readonly="readonly" 
+                name="content"
                 rows="auto" cols="90%" 
                 class="summernote-editor">${portfolio.content}</textarea>
       <br>

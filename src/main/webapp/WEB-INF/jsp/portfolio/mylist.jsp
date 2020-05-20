@@ -15,11 +15,12 @@
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
+<!-- 
 <button class="btn btn-outline-secondary btn-pill btn-sm" 
         onclick="location.href='form'">리스트형</button>
 <button class="btn btn-outline-secondary btn-pill btn-sm" 
         onclick="location.href='form'">네모형</button>
-
+ -->
 
 
 <div class="container" style="width: 65%;">
