@@ -64,6 +64,20 @@ public class ReportServiceImpl implements ReportService {
   }
 
   @Override
+  public List<Report> adminList(int pageNumber, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNumber - 1) * pageSize);
+    param.put("pageSize", pageSize);
+
+    return reportDao.findAllForAdmin(param);
+  }
+
+  @Override
+  public int adminListCount() throws Exception {
+    return reportDao.adminCount();
+  }
+
+  @Override
   public List<ReportCategory> reportCategorie() throws Exception {
     return reportCategoryDao.findAll();
   }
