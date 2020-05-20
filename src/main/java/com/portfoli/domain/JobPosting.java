@@ -22,6 +22,8 @@ public class JobPosting implements Serializable {
   private int readable;
   private int minimumEducationNumber;
   private EmploymentStatus employmentStatus;
+  private Certificate certificate;
+  List<Certificate> companyRequiredCertificates;
   List<JobPostingFile> files;
 
   @Override
@@ -32,14 +34,18 @@ public class JobPosting implements Serializable {
         + ", postingRegistration=" + postingRegistration + ", startDated=" + startDated
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
         + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
-        + employmentStatus + ", files=" + files + "]";
+        + employmentStatus + ", certificate=" + certificate + ", companyRequiredCertificates="
+        + companyRequiredCertificates + ", files=" + files + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((certificate == null) ? 0 : certificate.hashCode());
     result = prime * result + companyMemberNumber;
+    result = prime * result
+        + ((companyRequiredCertificates == null) ? 0 : companyRequiredCertificates.hashCode());
     result = prime * result + ((content == null) ? 0 : content.hashCode());
     result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
     result = prime * result + ((endDated == null) ? 0 : endDated.hashCode());
@@ -58,6 +64,8 @@ public class JobPosting implements Serializable {
     return result;
   }
 
+
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -67,7 +75,17 @@ public class JobPosting implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     JobPosting other = (JobPosting) obj;
+    if (certificate == null) {
+      if (other.certificate != null)
+        return false;
+    } else if (!certificate.equals(other.certificate))
+      return false;
     if (companyMemberNumber != other.companyMemberNumber)
+      return false;
+    if (companyRequiredCertificates == null) {
+      if (other.companyRequiredCertificates != null)
+        return false;
+    } else if (!companyRequiredCertificates.equals(other.companyRequiredCertificates))
       return false;
     if (content == null) {
       if (other.content != null)
@@ -124,6 +142,16 @@ public class JobPosting implements Serializable {
     if (yearSalary != other.yearSalary)
       return false;
     return true;
+  }
+
+
+
+  public Certificate getCertificate() {
+    return certificate;
+  }
+
+  public void setCertificate(Certificate certificate) {
+    this.certificate = certificate;
   }
 
   public int getJobPostingNumber() {
@@ -246,6 +274,14 @@ public class JobPosting implements Serializable {
     this.employmentStatus = employmentStatus;
   }
 
+  public List<Certificate> getCompanyRequiredCertificates() {
+    return companyRequiredCertificates;
+  }
+
+  public void setCompanyRequiredCertificates(List<Certificate> companyRequiredCertificates) {
+    this.companyRequiredCertificates = companyRequiredCertificates;
+  }
+
   public List<JobPostingFile> getFiles() {
     return files;
   }
@@ -253,7 +289,5 @@ public class JobPosting implements Serializable {
   public void setFiles(List<JobPostingFile> files) {
     this.files = files;
   }
-
-
 
 }

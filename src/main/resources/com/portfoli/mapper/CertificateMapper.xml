@@ -20,6 +20,11 @@
     FROM pf_certificate
     WHERE name = #{name}
   </select>
+  
+    <select id="findAll2" resultMap="CertificateMap">
+    SELECT certificate_no, name
+    FROM pf_certificate
+  </select>
 
 
 </mapper>

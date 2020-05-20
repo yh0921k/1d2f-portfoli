@@ -15,5 +15,5 @@ public interface CertificateService {
   void insertCertsByMemberNumber(List<GeneralMemberCertification> certs, int memberNumber)
       throws Exception;
 
-
+  List<Certificate> listCertificate() throws Exception;
 }
