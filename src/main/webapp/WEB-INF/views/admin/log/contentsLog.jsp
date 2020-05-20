@@ -5,7 +5,7 @@
   <div class="page-title shadow-xs">
   </div>
   <section class="rounded mb-3 ">
-    <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">Log 조회</div>
+    <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom"><strong>Log 조회</strong></div>
         <!--
           data-autofill="false|hover|click" 
           data-enable-paging="true"       false = show all, no pagination
@@ -13,7 +13,7 @@
         -->
         <div id="rand_yjK_wrapper" class="dataTables_wrapper dt-bootstrap4">
         <div class="row mb-3">
-        <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+        <div class="col-sm-8 col-md-4 d-flex align-items-center justify-content-start">
         <div id="rand_yjK_filter" class="dataTables_filter">
         <label><input id="keyword" type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="rand_yjK"></label>
         </div>
@@ -25,9 +25,49 @@
         <option id="more50" value="50">50</option>
         <option id="more100" value="100">100</option>        
         </select></label></div>
+        
+        
         </div>
         
-       
+        <!--
+Optional, for quick inline translation. Default: english
+data-quick-locale="..."
+
+Rounded - add class:
+.form-control-pill
+
+data-id="1" is not required but might be an id from the database. 
+You can instead to add to data-ajax-params ["id","1"]
+
+Read about data-ajax-params if you are not yet familiarized.
+-->
+
+<div style="margin-left:17px;"class="input-group-over position-realtive z-index-1 bg-white">
+
+  <input style="height:42.22px;" type="text" name="logDate" class="logDate form-control bg-transparent datepicker" 
+      data-layout-rounded="true" 
+      data-today-highlight="true" 
+      data-title="Smarty Datepicker" 
+      data-show-weeks="true" 
+      data-today-highlight="true" 
+      data-today-btn="true" 
+      data-autoclose="true" 
+      data-format="YYYY-MM-DD" 
+      data-quick-locale='{
+        "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "daysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "daysMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        "monthsShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "today": "Today",
+        "clear": "Clear",
+        "titleFormat": "MM yyyy"
+      }'
+>
+
+  <span class="fi fi-calendar fs--20 ml-4 mr-4 z-index-n1 text-muted"></span>
+</div>
+                      
         
         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-end">
         <div class="dt-buttons btn-group flex-wrap">
@@ -113,13 +153,24 @@ $(document).ready(function() {
           $(temp).parent().show();
   }); 
 });
+
 $(document).ready(function() { 
   $("#moreLine").change(function() { 
 	  var moreLine = $("#moreLine").val();
     console.log("contentsLog?" + this.id + "=" + moreLine);
-    window.location.href =  "contentsLog?" + this.id + "=" + moreLine;
+    //window.location.href =  "contentsLog?" + this.id + "=" + moreLine;
+    window.location.href =  "contentsLog?" + this.id + "=" + moreLine + "&logDate=" + $(".logDate").val();
   });
 });
+
+$(document).ready(function() { 
+	  $(".logDate").change(function() { 
+	    var moreLine = $("#moreLine").val();
+	    console.log("contentsLog?" + "moreLine=" + moreLine + "&logDate=" + $(".logDate").val());
+	    //window.location.href =  "contentsLog?" + this.id + "=" + moreLine;
+	    window.location.href =  "contentsLog?" + "moreLine" + "=" + moreLine + "&logDate=" + $(".logDate").val();
+	  });
+	});
 
 $(document).ready(function() {
   var loadLast = 0;
@@ -136,15 +187,18 @@ $(document).ready(function() {
             }
         }
     };
-	  xhr.open('GET', 'moreContentsLog?startLine=' + loadLast + "&moreLine=" + $("#moreLine").val(), true);
+	  xhr.open('GET', 'moreContentsLog?startLine=' + loadLast + "&moreLine=" + $("#moreLine").val() + "&logDate=" + $(".logDate").val(), true);
 	  xhr.send();
 	  
   });
 });
-	
-	
+
 window.onload = function() {
   var moreOption = "#more" + ${moreLine};
   $(moreOption).attr("selected", "selected");
+  
+  var current = "${logDate}";
+  console.log(typeof current);
+  $(".logDate").val(current);
 };
 </script>
