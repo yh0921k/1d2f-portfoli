@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import com.portfoli.domain.Certificate;
+import com.portfoli.domain.CompanyRequiredCertificate;
 import com.portfoli.domain.EmploymentStatus;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
+import com.portfoli.service.CertificateService;
 import com.portfoli.service.EmploymentStatusService;
 import com.portfoli.service.JobPostingService;
 import net.coobird.thumbnailator.ThumbnailParameter;
@@ -40,6 +43,9 @@ public class JobPostingController {
   @Autowired
   EmploymentStatusService employmentStatusService;
 
+  @Autowired
+  CertificateService certificateService;
+
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
   }
@@ -47,14 +53,16 @@ public class JobPostingController {
   @GetMapping("form")
   public void addForm(Model model) throws Exception {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
+    List<Certificate> certificates = certificateService.listCertificate();
     model.addAttribute("employmentStatus", employmentStatus);
+    model.addAttribute("certificates", certificates);
   }
 
   @PostMapping("add")
   public String add(//
       JobPosting jobPosting, //
-      MultipartFile[] jobPostingFiles) throws Exception {
-
+      Certificate certificate, MultipartFile[] jobPostingFiles) throws Exception {
+    System.out.println();
     System.out.println(jobPosting + "1111");
 
     ArrayList<JobPostingFile> files = new ArrayList<>();
@@ -76,10 +84,13 @@ public class JobPostingController {
               return name + "_300x300";
             }
           });
-
     }
 
+    List<Certificate> companyRequiredCertificates = new ArrayList<>();
+    companyRequiredCertificates.add(new CompanyRequiredCertificate().setCertificate(certificate));
+
     jobPosting.setFiles(files);
+    jobPosting.setCompanyRequiredCertificates(companyRequiredCertificates);
     System.out.println(jobPosting + "2222");
     jobPostingService.add(jobPosting);
     return "redirect:list";
@@ -121,15 +132,17 @@ public class JobPostingController {
   @GetMapping("updateForm")
   public void updateForm(int no, Model model) throws Exception {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
+    List<Certificate> certificates = certificateService.listCertificate();
     model.addAttribute("jobPosting", jobPostingService.get(no));
     model.addAttribute("employmentStatus", employmentStatus);
+    model.addAttribute("certificates", certificates);
   }
 
   @PostMapping("update")
   public String update(//
       JobPosting jobPosting, //
-      MultipartFile[] jobPostingFiles) throws Exception {
-
+      Certificate certificate, MultipartFile[] jobPostingFiles) throws Exception {
+    System.out.println(certificate);
     ArrayList<JobPostingFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/jobposting");
     for (MultipartFile jobPostingFile : jobPostingFiles) {
@@ -152,10 +165,20 @@ public class JobPostingController {
 
     }
 
+    List<Certificate> companyRequiredCertificates = new ArrayList<>();
+    companyRequiredCertificates.add(//
+        new CompanyRequiredCertificate().setCertificate(certificate));
+
     if (files.size() > 0) {
       jobPosting.setFiles(files);
     } else {
       jobPosting.setFiles(null);
+    }
+
+    if (companyRequiredCertificates.size() > 0) {
+      jobPosting.setCompanyRequiredCertificates(companyRequiredCertificates);
+    } else {
+      jobPosting.setCompanyRequiredCertificates(null);
     }
 
     jobPostingService.update(jobPosting);
