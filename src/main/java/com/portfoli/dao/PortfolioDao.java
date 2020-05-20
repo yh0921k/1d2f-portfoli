@@ -19,6 +19,9 @@ public interface PortfolioDao {
 
   int selectListCnt() throws Exception;
 
+  int selectMyListCnt(int generalMemberNumber) throws Exception;
+
+  
 
 
 

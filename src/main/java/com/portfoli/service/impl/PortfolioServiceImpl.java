@@ -51,6 +51,11 @@ public class PortfolioServiceImpl implements PortfolioService {
     return portfolioDao.selectListCnt();
   }
 
+  @Override
+  public int selectMyListCnt(int generalMemberNumber) throws Exception {
+    return portfolioDao.selectMyListCnt(generalMemberNumber);
+  }
+
 
 
 
