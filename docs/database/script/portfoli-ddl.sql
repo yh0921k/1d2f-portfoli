@@ -333,7 +333,7 @@ CREATE TABLE pf_banner (
   start_date    DATETIME     NOT NULL COMMENT '시작일', -- 시작일
   end_date      DATETIME     NOT NULL COMMENT '마감일', -- 마감일
   activate      INTEGER      NOT NULL COMMENT '게시여부', -- 게시여부
-  order         INTEGER      NULL     COMMENT '순서' -- 순서
+  `order`         INTEGER      NULL     COMMENT '순서' -- 순서
 )
 COMMENT '배너';
 
