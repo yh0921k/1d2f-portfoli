@@ -12,7 +12,7 @@ public class AdminAuthInterceptor implements HandlerInterceptor {
     System.out.println("AdminAuthInterceptor.preHandle()");
     if (request.getSession().getAttribute("admin") == null) {
       response
-          .sendRedirect(request.getContextPath() + request.getServletPath() + "/auth/loginForm");
+          .sendRedirect(request.getContextPath() + request.getServletPath() + "/adminAuth/loginForm");
       return false;
     }
     return true;

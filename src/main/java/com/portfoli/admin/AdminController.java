@@ -13,7 +13,7 @@ import com.portfoli.domain.Admin;
 import com.portfoli.service.AdminService;
 
 @Controller
-@RequestMapping("auth")
+@RequestMapping("adminAuth")
 public class AdminController {
 
   static Logger logger = LogManager.getLogger(AdminController.class);

@@ -73,7 +73,7 @@ public class AdminWebConfig implements WebMvcConfigurer {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new AdminControllerInterceptor()).addPathPatterns("/**");
     registry.addInterceptor(new AdminAuthInterceptor()).addPathPatterns("/*/*")
-        .excludePathPatterns("/auth/loginForm").excludePathPatterns("/auth/login");
+        .excludePathPatterns("/adminAuth/loginForm").excludePathPatterns("/adminAuth/login");
   }
 
   @Bean

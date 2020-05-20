@@ -15,8 +15,30 @@
   
   <!-- request handler가 리턴한 JSP의 경로에서
        TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다. -->
-  <definition name="*/*" extends="admin">
-    <put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}.jsp"/>
+    
+  <definition name="adminAuth/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/auth/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>   
+       
+  <definition name="banner/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/banner/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
+  <definition name="report/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/report/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
+  <definition name="log/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/log/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
@@ -35,7 +57,6 @@
   <definition name="log/moreContentsLog" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
   </definition>
-  
   
   <!-- app 템플릿 레이아웃 -->
   <definition name="app" template="/WEB-INF/tiles/app/template.jsp">
@@ -64,5 +85,6 @@
   <definition name="member/generalJoin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/member/generalJoin.jsp"/>
   </definition>
+  
   
 </tiles-definitions>
