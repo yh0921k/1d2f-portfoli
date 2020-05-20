@@ -43,9 +43,6 @@ public class QnaController {
   ServletContext servletContext;
 
   @Autowired
-  BoardAttachmentService boardAttachmentService;
-
-  @Autowired
   BoardService boardService;
 
   @Autowired
@@ -57,16 +54,11 @@ public class QnaController {
   @Autowired
   QnaCategoryService qnaCategoryService;
 
-  // @Autowired
-  // private UserMailSendService mailsender;
-
   @GetMapping("list")
   public void list(Model model, @RequestParam(defaultValue = "1") int pageNumber) throws Exception {
 
     int listCnt = qnaService.selectListCnt();
-    System.out.println("---------------------------listCnt" + listCnt);
     Pagination pagination = new Pagination(listCnt, pageNumber);
-    System.out.println("---------------------------curPage" + pageNumber);
     pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
 
     List<Qna> qnas = qnaService.list(pagination.getCurPage(), pagination.getPageSize());
@@ -75,13 +67,6 @@ public class QnaController {
       qna.setWriter(memberService.get(qna.getMemberNumber()).getName());
     }
     model.addAttribute("qnas", qnas);
-
-    System.out.println("---------------------------getCurPage" + pagination.getCurPage());
-    System.out.println("---------------------------getPageSize" + pagination.getPageSize());
-    System.out.println("---------------------------getPageCnt" + pagination.getPageCnt());
-    System.out.println("---------------------------getStartPage" + pagination.getStartPage());
-    System.out.println("---------------------------getEndPage" + pagination.getEndPage());
-
     model.addAttribute("pageNumber", pagination.getCurPage());
     model.addAttribute("pageSize", pagination.getPageSize());
     model.addAttribute("totalPage", pagination.getPageCnt());

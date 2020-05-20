@@ -43,6 +43,13 @@
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
+  
+  <definition name="adQna/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/qna/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
 
   <!-- Tiles 제외 정의부 -->
   <definition name="empty" template ="/WEB-INF/tiles/empty.jsp">
@@ -50,7 +57,7 @@
   </definition>
 
   <!-- Tiles 제외 선언부 -->
-  <definition name="auth/loginForm" extends="empty">
+  <definition name="adminAuth/loginForm" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/auth/loginForm.jsp"/>
   </definition>
   
