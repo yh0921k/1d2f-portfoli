@@ -29,14 +29,14 @@
           </a>
 
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="fi fi-task-list"></i>
-            게시글 관리
+          <a class="nav-link" href="#"> <i class="fab fa-quora"></i>
+            Q&A 관리
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="fi fi-support"></i>
-            문의 및 신고처리
+          <a class="nav-link" href="/portfoli/admin/report/list"> <i class="fi fi-support"></i>
+            신고 처리
           </a>
         </li>
 
