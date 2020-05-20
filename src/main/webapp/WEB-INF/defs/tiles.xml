@@ -2,7 +2,9 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
 <tiles-definitions>
+
   <!-- Admin 템플릿에서 공통으로 사용할 레이아웃을 정의한다. -->
   <definition name="admin" template="/WEB-INF/tiles/admin/template.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
@@ -10,7 +12,7 @@
     <put-attribute name="menu" value="/WEB-INF/tiles/admin/menu.jsp"/>
     <put-attribute name="footer" value="/WEB-INF/tiles/admin/footer.jsp"/>
   </definition>
-
+  
   <!-- request handler가 리턴한 JSP의 경로에서
        TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다. -->
   <definition name="*/*" extends="admin">
@@ -21,7 +23,7 @@
   </definition>
 
   <!-- Tiles 제외 정의부 -->
-  <definition name="empty" template ="/WEB-INF/tiles/admin/empty.jsp">
+  <definition name="empty" template ="/WEB-INF/tiles/empty.jsp">
     <put-attribute name="body" value =""/>
   </definition>
 
@@ -33,4 +35,34 @@
   <definition name="log/moreContentsLog" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
   </definition>
+  
+  
+  <!-- app 템플릿 레이아웃 -->
+  <definition name="app" template="/WEB-INF/tiles/app/template.jsp">
+    <put-attribute name="header" value="/WEB-INF/tiles/app/header.jsp"/>
+    <put-attribute name="menu" value="/WEB-INF/tiles/app/menu.jsp"/>
+    <put-attribute name="footer" value="/WEB-INF/tiles/app/footer.jsp"/>
+  </definition>
+  
+  <definition name="*/*" extends="app">
+    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+
+  <!-- Tiles 제외 선언부 -->
+  <definition name="auth/loginForm1" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/auth/loginForm.jsp"/>
+  </definition>
+  <definition name="auth/findPassword" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/auth/findPassword.jsp"/>
+  </definition>
+  <definition name="member/companyJoin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/member/companyJoin.jsp"/>
+  </definition>
+  <definition name="member/generalJoin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/member/generalJoin.jsp"/>
+  </definition>
+  
 </tiles-definitions>

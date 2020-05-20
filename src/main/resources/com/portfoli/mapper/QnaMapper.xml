@@ -76,7 +76,7 @@
 
 	<update id="update" parameterType="Qna">
 		UPDATE pf_qna
-		SET category_no = #{category.number}
+		SET category_no = #{category.number}, readable = #{readable}, email_notification = #{emailNoti}
 		WHERE board_no = #{number}
 	</update>
 

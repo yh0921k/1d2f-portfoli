@@ -44,7 +44,7 @@ public class AuthController {
   @Autowired
   MessageService messageService;
 
-  @GetMapping("loginForm")
+  @GetMapping("loginForm1")
   public void loginForm(HttpSession session, HttpServletRequest request, Model model)
       throws Exception {
 
