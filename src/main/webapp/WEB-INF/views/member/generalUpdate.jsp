@@ -23,12 +23,6 @@
 
 			<div class="col-12 col-sm-12 col-md-12 col-lg-9">
 
-				<!--
-                
-                Tab Navigation
-                Last tab remembered using localstorage by sow.nav_deep.js plugin
-
-              -->
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a
 						class="nav-link nav-link-remember active" data-toggle="tab"
