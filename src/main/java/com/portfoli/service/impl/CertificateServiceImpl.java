@@ -48,4 +48,13 @@ public class CertificateServiceImpl implements CertificateService {
     generalMemberCertificationDao.insertCertsByMemberNumber(certs);
   }
 
+  @Override
+  public List<Certificate> listCertificate() throws Exception {
+    List<Certificate> certs = certificateDao.findAll2();
+    if (certs.size() == 0) {
+      throw new Exception("자격 정보 불러오는 도중 에러 발생");
+    }
+    return certs;
+  }
+
 }

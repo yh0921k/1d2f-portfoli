@@ -9,6 +9,13 @@ public class Certificate implements Serializable {
   int certificateNumber;
   String agency, name;
 
+  public Certificate setCertificate(Certificate certificate) {
+    this.certificateNumber = certificate.certificateNumber;
+    this.agency = certificate.agency;
+    this.name = certificate.name;
+    return this;
+  }
+
   public int getCertificateNumber() {
     return certificateNumber;
   }
