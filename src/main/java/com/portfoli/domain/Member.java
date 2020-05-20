@@ -9,7 +9,7 @@ public class Member implements Serializable {
 
   private int number, smsYN, emailYN, type;
   private String id, password, name, postNumber, basicAddress, detailAddress, email, tel, userkey,
-      provider;
+  provider, photoFilePath;
   private Date createDate;
 
   public int getNumber() {
@@ -132,6 +132,14 @@ public class Member implements Serializable {
     this.createDate = createDate;
   }
 
+  public String getPhotoFilePath() {
+    return photoFilePath;
+  }
+
+  public void setPhotoFilePath(String photoFilePath) {
+    this.photoFilePath = photoFilePath;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -145,6 +153,7 @@ public class Member implements Serializable {
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + number;
     result = prime * result + ((password == null) ? 0 : password.hashCode());
+    result = prime * result + ((photoFilePath == null) ? 0 : photoFilePath.hashCode());
     result = prime * result + ((postNumber == null) ? 0 : postNumber.hashCode());
     result = prime * result + ((provider == null) ? 0 : provider.hashCode());
     result = prime * result + smsYN;
@@ -202,6 +211,11 @@ public class Member implements Serializable {
         return false;
     } else if (!password.equals(other.password))
       return false;
+    if (photoFilePath == null) {
+      if (other.photoFilePath != null)
+        return false;
+    } else if (!photoFilePath.equals(other.photoFilePath))
+      return false;
     if (postNumber == null) {
       if (other.postNumber != null)
         return false;
@@ -235,9 +249,6 @@ public class Member implements Serializable {
         + type + ", id=" + id + ", password=" + password + ", name=" + name + ", postNumber="
         + postNumber + ", basicAddress=" + basicAddress + ", detailAddress=" + detailAddress
         + ", email=" + email + ", tel=" + tel + ", userkey=" + userkey + ", provider=" + provider
-        + ", createDate=" + createDate + "]";
+        + ", photoFilePath=" + photoFilePath + ", createDate=" + createDate + "]";
   }
-
-
-
 }

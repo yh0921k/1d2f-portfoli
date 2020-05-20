@@ -35,7 +35,7 @@
 	<select id="findByEmailAndPassword" resultMap="GeneralMemberMap"
 		parameterType="map">
 		SELECT g.general_member_no, m.email, m.id, m.type, m.name,
-		g.seeking_flag, g.membership, g.career, g.photo
+		g.seeking_flag, g.membership, g.career, m.photo
 		FROM pf_members m JOIN pf_general_member g
 		ON m.member_no = g.general_member_no
 		<if test="password != null">WHERE (m.id=#{email} OR m.email=#{email}) AND
@@ -46,17 +46,11 @@
 	<select id="getSessionByGNumber" resultMap="GeneralMemberMap"
 		parameterType="int">
 		SELECT g.general_member_no, m.email, m.id, m.type, m.name, g.seeking_flag,
-		g.membership, g.career, g.photo
+		g.membership, g.career, m.photo
 		FROM pf_members m JOIN pf_general_member g
 		ON m.member_no = g.general_member_no
 		WHERE m.member_no=#{no}
 	</select>
-
-	<update id="updateProfilePicture" parameterType="map">
-		UPDATE pf_general_member
-		SET photo=#{photoFilePath}
-		WHERE general_member_no=#{member_number}
-	</update>
 
 	<update id="updateFlag" parameterType="map">
 		UPDATE pf_general_member

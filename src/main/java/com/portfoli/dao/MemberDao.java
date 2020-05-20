@@ -15,6 +15,8 @@ public interface MemberDao {
 
   int updateAddress(Member member) throws Exception;
 
+  int updateProfilePicture(Map<String, Object> params) throws Exception;
+
   Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
 
   Member findByMemberNumber(int userNumber) throws Exception;
