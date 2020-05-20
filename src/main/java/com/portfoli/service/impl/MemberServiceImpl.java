@@ -87,8 +87,8 @@ public class MemberServiceImpl implements MemberService {
 
 
   @Override
-  public int updateProfilePic(Map<String, Object> generalMember) throws Exception {
-    if (generalMemberDao.updateProfilePicture(generalMember) > 0) {
+  public int updateProfilePic(Map<String, Object> member) throws Exception {
+    if (memberDao.updateProfilePicture(member) > 0) {
       return 1;
     } else {
       return 0;
@@ -97,17 +97,7 @@ public class MemberServiceImpl implements MemberService {
 
 
   @Override
-  public GeneralMember get(int number) throws Exception {
-    GeneralMember generalMember = generalMemberDao.findByGeneralMemberNumber(number);
-    if ((generalMember) != null) {
-      return generalMember;
-    } else {
-      return null;
-    }
-  }
-
-  @Override
-  public Member getM(int number) throws Exception {
+  public Member get(int number) throws Exception {
     Member member = memberDao.findByMemberNumber(number);
     if ((member) != null) {
       return member;
@@ -173,9 +163,12 @@ public class MemberServiceImpl implements MemberService {
   public int updateDefaultInfo(GeneralMember member) throws Exception {
     Map<String, Object> params = new HashMap<>();
     params.put("photoFilePath", member.getPhotoFilePath());
-    params.put("member_number", member.getNumber());
-    if (generalMemberDao.updateProfilePicture(params) > 0) {
+    params.put("number", member.getNumber());
+    System.out.println("담음");
+    if (memberDao.updateProfilePicture(params) > 0) {
+      System.out.println("업프픽됨");
       if (memberDao.updateDefaultInfo(member) > 0) {
+        System.out.println("업디인");
         return 1;
       }
       return 0;
@@ -185,11 +178,11 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public GeneralMember getSessionInfo(int memberNumber) throws Exception {
+  public GeneralMember getSessionInfo(int number) throws Exception {
 
-    GeneralMember generalMember = generalMemberDao.getSessionByGNumber(memberNumber);
-    if (generalMember != null) {
-      return generalMember;
+    GeneralMember member = generalMemberDao.getSessionByGNumber(number);
+    if (member != null) {
+      return member;
     }
     return null;
   }

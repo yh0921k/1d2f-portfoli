@@ -169,7 +169,6 @@ DROP TABLE IF EXISTS pf_faq RESTRICT;
 CREATE TABLE pf_general_member (
   general_member_no INTEGER      NOT NULL COMMENT '일반회원번호', -- 일반회원번호
   seeking_flag      INTEGER      NOT NULL COMMENT '구직여부', -- 구직여부
-  photo             VARCHAR(255) NULL     COMMENT '사진', -- 사진
   membership        VARCHAR(255) NOT NULL COMMENT '멤버십(등급)', -- 멤버십(등급)
   career            INTEGER      NULL     COMMENT '경력' -- 경력
 )
@@ -334,6 +333,7 @@ CREATE TABLE pf_banner (
   start_date    DATETIME     NOT NULL COMMENT '시작일', -- 시작일
   end_date      DATETIME     NOT NULL COMMENT '마감일', -- 마감일
   activate      INTEGER      NOT NULL COMMENT '게시여부' -- 게시여부
+  order         INTEGER      NULL     COMMENT '순서' -- 순서
 )
 COMMENT '배너';
 
@@ -399,6 +399,7 @@ CREATE TABLE pf_members (
   detail_address VARCHAR(100) NULL     COMMENT '상세주소', -- 상세주소
   email          VARCHAR(50)  NOT NULL COMMENT '이메일', -- 이메일
   tel            VARCHAR(20)  NULL 	   COMMENT '연락처', -- 연락처
+  photo          VARCHAR(255) NULL     COMMENT '사진', -- 사진
   create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
   sms_yn         INTEGER      NOT NULL COMMENT 'SMS수신동의여부', -- SMS수신동의여부
   email_yn       INTEGER      NOT NULL COMMENT '이메일 수신 동의여부', -- 이메일 수신 동의여부

@@ -72,7 +72,7 @@ public class QnaController {
     List<Qna> qnas = qnaService.list(pagination.getCurPage(), pagination.getPageSize());
 
     for (Qna qna : qnas) {
-      qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
+      qna.setWriter(memberService.get(qna.getMemberNumber()).getName());
     }
     model.addAttribute("qnas", qnas);
 
@@ -109,7 +109,7 @@ public class QnaController {
     }
 
     if (qna != null) {
-      qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
+      qna.setWriter(memberService.get(qna.getMemberNumber()).getName());
       mv.addObject("qna", qna);
 
       if (viewCookie == null) {
@@ -136,7 +136,7 @@ public class QnaController {
   public void updateForm(Model model, int no) throws Exception {
     Qna qna = qnaService.get(no);
     List<QnaCategory> categories = qnaCategoryService.get();
-    qna.setWriter(memberService.getM(qna.getMemberNumber()).getName());
+    qna.setWriter(memberService.get(qna.getMemberNumber()).getName());
     model.addAttribute("qna", qna);
     model.addAttribute("categories", categories);
   }

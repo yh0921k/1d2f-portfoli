@@ -19,6 +19,7 @@
 		<result column="create_date" property="createDate" />
 		<result column="sms_yn" property="smsYN" />
 		<result column="email_yn" property="emailYN" />
+		<result column="photo" property="photoFilePath" />
 		<result column="type" property="type" />
 		<result column="userkey" property="userkey" />
 	</resultMap>
@@ -53,7 +54,7 @@
 
 	<select id="findByMemberNumber" resultMap="MemberMap"
 		parameterType="int">
-		SELECT member_no, type, id, name, email
+		SELECT member_no, type, id, name, email, photo
 		FROM pf_members
 		WHERE member_no=#{senderNumber}
 	</select>
@@ -111,6 +112,10 @@
 		WHERE member_no=#{number}
 	</update>
 	
-	
+	 <update id="updateProfilePicture" parameterType="map">
+    UPDATE pf_members
+    SET photo=#{photoFilePath}
+    WHERE member_no=#{number}
+  </update>
 
 </mapper>
