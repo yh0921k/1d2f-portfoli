@@ -13,7 +13,7 @@ import com.portfoli.domain.Admin;
 import com.portfoli.service.AdminService;
 
 @Controller
-@RequestMapping("adminAuth")
+@RequestMapping("auth")
 public class AdminController {
 
   static Logger logger = LogManager.getLogger(AdminController.class);
@@ -29,7 +29,8 @@ public class AdminController {
   }
 
   @GetMapping("loginForm")
-  public void loginForm(HttpServletRequest request, HttpSession session) throws Exception {
+  public void loginForm(final HttpServletRequest request, final HttpSession session)
+      throws Exception {
     System.out.println("loginForm");
     request.getSession().invalidate();
     System.out.println("loginForm after invalidate()");
@@ -42,7 +43,8 @@ public class AdminController {
   }
 
   @RequestMapping("login")
-  public String login(HttpServletRequest request, String id, String password) throws Exception {
+  public String login(final HttpServletRequest request, final String id, final String password)
+      throws Exception {
     logger.info("AdminController::login() called");
 
     if (request.getSession().getAttribute("admin") != null) {
