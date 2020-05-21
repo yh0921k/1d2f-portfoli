@@ -7,12 +7,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class AdminAuthInterceptor implements HandlerInterceptor {
 
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
+  public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
+      final Object handler) throws Exception {
     System.out.println("AdminAuthInterceptor.preHandle()");
     if (request.getSession().getAttribute("admin") == null) {
       response
-          .sendRedirect(request.getContextPath() + request.getServletPath() + "/adminAuth/loginForm");
+          .sendRedirect(request.getContextPath() + request.getServletPath() + "/auth/loginForm");
       return false;
     }
     return true;
