@@ -64,5 +64,9 @@
   <definition name="log/moreContentsLog.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
   </definition>
+  
+  <definition name="adQna/detail.admin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/qna/detail.jsp"/>
+  </definition>
     
 </tiles-definitions>

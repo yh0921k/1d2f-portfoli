@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <div id="middle" class="flex-fill">
 	<section class="rounded mb-3 ">
 		<div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-			Qna <small class="fs--11 text-muted d-block mt-1">Qna 내역입니다. </small>
+			Qna <small class="fs--11 text-muted d-block mt-1">Qna 내역입니다.
+			</small>
 		</div>
 
 		<div class="col-12 col-lg-9 col-xl-10 position-relative">
@@ -27,13 +29,20 @@
 
 							<tbody id="item_list">
 								<c:forEach items="${qnas}" var="qna">
-									<tr>
+
+									<tr class="text-muted">
 										<td>${qna.category.name}</td>
-										<td><a href="/portfoli/admin/adQna/detail?no=${qna.number}" class="text-gray-900">${qna.title}</td>
+										<td><a href="/portfoli/admin/adQna/detail?no=${qna.number}"
+											data-href="/portfoli/admin/adQna/detail?no=${qna.number}"
+											data-ajax-modal-size="modal-xl"
+											data-ajax-modal-centered="false"
+											data-ajax-modal-callback-function=""
+											data-ajax-modal-backdrop="" class="js-ajax-modal text-muted">${qna.title}</a></td>
 										<td>${qna.writer}</td>
 										<td>${qna.registeredDate}</td>
 										<td>${qna.viewCount}</td>
 									</tr>
+
 								</c:forEach>
 							</tbody>
 

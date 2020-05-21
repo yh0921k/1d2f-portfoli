@@ -21,9 +21,9 @@
 <link rel="stylesheet" href="<tiles:getAsString name='css.vendor_bundle.min'/>">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script src="<tiles:getAsString name='js.core.min'/>"></script>
 </head>
 <body class="layout-admin aside-sticky header-sticky">
+<script src="<tiles:getAsString name='js.core.min'/>"></script>
 
 <div id="wrapper" class="d-flex align-items-stretch flex-column">
 <tiles:insertAttribute name="header"/>

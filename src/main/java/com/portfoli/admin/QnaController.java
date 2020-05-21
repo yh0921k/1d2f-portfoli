@@ -19,9 +19,9 @@ import com.portfoli.service.UserMailSendService;
 @Controller
 @RequestMapping("adQna")
 public class QnaController {
-  
+
   final int pageSize = 10;
-  
+
   @Autowired
   ServletContext servletContext;
 
@@ -39,7 +39,7 @@ public class QnaController {
 
   @Autowired
   UserMailSendService mailsender;
-  
+
   @GetMapping("list")
   public void list(Model model, @RequestParam(defaultValue = "1") int pageNumber) throws Exception {
 
@@ -59,5 +59,10 @@ public class QnaController {
     model.addAttribute("startPage", pagination.getStartPage());
     model.addAttribute("endPage", pagination.getEndPage());
   }
-  
+
+  @GetMapping("detail")
+  public void detail() throws Exception {
+
+  }
+
 }
