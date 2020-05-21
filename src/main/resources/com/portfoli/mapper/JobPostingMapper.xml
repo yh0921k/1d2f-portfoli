@@ -37,11 +37,6 @@
 			<result column="file_path" property="filePath" />
 		</collection>
 
-		<collection property="companyRequiredCertificates"
-			ofType="CompanyRequiredCertificate">
-			<id column="certificate_no" property="certificateNumber" />
-		</collection>
-
 	</resultMap>
 
 	<insert id="insert" parameterType="JobPosting"

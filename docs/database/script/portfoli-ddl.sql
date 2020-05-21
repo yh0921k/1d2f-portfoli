@@ -680,9 +680,6 @@ CREATE UNIQUE INDEX UIX_pf_certificate
     name ASC    -- 자격증이름
   );
 
-ALTER TABLE pf_certificate
-  MODIFY COLUMN certificate_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '자격증번호';
-
 -- 일반회원자격증
 CREATE TABLE pf_general_member_certification (
   general_member_no INTEGER  NOT NULL COMMENT '일반회원번호', -- 일반회원번호
