@@ -3,8 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <jsp:include page="../header.jsp"/>
-
       <!-- PAGE TITLE -->
       <section class="bg-white" style="padding: 30px 0px;">
         <div class="container py-1">
@@ -28,16 +26,18 @@
 <div class="container">
 <div align="center"> <button style="font-size: small" onclick="location.href='form'">글쓰기(+)</button>
 <div class="row">
+<%--
+ --%>
+
   <c:forEach items="${list}" var="item">
-  
+
 <!-- 테스트코드 -->
 <a href="#"
   data-href="detail?number=${item.number}" 
   data-ajax-modal-size="modal-xl" 
-  data-ajax-modal-centered="true" 
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
-  class="js-ajax-modal ">
+  class="js-ajax-modal">
 <!-- 테스트코드 -->
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
@@ -80,6 +80,7 @@
     </div>
     </a>
     </c:forEach>
+    <script src="../../resources/assets/js/core.min.js"></script>
   </div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
@@ -128,7 +129,13 @@
 </div>
 </div>
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
+  <style>
+    .modal-content {
+    margin-top:150px;
+  }
+  </style>
   <script>
+  
   function fn_paging(curPage) {
 	  location.href = "list?curPage=" + curPage;
 	  }
@@ -147,4 +154,3 @@
       padding: 5px 5px;
     }
   </style>
-      <jsp:include page="../footer.jsp"/>

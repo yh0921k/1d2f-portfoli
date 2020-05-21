@@ -39,4 +39,8 @@
   <definition name="report/form.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/report/form.jsp"/>
   </definition>
+  <definition name="portfolio/detail.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/portfolio/detail.jsp"/>
+  </definition>
+  
 </tiles-definitions>

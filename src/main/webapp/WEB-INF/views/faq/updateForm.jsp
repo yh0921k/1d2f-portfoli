@@ -2,12 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <jsp:include page="../header.jsp"/>
 
 <div class="container-fluid">
   <div class="row">
     <!--------------------------------------- nav bar ----------------------------------------------->
-  <jsp:include page="navbar.jsp"/>
+    <jsp:include page="../faq/navbar.jsp"/>
     <!--------------------------------------------- /nav bar ------------------------------------------------>
     <!-------------------------------------------- contents -------------------------------------------------->
     <div class="portlet mt--20 p-3" style="width: 65%;">
@@ -125,5 +124,3 @@
       }
     
   </script>
-
-      <jsp:include page="../footer.jsp"/>

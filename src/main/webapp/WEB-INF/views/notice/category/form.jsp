@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
-  <jsp:include page="../../header.jsp"/>
-
     <%--상단 바부분 : 필요없어서 뺌 
 			<!-- PAGE TITLE -->
 			<section class="bg-white">
@@ -87,7 +85,3 @@
 
 			</section>
 			<!-- /FAQ -->
-
-
-
-		  <jsp:include page="../../footer.jsp"/>
