@@ -10,7 +10,7 @@
 		<id column="major_no" property="majorNumber" />
 	</resultMap>
 
-	<select id="findAll" resultMap="CertificateMap">
+	<select id="findAll" resultMap="MajorMap">
 		 SELECT major_no, name
     FROM pf_major
 	</select>
