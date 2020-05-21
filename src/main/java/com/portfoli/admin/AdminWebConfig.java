@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @ComponentScan(value = "com.portfoli.admin")
@@ -38,16 +37,17 @@ public class AdminWebConfig implements WebMvcConfigurer {
   // }
 
   // Tiles View를 사용할 Resolver 추가
-  @Bean
-  public TilesConfigurer tilesConfigurer() {
-    TilesConfigurer configurer = new TilesConfigurer();
-    configurer.setDefinitions("/WEB-INF/defs/admin-tiles.xml");
-    return configurer;
-  }
+  // @Bean
+  // public TilesConfigurer tilesConfigurer() {
+  // TilesConfigurer configurer = new TilesConfigurer();
+  // configurer.setDefinitions("/WEB-INF/defs/admin-tiles.xml");
+  // return configurer;
+  // }
 
   @Bean
   public ViewResolver tilesViewResolver() {
     UrlBasedViewResolver vr = new UrlBasedViewResolver();
+    vr.setSuffix(".admin");
 
     // Tiles 설정에 따라 템플릿을 실행할 뷰 처리기를 등록한다.
     vr.setViewClass(TilesView.class);
