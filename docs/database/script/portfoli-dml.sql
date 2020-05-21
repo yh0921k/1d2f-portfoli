@@ -425,11 +425,68 @@ INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES
 INSERT INTO pf_employment_status(employment_stat_no,employment_stat_name) VALUES(5,'파견직');
 
 -- pf_major 전공 데이터
-INSERT INTO pf_major(major_no, name) VALUES(1,'손영국');
-INSERT INTO pf_major(major_no, name) VALUES(2,'김용휘');
-INSERT INTO pf_major(major_no, name) VALUES(3,'전은혜');
-INSERT INTO pf_major(major_no, name) VALUES(4,'송율리아');
-INSERT INTO pf_major(major_no, name) VALUES(5,'문국대');
+INSERT INTO pf_major(major_no, name) VALUES(1000,'교육심리학');
+INSERT INTO pf_major(major_no, name) VALUES(1001,'아동보유상담학');
+INSERT INTO pf_major(major_no, name) VALUES(2000,'소방구조구급');
+INSERT INTO pf_major(major_no, name) VALUES(2001,'소방안전관리');
+INSERT INTO pf_major(major_no, name) VALUES(3000,'건설공학');
+INSERT INTO pf_major(major_no, name) VALUES(3001,'철도토목학');
+INSERT INTO pf_major(major_no, name) VALUES(3002,'건축설비공학과');
+INSERT INTO pf_major(major_no, name) VALUES(3003,'철도건설안전공학');
+INSERT INTO pf_major(major_no, name) VALUES(3004,'해양건설시스템공학');
+INSERT INTO pf_major(major_no, name) VALUES(4000,'산업경영공학');
+INSERT INTO pf_major(major_no, name) VALUES(4001,'산업정보시스템공학');
+INSERT INTO pf_major(major_no, name) VALUES(4002,'생명산업공학');
+INSERT INTO pf_major(major_no, name) VALUES(5000,'기계IT융합공학');
+INSERT INTO pf_major(major_no, name) VALUES(5001,'시스템디자인공학');
+INSERT INTO pf_major(major_no, name) VALUES(5002,'로봇기계공학');
+INSERT INTO pf_major(major_no, name) VALUES(5003,'바이오산업기계공학');
+INSERT INTO pf_major(major_no, name) VALUES(5004,'산업기계공학');
+INSERT INTO pf_major(major_no, name) VALUES(5005,'생산기계공학');
+INSERT INTO pf_major(major_no, name) VALUES(5006,'스마트기계공학');
+INSERT INTO pf_major(major_no, name) VALUES(5007,'컴퓨터응용기계공학');
+INSERT INTO pf_major(major_no, name) VALUES(6000,'수화통역학');
+INSERT INTO pf_major(major_no, name) VALUES(6001,'유아특수교육학');
+INSERT INTO pf_major(major_no, name) VALUES(6002,'가구디자인');
+INSERT INTO pf_major(major_no, name) VALUES(6003,'건축실내디자인');
+INSERT INTO pf_major(major_no, name) VALUES(6004,'공간디자인');
+INSERT INTO pf_major(major_no, name) VALUES(6005,'관광호텔경영');
+INSERT INTO pf_major(major_no, name) VALUES(6006,'호텔조리');
+INSERT INTO pf_major(major_no, name) VALUES(6007,'외식경영');
+INSERT INTO pf_major(major_no, name) VALUES(6008,'패션디자인');
+INSERT INTO pf_major(major_no, name) VALUES(6009,'비즈니스');
+INSERT INTO pf_major(major_no, name) VALUES(7000,'뷰티디자인');
+INSERT INTO pf_major(major_no, name) VALUES(7001,'기술경영공학');
+INSERT INTO pf_major(major_no, name) VALUES(7002,'미래융합학');
+INSERT INTO pf_major(major_no, name) VALUES(7003,'사이버드론봇군사학');
+INSERT INTO pf_major(major_no, name) VALUES(7004,'ICT경영학');
+INSERT INTO pf_major(major_no, name) VALUES(7005,'금융서비스');
+INSERT INTO pf_major(major_no, name) VALUES(7006,'세무회계');
+INSERT INTO pf_major(major_no, name) VALUES(7007,'반도체디스플레이');
+INSERT INTO pf_major(major_no, name) VALUES(7008,'스마트콘텐츠');
+INSERT INTO pf_major(major_no, name) VALUES(7009,'멀티미디어디자인');
+INSERT INTO pf_major(major_no, name) VALUES(8000,'응용소프트웨어');
+INSERT INTO pf_major(major_no, name) VALUES(8001,'IoT인공지능융합');
+INSERT INTO pf_major(major_no, name) VALUES(8002,'임베디드소프트웨어');
+INSERT INTO pf_major(major_no, name) VALUES(8003,'인공지능소프트웨어');
+INSERT INTO pf_major(major_no, name) VALUES(8004,'스마트ICT융합');
+INSERT INTO pf_major(major_no, name) VALUES(8005,'컴퓨터공학');
+INSERT INTO pf_major(major_no, name) VALUES(8006,'소프트웨어공학');
+INSERT INTO pf_major(major_no, name) VALUES(8007,'로봇공학');
+INSERT INTO pf_major(major_no, name) VALUES(8008,'로봇자동화공학');
+INSERT INTO pf_major(major_no, name) VALUES(8009,'가정복지학');
+INSERT INTO pf_major(major_no, name) VALUES(8010,'스포트건강관리학');
+INSERT INTO pf_major(major_no, name) VALUES(9000,'건설기계');
+INSERT INTO pf_major(major_no, name) VALUES(9001,'경찰행정');
+INSERT INTO pf_major(major_no, name) VALUES(9002,'도예');
+INSERT INTO pf_major(major_no, name) VALUES(9003,'공중보건학');
+INSERT INTO pf_major(major_no, name) VALUES(9004,'경영학');
+INSERT INTO pf_major(major_no, name) VALUES(9005,'광고디자인');
+INSERT INTO pf_major(major_no, name) VALUES(9006,'교육공학');
+INSERT INTO pf_major(major_no, name) VALUES(9007,'성악');
+INSERT INTO pf_major(major_no, name) VALUES(9008,'국어교육');
+INSERT INTO pf_major(major_no, name) VALUES(9009,'한국음악');
+INSERT INTO pf_major(major_no, name) VALUES(9010,'기계설계');
   
 -- 공지사항분류 예제데이터 (pf_notice_category)
 INSERT INTO pf_notice_category (category_no, name) VALUES(0, "미분류");
@@ -571,11 +628,11 @@ INSERT INTO pf_job_posting_file(job_posting_file_no,job_posting_no,file_path) VA
 INSERT INTO pf_job_posting_file(job_posting_file_no,job_posting_no,file_path) VALUES(5,5,'/file/path');  
   
 -- pf_company_required_major 기업요구전공 데이터 (pf_job_posting 인서트 후)
-INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(1,1);
-INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(2,2);
-INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(3,3);
-INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(4,4);
-INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(5,5); 
+INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(1000,1);
+INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(2001,2);
+INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(6006,3);
+INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(8005,4);
+INSERT INTO pf_company_required_major(major_no, job_posting_no) VALUES(9005,5); 
   
 -- pf_job_recommendation 채용추천 (pf_job_posting 인서트 후)
 INSERT INTO pf_job_recommendation (general_member_no,job_posting_no) VALUES(1,1);
@@ -599,11 +656,11 @@ INSERT INTO pf_general_mem_edu(general_member_no,education_no,school_name) VALUE
 INSERT INTO pf_general_mem_edu(general_member_no,education_no,school_name) VALUES(5,5,'한양대학교');
 
 -- pf_general_mem_edu_major 일반회원학력전공(pf_general_mem_edu 인서트 후)
-INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(1,1,1);
-INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(2,2,2);
-INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(3,3,3);
-INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(4,4,4);
-INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(5,5,5);
+INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(1,1,1000);
+INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(2,2,3000);
+INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(3,3,6003);
+INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(4,4,6007);
+INSERT INTO pf_general_mem_edu_major (general_member_no,education_no,major_no) VALUES(5,5,8001);
   
 -- interest_location (pf_country_district 인서트 후)
 INSERT INTO pf_interest_location(general_member_no, location_no) VALUES(1, 1);
