@@ -34,6 +34,16 @@
       </select>
     </div>
     
+    <div class="row">
+      <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">요구전공
+        : </span> <select id="select_options2" name="major.majorNumber"
+        class="form-control form-control-sm col-md-3">
+        <c:forEach items="${majors}" var="major">
+          <option value="${major.majorNumber}">${major.name}</option>
+        </c:forEach>
+      </select>
+    </div>
+    
      <!-- 
 		<div class="col-sm-13">
 			자격증 * <input id='certificateNumber' type='number'

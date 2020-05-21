@@ -23,6 +23,7 @@
 				<p class="text-gray-900 mb-1 ml-3">직무 : ${jobPosting.job}</p>
 				<p class="text-gray-900 mb-1 ml-3">고용형태 : ${jobPosting.employmentStatus.name}</p>
 				<p class="text-gray-900 mb-1 ml-3">자격증 : ${jobPosting.certificate.name}</p>
+				<p class="text-gray-900 mb-1 ml-3">요구전공 : ${jobPosting.major.name}</p>
 
 			</div>
 			<br>

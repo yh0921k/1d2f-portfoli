@@ -29,7 +29,12 @@
 
     <association property="certificate" javaType="Certificate">
       <id column="certificate_no" property="certificateNumber" />
-      <result column="name" property="name" />
+      <result column="certificate_name" property="name" />
+    </association>
+    
+    <association property="major" javaType="Major">
+    <id column="major_no" property="majorNumber"/>
+    <result column="major_name" property="name"/>
     </association>
     
 		<collection property="files" ofType="JobPostingFile">
@@ -160,8 +165,9 @@
      j.view_count,
      f.file_path,
      e.employment_stat_name,
-     c.name
-   from pf_job_posting j
+     c.name as certificate_name,
+     m.name as major_name
+     from pf_job_posting j
      left outer join
      pf_job_posting_file f on j.job_posting_no=f.job_posting_no
      join pf_employment_status e
@@ -170,6 +176,10 @@
      pf_company_required_certificate r on j.job_posting_no = r.job_posting_no
      left outer join
      pf_certificate c on r.certificate_no = c.certificate_no
+     left outer join
+     pf_company_required_major q on j.job_posting_no = q.job_posting_no
+     left outer join
+     pf_major m on q.major_no = m.major_no     
    where
    j.job_posting_no=#{jobPostingNumber}
 	</select>
@@ -210,7 +220,7 @@
 		j.view_count,
 		f.file_path,
 		e.employment_stat_name,
-		c.certificate_no
+		c.name as certificate_name		
 		from
 		pf_job_posting
 		j
@@ -236,8 +246,7 @@
 		or j.year_salary like
 		#{keywordPattern}
 		or e.employment_stat_name like #{keywordPattern}
-		or
-		e.certificate_no like #{keywordPattern}
+		or e.certificate_no like #{keywordPattern}
 	</select>
 
 </mapper>

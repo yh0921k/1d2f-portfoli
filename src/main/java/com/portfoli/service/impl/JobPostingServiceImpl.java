@@ -6,6 +6,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.CompanyRequiredCertificateDao;
+import com.portfoli.dao.CompanyRequiredMajorDao;
 import com.portfoli.dao.JobPostingDao;
 import com.portfoli.dao.JobPostingFileDao;
 import com.portfoli.domain.JobPosting;
@@ -18,16 +19,19 @@ public class JobPostingServiceImpl implements JobPostingService {
   JobPostingDao jobPostingDao;
   JobPostingFileDao jobPostingFileDao;
   CompanyRequiredCertificateDao companyRequiredCertificateDao;
+  CompanyRequiredMajorDao companyRequiredMajorDao;
 
   public JobPostingServiceImpl(//
       PlatformTransactionManager txManager, //
       JobPostingDao jobPostingDao, //
       JobPostingFileDao jobPostingFileDao, //
-      CompanyRequiredCertificateDao companyRequiredCertificateDao) {
+      CompanyRequiredCertificateDao companyRequiredCertificateDao, //
+      CompanyRequiredMajorDao companyRequiredMajorDao) {
     this.transactionTemplate = new TransactionTemplate(txManager);
     this.jobPostingDao = jobPostingDao;
     this.jobPostingFileDao = jobPostingFileDao;
     this.companyRequiredCertificateDao = companyRequiredCertificateDao;
+    this.companyRequiredMajorDao = companyRequiredMajorDao;
   }
 
   @Transactional
@@ -36,6 +40,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     if (jobPostingDao.insert(jobPosting) == 0) {
       throw new Exception("게시글 등록에 실패했습니다.");
     }
+    companyRequiredMajorDao.insert(jobPosting);
     companyRequiredCertificateDao.insert(jobPosting);
     jobPostingFileDao.insert(jobPosting);
   }
@@ -60,6 +65,7 @@ public class JobPostingServiceImpl implements JobPostingService {
   public void delete(int no) throws Exception {
     jobPostingFileDao.deleteAll(no);
     companyRequiredCertificateDao.deleteAll(no);
+    companyRequiredMajorDao.deleteAll(no);
     if (jobPostingDao.delete(no) == 0) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
@@ -80,8 +86,10 @@ public class JobPostingServiceImpl implements JobPostingService {
     if (jobPosting.getFiles() != null) {
       jobPostingFileDao.deleteAll(jobPosting.getJobPostingNumber());
       companyRequiredCertificateDao.deleteAll(jobPosting.getJobPostingNumber());
+      companyRequiredMajorDao.deleteAll(jobPosting.getJobPostingNumber());
       jobPostingFileDao.insert(jobPosting);
       companyRequiredCertificateDao.insert(jobPosting);
+      companyRequiredMajorDao.insert(jobPosting);
     }
   }
 

@@ -23,6 +23,7 @@ public class JobPosting implements Serializable {
   private int minimumEducationNumber;
   private EmploymentStatus employmentStatus;
   private Certificate certificate;
+  private Major major;
   List<JobPostingFile> files;
 
 
@@ -34,7 +35,8 @@ public class JobPosting implements Serializable {
         + ", postingRegistration=" + postingRegistration + ", startDated=" + startDated
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
         + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
-        + employmentStatus + ", certificate=" + certificate + ", files=" + files + "]";
+        + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", files="
+        + files + "]";
   }
 
   @Override
@@ -49,6 +51,7 @@ public class JobPosting implements Serializable {
     result = prime * result + ((files == null) ? 0 : files.hashCode());
     result = prime * result + ((job == null) ? 0 : job.hashCode());
     result = prime * result + jobPostingNumber;
+    result = prime * result + ((major == null) ? 0 : major.hashCode());
     result = prime * result + minimumCareer;
     result = prime * result + minimumEducationNumber;
     result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
@@ -60,7 +63,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
 
 
   @Override
@@ -106,6 +108,11 @@ public class JobPosting implements Serializable {
       return false;
     if (jobPostingNumber != other.jobPostingNumber)
       return false;
+    if (major == null) {
+      if (other.major != null)
+        return false;
+    } else if (!major.equals(other.major))
+      return false;
     if (minimumCareer != other.minimumCareer)
       return false;
     if (minimumEducationNumber != other.minimumEducationNumber)
@@ -134,6 +141,14 @@ public class JobPosting implements Serializable {
     if (yearSalary != other.yearSalary)
       return false;
     return true;
+  }
+
+  public Major getMajor() {
+    return major;
+  }
+
+  public void setMajor(Major major) {
+    this.major = major;
   }
 
   public Certificate getCertificate() {
