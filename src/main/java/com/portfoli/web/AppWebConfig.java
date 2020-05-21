@@ -27,13 +27,14 @@ public class AppWebConfig {
   @Bean
   public TilesConfigurer tilesConfigurer() {
     TilesConfigurer configurer = new TilesConfigurer();
-    configurer.setDefinitions("/WEB-INF/defs/tiles.xml");
+    configurer.setDefinitions("/WEB-INF/defs/tiles.xml", "/WEB-INF/defs/admin-tiles.xml");
     return configurer;
   }
 
   @Bean
   public ViewResolver tilesViewResolver() {
     UrlBasedViewResolver vr = new UrlBasedViewResolver();
+    vr.setSuffix(".do");
     vr.setViewClass(TilesView.class);
     vr.setOrder(1);
 

@@ -16,35 +16,35 @@
   <!-- request handler가 리턴한 JSP의 경로에서
        TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다. -->
     
-  <definition name="auth/*" extends="admin">
+  <definition name="auth/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/auth/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>   
        
-  <definition name="banner/*" extends="admin">
+  <definition name="banner/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/banner/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
   
-  <definition name="report/*" extends="admin">
+  <definition name="report/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/report/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
   
-  <definition name="log/*" extends="admin">
+  <definition name="log/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/log/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
   
-  <definition name="adQna/*" extends="admin">
+  <definition name="adQna/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/qna/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
@@ -57,11 +57,11 @@
   </definition>
 
   <!-- Tiles 제외 선언부 -->
-  <definition name="auth/loginForm" extends="empty">
+  <definition name="auth/loginForm.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/auth/loginForm.jsp"/>
   </definition>
   
-  <definition name="log/moreContentsLog" extends="empty">
+  <definition name="log/moreContentsLog.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
   </definition>
     
