@@ -12,7 +12,7 @@
 	<display-name>포트폴리오 관리 시스템</display-name>
 
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/jsp/index.jsp</welcome-file>
+		<welcome-file>/WEB-INF/views/index.jsp</welcome-file>
 		<!--<welcome-file>index.html</welcome-file> <welcome-file>index.htm</welcome-file> -->
 	</welcome-file-list>
   
