@@ -1015,7 +1015,7 @@ ALTER TABLE pf_recommendation
     );
 
 ALTER TABLE pf_recommendation
-  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
+  MODIFY COLUMN board_no INTEGER NOT NULL COMMENT '게시글번호';
 
 -- 질문분류
 CREATE TABLE pf_question_category (
