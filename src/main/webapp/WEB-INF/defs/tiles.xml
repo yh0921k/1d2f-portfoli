@@ -12,7 +12,7 @@
     <put-attribute name="footer" value="/WEB-INF/tiles/app/footer.jsp"/>
   </definition>
   
-  <definition name="*/*" extends="app">
+  <definition name="*/*.do" extends="app">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
@@ -20,16 +20,16 @@
   </definition>
 
   <!-- Tiles 제외 선언부 -->
-  <definition name="auth/loginForm1" extends="empty">
+  <definition name="auth/loginForm1.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/auth/loginForm.jsp"/>
   </definition>
-  <definition name="auth/findPassword" extends="empty">
+  <definition name="auth/findPassword.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/auth/findPassword.jsp"/>
   </definition>
-  <definition name="member/companyJoin" extends="empty">
+  <definition name="member/companyJoin.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/member/companyJoin.jsp"/>
   </definition>
-  <definition name="member/generalJoin" extends="empty">
+  <definition name="member/generalJoin.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/member/generalJoin.jsp"/>
   </definition>
   
