@@ -136,10 +136,4 @@
 function addCallback() {
   location.href = "./";
 }
-
-console.log(${loginUser.number});
-console.log(${target.number});
-console.log($("select[name=reportCategory.number]").val());
-
-
 </script>

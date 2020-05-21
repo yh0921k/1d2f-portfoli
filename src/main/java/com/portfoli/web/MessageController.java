@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Message;
 import com.portfoli.domain.MessageFile;
@@ -176,18 +175,16 @@ public class MessageController {
     return "message/inboxDetail";
   }
 
-  @GetMapping("inbox/modal")
-  public String inboxModal(int number, Model model) throws Exception {
+  @GetMapping("inboxModal")
+  public void inboxModal(int number, Model model) throws Exception {
     Message message = messageService.get(number);
     if (message.getReceiverDelete() == 1) {
       throw new Exception("존재하지 않는 쪽지입니다.");
     }
 
-    message.setMember((GeneralMember) memberService.get(message.getSenderNumber()));
+    message.setMember(memberService.get(message.getSenderNumber()));
 
     model.addAttribute("message", message);
-
-    return "message/inboxModal";
   }
 
   @GetMapping("sent/delete")

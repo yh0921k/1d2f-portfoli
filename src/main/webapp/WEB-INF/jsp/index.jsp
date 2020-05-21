@@ -10,7 +10,7 @@
   
 </script>
 
-  <div class="col-xs-12" style="padding-bottom: 5px;">
+  <div class="col-xs-12" style="padding-bottom: 5px; z-index: 1;">
     <div id="carouselExampleCaptions" class="carousel slide"
       data-ride="carousel">
       <ol class="carousel-indicators">

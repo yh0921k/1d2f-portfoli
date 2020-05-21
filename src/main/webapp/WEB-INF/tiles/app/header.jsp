@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- HEADER -->
-<header id="header" class="shadow-xs bg-gradient-dark z-index-9999">
+<header id="header" class="shadow-xs bg-gradient-dark z-index-1000">
 
 	<!-- TOP BAR -->
 	<div id="top_bar" class="bg-gradient-dark fs--14">
@@ -221,7 +221,7 @@
 
 				<li
 					class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-					<a target="_blank" href="/portfoli/app/auth/loginForm1"
+					<a target="_blank" href="/portfoli/app/auth/loginForm"
 					class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
 				</li>
 			</c:if>
@@ -291,9 +291,9 @@
 						<div class="max-h-75vh">
 							<c:forEach items="${inbox}" var="recentMessage">
 								<a
-									href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+									href="#"
 									class="js-ajax-modal clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light"
-									data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+									data-href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
 									data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
 									data-ajax-modal-backdrop="static"> <span
 									class="badge badge-soft badge-warning float-end font-weight-normal mt-1"

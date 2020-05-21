@@ -14,13 +14,10 @@
   
   <definition name="*/*.do" extends="app">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
-    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
-    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
-    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
-
+  
   <!-- Tiles 제외 선언부 -->
-  <definition name="auth/loginForm1.do" extends="empty">
+  <definition name="auth/loginForm.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/auth/loginForm.jsp"/>
   </definition>
   <definition name="auth/findPassword.do" extends="empty">
@@ -32,6 +29,14 @@
   <definition name="member/generalJoin.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/member/generalJoin.jsp"/>
   </definition>
-  
-  
+
+  <definition name="message/form.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/message/form.jsp"/>
+  </definition>
+  <definition name="message/inboxModal.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/message/inboxModal.jsp"/>
+  </definition>
+  <definition name="report/form.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/report/form.jsp"/>
+  </definition>
 </tiles-definitions>

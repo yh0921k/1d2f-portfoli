@@ -16,19 +16,17 @@
 <link rel="manifest" href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
 
 <link rel="preload" href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="<tiles:getAsString name='css.core.min'/>">
-<link rel="stylesheet" href="<tiles:getAsString name='css.vendor_bundle.min'/>">
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script src="<tiles:getAsString name='js.core.min'/>"></script>
 </head>
 <body class="header-sticky">
-
+<script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
 	<div id="wrapper">
 		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="body" />
 		<tiles:insertAttribute name="footer" />
 	</div>
-
 </body>
 </html>

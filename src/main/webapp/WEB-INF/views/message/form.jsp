@@ -2,7 +2,6 @@
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"
   trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <form novalidate class="bs-validate js-ajax"
   action="/portfoli/app/message/add" method="post"
   enctype="multipart/form-data" data-modal-autoclose-on-success="true"

@@ -30,8 +30,6 @@
 <link rel="apple-touch-icon" href="${pageContext.request.getContextPath()}/resources/demo.files/logo/icon_512x512.png">
 <link rel="manifest" href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <meta name="theme-color" content="#377dff">
@@ -39,12 +37,12 @@
 </head>
 
 <body class="header-sticky">
-
+<script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
 	<div id="wrapper">
 
 
 		<!-- HEADER -->
-		<header id="header" class="shadow-xs bg-gradient-dark z-index-9999">
+		<header id="header" class="shadow-xs bg-gradient-dark z-index-1000">
 
 			<!-- TOP BAR -->
 			<div id="top_bar" class="bg-gradient-dark fs--14">
@@ -280,7 +278,7 @@
 
 						<li
 							class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
-							<a target="_blank" href="/portfoli/app/auth/loginForm1"
+							<a target="_blank" href="/portfoli/app/auth/loginForm"
 							class="btn btn-sm btn-warning shadow-none m-0">로그인</a>
 						</li>
 					</c:if>
@@ -350,9 +348,9 @@
 								<div class="max-h-75vh">
 									<c:forEach items="${inbox}" var="recentMessage">
 										<a
-											href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+											href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
 											class="js-ajax-modal clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light"
-											data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+											data-href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
 											data-ajax-modal-size="modal-md"
 											data-ajax-modal-centered="true"
 											data-ajax-modal-backdrop="static"> <span

@@ -6,7 +6,7 @@
 
 <input type="hidden" name="number" value="${message.number}">
 <!-- Modal Header -->
-<div class="modal-header">
+<div class="modal-header z-index-9999">
   <h5 class="modal-title" id="exampleModalLabelMd">
     <i class="fi fi-envelope-2 text-muted"></i> <span
       class="d-inline-block pl-2 pr-2"> 쪽지 읽기 </span> </span>

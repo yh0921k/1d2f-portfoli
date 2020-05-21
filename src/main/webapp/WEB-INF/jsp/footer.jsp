@@ -162,7 +162,5 @@
     
         </div><!-- /#wrapper -->
 
-    <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
-    
   </body>
 </html>
