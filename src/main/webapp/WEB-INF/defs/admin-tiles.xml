@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+
+  <!-- Admin 템플릿에서 공통으로 사용할 레이아웃을 정의한다. -->
+  <definition name="admin" template="/WEB-INF/tiles/admin/template.jsp">
+    <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
+    <put-attribute name="header" value="/WEB-INF/tiles/admin/header.jsp"/>
+    <put-attribute name="menu" value="/WEB-INF/tiles/admin/menu.jsp"/>
+    <put-attribute name="footer" value="/WEB-INF/tiles/admin/footer.jsp"/>
+  </definition>
+  
+  <!-- request handler가 리턴한 JSP의 경로에서
+       TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다. -->
+    
+  <definition name="auth/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/auth/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>   
+       
+  <definition name="banner/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/banner/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
+  <definition name="report/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/report/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
+  <definition name="log/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/log/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
+  <definition name="adQna/*" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/qna/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+
+  <!-- Tiles 제외 정의부 -->
+  <definition name="empty" template ="/WEB-INF/tiles/empty.jsp">
+    <put-attribute name="body" value =""/>
+  </definition>
+
+  <!-- Tiles 제외 선언부 -->
+  <definition name="auth/loginForm" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/auth/loginForm.jsp"/>
+  </definition>
+  
+  <definition name="log/moreContentsLog" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
+  </definition>
+    
+</tiles-definitions>
