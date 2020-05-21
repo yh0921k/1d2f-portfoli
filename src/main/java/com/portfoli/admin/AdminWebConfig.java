@@ -41,7 +41,7 @@ public class AdminWebConfig implements WebMvcConfigurer {
   @Bean
   public TilesConfigurer tilesConfigurer() {
     TilesConfigurer configurer = new TilesConfigurer();
-    configurer.setDefinitions("/WEB-INF/defs/tiles.xml");
+    configurer.setDefinitions("/WEB-INF/defs/admin-tiles.xml");
     return configurer;
   }
 
@@ -70,10 +70,10 @@ public class AdminWebConfig implements WebMvcConfigurer {
   }
 
   @Override
-  public void addInterceptors(InterceptorRegistry registry) {
+  public void addInterceptors(final InterceptorRegistry registry) {
     registry.addInterceptor(new AdminControllerInterceptor()).addPathPatterns("/**");
     registry.addInterceptor(new AdminAuthInterceptor()).addPathPatterns("/*/*")
-        .excludePathPatterns("/adminAuth/loginForm").excludePathPatterns("/adminAuth/login");
+        .excludePathPatterns("/auth/loginForm").excludePathPatterns("/auth/login");
   }
 
   @Bean
