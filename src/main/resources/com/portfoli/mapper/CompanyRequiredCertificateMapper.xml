@@ -6,16 +6,13 @@
 <mapper namespace="com.portfoli.dao.CompanyRequiredCertificateDao">
 
   <resultMap type="CompanyRequiredCertificate" id="CompanyRequiredCertificateMap">
-    <id column="certificate_no" property="certificateNumber" />
     <id column="job_posting_no" property="jobPostingNumber" />
   </resultMap>
 
   <insert id="insert" parameterType="JobPosting">
    insert into pf_company_required_certificate(job_posting_no,certificate_no)
    values
-   <foreach collection="companyRequiredCertificates" item="companyRequiredCertificate" separator=",">
-   (#{jobPostingNumber},#{companyRequiredCertificate.certificateNumber})
-   </foreach>
+   (#{jobPostingNumber},#{certificate.certificateNumber})
   </insert>
   
 

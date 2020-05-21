@@ -54,6 +54,7 @@ public class JobPostingController {
   public void addForm(Model model) throws Exception {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     List<Certificate> certificates = certificateService.listCertificate();
+    System.out.println(certificates);
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
   }
@@ -62,7 +63,7 @@ public class JobPostingController {
   public String add(//
       JobPosting jobPosting, //
       Certificate certificate, MultipartFile[] jobPostingFiles) throws Exception {
-    System.out.println();
+    System.out.println(certificate);
     System.out.println(jobPosting + "1111");
 
     ArrayList<JobPostingFile> files = new ArrayList<>();
@@ -86,11 +87,7 @@ public class JobPostingController {
           });
     }
 
-    List<Certificate> companyRequiredCertificates = new ArrayList<>();
-    companyRequiredCertificates.add(new CompanyRequiredCertificate().setCertificate(certificate));
-
     jobPosting.setFiles(files);
-    jobPosting.setCompanyRequiredCertificates(companyRequiredCertificates);
     System.out.println(jobPosting + "2222");
     jobPostingService.add(jobPosting);
     return "redirect:list";
@@ -175,11 +172,11 @@ public class JobPostingController {
       jobPosting.setFiles(null);
     }
 
-    if (companyRequiredCertificates.size() > 0) {
-      jobPosting.setCompanyRequiredCertificates(companyRequiredCertificates);
-    } else {
-      jobPosting.setCompanyRequiredCertificates(null);
-    }
+    // if (companyRequiredCertificates.size() > 0) {
+    // jobPosting.setCompanyRequiredCertificates(companyRequiredCertificates);
+    // } else {
+    // jobPosting.setCompanyRequiredCertificates(null);
+    // }
 
     jobPostingService.update(jobPosting);
     return "redirect:list";
