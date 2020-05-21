@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.MajorDao">
+
+	<resultMap type="Major" id="MajorMap">
+		<id column="major_no" property="majorNumber" />
+	</resultMap>
+
+	<select id="findAll" resultMap="CertificateMap">
+		 SELECT major_no, name
+    FROM pf_major
+	</select>
+
+</mapper>
