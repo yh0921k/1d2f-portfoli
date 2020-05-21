@@ -21,9 +21,11 @@ import com.portfoli.domain.CompanyRequiredCertificate;
 import com.portfoli.domain.EmploymentStatus;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
+import com.portfoli.domain.Major;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.EmploymentStatusService;
 import com.portfoli.service.JobPostingService;
+import com.portfoli.service.MajorService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
@@ -46,6 +48,9 @@ public class JobPostingController {
   @Autowired
   CertificateService certificateService;
 
+  @Autowired
+  MajorService majorService;
+
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
   }
@@ -54,15 +59,19 @@ public class JobPostingController {
   public void addForm(Model model) throws Exception {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     List<Certificate> certificates = certificateService.listCertificate();
+    List<Major> majors = majorService.listMajor();
     System.out.println(certificates);
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
+    model.addAttribute("majors", majors);
   }
 
   @PostMapping("add")
   public String add(//
       JobPosting jobPosting, //
-      Certificate certificate, MultipartFile[] jobPostingFiles) throws Exception {
+      Certificate certificate, //
+      Major major, //
+      MultipartFile[] jobPostingFiles) throws Exception {
     System.out.println(certificate);
     System.out.println(jobPosting + "1111");
 
@@ -130,15 +139,19 @@ public class JobPostingController {
   public void updateForm(int no, Model model) throws Exception {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     List<Certificate> certificates = certificateService.listCertificate();
+    List<Major> majors = majorService.listMajor();
     model.addAttribute("jobPosting", jobPostingService.get(no));
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
+    model.addAttribute("majors", majors);
   }
 
   @PostMapping("update")
   public String update(//
       JobPosting jobPosting, //
-      Certificate certificate, MultipartFile[] jobPostingFiles) throws Exception {
+      Certificate certificate, //
+      Major major, //
+      MultipartFile[] jobPostingFiles) throws Exception {
     System.out.println(certificate);
     ArrayList<JobPostingFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/jobposting");
