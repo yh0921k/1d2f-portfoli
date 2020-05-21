@@ -655,9 +655,6 @@ CREATE UNIQUE INDEX UIX_pf_major
     name ASC -- 전공이름
   );
 
-ALTER TABLE pf_major
-  MODIFY COLUMN major_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '전공번호';
-
 -- 자격증
 CREATE TABLE pf_certificate (
   certificate_no INTEGER      NOT NULL COMMENT '자격증번호', -- 자격증번호
