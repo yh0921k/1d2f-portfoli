@@ -64,5 +64,8 @@
   <definition name="member/generalJoin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/member/generalJoin.jsp"/>
   </definition>
+  <definition name="portfolio/detail" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/jsp/portfolio/detail.jsp"/>
+  </definition>
   
 </tiles-definitions>

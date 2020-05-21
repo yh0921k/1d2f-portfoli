@@ -1,9 +1,44 @@
- <%@page import="com.portfoli.domain.BoardAttachment"%>
+<%@page import="com.portfoli.domain.BoardAttachment"%>
 <%@page import="com.portfoli.domain.Portfolio"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>Portfoli</title>
+<meta name="description" content="...">
+
+<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preload" href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2"
+                    as="font" type="font/woff2" crossorigin>
+
+
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+
+<!-- favicon -->
+<link rel="shortcut icon" href="${pageContext.request.getContextPath()}/favicon.ico">
+<link rel="apple-touch-icon" href="${pageContext.request.getContextPath()}/resources/demo.files/logo/icon_512x512.png">
+<link rel="manifest" href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<meta name="theme-color" content="#377dff">
+
+</head>
+<body>
 <form action="updateForm" method="post" >
 <div class="row scrollable-vertical scrollable-styled-dark" style="max-height:600px">
   <div class="col-3" style="background-color: #a1a8ae; min-height:600px;">
@@ -15,7 +50,7 @@
         d-inline-block cursor-pointer border border-secondary border-dashed bg-white" style="margin:25px 0px">
           <!-- preadded image --> 
           <span class="z-index-2 js-file-input-avatar-ajax-circle-container-preadded d-block absolute-full z-index-1">
-          <span style="background-image: url('demo.files/images/unsplash/team/thumb_330/michael-dam-mEZ3PoFGs_k-unsplash.jpg')"
+          <span style="background-image: url('')"
                 class="js-file-input-item d-inline-block position-relative overflow-hidden text-center rounded-circle m-0 p-0 animate-bouncein bg-cover w-100 h-100">
           </span>
           </span> 
@@ -98,46 +133,48 @@
       <%-- 헤드부분 --%>
       <div>
       <%-- 제목 --%>
-      <textarea style="font-weight:bold;font-size:large; border: 0px; resize: none" 
+      <textarea style="font-weight:bold;font-size:large; border: 0px; resize: none; margin-bottom: -20px; margin-top: 40px; padding-left:0px;" 
                 readonly="readonly" 
                 rows="auto" 
                 cols="83%">${portfolio.title}</textarea>
 
       
       <%-- 아이콘 --%>
-      <div style="float: right; top: -46px; position: relative; margin-right: 100px;">
-	      <div style="position: relative;display: inline-block;margin: 0px 80px;" align="center">
-	      <i class="fi fi-eye"> </i> <br>
-	      ${portfolio.viewCount}
-	      </div>
+      <div style="float: right; top: -60px; position: relative; margin-right: 100px;">
+        <div style="position: relative;display: inline-block;margin: 0px 80px;" align="center">
+        <i class="fi fi-eye"> </i> <br>
+        ${portfolio.viewCount}
+        </div>
         <div style="position: relative; display: inline-block;" align="center">
-	      <i class="fi fi-heart-empty"> </i> <br>
-	      ${portfolio.recommendedCount}
-	      </div>
+        <i class="fi fi-heart-empty"> </i> <br>
+        ${portfolio.recommendedCount}
+        </div>
       </div>
       </div>
       <hr>
       <%-- url 복사 버튼 --%>
-      <a href="#" onclick="urlClipCopy()">url 복사</a>
+      <a style="text-decoration:none; cursor:pointer; width:100%; display:inline-block; color: black" href="#" onclick="copy_to_clipboard()">url 복사 : <input style="cursor:pointer; width:65%; border:0px;" id="myInput" type="text" value="http://localhost:9999/portfoli/app/portfolio/detail?number=${portfolio.number}"/></a>
       
       <%-- 내용 --%>
-      <textarea style="border-top: 1px solid gray; resize: none" 
+      <textarea style="margin-top:10px; border:0px; resize: none; padding-left:0px;" 
                 readonly="readonly" 
                 name="content"
                 rows="auto" cols="90%" 
                 class="summernote-editor">${portfolio.content}</textarea>
-      <br>
+      <br/>
       <%--섬네일 --%>
+      썸네일 :
               <c:if test="${portfolio.thumbnail != null}">
                 ${item.thumbnail}
-                <a style="margin: 0" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' height='95%'>
+                <a style="width:70%; margin: 0;" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' height='95%'>
                 <img style="margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg' width='95%'/><br>
                 </a>
-                <br>
+                <br/>
                </c:if>
       
       
       <%--첨부파일 --%>
+      첨부파일 :<br>
               <c:choose>
               <c:when test="${not empty attachment}">
               <c:forEach items="${attachment}" var="item">
@@ -177,7 +214,8 @@
   </div>
 </div>
 </form>
-
+</body>
+</html>
   <style>
   .modal-dialog.modal-md.modal-xl.modal-dialog-centered > .modal-content {
     margin-top: 6rem!important;
@@ -195,15 +233,12 @@
   </style>
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
-  function urlClipCopy() {
-	  var f = document.clipboard.url;
-	  console.log(f);
-	  f.value = document.location.href;
-	  f.select() ;
-	  therange=f.createTextRange() ;
-	  therange.execCommand("Copy");
-	  alert("클립보드로 URL이 복사되었습니다.");
-  }
+  
+  function copy_to_clipboard() {
+	  var copyText = document.getElementById("myInput");
+	  copyText.select();
+	  document.execCommand("Copy");
+	}
   
   function warning(){
       console.log(${portfolio.number});
@@ -214,7 +249,6 @@
         },
         buttonsStyling: false
       })
-
       swalWithBootstrapButtons.fire({
         title: '정말 삭제하시겠습니까?',
         text: "되돌릴 수 없는 작업입니다.",
@@ -228,7 +262,7 @@
           swalWithBootstrapButtons.fire({
             title:'삭제완료',
             onClose: () => {
-            	location.href = "delete?number=" + ${portfolio.number};
+              location.href = "delete?number=" + ${portfolio.number};
                 clearInterval(timerInterval)
               }
           })
@@ -242,4 +276,3 @@
       })
     }
   </script>
-
