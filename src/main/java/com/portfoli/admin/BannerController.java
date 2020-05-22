@@ -41,6 +41,7 @@ public class BannerController {
   }
 
   @PostMapping("add")
+  @ResponseBody
   public void add(Banner banner, MultipartFile image) throws Exception {
     System.out.println(banner.getStartDate());
     System.out.println(banner.getEndDate());
@@ -87,6 +88,7 @@ public class BannerController {
   }
 
   @PostMapping("update")
+  @ResponseBody
   public void update(Banner banner, MultipartFile image) throws Exception {
     if (image.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/banner");

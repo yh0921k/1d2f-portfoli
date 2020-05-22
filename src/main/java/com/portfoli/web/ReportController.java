@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.BoardAttachment;
@@ -53,6 +54,7 @@ public class ReportController {
   }
 
   @PostMapping("add")
+  @ResponseBody
   public void add(Report report, @RequestParam("files[]") MultipartFile[] files) throws Exception {
     ArrayList<BoardAttachment> attachments = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/report");
