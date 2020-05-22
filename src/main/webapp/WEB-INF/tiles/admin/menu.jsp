@@ -29,12 +29,6 @@
           </a>
 
         <li class="nav-item">
-          <a class="nav-link" href="/portfoli/admin/adQna/list"> <i class="fab fa-quora"></i>
-            Q&A 관리
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link" href="/portfoli/admin/report/list"> <i class="fi fi-support"></i>
             신고 처리
           </a>
@@ -51,9 +45,34 @@
             배너 관리
           </a>
         </li>
+        
+        <li class="nav-title mt-5">
+          <h6 class="fs--15 mb-1 text-white font-weight-bold">
+            고객센터
+          </h6>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/portfoli/admin/notice/list"> <i class="nav-icon fi fi-start-half"></i>
+          <!-- <span class="badge opacity-2 font-weight-light float-end fs--11 mt-1">1</span> -->
+            공지사항
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/portfoli/admin/adQna/list"> <i class="nav-icon fab fa-quora"></i>
+            Q&A
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="#"> <i class="nav-icon fi fi-task-list"></i>
+            FAQ
+          </a>
+        </li>
 
         <li class="nav-title mt-5">
-          <h6 class="fs--15 mb-1 text-white font-weight-normal">
+          <h6 class="fs--15 mb-1 text-white font-weight-bold">
             로그 및 통계
           </h6>
         </li>
@@ -69,19 +88,7 @@
             통계
           </a>
         </li>
-
-        <li class="nav-title mt-5">
-          <h6 class="fs--15 mb-1 text-white font-weight-normal">
-            Settings
-          </h6>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="nav-icon fi fi-shape-star"></i>
-          <!-- <span class="badge opacity-2 font-weight-light float-end fs--11 mt-1">1</span> -->
-            설정
-          </a>
-        </li>
+        
       </ul>
     </nav>
 
