@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.RecommendationDao">
+  <resultMap type="Recommendation" id="RecommendationMap">
+    <id column="board_no" property="number" />
+    <result column="title" property="title" />
+    <result column="content" property="content" />
+    <result column="view_count" property="viewCount" />
+    <result column="registered_date" property="registeredDate" />
+    
+    <association property="member" javaType="GeneralMember">
+    <id column="member_no" property="number" />
+    <result column="id" property="id" />
+    <result column="pwd" property="password" />
+    <result column="name" property="name" />
+    <result column="post_no" property="postNumber" />
+    <result column="basic_address" property="basicAddress" />
+    <result column="detail_address" property="detailAddress" />
+    <result column="email" property="email" />
+    <result column="tel" property="tel" />
+    <result column="create_date" property="createDate" />
+    <result column="sms_yn" property="smsYN" />
+    <result column="email_yn" property="emailYN" />
+    <result column="photo" property="photoFilePath" />
+    <result column="type" property="type" />
+    <result column="userkey" property="userkey" />
+    </association>
+    
+  </resultMap>
+
+<!-- 
+  <sql id="select">
+    SELECT board_no, title, content, view_count,
+    registered_date
+    FROM pf_board
+  </sql>
+
+  <select id="findAll" resultMap="BoardMap">
+    <include refid="select" />
+    order by board_no desc
+  </select>
+
+  <select id="findByNo" resultMap="BoardMap" parameterType="int">
+    <include refid="select" />
+    WHERE board_no = #{number}
+  </select>
+
+  <insert id="insert" parameterType="Board"
+    useGeneratedKeys="true" keyColumn="board_no" keyProperty="number">
+    INSERT INTO
+    pf_board (
+    title,
+    content,
+    view_count,
+    registered_date)
+    VALUES(
+    #{title},
+    #{content},
+    #{viewCount},
+    now()
+    )
+  </insert>
+
+  <update id="update" parameterType="Board"
+    useGeneratedKeys="true" keyColumn="board_no" keyProperty="number">
+    UPDATE pf_board
+    <set>
+      <if test="title!=null and title!=''">,title = #{title}</if>
+      <if test="content!=null and content!=''">,registered_date = now(), content = #{content}</if>
+      <if test="viewCount!=null and viewCount!=''">,view_count = #{viewCount}</if>
+      WHERE board_no = #{number}
+    </set>
+  </update>
+
+  <delete id="delete" parameterType="int">
+    DELETE
+    FROM pf_board
+    WHERE
+    board_no = #{number}
+  </delete>
+
+  <update id="updateViewCount" parameterType="map">
+    UPDATE pf_board
+    SET view_count = #{viewCount}
+    WHERE board_no = #{boardNo}
+  </update>
+ -->
+</mapper>

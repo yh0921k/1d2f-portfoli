@@ -46,8 +46,8 @@
 	    m.name, -- 이름 --
 	    m.email, -- 이메일 --
 	    g.seeking_flag,  -- 재직여부 --
-	    g.photo,  -- 사진경로 --
-	    g.membership  -- 멤버십 --
+	    m.photo,  -- 사진경로 --
+	    g.membership -- 멤버십 --
 	  FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
 	  ON p.board_no = b.board_no
 	  LEFT OUTER JOIN pf_general_member as g
@@ -80,7 +80,7 @@
       m.name, -- 이름 --
       m.email, -- 이메일 --
       g.seeking_flag,  -- 재직여부 --
-      g.photo,  -- 사진경로 --
+      m.photo,  -- 사진경로 --
       g.membership  -- 멤버십 --
     FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
     ON p.board_no = b.board_no
@@ -124,7 +124,7 @@
       m.name, -- 이름 --
       m.email, -- 이메일 --
       g.seeking_flag,  -- 재직여부 --
-      g.photo,  -- 사진경로 --
+      m.photo,  -- 사진경로 --
       g.membership  -- 멤버십 --
     FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
     ON p.board_no = b.board_no
