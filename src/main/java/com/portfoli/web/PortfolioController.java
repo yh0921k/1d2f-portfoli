@@ -22,10 +22,12 @@ import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
 import com.portfoli.domain.Portfolio;
+import com.portfoli.domain.Recommendation;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.PortfolioService;
+import com.portfoli.service.RecommendationService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
@@ -48,6 +50,9 @@ public class PortfolioController {
   MemberService memberService;
 
   @Autowired
+  RecommendationService recommendationService;
+  
+  @Autowired
   BoardAttachmentService boardAttachmentService;
 
   @Autowired
@@ -56,6 +61,45 @@ public class PortfolioController {
   @Autowired
   PortfolioService portfolioService;
 
+  @RequestMapping("turnon")
+  public String turnon(int number, HttpServletRequest request, Model model) throws Exception {
+
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    else {
+      
+      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
+      Recommendation reco = new Recommendation();
+      ((Recommendation) reco.setNumber(number)).setMember(member);
+      
+      recommendationService.toggleon(reco);
+    }
+    return "portfolio/detail";
+  }
+
+  @RequestMapping("turnoff")
+  public String turnoff(int number, HttpServletRequest request, Model model) throws Exception {
+
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      //      return "redirect:/";
+    else {
+      
+      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
+      Recommendation reco = new Recommendation();
+      ((Recommendation) reco.setNumber(number)).setMember(member);
+      
+      recommendationService.toggleoff(reco);
+    }
+    return "portfolio/detail";
+  }
+
+  
   @RequestMapping("mylist")
   public String list(@ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
@@ -86,6 +130,7 @@ public class PortfolioController {
       // 작성자 정보
       model.addAttribute("generalMember", member);
       List<Portfolio> portfolios = portfolioService.getByMemberNumber(member.getNumber());
+      
       model.addAttribute("list", portfolios);
       return "portfolio/mylist";
     }
@@ -204,7 +249,7 @@ public class PortfolioController {
 
   @RequestMapping("detail")
   public String detail(int number, HttpServletRequest request, Model model) throws Exception {
-
+    
     Object mem = request.getSession().getAttribute("loginUser");
 
     if(mem == null)
@@ -213,9 +258,16 @@ public class PortfolioController {
     else {
       
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
-      
       Portfolio portfolio = portfolioService.get(number);
       Board board = boardService.get(number);
+      Recommendation recommendation = (Recommendation) new Recommendation().setMember(member).setBoard(board);
+      Recommendation reco = recommendationService.check(recommendation);
+      
+      if(reco == null) {
+        model.addAttribute("myRecommendation", 0);
+      } else {
+        model.addAttribute("myRecommendation", 1);
+      }
       
       // 다운로드시, 원 파일명을 받기 위해
       List<BoardAttachment> boardAttachment = boardAttachmentService.get(number);

@@ -22,7 +22,7 @@
 
 
 <div class="container" style="width: 65%;">
-    <div class="portlet mt--20"  >
+    <div class="portlet mt--20"  style="max-width: 75%">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
@@ -37,27 +37,35 @@
         <table class="table m-0">
           <thead>
             <tr>
-              <th class="b-0" style="font-size: large;">순번</th>
-              <th class="b-0" style="font-size: large;">제목</th>
-              <th class="b-0 w--150" style="font-size: large;">등록일</th>
+              <th class="b-0 w--150" style="font-size: large;">순번</th>
+              <th class="b-0 w--400" style="font-size: large;">제목</th>
+              <th class="b-0 w--200" style="font-size: large;">등록일</th>
+              <th class="b-0 w--200" style="font-size: large;">공개여부</th>
               <th class="b-0 w--200" style="font-size: large">추천수</th>
-              <th class="b-0 w--100" style="font-size: large;">조회수</th>
+              <th class="b-0 w--200" style="font-size: large;">조회수</th>
             </tr>
           </thead>
                 
           <tbody>
             <c:forEach items="${list}" var="item" varStatus="status">
   
-            <tr 
-  data-href="detail?number=${item.number}" 
-  data-ajax-modal-size="modal-xl" 
-  data-ajax-modal-centered="true" 
-  data-ajax-modal-callback-function=""
-  data-ajax-modal-backdrop="" 
-  class="js-ajax-modal ">
+            <tr data-href="detail?number=${item.number}" 
+							  data-ajax-modal-size="modal-xl" 
+							  data-ajax-modal-centered="true" 
+							  data-ajax-modal-callback-function=""
+							  data-ajax-modal-backdrop="" 
+							  class="js-ajax-modal ">
               <td>${status.getCount()}</td>
               <td>${item.title}</td>
               <td>${item.registeredDate}</td>
+              
+	              <c:if test="${item.readable eq 1}">
+	              <td>공개</td>
+	              </c:if>
+	              <c:if test="${item.getReadable() eq 0}">
+	              <td>비공개</td>
+	              </c:if>
+              
               <td>${item.getRecommendedCount()}</td>
               <td>${item.viewCount}</td>
             </tr>

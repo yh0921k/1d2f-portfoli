@@ -193,6 +193,14 @@ public class Pagination {
     return startIndex;
   }
 
+  @Override
+  public String toString() {
+    return "Pagination [pageSize=" + pageSize + ", rangeSize=" + rangeSize + ", curPage=" + curPage
+        + ", curRange=" + curRange + ", listCnt=" + listCnt + ", pageCnt=" + pageCnt + ", rangeCnt="
+        + rangeCnt + ", startPage=" + startPage + ", endPage=" + endPage + ", startIndex="
+        + startIndex + ", prevPage=" + prevPage + ", nextPage=" + nextPage + "]";
+  }
+
 
 
 

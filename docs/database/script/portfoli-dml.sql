@@ -175,16 +175,16 @@ INSERT INTO pf_general_member(general_member_no, seeking_flag, membership) VALUE
 INSERT INTO pf_general_member(general_member_no, seeking_flag, membership, career) VALUES (5, 1, 'Portfoli Basic', 1);
 
 -- 포트폴리오 예제데이터 (pf_portfolio) pf_general_member뒤에(완료)
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(31,1,'www.naver.com', "c:\folder1\folder2\file1.jpg", 1, 1);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(32,1,'www.daum.com', "c:\folder1\folder2\file2.jpg", 0, 0);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(33,1,'www. daum.com', "c:\folder1\folder2\file3.jpg", 3, 1);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(34,1,'www.daum.com', "c:\folder1\folder2\file4.jpg", 0, 1);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(35,1,'www.daum.com', "c:\folder1\folder2\file5.jpg", 0, 1);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(36,2,'www.daum.com', "c:\folder1\file1.jpg", 0, 1);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(37,2,'www.google.com', "c:\folder1\folder2\file1.jpg", 3, 0);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(38,2,'www.daum.com', "c:\folder1\folder2\file2.jpg", 1, 1);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(39,3,'www.google.com', "c:\ folder2\file3.jpg", 0, 0);
-INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, recommended_count, readable) VALUES(40,3,'www.google.com', "c:\folder1\folder2\file4.jpg", 0, 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(31,1,'www.naver.com', "c:\folder1\folder2\file1.jpg", 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(32,1,'www.daum.com', "c:\folder1\folder2\file2.jpg", 0);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(33,1,'www. daum.com', "c:\folder1\folder2\file3.jpg", 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(34,1,'www.daum.com', "c:\folder1\folder2\file4.jpg", 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(35,1,'www.daum.com', "c:\folder1\folder2\file5.jpg", 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(36,2,'www.daum.com', "c:\folder1\file1.jpg", 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(37,2,'www.google.com', "c:\folder1\folder2\file1.jpg", 0);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(38,2,'www.daum.com', "c:\folder1\folder2\file2.jpg", 1);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(39,3,'www.google.com', "c:\ folder2\file3.jpg", 0);
+INSERT INTO pf_portfolio (board_no, general_member_no, homepage, thumbnail, readable) VALUES(40,3,'www.google.com', "c:\folder1\folder2\file4.jpg", 1);
 
 -- 회원보유기술 샘플 데이터(pf_member_skill)
 INSERT INTO pf_member_skill(general_member_no, skill_no, level) VALUES(1, 1, 1);
@@ -573,6 +573,12 @@ INSERT INTO pf_recommendation(board_no, member_no) VALUES (2, 2);
 INSERT INTO pf_recommendation(board_no, member_no) VALUES (3, 3);
 INSERT INTO pf_recommendation(board_no, member_no) VALUES (4, 4);
 INSERT INTO pf_recommendation(board_no, member_no) VALUES (5, 5);
+INSERT INTO pf_recommendation(board_no, member_no) VALUES (31, 1);
+INSERT INTO pf_recommendation(board_no, member_no) VALUES (32, 2);
+INSERT INTO pf_recommendation(board_no, member_no) VALUES (34, 4);
+INSERT INTO pf_recommendation(board_no, member_no) VALUES (36, 1);
+INSERT INTO pf_recommendation(board_no, member_no) VALUES (38, 3);
+INSERT INTO pf_recommendation(board_no, member_no) VALUES (40, 5);
 
 -- 포트폴리오파일 예제데이터 (pf_board_attachment)
 INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)

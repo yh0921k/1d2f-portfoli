@@ -31,6 +31,34 @@
     
   </resultMap>
 
+
+  <select id="check" resultMap="RecommendationMap">
+    SELECT
+      * 
+    FROM pf_recommendation 
+    WHERE 
+      member_no = #{member.number} 
+    and 
+      board_no = #{number}
+  </select>
+  
+  <insert id="toggleon" parameterType="Recommendation">
+	  INSERT INTO 
+		  pf_recommendation
+		  (board_no, member_no) 
+	  VALUES( 
+		  #{number},
+		  #{member.number})
+  </insert>
+  
+  <insert id="toggleoff" parameterType="Recommendation">
+    DELETE FROM
+      pf_recommendation
+    WHERE
+    board_no = #{number}
+    and
+    member_no = #{member.number}
+  </insert>
 <!-- 
   <sql id="select">
     SELECT board_no, title, content, view_count,

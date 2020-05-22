@@ -9,33 +9,21 @@
 <head>
 <meta charset="utf-8" />
 <title>Portfoli</title>
-<meta name="description" content="...">
-
-<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 
 <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="preload" href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2"
-                    as="font" type="font/woff2" crossorigin>
-
-
-<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
-<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
-
-<!-- favicon -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="shortcut icon" href="${pageContext.request.getContextPath()}/favicon.ico">
-<link rel="apple-touch-icon" href="${pageContext.request.getContextPath()}/resources/demo.files/logo/icon_512x512.png">
 <link rel="manifest" href="${pageContext.request.getContextPath()}/resources/assets/images/manifest/manifest.json">
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<meta name="theme-color" content="#377dff">
+<link rel="preload" href="${pageContext.request.getContextPath()}/resources/assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
+<link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
+<script src="${pageContext.request.getContextPath()}/node_modules/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 <body>
@@ -141,13 +129,44 @@
       
       <%-- 아이콘 --%>
       <div style="float: right; top: -60px; position: relative; margin-right: 100px;">
-        <div style="position: relative;display: inline-block;margin: 0px 80px;" align="center">
+        <div class="btn-outline-secondary" style="position: relative; display: inline-block;margin: 0px 80px;" align="center">
         <i class="fi fi-eye"> </i> <br>
         ${portfolio.viewCount}
         </div>
+        
+        
+        
+        <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
         <div style="position: relative; display: inline-block;" align="center">
-        <i class="fi fi-heart-empty"> </i> <br>
-        ${portfolio.recommendedCount}
+        
+        
+<c:if test="${myRecommendation == 1}">
+        <a href="#" 
+					 class="btn-toggle btn btn-sm btn-outline-secondary active"
+					 data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
+				   data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
+				   data-toast-success-position="bottom-center">
+				  <span class="group-icon">
+				    <i class="fi fi-dislike text-muted"></i><%-- 추천안됨 --%>
+				    <i class="fi fi-like text-warning"></i><%-- 추천됨 --%>
+				  </span>
+				  <span>${portfolio.recommendedCount}</span>
+				</a>
+</c:if>
+<c:if test="${myRecommendation == 0}">
+        <a href="#" 
+           class="btn-toggle btn btn-sm btn-outline-secondary"
+           data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
+           data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
+           data-toast-success-position="bottom-center">
+          <span class="group-icon">
+            <i class="fi fi-dislike text-muted"></i><%-- 추천안됨 --%>
+            <i class="fi fi-like text-warning"></i><%-- 추천됨 --%>
+          </span>
+          <span>${portfolio.recommendedCount}</span>
+        </a>
+</c:if>
+
         </div>
       </div>
       </div>
@@ -162,6 +181,7 @@
                 rows="auto" cols="90%" 
                 class="summernote-editor">${portfolio.content}</textarea>
       <br/>
+      
       <%--섬네일 --%>
       썸네일 :<br>
               <c:if test="${portfolio.thumbnail != null}">
