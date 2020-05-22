@@ -50,6 +50,20 @@
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
+  
+  <definition name="notice/*.admin" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/notice/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
+  <definition name="faq/*.admin" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/faq/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
 
   <!-- Tiles 제외 정의부 -->
   <definition name="empty" template ="/WEB-INF/tiles/empty.jsp">
