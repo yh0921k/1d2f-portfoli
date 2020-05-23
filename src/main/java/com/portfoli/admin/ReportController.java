@@ -1,8 +1,12 @@
 package com.portfoli.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.Report;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.MemberService;
@@ -67,5 +72,40 @@ public class ReportController {
     model.addAttribute("totalPage", totalPage);
     model.addAttribute("startPage", startPage);
     model.addAttribute("endPage", endPage);
+  }
+
+  @GetMapping("detail")
+  public ModelAndView detail(HttpServletRequest request, HttpServletResponse response, int number)
+      throws Exception {
+    Map<String, Object> params = new HashMap<>();
+    ModelAndView mv = new ModelAndView();
+    Report report = reportService.get(number);
+
+    Cookie[] cookies = request.getCookies();
+    Cookie viewCookie = null;
+
+    if (cookies != null && cookies.length > 0) {
+      for (int i = 0; i < cookies.length; i++) {
+        if (cookies[i].getName().contentEquals("cookie" + number)) {
+          viewCookie = cookies[i];
+        }
+      }
+    }
+
+    if (report != null) {
+      report.setMember(memberService.get(report.getTargetNumber()));
+      mv.addObject("report", report);
+
+      if (viewCookie == null) {
+        Cookie newCookie = new Cookie("cookie" + number, "|" + number + "|");
+        response.addCookie(newCookie);
+
+        params.put("viewCount", report.getViewCount() + 1);
+        params.put("boardNo", number);
+        boardService.addViewCount(params);
+      }
+    }
+
+    return mv;
   }
 }
