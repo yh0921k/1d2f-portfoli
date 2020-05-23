@@ -26,19 +26,15 @@
 <div class="container">
 <div align="center"> 
 <div class="row">
-<%--
- --%>
 
+<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
-
-<!-- 테스트코드 -->
 <a href="#"
   data-href="detail?number=${item.number}" 
   data-ajax-modal-size="modal-xl" 
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
-<!-- 테스트코드 -->
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
@@ -51,7 +47,7 @@
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60">
         <div class="d-table">
-          <div class="d-table-cell align-bottom">
+          <div class="d-table-cell align-bottom" style="text-align:center;">
             <p>
               ${item.title}
             </p>
@@ -81,6 +77,7 @@
     </div>
     </a>
     </c:forEach>
+<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
     <script src="../../resources/assets/js/core.min.js"></script>
   </div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->

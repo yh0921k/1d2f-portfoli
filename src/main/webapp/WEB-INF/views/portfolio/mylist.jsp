@@ -21,8 +21,8 @@
  -->
 
 
-<div class="container" style="width: 65%; overflow: scroll;">
-    <div class="portlet mt--20"  style="max-width: 75%">
+<div class="container" style="width: 65%; overflow-y: scroll; margin-left: 30px;">
+    <div class="portlet mt--20"  style="max-width: 75%; box-shadow: 0 0 0 0;">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
@@ -90,15 +90,14 @@
 
 
 <div class="row" id="blockStyle" style="margin-top: -500px; backface-visibility:hidden; background:white; display:none;">
+<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
   data-href="detail?number=${item.number}" 
   data-ajax-modal-size="modal-xl" 
-  data-ajax-modal-centered="true" 
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
-  class="js-ajax-modal ">
-<!-- 테스트코드 -->
+  class="js-ajax-modal">
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
@@ -111,7 +110,7 @@
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60">
         <div class="d-table">
-          <div class="d-table-cell align-bottom">
+          <div class="d-table-cell align-bottom" style="text-align:center;">
             <p>
               ${item.title}
             </p>
@@ -124,13 +123,14 @@
     <!-- 제목, 아이디 -->
 
     <!-- 카드하단 -->
-      <div class="card-footer bg-transparent b-0">
+      <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
-        
+        <a style="position: absolute; left: 67%;">
         <span class="float-end fs--14 p-2">
           ${item.getRecommendedCount()}
         </span>
-        <a href="#" class="btn btn-sm btn-warning opacity-8">
+        </a>
+        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
           ${item.getViewCount()}
         </a>
       </div>
@@ -140,6 +140,7 @@
     </div>
     </a>
     </c:forEach>
+<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
 </div>
     
 </div>
