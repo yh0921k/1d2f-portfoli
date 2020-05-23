@@ -2,6 +2,7 @@ package com.portfoli.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,6 +92,15 @@ public class QnaServiceImpl implements QnaService {
   @Override
   public int selectListCnt() throws Exception {
     return qnaDao.count();
+  }
+
+
+  @Override
+  public void addReply(Map<String, Object> params) throws Exception {
+    if(qnaDao.insertReply(params) < 0 ) {
+     throw new Exception("QNA 답변 처리 중 오류 발생");
+    }
+    
   }
 
 

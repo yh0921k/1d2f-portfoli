@@ -29,7 +29,7 @@
           </a>
 
         <li class="nav-item">
-          <a class="nav-link" href="/portfoli/admin/adQna/list"> <i class="fab fa-quora"></i>
+          <a class="nav-link" href="/portfoli/admin/qna/list"> <i class="fab fa-quora"></i>
             Q&A 관리
           </a>
         </li>

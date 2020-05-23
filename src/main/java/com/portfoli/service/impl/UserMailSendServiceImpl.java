@@ -121,4 +121,18 @@ public class UserMailSendServiceImpl implements UserMailSendService {
     
   }
 
+  @Override
+  public void sendQnaReply(String email, String name, String content) throws Exception{
+    try {
+    MimeMessage mail = mailSender.createMimeMessage();
+    String htmlStr = "<h2>안녕하세요. Portfoli에 문의 남겨주셔서 감사합니다. 이에 대한 답변을 드립니다.</h2><br><br>" + "<p>" + content + "<br> 항상 portfoli를 이용해 주셔서 감사합니다.</p> ";
+      mail.setSubject(String.format("[QNA 답변] Portfoli: %s님의 문의 내역에 대한 답변입니다.", name), "utf-8");
+    mail.setText(htmlStr, "utf-8", "html");
+    mail.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(email));
+    mailSender.send(mail);
+    } catch (MessagingException e) {
+      throw new Exception("답변 Email 보내는 중 오류 발생");
+    }
+  }
+
 }

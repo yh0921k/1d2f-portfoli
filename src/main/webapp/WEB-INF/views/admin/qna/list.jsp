@@ -32,8 +32,8 @@
 
 									<tr class="text-muted">
 										<td>${qna.category.name}</td>
-										<td><a href="/portfoli/admin/adQna/detail?no=${qna.number}"
-											data-href="/portfoli/admin/adQna/detail?no=${qna.number}"
+										<td><a href="/portfoli/admin/qna/detail?no=${qna.number}"
+											data-href="/portfoli/admin/qna/detail?no=${qna.number}"
 											data-ajax-modal-size="modal-xl"
 											data-ajax-modal-centered="false"
 											data-ajax-modal-callback-function=""
@@ -63,7 +63,7 @@
 											<c:if test="${pageNumber <= pageSize}"> class="page-item disabled btn-pill"</c:if>
 											<c:if test="${pageNumber != '1'}"> class="page-item"</c:if>
 											data-page="prev"><a class="page-link"
-											href="/portfoli/admin/adQna/list?pageNumber=${startPage - 1}"
+											href="/portfoli/admin/qna/list?pageNumber=${startPage - 1}"
 											tabindex="-1" aria-disabled="true">Prev</a></li>
 									</c:if>
 
@@ -71,14 +71,14 @@
 										<li
 											<c:if test="${page == pageNumber}"> class="page-item active"</c:if>
 											data-page="${page}"><a class="page-link"
-											href="/portfoli/admin/adQna/list?pageNumber=${page}">${page}</a></li>
+											href="/portfoli/admin/qna/list?pageNumber=${page}">${page}</a></li>
 									</c:forEach>
 
 									<li
 										<c:if test="${endPage == totalPage}"> class="page-item disabled btn-pill"</c:if>
 										<c:if test="${endPage < totalPage}"> class="page-item"</c:if>
 										data-page="next"><a class="page-link"
-										href="/portfoli/admin/adQna/list?pageNumber=${endPage + 1}">Next</a>
+										href="/portfoli/admin/qna/list?pageNumber=${endPage + 1}">Next</a>
 									</li>
 								</ul>
 							</nav>

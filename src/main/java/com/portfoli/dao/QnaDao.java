@@ -2,6 +2,7 @@ package com.portfoli.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Qna;
 
 public interface QnaDao {
@@ -19,6 +20,8 @@ public interface QnaDao {
   int insert(Qna qna);
 
   int count();
+
+  int insertReply(Map<String, Object> params);
 
 
 }

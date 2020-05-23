@@ -60,13 +60,13 @@
 				<h1 class="d-none d-lg-block m--3">Q&A</h1>
 				<div align="right">
 					<a href="/portfoli/app/qna/add"><button type="button"
-							class="btn btn-outline-secondary btn-pill btn-sm">문의하기</button></a>
+							class="btn btn-outline-secondary btn-pill btn-sm">글쓰기(+)</button></a>
 				</div>
 			</div>
 
 			<div class="table-responsive rounded" style="min-height: 500px;">
 				<table class="table m-0">
-					<thead>
+					<thead style="font-size: large">
 						<tr>
 							<th class="b-0 w--200">카테고리</th>
 							<th class="b-0">제목</th>
@@ -81,13 +81,10 @@
 							<tr>
 								<td>${qna.category.name}</td>
 								<c:if test="${qna.readable == 1}">
-									<td><a href="/portfoli/app/qna/detail?no=${qna.number}"
-										class="text-gray-900">${qna.title}</td>
+									<td><a href="/portfoli/app/qna/detail?no=${qna.number}" class="text-gray-900">${qna.title}</td>
 								</c:if>
 								<c:if test="${qna.readable == 0}">
-									<td><a href="/portfoli/app/qna/detail?no=${qna.number}"
-										class="text-gray-900">${qna.title}<i
-											class="fa fa-lock ml-3"></i></td>
+									<td><a href="/portfoli/app/qna/detail?no=${qna.number}" class="text-gray-900">${qna.title}<i class="fa fa-lock ml-3"></i></td>
 								</c:if>
 								<td>${qna.writer}</td>
 								<td>${qna.registeredDate}</td>
