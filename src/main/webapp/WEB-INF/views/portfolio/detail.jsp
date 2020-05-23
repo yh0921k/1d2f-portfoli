@@ -114,7 +114,7 @@
     </div>
   </div>
 
-  <div class="col-9" style="min-height:600px;">
+  <div class="col-9" style="min-height:600px; background: white;">
     <div style="width:95%; position: relative; margin:25px" data-spy="scroll" data-target="#list-example" 
          data-offset="0" class="scrollable-vertical scrollable-styled-dark">
 
@@ -128,18 +128,20 @@
 
       
       <%-- 아이콘 --%>
-      <div style="float: right; top: -60px; position: relative; margin-right: 100px;">
-        <div class="btn-outline-secondary" style="position: relative; display: inline-block;margin: 0px 80px;" align="center">
-        <i class="fi fi-eye"> </i> <br>
-        ${portfolio.viewCount}
+      <div style="top: 30px; position: absolute; right: 3px;">
+        <div style="margin-right:20px; width:50px; position: relative; display: inline-block;" align="center">
+        <a href="#" id="fiEye" style="background-color: transparent;"
+           class="btn btn-sm btn-outline-secondary">
+          <span class="group-icon">
+            <i class="fi fi-eye" style="width: 27px;"></i><%-- 눈깔 --%>
+          </span>
+          <br>
+          <span>${portfolio.viewCount}</span>
+        </a>
         </div>
-        
-        
         
         <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
         <div style="position: relative; display: inline-block;" align="center">
-        
-        
 <c:if test="${myRecommendation == 1}">
         <a href="#" 
 					 class="btn-toggle btn btn-sm btn-outline-secondary active"
@@ -147,9 +149,10 @@
 				   data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
 				   data-toast-success-position="bottom-center">
 				  <span class="group-icon">
-				    <i class="fi fi-dislike text-muted"></i><%-- 추천안됨 --%>
-				    <i class="fi fi-like text-warning"></i><%-- 추천됨 --%>
+				    <i class="fi fi-dislike text-muted" style="width: 27px;"></i><%-- 추천안됨 --%>
+				    <i class="fi fi-like text-warning" style="width: 27px;"></i><%-- 추천됨 --%>
 				  </span>
+				  <br>
 				  <span>${portfolio.recommendedCount}</span>
 				</a>
 </c:if>
@@ -160,9 +163,10 @@
            data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
            data-toast-success-position="bottom-center">
           <span class="group-icon">
-            <i class="fi fi-dislike text-muted"></i><%-- 추천안됨 --%>
-            <i class="fi fi-like text-warning"></i><%-- 추천됨 --%>
+            <i class="fi fi-dislike text-muted" style="width: 27px;"></i><%-- 추천안됨 --%>
+            <i class="fi fi-like text-warning" style="width: 27px;"></i><%-- 추천됨 --%>
           </span>
+          <br>
           <span>${portfolio.recommendedCount}</span>
         </a>
 </c:if>
@@ -226,8 +230,8 @@
                </c:choose>
             <c:if test="${modifiable == true}">
             <div style="position: relative; margin: 10% 35%;">
-            <button style="font-size: small" type="submit">수정(M)</button>
-            <button style="font-size: small" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
+            <button class="btn btn-outline-secondary btn-pill btn-sm" style="font-size: medium" type="submit">수정(M)</button>
+            <button class="btn btn-outline-secondary btn-pill btn-sm" style="font-size: medium" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
             </div>
             </c:if>
     </div>
