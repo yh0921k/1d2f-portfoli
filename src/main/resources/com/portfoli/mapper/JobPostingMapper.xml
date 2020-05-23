@@ -220,35 +220,36 @@
 		j.view_count,
 		f.file_path,
 		e.employment_stat_name,
-		c.name as certificate_name		
+		c.name as certificate_name,
+		m.name as major_name
 		from
-		pf_job_posting
-		j
+		pf_job_posting j		
 		left outer join
 		pf_job_posting_file f on
-		j.job_posting_no=f.job_posting_no
-		join pf_employment_status e
-		on
+		j.job_posting_no = f.job_posting_no
+		join pf_employment_status e on
 		j.employment_stat_no = e.employment_stat_no
 		left outer join
-		pf_company_required_certificate c on j.job_posting_no =
-		c.job_posting_no
+		pf_company_required_certificate r on
+	  j.job_posting_no = r.job_posting_no
+		left outer join
+		pf_certificate c on r.certificate_no = c.certificate_no
+		left outer join
+		pf_company_required_major q on j.job_posting_no = q.job_posting_no
+		left outer join
+		pf_major m on q.major_no = m.major_no
 		where
 		j.title like #{keywordPattern}
-		or j.content like
-		#{keywordPattern}
+		or j.content like #{keywordPattern}
 		or j.minimum_career like #{keywordPattern}
-		or
-		j.start_dated like #{keywordPattern}
-		or j.end_dated like
-		#{keywordPattern}
+		or j.start_dated like #{keywordPattern}
+		or j.end_dated like	#{keywordPattern}
 		or j.job like #{keywordPattern}
-		or j.year_salary like
-		#{keywordPattern}
+		or j.year_salary like	#{keywordPattern}
 		or e.employment_stat_name like #{keywordPattern}
-		or e.certificate_no like #{keywordPattern}
+		or c.name like #{keywordPattern}
+		or m.name like #{keywordPattern}
 	</select>
-
 </mapper>
 
 

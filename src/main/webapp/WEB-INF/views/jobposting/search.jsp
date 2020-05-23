@@ -14,11 +14,7 @@
     <th>고용형태</th>
     <th>제목</th>
     <th>내용</th>
-    <!-- <th>최소경력</th> -->
-    <!-- <th>직무</th> -->
-    <!-- <th>연봉</th> -->
-    <th>시작일</th>
-    <th>마감일</th>
+    <th>등록일</th>
     <th>조회수</th>
   </thead>
 
@@ -31,11 +27,7 @@
       <td>${item.employmentStatus.name}</td>
       <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td> 
       <td>${item.content}</td>
-      <!-- <td>${item.minimumCareer}</td>  -->
-      <!-- <td>${item.job}</td> -->
-      <!-- <td>${item.yearSalary}</td> -->
-      <td>${item.startDated}</td>
-      <td>${item.endDated}</td>
+      <td>${item.postingRegistration}</td>
       <td>${item.viewCount}</td>
     </tr>
 </c:forEach>
