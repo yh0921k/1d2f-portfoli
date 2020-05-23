@@ -583,8 +583,6 @@ INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(3, 15, "file3.jpg", "c:\file1\file3.jpg");
 INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
  VALUES(4, 20, "file4.jpg", "c:\file1\file4.jpg");
-INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
- VALUES(5, 30, "file5.jpg", "c:\file1\file5.jpg");
  
 -- pf_job_posting 채용공고 (pf_company_member 인서트 후(완), pf_final_education인서트 후)
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,

@@ -12,6 +12,8 @@
 		<result column="readable" property="readable" />
 		<result column="email_notification" property="emailNoti" />
 		<result column="sms_notification" property="smsNoti" />
+		<result column="answer" property="answer" />
+		<result column="answer_date" property="answerDate" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="view_count" property="viewCount" />
@@ -52,7 +54,9 @@
 		b.registered_date,
 		b.content,
 		q.email_notification,
-		q.readable
+		q.readable,
+		q.answer,
+		q.answer_date
 		FROM pf_qna q
 		JOIN pf_question_category c
 		ON c.category_no =
@@ -87,6 +91,11 @@
     VALUES(#{number}, #{memberNumber}, #{category.number}, #{readable}, #{emailNoti})
 	</insert>
 	
+	<insert id="insertReply" parameterType="map">
+    UPDATE pf_qna
+    SET answer = #{answer}, answer_date=now()
+    WHERE board_no = #{no}
+	</insert>
 	
 
 

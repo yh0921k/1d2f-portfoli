@@ -1,6 +1,7 @@
 package com.portfoli.service;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Qna;
 
 public interface QnaService {
@@ -16,6 +17,8 @@ public interface QnaService {
   void add(Qna qna) throws Exception;
 
   int selectListCnt() throws Exception;
+
+  void addReply(Map<String, Object> params) throws Exception;
 
 
 }

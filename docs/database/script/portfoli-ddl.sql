@@ -889,7 +889,7 @@ CREATE TABLE pf_qna (
   readable           INTEGER  NOT NULL COMMENT '비밀글여부', -- 비밀글여부
   email_notification INTEGER  NOT NULL COMMENT '이메일답변알림여부', -- 이메일답변알림여부
   sms_notification   INTEGER  NULL COMMENT '문자답변알림여부', -- 문자답변알림여부
-  content            TEXT     NULL COMMENT '답변내용', -- 답변내용
+  answer            TEXT     NULL COMMENT '답변내용', -- 답변내용
   answer_date        DATETIME NULL COMMENT '답변일' -- 답변일
 )
 COMMENT 'QNA질문';

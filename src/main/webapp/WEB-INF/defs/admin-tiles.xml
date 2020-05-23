@@ -44,7 +44,7 @@
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
   
-  <definition name="adQna/*.admin" extends="admin">
+  <definition name="qna/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/qna/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
@@ -77,6 +77,10 @@
   
   <definition name="log/moreContentsLog.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
+  </definition>
+  
+  <definition name="qna/detail.admin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/qna/detail.jsp"/>
   </definition>
     
 </tiles-definitions>

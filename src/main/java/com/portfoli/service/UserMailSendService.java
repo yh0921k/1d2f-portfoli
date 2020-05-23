@@ -13,4 +13,6 @@ public interface UserMailSendService {
 
   void findPassword(String email) throws Exception;
 
+  void sendQnaReply(String email, String name, String content) throws Exception;
+
 }

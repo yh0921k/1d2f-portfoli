@@ -10,7 +10,7 @@ public class Qna extends Board implements Serializable {
   private int readable;
   private int emailNoti;
   private int smsNoti;
-  private String answerContent;
+  private String answer;
   private Date answerDate;
   QnaCategory category;
 
@@ -54,12 +54,12 @@ public class Qna extends Board implements Serializable {
     this.smsNoti = smsNoti;
   }
 
-  public String getAnswerContent() {
-    return answerContent;
+  public String getAnswer() {
+    return answer;
   }
 
-  public void setAnswerContent(String answerContent) {
-    this.answerContent = answerContent;
+  public void setAnswer(String answer) {
+    this.answer = answer;
   }
 
   public Date getAnswerDate() {
@@ -82,7 +82,7 @@ public class Qna extends Board implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((answerContent == null) ? 0 : answerContent.hashCode());
+    result = prime * result + ((answer == null) ? 0 : answer.hashCode());
     result = prime * result + ((answerDate == null) ? 0 : answerDate.hashCode());
     result = prime * result + ((category == null) ? 0 : category.hashCode());
     result = prime * result + emailNoti;
@@ -102,10 +102,10 @@ public class Qna extends Board implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Qna other = (Qna) obj;
-    if (answerContent == null) {
-      if (other.answerContent != null)
+    if (answer == null) {
+      if (other.answer != null)
         return false;
-    } else if (!answerContent.equals(other.answerContent))
+    } else if (!answer.equals(other.answer))
       return false;
     if (answerDate == null) {
       if (other.answerDate != null)
@@ -136,7 +136,7 @@ public class Qna extends Board implements Serializable {
   @Override
   public String toString() {
     return "Qna [memberNumber=" + memberNumber + ", writer=" + writer + ", readable=" + readable
-        + ", emailNoti=" + emailNoti + ", smsNoti=" + smsNoti + ", answerContent=" + answerContent
+        + ", emailNoti=" + emailNoti + ", smsNoti=" + smsNoti + ", answer=" + answer
         + ", answerDate=" + answerDate + ", category=" + category + "]";
   }
 
