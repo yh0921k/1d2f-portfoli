@@ -13,7 +13,7 @@
     
     <result column="homepage" property="homepage" /><!-- 홈페이지 -->
     <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
-    <result column="recommended_count" property="recommendedCount" /><!-- 추천수 -->
+    <result column="count" property="recommendedCount" /><!-- 추천수 -->
     <result column="readable" property="readable" /><!-- 공개여부 -->
     
     <association property="member" javaType="GeneralMember">
@@ -27,36 +27,42 @@
     </association>
   </resultMap>
   
-  
   <!-- 전체 포트폴리오 리스트 추출 (페이징처리)-->
   <select id="findAll" resultMap="PortfolioMap" parameterType="Portfolio">
-	  SELECT
-	    p.board_no,
-	    p.homepage,
-	    p.thumbnail,
-	    p.recommended_count,
-	    p.readable,
-	    b.board_no,
-	    b.title,
-	    b.content,
-	    b.view_count,
-	    b.registered_date,
-      m.member_no,  -- 회원번호  --
-      m.id,  -- id값  --
-	    m.name, -- 이름 --
-	    m.email, -- 이메일 --
-	    g.seeking_flag,  -- 재직여부 --
-	    m.photo,  -- 사진경로 --
-	    g.membership -- 멤버십 --
-	  FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
-	  ON p.board_no = b.board_no
-	  LEFT OUTER JOIN pf_general_member as g
-	  ON g.general_member_no = p.general_member_no
-	  LEFT OUTER JOIN pf_members as m
-    ON m.member_no = g.general_member_no
-	  WHERE p.readable = 1
-	  ORDER BY b.registered_date desc,
-	  p.recommended_count desc
+     SELECT
+       p.board_no,
+       count(r.board_no) count,
+       p.homepage,
+       p.thumbnail,
+       p.readable,
+       b.title,
+       b.content,
+       b.view_count,
+       b.registered_date,
+       m.member_no,  -- 회원번호(작성자)  --
+       m.id,  -- id값  --
+       m.name, -- 이름 --
+       m.email, -- 이메일 --
+       g.seeking_flag,  -- 재직여부 --
+       m.photo,  -- 사진경로 --
+       g.membership -- 멤버십 --
+     FROM pf_portfolio as p 
+     LEFT OUTER JOIN pf_board as b 
+     ON p.board_no = b.board_no
+     LEFT OUTER JOIN pf_general_member as g
+     ON g.general_member_no = p.general_member_no
+     LEFT OUTER JOIN pf_members as m
+     ON m.member_no = g.general_member_no
+     LEFT OUTER JOIN pf_recommendation r 
+     ON b.board_no = r.board_no
+     
+     WHERE p.readable = 1
+     
+     GROUP BY p.board_no
+    
+     ORDER BY count desc,
+     b.view_count desc,
+     b.registered_date desc
     <if test="startIndex != null and startIndex != ''">
     limit ${startIndex}, ${pageSize}
     </if>
@@ -66,9 +72,10 @@
   <select id="findByMember" resultMap="PortfolioMap" parameterType="int">
     SELECT
       p.board_no,
+      p.readable,
+      count(r.board_no) count,
       p.homepage,
       p.thumbnail,
-      p.recommended_count,
       p.readable,
       b.board_no,
       b.title,
@@ -82,13 +89,19 @@
       g.seeking_flag,  -- 재직여부 --
       m.photo,  -- 사진경로 --
       g.membership  -- 멤버십 --
-    FROM pf_portfolio as p LEFT OUTER JOIN pf_board as b 
+    FROM pf_portfolio as p 
+    LEFT OUTER JOIN pf_board as b 
     ON p.board_no = b.board_no
     LEFT OUTER JOIN pf_general_member as g
     ON g.general_member_no = p.general_member_no
     LEFT OUTER JOIN pf_members as m
     ON m.member_no = g.general_member_no
-    WHERE m.member_no = ${number}
+    LEFT OUTER JOIN pf_recommendation r 
+    ON b.board_no = r.board_no
+    
+    WHERE m.member_no = #{memberNumber}
+    
+    GROUP BY p.board_no
   </select>
    
   <select id="selectListCnt" resultType="int" parameterType="int">
@@ -110,9 +123,9 @@
   <select id="findByNo" resultMap="PortfolioMap" parameterType="int">
     SELECT
       p.board_no,
+      count(r.board_no) count,
       p.homepage,
       p.thumbnail,
-      p.recommended_count,
       p.readable,
       b.board_no,
       b.title,
@@ -132,7 +145,12 @@
     ON g.general_member_no = p.general_member_no
     LEFT OUTER JOIN pf_members as m
     ON m.member_no = g.general_member_no
-    WHERE p.board_no = #{boardNumber}
+    LEFT OUTER JOIN pf_recommendation r 
+    ON b.board_no = r.board_no
+    
+    WHERE p.board_no = #{number}
+    
+    GROUP BY p.board_no
   </select>
 
   <insert id="insert" parameterType="Portfolio">
@@ -141,7 +159,6 @@
       general_member_no,
       homepage,
       thumbnail,
-      recommended_count,
       readable
       )
     VALUES(
@@ -149,7 +166,6 @@
       #{member.number},
       #{homepage},
       #{thumbnail},
-      #{recommendedCount},
       #{readable}
     )
   </insert>
@@ -164,7 +180,6 @@
      <set>
      <if test="homepage != null and homepage != ''"> homepage = #{homepage}, </if>
      <if test="thumbnail != null and thumbnail != ''"> thumbnail = #{thumbnail}, </if>
-     <if test="recommended_count != null and recommended_count != ''"> recommended_count = #{recommendedCount}, </if>
      <if test="readable != null and readable != ''"> readable = #{readable} </if>
      </set>
      WHERE board_no = #{number}

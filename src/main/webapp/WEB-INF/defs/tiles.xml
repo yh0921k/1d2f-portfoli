@@ -45,4 +45,6 @@
   <definition name="jobposting/list2.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/jobposting/list2.jsp"/>
   </definition>
+
+
 </tiles-definitions>

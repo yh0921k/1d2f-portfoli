@@ -208,7 +208,6 @@ CREATE TABLE pf_portfolio (
   general_member_no INTEGER      NOT NULL COMMENT '일반회원번호', -- 일반회원번호
   homepage          VARCHAR(255) NULL     COMMENT '홈페이지', -- 홈페이지
   thumbnail         VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
-  recommended_count INTEGER      NOT NULL COMMENT '추천수', -- 추천수
   readable          INTEGER      NOT NULL COMMENT '공개여부' -- 공개여부
 )
 COMMENT '포트폴리오';

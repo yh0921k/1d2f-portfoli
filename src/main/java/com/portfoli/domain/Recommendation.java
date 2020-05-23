@@ -40,8 +40,9 @@ public class Recommendation extends Board implements java.io.Serializable{
     return member;
   }
 
-  public void setMember(Member member) {
+  public Recommendation setMember(Member member) {
     this.member = member;
+    return this;
   }
 
 

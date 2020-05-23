@@ -12,14 +12,6 @@
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block">공지사항</h1>
-
-        <div align="right">
-          <button class="btn btn-outline-secondary btn-pill btn-sm" 
-                  onclick="location.href='form'">글쓰기(+)</button>
-          <button class="btn btn-outline-secondary btn-pill btn-sm" 
-                  onclick="move(event)">취소</button>
-        </div>
-
       </div>
       <form action="add" method="post" enctype="multipart/form-data">
         <div class="row">
