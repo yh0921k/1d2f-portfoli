@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="container-fluid">
 	<div class="row">
@@ -74,11 +74,20 @@
 			<p class="text-gray-900 mb-1 ml-3">제목 : ${qna.title}</p>
 
 			<p class="text-gray-900 mb-1 ml-3">내용 :</p>
-			<div class="border m-3 p-3" style="min-height: 300px;">
+			<div class="border m-3 p-3 rounded" style="min-height: 200px;">
 				<p style="white-space: pre-wrap;" class="text-gray-900">${qna.content}</p>
 			</div>
+			<c:if test="${!empty qna.answer}">
+			<div class="row mb-0 ml-3">
+			<h6><i class="fi fi-arrow-right"></i>답변</h6>
+			<p class="mb-0 ml-3"><small><fmt:formatDate var="registeredDate" value="${qna.answerDate}" pattern="yyyy.MM.dd HH:mm:ss"/> ${qna.answerDate}</small></p>
+			</div>
+			<div class="border ml-3 mr-3 mb-3 p-3 rounded" style="min-height: 200px;">
+				<p style="white-space: pre-wrap;" class="text-gray-900">${qna.answer}</p>
+			</div>
+			</c:if>
+			</div>
 
-		</div>
 	</div>
 	<!-------------------------------------------- /contents -------------------------------------------------->
 </div>

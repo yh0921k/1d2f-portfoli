@@ -80,12 +80,14 @@
 						<c:forEach items="${qnas}" var="qna">
 							<tr>
 								<td>${qna.category.name}</td>
-								<c:if test="${qna.readable == 1}">
-									<td><a href="/portfoli/app/qna/detail?no=${qna.number}" class="text-gray-900">${qna.title}</td>
+									<td><a href="/portfoli/app/qna/detail?no=${qna.number}" class="text-gray-900">${qna.title}
+								<c:if test="${!empty qna.answerDate}">
+									<small>(답변완료)</small>
 								</c:if>
 								<c:if test="${qna.readable == 0}">
-									<td><a href="/portfoli/app/qna/detail?no=${qna.number}" class="text-gray-900">${qna.title}<i class="fa fa-lock ml-3"></i></td>
+									<i class="fa fa-lock ml-3"></i>
 								</c:if>
+								</td>
 								<td>${qna.writer}</td>
 								<td>${qna.registeredDate}</td>
 								<td>${qna.viewCount}</td>

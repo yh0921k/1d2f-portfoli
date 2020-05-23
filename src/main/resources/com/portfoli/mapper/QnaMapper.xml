@@ -28,6 +28,7 @@
 		SELECT
 		q.readable,
 		q.member_no,
+		q.answer_date,
 		b.board_no,
 		c.name,
 		b.title,
