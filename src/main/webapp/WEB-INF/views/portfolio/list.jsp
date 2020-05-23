@@ -24,7 +24,7 @@
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <div class="container">
-<div align="center"> <button style="font-size: small" onclick="location.href='form'">글쓰기(+)</button>
+<div align="center"> 
 <div class="row">
 <%--
  --%>
@@ -64,13 +64,14 @@
     <!-- 제목, 아이디 -->
 
     <!-- 카드하단 -->
-      <div class="card-footer bg-transparent b-0">
+      <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
-        
+        <a style="position: absolute; left: 67%;">
         <span class="float-end fs--14 p-2">
           ${item.getRecommendedCount()}
         </span>
-        <a href="#" class="btn btn-sm btn-warning opacity-8">
+        </a>
+        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
           ${item.getViewCount()}
         </a>
       </div>

@@ -21,15 +21,25 @@
  -->
 
 
-<div class="container" style="width: 65%;">
+<div class="container" style="width: 65%; overflow: scroll;">
     <div class="portlet mt--20"  style="max-width: 75%">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
+        
+<!-------------------------------- 버튼 -------------------------------->
         <div align="right">
           <button class="btn btn-outline-secondary btn-pill btn-sm" 
                   onclick="location.href='form'">글쓰기(+)</button>
+                  
+        <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" style="border: 1px #9E9E9E solid; padding:0.4rem 0.7rem;">
+          <span class="group-icon">
+            <i class="fi fi-list"></i>
+            <i class="fi fi-squared-dots"></i>
+          </span>
+        </a>
         </div>
+<!-------------------------------- 버튼 -------------------------------->
       </div>
 
       <div class="table-responsive rounded" style="min-height: 500px; margin-top: -280px;">
@@ -79,7 +89,7 @@
 
 
 
-<div class="row" style="margin-top: -280px;">
+<div class="row" id="blockStyle" style="margin-top: -500px; backface-visibility:hidden; background:white; display:none;">
   <c:forEach items="${list}" var="item">
 <a href="#"
   data-href="detail?number=${item.number}" 
@@ -181,6 +191,17 @@
 </div>
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>
+  var toggle = $('#styleToggle');
+  $('#styleToggle').on('click',function(){
+	  if(toggle.hasClass("active")) {
+//        $('#blockStyle').css("display", "none");
+        $('#blockStyle').hide('fast');
+		  } else {
+	      $('#blockStyle').show('fast');
+		  }
+  });
+  
+  
   function fn_paging(curPage) {
     location.href = "list?curPage=" + curPage;
     }

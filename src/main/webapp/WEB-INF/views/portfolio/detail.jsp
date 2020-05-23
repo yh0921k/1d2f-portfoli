@@ -98,12 +98,12 @@
         등록일 : ${portfolio.registeredDate}
       </a>
       <a class="list-group-item list-group-item-action" style="font-size: 0.8em">
-      <div style="display: inline-block; margin:0px">
-        <div style="font-size: 1em; margin-left:10px" class="badge badge-white badge-soft badge-ico-sm float-start">
-        <i class="fi fi-chat" style="font-style: normal;"> 문자</i>
+      <div style="display: block;">
+        <div style="font-size: 1em; margin-left:10px" class="badge badge-white badge-soft badge-ico-lg float-start">
+        <i class="fi fi-chat" style="font-style: normal; font-size:1.2rem;"></i> <span>쪽지</span>
         </div>
-        <div style="font-size: 1em; margin-left:70px" class="badge badge-white badge-soft badge-ico-sm float-start">
-        <i class="fi fi-envelope-2" style="font-style: normal;"> 메일</i>
+        <div style="font-size: 1em; margin-left:15%" class="badge badge-white badge-soft badge-ico-lg float-start">
+        <i class="fi fi-envelope-2" style="font-style: normal; font-size:1.2rem;"></i> <span>메일</span>
         <%--
         링크 예정
         ${portfolio.member...}
@@ -133,7 +133,7 @@
         <a href="#" id="fiEye" style="background-color: transparent;"
            class="btn btn-sm btn-outline-secondary">
           <span class="group-icon">
-            <i class="fi fi-eye" style="width: 27px;"></i><%-- 눈깔 --%>
+            <i class="fi fi-eye" style="font-size:medium; width: 27px;"></i><%-- 눈깔 --%>
           </span>
           <br>
           <span>${portfolio.viewCount}</span>
@@ -149,8 +149,8 @@
 				   data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
 				   data-toast-success-position="bottom-center">
 				  <span class="group-icon">
-				    <i class="fi fi-dislike text-muted" style="width: 27px;"></i><%-- 추천안됨 --%>
-				    <i class="fi fi-like text-warning" style="width: 27px;"></i><%-- 추천됨 --%>
+				    <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
+				    <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
 				  </span>
 				  <br>
 				  <span>${portfolio.recommendedCount}</span>
@@ -163,8 +163,8 @@
            data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
            data-toast-success-position="bottom-center">
           <span class="group-icon">
-            <i class="fi fi-dislike text-muted" style="width: 27px;"></i><%-- 추천안됨 --%>
-            <i class="fi fi-like text-warning" style="width: 27px;"></i><%-- 추천됨 --%>
+            <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
+            <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
           </span>
           <br>
           <span>${portfolio.recommendedCount}</span>
