@@ -42,6 +42,9 @@
   <definition name="portfolio/detail.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/portfolio/detail.jsp"/>
   </definition>  
+  <definition name="portfolio/pdf.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/portfolio/pdf.jsp"/>
+  </definition>  
   <definition name="jobposting/list2.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/jobposting/list2.jsp"/>
   </definition>

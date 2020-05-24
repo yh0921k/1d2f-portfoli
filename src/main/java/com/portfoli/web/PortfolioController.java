@@ -61,6 +61,13 @@ public class PortfolioController {
   @Autowired
   PortfolioService portfolioService;
 
+
+  @RequestMapping("pdf")
+  public String showPdf(String value, Model model) throws Exception {
+    model.addAttribute("addr", value);
+    return "portfolio/pdf";
+  }
+
   @RequestMapping("readableon")
   public String readableon(int number, HttpServletRequest request, Model model) throws Exception {
 

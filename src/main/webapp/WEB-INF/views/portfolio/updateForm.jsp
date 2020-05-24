@@ -27,14 +27,32 @@
                  name="title" value="${portfolio.title}">
 
           <p class="text-gray-900 mt-3">내용 :</p>
-
-          <textarea style="margin-bottom:1rem;resize:none; height: 600px;" required placeholder="내용을 적어주세요." id="description"
-            name="content" class="form-control" rows="6">${portfolio.content}</textarea>
-
-          <span class="text-gray-900">홈페이지 : </span> <textarea class="form-control" rows="1" name='homepage' style='resize: none; width:100%;'>${portfolio.homepage}</textarea>
+          <textarea class="summernote-editor"
+            name="content" 
+            data-placeholder="내용을 적어주세요."
+            data-min-height="300" 
+            data-max-height="1000" 
+            data-focus="true" 
+            data-lang="en-US"
+            data-toolbar='[
+                ["style", ["style"]],
+                ["font", ["bold", "italic", "underline", "clear"]],
+                ["fontname", ["fontname"]],
+                ["color", ["color"]],
+                ["para", ["ul", "ol", "paragraph"]],
+                ["height", ["height"]],
+                ["table", ["table"]],
+                ["insert", ["link", "hr"]],
+                ["view", ["fullscreen", "codeview"]],
+                ["help", ["help"]]
+              ]'>${portfolio.content}</textarea>
+                        
+          <span class="text-gray-900">홈페이지 : </span>
+          <textarea class="form-control" placeholder="홈페이지를 적어주세요" rows="1" name='homepage' style='resize: none; width:100%;'>${portfolio.homepage}</textarea>
+          
             
           <div class='photoDiv' style="min-height: 200px;">
-            <p class="text-gray-900 mt-3" style="margin-bottom: 0px">섬네일 :</p>
+            <p class="text-gray-900 mt-3" style="margin-bottom: 0px">썸네일 :</p>
               <div class="form-control" align="center" >
                     <input type="file" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
               </div>
@@ -42,10 +60,6 @@
             <%-- filePar : 첨부파일 개수 늘리는 부분 --%>
               <p class="text-gray-900 mt-3" style="margin-bottom: 0px">첨부파일 :</p>
               <div class="form-control" align="center" id="filePar" style="height:auto;">
-              <input type="file" name="files" class="files" onclick="plus(event)"/><br>
-              <input type="file" name="files" class="files" onclick="plus(event)"/><br>
-              <input type="file" name="files" class="files" onclick="plus(event)"/><br>
-              <input type="file" name="files" class="files" onclick="plus(event)"/><br>
               <input type="file" name="files" class="files" onclick="plus(event)"/><br>
               </div>
           </div>
@@ -93,7 +107,6 @@
   console.log(td);
   
   td.addEventListener("click", function(e) {
-      e.stopImmediatePropagation();
       
       var br = document.createElement("br");
       
