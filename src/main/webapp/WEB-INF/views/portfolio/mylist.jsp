@@ -13,16 +13,8 @@
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
-<!-- 
-<button class="btn btn-outline-secondary btn-pill btn-sm" 
-        onclick="location.href='form'">리스트형</button>
-<button class="btn btn-outline-secondary btn-pill btn-sm" 
-        onclick="location.href='form'">네모형</button>
- -->
-
-
 <div class="container" style="width: 65%; overflow-y: scroll; margin-left: 30px;">
-    <div class="portlet mt--20"  style="max-width: 75%; box-shadow: 0 0 0 0;">
+    <div class="portlet mt--20"  style="max-width: 75%; box-shadow: 0 0 0 0; ">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
@@ -70,10 +62,32 @@
               <td>${item.registeredDate}</td>
               
 	              <c:if test="${item.readable eq 1}">
-	              <td>공개</td>
+        <td><a href="#" id="readableToggler"
+           class="btn-toggle btn btn-sm btn-outline-secondary active"
+           data-toggle-ajax-url-on="readableon?number=${item.number}"
+           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+           data-toast-failure-position="">
+          <span class="group-icon">
+            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+          </span>
+          <br>
+        </a>
+	      </td>
 	              </c:if>
 	              <c:if test="${item.getReadable() eq 0}">
-	              <td>비공개</td>
+        <td><a href="#" id="readableToggler"
+           class="btn-toggle btn btn-sm btn-outline-secondary"
+           data-toggle-ajax-url-on="readableon?number=${item.number}"
+           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+           data-toast-failure-position="">
+          <span class="group-icon">
+            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+          </span>
+          <br>
+        </a>
+	      </td>
 	              </c:if>
               
               <td>${item.getRecommendedCount()}</td>
@@ -89,7 +103,7 @@
 
 
 
-<div class="row" id="blockStyle" style="margin-top: -500px; backface-visibility:hidden; background:white; display:none;">
+<div class="row" id="blockStyle" style="margin-top: -500px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
@@ -192,10 +206,14 @@
 </div>
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>
+  $("readableToggler").on('click', function(e){
+      e.stopImmediatePropagation();
+      e.currentTarget.stopImmediatePropagation();
+  });
+  
   var toggle = $('#styleToggle');
   $('#styleToggle').on('click',function(){
 	  if(toggle.hasClass("active")) {
-//        $('#blockStyle').css("display", "none");
         $('#blockStyle').hide('fast');
 		  } else {
 	      $('#blockStyle').show('fast');

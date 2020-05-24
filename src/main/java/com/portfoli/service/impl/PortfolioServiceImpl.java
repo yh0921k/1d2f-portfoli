@@ -56,7 +56,15 @@ public class PortfolioServiceImpl implements PortfolioService {
     return portfolioDao.selectMyListCnt(generalMemberNumber);
   }
 
+  @Override
+  public void readableon(Portfolio portfolio) throws Exception {
+    portfolioDao.readableon(portfolio);
+  }
 
+  @Override
+  public void readableoff(Portfolio portfolio) throws Exception {
+    portfolioDao.readableoff(portfolio);
+  }
 
 
 

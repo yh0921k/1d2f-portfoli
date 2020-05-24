@@ -21,7 +21,11 @@ public interface PortfolioDao {
 
   int selectMyListCnt(int generalMemberNumber) throws Exception;
 
-  
+  void readableon(Portfolio portfolio) throws Exception;
+
+  void readableoff(Portfolio portfolio) throws Exception;
+
+
 
 
 

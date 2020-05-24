@@ -169,6 +169,7 @@
       #{readable}
     )
   </insert>
+  
   <delete id="delete" parameterType="int">
     DELETE 
       FROM pf_portfolio
@@ -184,8 +185,24 @@
      </set>
      WHERE board_no = #{number}
   </update>
-  <!--
-   -->
+  
+  <delete id="readableon" parameterType="Portfolio">
+    UPDATE pf_portfolio
+    <set>
+      readable = 1
+    </set>
+    WHERE board_no = #{number}
+  </delete>
+
+  <delete id="readableoff" parameterType="Portfolio">
+    UPDATE pf_portfolio
+    <set>
+      readable = 0
+    </set>
+    WHERE board_no = #{number}
+  </delete>
+
+  
 </mapper>
 
 

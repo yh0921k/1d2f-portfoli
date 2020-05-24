@@ -176,7 +176,7 @@
       </div>
       <hr>
       <%-- url 복사 버튼 --%>
-      <a style="text-decoration:none; cursor:pointer; width:100%; display:inline-block; color: black" href="#" onclick="copy_to_clipboard()">url 복사 : <input style="cursor:pointer; width:65%; border:0px;" id="myInput" type="text" value="http://localhost:9999/portfoli/app/portfolio/detail?number=${portfolio.number}"/></a>
+      <a style="text-decoration:none; cursor:pointer; width:100%; display:inline-block; color: black" href="#" onclick="copy_to_clipboard()">url 복사 : <input readonly style="cursor:pointer; width:65%; border:0px;" id="myInput" type="text" value="http://localhost:9999/portfoli/app/portfolio/detail?number=${portfolio.number}"/></a>
       
       <%-- 내용 --%>
       <textarea style="margin-top:10px; border:0px; resize: none; padding-left:0px;" 
@@ -188,13 +188,20 @@
       
       <%--섬네일 --%>
       썸네일 :<br>
-              <c:if test="${portfolio.thumbnail != null}">
+              <c:choose>
+              <c:when test="${portfolio.thumbnail != null}">
                 ${item.thumbnail}
                 <a style="width:70%; margin: 0;" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' height='95%'>
                 <img style="margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg' width='95%'/><br>
                 </a>
                 <br/>
-               </c:if>
+               </c:when>
+               
+               <c:otherwise>
+               <p>썸네일이 없습니다.</p><br>
+               </c:otherwise>
+               
+               </c:choose>
       
       
       <%--첨부파일 --%>
@@ -225,7 +232,7 @@
                 <br>
                </c:when>
                <c:otherwise>
-               <span>첨부파일이 없습니다.</span>
+               <p>첨부파일이 없습니다.</p>
                </c:otherwise>
                </c:choose>
             <c:if test="${modifiable == true}">

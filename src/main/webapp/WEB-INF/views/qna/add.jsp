@@ -100,7 +100,6 @@
 						<button type="submit"
 							class="btn btn-outline-secondary btn-pill btn-sm mt-3">
 							등록하기</button>
-
 					</div>
 				</div>
 			</form>
