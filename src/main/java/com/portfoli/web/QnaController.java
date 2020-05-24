@@ -119,7 +119,8 @@ public class QnaController {
   }
 
   @GetMapping("delete")
-  public String delete(int no) throws Exception {
+  public String delete(int no, HttpSession session) throws Exception {
+  
     qnaService.delete(no);
     return "redirect:/app/qna/list";
   }

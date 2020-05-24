@@ -58,6 +58,7 @@
 
 			<div class="portlet-header">
 				<h1 class="d-none d-lg-block m--3">Q&A</h1>
+				<c:if test="${qna.memberNumber == sessionScope.loginUser.number}">
 				<div align="right" class="container-fluid">
 					<a href="/portfoli/app/qna/update?no=${qna.number}"><button type="button"
 							class="btn btn-outline-secondary btn-pill btn-sm">수정</button></a> <a
@@ -65,6 +66,7 @@
 							type="button"
 							class="btn btn-outline-secondary btn-pill btn-sm ml-2">삭제</button></a>
 				</div>
+				</c:if>
 			</div>
 			<p class="text-gray-900 mb-1 ml-3">카테고리 : ${qna.category.name}</p>
 			<p class="text-gray-900 mb-1 ml-3">작성자 : ${qna.writer}</p>

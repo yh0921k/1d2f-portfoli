@@ -58,10 +58,12 @@
 
 			<div class="portlet-header">
 				<h1 class="d-none d-lg-block m--3">Q&A</h1>
+				<c:if test="${!empty sessionScope.loginUser.number}">
 				<div align="right">
 					<a href="/portfoli/app/qna/add"><button type="button"
 							class="btn btn-outline-secondary btn-pill btn-sm">글쓰기(+)</button></a>
 				</div>
+				</c:if>
 			</div>
 
 			<div class="table-responsive rounded" style="min-height: 500px;">
