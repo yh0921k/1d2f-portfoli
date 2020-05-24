@@ -394,16 +394,10 @@ INSERT INTO pf_report_class(report_class_no, report_class) VALUES(3, '저작물 
 INSERT INTO pf_report_class(report_class_no, report_class) VALUES(4, '상업적 홍보');
 INSERT INTO pf_report_class(report_class_no, report_class) VALUES(5, '기타');
 
--- 신고처리분류 예제 데이터
-INSERT INTO pf_handle_class(handle_class) VALUES('게시글 삭제');
-INSERT INTO pf_handle_class(handle_class) VALUES('1개월 정지');
-INSERT INTO pf_handle_class(handle_class) VALUES('3개월 정지');
-INSERT INTO pf_handle_class(handle_class) VALUES('회원 추방');
-
 -- 신고 예제 데이터 (게시글 데이터 입력 후 INSERT(완))
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) VALUES(1, 1, 2, 1, 1, '2020-4-1', '처리내용1');
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) VALUES(2, 3, 4, 2, 2, '2020-4-2', '처리내용2');
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date, handle_content) VALUES(3, 5, 6, 3, 4, '2020-4-2', '처리내용3');
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date) VALUES(1, 1, 2, 1, 1, '2020-4-1');
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date) VALUES(2, 3, 4, 2, 2, '2020-4-2');
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date) VALUES(3, 5, 6, 3, 3, '2020-4-2');
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(4, 7, 8, 5);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(5, 1, 3, 1);
 INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(6, 1, 8, 1);
