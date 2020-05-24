@@ -176,7 +176,7 @@
       </div>
       <hr>
       <%-- url 복사 버튼 --%>
-      <a style="text-decoration:none; cursor:pointer; width:100%; display:inline-block; color: black" href="#" onclick="copy_to_clipboard()">url 복사 : <input style="cursor:pointer; width:65%; border:0px;" id="myInput" type="text" value="http://localhost:9999/portfoli/app/portfolio/detail?number=${portfolio.number}"/></a>
+      <a style="text-decoration:none; cursor:pointer; width:100%; display:inline-block; color: black" href="#" onclick="copy_to_clipboard()">url 복사 : <input readonly style="cursor:pointer; width:65%; border:0px;" id="myInput" type="text" value="http://localhost:9999/portfoli/app/portfolio/detail?number=${portfolio.number}"/></a>
       
       <%-- 내용 --%>
       <textarea style="margin-top:10px; border:0px; resize: none; padding-left:0px;" 
@@ -188,34 +188,63 @@
       
       <%--섬네일 --%>
       썸네일 :<br>
-              <c:if test="${portfolio.thumbnail != null}">
+              <c:choose>
+              <c:when test="${portfolio.thumbnail != null}">
                 ${item.thumbnail}
                 <a style="width:70%; margin: 0;" href='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}' height='95%'>
-                <img style="margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg' width='95%'/><br>
+                <img style="height:110px; margin: 0" alt="첨부파일" name="thumbnail" src='${pageContext.servletContext.contextPath}/upload/portfolio/${portfolio.thumbnail}_300x300.jpg'/><br>
                 </a>
                 <br/>
-               </c:if>
-      
+               </c:when>
+               
+               <c:otherwise>
+               <p>썸네일이 없습니다.</p><br>
+               </c:otherwise>
+               
+               </c:choose>
       
       <%--첨부파일 --%>
       첨부파일 :<br>
+<div style="height: 130px;">
               <c:choose>
               <c:when test="${not empty attachment}">
               <c:forEach items="${attachment}" var="item">
               <c:set var="name" value="${item.fileName}" />
               <div style="display:inline-block; padding:5px 5px; margin:5px 5px; border: 3px outset white; height: 110px;">
-                <div style="font-size: small">
+                <div style="text-align: center; font-size: small;">
                 ${item.filePath}
                 </div>
                 <div>
                 <a target="_blank" download="${item.filePath}" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' style='margin: 0'>
                     <c:choose>
                       <c:when test="${item.fileName.endsWith('.jpg') || item.fileName.endsWith('.png') || item.fileName.endsWith('.jpeg') || item.fileName.endsWith('.gif') }">
-                       <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' height="80px"/><br>
+                       <img style='margin: 0' alt='그림파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' height="80px"/><br>
                        
                       </c:when>
+                      
+                      <%-- PDF --%>
+                      <c:when test="${item.fileName.endsWith('.pdf')}">
+										<div class="dropdown d-inline-block mb-3">
+										  
+										  <a href="#" class="btn" data-toggle="dropdown">
+										    <img style='height:-webkit-fill-available; margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/resources/assets/images/icons/file_icon.png' height="80px"/><br>
+										  </a>
+										
+										
+										  <div class="dropdown-menu dropdown-menu-click-update">
+										    <a href="#!" class="dropdown-item">
+										      <span class="js-trigger-text" onclick="showPdf('${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}')">바로보기</span>
+										    </a>
+										    <a id="my-dropdown-menu" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' href="원하는_주소" download>
+										      <span class="js-trigger-text">다운로드 받기</span>
+										    </a>
+										  </div>
+										</div>
+                      </c:when>
+                      <%-- PDF --%>
+                      
                       <c:otherwise>
-                       <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/resources/assets/images/file_icon.png' height="80px"/><br>
+                       <img style='margin: 0' alt='첨부파일' name='attachment' id="attch" src='${pageContext.servletContext.contextPath}/resources/assets/images/icons/file_icon.png' height="80px"/><br>
                       </c:otherwise>
                     </c:choose>
                 </a>
@@ -225,13 +254,16 @@
                 <br>
                </c:when>
                <c:otherwise>
-               <span>첨부파일이 없습니다.</span>
+               <p>첨부파일이 없습니다.</p>
                </c:otherwise>
                </c:choose>
+               
+</div>
             <c:if test="${modifiable == true}">
-            <div style="position: relative; margin: 10% 35%;">
+            <div style="position: relative; margin-top: 10%; margin-left:35%">
             <button class="btn btn-outline-secondary btn-pill btn-sm" style="font-size: medium" type="submit">수정(M)</button>
             <button class="btn btn-outline-secondary btn-pill btn-sm" style="font-size: medium" type="button"  id="deleteButton"onclick='warning(${portfolio.number})'>삭제(D)</button>
+
             </div>
             </c:if>
     </div>
@@ -240,7 +272,21 @@
 </form>
 </body>
 </html>
+
+  <link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
+  <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
   <style>
+  
+  #my-dropdown-menu{
+  color:black; 
+  text-decoration:none; 
+  padding: 8px 15px 8px 25px; 
+  display: block;
+  }
+   #my-dropdown-menu:hover{
+   background-color:#f8f9fa;
+  }
+  
   .modal-dialog.modal-md.modal-xl.modal-dialog-centered > .modal-content {
     margin-top: 6rem!important;
     height: 600px;
@@ -257,11 +303,29 @@
   </style>
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
+  $.SOW.core.dropdown.init('.dropdown-menu.dropdown-menu-hover');
+  $.SOW.core.dropdown_click_ignore.init('.dropdown-menu.dropdown-click-ignore');
+  $.SOW.core.dropdown_ajax.init('a[data-toggle="dropdown"]');
+  
+  function showPdf(string) {
+      console.log(string);
+	    window.open("pdf?value=" + string, "pdf 새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, copyhistory=no, resizable=yes");  
+	    return false;
+  }
   
   function copy_to_clipboard() {
 	  var copyText = document.getElementById("myInput");
 	  copyText.select();
 	  document.execCommand("Copy");
+	  Swal.fire({
+		  position: 'center',
+		  icon: 'success',
+		  title: 'URL이 클립보드에 복사되었습니다',
+		  showConfirmButton: false,
+		  timer: 1000
+		})
+
+
 	}
   
   function warning(){

@@ -13,16 +13,8 @@
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
-<!-- 
-<button class="btn btn-outline-secondary btn-pill btn-sm" 
-        onclick="location.href='form'">리스트형</button>
-<button class="btn btn-outline-secondary btn-pill btn-sm" 
-        onclick="location.href='form'">네모형</button>
- -->
-
-
-<div class="container" style="width: 65%; overflow: scroll;">
-    <div class="portlet mt--20"  style="max-width: 75%">
+<div class="container" style="width: 70%;overflow-y: scroll;margin-left: 30px;overflow-x: hidden;">
+    <div class="portlet mt--20"  style="max-width: 80%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
@@ -42,7 +34,7 @@
 <!-------------------------------- 버튼 -------------------------------->
       </div>
 
-      <div class="table-responsive rounded" style="min-height: 500px; margin-top: -280px;">
+      <div class="table-responsive rounded" style="min-height: 500px;">
 
         <table class="table m-0">
           <thead>
@@ -65,15 +57,37 @@
 							  data-ajax-modal-callback-function=""
 							  data-ajax-modal-backdrop="" 
 							  class="js-ajax-modal ">
-              <td>${status.getCount()}</td>
+              <td>${(10*pagination.curPage)-10 + status.getCount()}</td>
               <td>${item.title}</td>
               <td>${item.registeredDate}</td>
               
 	              <c:if test="${item.readable eq 1}">
-	              <td>공개</td>
+        <td><a href="#" id="readableToggler"
+           class="btn-toggle btn btn-sm btn-outline-secondary active"
+           data-toggle-ajax-url-on="readableon?number=${item.number}"
+           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+           data-toast-failure-position="">
+          <span class="group-icon">
+            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+          </span>
+          <br>
+        </a>
+	      </td>
 	              </c:if>
 	              <c:if test="${item.getReadable() eq 0}">
-	              <td>비공개</td>
+        <td><a href="#" id="readableToggler"
+           class="btn-toggle btn btn-sm btn-outline-secondary"
+           data-toggle-ajax-url-on="readableon?number=${item.number}"
+           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+           data-toast-failure-position="">
+          <span class="group-icon">
+            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+          </span>
+          <br>
+        </a>
+	      </td>
 	              </c:if>
               
               <td>${item.getRecommendedCount()}</td>
@@ -89,16 +103,15 @@
 
 
 
-<div class="row" id="blockStyle" style="margin-top: -500px; backface-visibility:hidden; background:white; display:none;">
+<div class="row" id="blockStyle" style="margin-left:50000px ; position:absolute; margin-top: -745px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
+<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
   data-href="detail?number=${item.number}" 
   data-ajax-modal-size="modal-xl" 
-  data-ajax-modal-centered="true" 
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
-  class="js-ajax-modal ">
-<!-- 테스트코드 -->
+  class="js-ajax-modal">
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
@@ -111,7 +124,7 @@
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60">
         <div class="d-table">
-          <div class="d-table-cell align-bottom">
+          <div class="d-table-cell align-bottom" style="text-align:center;">
             <p>
               ${item.title}
             </p>
@@ -124,13 +137,14 @@
     <!-- 제목, 아이디 -->
 
     <!-- 카드하단 -->
-      <div class="card-footer bg-transparent b-0">
+      <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
-        
+        <a style="position: absolute; left: 67%;">
         <span class="float-end fs--14 p-2">
           ${item.getRecommendedCount()}
         </span>
-        <a href="#" class="btn btn-sm btn-warning opacity-8">
+        </a>
+        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
           ${item.getViewCount()}
         </a>
       </div>
@@ -140,12 +154,12 @@
     </div>
     </a>
     </c:forEach>
+<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
 </div>
-    
 </div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
-  <div class="col-12 col-xl-12">
+  <div class="col-12 col-xl-12" style="margin-top: 2%; padding-right: 35%;">
    <nav aria-label="pagination">
      <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
     
@@ -163,47 +177,54 @@
       <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
         <c:if test="${pageNum == pagination.curPage}">
           <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
           </li>
         </c:if>
         <c:if test="${pageNum != pagination.curPage}">
           <li data-page="${pageNum}">
-            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
           </li>
         </c:if>
       </c:forEach>
       
             <!-- next 부분 -->
-        <c:if test="${pagination.curPage != pagination.rangeCnt && pagination.rangeCnt > 0}">
-          <li class="page-item disabled btn-pill" data-page="next">
+        <c:if test="${pagination.curPage < pagination.pageCnt}">
+          <li class="page-item btn-pill" data-page="next">
             <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
           </li>
         </c:if>
-        <c:if test="${pagination.curPage == pagination.rangeCnt}"> 
-          <li class="page-item" data-page="next">
-            <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
+        <c:if test="${pagination.curPage >= pagination.pageCnt}"> 
+          <li class="page-item disabled btn-pill" data-page="next">
+            <a class="page-link" href="#">Next</a> 
           </li>
+          
         </c:if>
       </ul>
      </nav>
     </div>
 </div>
 </div>
+
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>
+  $("readableToggler").on('click', function(e){
+      e.stopImmediatePropagation();
+      e.currentTarget.stopImmediatePropagation();
+  });
+  
   var toggle = $('#styleToggle');
   $('#styleToggle').on('click',function(){
 	  if(toggle.hasClass("active")) {
-//        $('#blockStyle').css("display", "none");
         $('#blockStyle').hide('fast');
 		  } else {
+	      $('#blockStyle').css('margin-left', 0);
 	      $('#blockStyle').show('fast');
 		  }
   });
   
   
   function fn_paging(curPage) {
-    location.href = "list?curPage=" + curPage;
+    location.href = "mylist?curPage=" + curPage;
     }
   </script>
   <style>

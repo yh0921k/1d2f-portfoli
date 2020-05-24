@@ -2,87 +2,80 @@
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-      <!-- PAGE TITLE -->
-      <section class="bg-white" style="padding: 30px 0px;">
-        <div class="container py-1">
+  <div class="container-fluid">
 
-          <h1 class="h2">
-            포트폴리오
-          </h1>
+    <div class="row">
+<!--------------------------------------- nav bar ----------------------------------------------->
+  <jsp:include page="../member/sidebar.jsp"/>
+<!--------------------------------------- nav bar ----------------------------------------------->
 
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb fs--14">
-              <li class="breadcrumb-item"><a href="#!">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page">포트폴리오 게시판</li>
-            </ol>
-          </nav>
-
-        </div>
-      </section>
-      <!-- /PAGE TITLE -->
-
-
-      <!-- FAQ -->
-      <section style="padding: 50px 0px;">
+<!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
+      <section style="padding: 50px 0px; width: 55%;">
         <div class="container">
 
           <div class="row">
 
             <div class="col-12 col-lg-12">
+        <h1 class="d-none d-lg-block m--3">내 포트폴리오 수정</h1>
 
                <form action="update" method="post" enctype="multipart/form-data">
                <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
-                <table class="lightGray">
-
-                <tr class="firstTR" >
-                 <td align="center" style="width:20%;">공개여부</td>
-                 <td style="height:50px" class="smallPadding">
-                 <c:if test="${portfolio.readable == 1}">
-                  <input type="radio" name="readable" value="1" checked="checked"/>공개
-                  <input type="radio" name="readable" value="0"/>비공개
-                 </c:if>
-                 <c:if test="${portfolio.readable == 0}">
-                  <input type="radio" name="readable" value="1"/>공개
-                  <input type="radio" name="readable" value="0" checked="checked"/>비공개
-                 </c:if>
-                 </td>
-
-                </tr>
-                <tr class="firstTR">
-                 <td align="center">홈페이지</td>
-                 <td style="height:50px" class="smallPadding"><textarea rows="1" name='homepage' style='resize: none; width:100%;'>${portfolio.homepage}</textarea></td>
-                </tr>
-
                 
-                <tr class="firstTR">
-                 <td align="center">제목</td>
-                 <td style="height:50px" class="smallPadding"><textarea rows="1" name='title' style='resize: none; width:100%;'>${portfolio.title}</textarea></td>
-                </tr>
-                
-                <tr height="500" class="firstTR">
-                <td align="center">내용</td>
-                <td style="height:300px;" class="smallPadding"><textarea name='content' style="resize: none; width:100%; height:100%;">${portfolio.content}</textarea></td>
-                </tr>
-                
-                <tr class = "photoTD padding">
-                  <td colspan="2" align="center">
+          <span class="text-gray-900">제목 : </span>
+          <input required type="text" placeholder="제목을 적어주세요"
+                 class="form-label-group form-control-clean col-md-11 mt--5"
+                 name="title" value="${portfolio.title}">
+
+          <p class="text-gray-900 mt-3">내용 :</p>
+          <textarea class="summernote-editor"
+            name="content" 
+            data-placeholder="내용을 적어주세요."
+            data-min-height="300" 
+            data-max-height="1000" 
+            data-focus="true" 
+            data-lang="en-US"
+            data-toolbar='[
+                ["style", ["style"]],
+                ["font", ["bold", "italic", "underline", "clear"]],
+                ["fontname", ["fontname"]],
+                ["color", ["color"]],
+                ["para", ["ul", "ol", "paragraph"]],
+                ["height", ["height"]],
+                ["table", ["table"]],
+                ["insert", ["link", "hr"]],
+                ["view", ["fullscreen", "codeview"]],
+                ["help", ["help"]]
+              ]'>${portfolio.content}</textarea>
+                        
+          <span class="text-gray-900">홈페이지 : </span>
+          <textarea class="form-control" placeholder="홈페이지를 적어주세요" rows="1" name='homepage' style='resize: none; width:100%;'>${portfolio.homepage}</textarea>
+          
+            
+          <div class='photoDiv' style="min-height: 200px;">
+            <p class="text-gray-900 mt-3" style="margin-bottom: 0px">썸네일 :</p>
+              <div class="form-control" align="center" >
                     <input type="file" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
-                  </td>
-                </tr>
-                <tr class = "photoTD padding">
-                <%-- filePar : 첨부파일 개수 늘리는 부분 --%>
-                  <td colspan="2" align="center" id="filePar">
-                    <input type="file" name="files" class="files" onclick="plus(event)"/><br>
-                  </td>
-                </tr>
-                <tr style="background-color: white">
-                  <td colspan="2" align="center">
-                    <button>글쓰기</button>
-                    <button onclick="move(event)">취소</button>
-                  </td>
-                </tr>
-                </table>
-                
+              </div>
+            
+            <%-- filePar : 첨부파일 개수 늘리는 부분 --%>
+              <p class="text-gray-900 mt-3" style="margin-bottom: 0px">첨부파일 :</p>
+              <div class="form-control" align="center" id="filePar" style="height:auto;">
+              <input type="file" name="files" class="files" onclick="plus(event)"/><br>
+              </div>
+          </div>
+          
+            <label
+              class="form-switch form-switch-pill form-switch-primary d-block mt-3  ml-3">
+              <input type="checkbox" id="readable" name="readable">
+              <i data-on="OK" data-off="NO"></i> <span class="h6">포트폴리오 공개 여부</span>
+            </label>
+
+          <div align="right" class="container-fluid">
+            <button type="submit"
+              class="btn btn-outline-secondary btn-pill btn-sm mt-3">
+              등록하기</button>
+          </div>
+
                 </form>
                 
 
@@ -94,7 +87,8 @@
 
       </section>
       <!-- /FAQ -->
-
+</div>
+</div>
   <style>
     .lightGray{width: 100%; border:2px lightGray solid;}
     .darkerGray{color:#313335;}
@@ -113,7 +107,6 @@
   console.log(td);
   
   td.addEventListener("click", function(e) {
-      e.stopImmediatePropagation();
       
       var br = document.createElement("br");
       

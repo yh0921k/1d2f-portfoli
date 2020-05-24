@@ -9,7 +9,7 @@ public interface PortfolioService {
 
   Portfolio get(int boardNumber) throws Exception;
 
-  List<Portfolio> getByMemberNumber(int generalMemberNumber) throws Exception;
+  List<Portfolio> getByMemberNumber(Portfolio portfolio) throws Exception;
 
   boolean insert(Portfolio portfolio) throws Exception;
 
@@ -20,6 +20,10 @@ public interface PortfolioService {
   int selectListCnt(Portfolio portfolio) throws Exception;
 
   int selectMyListCnt(int generalMemberNumber) throws Exception;
+
+  void readableon(Portfolio portfolio) throws Exception;
+
+  void readableoff(Portfolio portfolio) throws Exception;
 
   //  int update(Map<String, Integer> map) throws Exception;
 

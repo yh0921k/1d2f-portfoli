@@ -9,7 +9,7 @@ public interface PortfolioDao {
 
   Portfolio findByNo(int boardNumber) throws Exception;
 
-  List<Portfolio> findByMember(int generalMemberNumber) throws Exception;
+  List<Portfolio> findByMember(Portfolio portfolio) throws Exception;
 
   boolean insert(Portfolio portfolio) throws Exception;
 
@@ -21,7 +21,11 @@ public interface PortfolioDao {
 
   int selectMyListCnt(int generalMemberNumber) throws Exception;
 
-  
+  void readableon(Portfolio portfolio) throws Exception;
+
+  void readableoff(Portfolio portfolio) throws Exception;
+
+
 
 
 

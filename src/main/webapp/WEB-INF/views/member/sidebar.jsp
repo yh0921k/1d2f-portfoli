@@ -70,7 +70,8 @@
 
 
             <li class="nav-item"><a class="nav-link pt--200"
-              href="account-settings.html"> <i
+                style="margin-top: 200px; padding-top: 0px!important;"
+                href="account-settings.html"> <i
                 class="fi fi-arrow-end m-0 fs--12"></i> <span
                 class="px-2 d-inline-block"> 통계 </span>
             </a></li>
