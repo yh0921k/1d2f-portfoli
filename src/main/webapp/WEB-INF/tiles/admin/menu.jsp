@@ -23,7 +23,7 @@
 		<nav class="nav-deep nav-deep-dark nav-deep-hover fs--15 pb-5">
 			<ul style="height: 25px"></ul>
 			<ul class="nav flex-column">
-				<li class="nav-item active"><a class="nav-link" href="#"> <i
+				<li class="nav-item active"><a class="nav-link" href="/portfoli/admin/member/list"> <i
 						class="fi fi-user-male"></i> 회원 관리
 				</a></li>
 				<li class="nav-item"><a class="nav-link"

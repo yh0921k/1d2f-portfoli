@@ -1,6 +1,7 @@
 package com.portfoli.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.GeneralMember;
@@ -39,5 +40,9 @@ public interface MemberService {
   int updateProvider(String provider, String email);
 
   String getProviderByEmail(String email) throws Exception;
+
+  List<Member> list(String regisDate, int currentPage, int pageSize) throws Exception;
+
+  int selectListCnt() throws Exception;
 
 }

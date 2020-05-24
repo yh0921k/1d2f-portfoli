@@ -8,8 +8,7 @@ public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private int number, smsYN, emailYN, type;
-  private String id, password, name, postNumber, basicAddress, detailAddress, email, tel, userkey,
-  provider, photoFilePath;
+  private String id, password, name, postNumber, basicAddress, detailAddress, email, tel, userkey, provider, photoFilePath;
   private Date createDate;
 
   public int getNumber() {

@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -250,6 +251,29 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public String getProviderByEmail(String email) throws Exception {
     return memberDao.findProviderByEmail(email);
+  }
+
+
+  // 어드민
+  
+  @Override
+  public List<Member> list(String regisDate, int currentPage, int pageSize) throws Exception {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("offset", (currentPage - 1) * pageSize);
+    params.put("pageSize", pageSize);
+    params.put("createDate", regisDate);
+    
+    List<Member> members = memberDao.findAll(params);
+    if(members.size() < 0) {
+      throw new Exception("회원 정보 불러오기 실패");
+    }
+    return members;
+  }
+
+
+  @Override
+  public int selectListCnt() throws Exception {
+    return memberDao.count();
   }
 
 

@@ -64,6 +64,13 @@
     <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
+  
+  <definition name="member/*.admin" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/member/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
 
   <!-- Tiles 제외 정의부 -->
   <definition name="empty" template ="/WEB-INF/tiles/empty.jsp">
@@ -81,6 +88,9 @@
   
   <definition name="qna/detail.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/qna/detail.jsp"/>
+  </definition>
+  <definition name="member/moreContents.admin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/member/moreContents.jsp"/>
   </definition>
     
 </tiles-definitions>

@@ -40,7 +40,7 @@ public class MemberController {
   static Logger logger = LogManager.getLogger(MemberController.class);
 
   public MemberController() {
-    MemberController.logger.debug("GeneralMemeberController 객체 생성!");
+    MemberController.logger.debug("MemeberController 객체 생성!");
   }
 
   @Autowired

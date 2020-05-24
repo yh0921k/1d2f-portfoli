@@ -27,52 +27,56 @@
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
 		INSERT INTO
-		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, provider)
+		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type,
+		provider)
 		VALUES
-		(#{id}, PASSWORD(#{password}), #{name}, #{email}, #{tel}, #{smsYN},
+		(#{id}, PASSWORD(#{password}), #{name}, #{email},
+		#{tel}, #{smsYN},
 		#{emailYN}, #{type}, #{provider})
 	</insert>
-	
+
 	<update id="putKey" parameterType="map">
-	 UPDATE pf_members 
-	 SET userkey=#{key}
-	 WHERE id=#{user_id}
+		UPDATE pf_members
+		SET userkey=#{key}
+		WHERE id=#{user_id}
 	</update>
-	
+
 	<update id="alter_userkey" parameterType="map">
-	 UPDATE pf_members
-	 SET userkey='Y'
-	 WHERE id=#{user_id} AND userkey=#{key}
+		UPDATE pf_members
+		SET userkey='Y'
+		WHERE id=#{user_id} AND userkey=#{key}
 	</update>
 
 	<select id="findByEmailAndPassword" resultMap="MemberMap"
 		parameterType="map">
 		SELECT member_no, type, id, name, email
 		FROM pf_members
-		WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password}) AND userkey='Y'
+		WHERE (id=#{email} OR email=#{email}) AND pwd=password(#{password})
+		AND userkey='Y'
 	</select>
 
 	<select id="findByMemberNumber" resultMap="MemberMap"
 		parameterType="int">
 		SELECT member_no, type, id, name, email, photo
-		FROM pf_members
+		FROM
+		pf_members
 		WHERE member_no=#{senderNumber}
 	</select>
-	
+
 	<select id="getEmailByEmail" resultType="string"
 		parameterType="string">
 		SELECT email
 		FROM pf_members
 		WHERE email=#{email}
 	</select>
-	
-	 <select id="findProviderByEmail" resultType="string"
-    parameterType="string">
-    SELECT provider
-    FROM pf_members
-    WHERE email=#{email}
-  </select>
-	
+
+	<select id="findProviderByEmail" resultType="string"
+		parameterType="string">
+		SELECT provider
+		FROM pf_members
+		WHERE email=#{email}
+	</select>
+
 	<select id="getMemberByOtherProvider" resultMap="MemberMap"
 		parameterType="map">
 		SELECT member_no, type, id, name, email
@@ -83,39 +87,56 @@
 	<delete id="delete" parameterType="map">
 		DELETE
 		FROM pf_members
-		WHERE member_no = #{member_no} AND pwd=PASSWORD(#{pwd})
+		WHERE
+		member_no = #{member_no} AND pwd=PASSWORD(#{pwd})
 	</delete>
 
 	<update id="updatePassword" parameterType="map">
 		UPDATE pf_members
 		SET pwd=password(#{newPassword})
-		WHERE 
-		<if test="memberNumber != null">member_no=#{memberNumber} AND pwd=PASSWORD(#{password})</if>
+		WHERE
+		<if test="memberNumber != null">member_no=#{memberNumber} AND pwd=PASSWORD(#{password})
+		</if>
 		<if test="email != null">email=#{email}</if>
 	</update>
-	
+
 	<update id="updateProviderByEmail" parameterType="map">
-    UPDATE pf_members
-    SET provider=#{provider}, userKey=null
-    WHERE email=#{email}
-  </update>
-	
+		UPDATE pf_members
+		SET provider=#{provider}, userKey=null
+		WHERE email=#{email}
+	</update>
+
 	<update id="updateDefaultInfo" parameterType="Member">
 		UPDATE pf_members
-		SET name=#{name}, id=#{id}, email=#{email}, tel=#{tel}, sms_yn=#{smsYN}, email_yn=#{emailYN}
+		SET name=#{name}, id=#{id}, email=#{email}, tel=#{tel},
+		sms_yn=#{smsYN}, email_yn=#{emailYN}
 		WHERE member_no=#{number}
 	</update>
-	
+
 	<update id="updateAddress" parameterType="Member">
 		UPDATE pf_members
-		SET post_no=#{postNumber}, basic_address=#{basicAddress}, detail_address=#{detailAddress}
+		SET
+		post_no=#{postNumber}, basic_address=#{basicAddress},
+		detail_address=#{detailAddress}
 		WHERE member_no=#{number}
 	</update>
-	
-	 <update id="updateProfilePicture" parameterType="map">
-    UPDATE pf_members
-    SET photo=#{photoFilePath}
-    WHERE member_no=#{number}
-  </update>
 
+	<update id="updateProfilePicture" parameterType="map">
+		UPDATE pf_members
+		SET photo=#{photoFilePath}
+		WHERE member_no=#{number}
+	</update>
+
+	<select id="findAll" resultMap="MemberMap" parameterType="map">
+		SELECT member_no, type, id, name, email, create_date, provider
+		FROM pf_members
+		<if test="createDate != null">WHERE create_date LIKE CONCAT(#{createDate},'%')</if>
+		LIMIT #{offset}, #{pageSize}
+	</select>
+	
+	<select id="count" resultType="int">
+    SELECT count(*)
+    FROM pf_members
+  </select>
+  
 </mapper>

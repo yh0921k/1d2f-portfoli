@@ -1,5 +1,7 @@
 package com.portfoli.dao;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.portfoli.domain.Member;
 
@@ -32,5 +34,9 @@ public interface MemberDao {
   int updateProviderByEmail(Map<String, Object> params);
 
   String findProviderByEmail(String email);
+
+  List<Member> findAll(HashMap<String, Object> params);
+
+  int count();
 
 }
