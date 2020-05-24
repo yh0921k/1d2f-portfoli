@@ -77,7 +77,7 @@
 										data-ajax-modal-size="modal-xl"
 										data-ajax-modal-centered="false"
 										data-ajax-modal-callback-function=""
-										data-ajax-modal-backdrop="" class="js-ajax-modal text-dark">${qna.title}</a></td>
+										data-ajax-modal-backdrop="" class="js-ajax-modal text-dark">${qna.title}<c:if test="${!empty qna.answerDate}"><small>(답변완료)</small></c:if></a></td>
 									<td>${qna.writer}</td>
 									<td>${qna.registeredDate}</td>
 									<td>${qna.viewCount}</td>

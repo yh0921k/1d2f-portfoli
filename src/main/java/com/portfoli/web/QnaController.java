@@ -81,6 +81,13 @@ public class QnaController {
     ModelAndView mv = new ModelAndView();
     Qna qna = qnaService.get(no);
 
+    if (qna.getReadable() == 0) {
+      if (((Member) session.getAttribute("loginUser")) == null || ((Member) session.getAttribute("loginUser")).getNumber() != qna.getMemberNumber()) {
+        throw new Exception("비공개 게시글 입니다.");
+      }
+    }
+
+    System.out.println(qna);
     // 새로고침 조회수 막기
     Cookie[] cookies = request.getCookies();
     Cookie viewCookie = null;
