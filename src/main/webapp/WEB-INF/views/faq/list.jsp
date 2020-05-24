@@ -50,47 +50,48 @@
 
     <!-------------------------------------------- 페이징부분 -------------------------------------------------->
 <div class="col-12 col-xl-7">
- <nav aria-label="pagination">
-   <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
-  
-          <!-- prev부분 -->
-     <c:if test="${pagination.curPage == 1}"> 
-       <li class="page-item disabled btn-pill" data-page="prev">
-       <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging(1)">Prev</a></li>
-     </c:if>
-     <c:if test="${pagination.curPage != 1}"> 
-       <li class="page-item" data-page="prev">
-       <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging('${pagination.prevPage}')">Prev</a></li>
-     </c:if>
-
-          <!-- 중간 numbering 부분 -->
-    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
-      <c:if test="${pageNum == pagination.curPage}">
-        <li class="page-item active" data-page="${pageNum}">
-          <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
-        </li>
-      </c:if>
-      <c:if test="${pageNum != pagination.curPage}">
-        <li data-page="${pageNum}">
-          <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
-        </li>
-      </c:if>
-    </c:forEach>
+   <nav aria-label="pagination">
+     <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
     
-          <!-- next 부분 -->
-      <c:if test="${pagination.curPage != pagination.rangeCnt && pagination.rangeCnt > 0}">
-        <li class="page-item disabled btn-pill" data-page="next">
-		      <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
-		    </li>
-      </c:if>
-      <c:if test="${pagination.curPage == pagination.rangeCnt}"> 
-        <li class="page-item" data-page="next">
-		      <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
-		    </li>
-      </c:if>
-	  </ul>
-	 </nav>
-	</div>
+            <!-- prev부분 -->
+       <c:if test="${pagination.curPage == 1}"> 
+         <li class="page-item disabled btn-pill" data-page="prev">
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging(1)">Prev</a></li>
+       </c:if>
+       <c:if test="${pagination.curPage != 1}"> 
+         <li class="page-item" data-page="prev">
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging('${pagination.prevPage}')">Prev</a></li>
+       </c:if>
+  
+            <!-- 중간 numbering 부분 -->
+      <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
+        <c:if test="${pageNum == pagination.curPage}">
+          <li class="page-item active" data-page="${pageNum}">
+            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+          </li>
+        </c:if>
+        <c:if test="${pageNum != pagination.curPage}">
+          <li data-page="${pageNum}">
+            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+          </li>
+        </c:if>
+      </c:forEach>
+      
+            <!-- next 부분 -->
+        <c:if test="${pagination.curPage < pagination.pageCnt}">
+          <li class="page-item btn-pill" data-page="next">
+            <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
+          </li>
+        </c:if>
+        <c:if test="${pagination.curPage >= pagination.pageCnt}"> 
+          <li class="page-item disabled btn-pill" data-page="next">
+            <a class="page-link" href="#">Next</a> 
+          </li>
+          
+        </c:if>
+      </ul>
+     </nav>
+     </div>
     <!-------------------------------------------- 페이징부분 -------------------------------------------------->
 	 </div>
 	</div>

@@ -179,9 +179,12 @@ public class PortfolioController {
 
       // 작성자 정보
       model.addAttribute("generalMember", member);
-      List<Portfolio> portfolios = portfolioService.getByMemberNumber(member.getNumber());
+      portfolio.setMember((GeneralMember)member);
+      List<Portfolio> portfolios = portfolioService.getByMemberNumber(portfolio);
 
       model.addAttribute("list", portfolios);
+      System.out.println("페이징처리에 관헌 정보");
+      System.out.println(pagination);
       return "portfolio/mylist";
     }
   }
@@ -292,7 +295,7 @@ public class PortfolioController {
         portfolioService.update(portfolio);
       }
 
-      return "redirect:list";
+      return "redirect:mylist";
     }
   }
 
@@ -406,7 +409,7 @@ public class PortfolioController {
       }
 
       portfolioService.insert(portfolio);
-      return "redirect:list";
+      return "redirect:mylist";
     }
   }
 
@@ -416,7 +419,7 @@ public class PortfolioController {
       portfolioService.delete(number);
       boardAttachmentService.delete(number);
       boardService.delete(number);
-      return "redirect:list";
+      return "redirect:mylist";
     } catch(Exception e) {
       throw new Exception("삭제중 오류발생");
     }

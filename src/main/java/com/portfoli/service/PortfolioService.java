@@ -9,7 +9,7 @@ public interface PortfolioService {
 
   Portfolio get(int boardNumber) throws Exception;
 
-  List<Portfolio> getByMemberNumber(int generalMemberNumber) throws Exception;
+  List<Portfolio> getByMemberNumber(Portfolio portfolio) throws Exception;
 
   boolean insert(Portfolio portfolio) throws Exception;
 

@@ -63,9 +63,7 @@
      ORDER BY count desc,
      b.view_count desc,
      b.registered_date desc
-    <if test="startIndex != null and startIndex != ''">
     limit ${startIndex}, ${pageSize}
-    </if>
   </select>
   
   <!-- 사용자별 포트폴리오 리스트 추출 -->
@@ -99,9 +97,10 @@
     LEFT OUTER JOIN pf_recommendation r 
     ON b.board_no = r.board_no
     
-    WHERE m.member_no = #{memberNumber}
+    WHERE m.member_no = #{member.number}
     
     GROUP BY p.board_no
+    limit ${startIndex}, ${pageSize}
   </select>
    
   <select id="selectListCnt" resultType="int" parameterType="int">

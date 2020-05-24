@@ -13,8 +13,8 @@
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
-<div class="container" style="width: 65%; overflow-y: scroll; margin-left: 30px;">
-    <div class="portlet mt--20"  style="max-width: 75%; box-shadow: 0 0 0 0; ">
+<div class="container" style="width: 70%;overflow-y: scroll;margin-left: 30px;overflow-x: hidden;">
+    <div class="portlet mt--20"  style="max-width: 80%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
@@ -34,7 +34,7 @@
 <!-------------------------------- 버튼 -------------------------------->
       </div>
 
-      <div class="table-responsive rounded" style="min-height: 500px; margin-top: -280px;">
+      <div class="table-responsive rounded" style="min-height: 500px;">
 
         <table class="table m-0">
           <thead>
@@ -57,7 +57,7 @@
 							  data-ajax-modal-callback-function=""
 							  data-ajax-modal-backdrop="" 
 							  class="js-ajax-modal ">
-              <td>${status.getCount()}</td>
+              <td>${(10*pagination.curPage)-10 + status.getCount()}</td>
               <td>${item.title}</td>
               <td>${item.registeredDate}</td>
               
@@ -103,7 +103,7 @@
 
 
 
-<div class="row" id="blockStyle" style="margin-top: -500px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
+<div class="row" id="blockStyle" style="margin-left:50000px ; position:absolute; margin-top: -675px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
@@ -156,11 +156,10 @@
     </c:forEach>
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
 </div>
-    
 </div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
-  <div class="col-12 col-xl-12">
+  <div class="col-12 col-xl-12" style="margin-top: 2%; padding-right: 35%;">
    <nav aria-label="pagination">
      <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
     
@@ -178,32 +177,34 @@
       <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
         <c:if test="${pageNum == pagination.curPage}">
           <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
           </li>
         </c:if>
         <c:if test="${pageNum != pagination.curPage}">
           <li data-page="${pageNum}">
-            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
           </li>
         </c:if>
       </c:forEach>
       
             <!-- next 부분 -->
-        <c:if test="${pagination.curPage != pagination.rangeCnt && pagination.rangeCnt > 0}">
-          <li class="page-item disabled btn-pill" data-page="next">
+        <c:if test="${pagination.curPage < pagination.pageCnt}">
+          <li class="page-item btn-pill" data-page="next">
             <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
           </li>
         </c:if>
-        <c:if test="${pagination.curPage == pagination.rangeCnt}"> 
-          <li class="page-item" data-page="next">
-            <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
+        <c:if test="${pagination.curPage >= pagination.pageCnt}"> 
+          <li class="page-item disabled btn-pill" data-page="next">
+            <a class="page-link" href="#">Next</a> 
           </li>
+          
         </c:if>
       </ul>
      </nav>
     </div>
 </div>
 </div>
+
 <!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>
   $("readableToggler").on('click', function(e){
@@ -216,13 +217,14 @@
 	  if(toggle.hasClass("active")) {
         $('#blockStyle').hide('fast');
 		  } else {
+	      $('#blockStyle').css('margin-left', 0);
 	      $('#blockStyle').show('fast');
 		  }
   });
   
   
   function fn_paging(curPage) {
-    location.href = "list?curPage=" + curPage;
+    location.href = "mylist?curPage=" + curPage;
     }
   </script>
   <style>

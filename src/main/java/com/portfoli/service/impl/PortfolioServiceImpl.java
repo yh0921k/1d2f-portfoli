@@ -27,8 +27,8 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
-  public List<Portfolio> getByMemberNumber(int generalMemberNumber) throws Exception {
-    return portfolioDao.findByMember(generalMemberNumber);
+  public List<Portfolio> getByMemberNumber(Portfolio portfolio) throws Exception {
+    return portfolioDao.findByMember(portfolio);
   }
 
   @Override
