@@ -1,7 +1,9 @@
 package com.portfoli.web;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
@@ -27,6 +29,7 @@ import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.PortfolioService;
+import com.portfoli.service.PortfolioSkillService;
 import com.portfoli.service.RecommendationService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -40,7 +43,7 @@ public class PortfolioController {
   static Logger logger = LogManager.getLogger(PortfolioController.class);
 
   public PortfolioController() {
-    PortfolioController.logger.debug("NoticeController 객체 생성!");
+    PortfolioController.logger.debug("PortfolioController 객체 생성!");
   }
 
   @Autowired
@@ -61,11 +64,38 @@ public class PortfolioController {
   @Autowired
   PortfolioService portfolioService;
 
+  @Autowired
+  PortfolioSkillService portfolioSkillService;
 
   @RequestMapping("pdf")
   public String showPdf(String value, Model model) throws Exception {
     model.addAttribute("addr", value);
     return "portfolio/pdf";
+  }
+
+  @RequestMapping("search")
+  public String search(String keyword, HttpServletRequest request, Model model) throws Exception {
+
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+    else {
+      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
+      Map<String, String> map = new HashMap<>();
+      map.put("keyword", keyword);
+      map.put("number", String.valueOf(member.getNumber()));
+      List<Portfolio> portfolios = portfolioService.search(map);
+
+      // 포트폴리오 스킬 붙이기
+      for(Portfolio p : portfolios) {
+        p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
+      }
+
+      model.addAttribute("list", portfolios);
+      model.addAttribute("keyword", keyword);
+      return "portfolio/mylist";
+    }
   }
 
   @RequestMapping("readableon")
@@ -80,10 +110,8 @@ public class PortfolioController {
       Portfolio portfolio = portfolioService.get(number);
       if(portfolio.getMember().getNumber() == member.getNumber()) {
         portfolioService.readableon(portfolio);
-        System.out.println("공개 성공!!!!");
-      } else {
+      } else
         throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-      }
     }
     return "portfolio/mylist";
   }
@@ -100,10 +128,8 @@ public class PortfolioController {
       Portfolio portfolio = portfolioService.get(number);
       if(portfolio.getMember().getNumber() == member.getNumber()) {
         portfolioService.readableoff(portfolio);
-        System.out.println("비공개 성공!!!!");
-      } else {
+      } else
         throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-      }
     }
     return "portfolio/mylist";
   }
@@ -182,9 +208,12 @@ public class PortfolioController {
       portfolio.setMember((GeneralMember)member);
       List<Portfolio> portfolios = portfolioService.getByMemberNumber(portfolio);
 
+      // 포트폴리오 스킬 붙이기
+      for(Portfolio p : portfolios) {
+        p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
+      }
+
       model.addAttribute("list", portfolios);
-      System.out.println("페이징처리에 관헌 정보");
-      System.out.println(pagination);
       return "portfolio/mylist";
     }
   }
@@ -220,8 +249,13 @@ public class PortfolioController {
       // 작성자 정보
       model.addAttribute("generalMember", member);
       List<Portfolio> portfolios = portfolioService.list(portfolio);
-      model.addAttribute("list", portfolios);
 
+      // 포트폴리오 스킬 붙이기
+      for(Portfolio p : portfolios) {
+        p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
+      }
+
+      model.addAttribute("list", portfolios);
       return "portfolio/list";
     }
   }
@@ -334,6 +368,9 @@ public class PortfolioController {
       // 조회할때마다 입력날짜가 바뀌지 않게 하기 위해
       board.setViewCount(board.getViewCount() + 1).setContent(null);
       boardService.update(board);
+
+      // 포트폴리오 스킬 붙이기
+      portfolio.setSkill(portfolioSkillService.findAllSkill(portfolio.getBoard().getNumber()).getSkill());
 
       model.addAttribute("portfolio", portfolio);
       model.addAttribute("attachment", boardAttachment);

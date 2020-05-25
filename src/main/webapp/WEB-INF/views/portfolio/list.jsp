@@ -35,20 +35,21 @@
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
-  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
+
+  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px; margin-right:20px">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
-           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
+           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
     </c:if>
     <c:if test="${item.thumbnail == null}">
-           style="background-image: url('../../resources/assets/images/background/black.png');">
+           style="background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
     </c:if>
     
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60">
         <div class="d-table">
           <div class="d-table-cell align-bottom" style="text-align:center;">
-            <p>
+            <p style="max-height: 1.65rem;width: 16.5rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
               ${item.title}
             </p>
             <p class="text-warning fs--13">
@@ -75,6 +76,7 @@
     
       </div>
     </div>
+
     </a>
     </c:forEach>
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->

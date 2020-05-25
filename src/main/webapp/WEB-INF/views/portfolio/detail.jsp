@@ -121,11 +121,8 @@
       <%-- 헤드부분 --%>
       <div>
       <%-- 제목 --%>
-      <textarea style="font-weight:bold;font-size:large; border: 0px; resize: none; margin-bottom: -20px; margin-top: 40px; padding-left:0px;" 
-                readonly="readonly" 
-                rows="auto" 
-                cols="83%">${portfolio.title}</textarea>
-
+      <textarea rows="1" style="resize:none;font-weight:bold;font-size: 1.8rem;border:0px;width: 39rem;overflow: hidden;text-overflow: ellipsis;padding-top: 60px;white-space: nowrap;"
+             ondragstart="return false" readonly="readonly">${portfolio.title}</textarea>
       
       <%-- 아이콘 --%>
       <div style="top: 30px; position: absolute; right: 3px;">
@@ -175,6 +172,15 @@
       </div>
       </div>
       <hr>
+      
+      <%--스킬나열 --%>
+      <div>
+      <c:forEach items="${portfolio.skill}" var="skill">
+      <button type="button" class="btn btn-outline-secondary btn-pill btn-sm active" style="font-size: small">${skill.name}</button>
+      </c:forEach>
+      </div>
+      <br>
+      
       <%-- url 복사 버튼 --%>
       <a style="text-decoration:none; cursor:pointer; width:100%; display:inline-block; color: black" href="#" onclick="copy_to_clipboard()">url 복사 : <input readonly style="cursor:pointer; width:65%; border:0px;" id="myInput" type="text" value="http://localhost:9999/portfoli/app/portfolio/detail?number=${portfolio.number}"/></a>
       
@@ -183,6 +189,7 @@
                 readonly="readonly" 
                 name="content"
                 rows="auto" cols="90%" 
+                readonly
                 class="summernote-editor">${portfolio.content}</textarea>
       <br/>
       
@@ -235,7 +242,7 @@
 										    <a href="#!" class="dropdown-item">
 										      <span class="js-trigger-text" onclick="showPdf('${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}')">바로보기</span>
 										    </a>
-										    <a id="my-dropdown-menu" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.fileName}' href="원하는_주소" download>
+										    <a id="my-dropdown-menu" href='${pageContext.servletContext.contextPath}/upload/portfolio/${item.filePath}' href="원하는_주소" download>
 										      <span class="js-trigger-text">다운로드 받기</span>
 										    </a>
 										  </div>

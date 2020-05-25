@@ -1,6 +1,7 @@
 package com.portfoli.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Portfolio;
 
 public interface PortfolioDao {
@@ -24,6 +25,8 @@ public interface PortfolioDao {
   void readableon(Portfolio portfolio) throws Exception;
 
   void readableoff(Portfolio portfolio) throws Exception;
+
+  List<Portfolio> search(Map<String, String> map) throws Exception;
 
 
 

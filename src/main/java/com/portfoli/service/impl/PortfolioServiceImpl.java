@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.PortfolioDao;
@@ -64,6 +65,11 @@ public class PortfolioServiceImpl implements PortfolioService {
   @Override
   public void readableoff(Portfolio portfolio) throws Exception {
     portfolioDao.readableoff(portfolio);
+  }
+
+  @Override
+  public List<Portfolio> search(Map<String, String> map) throws Exception {
+    return portfolioDao.search(map);
   }
 
 

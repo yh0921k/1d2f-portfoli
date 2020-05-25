@@ -13,38 +13,49 @@
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
-<div class="container" style="width: 70%;overflow-y: scroll;margin-left: 30px;overflow-x: hidden;">
-    <div class="portlet mt--20"  style="max-width: 80%; box-shadow: 0 0 0 0; display:inline-block">
+<div class="container" style="width: 70%;overflow-y: scroll;margin-left: 10px;overflow-x: hidden;">
+    <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
-        <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리</h1>
+        <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리
         
 <!-------------------------------- 버튼 -------------------------------->
-        <div align="right">
-          <button class="btn btn-outline-secondary btn-pill btn-sm" 
-                  onclick="location.href='form'">글쓰기(+)</button>
-                  
-        <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" style="border: 1px #9E9E9E solid; padding:0.4rem 0.7rem;">
+        <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
+           style="margin-left: 40%;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
           <span class="group-icon">
             <i class="fi fi-list"></i>
             <i class="fi fi-squared-dots"></i>
           </span>
         </a>
-        </div>
+          <button class="btn btn-outline-secondary btn-pill btn-sm" 
+                  onclick="location.href='form'">글쓰기(+)</button>
 <!-------------------------------- 버튼 -------------------------------->
+        </h1>
       </div>
 
-      <div class="table-responsive rounded" style="min-height: 500px;">
+<!-------------------------------- 검색창 -------------------------------->
+		<form action='search' method='get' >
+		  <input class="form-control" id='keyword' name='keyword' type='text'
+		         style="display:inline-block; width: 90%; height: 2.5rem; margin: 3rem 0rem;">
+		  <button aria-label="Global Search" type="submit"
+		          class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
+		     <i class="fi fi-search fs--20"></i>
+		  </button>
+		</form>
+<!-------------------------------- 검색창 -------------------------------->
+      <div class="table-responsive rounded" style="min-height: 500px; overflow:initial;">
 
-        <table class="table m-0">
+<!-------------------------------- 프토폴리오 리스트 (테이블형) -------------------------------->
+        <table id="listTable" class="table m-0" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
           <thead>
             <tr>
               <th class="b-0 w--150" style="font-size: large;">순번</th>
               <th class="b-0 w--400" style="font-size: large;">제목</th>
-              <th class="b-0 w--200" style="font-size: large;">등록일</th>
-              <th class="b-0 w--200" style="font-size: large;">공개여부</th>
+              <th class="b-0 w--300" style="font-size: large;">등록일</th>
+              <th class="b-0 w--250" style="font-size: large;">공개여부</th>
               <th class="b-0 w--200" style="font-size: large">추천수</th>
               <th class="b-0 w--200" style="font-size: large;">조회수</th>
+              <th class="b-0 w--500" style="font-size: large;">스킬</th>
             </tr>
           </thead>
                 
@@ -57,53 +68,75 @@
 							  data-ajax-modal-callback-function=""
 							  data-ajax-modal-backdrop="" 
 							  class="js-ajax-modal ">
-              <td>${(10*pagination.curPage)-10 + status.getCount()}</td>
-              <td>${item.title}</td>
-              <td>${item.registeredDate}</td>
+							<c:choose>
+							<c:when test="${not empty keyword}">
+              <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${status.getCount()}</td>
+              </c:when>
+              <c:otherwise>
+              <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${(10*pagination.curPage)-10 + status.getCount()}</td>
+              </c:otherwise>
+              </c:choose>
+              <td class="my-td my" 
+                  ondragstart="return false" 
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+                  ${item.title}
+              </td>
+              <td class="my-td my"
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+                  ${item.registeredDate}</td>
               
 	              <c:if test="${item.readable eq 1}">
-        <td><a href="#" id="readableToggler"
-           class="btn-toggle btn btn-sm btn-outline-secondary active"
-           data-toggle-ajax-url-on="readableon?number=${item.number}"
-           data-toggle-ajax-url-off="readableoff?number=${item.number}"
-           data-toast-failure-position="">
-          <span class="group-icon">
-            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
-            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
-          </span>
-          <br>
-        </a>
-	      </td>
+			        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+			        <a href="#" id="readableToggler"
+			           class="btn-toggle btn btn-sm btn-outline-secondary active"
+			           data-toggle-ajax-url-on="readableon?number=${item.number}"
+			           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+			           data-toast-failure-position="">
+			          <span class="group-icon">
+			            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+			            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+			          </span>
+			          <br>
+			        </a>
+				      </td>
 	              </c:if>
 	              <c:if test="${item.getReadable() eq 0}">
-        <td><a href="#" id="readableToggler"
-           class="btn-toggle btn btn-sm btn-outline-secondary"
-           data-toggle-ajax-url-on="readableon?number=${item.number}"
-           data-toggle-ajax-url-off="readableoff?number=${item.number}"
-           data-toast-failure-position="">
-          <span class="group-icon">
-            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
-            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
-          </span>
-          <br>
-        </a>
-	      </td>
+			        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+			        <a href="#" id="readableToggler"
+			           class="btn-toggle btn btn-sm btn-outline-secondary"
+			           data-toggle-ajax-url-on="readableon?number=${item.number}"
+			           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+			           data-toast-failure-position="">
+			          <span class="group-icon">
+			            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+			            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+			          </span>
+			          <br>
+			        </a>
+				      </td>
 	              </c:if>
               
-              <td>${item.getRecommendedCount()}</td>
-              <td>${item.viewCount}</td>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.getRecommendedCount()}</td>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.viewCount}</td>
+              <td class="my-td my"
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+		              <c:forEach items="${item.skill}" var="skill">
+		              ${skill.name}/
+		              </c:forEach>
+              </td>
             </tr>
             
             </c:forEach>
           </tbody>
         </table>
+<!-------------------------------- 프토폴리오 리스트 (테이블형) -------------------------------->
         
       </div>
     </div>
 
 
 
-<div class="row" id="blockStyle" style="margin-left:50000px ; position:absolute; margin-top: -745px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
+<div class="row" id="blockStyle" style="margin-left:50000px ; position:absolute; margin-top:-550px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
@@ -112,20 +145,20 @@
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
-  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px;">
+  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px; margin-right:20px">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
-           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
+           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
     </c:if>
     <c:if test="${item.thumbnail == null}">
-           style="background-image: url('../../resources/assets/images/background/black.png');">
+           style="background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
     </c:if>
     
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60">
         <div class="d-table">
           <div class="d-table-cell align-bottom" style="text-align:center;">
-            <p>
+            <p style="max-height: 1.65rem;width: 16.5rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
               ${item.title}
             </p>
             <p class="text-warning fs--13">
@@ -158,8 +191,13 @@
 </div>
 </div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
-<!-------------------------------------------- 페이징부분 -------------------------------------------->
-  <div class="col-12 col-xl-12" style="margin-top: 2%; padding-right: 35%;">
+<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
+              <c:choose>
+              <c:when test="${not empty keyword}">
+              </c:when>
+              <c:otherwise>
+
+  <div class="col-12 col-xl-12" style="margin-top: 2%;padding-right: 40%;margin: 10px auto;text-align: center;">
    <nav aria-label="pagination">
      <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
     
@@ -202,11 +240,23 @@
       </ul>
      </nav>
     </div>
+              </c:otherwise>
+              </c:choose>
+<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
 </div>
 </div>
-
-<!-------------------------------------------- 페이징부분 -------------------------------------------->
   <script>
+  $(document).ready(function() {
+	   $("#keyword").keyup(function() {
+	     var k = $(this).val();
+	     $("#listTable > tbody > tr").hide();
+	     
+	     var temp = $("#listTable > tbody > tr > td:nth-child(n):contains('"+ k +"')");
+	     $(temp).parent().show();
+	     })
+	   
+	 });
+  
   $("readableToggler").on('click', function(e){
       e.stopImmediatePropagation();
       e.currentTarget.stopImmediatePropagation();
@@ -215,10 +265,11 @@
   var toggle = $('#styleToggle');
   $('#styleToggle').on('click',function(){
 	  if(toggle.hasClass("active")) {
+	      $('.table.m-0').css('display', 'contents');
         $('#blockStyle').hide('fast');
 		  } else {
-	      $('#blockStyle').css('margin-left', 0);
-	      $('#blockStyle').show('fast');
+			  $('.table.m-0').css('display', 'none');
+	      $('#blockStyle').css('margin-left', 0).show('fast');
 		  }
   });
   
@@ -228,6 +279,9 @@
     }
   </script>
   <style>
+  .table .my-td.my{
+    padding: 1.2rem 1rem 1rem 1rem;
+  }
     .cursor {
       cursor: pointer;
     }

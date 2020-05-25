@@ -102,6 +102,11 @@
     .textAR{resize:none; border-color:pink}
   </style>
   <script>
+  
+  $('input[type="checkbox"]').change(function(){
+      this.value = (Number(this.checked));
+  });
+  
   var td = document.querySelector("#filePar");
   console.log(td);
   

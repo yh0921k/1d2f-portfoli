@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.PortfolioSkillDao">
+  <resultMap type="Portfolio" id="PortfolioMap">
+    <id column="board_no" property="number" /><!-- 게시글번호-->
+    
+    <collection property="skill" ofType="Skill">
+      <id column="sskill_no" property="skillNumber" /><!-- 기술번호-->
+      <result column="scategory" property="category" /><!-- 기술구분 -->
+      <result column="sname" property="name" /><!-- 이름 -->
+    </collection>
+  </resultMap>
+  
+
+  <select id="findAllSkill" resultMap="PortfolioMap" parameterType="int">
+    SELECT
+      p.board_no, 
+      s.skill_no sskill_no, 
+      s.category scategory, 
+      s.name sname
+    FROM pf_portfolio p 
+    LEFT OUTER JOIN pf_portfolio_skill ps 
+    ON p.board_no = ps.board_no 
+    LEFT OUTER JOIN pf_member_skill ms 
+    ON ps.member_skill_no = ms.member_skill_no 
+    LEFT OUTER JOIN pf_general_member m 
+    ON m.general_member_no = ms.general_member_no 
+    LEFT OUTER JOIN pf_skill s ON s.skill_no = ms.skill_no
+    WHERE p.board_no = ${number}
+  </select>
+  
+
+
+  
+</mapper>
+
+
+
+
+
+
