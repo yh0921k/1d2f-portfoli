@@ -15,7 +15,9 @@
         </div>
         </div>
         </div>
-        <div align="right">
+        <div align="right"> 
+          <button class="btn btn-outline-secondary btn-pill btn-sm" 
+                  onclick="location.href='../category/list'">카테고리 수정</button>
           <button class="btn btn-outline-secondary btn-pill btn-sm" 
                   onclick="location.href='form'">등록하기</button>
         </div>
