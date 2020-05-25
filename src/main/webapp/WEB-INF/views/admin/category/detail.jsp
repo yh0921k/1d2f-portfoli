@@ -22,7 +22,7 @@
       <div class="pt--0">
 
         <div class="form-label-group mb-4">
-          <input value=${category.categoryNumber} required placeholder="number" id="categoryNumber" name="categoryNumber" class="form-control form-control-clean">
+          <input value=${category.categoryNumber} readonly="readonly" placeholder="number" id="categoryNumber" name="categoryNumber" class="form-control form-control-clean">
           <label>번호</label>
         </div>
 
