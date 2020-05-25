@@ -13,8 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.gson.Gson;
 import com.portfoli.domain.NoticeCategory;
 import com.portfoli.domain.Pagination;
 import com.portfoli.service.NoticeCategoryService;
@@ -68,9 +71,7 @@ public class AdminNoticeCategoryController {
   }
 
   @GetMapping("form")
-  public void form() throws Exception {
-    System.out.println("notice/form from controller");
-  }
+  public void form() throws Exception {}
 
   @PostMapping("add")
   public String add(final NoticeCategory noticeCategory) throws Exception {
@@ -124,6 +125,30 @@ public class AdminNoticeCategoryController {
     return "redirect:list";
   }
 
+  @PostMapping(value = "isValid", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String isValid(@RequestBody HashMap<String, String> map, Model model) throws Exception {
+    int categoryNumber;
+    try {
+      categoryNumber = Integer.parseInt(map.get("categoryNumber"));
 
+    } catch (NumberFormatException e) {
+      return "";
+    }
+    NoticeCategory noticeCategory = new NoticeCategory();
+    noticeCategory.setStartIndex(-1);
 
+    List<NoticeCategory> categories = noticeCategoryService.list(noticeCategory);
+    String result = "valid";
+    for (NoticeCategory tmp : categories) {
+      if (tmp.getCategoryNumber() == categoryNumber) {
+        result = "invalid";
+        break;
+      }
+    }
+
+    Gson gson = new Gson();
+    String jsonString = gson.toJson(result);
+    return jsonString;
+  }
 }
