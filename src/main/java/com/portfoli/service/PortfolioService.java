@@ -1,6 +1,7 @@
 package com.portfoli.service;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.Portfolio;
 
 public interface PortfolioService {
@@ -25,8 +26,7 @@ public interface PortfolioService {
 
   void readableoff(Portfolio portfolio) throws Exception;
 
-  //  int update(Map<String, Integer> map) throws Exception;
-
+  List<Portfolio> search(Map<String, String> map) throws Exception;
 
 
 }

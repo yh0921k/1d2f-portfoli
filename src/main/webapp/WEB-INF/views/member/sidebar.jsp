@@ -57,7 +57,7 @@
 
 
             <li class="nav-item"><a class="nav-link "
-              href="account-orders.html"> <i
+              href="/portfoli/app/calendar/list"> <i
                 class="fi fi-arrow-end m-0 fs--12"></i> <span
                 class="px-2 d-inline-block"> 일정 관리 </span>
             </a></li>

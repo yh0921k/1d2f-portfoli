@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
 <link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/vendor_bundle.min.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 </head>
 <body class="header-sticky">
 <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>

@@ -152,6 +152,18 @@
     GROUP BY p.board_no
   </select>
 
+<!-- mylist에서 상단 검색어 기능 -->
+  <select id="search" resultMap="PortfolioMap" parameterType="Map">
+    SELECT
+      * 
+    FROM pf_portfolio p 
+    LEFT OUTER JOIN pf_board b 
+    ON p.board_no = b.board_no 
+    WHERE b.title like '%${keyword}%'
+    AND p.general_member_no = ${number}
+  </select>
+
+
   <insert id="insert" parameterType="Portfolio">
     INSERT INTO pf_portfolio (
       board_no,
