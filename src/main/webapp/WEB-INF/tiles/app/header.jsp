@@ -179,7 +179,7 @@
 
                   <div class="dropdown-divider" style="z-index: 200;"></div>
 
-                  <a href="#!" target="_blank"
+                  <a href="/portfoli/app/calendar/calendar" target="_blank"
                     class="dropdown-item text-truncate font-weight-medium"> <span
                     class="badge badge-success float-end font-weight-normal mt-1">3
                       new</span> 일정 <small class="d-block text-muted">internal

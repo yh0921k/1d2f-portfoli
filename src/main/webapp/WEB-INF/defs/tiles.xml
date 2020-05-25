@@ -48,6 +48,12 @@
   <definition name="jobposting/list2.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/jobposting/list2.jsp"/>
   </definition>
+  <definition name="calendar/eventCreate.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/calendar/eventCreate.jsp"/>
+  </definition>
+  <definition name="jobposting/eventEdit.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/calendar/eventCreate.jsp"/>
+  </definition>
 
 
 </tiles-definitions>
