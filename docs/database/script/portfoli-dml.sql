@@ -687,12 +687,13 @@ INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(5, 7)
 INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(5, 3);
 
 -- 일정(개인용) 샘플 데이터(pf_schedule)
-INSERT INTO pf_schedule(general_member_no, start_date, end_date, content) VALUES(1, '2020-05-01', '2020-07-01', 'TOEIC');
-INSERT INTO pf_schedule(general_member_no, end_date, content) VALUES(1, '2020-08-11', '정보처리기사');
-INSERT INTO pf_schedule(general_member_no, content) VALUES(1, '우아한형제들 날짜 확인할것');
-INSERT INTO pf_schedule(general_member_no, start_date, end_date, content) VALUES(3, '2020-03-01', '2020-07-01', '1일 1알고리즘');
-INSERT INTO pf_schedule(general_member_no, end_date, content) VALUES(3, '2020-08-11', '카카오 코딩 테스트');
-INSERT INTO pf_schedule(general_member_no, end_date, content) VALUES(3, '2020-09-10', '카카오 1차 면접');
-INSERT INTO pf_schedule(general_member_no, start_date, end_date, content) VALUES(5, '2020-01-01', '2020-06-01', 'SSAPY 활동 기간');
-INSERT INTO pf_schedule(general_member_no, start_date, content) VALUES(5, '2020-06-10', '취업 준비 시작');
-INSERT INTO pf_schedule(general_member_no, content) VALUES(5, '기업 공고 찾아보기');
+INSERT INTO pf_schedule(general_member_no, start_date, end_date, title) VALUES(1, '2020-05-01', '2020-07-01', 'TOEIC');
+INSERT INTO pf_schedule(general_member_no, end_date, title) VALUES(2, '2020-08-11', '정보처리기사');
+INSERT INTO pf_schedule(general_member_no, title) VALUES(3, '우아한형제들 날짜 확인할것');
+INSERT INTO pf_schedule(general_member_no, start_date, end_date, title, description) VALUES(4, '2020-03-01', '2020-07-01', '1일 1알고리즘', '상세');
+INSERT INTO pf_schedule(general_member_no, end_date, title) VALUES(5, '2020-08-11', '카카오 코딩 테스트');
+INSERT INTO pf_schedule(general_member_no, end_date, title) VALUES(1, '2020-09-10', '카카오 1차 면접');
+INSERT INTO pf_schedule(general_member_no, start_date, end_date, title) VALUES(2, '2020-01-01', '2020-06-01', 'SSAPY 활동 기간');
+INSERT INTO pf_schedule(general_member_no, start_date, title) VALUES(3, '2020-06-10', '취업 준비 시작');
+INSERT INTO pf_schedule(general_member_no, title) VALUES(4, '기업 공고 찾아보기');
+INSERT INTO pf_schedule(general_member_no, title) VALUES(5, '기업 공고 찾아보기');

@@ -1073,7 +1073,9 @@ CREATE TABLE pf_schedule (
   general_member_no INTEGER  NOT NULL COMMENT '일반회원번호', -- 일반회원번호
   start_date        DATETIME NULL     COMMENT '시작일', -- 시작일
   end_date          DATETIME NULL     COMMENT '종료일', -- 종료일
-  content           TEXT     NOT NULL COMMENT '일정내용' -- 일정내용
+  title             VARCHAR(255) NOT NULL COMMENT '일정 이름', -- 일정 이름
+  description       TEXT     NULL COMMENT '일정내용', -- 일정내용
+  class             VARCHAR(255) NULL COMMENT '분류' -- 분류
 )
 COMMENT '일정(개인용)';
 

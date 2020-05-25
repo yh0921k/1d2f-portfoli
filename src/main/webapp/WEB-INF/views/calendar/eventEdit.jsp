@@ -3,7 +3,7 @@
 
     <div class="modal-header">
       <h2 class="modal-title fs--18 m-0">
-        Event
+        일정
       </h2>
 
       <button type="button" class="close pointer" data-dismiss="modal" aria-label="Close">
@@ -15,13 +15,6 @@
 
       <div class="accordion" id="accordionFullcalendarEdit">
 
-
-        <!-- 
-
-          DETAIL 
-          Updated By Fullcalendar Controller
-
-        -->
         <div class="collapse show" id="accordionDetail" data-parent="#accordionFullcalendarEdit">
 
           <h5 class="mb-3">
@@ -31,39 +24,34 @@
           <ul class="list-unstyled">
 
             <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">Description:</div>
+              <div class="w--180 flex-none font-weight-medium">일정 상세:</div>
               <div class="flex-grow-1">
-                <!-- small trick: .hide-empty will hide if no content -->
+
                 <div id="info_description" class="hide-empty bg-light p--15 rounded mb-3"></div>
               </div>
-            </li>
-
-            <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">URL:</div>
-              <div class="flex-grow-1 text-truncate" id="info_url">&ndash;</div>
             </li>
 
             <li class="list-item"><hr></li>
 
             <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">Start Date:</div>
+              <div class="w--180 flex-none font-weight-medium">시작일:</div>
               <div class="flex-grow-1 text-truncate" id="info_start">&ndash;</div>
             </li>
 
             <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">End Date:</div>
+              <div class="w--180 flex-none font-weight-medium">종료일:</div>
               <div class="flex-grow-1 text-truncate" id="info_end">&ndash;</div>
             </li>
 
             <li class="list-item"><hr></li>
 
             <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">Start Reccurency:</div>
+              <div class="w--180 flex-none font-weight-medium">반복 시작일:</div>
               <div class="flex-grow-1 text-truncate" id="info_startRecur">&ndash;</div>
             </li>
 
             <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">End Reccurency:</div>
+              <div class="w--180 flex-none font-weight-medium">반복 종료일:</div>
               <div class="flex-grow-1 text-truncate" id="info_endRecur">&ndash;</div>
             </li>
 
@@ -73,7 +61,7 @@
           <div class="mt--30">
             <a href="#accordionEdit" class="btn btn-light btn-sm" data-toggle="collapse" aria-expanded="true" aria-controls="accordionEdit">
               <i class="fi fi-pencil"></i> 
-              Edit Event
+              일정 수정
             </a>
           </div>
 
@@ -82,11 +70,7 @@
 
 
         <!-- <form class="bs-validate collapse" novalidate action="../../html_frontend/demo.files/php/demo.ajax_request.php" method="POST"> -->
-        <form class="bs-validate js-ajax collapse" id="accordionEdit" novalidate data-parent="#accordionFullcalendarEdit"
-            method="post" 
-            action="../../html_frontend/demo.files/php/demo.ajax_request.php" 
-            method="POST" 
-
+        <form class="bs-validate js-ajax collapse" id="accordionEdit" novalidate data-parent="#accordionFullcalendarEdit" action="eventEdit" method="POST" 
             data-modal-autoclose-on-success="true"
             data-modal-autoclose-on-success-delay="800"
 
@@ -130,17 +114,10 @@
                       "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                     }' placeholder="Event Date Start" name="start" id="start">
 
-                  <label for="start">Event Date Start</label>
+                  <label for="start">시작일</label>
                   <a href="#" class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
 
                 </div>
-
-
-                <label class="form-switch form-switch-pill form-switch-primary d-block mb-0 mt-3">
-                  <input type="checkbox" id="recurrent_enable" value="1" data-toggle="collapse" data-target="#event_recurrency">
-                  <i data-on="&#10004;" data-off="&#10005;"></i>
-                  Recurrency
-                </label>
 
               </div>
 
@@ -163,7 +140,7 @@
                       "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                     }' placeholder="Event Date End" name="end" id="end">
 
-                  <label for="end">Event Date End</label>
+                  <label for="end">종료일</label>
                   <a href="#" class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
 
                 </div>
@@ -172,97 +149,13 @@
 
             </div>
 
-
-            <!-- recurrency -->
-            <div id="event_recurrency" class="collapse">
-              <div class="row">
-
-                <div class="col-12 col-lg-6 mb-3">
-
-                  <div class="form-label-group">
-
-                    <input autocomplete="off" type="text" class="form-control rangepicker" 
-                      data-single-datepicker="true" 
-                      data-timepicker="true" 
-                      data-timepicker-24h="false" 
-                      data-timepicker-show-seconds="false" 
-                      data-disable-auto-update-input="true" 
-                      data-date-start="" 
-                      data-date-format="YYYY-MM-DD HH:mm" 
-                      data-quick-locale='{
-                        "lang_apply"  : "Apply",
-                        "lang_cancel" : "Cancel",
-                        "lang_months"   : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                        "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-                      }' placeholder="Recurrency Date Start" name="startRecur" id="startRecur">
-
-                    <label for="startRecur">Recurrency Date Start</label>
-                    <a href="#" class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
-
-                  </div>
-
-                </div>
-
-                <div class="col-12 col-lg-6 mb-3">
-
-                  <div class="form-label-group">
-
-                    <input autocomplete="off" type="text" class="form-control rangepicker" 
-                      data-single-datepicker="true" 
-                      data-timepicker="true" 
-                      data-timepicker-24h="false" 
-                      data-timepicker-show-seconds="false" 
-                      data-disable-auto-update-input="true" 
-                      data-date-start="" 
-                      data-date-format="YYYY-MM-DD HH:mm" 
-                      data-quick-locale='{
-                        "lang_apply"  : "Apply",
-                        "lang_cancel" : "Cancel",
-                        "lang_months"   : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                        "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-                      }' placeholder="Recurrency Date End" name="endRecur" id="endRecur">
-
-                    <label for="endRecur">Recurrency Date End</label>
-                    <a href="#" class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
-
-                  </div>
-
-                </div>
-
-                <div class="col-12 mb-3">
-
-                  <select multiple class="form-control bs-select" id="daysOfWeek" name="daysOfWeek[]" title="Days to repeat">
-                    <option value="0">Sun</option>
-                    <option value="1">Mon</option>
-                    <option value="2">Tue</option>
-                    <option value="3">Wed</option>
-                    <option value="4">Thu</option>
-                    <option value="5">Fri</option>
-                    <option value="6">Sat</option>
-                  </select>
-
-                </div>
-
-              </div>
-            </div>
-            <!-- /recurrency -->
-
           </div>
-
-
-
-
 
 
 
           <div class="form-label-group mb-3">
             <input required placeholder="Event Name" id="title" name="title" type="text" value="" class="form-control">
-            <label for="title">Event Name</label>
-          </div>
-
-          <div class="form-label-group mb-3">
-            <input placeholder="Event URL" id="url" name="url" type="text" value="" class="form-control">
-            <label for="url">Event URL</label>
+            <label for="title">일정 이름</label>
           </div>
 
 
@@ -294,20 +187,20 @@
 
           <div class="form-label-group mb-3">
             <textarea placeholder="Event Description" id="description" name="description" class="form-control" rows="3"></textarea>
-            <label for="description">Event Description</label>
+            <label for="description">일정 상세</label>
           </div>
 
           <div class="row">
             <div class="col-12 col-md-6 mt-3">
               <button type="submit" class="btn-fullcalendar-edit btn btn-primary btn-soft btn-block">
-                Save Changes
+                일정 수정
               </button>
             </div>
 
             <div class="col-12 col-md-6 mt-3">
               <button type="submit" class="btn-fullcalendar-remove btn btn-danger btn-soft btn-block" 
                 onclick="jQuery('#action').val('del_event');">
-                Delete Event
+                일정 삭제
               </button>
             </div>
           </div>
@@ -316,7 +209,7 @@
           <div class="text-center mt--30">
             <a href="#accordionDetail" class="btn btn-light btn-sm" data-toggle="collapse" aria-expanded="true" aria-controls="accordionDetail">
               <i class="fi fi-close"></i> 
-              Cancel Edit
+              수정 취소하기
             </a>
           </div>
 
