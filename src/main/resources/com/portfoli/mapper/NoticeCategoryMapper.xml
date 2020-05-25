@@ -15,7 +15,7 @@
       name 
     from pf_notice_category
     ORDER BY category_no asc
-    <if test="startIndex != null and startIndex != ''">
+    <if test="startIndex != null and startIndex gte 0">
     limit ${startIndex}, ${pageSize}
     </if>
   </select>
