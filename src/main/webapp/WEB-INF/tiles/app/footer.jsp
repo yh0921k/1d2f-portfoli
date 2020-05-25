@@ -146,5 +146,43 @@
 
 		</div>
 	</div>
-
 </footer>
+  <script>
+function sendMessage() {
+  console.log('trying socket connection');
+  var wsUri = "ws://" + window.location.host
+      + "/portfoli/app/message/alert";
+  if (wsUri == "ws://localhost:9999/portfoli/app/message/alert") {
+    websocket = new WebSocket(wsUri);
+  } else {
+    wsUri = "ws://121.132.195.172:8080/portfoli/app/message/alert";
+    websocket = new WebSocket(wsUri);
+  }
+  websocket.onopen = function(evt) {
+    console.log('connection opened');
+    onOpen(evt);
+  };
+  websocket.onmessage = function(evt) {
+    console.log("received message : " + evt.data);
+    onMessage(evt);
+  };
+  websocket.onerror = function(evt) {
+    console.log('error : ' + err);
+    onError(evt);
+  };
+  websocket.onclose = function(evt) {
+    console.log("WebSocket is closed now.");
+  };
+}
+function onOpen(evt) {
+  websocket.send("${loginUser.number}");
+}
+function onMessage(evt) {
+  $('#count').append(evt.data);
+}
+function onError(evt) {
+}
+$(document).ready(function() {
+  sendMessage();
+});
+</script>
