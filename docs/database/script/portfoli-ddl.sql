@@ -631,9 +631,6 @@ CREATE UNIQUE INDEX UIX_pf_final_education
     category ASC -- 학력구분
   );
 
-ALTER TABLE pf_final_education
-  MODIFY COLUMN education_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '학력번호';
-
 -- 전공
 CREATE TABLE pf_major (
   major_no INTEGER      NOT NULL COMMENT '전공번호', -- 전공번호
@@ -728,9 +725,6 @@ ALTER TABLE pf_general_mem_edu
       general_member_no, -- 일반회원번호
       education_no       -- 학력번호
     );
-
-ALTER TABLE pf_general_mem_edu
-  MODIFY COLUMN general_member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일반회원번호';
 
 -- 일반회원관심지역
 CREATE TABLE pf_interest_location (
