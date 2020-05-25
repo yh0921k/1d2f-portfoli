@@ -55,7 +55,7 @@
 						class="nav-icon fab fa-quora"></i> Q&A
 				</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#"> <i
+				<li class="nav-item"><a class="nav-link" href="/portfoli/admin/faq/list"> <i
 						class="nav-icon fi fi-task-list"></i> FAQ
 				</a></li>
 
