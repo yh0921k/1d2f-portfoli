@@ -2,96 +2,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- AJAX CONTENT -->
+<div class="modal-header">
+  <h2 class="modal-title fs--18 m-0">
+    <strong>카테고리 수정</strong>
+  </h2>
 
-    <%--상단 바부분 : 필요없어서 뺌 
-			<!-- PAGE TITLE -->
-			<section class="bg-white">
-				<div class="container py-1">
+  <button type="button" class="close pointer" data-dismiss="modal" aria-label="Close">
+    <span class="fi fi-close fs--18" aria-hidden="true"></span>
+  </button>
+</div>
 
-					<h1 class="h2">
-						공지사항
-					</h1>
+<div class="modal-body">
+        
+  <div class="accordion" id="accordionDropdownSignInUp">
 
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
-              <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="list">고객센터</a></li>
-						</ol>
-					</nav>
+    <!-- SIGN IN -->
+    <form class="collapse bs-validate show" novalidate method="post" action="update" enctype="multipart/form-data" id="accordionDropdownSignInUpSignIn" data-parent="#accordionDropdownSignInUp">
+      <div class="pt--0">
 
-				</div>
-			</section>
-			--%>
-			<!-- /PAGE TITLE -->
+        <div class="form-label-group mb-4">
+          <input value=${category.categoryNumber} required placeholder="number" id="categoryNumber" name="categoryNumber" class="form-control form-control-clean">
+          <label>번호</label>
+        </div>
 
-			<!-- FAQ -->
-			<section>
-				<div class="container">
+        <div class="form-label-group mb-4">
+          <input value=${category.name} required placeholder="category" id="name" name="name" class="form-control form-control-clean">
+          <label for="signin_password">카테고리</label>
+        </div>
 
-					<div class="row">
+        <button type="submit" class="btn btn-primary btn-soft">
+          수정
+        </button>
+        <input value="삭제" type="button" class="btn btn-primary btn-soft" onclick="location.href='delete?categoryNumber=${category.categoryNumber}'">
+        </button>
 
-          <%--왼쪽 noticebar부분 : 필요없어서 뺌
-          <jsp:include page="sidebar.jsp" />          
-           --%>
-						
-						<div class="col-12 col-lg-8">
-
-							<!--
-								.article-format class will add some slightly formattings for a good text visuals. 
-								This is because most editors are not ready formatted for bootstrap
-								Blog content should come inside this container, as it is from database!
-								src/scss/_core/base/_typography.scss
-							-->
-							<div class="bg-white p-5 p-4-xl rounded-xl article-format">
-						
-						<h1>공지사항 카테고리 세부정보 페이지</h1>
-					  <form action="updateForm" method="post">
-            <c:if test="${not empty category}">
-            <table border='1' style="width: 100%;">
-            <tr>
-              <td class="TD" width="30%">카테고리 번호</td>
-              <td class="TD2" width="70%">
-              <input value=${category.categoryNumber} readonly="readonly" style="border-color:transparent; resize:none;" name="categoryNumber"/>
-              </td>
-            </tr>
-            <tr>
-              <td class="TD" width="30%">카테고리 내용</td>
-              <td class="TD2" width="70%"><input readonly="readonly" style="border-color:transparent; resize:none;" name="name" value='${category.name}'/></td>
-            </tr>
-            <tr>
-            <td class="padding" colspan="2" align="left" style="background-color: lightGray">
-            <button>수정 (혹은 강제삭제)</button>
-            <div style="display: inline-block; float:right;">
-              <input type="button" onclick="location.href='delete?categoryNumber=${category.categoryNumber}'" value="삭제"/>
-            </div>
-            </td>
-            </tr>
-            </table>
-            </c:if>
-            <c:if test="${empty category}">
-            값이 없습니다. 찡긋
-            </c:if>
-            </form>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</section>
-			<!-- /FAQ -->
+      </div>
+    </form>
+    <!-- /SIGN IN -->
+  </div>
+</div>
 
 
-
-  <style>
-    .TD{
-      padding: 10px 0px; text-align: center;
-    }
-    .TD2{
-      padding: 10px 10px;
-    }
-    .padding{
-      padding:5px 5px;
-    }
-  </style>
+<style>
+ .TD{
+   padding: 10px 0px; text-align: center;
+ }
+ .TD2{
+   padding: 10px 10px;
+ }
+ .padding{
+   padding:5px 5px;
+ }
+</style>
