@@ -2,19 +2,57 @@
 test -f ~/.profile && . ~/.profile
 test -f ~/.bashrc && . ~/.bashrc
 
+# Initialize eclipse settings in gradle
 alias clean='gradle cleanEclipse && gradle eclipse'
 
 color_option="%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)"
+
+# Show git log with color_option, graph, and more info than original 'git log' command
 alias log="git log --graph --abbrev-commit --decorate --format=format:'$color_option' --all"
 
+# Remove project directory
+# Clone project
+# Clean-up the project
 alias init="rm -rf ./1d2f-portfoli/ && git clone https://github.com/yh0921k/1d2f-portfoli.git && cd ./1d2f-portfoli && clean"
+
+# Show the commit list with differences 
 alias commit="git commit --verbose"
+
+# Push from master branch of local repository to master branch of remote repository
 alias push="git push origin master"
+
+# Show status of git in simple
 alias status="git status -s"
+
+# Remove branch with '-D' option
 alias delete="git branch -D kyh-dev"
+
+# Make branch and checkout 
 alias checkout="git checkout -b kyh-dev"
+
+# Checkout the master branch
 alias master="git checkout master"
+
+# Checkout the development branch
 alias dev="git checkout kyh-dev"
+
+# Merge from development branch to master branch with 'no fast forward' option
 alias merge="git merge kyh-dev --no-ff"
+
+# Fetch and Merge commit history from remote repository
 alias pull="git pull"
+
+# Add all changed history
 alias add="git add ."
+
+# Remove development branch in remote repository
+alias rrbdelete="git push origin :kyh-dev"
+
+# Push from local development branch to remote
+alias rrbpush="git push origin kyh-dev:kyh-dev"
+
+# Bring the development branch in remote repository to local and checkout the branch
+alias rrbpull="git remote update && git checkout master && git checkout -t origin/kyh-dev"
+
+# Clean-up and Show all branch
+alias cleanshow="git remote prune origin && git branch -a"
