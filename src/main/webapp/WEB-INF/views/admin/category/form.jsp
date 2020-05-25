@@ -28,12 +28,13 @@
           <label for="signin_email">번호</label>
         </div>
 
-        <div class="form-label-group mb-4">
+        <div class="form-label-group mb-2">
           <input required placeholder="category" id="name" name="name" class="form-control form-control-clean" autocomplete="new-password">
           <label for="signin_password">카테고리</label>
         </div>
-
-        <button type="submit" class="btn btn-primary btn-soft btn-block">
+          
+        <span id="message" style="color:red; font-size:13px;"></span>
+        <button id="register" type="submit" class="btn btn-primary btn-soft btn-block">
           등록하기
         </button>
 
@@ -42,3 +43,31 @@
     <!-- /SIGN IN -->
   </div>
 </div>
+
+<script>
+$(document).ready(function() {
+	$("#register").attr('disabled', "true");
+  $("#categoryNumber").keyup(function() { 
+	  var obj = {"categoryNumber" : $("#categoryNumber").val()}
+	  $.ajax({
+	        url: "/portfoli/admin/category/isValid",
+	        type: "post",
+	        data: JSON.stringify(obj),
+	        dataType: "json",
+	        contentType: "application/json",
+	        success: function(data) {
+	            if(data == "valid") {
+	            	$("#message").html("");
+	            	$("#register").removeAttr('disabled');
+	            } else {
+	            	$("#message").html("해당 번호의 카테고리가 존재합니다.");
+	            	$("#register").attr('disabled', "true");
+	            }   
+	        },
+	        error: function(errorThrown) {
+	            console.log("Error");
+	        }
+	    });
+  }); 
+});
+</script>
