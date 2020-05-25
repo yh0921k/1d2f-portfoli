@@ -58,6 +58,13 @@
     <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
   </definition>
   
+  <definition name="category/*.admin" extends="admin">
+    <put-attribute name="body" value="/WEB-INF/views/admin/category/{1}.jsp"/>
+    <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
+    <put-attribute name="css.vendor_bundle.min" value="../../resources/assets/css/vendor_bundle.min.css"/>
+    <put-attribute name="js.core.min" value="../../resources/assets/js/core.min.js"/>
+  </definition>
+  
   <definition name="faq/*.admin" extends="admin">
     <put-attribute name="body" value="/WEB-INF/views/admin/faq/{1}.jsp"/>
     <put-attribute name="css.core.min" value="../../resources/assets/css/core.min.css"/>
@@ -75,8 +82,11 @@
     <put-attribute name="body" value ="/WEB-INF/views/admin/auth/loginForm.jsp"/>
   </definition>
   
+  <definition name="category/form.admin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/category/form.jsp"/>
+  </definition>
+  
   <definition name="log/moreContentsLog.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/log/moreContentsLog.jsp"/>
   </definition>
-    
 </tiles-definitions>
