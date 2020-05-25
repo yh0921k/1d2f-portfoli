@@ -20,6 +20,7 @@
 		</association>
 	</resultMap>
 
+<!-- 관리자용 목록 출력 -->
 	<select id="findAll" resultMap="FaqMap">
 		SELECT
 		f.readable,
@@ -41,6 +42,44 @@
 		LIMIT #{offset}, #{pageSize}
 	</select>
 
+<!-- 일반유저용 목록 출력 -->
+  <select id="findAllforUser" resultMap="FaqMap">
+    SELECT
+    f.readable,
+    f.category_no,
+    b.board_no,
+    c.name,
+    b.title,
+    b.view_count,
+    b.registered_date
+    FROM pf_faq f
+    LEFT OUTER JOIN pf_question_category c
+    ON c.category_no = f.category_no
+    LEFT OUTER JOIN
+    pf_board b
+    ON f.board_no = b.board_no
+    WHERE f.readable = 1 <!-- 일반유저 : 공개된 게시물만 -->
+    ORDER BY b.registered_date DESC,
+    b.board_no DESC
+    LIMIT #{offset}, #{pageSize}
+  </select>
+
+<!-- 관리자용 리스트 개수출력 -->
+  <select id="selectListCnt" resultType="int" parameterType="Faq">
+    SELECT 
+      count(*)
+    FROM pf_faq 
+  </select>
+
+<!-- 일반유저용 리스트 개수출력 -->
+  <select id="selectListCntForUser" resultType="int" parameterType="Faq">
+    SELECT 
+      count(*)
+    FROM pf_faq 
+    WHERE readable = 1 <!-- 일반유저 : 공개된 게시물만 --> 
+  </select>
+
+
 	<select id="findByNo" resultMap="FaqMap" parameterType="int">
 		SELECT
 		f.answer_content,
@@ -60,13 +99,6 @@
 		WHERE b.board_no = #{no}
 	</select>
 	
-	<select id="selectListCnt" resultType="int" parameterType="Faq">
-    SELECT 
-      count(*)
-    FROM pf_faq 
-    -- WHERE readable = 1  관리자용이 아닌경우 넣기 --
-  </select>
-  
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM pf_faq

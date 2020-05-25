@@ -17,5 +17,9 @@ public interface FaqService {
 
   int selectListCnt(Faq faq) throws Exception;
 
+  List<Faq> listForUser(int curPage, int pageSize) throws Exception;
 
+  int selectListCntForUser(Faq faq) throws Exception;
+
+  
 }

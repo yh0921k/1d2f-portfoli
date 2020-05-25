@@ -7,6 +7,8 @@ import com.portfoli.domain.Faq;
 public interface FaqDao {
 
   List<Faq> findAll(HashMap<String, Object> param);
+  
+  List<Faq> findAllforUser(HashMap<String, Object> param);
 
   Faq findByNo(int no);
 
@@ -19,6 +21,12 @@ public interface FaqDao {
   int insert(Faq faq);
 
   int selectListCnt(Faq faq);
+  
+  int selectListCntForUser(Faq faq);
+
+
+
+
 
 
 }

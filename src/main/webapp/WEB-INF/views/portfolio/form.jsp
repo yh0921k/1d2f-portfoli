@@ -16,7 +16,7 @@
           <div class="row">
 
             <div class="col-12 col-lg-12">
-        <h1 class="d-none d-lg-block m--3">내 포트폴리오 등록</h1>
+        <h3 class="d-none d-lg-block m--3" style="margin-bottom: 1.4rem!important;">내 포트폴리오 등록</h3>
 
                <form action="add" method="post" enctype="multipart/form-data">
                 

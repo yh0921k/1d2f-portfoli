@@ -7,9 +7,9 @@
       <section class="bg-white" style="padding: 30px 0px;">
         <div class="container py-1">
 
-          <h1 class="h2">
+          <h3 class="h2">
             포트폴리오 게시판
-          </h1>
+          </h3>
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb fs--14">
