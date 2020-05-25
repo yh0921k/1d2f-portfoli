@@ -84,13 +84,16 @@
     <put-attribute name="body" value =""/>
   </definition>
 
-  <!-- Tiles 제외 선언부 -->
   <definition name="auth/loginForm.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/auth/loginForm.jsp"/>
   </definition>
   
   <definition name="category/form.admin" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/admin/category/form.jsp"/>
+  </definition>
+  
+  <definition name="category/detail.admin" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/admin/category/detail.jsp"/>
   </definition>
   
   <definition name="log/moreContentsLog.admin" extends="empty">
