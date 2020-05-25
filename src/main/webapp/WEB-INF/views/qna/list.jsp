@@ -54,7 +54,7 @@
 		<!--------------------------------------------- /nav bar ------------------------------------------------>
 
 		<!-------------------------------------------- contents -------------------------------------------------->
-		<div class="portlet mt--20" style="width: 65%;">
+		<div class="portlet mt--20" style="width: 60%;box-shadow: none;">
 
 			<div class="portlet-header">
 				<h1 class="d-none d-lg-block m--3">Q&A</h1>

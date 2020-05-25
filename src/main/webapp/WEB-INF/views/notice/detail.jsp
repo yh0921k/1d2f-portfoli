@@ -9,19 +9,13 @@
   <jsp:include page="navbar.jsp"/>
     <!--------------------------------------------- /nav bar ------------------------------------------------>
     <!-------------------------------------------- contents -------------------------------------------------->
-    <div class="portlet mt--20 p-3" style="width: 65%;">
+    <div class="portlet mt--20 p-3" style="width: 60%;box-shadow: none;">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block">공지사항</h1>
 
       </div>
       <form action="updateForm" method="post">
-      <div align="right">
-        <button type="submit" class="btn btn-outline-secondary btn-pill btn-sm" 
-                onclick="location.href='form'">수정(M)</button>
-        <input type="button" class="btn btn-outline-secondary btn-pill btn-sm" 
-                onclick='warning(${notice.number})' value="삭제(D)"/>
-      </div>
       <input name="number" type="hidden" value="${notice.getNumber()}"/>
       <input name="number" type="hidden" value="${notice.categoryNumber}"/>
         <div class="row">
@@ -33,7 +27,7 @@
           <span class="text-gray-900">제목 : ${notice.title}</span>
 
           <p class="text-gray-900 mt-3">내용 :</p>
-          <textarea readonly="readonly" style="resize:none; height: 600px;" id="description"
+          <textarea readonly="readonly" style="resize:none; max-height: 600px;" id="description"
             name="content" class="form-control" rows="6">${notice.content}</textarea>
 
         <div class='photoDiv'>
@@ -66,17 +60,6 @@
           </c:choose>
          </div>
         </div>
-
-          <div align="right" class="container-fluid">
-            <button type="submit"
-              class="btn btn-outline-secondary btn-pill btn-sm mt-3">
-              수정하기</button>
-              
-            <button type="submit"
-              class="btn btn-outline-secondary btn-pill btn-sm mt-3" onclick="move(event)">
-              취소하기</button>
-
-          </div>
         </div>
       </form>
     </div>

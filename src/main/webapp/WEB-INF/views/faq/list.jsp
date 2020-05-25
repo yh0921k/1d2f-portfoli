@@ -11,14 +11,10 @@
     <!-------------------------------------- /nav bar --------------------------------------------->
     
     <!-------------------------------------------- contents --------------------------------------->
-    <div class="portlet mt--20" style="width: 65%;">
+    <div class="portlet mt--20" style="width: 60%;box-shadow: none;">
 
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">FAQ</h1>
-        <div align="right">
-          <button class="btn btn-outline-secondary btn-pill btn-sm" 
-                  onclick="location.href='form'">글쓰기(+)</button>
-        </div>
       </div>
 
       <div class="table-responsive rounded" style="min-height: 500px;">

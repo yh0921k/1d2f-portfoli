@@ -65,7 +65,7 @@ public class FaqController {
       Model model, @RequestParam(defaultValue="1") int curPage) throws Exception {
 
     // 전체리스트 개수
-    int listCnt = faqService.selectListCnt(faq);
+    int listCnt = faqService.selectListCntForUser(faq);
 
     Pagination pagination = new Pagination(listCnt, curPage);
     pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
@@ -77,7 +77,7 @@ public class FaqController {
     model.addAttribute("listCnt", listCnt);
     model.addAttribute("pagination", pagination);
     
-    List<Faq> faqs = faqService.list(pagination.getCurPage(), pagination.getPageSize());
+    List<Faq> faqs = faqService.listForUser(pagination.getCurPage(), pagination.getPageSize());
     
     model.addAttribute("list", faqs);
   }

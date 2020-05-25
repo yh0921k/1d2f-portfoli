@@ -38,6 +38,28 @@ public class FaqServiceImpl implements FaqService {
   }
 
   @Override
+  public List<Faq> listForUser(int pageNumber, int pageSize) throws Exception {
+    HashMap<String, Object> param = new HashMap<>();
+    param.put("offset", (pageNumber - 1) * pageSize);
+    param.put("pageSize", pageSize);
+
+    List<Faq> faqList = faqDao.findAllforUser(param);
+    if (faqList.size() < 0)
+      throw new Exception("Q&A 불러오기 실패");
+    return faqList;
+  }
+  
+  @Override
+  public int selectListCnt(Faq faq) throws Exception {
+    return faqDao.selectListCnt(faq);
+  }
+
+  @Override
+  public int selectListCntForUser(Faq faq) throws Exception {
+    return faqDao.selectListCntForUser(faq);
+  }
+  
+  @Override
   public Faq get(int no) throws Exception {
     Faq faq = faqDao.findByNo(no);
     if (faq == null)
@@ -80,11 +102,13 @@ public class FaqServiceImpl implements FaqService {
       throw new Exception("QNA 등록 실패");
   }
 
-  @Override
-  public int selectListCnt(Faq faq) throws Exception {
-    return faqDao.selectListCnt(faq);
-  }
 
+
+
+
+
+
+  
 
 
 }

@@ -16,7 +16,7 @@
           <div class="row">
 
             <div class="col-12 col-lg-12">
-        <h1 class="d-none d-lg-block m--3">내 포트폴리오 수정</h1>
+        <h3 class="d-none d-lg-block m--3" style="margin-bottom: 1.4rem!important;">내 포트폴리오 수정</h3>
 
                <form action="update" method="post" enctype="multipart/form-data">
                <input name="number" type="hidden" value="${portfolio.getNumber()}"/>

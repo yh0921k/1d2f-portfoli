@@ -17,7 +17,7 @@
     <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
-        <h1 class="d-none d-lg-block m--3">내 포트폴리오 관리
+        <h3 class="d-none d-lg-block m--3" style="display: inline-block!important;">내 포트폴리오 관리</h3>
         
 <!-------------------------------- 버튼 -------------------------------->
         <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
