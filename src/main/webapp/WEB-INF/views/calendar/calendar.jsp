@@ -19,8 +19,7 @@
 				<h6 class="js-toDoList d-none d-lg-block m--3">< To Do List ></h6>
 			</div>
 			<form class="js-toDoForm">
-				<input class="form-control form-control-sm" type="text"
-					placeholder="할 일 추가"></input>
+				<input class="form-control form-control-sm" type="text" placeholder="할 일 추가"></input>
 			</form>
 		</div>
 

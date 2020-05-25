@@ -25,4 +25,10 @@ public class CalendarServiceImpl implements CalendarService {
     return calendarDao.find(memberNumber);
   }
 
+  @Override
+  public void delete(int id) throws Exception {
+    if(calendarDao.delete(id)< 0)
+      throw new Exception("일정 삭제 도중 에러 발생");
+  }
+
 }

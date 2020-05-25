@@ -6,7 +6,7 @@
 <mapper namespace="com.portfoli.dao.CalendarDao">
 
 	<resultMap type="Calendar" id="CalendarMap">
-		<id column="schedule_no" property="scheduleNumber" />
+		<id column="schedule_no" property="id" />
 		<result column="general_member_no"
 			property="generalMemberNumber" />
 		<result column="start_date" property="start" />
@@ -31,6 +31,10 @@
 		WHERE general_member_no = #{no}
 	</select>
 
+	<delete id="delete" parameterType="int">
+		DELETE FROM pf_schedule
+		WHERE schedule_no = #{id}
+	</delete>
 
 
 

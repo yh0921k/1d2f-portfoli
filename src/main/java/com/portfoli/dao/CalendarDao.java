@@ -9,4 +9,6 @@ public interface CalendarDao {
 
   List<Calendar> find(int memberNumber);
 
+  int delete(int id);
+
 }

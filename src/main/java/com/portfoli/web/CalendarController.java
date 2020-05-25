@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.portfoli.domain.Calendar;
 import com.portfoli.domain.Member;
@@ -38,13 +39,16 @@ public class CalendarController {
   }
 
   @PostMapping("eventCreate")
-  public void eventCreate(Calendar calendar, HttpSession session) throws Exception {
+  public String eventCreate(Calendar calendar, HttpSession session) throws Exception {
     calendar.setGeneralMemberNumber(((Member) session.getAttribute("loginUser")).getNumber());
     calendarService.add(calendar);
+    return "redirect:/app/calendar/calendar";
   }
 
   @GetMapping("eventEdit")
-  public void eventEditModal() throws Exception {}
+  public void eventEditModal(String id, Model model) throws Exception {
+    model.addAttribute("id", id);
+  }
 
   @PostMapping("eventEdit")
   public void eventEdit(Calendar calendar, HttpSession session) throws Exception {
@@ -52,8 +56,8 @@ public class CalendarController {
     // calendarService.update(calendar);
   }
 
-  @PostMapping("schedule")
   @ResponseBody
+  @PostMapping("schedule")
   public String schedule(HttpSession session, String start) throws Exception {
     int memberNumber = ((Member) session.getAttribute("loginUser")).getNumber();
     List<Calendar> schedules = calendarService.get(memberNumber);
@@ -61,6 +65,12 @@ public class CalendarController {
     String list = gson.toJson(schedules);
     System.out.println(list);
     return list;
+  }
+
+  @GetMapping("delete")
+  public String  delete(String id) throws Exception {
+    calendarService.delete(Integer.parseInt(id));
+    return "redirect:/app/calendar/calendar";
   }
 
 }

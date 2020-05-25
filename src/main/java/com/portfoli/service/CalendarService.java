@@ -9,5 +9,7 @@ public interface CalendarService {
 
   List<Calendar> get(int memberNumber);
 
+  void delete(int id) throws Exception;
+
 
 }

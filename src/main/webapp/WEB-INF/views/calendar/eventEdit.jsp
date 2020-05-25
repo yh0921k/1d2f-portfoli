@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <div class="modal-header">
-      <h2 class="modal-title fs--18 m-0">
-        일정
-      </h2>
+      <h2 class="modal-title fs--18 m-0">일정</h2>
 
       <button type="button" class="close pointer" data-dismiss="modal" aria-label="Close">
         <span class="fi fi-close fs--18" aria-hidden="true"></span>
@@ -43,33 +41,18 @@
               <div class="flex-grow-1 text-truncate" id="info_end">&ndash;</div>
             </li>
 
-            <li class="list-item"><hr></li>
-
-            <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">반복 시작일:</div>
-              <div class="flex-grow-1 text-truncate" id="info_startRecur">&ndash;</div>
-            </li>
-
-            <li class="list-item d-flex">
-              <div class="w--180 flex-none font-weight-medium">반복 종료일:</div>
-              <div class="flex-grow-1 text-truncate" id="info_endRecur">&ndash;</div>
-            </li>
-
           </ul>
 
 
           <div class="mt--30">
             <a href="#accordionEdit" class="btn btn-light btn-sm" data-toggle="collapse" aria-expanded="true" aria-controls="accordionEdit">
-              <i class="fi fi-pencil"></i> 
-              일정 수정
-            </a>
+              <i class="fi fi-pencil"></i> 일정 수정  </a>
           </div>
 
         </div>
         <!-- /DETAIL -->
 
 
-        <!-- <form class="bs-validate collapse" novalidate action="../../html_frontend/demo.files/php/demo.ajax_request.php" method="POST"> -->
         <form class="bs-validate js-ajax collapse" id="accordionEdit" novalidate data-parent="#accordionFullcalendarEdit" action="eventEdit" method="POST" 
             data-modal-autoclose-on-success="true"
             data-modal-autoclose-on-success-delay="800"
@@ -78,7 +61,7 @@
             data-ajax-update-url="false" 
             data-ajax-show-loading-icon="true" 
 
-            data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!" 
+            data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> 필수 입력 사항을 입력해 주십시오." 
             data-error-toast-delay="3000" 
             data-error-toast-position="top-center" 
             data-error-scroll-up="true"
@@ -87,7 +70,7 @@
 
           <!-- nestable item id -->
           <input type="hidden" id="action" name="action" value="add_event"> <!-- action updated by delete button (on click) -->
-          <input type="hidden" id="event_id" name="id" value=""><!-- database generated id -OR- populated by js (if empty = current timestamp)  -->
+         <!-- <input type="hidden" id="event_id" name="id" value=""> database generated id -OR- populated by js (if empty = current timestamp)  -->
 
 
           <div class="bg-light pl--20 pr--20 pt--20 mb-4 rounded">
@@ -192,25 +175,19 @@
 
           <div class="row">
             <div class="col-12 col-md-6 mt-3">
-              <button type="submit" class="btn-fullcalendar-edit btn btn-primary btn-soft btn-block">
-                일정 수정
-              </button>
+              <button type="submit" class="btn-fullcalendar-edit btn btn-primary btn-soft btn-block">일정 수정</button>
             </div>
 
             <div class="col-12 col-md-6 mt-3">
-              <button type="submit" class="btn-fullcalendar-remove btn btn-danger btn-soft btn-block" 
-                onclick="jQuery('#action').val('del_event');">
-                일정 삭제
-              </button>
+              <a href="/portfoli/app/calendar/delete?id=${id}"><button type="button" class="btn-fullcalendar-remove btn btn-danger btn-soft btn-block" 
+                onclick="jQuery('#action').val('del_event');">일정 삭제</button></a>
             </div>
           </div>
 
 
           <div class="text-center mt--30">
             <a href="#accordionDetail" class="btn btn-light btn-sm" data-toggle="collapse" aria-expanded="true" aria-controls="accordionDetail">
-              <i class="fi fi-close"></i> 
-              수정 취소하기
-            </a>
+              <i class="fi fi-close"></i>수정 취소하기</a>
           </div>
 
         </form>

@@ -6,15 +6,15 @@ public class Calendar implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  int scheduleNumber, generalMemberNumber;
+  int id, generalMemberNumber;
   String title, description, className, start, end;
 
-  public int getScheduleNumber() {
-    return scheduleNumber;
+  public int getId() {
+    return id;
   }
 
-  public void setScheduleNumber(int scheduleNumber) {
-    this.scheduleNumber = scheduleNumber;
+  public void setId(int id) {
+    this.id = id;
   }
 
   public int getGeneralMemberNumber() {
@@ -73,7 +73,7 @@ public class Calendar implements Serializable {
     result = prime * result + ((description == null) ? 0 : description.hashCode());
     result = prime * result + ((end == null) ? 0 : end.hashCode());
     result = prime * result + generalMemberNumber;
-    result = prime * result + scheduleNumber;
+    result = prime * result + id;
     result = prime * result + ((start == null) ? 0 : start.hashCode());
     result = prime * result + ((title == null) ? 0 : title.hashCode());
     return result;
@@ -105,7 +105,7 @@ public class Calendar implements Serializable {
       return false;
     if (generalMemberNumber != other.generalMemberNumber)
       return false;
-    if (scheduleNumber != other.scheduleNumber)
+    if (id != other.id)
       return false;
     if (start == null) {
       if (other.start != null)
@@ -122,10 +122,11 @@ public class Calendar implements Serializable {
 
   @Override
   public String toString() {
-    return "Calendar [scheduleNumber=" + scheduleNumber + ", generalMemberNumber="
-        + generalMemberNumber + ", title=" + title + ", description=" + description + ", className="
-        + className + ", start=" + start + ", end=" + end + "]";
+    return "Calendar [id=" + id + ", generalMemberNumber=" + generalMemberNumber + ", title="
+        + title + ", description=" + description + ", className=" + className + ", start=" + start
+        + ", end=" + end + "]";
   }
+
 
 
 }
