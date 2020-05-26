@@ -236,12 +236,12 @@
       <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
         <c:if test="${pageNum == pagination.curPage}">
           <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
           </li>
         </c:if>
         <c:if test="${pageNum != pagination.curPage}">
           <li data-page="${pageNum}">
-            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
           </li>
         </c:if>
       </c:forEach>
@@ -282,7 +282,7 @@
   }
   
   function fnSetPageSize(val) {
-      location.href = "showMyTable?quantity=" + val;
+      location.href = "mylist?quantity=" + val;
   }
   
   $(document).ready(function() {
@@ -332,7 +332,15 @@
 		  }
   });
   
-  
+  function fn_center_paging(pageNum) {
+      var qs = getQueryStringObject();
+      if(qs.quantity != null) {
+        location.href = "mylist?quantity=" + qs.quantity + "&curPage=" + pageNum;
+      } else {
+        location.href = "mylist?curPage=" + pageNum;
+      }
+    }
+
   function fn_paging(curPage) {
     location.href = "mylist?curPage=" + curPage;
     }

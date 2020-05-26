@@ -72,19 +72,19 @@ public class PortfolioController {
     model.addAttribute("addr", value);
     return "portfolio/pdf";
   }
-  
+
   @RequestMapping("myRecommendedlist")
-  public String myRecommendedlist(@ModelAttribute("portfolio") Portfolio portfolio,
-      @RequestParam(defaultValue="1") int curPage,
+  public String myRecommendedlist(@RequestParam(defaultValue="10") int quantity,
+      @ModelAttribute("portfolio") Portfolio portfolio, @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
-    
+
     Object mem = request.getSession().getAttribute("loginUser");
 
     if(mem == null)
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
     //      return "redirect:/";
     else {
-
+      this.pageSize = quantity;
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
       // 전체리스트 개수
@@ -114,40 +114,8 @@ public class PortfolioController {
       model.addAttribute("list", portfolios);
       return "portfolio/myRecommendedlist";
     }
-    
-    
-  }
-  
-  @RequestMapping("showTable")
-  public String showTable(int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
-      @RequestParam(defaultValue="1") int curPage,
-      HttpServletRequest request, Model model) throws Exception {
-    this.pageSize = quantity;
-    list(portfolio, curPage, request, model);
-    model.addAttribute("pageSize",pageSize);
-    return "portfolio/list";
   }
 
-  @RequestMapping("showMyTable")
-  public String showMyTable(int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
-      @RequestParam(defaultValue="1") int curPage,
-      HttpServletRequest request, Model model) throws Exception {
-    this.pageSize = quantity;
-    mylist(portfolio, curPage, request, model);
-    model.addAttribute("pageSize",pageSize);
-    return "portfolio/mylist";
-  }
-  
-  @RequestMapping("showMyRecommendationTable")
-  public String showMyRecommendationTable(int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
-      @RequestParam(defaultValue="1") int curPage,
-      HttpServletRequest request, Model model) throws Exception {
-    this.pageSize = quantity;
-    mylist(portfolio, curPage, request, model);
-    model.addAttribute("pageSize",pageSize);
-    return "portfolio/myRecommendedlist";
-  }
-  
   @RequestMapping("searchMylist")
   public String searchMylist(String keyword, HttpServletRequest request, Model model) throws Exception {
 
@@ -173,7 +141,7 @@ public class PortfolioController {
       return "portfolio/mylist";
     }
   }
-  
+
   @RequestMapping("searchAll")
   public String searchAll(String keyword, HttpServletRequest request, Model model) throws Exception {
 
@@ -241,7 +209,6 @@ public class PortfolioController {
 
   @RequestMapping("turnon")
   public String turnon(int number, HttpServletRequest request, Model model) throws Exception {
-
     Object mem = request.getSession().getAttribute("loginUser");
 
     if(mem == null)
@@ -260,18 +227,15 @@ public class PortfolioController {
 
   @RequestMapping("turnoff")
   public String turnoff(int number, HttpServletRequest request, Model model) throws Exception {
-
     Object mem = request.getSession().getAttribute("loginUser");
 
     if(mem == null)
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
     //      return "redirect:/";
     else {
-
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Recommendation reco = new Recommendation();
       ((Recommendation) reco.setNumber(number)).setMember(member);
-
       recommendationService.toggleoff(reco);
     }
     return "portfolio/detail";
@@ -279,7 +243,7 @@ public class PortfolioController {
 
 
   @RequestMapping("mylist")
-  public String mylist(@ModelAttribute("portfolio") Portfolio portfolio,
+  public String mylist(@RequestParam(defaultValue="10") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -290,6 +254,7 @@ public class PortfolioController {
     //      return "redirect:/";
     else {
 
+      this.pageSize = quantity;
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
       // 전체리스트 개수
@@ -323,7 +288,7 @@ public class PortfolioController {
 
 
   @RequestMapping("list")
-  public String list(@ModelAttribute("portfolio") Portfolio portfolio,
+  public String list(@RequestParam(defaultValue="10") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -334,6 +299,7 @@ public class PortfolioController {
     //      return "redirect:/";
     else {
 
+      this.pageSize = quantity;
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
       // 전체리스트 개수
@@ -483,11 +449,11 @@ public class PortfolioController {
       if(portfolio.getMember().getNumber() == member.getNumber()) {
         model.addAttribute("modifiable", true);
       }
-      
+
       // 내가 찜한 포트폴리오 & 작성자가 비공개한 경우, 열리지 않도록 예외발생
       if(portfolio.getMember().getNumber() != member.getNumber() && portfolio.getReadable() == 0)
         throw new Exception("비공개된 포트폴리오입니다.");
-      
+
       return "portfolio/detail";
     }
   }
