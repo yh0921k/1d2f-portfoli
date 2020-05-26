@@ -55,9 +55,9 @@ public class AppWebConfig {
   @Bean
   public MultipartResolver multipartResolver() {
     CommonsMultipartResolver mr = new CommonsMultipartResolver();
-    mr.setMaxUploadSize(10000000);
-    mr.setMaxInMemorySize(2000000);
-    mr.setMaxUploadSizePerFile(10000000);
+    mr.setMaxUploadSize(100000000);
+    mr.setMaxInMemorySize(20000000);
+    mr.setMaxUploadSizePerFile(100000000); //업로드 파일 용량 95.4MB로 수정
     return mr;
   }
 }
