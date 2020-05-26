@@ -28,11 +28,12 @@ INSERT INTO pf_admin(id, pwd) VALUES('eomjinyoung', password('1111'));
 INSERT INTO pf_admin(id, pwd) VALUES('kyh', password('1111'));
 
 -- 학력 샘플 데이터(pf_final_education)
-INSERT INTO pf_final_education(category) VALUES('고등학교 졸업');
-INSERT INTO pf_final_education(category) VALUES('2,3년제 대학 졸업');
-INSERT INTO pf_final_education(category) VALUES('4년제 대학 졸업');
-INSERT INTO pf_final_education(category) VALUES('대학원 졸업(석사)');
-INSERT INTO pf_final_education(category) VALUES('대학원 졸업(박사)');
+INSERT INTO pf_final_education(education_no,category) VALUES(1,'고등학교 졸업');
+INSERT INTO pf_final_education(education_no,category) VALUES(2,'2,3년제 대학 졸업');
+INSERT INTO pf_final_education(education_no,category) VALUES(3,'4년제 대학 졸업');
+INSERT INTO pf_final_education(education_no,category) VALUES(4,'대학원 졸업(석사)');
+INSERT INTO pf_final_education(education_no,category) VALUES(5,'대학원 졸업(박사)');
+
 
 -- 시도 샘플 데이터(pf_province_city)
 INSERT INTO pf_province_city(province_city_no, province_name, city_name) VALUES(1, '경기도', '의정부시');
