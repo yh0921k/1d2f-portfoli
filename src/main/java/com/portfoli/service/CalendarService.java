@@ -11,5 +11,7 @@ public interface CalendarService {
 
   void delete(int id) throws Exception;
 
+  void update(Calendar calendar) throws Exception;
+
 
 }

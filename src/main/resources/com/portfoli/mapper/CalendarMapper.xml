@@ -35,8 +35,18 @@
 		DELETE FROM pf_schedule
 		WHERE schedule_no = #{id}
 	</delete>
-
-
+	
+	<update id="update" parameterType="Calendar">
+	 UPDATE pf_schedule
+    <set>
+      title = #{title}
+      <if test="description!=null and description!=''">,description = #{description}</if>
+      <if test="className!=null and className!=''">,class = #{className}</if>
+      <if test="start!=null and start!=''">,start_date = #{start}</if>
+      <if test="end!=null and end!=''">,end_date = #{end}</if>
+      WHERE schedule_no = #{id}
+    </set>
+	</update>
 
 </mapper>
 

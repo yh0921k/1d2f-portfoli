@@ -18,7 +18,7 @@
 		data-ajax-update-url="false" data-ajax-show-loading-icon="true"
 		data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
 		data-error-toast-delay="3000" data-error-toast-position="top-center"
-		data-error-scroll-up="true" data-ajax-callback-function="">
+		data-error-scroll-up="true" data-ajax-callback-function="reload">
 
 		<input type="hidden" name="action" value="add_event">
 		<!-- <input type="hidden" id="event_id" name="id" value=''> -->
@@ -87,30 +87,17 @@
 			<input required placeholder="Event Name" id="title" name="title" type="text" value="" class="form-control"><label for="title">일정 이름</label>
 		</div>
 
-		<select class="form-control bs-select mb-3" id="className"
-			name="className" title="Please Select...">
-			<option value="bg-primary border-primary text-white" selected="" data-content="<span class='bg-primary border-primary text-white p--3 pl--5 pr--5 rounded fs--14'>Primary</span>">Primary</option>
-			<option value="bg-secondary border-secondary text-white" data-content="<span class='bg-secondary border-secondary text-white p--3 pl--5 pr--5 rounded fs--14'>Secondary</span>">Secondary</option>
-			<option value="bg-dark border-dark text-white" data-content="<span class='bg-dark border-dark text-white p--3 pl--5 pr--5 rounded fs--14'>Dark</span>">Dark</option>
-			<option value="bg-light border-light text-dark" data-content="<span class='bg-light border-light text-dark p--3 pl--5 pr--5 rounded fs--14'>Light</span>">Light</option>
-			<option value="bg-success border-success text-white" data-content="<span class='bg-success border-success text-white p--3 pl--5 pr--5 rounded fs--14'>Success</span>">Success</option>
-			<option value="bg-warning border-warning text-dark" data-content="<span class='bg-warning border-warning text-dark p--3 pl--5 pr--5 rounded fs--14'>Warning</span>">Warning</option>
-			<option value="bg-danger border-danger text-white" data-content="<span class='bg-danger border-danger text-white p--3 pl--5 pr--5 rounded fs--14'>Danger</span>">Danger</option>
-			<option value="bg-info border-info text-white" data-content="<span class='bg-info border-info text-white p--3 pl--5 pr--5 rounded fs--14'>Info</span>">Info</option>
-			<option value="bg-purple border-purple text-white" data-content="<span class='bg-purple border-purple text-white p--3 pl--5 pr--5 rounded fs--14'>Purple</span>">Purple</option>
-			<option value="bg-indigo border-indigo text-white" data-content="<span class='bg-indigo border-indigo text-white p--3 pl--5 pr--5 rounded fs--14'>Indigo</span>">Indigo</option>
-			<option value="bg-pink border-pink text-white" data-content="<span class='bg-pink border-pink text-white p--3 pl--5 pr--5 rounded fs--14'>Pink</span>">Pink</option>
-			<option data-divider="true"></option>
-			<option value="bg-primary-soft border-primary-soft" data-content="<span class='bg-primary-soft border-primary-soft p--3 pl--5 pr--5 rounded fs--14'>Primary</span>">Primary Soft</option>
-			<option value="bg-secondary-soft border-secondary-soft" data-content="<span class='bg-secondary-soft border-secondary-soft p--3 pl--5 pr--5 rounded fs--14'>Secondary</span>">Secondary Soft</option>
-			<option value="bg-dark-soft border-dark-soft" data-content="<span class='bg-dark-soft border-dark-soft p--3 pl--5 pr--5 rounded fs--14'>Dark</span>">Dark 	Soft</option>
-			<option value="bg-success-soft border-success-soft" data-content="<span class='bg-success-soft border-success-soft p--3 pl--5 pr--5 rounded fs--14'>Success</span>">Success Soft</option>
-			<option value="bg-warning-soft border-warning-soft" data-content="<span class='bg-warning-soft border-warning-soft p--3 pl--5 pr--5 rounded fs--14'>Warning</span>">Warning Soft</option>
-			<option value="bg-danger-soft border-danger-soft" data-content="<span class='bg-danger-soft border-danger-soft p--3 pl--5 pr--5 rounded fs--14'>Danger</span>">Danger Soft</option>
-			<option value="bg-info-soft border-info-soft" data-content="<span class='bg-info-soft border-info-soft p--3 pl--5 pr--5 rounded fs--14'>Info</span>">Info Soft</option>
-			<option value="bg-purple-soft border-purple-soft" data-content="<span class='bg-purple-soft border-purple-soft p--3 pl--5 pr--5 rounded fs--14'>Purple</span>">Purple Soft</option>
-			<option value="bg-indigo-soft border-indigo-soft" data-content="<span class='bg-indigo-soft border-indigo-soft p--3 pl--5 pr--5 rounded fs--14'>Indigo</span>">Indigo Soft</option>
-			<option value="bg-pink-soft border-pink-soft" data-content="<span class='bg-pink-soft border-pink-soft p--3 pl--5 pr--5 rounded fs--14'>Pink</span>">Pink Soft</option>
+		<select class="form-control bs-select mb-3" id="className" name="className" title="Please Select...">
+			      <option value="bg-primary border-primary text-white" selected="" data-content="<span class='bg-primary border-primary text-white p--3 pl--5 pr--5 rounded fs--14'>blue</span>">blue</option>
+            <option value="bg-secondary border-secondary text-white" data-content="<span class='bg-secondary border-secondary text-white p--3 pl--5 pr--5 rounded fs--14'>gray</span>">gray</option>
+            <option value="bg-light border-light text-dark" data-content="<span class='bg-light border-light text-dark p--3 pl--5 pr--5 rounded fs--14'>light</span>">light</option>
+            <option value="bg-success border-success text-white" data-content="<span class='bg-success border-success text-white p--3 pl--5 pr--5 rounded fs--14'>green</span>">green</option>
+            <option value="bg-warning border-warning text-dark" data-content="<span class='bg-warning border-warning text-dark p--3 pl--5 pr--5 rounded fs--14'>yellow</span>">yellow</option>
+            <option value="bg-danger border-danger text-white" data-content="<span class='bg-danger border-danger text-white p--3 pl--5 pr--5 rounded fs--14'>red</span>">red</option>
+            <option value="bg-info border-info text-white" data-content="<span class='bg-info border-info text-white p--3 pl--5 pr--5 rounded fs--14'>skyblue</span>">skyblue</option>
+            <option value="bg-purple border-purple text-white" data-content="<span class='bg-purple border-purple text-white p--3 pl--5 pr--5 rounded fs--14'>purple</span>">Purple</option>
+            <option value="bg-indigo border-indigo text-white" data-content="<span class='bg-indigo border-indigo text-white p--3 pl--5 pr--5 rounded fs--14'>indigo</span>">Indigo</option>
+            <option value="bg-pink border-pink text-white" data-content="<span class='bg-pink border-pink text-white p--3 pl--5 pr--5 rounded fs--14'>pink</span>">Pink</option>
 		</select>
 
 
@@ -124,4 +111,10 @@
 	</form>
 
 </div>
+
+<script>
+function reload() {
+	window.location.href="/portfoli/app/calendar/calendar";
+}
+</script>
 

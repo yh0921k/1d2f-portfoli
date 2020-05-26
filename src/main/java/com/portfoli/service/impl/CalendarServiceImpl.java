@@ -27,8 +27,14 @@ public class CalendarServiceImpl implements CalendarService {
 
   @Override
   public void delete(int id) throws Exception {
-    if(calendarDao.delete(id)< 0)
+    if (calendarDao.delete(id) < 0)
       throw new Exception("일정 삭제 도중 에러 발생");
+  }
+
+  @Override
+  public void update(Calendar calendar) throws Exception {
+    if (calendarDao.update(calendar) < 0)
+      throw new Exception("일정 수정 도중 에러 발생");
   }
 
 }
