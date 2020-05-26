@@ -65,11 +65,7 @@
 </div>
 
 <script>
-var events = [{
-    id: '1',
-    title: 'All Day Event',
-    start: '2020-05-23'
-  }];
+var events = [];
 const toDoForm = document.querySelector(".js-toDoForm");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.querySelector(".js-toDoList");
@@ -152,7 +148,6 @@ window.onload = function(proSeq) {
             alert('저장 중 에러가 발생했습니다. 다시 시도해 주세요.');
         }
     });
-    console.log(events);
     return events;
 	
 };
