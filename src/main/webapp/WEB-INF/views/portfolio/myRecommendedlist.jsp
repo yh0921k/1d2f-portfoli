@@ -156,34 +156,17 @@
 <%-- 다음과제) 아이콘 안뜨는 문제 해결 --%>
               <td>
 			        <div style="position: relative; display: inline-block;" align="center">
-								<c:if test="${myRecommendation == 1}">
 					        <a href="#" 
 					           class="btn-toggle btn btn-sm btn-outline-secondary active"
-					           data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
-					           data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
+					           data-toggle-ajax-url-on="turnon?number=${item.number}"
+					           data-toggle-ajax-url-off="turnoff?number=${item.number}"
 					           data-toast-success-position="bottom-center">
 					          <span class="group-icon">
 					            <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
 					            <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
 					          </span>
 					          <br>
-					          <span>${portfolio.recommendedCount}</span>
 					        </a>
-								</c:if>
-								<c:if test="${myRecommendation == 0}">
-					        <a href="#" 
-					           class="btn-toggle btn btn-sm btn-outline-secondary"
-					           data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
-					           data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
-					           data-toast-success-position="bottom-center">
-					          <span class="group-icon">
-					            <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
-					            <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
-					          </span>
-					          <br>
-					          <span>${portfolio.recommendedCount}</span>
-					        </a>
-								</c:if>
 			        </div>
               </td>
 <%-------------------------------- 찜관리 --------------------------------%>
@@ -278,12 +261,12 @@
       <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
         <c:if test="${pageNum == pagination.curPage}">
           <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="showMyRecommendationTable?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
           </li>
         </c:if>
         <c:if test="${pageNum != pagination.curPage}">
           <li data-page="${pageNum}">
-            <a class="page-link" href="showMyRecommendationTable?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
           </li>
         </c:if>
       </c:forEach>
@@ -326,7 +309,7 @@
   }
   
   function fnSetPageSize(val) {
-      location.href = "showMyRecommendationTable?quantity=" + val;
+      location.href = "myRecommendedlist?quantity=" + val;
   }
   
   $(document).ready(function() {
@@ -376,7 +359,15 @@
       }
   });
   
-  
+  function fn_center_paging(pageNum) {
+      var qs = getQueryStringObject();
+      if(qs.quantity != null) {
+        location.href = "myRecommendedlist?quantity=" + qs.quantity + "&curPage=" + pageNum;
+      } else {
+        location.href = "myRecommendedlist?curPage=" + pageNum;
+      }
+    }
+
   function fn_paging(curPage) {
     location.href = "mylist?curPage=" + curPage;
     }

@@ -199,12 +199,12 @@
       <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
         <c:if test="${pageNum == pagination.curPage}">
           <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
           </li>
         </c:if>
         <c:if test="${pageNum != pagination.curPage}">
           <li data-page="${pageNum}">
-            <a class="page-link" href="list?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
           </li>
         </c:if>
       </c:forEach>
@@ -251,7 +251,7 @@
 	}
   
   function fnSetPageSize(val) {
-		  location.href = "showTable?quantity=" + val;
+		  location.href = "list?quantity=" + val;
   }
   
   $(document).ready(function() {
@@ -259,7 +259,6 @@
 	  
 	  var qs = getQueryStringObject();
 	  var page = qs.quantity;
-	  // 다음과제) pageSize값을 받아서 selected 마킹해주기 필요함!
 		  console.log($('pageSize'));
 	  switch(page) {
 	  case "5":
@@ -304,7 +303,15 @@
 	      }
 	  });
   
-  
+	  function fn_center_paging(pageNum) {
+		  var qs = getQueryStringObject();
+		  if(qs.quantity != null) {
+			  location.href = "list?quantity=" + qs.quantity + "&curPage=" + pageNum;
+		  } else {
+	      location.href = "list?curPage=" + pageNum;
+		  }
+	  }
+	  
   function fn_paging(curPage) {
 	  location.href = "list?curPage=" + curPage;
 	  }
