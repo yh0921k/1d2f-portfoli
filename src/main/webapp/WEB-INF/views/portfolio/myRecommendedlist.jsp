@@ -4,7 +4,7 @@
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <div class="container-fluid">
+<div class="container-fluid">
 
     <div class="row">
 <!--------------------------------------- nav bar ----------------------------------------------->
@@ -17,13 +17,10 @@
     <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
-          <h3 class="h2" style="display:inline-block;">포트폴리오 관리하기</h3>
-          <button class="btn btn-outline-secondary btn-pill btn-sm" 
-                  style="margin-bottom:.5rem;margin-left: 2rem;"
-                  onclick="location.href='form'">글쓰기(+)</button>
+          <h3 class="h2" style="display:inline-block;">내가 찜한 목록</h3>
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
         <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
-           style="margin-bottom: 0.3rem;margin-left: 30%;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
+           style="margin-bottom: 0.3rem;margin-left: 55%;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
           <span class="group-icon">
             <i class="fi fi-list"></i>
             <i class="fi fi-squared-dots"></i>
@@ -43,14 +40,14 @@
 <!-------------------------------- 페이지 노출 컨텐츠수 -------------------------------->
       </div>
 <!-------------------------------- 검색창 -------------------------------->
-		<form action='searchMylist' method='get' >
-		  <input class="form-control" id='keyword' name='keyword' type='text'
-		         style="display:inline-block; width: 90%; height: 2.5rem; margin: 3rem 0rem;">
-		  <button aria-label="Global Search" type="submit"
-		          class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
-		     <i class="fi fi-search fs--20"></i>
-		  </button>
-		</form>
+    <form action='searchMylist' method='get' >
+      <input class="form-control" id='keyword' name='keyword' type='text'
+             style="display:inline-block; width: 90%; height: 2.5rem; margin: 3rem 0rem;">
+      <button aria-label="Global Search" type="submit"
+              class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
+         <i class="fi fi-search fs--20"></i>
+      </button>
+    </form>
 <!-------------------------------- 검색창 -------------------------------->
       <div class="table-responsive rounded" style="min-height: 500px; overflow:initial;">
 
@@ -59,12 +56,14 @@
           <thead>
             <tr>
               <th class="b-0 w--150" style="font-size: large;">순번</th>
+              <th class="b-0 w--200" style="font-size: large;">작성자</th>
               <th class="b-0 w--400" style="font-size: large;">제목</th>
               <th class="b-0 w--300" style="font-size: large;">등록일</th>
               <th class="b-0 w--250" style="font-size: large;">공개여부</th>
               <th class="b-0 w--200" style="font-size: large">추천수</th>
               <th class="b-0 w--200" style="font-size: large;">조회수</th>
               <th class="b-0 w--500" style="font-size: large;">스킬</th>
+              <th class="b-0 w--250" style="font-size: large;">찜관리</th>
             </tr>
           </thead>
                 
@@ -72,79 +71,122 @@
             <c:forEach items="${list}" var="item" varStatus="status">
   
             <tr data-href="detail?number=${item.number}" 
-							  data-ajax-modal-size="modal-xl" 
-							  data-ajax-modal-centered="true" 
-							  data-ajax-modal-callback-function=""
-							  data-ajax-modal-backdrop="" 
-							  class="js-ajax-modal ">
-<%--------------------------------------순번 --------------------------------------%>
-							<c:choose>
-							<c:when test="${not empty keyword}">
+                data-ajax-modal-size="modal-xl" 
+                data-ajax-modal-centered="true" 
+                data-ajax-modal-callback-function=""
+                data-ajax-modal-backdrop="" 
+                class="js-ajax-modal ">
+<%-------------------------------- 순번 --------------------------------%>
+              <c:choose>
+              <c:when test="${not empty keyword}">
               <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${status.getCount()}</td>
               </c:when>
               <c:otherwise>
               <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${(pageSize*pagination.curPage)-pageSize + status.getCount()}</td>
               </c:otherwise>
               </c:choose>
-<%--------------------------------------순번 --------------------------------------%>
-<%--------------------------------------제목 --------------------------------------%>
+<%-------------------------------- 순번 --------------------------------%>
+              
+<%-------------------------------- 작성자 --------------------------------%>
+              <td class="my-td my"
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+                  ${item.member.id}
+              </td>
+<%-------------------------------- 작성자 --------------------------------%>
+<%-------------------------------- 제목 --------------------------------%>
               <td class="my-td my" 
                   ondragstart="return false" 
                   style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
                   ${item.title}
               </td>
-<%--------------------------------------제목 --------------------------------------%>
-<%--------------------------------------등록일 --------------------------------------%>
+<%-------------------------------- 제목 --------------------------------%>
+<%-------------------------------- 등록일 --------------------------------%>
               <td class="my-td my"
                   style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
                   ${item.registeredDate}</td>
-<%--------------------------------------등록일 --------------------------------------%>
-<%--------------------------------------공개여부 --------------------------------------%>
-	              <c:if test="${item.readable eq 1}">
-			        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-			        <a href="#" id="readableToggler"
-			           class="btn-toggle btn btn-sm btn-outline-secondary active"
-			           data-toggle-ajax-url-on="readableon?number=${item.number}"
-			           data-toggle-ajax-url-off="readableoff?number=${item.number}"
-			           data-toast-failure-position="">
-			          <span class="group-icon">
-			            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
-			            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
-			          </span>
-			          <br>
-			        </a>
-				      </td>
-	              </c:if>
-	              <c:if test="${item.getReadable() eq 0}">
-			        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-			        <a href="#" id="readableToggler"
-			           class="btn-toggle btn btn-sm btn-outline-secondary"
-			           data-toggle-ajax-url-on="readableon?number=${item.number}"
-			           data-toggle-ajax-url-off="readableoff?number=${item.number}"
-			           data-toast-failure-position="">
-			          <span class="group-icon">
-			            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
-			            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
-			          </span>
-			          <br>
-			        </a>
-				      </td>
-	              </c:if>
-<%--------------------------------------공개여부 --------------------------------------%>
-<%--------------------------------------추천수 --------------------------------------%>
+              
+                <c:if test="${item.readable eq 1}">
+<%-------------------------------- 등록일 --------------------------------%>
+<%-------------------------------- 공개여부 --------------------------------%>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+              <a href="#" id="readableToggler"
+                 class="btn-toggle btn btn-sm btn-outline-secondary active"
+                 data-toggle-ajax-url-on="readableon?number=${item.number}"
+                 data-toggle-ajax-url-off="readableoff?number=${item.number}"
+                 data-toast-failure-position="">
+                <span class="group-icon">
+                  <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+                  <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+                </span>
+                <br>
+              </a>
+              </td>
+                </c:if>
+                <c:if test="${item.getReadable() eq 0}">
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+              <a href="#" id="readableToggler"
+                 class="btn-toggle btn btn-sm btn-outline-secondary"
+                 data-toggle-ajax-url-on="readableon?number=${item.number}"
+                 data-toggle-ajax-url-off="readableoff?number=${item.number}"
+                 data-toast-failure-position="">
+                <span class="group-icon">
+                  <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+                  <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+                </span>
+                <br>
+              </a>
+              </td>
+                </c:if>
+<%-------------------------------- 공개여부 --------------------------------%>
+<%-------------------------------- 추천수 --------------------------------%>
               <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.getRecommendedCount()}</td>
-<%--------------------------------------추천수 --------------------------------------%>
-<%--------------------------------------조회수 --------------------------------------%>
+<%-------------------------------- 추천수 --------------------------------%>
+<%-------------------------------- 조회수 --------------------------------%>
               <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.viewCount}</td>
-<%--------------------------------------조회수 --------------------------------------%>
-<%--------------------------------------스킬 --------------------------------------%>
+<%-------------------------------- 조회수 --------------------------------%>
+<%-------------------------------- 스킬명 --------------------------------%>
               <td class="my-td my"
                   style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-		              <c:forEach items="${item.skill}" var="skill">
-		              ${skill.name}/
-		              </c:forEach>
+                  <c:forEach items="${item.skill}" var="skill">
+                  ${skill.name}/
+                  </c:forEach>
               </td>
-<%--------------------------------------스킬 --------------------------------------%>
+<%-------------------------------- 스킬명 --------------------------------%>
+<%-------------------------------- 찜관리 --------------------------------%>
+<%-- 다음과제) 아이콘 안뜨는 문제 해결 --%>
+              <td>
+			        <div style="position: relative; display: inline-block;" align="center">
+								<c:if test="${myRecommendation == 1}">
+					        <a href="#" 
+					           class="btn-toggle btn btn-sm btn-outline-secondary active"
+					           data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
+					           data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
+					           data-toast-success-position="bottom-center">
+					          <span class="group-icon">
+					            <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
+					            <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
+					          </span>
+					          <br>
+					          <span>${portfolio.recommendedCount}</span>
+					        </a>
+								</c:if>
+								<c:if test="${myRecommendation == 0}">
+					        <a href="#" 
+					           class="btn-toggle btn btn-sm btn-outline-secondary"
+					           data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
+					           data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
+					           data-toast-success-position="bottom-center">
+					          <span class="group-icon">
+					            <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
+					            <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
+					          </span>
+					          <br>
+					          <span>${portfolio.recommendedCount}</span>
+					        </a>
+								</c:if>
+			        </div>
+              </td>
+<%-------------------------------- 찜관리 --------------------------------%>
             </tr>
             
             </c:forEach>
@@ -236,12 +278,12 @@
       <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
         <c:if test="${pageNum == pagination.curPage}">
           <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="showMyRecommendationTable?curPage=${pageNum}">${pageNum}</a>
           </li>
         </c:if>
         <c:if test="${pageNum != pagination.curPage}">
           <li data-page="${pageNum}">
-            <a class="page-link" href="mylist?curPage=${pageNum}">${pageNum}</a>
+            <a class="page-link" href="showMyRecommendationTable?curPage=${pageNum}">${pageNum}</a>
           </li>
         </c:if>
       </c:forEach>
@@ -266,6 +308,8 @@
 <!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
 </div>
 </div>
+
+
   <script>
   function getQueryStringObject() {
       var a = window.location.search.substr(1).split('&');
@@ -282,39 +326,39 @@
   }
   
   function fnSetPageSize(val) {
-      location.href = "showMyTable?quantity=" + val;
+      location.href = "showMyRecommendationTable?quantity=" + val;
   }
   
   $(document).ready(function() {
 
-	    var qs = getQueryStringObject();
-	    var page = qs.quantity;
-	    switch(page) {
-	    case "5":
-	        $("option[value='5']").attr('selected','selected');
-	      break;
-	    case "10":
-	          $("option[value='10']").attr('selected','selected');
-	      break;
-	    case "20":
-	          $("option[value='20']").attr('selected','selected');
-	      break;
-	    case "50":
-	          $("option[value='50']").attr('selected','selected');
-	      break;
-	    default:
-	          $("option[value='10']").attr('selected','selected');
-	    }
-	  
-	   $("#keyword").keyup(function() {
-	     var k = $(this).val();
-	     $("#listTable > tbody > tr").hide();
-	     
-	     var temp = $("#listTable > tbody > tr > td:nth-child(n):contains('"+ k +"')");
-	     $(temp).parent().show();
-	     })
-	   
-	 });
+      var qs = getQueryStringObject();
+      var page = qs.quantity;
+      switch(page) {
+      case "5":
+          $("option[value='5']").attr('selected','selected');
+        break;
+      case "10":
+            $("option[value='10']").attr('selected','selected');
+        break;
+      case "20":
+            $("option[value='20']").attr('selected','selected');
+        break;
+      case "50":
+            $("option[value='50']").attr('selected','selected');
+        break;
+      default:
+            $("option[value='10']").attr('selected','selected');
+      }
+    
+     $("#keyword").keyup(function() {
+       var k = $(this).val();
+       $("#listTable > tbody > tr").hide();
+       
+       var temp = $("#listTable > tbody > tr > td:nth-child(n):contains('"+ k +"')");
+       $(temp).parent().show();
+       })
+     
+   });
   
   $("readableToggler").on('click', function(e){
       e.stopImmediatePropagation();
@@ -323,13 +367,13 @@
   
   var toggle = $('#styleToggle');
   $('#styleToggle').on('click',function(){
-	  if(toggle.hasClass("active")) {
-	      $('.table.m-0').css('display', 'contents');
+    if(toggle.hasClass("active")) {
+        $('.table.m-0').css('display', 'contents');
         $('#blockStyle').hide('fast');
-		  } else {
-			  $('.table.m-0').css('display', 'none');
-	      $('#blockStyle').css('margin-left', 0).show('fast');
-		  }
+      } else {
+        $('.table.m-0').css('display', 'none');
+        $('#blockStyle').css('margin-left', 0).show('fast');
+      }
   });
   
   

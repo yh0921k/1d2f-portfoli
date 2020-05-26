@@ -39,7 +39,7 @@ import net.coobird.thumbnailator.name.Rename;
 @RequestMapping("/portfolio")
 @MultipartConfig(maxFileSize = 100000000)
 public class PortfolioController {
-  final int pageSize = 10;
+  int pageSize = 10;
   static Logger logger = LogManager.getLogger(PortfolioController.class);
 
   public PortfolioController() {
@@ -72,9 +72,84 @@ public class PortfolioController {
     model.addAttribute("addr", value);
     return "portfolio/pdf";
   }
+  
+  @RequestMapping("myRecommendedlist")
+  public String myRecommendedlist(@ModelAttribute("portfolio") Portfolio portfolio,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
+    
+    Object mem = request.getSession().getAttribute("loginUser");
 
-  @RequestMapping("search")
-  public String search(String keyword, HttpServletRequest request, Model model) throws Exception {
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+    //      return "redirect:/";
+    else {
+
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+
+      // 전체리스트 개수
+      int listCnt = portfolioService.selectMyRecommendedListCnt(member.getNumber());
+
+      Pagination pagination = new Pagination(listCnt, curPage);
+      pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+
+      portfolio.setStartIndex(pagination.getStartIndex());
+      portfolio.setPageSize(pagination.getPageSize());
+
+      // 전체리스트 출력
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("pagination", pagination);
+
+      // 작성자 정보
+      model.addAttribute("generalMember", member);
+      portfolio.setMember((GeneralMember)member);
+      List<Portfolio> portfolios = portfolioService.listMyRecommendedlist(portfolio);
+
+      // 포트폴리오 스킬 붙이기
+      for(Portfolio p : portfolios) {
+        p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
+      }
+
+      model.addAttribute("pageSize",pageSize);
+      model.addAttribute("list", portfolios);
+      return "portfolio/myRecommendedlist";
+    }
+    
+    
+  }
+  
+  @RequestMapping("showTable")
+  public String showTable(int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
+    this.pageSize = quantity;
+    list(portfolio, curPage, request, model);
+    model.addAttribute("pageSize",pageSize);
+    return "portfolio/list";
+  }
+
+  @RequestMapping("showMyTable")
+  public String showMyTable(int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
+    this.pageSize = quantity;
+    mylist(portfolio, curPage, request, model);
+    model.addAttribute("pageSize",pageSize);
+    return "portfolio/mylist";
+  }
+  
+  @RequestMapping("showMyRecommendationTable")
+  public String showMyRecommendationTable(int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
+      @RequestParam(defaultValue="1") int curPage,
+      HttpServletRequest request, Model model) throws Exception {
+    this.pageSize = quantity;
+    mylist(portfolio, curPage, request, model);
+    model.addAttribute("pageSize",pageSize);
+    return "portfolio/myRecommendedlist";
+  }
+  
+  @RequestMapping("searchMylist")
+  public String searchMylist(String keyword, HttpServletRequest request, Model model) throws Exception {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
@@ -92,9 +167,36 @@ public class PortfolioController {
         p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
       }
 
+      model.addAttribute("pageSize",pageSize);
       model.addAttribute("list", portfolios);
       model.addAttribute("keyword", keyword);
       return "portfolio/mylist";
+    }
+  }
+  
+  @RequestMapping("searchAll")
+  public String searchAll(String keyword, HttpServletRequest request, Model model) throws Exception {
+
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null)
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+    else {
+      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
+      Map<String, String> map = new HashMap<>();
+      map.put("keyword", keyword);
+      map.put("number", String.valueOf(member.getNumber()));
+      List<Portfolio> portfolios = portfolioService.search(map);
+
+      // 포트폴리오 스킬 붙이기
+      for(Portfolio p : portfolios) {
+        p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
+      }
+
+      model.addAttribute("pageSize",pageSize);
+      model.addAttribute("list", portfolios);
+      model.addAttribute("keyword", keyword);
+      return "portfolio/list";
     }
   }
 
@@ -177,7 +279,7 @@ public class PortfolioController {
 
 
   @RequestMapping("mylist")
-  public String list(@ModelAttribute("portfolio") Portfolio portfolio,
+  public String mylist(@ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -213,6 +315,7 @@ public class PortfolioController {
         p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
       }
 
+      model.addAttribute("pageSize",pageSize);
       model.addAttribute("list", portfolios);
       return "portfolio/mylist";
     }
@@ -220,7 +323,7 @@ public class PortfolioController {
 
 
   @RequestMapping("list")
-  public String mylist(@ModelAttribute("portfolio") Portfolio portfolio,
+  public String list(@ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -256,6 +359,7 @@ public class PortfolioController {
       }
 
       model.addAttribute("list", portfolios);
+      model.addAttribute("pageSize", pageSize);
       return "portfolio/list";
     }
   }
@@ -375,9 +479,15 @@ public class PortfolioController {
       model.addAttribute("portfolio", portfolio);
       model.addAttribute("attachment", boardAttachment);
 
+      // 내가 작성한 포트폴리오인 경우, modifier 객체를 추가하여, 수정/삭제 버튼 삽입
       if(portfolio.getMember().getNumber() == member.getNumber()) {
         model.addAttribute("modifiable", true);
       }
+      
+      // 내가 찜한 포트폴리오 & 작성자가 비공개한 경우, 열리지 않도록 예외발생
+      if(portfolio.getMember().getNumber() != member.getNumber() && portfolio.getReadable() == 0)
+        throw new Exception("비공개된 포트폴리오입니다.");
+      
       return "portfolio/detail";
     }
   }

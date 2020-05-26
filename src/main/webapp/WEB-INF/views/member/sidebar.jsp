@@ -62,12 +62,23 @@
                 class="px-2 d-inline-block"> 일정 관리 </span>
             </a></li>
 
-            <li class="nav-item"><a class="nav-link "
-              href="/portfoli/app/portfolio/mylist"> <i
-                class="fi fi-arrow-end m-0 fs--12"></i> <span
-                class="px-2 d-inline-block"> 포트폴리오 관리 </span>
-            </a></li>
+            <li class="nav-item">
+            <a class="nav-link "href="#"> 
+              <i class="fi fi-arrow-end m-0 fs--12"></i> 
+              <span class="px-2 d-inline-block"> 내 포트폴리오</span>
+            </a>
 
+            <ul class="nav flex-column px-2 font-weight-bold">
+              <li class="nav-item">
+                <a class="nav-link"
+                   href="/portfoli/app/portfolio/mylist"> 포트폴리오 관리하기</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"
+                   href="/portfoli/app/portfolio/myRecommendedlist"> 내가 찜한 목록</a>
+              </li>
+            </ul>
+            </li>
 
             <li class="nav-item"><a class="nav-link pt--200"
                 style="margin-top: 200px; padding-top: 0px!important;"

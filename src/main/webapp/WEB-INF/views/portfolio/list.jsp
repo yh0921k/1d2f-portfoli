@@ -7,9 +7,27 @@
       <section class="bg-white" style="padding: 30px 0px;">
         <div class="container py-1">
 
-          <h3 class="h2">
-            포트폴리오 게시판
-          </h3>
+          <h3 class="h2" style="display:inline-block;">포트폴리오 게시판</h3>
+<!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
+        <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
+           style="margin-left: 44%;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
+          <span class="group-icon">
+            <i class="fi fi-list"></i>
+            <i class="fi fi-squared-dots"></i>
+          </span>
+        </a>
+<!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
+<!-------------------------------- 페이지 노출 컨텐츠수 -------------------------------->
+			<select name="quantity" id="fnPageSize" class="form-control mb-3"
+			        style="display: inline-block;font-size: 1rem;width: 9rem;height: 2.5rem;padding: 0.5rem;"
+			        onchange="fnSetPageSize(this.value)"
+			        >
+			  <option value="5">5개씩 보기</option>
+			  <option value="10">10개씩 보기</option>
+			  <option value="20">20개씩 보기</option>
+			  <option value="50">50개씩 보기</option>
+			</select>
+<!-------------------------------- 페이지 노출 컨텐츠수 -------------------------------->
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb fs--14">
@@ -17,16 +35,93 @@
               <li class="breadcrumb-item active" aria-current="page"><a href="list">포트폴리오 게시판</a></li>
             </ol>
           </nav>
-
-        </div>
-      </section>
       <!-- /PAGE TITLE -->
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
-<div class="container">
-<div align="center"> 
-<div class="row">
 
+    <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
+<!-------------------------------- 검색창 -------------------------------->
+    <form action='searchAll' method='get' >
+      <input class="form-control" id='keyword' name='keyword' type='text'
+             style="display:inline-block; width: 90%; height: 2.5rem; margin: 3rem 0rem;">
+      <button aria-label="Global Search" type="submit"
+              class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
+         <i class="fi fi-search fs--20"></i>
+      </button>
+    </form>
+<!-------------------------------- 검색창 -------------------------------->
+      <div class="table-responsive rounded" style="min-height: 500px; overflow:initial;">
+
+<!-------------------------------- 프토폴리오 리스트 (테이블형) -------------------------------->
+        <table id="listTable" class="table m-0" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+          <thead>
+            <tr>
+              <th class="b-0 w--150" style="font-size: large;">순번</th>
+              <th class="b-0 w--400" style="font-size: large;">제목</th>
+              <th class="b-0 w--300" style="font-size: large;">등록일</th>
+              <th class="b-0 w--200" style="font-size: large">추천수</th>
+              <th class="b-0 w--200" style="font-size: large;">조회수</th>
+              <th class="b-0 w--500" style="font-size: large;">스킬</th>
+            </tr>
+          </thead>
+                
+          <tbody>
+<%--------------------------------------순번 --------------------------------------%>
+            <c:forEach items="${list}" var="item" varStatus="status">
+            <tr data-href="detail?number=${item.number}" 
+                data-ajax-modal-size="modal-xl" 
+                data-ajax-modal-centered="true" 
+                data-ajax-modal-callback-function=""
+                data-ajax-modal-backdrop="" 
+                class="js-ajax-modal ">
+              <c:choose>
+              <c:when test="${not empty keyword}">
+              <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${status.getCount()}</td>
+              </c:when>
+              <c:otherwise>
+              <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${(pageSize*pagination.curPage)-pageSize + status.getCount()}</td>
+              </c:otherwise>
+              </c:choose>
+<%--------------------------------------순번 --------------------------------------%>
+<%--------------------------------------제목 --------------------------------------%>
+              <td class="my-td my" 
+                  ondragstart="return false" 
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+                  ${item.title}
+              </td>
+<%--------------------------------------제목 --------------------------------------%>
+<%--------------------------------------등록일 --------------------------------------%>
+              <td class="my-td my"
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+                  ${item.registeredDate}</td>
+<%--------------------------------------등록일 --------------------------------------%>
+<%--------------------------------------추천수 --------------------------------------%>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.getRecommendedCount()}</td>
+<%--------------------------------------추천수 --------------------------------------%>
+<%--------------------------------------조회수 --------------------------------------%>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.viewCount}</td>
+<%--------------------------------------조회수 --------------------------------------%>
+<%--------------------------------------스킬 --------------------------------------%>
+              <td class="my-td my"
+                  style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+                  <c:forEach items="${item.skill}" var="skill">
+                  ${skill.name}/
+                  </c:forEach>
+              </td>
+<%--------------------------------------스킬 --------------------------------------%>
+            </tr>
+            
+            </c:forEach>
+          </tbody>
+        </table>
+<!-------------------------------- 프토폴리오 리스트 (테이블형) -------------------------------->
+        
+      </div>
+    </div>
+
+
+
+<div class="row" id="blockStyle" style="margin-left: 0px; position: relative; margin-top:-500px; backface-visibility: hidden; background: white; display: none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
@@ -35,7 +130,6 @@
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
-
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px; margin-right:20px">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
@@ -76,15 +170,18 @@
     
       </div>
     </div>
-
     </a>
     </c:forEach>
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
-    <script src="../../resources/assets/js/core.min.js"></script>
-  </div>
+</div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
-<!-------------------------------------------- 페이징부분 -------------------------------------------->
-	<div class="col-12 col-xl-12">
+<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
+              <c:choose>
+              <c:when test="${not empty keyword}">
+              </c:when>
+              <c:otherwise>
+
+  <div class="col-12 col-xl-12" style="margin-top: 2%;padding-right: 40%;margin: 10px auto;text-align: center;">
    <nav aria-label="pagination">
      <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
     
@@ -126,16 +223,87 @@
         </c:if>
       </ul>
      </nav>
-	  </div>
-</div>
-</div>
-<!-------------------------------------------- 페이징부분 -------------------------------------------->
-  <style>
+    </div>
+              </c:otherwise>
+              </c:choose>
+              
+        </div>
+      </section>
+<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->  <style>
     .modal-content {
     margin-top:150px;
   }
   </style>
+  
   <script>
+  function getQueryStringObject() {
+	    var a = window.location.search.substr(1).split('&');
+	    if (a == "") return {};
+	    var b = {};
+	    for (var i = 0; i < a.length; ++i) {
+	        var p = a[i].split('=', 2);
+	        if (p.length == 1)
+	            b[p[0]] = "";
+	        else
+	            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	    }
+	    return b;
+	}
+  
+  function fnSetPageSize(val) {
+		  location.href = "showTable?quantity=" + val;
+  }
+  
+  $(document).ready(function() {
+	  
+	  
+	  var qs = getQueryStringObject();
+	  var page = qs.quantity;
+	  // 다음과제) pageSize값을 받아서 selected 마킹해주기 필요함!
+		  console.log($('pageSize'));
+	  switch(page) {
+	  case "5":
+		    $("option[value='5']").attr('selected','selected');
+		  break;
+	  case "10":
+	        $("option[value='10']").attr('selected','selected');
+		  break;
+	  case "20":
+	        $("option[value='20']").attr('selected','selected');
+		  break;
+	  case "50":
+	        $("option[value='50']").attr('selected','selected');
+		  break;
+		default:
+	        $("option[value='10']").attr('selected','selected');
+	  }
+	  
+	     $("#keyword").keyup(function() {
+	       var k = $(this).val();
+	       $("#listTable > tbody > tr").hide();
+	       
+	       var temp = $("#listTable > tbody > tr > td:nth-child(n):contains('"+ k +"')");
+	       $(temp).parent().show();
+	       })
+	     
+	   });
+	  
+	  $("readableToggler").on('click', function(e){
+	      e.stopImmediatePropagation();
+	      e.currentTarget.stopImmediatePropagation();
+	  });
+	  
+	  var toggle = $('#styleToggle');
+	  $('#styleToggle').on('click',function(){
+	    if(toggle.hasClass("active")) {
+	        $('.table.m-0').css('display', 'contents');
+	        $('#blockStyle').hide('fast');
+	      } else {
+	        $('.table.m-0').css('display', 'none');
+	        $('#blockStyle').css('margin-left', 0).show('fast');
+	      }
+	  });
+  
   
   function fn_paging(curPage) {
 	  location.href = "list?curPage=" + curPage;

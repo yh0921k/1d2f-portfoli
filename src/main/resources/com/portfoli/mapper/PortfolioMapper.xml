@@ -29,9 +29,50 @@
   
   <!-- 전체 포트폴리오 리스트 추출 (페이징처리)-->
   <select id="findAll" resultMap="PortfolioMap" parameterType="Portfolio">
-     SELECT
-       p.board_no,
-       count(r.board_no) count,
+    SELECT
+      p.board_no,
+      p.readable,
+      count(r.board_no) count,
+      p.homepage,
+      p.thumbnail,
+      p.readable,
+      b.board_no,
+      b.title,
+      b.content,
+      b.view_count,
+      b.registered_date,
+      m.member_no,  -- 회원번호  --
+      m.id,  -- id값  --
+      m.name, -- 이름 --
+      m.email, -- 이메일 --
+      g.seeking_flag,  -- 재직여부 --
+      m.photo,  -- 사진경로 --
+      g.membership  -- 멤버십 --
+    FROM pf_portfolio as p 
+    LEFT OUTER JOIN pf_board as b 
+    ON p.board_no = b.board_no
+    LEFT OUTER JOIN pf_general_member as g
+    ON g.general_member_no = p.general_member_no
+    LEFT OUTER JOIN pf_members as m
+    ON m.member_no = g.general_member_no
+    LEFT OUTER JOIN pf_recommendation r 
+    ON b.board_no = r.board_no
+
+    WHERE p.readable = 1
+
+    GROUP BY p.board_no
+  
+    ORDER BY count desc,
+    b.view_count desc,
+    b.registered_date desc
+    limit ${startIndex}, ${pageSize}
+  </select>
+  
+  <!-- 전체 포트폴리오 리스트 추출 (페이징처리)-->
+  <select id="findAllRecommendedlist" resultMap="PortfolioMap" parameterType="Portfolio">
+    SELECT 
+       r1.board_no, 
+       count(r2.member_no) count,
        p.homepage,
        p.thumbnail,
        p.readable,
@@ -46,26 +87,31 @@
        g.seeking_flag,  -- 재직여부 --
        m.photo,  -- 사진경로 --
        g.membership -- 멤버십 --
-     FROM pf_portfolio as p 
-     LEFT OUTER JOIN pf_board as b 
-     ON p.board_no = b.board_no
-     LEFT OUTER JOIN pf_general_member as g
-     ON g.general_member_no = p.general_member_no
-     LEFT OUTER JOIN pf_members as m
-     ON m.member_no = g.general_member_no
-     LEFT OUTER JOIN pf_recommendation r 
-     ON b.board_no = r.board_no
-     
-     WHERE p.readable = 1
-     
-     GROUP BY p.board_no
-    
+       
+	   FROM (SELECT * 
+		       FROM pf_recommendation 
+		       WHERE member_no = ${member.number}
+		       ) r1 
+	   LEFT OUTER JOIN pf_recommendation r2 
+	   ON r1.board_no = r2.board_no 
+	   LEFT OUTER JOIN pf_board b
+	   ON r1.board_no = b.board_no
+	   LEFT OUTER JOIN pf_portfolio p
+	   ON r1.board_no = p.board_no
+	   LEFT OUTER JOIN pf_general_member as g
+	   ON g.general_member_no = p.general_member_no
+	   LEFT OUTER JOIN pf_members as m
+	   ON m.member_no = g.general_member_no
+	
+     WHERE r1.board_no = p.board_no
+	   GROUP BY r1.board_no
+	  
      ORDER BY count desc,
      b.view_count desc,
      b.registered_date desc
     limit ${startIndex}, ${pageSize}
-  </select>
-  
+  </select>  
+
   <!-- 사용자별 포트폴리오 리스트 추출 -->
   <select id="findByMember" resultMap="PortfolioMap" parameterType="int">
     SELECT
@@ -101,6 +147,18 @@
     
     GROUP BY p.board_no
     limit ${startIndex}, ${pageSize}
+  </select>
+   
+  <select id="selectMyRecommendedListCnt" resultType="int" parameterType="int">
+	  SELECT 
+	    count(*) 
+	  FROM pf_portfolio p 
+	  LEFT OUTER JOIN pf_board b 
+	  ON p.board_no = b.board_no 
+	  LEFT OUTER JOIN pf_recommendation r 
+	  on b.board_no = r.board_no 
+	  
+	  WHERE member_no = ${number}
   </select>
    
   <select id="selectListCnt" resultType="int" parameterType="int">

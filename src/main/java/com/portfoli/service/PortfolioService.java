@@ -28,5 +28,9 @@ public interface PortfolioService {
 
   List<Portfolio> search(Map<String, String> map) throws Exception;
 
+  List<Portfolio> listMyRecommendedlist(Portfolio portfolio) throws Exception;
+
+  int selectMyRecommendedListCnt(int generalMemberNumber) throws Exception;
+
 
 }

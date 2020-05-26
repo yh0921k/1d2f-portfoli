@@ -33,6 +33,11 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
+  public List<Portfolio> listMyRecommendedlist(Portfolio portfolio) throws Exception {
+    return portfolioDao.findAllRecommendedlist(portfolio);
+  }
+
+  @Override
   public boolean insert(Portfolio portfolio) throws Exception {
     return portfolioDao.insert(portfolio);
   }
@@ -58,6 +63,11 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
+  public int selectMyRecommendedListCnt(int generalMemberNumber) throws Exception {
+    return portfolioDao.selectMyRecommendedListCnt(generalMemberNumber);
+  }
+  
+  @Override
   public void readableon(Portfolio portfolio) throws Exception {
     portfolioDao.readableon(portfolio);
   }
@@ -71,6 +81,9 @@ public class PortfolioServiceImpl implements PortfolioService {
   public List<Portfolio> search(Map<String, String> map) throws Exception {
     return portfolioDao.search(map);
   }
+
+
+
 
 
 
