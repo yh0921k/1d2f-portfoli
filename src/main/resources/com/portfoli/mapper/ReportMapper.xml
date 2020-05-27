@@ -14,6 +14,9 @@
     <result column="registered_date" property="registeredDate"/>
     <result column="handle_date" property="handleDate"/>
     <result column="handle_content" property="handleContent"/>
+    <result column="handle_class" property="handleClass"/>
+    <result column="ref" property="ref"/>
+    <result column="re_step" property="reStep"/>
 
     <association property="member" javaType="Member">
       <id column="member_no" property="number"/>
@@ -23,11 +26,6 @@
     <association property="reportCategory" javaType="ReportCategory">
       <id column="report_class_no" property="number"/>
       <result column="report_class" property="category"/>
-    </association>
-
-    <association property="reportHandleCategory" javaType="ReportHandleCategory">
-      <id column="handle_class_no" property="number"/>
-      <result column="handle_class" property="category"/>
     </association>
 
     <collection property="attachments" ofType="BoardAttachment">
@@ -67,6 +65,7 @@
 
   <select id="findByNumber" resultMap="ReportMap" parameterType="int">
     select
+    r.reporter_no,
     r.target_no,
     m.id member_id,
     b.board_no,
@@ -104,4 +103,9 @@
     select count(*)
     from pf_report
   </select>
+
+  <insert id="reply" parameterType="Report">
+    insert into pf_report(board_no, reporter_no, target_no, handle_class_no, handle_date, ref, re_step)
+    values(#{number}, #{reporterNumber}, #{targetNumber}, #{handleCategory}, now(), #{ref}, #{reStep} + 1)
+  </insert>
 </mapper>

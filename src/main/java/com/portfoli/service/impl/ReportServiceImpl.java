@@ -73,6 +73,14 @@ public class ReportServiceImpl implements ReportService {
   }
 
   @Override
+  public int adminReply(Report report) throws Exception {
+    boardDao.insert(report);
+    reportDao.reply(report);
+
+    return 1;
+  }
+
+  @Override
   public int adminListCount() throws Exception {
     return reportDao.adminCount();
   }
