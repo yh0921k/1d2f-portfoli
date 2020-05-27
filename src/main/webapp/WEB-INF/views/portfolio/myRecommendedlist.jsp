@@ -63,7 +63,7 @@
               <th class="b-0 w--200" style="font-size: large">추천수</th>
               <th class="b-0 w--200" style="font-size: large;">조회수</th>
               <th class="b-0 w--500" style="font-size: large;">스킬</th>
-              <th class="b-0 w--250" style="font-size: large;">찜관리</th>
+              <th class="b-0 w--350" style="font-size: large;">찜관리</th>
             </tr>
           </thead>
                 
@@ -153,20 +153,22 @@
               </td>
 <%-------------------------------- 스킬명 --------------------------------%>
 <%-------------------------------- 찜관리 --------------------------------%>
-<%-- 다음과제) 아이콘 안뜨는 문제 해결 --%>
               <td>
 			        <div style="position: relative; display: inline-block;" align="center">
 					        <a href="#" 
 					           class="btn-toggle btn btn-sm btn-outline-secondary active"
 					           data-toggle-ajax-url-on="turnon?number=${item.number}"
 					           data-toggle-ajax-url-off="turnoff?number=${item.number}"
-					           data-toast-success-position="bottom-center">
+					           data-toast-success-position="bottom-center"
+					           style="padding: 2px 17px;">
 					          <span class="group-icon">
 					            <i class="fi fi-dislike text-muted" style="font-size:medium; width: 27px;"></i><%-- 추천안됨 --%>
 					            <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
 					          </span>
 					          <br>
 					        </a>
+					    <br>
+              <span style="font-size: small;">${item.recommendationDate}</span>
 			        </div>
               </td>
 <%-------------------------------- 찜관리 --------------------------------%>

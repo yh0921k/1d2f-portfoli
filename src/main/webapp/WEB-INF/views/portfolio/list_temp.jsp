@@ -119,61 +119,90 @@
       </div>
     </div>
 
-
-
-<div class="row" id="blockStyle" style="margin-left: 0px; position: relative; margin-top:-500px; backface-visibility: hidden; background: white; display: none;">
+<div class="row" id="blockStyle" style="width: 1000px;margin-left: 0px;position: relative;margin-top: -500px;backface-visibility: hidden;background: white;display:none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
+
+
+
+<%--시작점 --%>
+<div class="card shadow-xs overflow-hidden b-0" style="min-width:830px;box-shadow: none!important;">
   <c:forEach items="${list}" var="item">
-<a href="#"
-  data-href="detail?number=${item.number}" 
-  data-ajax-modal-size="modal-xl" 
-  data-ajax-modal-callback-function=""
-  data-ajax-modal-backdrop="" 
-  class="js-ajax-modal">
-  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px; margin-right:20px">
-    <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
+	<a href="#"
+	  data-href="detail?number=${item.number}" 
+	  data-ajax-modal-size="modal-xl" 
+	  data-ajax-modal-callback-function=""
+	  data-ajax-modal-backdrop=""
+	  class="js-ajax-modal"
+	  style="text-decoration: none;">
+	<div class="row no-gutters" style="width: 688px;margin-bottom: 2rem;box-shadow: 25px 25px 25px rgba(140,152,164,.9)!important;">
+
+<%----------------------------------------썸네일 ----------------------------------------%>
+		<div class="col-12 col-lg-5 jarallax overlay-dark overlay-opacity-5 text-white pt--100 pb--100 d-table bg-cover" 
+			data-speed="1.1"
+			style="width:340px; background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');"
+			onError="this.style.backgrdoun-image ='../../resources/assets/images/background/black.png';"
+			>
     <c:if test="${item.thumbnail != null}">
-           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
     </c:if>
     <c:if test="${item.thumbnail == null}">
-           style="background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
     </c:if>
-    
-    <!-- 제목, 아이디 -->
-      <div class="card-body font-weight-light mt--60">
-        <div class="d-table">
-          <div class="d-table-cell align-bottom" style="text-align:center;">
-            <p style="max-height: 1.65rem;width: 16.5rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
-              ${item.title}
-            </p>
-            <p class="text-warning fs--13">
-              ${item.member.id}
-            </p>
-          </div>
-        </div>
-      </div>
-    <!-- 제목, 아이디 -->
+<%----------------------------------------썸네일 ----------------------------------------%>
 
-    <!-- 카드하단 -->
-      <div class="card-footer bg-transparent b-0" style="height: 100px;">
-        <hr class="border-light opacity-2">
-        <a style="position: absolute; left: 67%;">
-        <span class="float-end fs--14 p-2">
-          ${item.getRecommendedCount()}
-        </span>
-        </a>
-        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
-          ${item.getViewCount()}
-        </a>
-      </div>
-    <!-- 카드하단 -->
-    
-      </div>
-    </div>
-    </a>
+<%----------------------------------------작성자 아이디 ----------------------------------------%>
+		<div class="d-table-cell align-middle text-center" style="display: block!important; font-size: 1.5rem;">
+		${item.member.id}<br>
+		</div>
+<%----------------------------------------작성자 아이디 ----------------------------------------%>
+		<br>
+<%----------------------------------------추천수 ----------------------------------------%>
+       <span class="float-end fs--14 p-2" style="color: black;position: absolute;left: 59%;text-align:center;font-size: 1rem!important;">
+         <i class="fi fi-like" style=""></i><br>${item.getRecommendedCount()}
+       </span>
+<%----------------------------------------추천수 ----------------------------------------%>
+<%----------------------------------------조회수 ----------------------------------------%>
+       <span class="float-end fs--14 p-2" style="font-size: 1.2rem!important;color: black;position: absolute;left:20%;font-size: 1rem!important;">
+         <i class="fi fi-eye" style="color: black;font-size: 1rem!important;text-align: center;margin: 0;"></i><br>${item.getViewCount()}
+       </span>
+<%----------------------------------------조회수 ----------------------------------------%>
+
+	</div>
+
+	<!-- card body -->
+	<div class="col-12 col-lg-7 p--30">
+
+		<div class="card-body d-table h-100" style="height: 9rem!important">
+
+			<div class="d-table-cell align-middle" 
+					 style="font-size: 1rem; text-overflow: ellipsis;overflow: hidden;">
+
+<%----------------------------------------제목 ----------------------------------------%>
+				<div class="mb-0 text-center mx-auto max-w-400 font-weight-light" style="color: black;font-weight: 550!important;font-size: 1.5rem;text-overflow: ellipsis;overflow: hidden;">
+				${item.title}
+				</div>
+<%----------------------------------------제목 ----------------------------------------%>
+
+			</div>
+
+		</div>
+<%----------------------------------------기술명 ----------------------------------------%>
+		<div style="text-align: center;color:black;">
+      <c:forEach items="${item.skill}" var="skill" varStatus="status">
+			${skill.name}<c:if test="${!status.last}">/</c:if>
+      </c:forEach>
+		</div>
+<%----------------------------------------기술명 ----------------------------------------%>
+	</div>
+	</div>
+	</a>
     </c:forEach>
+</div>
+
+
+
+
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
 </div>
+
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
               <c:choose>
