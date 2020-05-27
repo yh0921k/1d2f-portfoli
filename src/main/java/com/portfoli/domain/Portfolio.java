@@ -116,8 +116,9 @@ public class Portfolio extends Board implements java.io.Serializable{
   public List<Skill> getSkill() {
     return skill;
   }
-  public void setSkill(List<Skill> skill) {
+  public Portfolio setSkill(List<Skill> skill) {
     this.skill = skill;
+    return this;
   }
 
 

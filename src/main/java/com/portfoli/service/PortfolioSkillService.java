@@ -4,7 +4,9 @@ import com.portfoli.domain.Portfolio;
 
 public interface PortfolioSkillService {
 
-  Portfolio findAllSkill(int number);
+  Portfolio findAllSkill(int number) throws Exception;
+
+  boolean add(int boardNumber, int memberNumber) throws Exception;
 
 
 

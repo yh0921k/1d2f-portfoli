@@ -460,7 +460,7 @@ public class PortfolioController {
   public void form() throws Exception {}
 
   @RequestMapping("add")
-  public String add(Portfolio portfolio, HttpServletRequest request, Model model,
+  public String add(String skills, Portfolio portfolio, HttpServletRequest request, Model model,
       @RequestParam("thumb") MultipartFile thumb,
       @RequestParam("files") MultipartFile[] files) throws Exception {
 
@@ -518,8 +518,15 @@ public class PortfolioController {
         // Portfolio 입력 중에서 작성자 정보입력
         portfolio.getMember().setNumber(member.getNumber());
       }
-
       portfolioService.insert(portfolio);
+
+      // 기술명 확인하고 넣을 예정 (현재는 숫자로만 넣을 수 있음)
+      String[] strs = skills.split(",");
+      for(String str : strs) {
+        System.out.println(str);
+        portfolioSkillService.add(portfolio.getNumber(), Integer.valueOf(str));
+      }
+
       return "redirect:mylist";
     }
   }

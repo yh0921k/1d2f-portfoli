@@ -1,5 +1,7 @@
 package com.portfoli.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import com.portfoli.dao.PortfolioSkillDao;
 import com.portfoli.domain.Portfolio;
@@ -14,8 +16,16 @@ public class PortfolioSkillServiceImpl implements PortfolioSkillService {
   }
 
   @Override
-  public Portfolio findAllSkill(int number) {
+  public Portfolio findAllSkill(int number) throws Exception {
     return portfolioSkillDao.findAllSkill(number);
+  }
+
+  @Override
+  public boolean add(int boardNumber, int memberNumber) throws Exception {
+    Map<String, Integer> map = new HashMap<>();
+    map.put("boardNumber", boardNumber);
+    map.put("memberNumber", memberNumber);
+    return portfolioSkillDao.insert(map);
   }
 
 

@@ -26,9 +26,9 @@
                  name="title" value="${portfolio.title}">
           <br>
           <p class="text-gray-900 mt-3" style="display: inline-block;">기술 : </p>
-          <input required type="text"  placeholder="기술명을 적어주세요"
+          <input type="text"  placeholder="기술명을 적어주세요"
                  class="form-label-group form-control-clean col-md-11 mt--5"
-                 name="title" value="${portfolio.title}">
+                 name="skills">
 
           <p class="text-gray-900 mt-3">내용 :</p>
 					<textarea class="summernote-editor"
