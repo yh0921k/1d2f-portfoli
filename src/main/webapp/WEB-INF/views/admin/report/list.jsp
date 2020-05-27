@@ -27,7 +27,14 @@
                 <tbody id="item_list">
                       <c:forEach items="${list}" var="report">
                     <tr id="report_id_${report.number}" class="text-dark">
-                      <td><a href="/portfoli/admin/report/detail?number=${report.number}"
+                      <td>
+                      <c:choose>
+                        <c:when test="${report.reStep == 0}">
+                        <span class="text-muted"> [${report.reportCategory.category}] </span>
+                        </c:when> 
+                        <c:when test="${report.reStep > 0}"> &nbsp; &nbsp; &nbsp; </c:when> 
+                      </c:choose>
+                      <a href="/portfoli/admin/report/detail?number=${report.number}"
                       class="font-weight-medium text-muted mx-2 m-0-xs"> ${report.title} </a>
                       </td>
                       <td class="hidden-lg-down"><span
