@@ -32,7 +32,18 @@
     WHERE p.board_no = ${number}
   </select>
   
+  <insert id="insert" parameterType="map">
 
+  INSERT INTO pf_portfolio_skill (
+	  board_no, 
+	  member_skill_no
+  ) 
+  values ( 
+	  ${boardNumber}
+	  , 
+	  ${memberNumber}
+  )
+  </insert>
 
   
 </mapper>

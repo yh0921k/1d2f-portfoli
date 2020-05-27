@@ -563,17 +563,17 @@ INSERT INTO pf_faq(board_no, category_no, readable, answer_content, answer_date)
 VALUES(50, 4, 1, "내용입니다", "2020-05-01 00:00:00");
 
 -- 게시글추천 예제데이터 (pf_recommendation)
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (1, 1);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (2, 2);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (3, 3);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (4, 4);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (5, 5);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (31, 1);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (32, 2);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (34, 4);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (36, 1);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (38, 3);
-INSERT INTO pf_recommendation(board_no, member_no) VALUES (40, 5);
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (1, 1, '2020-05-01');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (2, 3, '2020-05-02');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (3, 2, '2020-05-03');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (4, 4, '2020-05-04');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (5, 2, '2020-05-05');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (31, 1, '2020-05-05');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (31, 2, '2020-05-04');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (34, 4, '2020-04-25');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (36, 1, '2020-05-06');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (38, 3, '2020-05-01');
+INSERT INTO pf_recommendation(board_no, member_no, recommendation_date) VALUES (40, 5, '2020-05-01');
 
 -- 포트폴리오파일 예제데이터 (pf_board_attachment)
 INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)

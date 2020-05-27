@@ -987,7 +987,8 @@ ALTER TABLE pf_province_city
 -- 게시글추천
 CREATE TABLE pf_recommendation (
   board_no  INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
-  member_no INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  recommendation_date TIMESTAMP NOT NULL DEFAULT NOW() COMMENT '찜한날짜' -- 찜한날짜
 )
 COMMENT '게시글추천';
 
