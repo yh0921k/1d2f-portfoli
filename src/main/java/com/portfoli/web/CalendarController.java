@@ -43,13 +43,20 @@ public class CalendarController {
   }
 
   @GetMapping("eventEdit")
-  public void eventEditModal(String id, Model model) throws Exception {
+  public void eventEditModal(String id, String start, String end, Model model) throws Exception {
+    // 2020-05-12T15:00:00.000Z
+    if(start != null) {
+      Calendar calendar = new Calendar();
+      calendar.setId(Integer.parseInt(id));
+      calendar.setStart(start.substring(0, 10) + " " + start.substring(11, 16));
+      calendar.setEnd(end.substring(0, 10) + " " +  end.substring(11, 16));
+      eventEdit(calendar);
+    }
     model.addAttribute("id", id);
   }
 
   @PostMapping("eventEdit")
-  public void eventEdit(Calendar calendar, HttpSession session) throws Exception {
-    System.out.println(calendar);
+  public void eventEdit(Calendar calendar) throws Exception {
     calendarService.update(calendar);
   }
 

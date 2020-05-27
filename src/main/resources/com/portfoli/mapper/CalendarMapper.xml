@@ -39,7 +39,7 @@
 	<update id="update" parameterType="Calendar">
 	 UPDATE pf_schedule
     <set>
-      title = #{title}
+      <if test="title!=null and title!=''">title = #{title}</if>
       <if test="description!=null and description!=''">,description = #{description}</if>
       <if test="className!=null and className!=''">,class = #{className}</if>
       <if test="start!=null and start!=''">,start_date = #{start}</if>

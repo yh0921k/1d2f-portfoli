@@ -36,7 +36,7 @@
 						<input required autocomplete="off" type="text"
 							class="form-control rangepicker" data-load-delay="800"
 							data-single-datepicker="true" data-timepicker="true"
-							data-timepicker-24h="false" data-timepicker-show-seconds="false"
+							data-timepicker-24h="true" data-timepicker-show-seconds="false"
 							data-disable-auto-update-input="true" data-date-start=""
 							data-date-format="YYYY-MM-DD HH:mm"
 							data-quick-locale='{
@@ -61,7 +61,7 @@
 
 						<input autocomplete="off" type="text"
 							class="form-control rangepicker" data-single-datepicker="true"
-							data-timepicker="true" data-timepicker-24h="false"
+							data-timepicker="true" data-timepicker-24h="true"
 							data-timepicker-show-seconds="false"
 							data-disable-auto-update-input="true" data-date-start=""
 							data-date-format="YYYY-MM-DD HH:mm"

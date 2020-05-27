@@ -28,7 +28,7 @@
 
 			<div class="fullcalendar rounded"
 				data-fullcalendar-default-view="dayGridMonth"
-				data-fullcalendar-editable="true" data-fullcalendar-timezone="local"
+				data-fullcalendar-editable="true" data-fullcalendar-timezone="Asia/Seoul"
 				data-fullcalendar-default-date="now"
 				data-fullcalendar-modal-size="modal-lg"
 				data-fullcalendar-event-create-modal="true"
@@ -40,31 +40,18 @@
 				data-toast-success="Successfully Updated!"
 				data-toast-position="top-center"
 				data-fullcalendar-plugins='[ "interaction", "dayGrid", "timeGrid", "list", "bootstrap", "googleCalendar" ]'
-				data-fullcalendar-google-apikey="AIzaSyCBpT7NTo9rwR-gS5iq7ayV-dGlE_Ebr0s"
 				data-fullcalendar-source-object="events"
-				data-fullcalendar-lang-btn='{
-    "today" : "today",
-    "month" : "month",
-    "week"   : "week",
-    "day"  : "day",
-    "list"   : "list"
-  }'
-				data-fullcalendar-header='{
-    "left"     : "prev,next, today, customAddEventButton",
-    "center"   : "title",
-    "right"  : "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-  }'
-				data-fullcalendar-time-format='{
-    "hour"     : "numeric",
-    "minute"   : "2-digit",
-    "meridiem"   : "short"
-  }'></div>
+				data-fullcalendar-lang-btn='{ "today" : "today", "month" : "month", "week"   : "week", "day"  : "day", "list"   : "list" }'
+				data-fullcalendar-header='{ "left"     : "prev,next, today, customAddEventButton", "center"   : "title", "right"  : "dayGridMonth,timeGridWeek,timeGridDay,listWeek" }'
+				data-fullcalendar-time-format='{ "hour"     : "numeric", "minute"   : "2-digit", "meridiem"   : "short"  }'>
+				</div>
 		</div>
 
 	</div>
 </div>
 
 <script>
+
 var events = [];
 const toDoForm = document.querySelector(".js-toDoForm");
 const toDoInput = toDoForm.querySelector("input");
