@@ -156,9 +156,6 @@ DROP TABLE IF EXISTS pf_schedule RESTRICT;
 -- 알림분류
 DROP TABLE IF EXISTS pf_alarm_class RESTRICT;
 
--- 신고처리분류
-DROP TABLE IF EXISTS pf_handle_class RESTRICT;
-
 -- 결제수단
 DROP TABLE IF EXISTS pf_payment_method RESTRICT;
 
@@ -257,10 +254,11 @@ CREATE TABLE pf_report (
   board_no        INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
   reporter_no     INTEGER  NOT NULL COMMENT '신고자번호', -- 신고자번호
   target_no       INTEGER  NOT NULL COMMENT '대상자번호', -- 대상자번호
-  report_class_no INTEGER  NOT NULL COMMENT '신고분류번호', -- 신고분류번호
+  report_class_no INTEGER  NULL COMMENT '신고분류번호', -- 신고분류번호
   handle_class_no INTEGER  NULL     COMMENT '처리분류번호', -- 처리분류번호
   handle_date     DATETIME NULL     COMMENT '신고처리일', -- 신고처리일
-  handle_content  TEXT     NULL     COMMENT '신고처리내용' -- 신고처리내용
+  ref             INTEGER  NULL     COMMENT '답변그룹', -- 답변그룹
+  re_step         INTEGER  NULL     COMMENT '답변순서' -- 답변순서
 )
 COMMENT '신고';
 
@@ -1106,23 +1104,6 @@ ALTER TABLE pf_alarm_class
 ALTER TABLE pf_alarm_class
   MODIFY COLUMN alarm_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '알림분류번호';
 
--- 신고처리분류
-CREATE TABLE pf_handle_class (
-  handle_class_no INTEGER     NOT NULL COMMENT '처리분류번호', -- 처리분류번호
-  handle_class    VARCHAR(40) NOT NULL COMMENT '처리분류명' -- 처리분류명
-)
-COMMENT '신고처리분류';
-
--- 신고처리분류
-ALTER TABLE pf_handle_class
-  ADD CONSTRAINT PK_pf_handle_class -- 신고처리분류 기본키
-    PRIMARY KEY (
-      handle_class_no -- 처리분류번호
-    );
-
-ALTER TABLE pf_handle_class
-  MODIFY COLUMN handle_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '처리분류번호';
-
 -- 결제수단
 CREATE TABLE pf_payment_method (
   payment_method_no INTEGER     NOT NULL COMMENT '결제수단번호', -- 결제수단번호
@@ -1285,16 +1266,6 @@ ALTER TABLE pf_report
     )
     REFERENCES pf_board ( -- 게시글
       board_no -- 게시글번호
-    );
-
--- 신고
-ALTER TABLE pf_report
-  ADD CONSTRAINT FK_pf_handle_class_TO_pf_report -- 신고처리분류 -> 신고
-    FOREIGN KEY (
-      handle_class_no -- 처리분류번호
-    )
-    REFERENCES pf_handle_class ( -- 신고처리분류
-      handle_class_no -- 처리분류번호
     );
 
 -- 회원쪽지
@@ -1759,7 +1730,6 @@ ALTER TABLE pf_schedule
       general_member_no -- 일반회원번호
     );
 
-
 -- FAQ 자주묻는질문
 ALTER TABLE pf_faq
   ADD CONSTRAINT FK_pf_board_TO_pf_faq -- 게시글 -> FAQ 자주묻는질문
@@ -1779,4 +1749,3 @@ ALTER TABLE pf_faq
     REFERENCES pf_question_category ( -- 질문분류
       category_no -- 질문분류번호
     );
-

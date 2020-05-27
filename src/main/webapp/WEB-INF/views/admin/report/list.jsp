@@ -2,41 +2,46 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <div id="middle" class="flex-fill">
   <section class="rounded mb-3 ">
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-      신고 처리 <small class="fs--11 text-muted d-block mt-1">
-      사용자가 신고한 내역입니다. </small>
+      <strong> 신고 처리 </strong>
+      <small class="fs--11 text-muted d-block mt-1">
+               사용자가 신고한 내역입니다. </small>
     </div>
     
-      <div class="col-12 col-lg-9 col-xl-10 position-relative">
-        <div class="portlet">
-          <div class="portlet-body pt-0">
-
+      <div class="col-sm-12">
             <div class="table-responsive">
               <table class="table table-align-middle border-bottom mb-6">
 
                 <thead>
                   <tr class="text-muted fs--13">
                     <th><span class="px-2 p-0-xs"> 제목 </span></th>
-                    <th class="w--200 hidden-lg-down">신고자</th>
+                    <th class="w--300 hidden-lg-down"> 신고자 </th>
                     <th class="w--200 hidden-lg-down">날짜</th>
+                    <th class="w--100">조회수</th>
                   </tr>
                 </thead>
 
                 <tbody id="item_list">
                       <c:forEach items="${list}" var="report">
                     <tr id="report_id_${report.number}" class="text-dark">
-                      <td><a href="/portfoli/admin/report/detail?number=${report.number}"
+                      <td>
+                      <c:choose>
+                        <c:when test="${report.reStep == 0}">
+                        <span class="text-muted"> [${report.reportCategory.category}] </span>
+                        </c:when> 
+                        <c:when test="${report.reStep > 0}"> &nbsp; &nbsp; &nbsp; </c:when> 
+                      </c:choose>
+                      <a href="/portfoli/admin/report/detail?number=${report.number}"
                       class="font-weight-medium text-muted mx-2 m-0-xs"> ${report.title} </a>
                       </td>
                       <td class="hidden-lg-down"><span
                         class="d-block text-muted"> ${report.member.id} </span></td>
                       <td class="hidden-lg-down"><span class="d-block text-muted">
-                      <fmt:formatDate var="registeredDate"
-                      value="${report.registeredDate}" pattern="yyyy.MM.dd HH:mm:ss"/>
-                        ${registeredDate}</span></td>
+                      ${report.registeredDate} </span></td>
+                      <td><span class="d-block text-muted"> ${report.viewCount} </span></td>
                     </tr>
                   </c:forEach>
                 </tbody>
@@ -84,8 +89,6 @@
             </div>
             <!-- /options and pagination -->
 
-          </div>
-        </div>
       </div>
   </section>
 </div>

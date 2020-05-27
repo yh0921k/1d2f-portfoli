@@ -17,5 +17,7 @@ public interface ReportService {
 
   int adminListCount() throws Exception;
 
+  int adminReply(Report report) throws Exception;
+
   List<ReportCategory> reportCategorie() throws Exception;
 }

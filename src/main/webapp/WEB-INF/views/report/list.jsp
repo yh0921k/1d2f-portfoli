@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="container-fluid">
   <div class="row">
@@ -12,6 +11,7 @@
       <div class="portlet-header">
         <h1 class="d-none d-lg-block m--3">내 신고내역</h1>
       </div>
+      <br><br>
 
       <div class="table-responsive rounded" style="min-height: 500px;">
         <table class="table m-0">
@@ -26,13 +26,15 @@
           <tbody>
             <c:forEach items="${list}" var="report">
               <tr>
-                <td>[${report.reportCategory.category}] &nbsp;
+                <td>
+                  <c:choose>
+                  <c:when test="${report.reStep == 0}"> [${report.reportCategory.category}] &nbsp; </c:when> 
+                  <c:when test="${report.reStep > 0}"> &nbsp; &nbsp; &nbsp; </c:when> 
+                  </c:choose>
                   <a href="/portfoli/app/report/detail?number=${report.number}"
                     class="text-gray-900"> ${report.title} </a>
                 </td>
-                <td><fmt:formatDate var="registeredDate"
-                  value="${report.registeredDate}" pattern="yyyy.MM.dd HH:mm:ss"/> ${registeredDate}
-                </td>
+                <td>${report.registeredDate}</td>
                 <td>${report.viewCount}</td>
               </tr>
             </c:forEach>

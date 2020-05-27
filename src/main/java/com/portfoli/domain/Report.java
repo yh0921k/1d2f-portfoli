@@ -12,16 +12,18 @@ public class Report extends Board implements Serializable {
   private Member member;
   private List<BoardAttachment> attachments;
   private ReportCategory reportCategory;
-  private ReportHandleCategory reportHandleCategory;
+  private int HandleCategory;
   private Date handleDate;
   private String handleContent;
+
+  private int ref, reStep;
 
   @Override
   public String toString() {
     return "Report [reporterNumber=" + reporterNumber + ", targetNumber=" + targetNumber
         + ", member=" + member + ", attachments=" + attachments + ", reportCategory="
-        + reportCategory + ", reportHandleCategory=" + reportHandleCategory + ", handleDate="
-        + handleDate + ", handleContent=" + handleContent + "]";
+        + reportCategory + ", HandleCategory=" + HandleCategory + ", handleDate=" + handleDate
+        + ", handleContent=" + handleContent + ", ref=" + ref + ", reStep=" + reStep + "]";
   }
 
   public int getReporterNumber() {
@@ -64,12 +66,12 @@ public class Report extends Board implements Serializable {
     this.reportCategory = reportCategory;
   }
 
-  public ReportHandleCategory getReportHandleCategory() {
-    return reportHandleCategory;
+  public int getHandleCategory() {
+    return HandleCategory;
   }
 
-  public void setReportHandleCategory(ReportHandleCategory reportHandleCategory) {
-    this.reportHandleCategory = reportHandleCategory;
+  public void setHandleCategory(int handleCategory) {
+    HandleCategory = handleCategory;
   }
 
   public Date getHandleDate() {
@@ -88,17 +90,34 @@ public class Report extends Board implements Serializable {
     this.handleContent = handleContent;
   }
 
+  public int getRef() {
+    return ref;
+  }
+
+  public void setRef(int ref) {
+    this.ref = ref;
+  }
+
+  public int getReStep() {
+    return reStep;
+  }
+
+  public void setReStep(int reStep) {
+    this.reStep = reStep;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
+    result = prime * result + HandleCategory;
     result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
     result = prime * result + ((handleContent == null) ? 0 : handleContent.hashCode());
     result = prime * result + ((handleDate == null) ? 0 : handleDate.hashCode());
     result = prime * result + ((member == null) ? 0 : member.hashCode());
+    result = prime * result + reStep;
+    result = prime * result + ref;
     result = prime * result + ((reportCategory == null) ? 0 : reportCategory.hashCode());
-    result =
-        prime * result + ((reportHandleCategory == null) ? 0 : reportHandleCategory.hashCode());
     result = prime * result + reporterNumber;
     result = prime * result + targetNumber;
     return result;
@@ -113,6 +132,8 @@ public class Report extends Board implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Report other = (Report) obj;
+    if (HandleCategory != other.HandleCategory)
+      return false;
     if (attachments == null) {
       if (other.attachments != null)
         return false;
@@ -133,15 +154,14 @@ public class Report extends Board implements Serializable {
         return false;
     } else if (!member.equals(other.member))
       return false;
+    if (reStep != other.reStep)
+      return false;
+    if (ref != other.ref)
+      return false;
     if (reportCategory == null) {
       if (other.reportCategory != null)
         return false;
     } else if (!reportCategory.equals(other.reportCategory))
-      return false;
-    if (reportHandleCategory == null) {
-      if (other.reportHandleCategory != null)
-        return false;
-    } else if (!reportHandleCategory.equals(other.reportHandleCategory))
       return false;
     if (reporterNumber != other.reporterNumber)
       return false;
