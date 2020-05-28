@@ -222,11 +222,16 @@ INSERT INTO pf_admin(id, pwd) VALUES('eomjinyoung', password('1111'));
 INSERT INTO pf_admin(id, pwd) VALUES('kyh', password('1111'));
 
 -- 학력 샘플 데이터(pf_final_education)
-INSERT INTO pf_final_education(education_no,category) VALUES(1,'고등학교 졸업');
-INSERT INTO pf_final_education(education_no,category) VALUES(2,'2,3년제 대학 졸업');
-INSERT INTO pf_final_education(education_no,category) VALUES(3,'4년제 대학 졸업');
-INSERT INTO pf_final_education(education_no,category) VALUES(4,'대학원 졸업(석사)');
-INSERT INTO pf_final_education(education_no,category) VALUES(5,'대학원 졸업(박사)');
+INSERT INTO pf_final_education(education_no,category) VALUES(0,'학력무관');
+INSERT INTO pf_final_education(education_no,category) VALUES(1,'고등학교졸업');
+INSERT INTO pf_final_education(education_no,category) VALUES(2,'대학졸업(2,3년)');
+INSERT INTO pf_final_education(education_no,category) VALUES(3,'대학교졸업(4년)');
+INSERT INTO pf_final_education(education_no,category) VALUES(4,'석사졸업');
+INSERT INTO pf_final_education(education_no,category) VALUES(5,'박사졸업');
+INSERT INTO pf_final_education(education_no,category) VALUES(6,'고등학교졸업이상');
+INSERT INTO pf_final_education(education_no,category) VALUES(7,'대학졸업(2,3년)이상');
+INSERT INTO pf_final_education(education_no,category) VALUES(8,'대학교졸업(4년)이상');
+INSERT INTO pf_final_education(education_no,category) VALUES(9,'석사졸업이상 ');
 
 
 -- 도시 샘플 데이터(pf_city)
