@@ -25,7 +25,7 @@
 					<li class="nav-item"><a class="nav-link nav-link-remember" data-toggle="tab" href="#tab_profile">프로필</a></li>
 
 					<!-- 일반회원 - 내정보수정 - 보유기술 탭 -->
-					<li class="nav-item"><a class="nav-link nav-link-remember" data-toggle="tab" href="#tab_availableSkills">보유기술</a>
+					<li id="availableSkills" class="nav-item"><a class="nav-link nav-link-remember" data-toggle="tab" href="#tab_availableSkills">보유기술</a>
 					</li>
 					
 					<!-- 일반회원 - 내정보수정 - 관심기술 탭 -->
@@ -531,8 +531,38 @@
   <div class="d-block shadow-xs rounded p-4 mb-2">
     <div class="row">
       <div class="col">
+        <div id="availableList", style="width:100%; height:200px; background-color:seashell;">
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          
+        </div>
+        <hr>
+        <div style="display:inline-block; width:30%; height:400px;">
+					<div id= "selectField" class="iqs-container p--15 border rounded mt-3" style="background-color:lightcyan;">					
+					  <!-- ajax 필드 추가 코드 들어감 -->
+					</div>
+        </div> 
+        
+        <div style="display:inline-block; width:30%; height:400px;">
+          <div id="selectSkill" class="iqs-container p--15 border rounded mt-3" style="background-color:lightcyan;">         
+            <!-- ajax 기술 추가 코드 들어감 -->             
+          </div>
+        </div> 
       </div>
-    </div> 
+      <hr>
+    </div>  
   </div>
 </div>
 <!-- MEMBER AVAILABLE SKILL TAB -->
@@ -568,3 +598,27 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="${pageContext.request.getContextPath()}/resources/assets/js/generalUpdate.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<script>
+  $(document).ready(function() {
+	  $("#availableSkills").click(function() {
+		  var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = () => {
+	        if (xhr.readyState == 4) {
+	            if (xhr.status == 200) {
+	              var obj = JSON.parse(xhr.responseText);
+	              for(idx in obj) {
+	            	  var addHtml = `<div class="iqs-item">       
+	            	  <label class="form-checkbox form-checkbox-primary">
+	            	    <input type="checkbox" name="checkbox_p">
+	            	    <i></i>` + obj[idx].name + `</label>`
+	            	  $("#selectField").append(addHtml);
+	              }	              
+	            }
+	        }
+	    };
+	    xhr.open('GET', '../field/list', true);
+	    xhr.send();
+	  });
+  });
+</script>

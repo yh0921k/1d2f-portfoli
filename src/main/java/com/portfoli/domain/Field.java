@@ -1,11 +1,14 @@
 package com.portfoli.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class Skill implements Serializable {
+public class Field implements Serializable {
   private static final long serialVersionUID = 1L;
+
   int number;
   String name;
+  List<Skill> list;
 
   public int getNumber() {
     return number;
@@ -23,10 +26,19 @@ public class Skill implements Serializable {
     this.name = name;
   }
 
+  public List<Skill> getList() {
+    return list;
+  }
+
+  public void setList(List<Skill> list) {
+    this.list = list;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((list == null) ? 0 : list.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + number;
     return result;
@@ -43,7 +55,14 @@ public class Skill implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    Skill other = (Skill) obj;
+    Field other = (Field) obj;
+    if (list == null) {
+      if (other.list != null) {
+        return false;
+      }
+    } else if (!list.equals(other.list)) {
+      return false;
+    }
     if (name == null) {
       if (other.name != null) {
         return false;
@@ -59,7 +78,8 @@ public class Skill implements Serializable {
 
   @Override
   public String toString() {
-    return "Skill [number=" + number + ", name=" + name + "]";
+    return "Field [number=" + number + ", name=" + name + ", list=" + list + "]";
   }
+
 
 }
