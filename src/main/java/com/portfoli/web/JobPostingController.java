@@ -20,12 +20,14 @@ import com.portfoli.domain.Certificate;
 import com.portfoli.domain.CompanyRequiredCertificate;
 import com.portfoli.domain.District;
 import com.portfoli.domain.EmploymentStatus;
+import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
 import com.portfoli.domain.Major;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.DistrictService;
 import com.portfoli.service.EmploymentStatusService;
+import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.JobPostingService;
 import com.portfoli.service.MajorService;
 import net.coobird.thumbnailator.ThumbnailParameter;
@@ -56,6 +58,10 @@ public class JobPostingController {
   @Autowired
   DistrictService districtService;
 
+  @Autowired
+  FinalEducationService finalEducationService;
+
+
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
   }
@@ -66,11 +72,13 @@ public class JobPostingController {
     List<Certificate> certificates = certificateService.listCertificate();
     List<Major> majors = majorService.listMajor();
     List<District> districts = districtService.get();
+    List<FinalEducation> finalEducations = finalEducationService.findAll();
     System.out.println(certificates);
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
     model.addAttribute("majors", majors);
     model.addAttribute("districts", districts);
+    model.addAttribute("finalEducations", finalEducations);
   }
 
   @PostMapping("add")
@@ -148,11 +156,13 @@ public class JobPostingController {
     List<Certificate> certificates = certificateService.listCertificate();
     List<Major> majors = majorService.listMajor();
     List<District> districts = districtService.get();
+    List<FinalEducation> finalEducations = finalEducationService.findAll();
     model.addAttribute("jobPosting", jobPostingService.get(no));
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
     model.addAttribute("majors", majors);
     model.addAttribute("districts", districts);
+    model.addAttribute("finalEducations", finalEducations);
   }
 
   @PostMapping("update")
