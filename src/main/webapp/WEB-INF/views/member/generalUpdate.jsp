@@ -480,7 +480,7 @@
 					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">*
 						학교 구분을 선택하지 않으면 기본값은 '대학교'입니다.</p>
 					<div class="form-label-group input-group mb-3 ml-3">
-						<input type="text" id="word" class="form-control"
+						<input type="text" id="word" class="form-control" name='schoolName'
 							placeholder="school" aria-label="검색어를 입력해 주세요."
 							onkeyup="search(this);"><label for="">학교</label>
 						<div class="input-group-append">
