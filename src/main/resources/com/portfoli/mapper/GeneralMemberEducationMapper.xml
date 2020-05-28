@@ -28,7 +28,8 @@
 	<select id="findEducations" parameterType="int"
 		resultMap="GeneralMemberEducationMap">
 		SELECT 
-		f.category
+		f.category , 
+		m.school_name
 		FROM pf_general_mem_edu m
 		LEFT OUTER JOIN pf_final_education f
 		ON m.education_no = f.education_no
