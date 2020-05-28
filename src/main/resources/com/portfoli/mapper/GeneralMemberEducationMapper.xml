@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.portfoli.dao.GeneralMemberEducationDao">
+
+	<resultMap type="GeneralMemberEducation"
+		id="GeneralMemberEducationMap">
+		<id column="general_member_no" property="generalMemberNumber" />
+		<id column="education_no" property="educationNumber" />
+		<result column="school_name" property="schoolName" />
+		
+		<association property="finalEducation" javaType="FinalEducation">
+			<result column="category" property="category" />
+		</association>
+		
+	</resultMap>
+	
+	<delete id="deleteAll" parameterType="int">
+	DELETE
+	FROM pf_general_mem_edu
+	WHERE general_member_no=#{generalMemberNumber}
+	</delete>
+
+	<select id="findEducations" parameterType="int"
+		resultMap="GeneralMemberEducationMap">
+		SELECT 
+		f.category
+		FROM pf_general_mem_edu m
+		LEFT OUTER JOIN pf_final_education f
+		ON m.education_no = f.education_no
+		WHERE general_member_no=#{generalMemberNumber}
+	</select>
+	
+	<select id="findEduAll" resultMap="GeneralMemberEducationMap">
+    SELECT * 
+    FROM pf_final_education
+  </select>
+	
+	<insert id="insertEduByMemberNumber" parameterType="java.util.Map">
+	INSERT INTO pf_general_mem_edu
+	(general_member_no, education_no, school_name) 
+	VALUES
+	<foreach item="item" index="index" collection="list">
+  	(#{item.generalMemberNumber}, #{item.educationNumber}, #{item.schoolName})
+	</foreach>
+	</insert>
+	
+	
+</mapper>
