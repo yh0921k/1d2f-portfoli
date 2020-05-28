@@ -31,6 +31,11 @@
 		<id column="district_no" property="districtNumber"></id>
 		<result column="district_name" property="name"></result>
 		</association>
+		
+		<association property="finalEducation" javaType="FinalEducation">
+		<id column="education_no" property="educationNumber"></id>
+		<result column="category" property="category"></result>
+		</association>
 
     <association property="certificate" javaType="Certificate">
       <id column="certificate_no" property="certificateNumber" />
@@ -80,7 +85,7 @@
 		#{district.districtNumber},
 		now(),
 		1,
-		1,
+		#{finalEducation.educationNumber},
 		#{employmentStatus.number})
 	</insert>
 
@@ -172,7 +177,8 @@
      e.employment_stat_name,
      c.name as certificate_name,
      m.name as major_name,
-     d.name as district_name
+     d.name as district_name,
+     i.category
      from pf_job_posting j
      left outer join
      pf_job_posting_file f on j.job_posting_no=f.job_posting_no
@@ -187,7 +193,9 @@
      left outer join
      pf_major m on q.major_no = m.major_no
      left outer join
-     pf_district d on j.work_place_no = d.district_no     
+     pf_district d on j.work_place_no = d.district_no
+     left outer join
+     pf_final_education i on j.minimum_education_no = i.education_no    
    where
    j.job_posting_no=#{jobPostingNumber}
 	</select>
@@ -203,7 +211,8 @@
 			<if test="startDated != null">start_dated=#{startDated},</if>
 			<if test="endDated != null">end_dated=#{endDated},</if>
 			<if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number},</if>
-			<if test="district != null and district != ''">work_place_no=#{district.districtNumber}</if>
+			<if test="district != null and district != ''">work_place_no=#{district.districtNumber},</if>
+			<if test="finalEducation != null and finalEducation != ''">minimum_education_no=#{finalEducation.educationNumber}</if>
 		</set>
 		where job_posting_no=#{jobPostingNumber}
 	</update>
