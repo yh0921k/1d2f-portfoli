@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.GeneralMemberEducationMajorDao">
+
+	<resultMap type="FinalEducation" id="FinalEducationMap">
+		<id column="general_member_no" property="generalMemberNumber"/>
+		<id column="education_no" property="educationNumber"/>
+		<id column="major_no" property="majorNumber"/>
+	</resultMap>
+
+	<delete id="deleteAll" parameterType="int">
+		DELETE
+		FROM pf_general_mem_edu_major
+		WHERE general_member_no=#{generalMemberNumber}
+	</delete>
+	
+	<insert id="insert" parameterType="java.util.Map">
+	 INSERT INTO pf_general_mem_edu_major
+	 (general_member_no, education_no, major_no)
+	 VALUES
+	 <foreach item="item" index="index" collection="list">
+    (#{item.generalMemberNumber}, #{item.educationNumber}, 1000)
+  </foreach>	 
+	</insert>
+
+</mapper>

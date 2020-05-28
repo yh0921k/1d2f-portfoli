@@ -25,11 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.portfoli.domain.Certificate;
 import com.portfoli.domain.Company;
 import com.portfoli.domain.CompanyMember;
+import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.GeneralMemberCertification;
+import com.portfoli.domain.GeneralMemberEducation;
 import com.portfoli.domain.Member;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.CompanyService;
+import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.UserMailSendService;
 
@@ -54,6 +57,9 @@ public class MemberController {
 
   @Autowired
   CertificateService certificateService;
+
+  @Autowired
+  FinalEducationService finalEducationService;
 
   @Autowired
   private UserMailSendService mailsender;
@@ -120,8 +126,13 @@ public class MemberController {
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
     List<GeneralMemberCertification> memberCerts = certificateService.getMemberCerts(
         ((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
+    GeneralMemberEducation memEdu = finalEducationService
+        .memEuds(((GeneralMember) request.getSession().getAttribute("loginUser")).getNumber());
+    List<FinalEducation> edus = finalEducationService.findAll();
     model.addAttribute("member", generalMember);
     model.addAttribute("memberCerts", memberCerts);
+    model.addAttribute("memEdu", memEdu); // 회원의 학력
+    model.addAttribute("edus", edus); // 학력 카테고리 리스트
   }
 
   @PostMapping("updateDefaultInfo")
@@ -201,10 +212,23 @@ public class MemberController {
       memCert.setExpireDate(expireDate[i]);
       certs.add(memCert);
       System.out.println("------------------------" + memCert);
+
     }
 
     certificateService.insertCertsByMemberNumber(certs, memberNumber);
 
+    int educationNumber = Integer.parseInt(request.getParameter("edu.educationNumber"));
+    String schoolName = request.getParameter("schoolName");
+
+    List<GeneralMemberEducation> edus = new ArrayList<>();
+    GeneralMemberEducation memEdu = new GeneralMemberEducation();
+    memEdu.setGeneralMemberNumber(memberNumber);
+    memEdu.setEducationNumber(educationNumber);
+    memEdu.setSchoolName(schoolName);
+    edus.add(memEdu);
+    System.out.println("-------------" + memEdu);
+
+    finalEducationService.insertEduByMemberNumber(edus, memberNumber);
     return "redirect:/app/member/generalUpdate";
   }
 
