@@ -600,8 +600,13 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script>
+  // Field 리스트 출력
   $(document).ready(function() {
 	  $("#availableSkills").click(function() {
+		  console.log("FieldList 출력");
+		  if(document.getElementsByName("checkbox_p").length > 0) {
+			  return;
+		  }		  
 		  var xhr = new XMLHttpRequest();
 	    xhr.onreadystatechange = () => {
 	        if (xhr.readyState == 4) {
@@ -610,15 +615,30 @@
 	              for(idx in obj) {
 	            	  var addHtml = `<div class="iqs-item">       
 	            	  <label class="form-checkbox form-checkbox-primary">
-	            	    <input type="checkbox" name="checkbox_p">
+	            	    <input class="field" type="checkbox" name="checkbox_p">
 	            	    <i></i>` + obj[idx].name + `</label>`
 	            	  $("#selectField").append(addHtml);
+
 	              }	              
 	            }
 	        }
 	    };
-	    xhr.open('GET', '../field/list', true);
+	    xhr.open('GET', '../field/list', true); 
 	    xhr.send();
 	  });
   });
+  
+  // Field 클릭 시 해당 Field에 맞는 우측에 Skill 리스트 출력
+$("#selectField").on("click", ".field", function() {
+  var fields = $("#selectField .field");
+	var field;
+	var selected;
+	for(field of fields) {
+		if($(field).is(":checked")) {
+			selected = field;
+		}
+		$(field).prop("checked", false);
+	}
+	$(selected).prop("checked", true);
+});
 </script>
