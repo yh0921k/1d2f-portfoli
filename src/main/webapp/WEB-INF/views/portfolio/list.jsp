@@ -72,8 +72,13 @@
                 data-ajax-modal-size="modal-xl" 
                 data-ajax-modal-centered="true" 
                 data-ajax-modal-callback-function=""
-                data-ajax-modal-backdrop="" 
                 class="js-ajax-modal ">
+                
+             <%--
+             ESC키나 바깥 클릭시 닫히지 않도록.
+             data-ajax-modal-backdrop="static"
+              --%>
+
               <c:choose>
               <c:when test="${not empty keyword}">
               <td style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;" class="my-td my">${status.getCount()}</td>
