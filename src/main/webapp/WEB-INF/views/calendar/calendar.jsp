@@ -15,6 +15,7 @@
 
 #mydiv {
   position: absolute;
+  margin : 150px;
   width: 600px;
   height: auto;
   background-color: menu;

@@ -128,30 +128,12 @@
 												</div>
 
 											</div>
-
-
-
 											<div class="col-12 col-sm-6 col-md-6">
-
-
-												<div class="input-group-over">
 													<div class="form-label-group mb-3">
 														<input readonly placeholder="email" id="email" name="email" type="email"
 															class="form-control" value=${member.email}> <label for="email">이메일</label>
 													</div>
-
-													<a id="email_edit_show" href="javascript:;" class="btn fs--13"
-														onclick="jQuery('#account_email').attr('readonly', false); jQuery('#email_edit_show, #email_edit_info').addClass('hide'); jQuery('#email_edit_hide, #email_edit_info').removeClass('hide');jQuery('#account_email').val('').focus();">
-														<i class="fi fi-pencil m-0"></i>
-													</a> <a id="email_edit_hide" href="javascript:;" class="btn fs--12 hide"
-														onclick="jQuery('#account_email').attr('readonly', true); jQuery('#email_edit_show, #email_edit_info').removeClass('hide'); jQuery('#email_edit_hide, #email_edit_info').addClass('hide'); jQuery('#account_email').val('john.doe@gmail.com');">
-														<i class="fi fi-close m-0"></i>
-													</a>
-
-												</div>
-
-												<div id="email_edit_info" class="mt-1 mb-4 fs--13 text-muted hide">인증 이메일을
-													보냈습니다.</div>
+												
 												<!-- /EMAIL ADDRESS -->
 
 											</div>
