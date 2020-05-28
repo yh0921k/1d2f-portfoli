@@ -30,7 +30,11 @@ public class FinalEducationServiceImpl implements FinalEducationService {
 
   @Override
   public List<FinalEducation> findAll() throws Exception {
-    return finalEducationDao.findAll();
+    List<FinalEducation> edus = finalEducationDao.findAll();
+    if (edus.size() == 0) {
+      throw new Exception("학력정보가 존재하지 않습니다.");
+    }
+    return edus;
   }
 
   @Override

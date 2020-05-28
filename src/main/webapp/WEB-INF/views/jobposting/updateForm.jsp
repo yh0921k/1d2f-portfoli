@@ -50,6 +50,23 @@
           </c:forEach>
         </select>
       </div>
+      
+      <div class="row">
+        <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">최소학력
+          : </span> <select id="select_options2" name="finalEducation.educationNumber"
+          class="form-control form-control-sm col-md-3">
+          <c:forEach items="${finalEducations}" var="finalEducation">
+            <c:if
+              test="${jobPosting.finalEducation.category == finalEducation.category}">
+              <option value="${finalEducation.educationNumber}" selected="selected">${finalEducation.category}</option>
+            </c:if>
+            <c:if
+              test="${jobPosting.finalEducation.category != finalEducation.category}">
+              <option value="${finalEducation.educationNumber}">${finalEducation.category}</option>
+            </c:if>
+          </c:forEach>
+        </select>
+      </div>
 
   <div class="row">
       <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">자격증
