@@ -436,32 +436,27 @@
 			<div class="col">
 				<form method="post" action="updateProfile">
 
-
-
-					<div class="form-label-group mb-3 ml-3">             
-            <input placeholder="" type="text"
-            class="form-control" value="<c:out value="${memEdu.FinalEducation.category}"/>">
-             <label for="">학력</label>
+					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">*
+            학력 구분을 선택하지 않으면 기본값은 '미분류'입니다.</p>
+          <div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect02"
+              name="edu.educationNumber">
+              <c:forEach items="${edus}" var="edu">
+                <option value="${edu.educationNumber}">${edu.category}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect02" >학력</label>
+            </div>
           </div>
           
-          <div class="row">
-           <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">학력
-        : </span> <select id="select_options2" name="edu.educationNumber"
-        class="form-control form-control-sm col-md-3">
-          <c:forEach items="${edus}" var="edu">
-            <option value="${edu.educationNumber}" >${edu.category}</option>
-          </c:forEach>
-          </select>
-          </div>
-					
-					
 					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">*
 						학교 구분을 선택하지 않으면 기본값은 '대학교'입니다.</p>
 					<div class="form-label-group input-group mb-3 ml-3">
 						<input type="text" id="word" class="form-control" name='schoolName'
 							placeholder="school" aria-label="검색어를 입력해 주세요."
-
-							onkeyup="search(this);"><label for="">학교</label>
+							onkeyup="search(this);" value="<c:out value="${memEdu.schoolName}"/>">
+							<label for="">학교</label>
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary dropdown-toggle mr-3" type="button" data-toggle="dropdown"
 								id="schoolCat" aria-haspopup="true" aria-expanded="false">학교 구분</button>
