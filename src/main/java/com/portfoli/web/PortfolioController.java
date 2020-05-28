@@ -1,9 +1,12 @@
 package com.portfoli.web;
 
 import java.io.File;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
@@ -66,6 +69,62 @@ public class PortfolioController {
 
   @Autowired
   PortfolioSkillService portfolioSkillService;
+
+  @RequestMapping("rankAll")
+  public String rankAll(Date startDate, Date endDate, @RequestParam(defaultValue="10") int quantity,
+      @ModelAttribute("recommendation") Recommendation recommendation,
+      @RequestParam(defaultValue="1") int curPage, HttpServletRequest request, Model model) throws Exception {
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null) {
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+    } else {
+
+      this.pageSize = quantity;
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+      // 작성자 정보
+      model.addAttribute("generalMember", member);
+
+      // 현재 날짜를 기준으로 검색
+      Calendar now = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+      if(startDate == null && endDate == null) {
+        startDate = Date.valueOf(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + "01");
+        endDate = Date.valueOf(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 2) + "-" + "01");
+      }
+
+      // 전체리스트 개수
+      recommendation.setStartDate(startDate).setEndDate(endDate);
+      int listCnt = recommendationService.rankAllCnt(recommendation);
+
+
+      // 시작일 ~ 마지막일 model에 등록
+      model.addAttribute("startDate", startDate);
+      model.addAttribute("endDate", endDate);
+
+      Pagination pagination = new Pagination(listCnt, curPage);
+      pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+
+      recommendation.setStartIndex(pagination.getStartIndex());
+      recommendation.setPageSize(pagination.getPageSize());
+
+      // 전체리스트 출력
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("pagination", pagination);
+
+      List<Recommendation> list = recommendationService.rankAll(recommendation);
+
+      for(Recommendation r : list) {
+        // 포트폴리오 스킬 붙이기
+        r.getPortfolio().setSkill(portfolioSkillService.findAllSkill(r.getBoard().getNumber()).getSkill());
+      }
+
+      model.addAttribute("list", list);
+      model.addAttribute("pageSize", pageSize);
+      return "portfolio/ranklist";
+    }
+
+  }
+
 
   @RequestMapping("pdf")
   public String showPdf(String value, Model model) throws Exception {
@@ -521,6 +580,7 @@ public class PortfolioController {
       portfolioService.insert(portfolio);
 
       // 기술명 확인하고 넣을 예정 (현재는 숫자로만 넣을 수 있음)
+      // 여기서 str은 member_skill_no임! (주의)
       String[] strs = skills.split(",");
       for(String str : strs) {
         System.out.println(str);

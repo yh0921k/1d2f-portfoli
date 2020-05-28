@@ -10,6 +10,31 @@
     <result column="content" property="content" />
     <result column="view_count" property="viewCount" />
     <result column="registered_date" property="registeredDate" />
+    <result column="count" property="count" />
+    
+    <association property="portfolio" javaType="Portfolio">
+	    <id column="board_no" property="number" /><!-- 게시글번호-->
+	    <result column="title" property="title" /><!-- 제목-->
+	    <result column="content" property="content" /><!-- 내용-->
+	    <result column="view_count" property="viewCount" /><!-- 조회수-->
+	    <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
+	    <result column="recommendation_date" property="recommendationDate" /><!-- 등록일 -->
+	    <result column="mynumber" property="myNumber" /><!-- 추천여부 확인할 사람-->
+	    
+	    <result column="homepage" property="homepage" /><!-- 홈페이지 -->
+	    <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
+	    <result column="count" property="recommendedCount" /><!-- 추천수 -->
+	    <result column="readable" property="readable" /><!-- 공개여부 -->
+	    <association property="member" javaType="GeneralMember">
+	      <id column="member_no" property="number" /><!-- 아이디 -->
+	      <result column="id" property="id" /><!-- 아이디 -->
+	      <result column="name" property="name" /><!-- 이름 -->
+	      <result column="seeking_flag" property="seekingFlag" /><!-- 재직여부 -->
+	      <result column="photo" property="photoFilePath" /><!-- 프로필사진 -->
+	      <result column="membership" property="membership" /><!-- 멤버십 -->
+	      <result column="email" property="email" /><!-- 이메일 -->
+	    </association>
+    </association>
     
     <association property="member" javaType="GeneralMember">
     <id column="member_no" property="number" />
@@ -59,4 +84,69 @@
     and
     member_no = #{member.number}
   </insert>
+  
+  <select id="rankAll" resultMap="RecommendationMap" parameterType="Recommendation">
+	  SELECT 
+	  	r1.*, 
+	  	b.title, 
+	  	b.content, 
+	  	b.view_count, 
+	  	b.registered_date, 
+	    p.board_no,
+      p.readable,
+      p.homepage,
+      p.thumbnail,
+      p.readable,
+      b.board_no,
+      m.member_no,  -- 회원번호  --
+      m.id,  -- id값  --
+      m.name, -- 이름 --
+      m.email, -- 이메일 --
+      g.seeking_flag,  -- 재직여부 --
+      m.photo,  -- 사진경로 --
+      g.membership  -- 멤버십 --
+	  FROM (
+	  			select 
+	  				r.board_no, 
+	  				count(r.member_no) count
+	  			from pf_recommendation r 
+	  			WHERE recommendation_date &gt; str_to_date('${startDate}', '%Y-%m-%d') 
+	  			and recommendation_date &lt; str_to_date('${endDate}', '%Y-%m-%d')
+	  			GROUP BY r.board_no
+	  			) r1 
+	  LEFT OUTER JOIN pf_board b 
+	  ON r1.board_no = b.board_no 
+	  LEFT OUTER JOIN pf_portfolio p 
+	  ON b.board_no = p.board_no 
+	  LEFT OUTER JOIN pf_general_member g 
+	  ON p.general_member_no = g.general_member_no 
+	  LEFT OUTER JOIN pf_members m 
+	  ON m.member_no = g.general_member_no 
+	  WHERE p.board_no > 0
+	  
+	  ORDER BY r1.count desc, 
+	  				 b.view_count desc
+	  limit ${startIndex}, ${pageSize}
+  </select>
+  
+  <select id="rankAllCnt" resultType="int" parameterType="Recommendation">
+	  SELECT 
+	  	count(r1.count)
+	  FROM (
+	  			select 
+	  				r.board_no, 
+	  				count(r.member_no) count
+	  			from pf_recommendation r 
+	  			WHERE recommendation_date &gt; str_to_date('${startDate}', '%Y-%m-%d') 
+	  			and recommendation_date &lt; str_to_date('${endDate}', '%Y-%m-%d')
+	  			GROUP BY r.board_no
+	  			) r1 
+	  LEFT OUTER JOIN pf_portfolio p 
+	  ON r1.board_no = p.board_no 
+	  WHERE p.board_no > 0
+  </select>
+ 
 </mapper>
+
+
+

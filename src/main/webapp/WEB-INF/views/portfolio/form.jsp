@@ -26,9 +26,24 @@
                  name="title" value="${portfolio.title}">
           <br>
           <p class="text-gray-900 mt-3" style="display: inline-block;">기술 : </p>
+          <%--
           <input type="text"  placeholder="기술명을 적어주세요"
                  class="form-label-group form-control-clean col-md-11 mt--5"
                  name="skills">
+           --%>
+                 
+          <select name="skills" multiple class="bs-select form-label-group form-control-clean col-md-11 mt--5" title="기술을 골라주세요">
+          	<option value="1" data-subtext="Web">JAVA</option>
+          	<option value="2" data-subtext="Web">JSP</option>
+          	<option value="3" data-subtext="Web">Spring</option>
+          	<option value="4" data-subtext="Web">Django</option>
+          	<option value="5" data-subtext="Web">Javascript</option>
+          	<%--
+          	<c:forEach items="item">
+          	<option value="${item.memberSkillNumber}" data-subtext="${item.category}">${item.name}</option>
+	          	</c:forEach>
+          	 --%>
+          </select>
 
           <p class="text-gray-900 mt-3">내용 :</p>
 					<textarea class="summernote-editor"
@@ -94,6 +109,9 @@
 </div>
 </div>
   <style>
+    .dropdown.bootstrap-select.show-tick.bs-select.form-label-group.form-control-clean.col-md-11.mt--5 {
+    	padding:0px;
+    }
     .lightGray{width: 100%; border:2px lightGray solid;}
     .darkerGray{color:#313335;}
     .firstTR{border-bottom:1px darkGray dashed; padding:0px 5px;}
