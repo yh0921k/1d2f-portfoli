@@ -24,8 +24,8 @@ public class JobPosting implements Serializable {
   private EmploymentStatus employmentStatus;
   private Certificate certificate;
   private Major major;
+  private District district;
   List<JobPostingFile> files;
-
 
   @Override
   public String toString() {
@@ -35,8 +35,8 @@ public class JobPosting implements Serializable {
         + ", postingRegistration=" + postingRegistration + ", startDated=" + startDated
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
         + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
-        + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", files="
-        + files + "]";
+        + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", district="
+        + district + ", files=" + files + "]";
   }
 
   @Override
@@ -46,6 +46,7 @@ public class JobPosting implements Serializable {
     result = prime * result + ((certificate == null) ? 0 : certificate.hashCode());
     result = prime * result + companyMemberNumber;
     result = prime * result + ((content == null) ? 0 : content.hashCode());
+    result = prime * result + ((district == null) ? 0 : district.hashCode());
     result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
     result = prime * result + ((endDated == null) ? 0 : endDated.hashCode());
     result = prime * result + ((files == null) ? 0 : files.hashCode());
@@ -63,6 +64,7 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
+
 
 
   @Override
@@ -85,6 +87,11 @@ public class JobPosting implements Serializable {
       if (other.content != null)
         return false;
     } else if (!content.equals(other.content))
+      return false;
+    if (district == null) {
+      if (other.district != null)
+        return false;
+    } else if (!district.equals(other.district))
       return false;
     if (employmentStatus == null) {
       if (other.employmentStatus != null)
@@ -277,6 +284,14 @@ public class JobPosting implements Serializable {
 
   public void setEmploymentStatus(EmploymentStatus employmentStatus) {
     this.employmentStatus = employmentStatus;
+  }
+
+  public District getDistrict() {
+    return district;
+  }
+
+  public void setDistrict(District district) {
+    this.district = district;
   }
 
   public List<JobPostingFile> getFiles() {
