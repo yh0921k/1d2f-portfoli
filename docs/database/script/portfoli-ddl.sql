@@ -75,8 +75,8 @@ DROP TABLE IF EXISTS pf_board_attachment RESTRICT;
 -- 분야
 DROP TABLE IF EXISTS pf_field RESTRICT;
 
--- 군구
-DROP TABLE IF EXISTS pf_county_district RESTRICT;
+-- 지역
+DROP TABLE IF EXISTS pf_district RESTRICT;
 
 -- 학력
 DROP TABLE IF EXISTS pf_final_education RESTRICT;
@@ -132,8 +132,8 @@ DROP TABLE IF EXISTS pf_apply RESTRICT;
 -- 채용추천
 DROP TABLE IF EXISTS pf_job_recommendation RESTRICT;
 
--- 시도
-DROP TABLE IF EXISTS pf_province_city RESTRICT;
+-- 도시
+DROP TABLE IF EXISTS pf_city RESTRICT;
 
 -- 게시글추천
 DROP TABLE IF EXISTS pf_recommendation RESTRICT;
@@ -155,9 +155,6 @@ DROP TABLE IF EXISTS pf_schedule RESTRICT;
 
 -- 알림분류
 DROP TABLE IF EXISTS pf_alarm_class RESTRICT;
-
--- 신고처리분류
-DROP TABLE IF EXISTS pf_handle_class RESTRICT;
 
 -- 결제수단
 DROP TABLE IF EXISTS pf_payment_method RESTRICT;
@@ -257,10 +254,11 @@ CREATE TABLE pf_report (
   board_no        INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
   reporter_no     INTEGER  NOT NULL COMMENT '신고자번호', -- 신고자번호
   target_no       INTEGER  NOT NULL COMMENT '대상자번호', -- 대상자번호
-  report_class_no INTEGER  NOT NULL COMMENT '신고분류번호', -- 신고분류번호
+  report_class_no INTEGER  NULL COMMENT '신고분류번호', -- 신고분류번호
   handle_class_no INTEGER  NULL     COMMENT '처리분류번호', -- 처리분류번호
   handle_date     DATETIME NULL     COMMENT '신고처리일', -- 신고처리일
-  handle_content  TEXT     NULL     COMMENT '신고처리내용' -- 신고처리내용
+  ref             INTEGER  NULL     COMMENT '답변그룹', -- 답변그룹
+  re_step         INTEGER  NULL     COMMENT '답변순서' -- 답변순서
 )
 COMMENT '신고';
 
@@ -473,9 +471,10 @@ ALTER TABLE pf_bookmark
     );
 
 -- 기술
+-- 기술
 CREATE TABLE pf_skill (
   skill_no INTEGER     NOT NULL COMMENT '기술번호', -- 기술번호
-  category VARCHAR(40) NOT NULL COMMENT '기술구분', -- 기술구분
+  field_no INTEGER     NOT NULL COMMENT '분야번호', -- 분야번호  
   name     VARCHAR(40) NOT NULL COMMENT '기술이름' -- 기술이름
 )
 COMMENT '기술';
@@ -487,15 +486,8 @@ ALTER TABLE pf_skill
       skill_no -- 기술번호
     );
 
--- 기술 유니크 인덱스
-CREATE UNIQUE INDEX UIX_pf_skill
-  ON pf_skill ( -- 기술
-    category ASC, -- 기술구분
-    name ASC      -- 기술이름
-  );
-
 ALTER TABLE pf_skill
-  MODIFY COLUMN skill_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '기술번호';
+  MODIFY COLUMN skill_no INTEGER NOT NULL COMMENT '기술번호';
 
 -- 첨부파일
 CREATE TABLE pf_attachments (
@@ -562,8 +554,7 @@ ALTER TABLE pf_board_attachment
 
 -- 분야
 CREATE TABLE pf_field (
-  field_no INTEGER     NOT NULL COMMENT '분야번호', -- 분야번호
-  category VARCHAR(40) NOT NULL COMMENT '분야구분', -- 분야구분
+  field_no INTEGER     NOT NULL COMMENT '분야번호', -- 분야번호  
   name     VARCHAR(40) NOT NULL COMMENT '분야이름' -- 분야이름
 )
 COMMENT '분야';
@@ -578,38 +569,28 @@ ALTER TABLE pf_field
 -- 분야 유니크 인덱스
 CREATE UNIQUE INDEX UIX_pf_field
   ON pf_field ( -- 분야
-    category ASC, -- 분야구분
     name ASC      -- 분야이름
   );
 
 ALTER TABLE pf_field
-  MODIFY COLUMN field_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '분야번호';
+  MODIFY COLUMN field_no INTEGER NOT NULL COMMENT '분야번호';
 
--- 군구
-CREATE TABLE pf_county_district (
-  county_district_no INTEGER     NOT NULL COMMENT '군구번호', -- 군구번호
-  province_city_no   INTEGER     NOT NULL COMMENT '시도번호', -- 시도번호
-  county_name        VARCHAR(40) NULL     COMMENT '군이름', -- 군이름
-  district_name      VARCHAR(40) NULL     COMMENT '구이름' -- 구이름
+-- 지역
+CREATE TABLE pf_district (
+  district_no INTEGER     NOT NULL COMMENT '지역번호', -- 지역번호
+  name      VARCHAR(40) NULL     COMMENT '지역이름' -- 지역이름
 )
-COMMENT '군구';
+COMMENT '지역';
 
--- 군구
-ALTER TABLE pf_county_district
-  ADD CONSTRAINT PK_pf_county_district -- 군구 기본키
+-- 지역
+ALTER TABLE pf_district
+  ADD CONSTRAINT PK_pf_district -- 지역 기본키
     PRIMARY KEY (
-      county_district_no -- 군구번호
+      district_no -- 군구번호
     );
 
--- 군구 유니크 인덱스
-CREATE UNIQUE INDEX UIX_pf_county_district
-  ON pf_county_district ( -- 군구
-    county_name ASC,   -- 군이름
-    district_name ASC  -- 구이름
-  );
-
-ALTER TABLE pf_county_district
-  MODIFY COLUMN county_district_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '군구번호';
+ALTER TABLE pf_district
+  MODIFY COLUMN district_no INTEGER NOT NULL COMMENT '군구번호';
 
 -- 학력
 CREATE TABLE pf_final_education (
@@ -961,35 +942,34 @@ ALTER TABLE pf_job_recommendation
 ALTER TABLE pf_job_recommendation
   MODIFY COLUMN general_member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일반회원번호';
 
--- 시도
-CREATE TABLE pf_province_city (
-  province_city_no INTEGER     NOT NULL COMMENT '시도번호', -- 시도번호
-  province_name    VARCHAR(40) NULL     COMMENT '도이름', -- 도이름
-  city_name        VARCHAR(40) NULL     COMMENT '시이름' -- 시이름
+-- 도시
+CREATE TABLE pf_city (
+  city_no INTEGER     NOT NULL COMMENT '시도번호', -- 시도번호
+  name        VARCHAR(40) NULL     COMMENT '시이름' -- 시이름
 )
-COMMENT '시도';
+COMMENT '도시';
 
--- 시도
-ALTER TABLE pf_province_city
-  ADD CONSTRAINT PK_pf_province_city -- 시도 기본키
+-- 도시
+ALTER TABLE pf_city
+  ADD CONSTRAINT PK_pf_city -- 도시 기본키
     PRIMARY KEY (
-      province_city_no -- 시도번호
+      city_no -- 도시번호
     );
 
--- 시도 유니크 인덱스
-CREATE UNIQUE INDEX UIX_pf_province_city
-  ON pf_province_city ( -- 시도
-    province_name ASC, -- 도이름
-    city_name ASC      -- 시이름
+-- 도시 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pf_city
+  ON pf_city ( -- 도시
+    name ASC      -- 시이름
   );
 
-ALTER TABLE pf_province_city
-  MODIFY COLUMN province_city_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '시도번호';
+ALTER TABLE pf_city
+  MODIFY COLUMN city_no INTEGER NOT NULL COMMENT '시도번호';
 
 -- 게시글추천
 CREATE TABLE pf_recommendation (
   board_no  INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
-  member_no INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  recommendation_date TIMESTAMP NOT NULL DEFAULT NOW() COMMENT '찜한날짜' -- 찜한날짜
 )
 COMMENT '게시글추천';
 
@@ -1105,23 +1085,6 @@ ALTER TABLE pf_alarm_class
 
 ALTER TABLE pf_alarm_class
   MODIFY COLUMN alarm_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '알림분류번호';
-
--- 신고처리분류
-CREATE TABLE pf_handle_class (
-  handle_class_no INTEGER     NOT NULL COMMENT '처리분류번호', -- 처리분류번호
-  handle_class    VARCHAR(40) NOT NULL COMMENT '처리분류명' -- 처리분류명
-)
-COMMENT '신고처리분류';
-
--- 신고처리분류
-ALTER TABLE pf_handle_class
-  ADD CONSTRAINT PK_pf_handle_class -- 신고처리분류 기본키
-    PRIMARY KEY (
-      handle_class_no -- 처리분류번호
-    );
-
-ALTER TABLE pf_handle_class
-  MODIFY COLUMN handle_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '처리분류번호';
 
 -- 결제수단
 CREATE TABLE pf_payment_method (
@@ -1239,12 +1202,12 @@ ALTER TABLE pf_job_posting
 
 -- 채용공고
 ALTER TABLE pf_job_posting
-  ADD CONSTRAINT FK_pf_county_district_TO_pf_job_posting -- 군구 -> 채용공고
+  ADD CONSTRAINT FK_pf_district_TO_pf_job_posting -- 지역 -> 채용공고
     FOREIGN KEY (
       work_place_no -- 근무지번호
     )
-    REFERENCES pf_county_district ( -- 군구
-      county_district_no -- 군구번호
+    REFERENCES pf_district ( -- 지역
+      district_no -- 군구번호
     );
 
 -- 신고
@@ -1285,16 +1248,6 @@ ALTER TABLE pf_report
     )
     REFERENCES pf_board ( -- 게시글
       board_no -- 게시글번호
-    );
-
--- 신고
-ALTER TABLE pf_report
-  ADD CONSTRAINT FK_pf_handle_class_TO_pf_report -- 신고처리분류 -> 신고
-    FOREIGN KEY (
-      handle_class_no -- 처리분류번호
-    )
-    REFERENCES pf_handle_class ( -- 신고처리분류
-      handle_class_no -- 처리분류번호
     );
 
 -- 회원쪽지
@@ -1447,16 +1400,6 @@ ALTER TABLE pf_board_attachment
       board_no -- 게시글번호
     );
 
--- 군구
-ALTER TABLE pf_county_district
-  ADD CONSTRAINT FK_pf_province_city_TO_pf_county_district -- 시도 -> 군구
-    FOREIGN KEY (
-      province_city_no -- 시도번호
-    )
-    REFERENCES pf_province_city ( -- 시도
-      province_city_no -- 시도번호
-    );
-
 -- 일반회원자격증
 ALTER TABLE pf_general_member_certification
   ADD CONSTRAINT FK_pf_general_member_TO_pf_general_member_certification -- 일반회원 -> 일반회원자격증
@@ -1531,12 +1474,12 @@ ALTER TABLE pf_interest_location
 
 -- 일반회원관심지역
 ALTER TABLE pf_interest_location
-  ADD CONSTRAINT FK_pf_county_district_TO_pf_interest_location -- 군구 -> 일반회원관심지역
+  ADD CONSTRAINT FK_pf_district_TO_pf_interest_location -- 지역 -> 일반회원관심지역
     FOREIGN KEY (
       location_no -- 군구번호
     )
-    REFERENCES pf_county_district ( -- 군구
-      county_district_no -- 군구번호
+    REFERENCES pf_district ( -- 군구
+      district_no -- 군구번호
     );
 
 -- 일반회원관심분야
@@ -1759,7 +1702,6 @@ ALTER TABLE pf_schedule
       general_member_no -- 일반회원번호
     );
 
-
 -- FAQ 자주묻는질문
 ALTER TABLE pf_faq
   ADD CONSTRAINT FK_pf_board_TO_pf_faq -- 게시글 -> FAQ 자주묻는질문
@@ -1779,4 +1721,3 @@ ALTER TABLE pf_faq
     REFERENCES pf_question_category ( -- 질문분류
       category_no -- 질문분류번호
     );
-

@@ -1,5 +1,6 @@
 package com.portfoli.service.impl;
 
+import java.util.List;
 import org.springframework.stereotype.Component;
 import com.portfoli.dao.RecommendationDao;
 import com.portfoli.domain.Recommendation;
@@ -27,6 +28,16 @@ public class RecommendationServiceImpl implements RecommendationService {
   @Override
   public void toggleoff(Recommendation reco) throws Exception {
     recommendationDao.toggleoff(reco);
+  }
+
+  @Override
+  public List<Recommendation> rankAll(Recommendation recommendation) throws Exception {
+    return recommendationDao.rankAll(recommendation);
+  }
+
+  @Override
+  public int rankAllCnt(Recommendation recommendation) throws Exception {
+    return recommendationDao.rankAllCnt(recommendation);
   }
 
 

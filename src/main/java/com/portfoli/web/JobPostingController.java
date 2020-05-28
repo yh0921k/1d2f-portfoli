@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Certificate;
 import com.portfoli.domain.CompanyRequiredCertificate;
+import com.portfoli.domain.District;
 import com.portfoli.domain.EmploymentStatus;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
 import com.portfoli.domain.Major;
 import com.portfoli.service.CertificateService;
+import com.portfoli.service.DistrictService;
 import com.portfoli.service.EmploymentStatusService;
 import com.portfoli.service.JobPostingService;
 import com.portfoli.service.MajorService;
@@ -51,6 +53,9 @@ public class JobPostingController {
   @Autowired
   MajorService majorService;
 
+  @Autowired
+  DistrictService districtService;
+
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
   }
@@ -60,10 +65,12 @@ public class JobPostingController {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     List<Certificate> certificates = certificateService.listCertificate();
     List<Major> majors = majorService.listMajor();
+    List<District> districts = districtService.get();
     System.out.println(certificates);
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
     model.addAttribute("majors", majors);
+    model.addAttribute("districts", districts);
   }
 
   @PostMapping("add")
@@ -140,10 +147,12 @@ public class JobPostingController {
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     List<Certificate> certificates = certificateService.listCertificate();
     List<Major> majors = majorService.listMajor();
+    List<District> districts = districtService.get();
     model.addAttribute("jobPosting", jobPostingService.get(no));
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
     model.addAttribute("majors", majors);
+    model.addAttribute("districts", districts);
   }
 
   @PostMapping("update")

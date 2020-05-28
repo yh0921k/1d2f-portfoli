@@ -146,8 +146,6 @@ public class ReportController {
       }
     }
 
-    mv.setViewName("/report/detail");
-
     return mv;
   }
 }

@@ -55,5 +55,4 @@
     <put-attribute name="body" value ="/WEB-INF/views/calendar/eventEdit.jsp"/>
   </definition>
 
-
 </tiles-definitions>

@@ -14,6 +14,9 @@
     <result column="registered_date" property="registeredDate"/>
     <result column="handle_date" property="handleDate"/>
     <result column="handle_content" property="handleContent"/>
+    <result column="handle_class" property="handleClass"/>
+    <result column="ref" property="ref"/>
+    <result column="re_step" property="reStep"/>
 
     <association property="member" javaType="Member">
       <id column="member_no" property="number"/>
@@ -23,11 +26,6 @@
     <association property="reportCategory" javaType="ReportCategory">
       <id column="report_class_no" property="number"/>
       <result column="report_class" property="category"/>
-    </association>
-
-    <association property="reportHandleCategory" javaType="ReportHandleCategory">
-      <id column="handle_class_no" property="number"/>
-      <result column="handle_class" property="category"/>
     </association>
 
     <collection property="attachments" ofType="BoardAttachment">
@@ -49,13 +47,15 @@
       b.title,
       b.registered_date,
       b.view_count,
-      c.report_class
+      c.report_class,
+      r.ref,
+      r.re_step
     from pf_report r
-    join pf_report_class c on r.report_class_no=c.report_class_no
+    left outer join pf_report_class c on r.report_class_no=c.report_class_no
     join pf_board b on r.board_no = b.board_no
     where
       r.reporter_no=#{userNumber}
-    order by b.registered_date desc
+    order by r.ref desc, r.re_step asc
     limit #{offset}, #{pageSize}
   </select>
 
@@ -67,6 +67,7 @@
 
   <select id="findByNumber" resultMap="ReportMap" parameterType="int">
     select
+    r.reporter_no,
     r.target_no,
     m.id member_id,
     b.board_no,
@@ -76,9 +77,11 @@
     b.registered_date,
     b.view_count,
     f.file_name,
-    f.file_path
+    f.file_path,
+    r.ref,
+    r.re_step
     from pf_report r
-    join pf_report_class c on r.report_class_no=c.report_class_no
+    left outer join pf_report_class c on r.report_class_no=c.report_class_no
     join pf_members m on r.target_no=m.member_no
     join pf_board b on r.board_no=b.board_no
     left outer join pf_board_attachment f on b.board_no=f.board_no
@@ -92,11 +95,13 @@
       b.title,
       b.registered_date,
       b.view_count,
-      c.report_class
+      c.report_class,
+      r.ref,
+      r.re_step
       from pf_report r
-      join pf_report_class c on r.report_class_no=c.report_class_no
+      left outer join pf_report_class c on r.report_class_no=c.report_class_no
       join pf_board b on r.board_no = b.board_no
-    order by b.registered_date desc
+    order by r.ref desc, r.re_step asc
     limit #{offset}, #{pageSize}
   </select>
 
@@ -104,4 +109,9 @@
     select count(*)
     from pf_report
   </select>
+
+  <insert id="reply" parameterType="Report">
+    insert into pf_report(board_no, reporter_no, target_no, handle_class_no, handle_date, ref, re_step)
+    values(#{number}, #{reporterNumber}, #{targetNumber}, #{handleCategory}, now(), #{ref}, #{reStep} + 1)
+  </insert>
 </mapper>

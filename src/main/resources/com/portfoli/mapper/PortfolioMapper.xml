@@ -10,6 +10,8 @@
     <result column="content" property="content" /><!-- 내용-->
     <result column="view_count" property="viewCount" /><!-- 조회수-->
     <result column="registered_date" property="registeredDate" /><!-- 등록일 -->
+    <result column="recommendation_date" property="recommendationDate" /><!-- 등록일 -->
+    <result column="mynumber" property="myNumber" /><!-- 추천여부 확인할 사람-->
     
     <result column="homepage" property="homepage" /><!-- 홈페이지 -->
     <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
@@ -72,6 +74,7 @@
   <select id="findAllRecommendedlist" resultMap="PortfolioMap" parameterType="Portfolio">
     SELECT 
        r1.board_no, 
+       r1.recommendation_date,
        count(r2.member_no) count,
        p.homepage,
        p.thumbnail,
@@ -90,7 +93,7 @@
        
 	   FROM (SELECT * 
 		       FROM pf_recommendation 
-		       WHERE member_no = ${member.number}
+		       WHERE member_no = ${myNumber}
 		       ) r1 
 	   LEFT OUTER JOIN pf_recommendation r2 
 	   ON r1.board_no = r2.board_no 

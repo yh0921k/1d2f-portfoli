@@ -1,9 +1,12 @@
 package com.portfoli.web;
 
 import java.io.File;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
@@ -67,6 +70,62 @@ public class PortfolioController {
   @Autowired
   PortfolioSkillService portfolioSkillService;
 
+  @RequestMapping("rankAll")
+  public String rankAll(Date startDate, Date endDate, @RequestParam(defaultValue="10") int quantity,
+      @ModelAttribute("recommendation") Recommendation recommendation,
+      @RequestParam(defaultValue="1") int curPage, HttpServletRequest request, Model model) throws Exception {
+    Object mem = request.getSession().getAttribute("loginUser");
+
+    if(mem == null) {
+      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+    } else {
+
+      this.pageSize = quantity;
+      Member member = memberService.getGeneralMember(((Member) mem).getNumber());
+      // 작성자 정보
+      model.addAttribute("generalMember", member);
+
+      // 현재 날짜를 기준으로 검색
+      Calendar now = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+      if(startDate == null && endDate == null) {
+        startDate = Date.valueOf(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + "01");
+        endDate = Date.valueOf(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 2) + "-" + "01");
+      }
+
+      // 전체리스트 개수
+      recommendation.setStartDate(startDate).setEndDate(endDate);
+      int listCnt = recommendationService.rankAllCnt(recommendation);
+
+
+      // 시작일 ~ 마지막일 model에 등록
+      model.addAttribute("startDate", startDate);
+      model.addAttribute("endDate", endDate);
+
+      Pagination pagination = new Pagination(listCnt, curPage);
+      pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+
+      recommendation.setStartIndex(pagination.getStartIndex());
+      recommendation.setPageSize(pagination.getPageSize());
+
+      // 전체리스트 출력
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("pagination", pagination);
+
+      List<Recommendation> list = recommendationService.rankAll(recommendation);
+
+      for(Recommendation r : list) {
+        // 포트폴리오 스킬 붙이기
+        r.getPortfolio().setSkill(portfolioSkillService.findAllSkill(r.getBoard().getNumber()).getSkill());
+      }
+
+      model.addAttribute("list", list);
+      model.addAttribute("pageSize", pageSize);
+      return "portfolio/ranklist";
+    }
+
+  }
+
+
   @RequestMapping("pdf")
   public String showPdf(String value, Model model) throws Exception {
     model.addAttribute("addr", value);
@@ -80,10 +139,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
       this.pageSize = quantity;
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
@@ -103,8 +161,11 @@ public class PortfolioController {
       // 작성자 정보
       model.addAttribute("generalMember", member);
       portfolio.setMember((GeneralMember)member);
-      List<Portfolio> portfolios = portfolioService.listMyRecommendedlist(portfolio);
 
+      // 추천여부 확인용 임시변수 붙이기
+      portfolio.setMyNumber(member.getNumber());
+
+      List<Portfolio> portfolios = portfolioService.listMyRecommendedlist(portfolio);
       // 포트폴리오 스킬 붙이기
       for(Portfolio p : portfolios) {
         p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
@@ -121,9 +182,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    else {
+    } else {
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Map<String, String> map = new HashMap<>();
       map.put("keyword", keyword);
@@ -147,9 +208,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    else {
+    } else {
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Map<String, String> map = new HashMap<>();
       map.put("keyword", keyword);
@@ -173,15 +234,16 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    else {
+    } else {
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Portfolio portfolio = portfolioService.get(number);
       if(portfolio.getMember().getNumber() == member.getNumber()) {
         portfolioService.readableon(portfolio);
-      } else
+      } else {
         throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      }
     }
     return "portfolio/mylist";
   }
@@ -191,15 +253,16 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    else {
+    } else {
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Portfolio portfolio = portfolioService.get(number);
       if(portfolio.getMember().getNumber() == member.getNumber()) {
         portfolioService.readableoff(portfolio);
-      } else
+      } else {
         throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
+      }
     }
     return "portfolio/mylist";
   }
@@ -211,10 +274,9 @@ public class PortfolioController {
   public String turnon(int number, HttpServletRequest request, Model model) throws Exception {
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
 
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Recommendation reco = new Recommendation();
@@ -229,10 +291,9 @@ public class PortfolioController {
   public String turnoff(int number, HttpServletRequest request, Model model) throws Exception {
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Recommendation reco = new Recommendation();
       ((Recommendation) reco.setNumber(number)).setMember(member);
@@ -249,10 +310,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
 
       this.pageSize = quantity;
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
@@ -294,10 +354,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
 
       this.pageSize = quantity;
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
@@ -319,8 +378,8 @@ public class PortfolioController {
       model.addAttribute("generalMember", member);
       List<Portfolio> portfolios = portfolioService.list(portfolio);
 
-      // 포트폴리오 스킬 붙이기
       for(Portfolio p : portfolios) {
+        // 포트폴리오 스킬 붙이기
         p.setSkill(portfolioSkillService.findAllSkill(p.getBoard().getNumber()).getSkill());
       }
 
@@ -344,10 +403,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
 
       Member member = memberService.getGeneralMember(((Member) mem).getNumber());
 
@@ -409,10 +467,9 @@ public class PortfolioController {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
 
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Portfolio portfolio = portfolioService.get(number);
@@ -451,8 +508,9 @@ public class PortfolioController {
       }
 
       // 내가 찜한 포트폴리오 & 작성자가 비공개한 경우, 열리지 않도록 예외발생
-      if(portfolio.getMember().getNumber() != member.getNumber() && portfolio.getReadable() == 0)
+      if(portfolio.getMember().getNumber() != member.getNumber() && portfolio.getReadable() == 0) {
         throw new Exception("비공개된 포트폴리오입니다.");
+      }
 
       return "portfolio/detail";
     }
@@ -461,16 +519,15 @@ public class PortfolioController {
   public void form() throws Exception {}
 
   @RequestMapping("add")
-  public String add(Portfolio portfolio, HttpServletRequest request, Model model,
+  public String add(String skills, Portfolio portfolio, HttpServletRequest request, Model model,
       @RequestParam("thumb") MultipartFile thumb,
       @RequestParam("files") MultipartFile[] files) throws Exception {
 
     Object mem = request.getSession().getAttribute("loginUser");
 
-    if(mem == null)
+    if(mem == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    //      return "redirect:/";
-    else {
+    } else {
 
       GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       portfolio.setMember(member);
@@ -520,8 +577,16 @@ public class PortfolioController {
         // Portfolio 입력 중에서 작성자 정보입력
         portfolio.getMember().setNumber(member.getNumber());
       }
-
       portfolioService.insert(portfolio);
+
+      // 기술명 확인하고 넣을 예정 (현재는 숫자로만 넣을 수 있음)
+      // 여기서 str은 member_skill_no임! (주의)
+      String[] strs = skills.split(",");
+      for(String str : strs) {
+        System.out.println(str);
+        portfolioSkillService.add(portfolio.getNumber(), Integer.valueOf(str));
+      }
+
       return "redirect:mylist";
     }
   }

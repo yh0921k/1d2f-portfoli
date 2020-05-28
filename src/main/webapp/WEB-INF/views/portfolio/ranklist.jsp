@@ -4,10 +4,11 @@
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       <!-- PAGE TITLE -->
+      <form id="get" action="rankAll" method="get">
       <section class="bg-white" style="padding: 30px 0px;">
         <div class="container py-1">
 
-          <h3 class="h2" style="display:inline-block;">포트폴리오 게시판</h3>
+          <h3 class="h2" style="display:inline-block;">포트폴리오 랭킹 게시판</h3>
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
         <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
            style="margin-left: 44%;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
@@ -32,7 +33,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb fs--14">
               <li class="breadcrumb-item"><a href="../../">portfoli</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="list">포트폴리오 게시판</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="list">포트폴리오 랭킹 게시판</a></li>
             </ol>
           </nav>
       <!-- /PAGE TITLE -->
@@ -40,16 +41,13 @@
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
     <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
-<!-------------------------------- 검색창 -------------------------------->
-    <form action='searchAll' method='get' >
-      <input class="form-control" id='keyword' name='keyword' type='text'
-             style="display:inline-block; width: 90%; height: 2.5rem; margin: 3rem 0rem;">
-      <button aria-label="Global Search" type="submit"
-              class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
-         <i class="fi fi-search fs--20"></i>
-      </button>
-    </form>
-<!-------------------------------- 검색창 -------------------------------->
+<!-------------------------------- 시작일~마지막일 박스 -------------------------------->
+		<div>
+		<input class="searchMonth" type="month" />달
+		<input class="searchDate" id="startDate" name="startDate"  type="date" value='${startDate}'/>시작일
+		<input class="searchDate" id="endDate" name="endDate"  type="date" value='${endDate}'/>마지막일
+		</div>
+<!-------------------------------- 시작일~마지막일 박스 -------------------------------->
       <div class="table-responsive rounded" style="min-height: 500px; overflow:initial;">
 
 <!-------------------------------- 프토폴리오 리스트 (테이블형) -------------------------------->
@@ -68,7 +66,7 @@
           <tbody>
 <%--------------------------------------순번 --------------------------------------%>
             <c:forEach items="${list}" var="item" varStatus="status">
-            <tr data-href="detail?number=${item.number}" 
+            <tr data-href="detail?number=${item.portfolio.number}" 
                 data-ajax-modal-size="modal-xl" 
                 data-ajax-modal-centered="true" 
                 data-ajax-modal-callback-function=""
@@ -87,24 +85,24 @@
               <td class="my-td my" 
                   ondragstart="return false" 
                   style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-                  ${item.title}
+                  ${item.portfolio.title}
               </td>
 <%--------------------------------------제목 --------------------------------------%>
 <%--------------------------------------등록일 --------------------------------------%>
               <td class="my-td my"
                   style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-                  ${item.registeredDate}</td>
+                  ${item.portfolio.registeredDate}</td>
 <%--------------------------------------등록일 --------------------------------------%>
 <%--------------------------------------추천수 --------------------------------------%>
-              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.getRecommendedCount()}</td>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.portfolio.getRecommendedCount()}</td>
 <%--------------------------------------추천수 --------------------------------------%>
 <%--------------------------------------조회수 --------------------------------------%>
-              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.viewCount}</td>
+              <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.portfolio.viewCount}</td>
 <%--------------------------------------조회수 --------------------------------------%>
 <%--------------------------------------스킬 --------------------------------------%>
               <td class="my-td my"
                   style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-                  <c:forEach items="${item.skill}" var="skill">
+                  <c:forEach items="${item.portfolio.skill}" var="skill">
                   ${skill.name}/
                   </c:forEach>
               </td>
@@ -125,17 +123,17 @@
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
-  data-href="detail?number=${item.number}" 
+  data-href="detail?number=${item.portfolio.number}" 
   data-ajax-modal-size="modal-xl" 
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
   <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px; margin-right:20px">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
-    <c:if test="${item.thumbnail != null}">
-           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
+    <c:if test="${item.portfolio.thumbnail != null}">
+           style="background-image: url('../../upload/portfolio/${item.portfolio.thumbnail}_300x300.jpg'); width:300px;">
     </c:if>
-    <c:if test="${item.thumbnail == null}">
+    <c:if test="${item.portfolio.thumbnail == null}">
            style="background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
     </c:if>
     
@@ -144,10 +142,10 @@
         <div class="d-table">
           <div class="d-table-cell align-bottom" style="text-align:center;">
             <p style="max-height: 1.65rem;width: 16.5rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
-              ${item.title}
+              ${item.portfolio.title}
             </p>
             <p class="text-warning fs--13">
-              ${item.member.id}
+              ${item.portfolio.member.id}
             </p>
           </div>
         </div>
@@ -159,11 +157,11 @@
         <hr class="border-light opacity-2">
         <a style="position: absolute; left: 67%;">
         <span class="float-end fs--14 p-2">
-          ${item.getRecommendedCount()}
+          ${item.portfolio.getRecommendedCount()}
         </span>
         </a>
         <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
-          ${item.getViewCount()}
+          ${item.portfolio.getViewCount()}
         </a>
       </div>
     <!-- 카드하단 -->
@@ -212,7 +210,7 @@
             <!-- next 부분 -->
         <c:if test="${pagination.curPage < pagination.pageCnt}">
           <li class="page-item btn-pill" data-page="next">
-            <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
+            <a class="page-link" onClick="fn_paging('${pagination.nextPage}, ${pagination.pageCnt}')" href="#">Next</a> 
           </li>
         </c:if>
         <c:if test="${pagination.curPage >= pagination.pageCnt}"> 
@@ -229,6 +227,7 @@
               
         </div>
       </section>
+		</form>
 <!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->  <style>
     .modal-content {
     margin-top:150px;
@@ -236,6 +235,20 @@
   </style>
   
   <script>
+  $('.searchMonth').change(function() {
+	  var month = $('.searchMonth').val();
+	  console.log(month+"-01");
+	  console.log($('.searchMonth').getMonth());
+	  console.log($('.searchMonth').getMonth()+1);
+  });
+  
+  $('.searchDate').change(function() {
+	  if($('#startDate').val() != "" && $('#endDate').val() != "") {
+		  $('#get').submit();
+	  }
+  });
+  
+  
   function getQueryStringObject() {
 	    var a = window.location.search.substr(1).split('&');
 	    if (a == "") return {};
@@ -251,11 +264,14 @@
 	}
   
   function fnSetPageSize(val) {
-		  location.href = "list?quantity=" + val;
+	  $('#get').submit();
+		  //location.href = "rankAll?quantity=" + val;
   }
   
   $(document).ready(function() {
-	  
+	  var date = new Date();
+	  $('.searchMonth').attr("value", date.getFullYear() + "-" +
+			  (date.getMonth() >= 9 ? date.getMonth()+1 : "0" + (date.getMonth()+1)));
 	  
 	  var qs = getQueryStringObject();
 	  var page = qs.quantity;
@@ -305,16 +321,34 @@
   
 	  function fn_center_paging(pageNum) {
 		  var qs = getQueryStringObject();
-		  if(qs.quantity != null) {
-			  location.href = "list?quantity=" + qs.quantity + "&curPage=" + pageNum;
+		  var queryString;
+		  if(qs.quantity == null) {
+			  queryString = "quantity=" + 10;
 		  } else {
-	      location.href = "list?curPage=" + pageNum;
+			  queryString = "quantity=" + qs.quantity;
 		  }
+		  if(pageNum == null) {
+			  queryString += "&curPage=" + 1;
+		  } else {
+			  queryString += "&curPage=" + pageNum;
+		  }
+		  if(qs.startDate != null) {
+			  queryString += "&startDate=" + qs.startDate;
+		  }
+		  if(qs.endDate != null) {
+			  queryString += "&endDate=" + qs.endDate;
+		  }		  
+		  location.href = "rankAll?" + queryString;
 	  }
-	  
-  function fn_paging(curPage) {
-	  location.href = "list?curPage=" + curPage;
+  function fn_paging(pagination) {
+	  var pag = pagination.split(',');
+	  var curPage = pag[0];
+	  var pageCnt = pag[1];
+	  if(curPage != pageCnt) {
+		  fn_center_paging(curPage);
+	  } else {
 	  }
+  }
   </script>
   <style>
     .cursor {

@@ -1,44 +1,49 @@
 package com.portfoli.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class Skill implements Serializable {
+public class Field implements Serializable {
   private static final long serialVersionUID = 1L;
-  int number; // 기술번호
-  int fieldNumber; // 분야번호
-  String name; // 기술이름
+
+  int number;
+  String name;
+  List<Skill> list;
 
   public int getNumber() {
     return number;
   }
-  public Skill setNumber(int number) {
+
+  public void setNumber(int number) {
     this.number = number;
-    return this;
   }
+
   public String getName() {
     return name;
   }
-  public Skill setName(String name) {
+
+  public void setName(String name) {
     this.name = name;
-    return this;
   }
-  public int getFieldNumber() {
-    return fieldNumber;
+
+  public List<Skill> getList() {
+    return list;
   }
-  public Skill setFieldNumber(int fieldNumber) {
-    this.fieldNumber = fieldNumber;
-    return this;
+
+  public void setList(List<Skill> list) {
+    this.list = list;
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + fieldNumber;
-    result = prime * result + (name == null ? 0 : name.hashCode());
+    result = prime * result + ((list == null) ? 0 : list.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + number;
     return result;
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -50,8 +55,12 @@ public class Skill implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    Skill other = (Skill) obj;
-    if (fieldNumber != other.fieldNumber) {
+    Field other = (Field) obj;
+    if (list == null) {
+      if (other.list != null) {
+        return false;
+      }
+    } else if (!list.equals(other.list)) {
       return false;
     }
     if (name == null) {
@@ -66,9 +75,10 @@ public class Skill implements Serializable {
     }
     return true;
   }
+
   @Override
   public String toString() {
-    return "Skill [number=" + number + ", fieldNumber=" + fieldNumber + ", name=" + name + "]";
+    return "Field [number=" + number + ", name=" + name + ", list=" + list + "]";
   }
 
 

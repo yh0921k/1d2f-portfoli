@@ -22,47 +22,60 @@ public class Portfolio extends Board implements java.io.Serializable{
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((homepage == null) ? 0 : homepage.hashCode());
-    result = prime * result + ((member == null) ? 0 : member.hashCode());
+    result = prime * result + (homepage == null ? 0 : homepage.hashCode());
+    result = prime * result + (member == null ? 0 : member.hashCode());
     result = prime * result + readable;
     result = prime * result + recommendedCount;
-    result = prime * result + ((skill == null) ? 0 : skill.hashCode());
-    result = prime * result + ((thumbnail == null) ? 0 : thumbnail.hashCode());
+    result = prime * result + (skill == null ? 0 : skill.hashCode());
+    result = prime * result + (thumbnail == null ? 0 : thumbnail.hashCode());
     return result;
   }
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (!super.equals(obj))
+    }
+    if (!super.equals(obj)) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     Portfolio other = (Portfolio) obj;
     if (homepage == null) {
-      if (other.homepage != null)
+      if (other.homepage != null) {
         return false;
-    } else if (!homepage.equals(other.homepage))
+      }
+    } else if (!homepage.equals(other.homepage)) {
       return false;
+    }
     if (member == null) {
-      if (other.member != null)
+      if (other.member != null) {
         return false;
-    } else if (!member.equals(other.member))
+      }
+    } else if (!member.equals(other.member)) {
       return false;
-    if (readable != other.readable)
+    }
+    if (readable != other.readable) {
       return false;
-    if (recommendedCount != other.recommendedCount)
+    }
+    if (recommendedCount != other.recommendedCount) {
       return false;
+    }
     if (skill == null) {
-      if (other.skill != null)
+      if (other.skill != null) {
         return false;
-    } else if (!skill.equals(other.skill))
+      }
+    } else if (!skill.equals(other.skill)) {
       return false;
+    }
     if (thumbnail == null) {
-      if (other.thumbnail != null)
+      if (other.thumbnail != null) {
         return false;
-    } else if (!thumbnail.equals(other.thumbnail))
+      }
+    } else if (!thumbnail.equals(other.thumbnail)) {
       return false;
+    }
     return true;
   }
   public String getHomepage() {
@@ -103,8 +116,9 @@ public class Portfolio extends Board implements java.io.Serializable{
   public List<Skill> getSkill() {
     return skill;
   }
-  public void setSkill(List<Skill> skill) {
+  public Portfolio setSkill(List<Skill> skill) {
     this.skill = skill;
+    return this;
   }
 
 

@@ -33,6 +33,23 @@
 					</c:forEach>
 				</select>
 			</div>
+			
+			<div class="row">
+        <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">지역
+          : </span> <select id="select_options2" name="district.districtNumber"
+          class="form-control form-control-sm col-md-3">
+          <c:forEach items="${districts}" var="district">
+            <c:if
+              test="${jobPosting.district.name == district.name}">
+              <option value="${district.districtNumber}" selected="selected">${district.name}</option>
+            </c:if>
+            <c:if
+              test="${jobPosting.district.name != district.name}">
+              <option value="${district.districtNumber}">${district.name}</option>
+            </c:if>
+          </c:forEach>
+        </select>
+      </div>
 
   <div class="row">
       <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">자격증

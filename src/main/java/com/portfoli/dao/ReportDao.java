@@ -16,4 +16,6 @@ public interface ReportDao {
   int adminCount() throws Exception;
 
   Report findByNumber(int number) throws Exception;
+
+  int reply(Report report) throws Exception;
 }
