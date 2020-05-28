@@ -12,7 +12,7 @@
 
 	<div class="row">
 
-		<jsp:include page="sidebar.jsp" />
+		<jsp:include page="../member/sidebar.jsp" />
 
 		<div class="portlet col-lg-2 mt--20">
 			<div class="portlet-header">

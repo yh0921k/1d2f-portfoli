@@ -358,11 +358,18 @@
 
                     <div class="dropdown-divider"></div>
                     
-                    <a href="/portfoli/app/member/generalMypage"
+                    <a href="/portfoli/app/member/companyMypage"
                         class="dropdown-item text-truncate font-weight-medium">
                         마이페이지 <small class="d-block text-muted">profile,
                           password and more...</small>
                       </a>
+                    <a href="#!" target="_blank"
+                    class="dropdown-item text-truncate font-weight-medium">
+                    공고 <small class="d-block text-muted">montly billing</small>
+                  </a> <a href="#!"
+                    class="dropdown-item text-truncate font-weight-medium">
+                    멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
+                  </a>
                       
                     <div class="dropdown-divider mb-0"></div>
                     <a href="/portfoli/app/auth/logout"

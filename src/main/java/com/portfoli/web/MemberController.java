@@ -82,7 +82,7 @@ public class MemberController {
 
 
   @GetMapping("generalMypage")
-  public void viewingMypage() throws Exception {}
+  public void viewingGeneralMypage() throws Exception {}
 
 
   @PostMapping("updatePic")
@@ -232,7 +232,8 @@ public class MemberController {
     }
   }
 
-
+  @GetMapping("companyMypage")
+  public void viewingCompanyMypage() throws Exception {}
 
   // 공통
 
