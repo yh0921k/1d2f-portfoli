@@ -138,10 +138,10 @@
                 </div>
               </div></li>
 
-            <li class="list-inline-item dropdown-menu-hover mt-3"><a
-              href="#" id="dropdownAccountOptions"
-              class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
-              data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+            <li class="list-inline-item dropdown-menu-hover mt-3">
+            <a href="#" id="dropdownAccountOptions"
+	             class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+	             data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                 <span class="group-icon m-0"> <i
                   class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
               </span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}
@@ -180,20 +180,23 @@
                   <div class="dropdown-divider" style="z-index: 200;"></div>
 
                   <a href="/portfoli/app/calendar/calendar" target="_blank"
-                    class="dropdown-item text-truncate font-weight-medium"> <span
-                    class="badge badge-success float-end font-weight-normal mt-1">3
-                      new</span> 일정 <small class="d-block text-muted">internal
-                      messaging system</small>
-                  </a> <a href="#!" target="_blank"
-                    class="dropdown-item text-truncate font-weight-medium">
-                    포트폴리오 <small class="d-block text-muted">montly billing</small>
-                  </a> <a href="/portfoli/app/member/generalMypage"
-                    class="dropdown-item text-truncate font-weight-medium">
-                    마이페이지 <small class="d-block text-muted">profile,
+                     class="dropdown-item text-truncate font-weight-medium">
+                  <span class="badge badge-success float-end font-weight-normal mt-1">
+                    3 new</span>
+                                일정 <small class="d-block text-muted">internalmessaging system</small>
+                  </a>
+                  <a href="/portfoli/app/portfolio/mylist" target="_blank"
+                     class="dropdown-item text-truncate font-weight-medium">
+                                내 포트폴리오 <small class="d-block text-muted">portfolio</small>
+                  </a>
+                  <a href="/portfoli/app/member/generalMypage"
+                     class="dropdown-item text-truncate font-weight-medium">
+                                     마이페이지 <small class="d-block text-muted">profile,
                       password and more...</small>
-                  </a> <a href="#!"
+                  </a>
+                  <a href="#!"
                     class="dropdown-item text-truncate font-weight-medium">
-                    멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
+                               멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
                   </a>
 
                   <div class="dropdown-divider mb-0"></div>
