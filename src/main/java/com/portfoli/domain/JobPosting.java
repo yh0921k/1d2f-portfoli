@@ -25,6 +25,7 @@ public class JobPosting implements Serializable {
   private Certificate certificate;
   private Major major;
   private District district;
+  private FinalEducation finalEducation;
   List<JobPostingFile> files;
 
   @Override
@@ -36,7 +37,7 @@ public class JobPosting implements Serializable {
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
         + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
         + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", district="
-        + district + ", files=" + files + "]";
+        + district + ", finalEducation=" + finalEducation + ", files=" + files + "]";
   }
 
   @Override
@@ -50,6 +51,7 @@ public class JobPosting implements Serializable {
     result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
     result = prime * result + ((endDated == null) ? 0 : endDated.hashCode());
     result = prime * result + ((files == null) ? 0 : files.hashCode());
+    result = prime * result + ((finalEducation == null) ? 0 : finalEducation.hashCode());
     result = prime * result + ((job == null) ? 0 : job.hashCode());
     result = prime * result + jobPostingNumber;
     result = prime * result + ((major == null) ? 0 : major.hashCode());
@@ -64,7 +66,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
 
 
   @Override
@@ -108,6 +109,11 @@ public class JobPosting implements Serializable {
         return false;
     } else if (!files.equals(other.files))
       return false;
+    if (finalEducation == null) {
+      if (other.finalEducation != null)
+        return false;
+    } else if (!finalEducation.equals(other.finalEducation))
+      return false;
     if (job == null) {
       if (other.job != null)
         return false;
@@ -149,6 +155,7 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
+
 
   public Major getMajor() {
     return major;
@@ -292,6 +299,14 @@ public class JobPosting implements Serializable {
 
   public void setDistrict(District district) {
     this.district = district;
+  }
+
+  public FinalEducation getFinalEducation() {
+    return finalEducation;
+  }
+
+  public void setFinalEducation(FinalEducation finalEducation) {
+    this.finalEducation = finalEducation;
   }
 
   public List<JobPostingFile> getFiles() {
