@@ -50,10 +50,10 @@
           </c:if>
 
           <c:if test="${loginUser.type=='2'}">
-            <li class="nav-item"><a href="#" id="portfolio"
+            <li class="nav-item"><a href="/portfoli/app/portfolio/list" id="portfolio"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
-            <li class="nav-item"><a href="#" id="info"
+            <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
             <li class="nav-item"><a href="#" id="recommendInfoForCom"
@@ -191,9 +191,6 @@
                     class="dropdown-item text-truncate font-weight-medium">
                     마이페이지 <small class="d-block text-muted">profile,
                       password and more...</small>
-                  </a> <a href="#!"
-                    class="dropdown-item text-truncate font-weight-medium">
-                    멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
                   </a>
 
                   <div class="dropdown-divider mb-0"></div>
@@ -310,9 +307,9 @@
                     <a href="#!" target="_blank"
                     class="dropdown-item text-truncate font-weight-medium">
                     공고 <small class="d-block text-muted">montly billing</small>
-                  </a> <a href="#!"
+                  </a> <a href="/portfoli/app/payment/introduction"
                     class="dropdown-item text-truncate font-weight-medium">
-                    멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
+                    멤버십 <small class="d-block text-muted">계정 업그레이드</small>
                   </a>
 
                     <div class="dropdown-divider mb-0"></div>
