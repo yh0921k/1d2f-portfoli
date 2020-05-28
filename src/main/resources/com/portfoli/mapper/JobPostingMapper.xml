@@ -26,6 +26,11 @@
 			<id column="employment_stat_no" property="number" />
 			<result column="employment_stat_name" property="name" />
 		</association>
+		
+		<association property="district" javaType="District">
+		<id column="district_no" property="districtNumber"></id>
+		<result column="district_name" property="name"></result>
+		</association>
 
     <association property="certificate" javaType="Certificate">
       <id column="certificate_no" property="certificateNumber" />
@@ -72,7 +77,7 @@
 		#{endDated},
 		0,
 		6,
-		1,
+		#{district.districtNumber},
 		now(),
 		1,
 		1,
@@ -166,7 +171,8 @@
      f.file_path,
      e.employment_stat_name,
      c.name as certificate_name,
-     m.name as major_name
+     m.name as major_name,
+     d.name as district_name
      from pf_job_posting j
      left outer join
      pf_job_posting_file f on j.job_posting_no=f.job_posting_no
@@ -179,7 +185,9 @@
      left outer join
      pf_company_required_major q on j.job_posting_no = q.job_posting_no
      left outer join
-     pf_major m on q.major_no = m.major_no     
+     pf_major m on q.major_no = m.major_no
+     left outer join
+     pf_district d on j.work_place_no = d.district_no     
    where
    j.job_posting_no=#{jobPostingNumber}
 	</select>
@@ -194,7 +202,8 @@
 			<if test="yearSalary > 0">year_salary=#{yearSalary},</if>
 			<if test="startDated != null">start_dated=#{startDated},</if>
 			<if test="endDated != null">end_dated=#{endDated},</if>
-			<if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number}</if>
+			<if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number},</if>
+			<if test="district != null and district != ''">work_place_no=#{district.districtNumber}</if>
 		</set>
 		where job_posting_no=#{jobPostingNumber}
 	</update>
