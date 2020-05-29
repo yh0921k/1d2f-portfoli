@@ -52,7 +52,7 @@
 					<div class="col-12 col-lg-6">
 
 						<ul class="mt-4 mb-0 list-unstyled p-0 block-xs">
-							<li><a href="contact-1.html">Contact</a></li>
+							<li><a href="mailto:portfoli@portfoli.com">Contact</a></li>
 							<li><a href="about-us-1.html">About Us</a></li>
 							<li><a href="page-terms-and-conditions.html">이용약관</a></li>
 						</ul>
@@ -85,7 +85,7 @@
 								<i class="float-start fi fi-phone h4"></i> 1577-1677
 						</a></li>
 
-						<li class="list-item py-2"><a href="mailto:info@mycomany.com"
+						<li class="list-item py-2"><a href="mailto:portfoli@portfoli.com"
 							class="clearfix py-1 h5 d-inline-block font-weight-medium text-warning">
 								<i class="float-start fi fi-envelope h4 mt--n5"></i>
 								portfoli@portfoli.com

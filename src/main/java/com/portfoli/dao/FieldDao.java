@@ -6,4 +6,6 @@ import com.portfoli.domain.Field;
 public interface FieldDao {
 
   public List<Field> findAll() throws Exception;
+
+  public int findNumber(String fieldName) throws Exception;
 }

@@ -99,15 +99,25 @@
       </a>
       <a class="list-group-item list-group-item-action" style="font-size: 0.8em">
       <div style="display: block;">
-        <div style="font-size: 1em; margin-left:10px" class="badge badge-white badge-soft badge-ico-lg float-start">
+        <div style="font-size: 1em; margin-left:10px"
+             class="badge badge-white badge-soft badge-ico-lg float-start js-ajax-modal btn btn-sm"
+             data-href="/portfoli/app/message/form?receiverNumber=${portfolio.member.number}"
+             data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
+             title="쪽지보내기"
+             >
+             <%--
+             ESC키나 바깥 클릭시 닫히지 않도록.
+             data-ajax-modal-backdrop="static"
+             --%>
+              
         <i class="fi fi-chat" style="font-style: normal; font-size:1.2rem;"></i> <span>쪽지</span>
         </div>
-        <div style="font-size: 1em; margin-left:15%" class="badge badge-white badge-soft badge-ico-lg float-start">
+        <div style="font-size: 1em; margin-left:15%" 
+             class="badge badge-white badge-soft badge-ico-lg float-start btn"
+             id="sendMail"
+             title="이메일 보내기"
+        >
         <i class="fi fi-envelope-2" style="font-style: normal; font-size:1.2rem;"></i> <span>메일</span>
-        <%--
-        링크 예정
-        ${portfolio.member...}
-        --%>
         </div>
       </div>
       </a>
@@ -314,6 +324,10 @@
   $.SOW.core.dropdown_click_ignore.init('.dropdown-menu.dropdown-click-ignore');
   $.SOW.core.dropdown_ajax.init('a[data-toggle="dropdown"]');
   
+  $('#sendMail').on('click', function() {
+	  location.href="mailto:" + "${portfolio.member.email}";
+  });
+  
   function showPdf(string) {
       console.log(string);
 	    window.open("pdf?value=" + string, "pdf 새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, copyhistory=no, resizable=yes");  
@@ -331,8 +345,6 @@
 		  showConfirmButton: false,
 		  timer: 1000
 		})
-
-
 	}
   
   function warning(){

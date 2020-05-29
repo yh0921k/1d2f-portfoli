@@ -21,4 +21,10 @@
 		from pf_field
 	</select>	
 	
+	<select id="findNumber" resultType="integer" parameterType="string">
+	  select field_no
+	  from pf_field
+	  where name=#{name}
+	</select>
+	
 </mapper>
