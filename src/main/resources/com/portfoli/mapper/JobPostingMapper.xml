@@ -250,6 +250,12 @@
 		or c.name like #{keywordPattern}
 		or m.name like #{keywordPattern}
 	</select>
+	
+	<select id="findAllByUserNumber" resultMap="JobPostingMap" parameterType="int">
+    select *
+    from pf_job_posting
+    where company_member_no=#{userNumber}
+  </select>
 </mapper>
 
 
