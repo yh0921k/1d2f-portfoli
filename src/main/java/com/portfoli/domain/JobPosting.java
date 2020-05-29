@@ -26,7 +26,9 @@ public class JobPosting implements Serializable {
   private Major major;
   private District district;
   private FinalEducation finalEducation;
+  private CompanyMember companyMember;
   List<JobPostingFile> files;
+
 
   @Override
   public String toString() {
@@ -37,7 +39,8 @@ public class JobPosting implements Serializable {
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
         + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
         + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", district="
-        + district + ", finalEducation=" + finalEducation + ", files=" + files + "]";
+        + district + ", finalEducation=" + finalEducation + ", companyMember=" + companyMember
+        + ", files=" + files + "]";
   }
 
   @Override
@@ -45,6 +48,7 @@ public class JobPosting implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((certificate == null) ? 0 : certificate.hashCode());
+    result = prime * result + ((companyMember == null) ? 0 : companyMember.hashCode());
     result = prime * result + companyMemberNumber;
     result = prime * result + ((content == null) ? 0 : content.hashCode());
     result = prime * result + ((district == null) ? 0 : district.hashCode());
@@ -68,6 +72,7 @@ public class JobPosting implements Serializable {
   }
 
 
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -81,6 +86,11 @@ public class JobPosting implements Serializable {
       if (other.certificate != null)
         return false;
     } else if (!certificate.equals(other.certificate))
+      return false;
+    if (companyMember == null) {
+      if (other.companyMember != null)
+        return false;
+    } else if (!companyMember.equals(other.companyMember))
       return false;
     if (companyMemberNumber != other.companyMemberNumber)
       return false;
@@ -155,6 +165,7 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
+
 
 
   public Major getMajor() {
@@ -307,6 +318,14 @@ public class JobPosting implements Serializable {
 
   public void setFinalEducation(FinalEducation finalEducation) {
     this.finalEducation = finalEducation;
+  }
+
+  public CompanyMember getCompanyMember() {
+    return companyMember;
+  }
+
+  public void setCompanyMember(CompanyMember companyMember) {
+    this.companyMember = companyMember;
   }
 
   public List<JobPostingFile> getFiles() {

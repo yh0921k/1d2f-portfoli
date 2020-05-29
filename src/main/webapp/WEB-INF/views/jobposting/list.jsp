@@ -56,7 +56,7 @@
 
 <hr>
 
-<c:if test="${not empty loginUser}">
+<c:if test="${RegistrationPossible== true}">
 <div style="text-align:right">
 <a href='form' class="btn btn-outline-dark btn-pill mb-1">글쓰기</a>
 </div>

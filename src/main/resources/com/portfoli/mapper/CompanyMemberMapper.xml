@@ -43,6 +43,14 @@
     WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
   </select>
   
+   <select id="findByCompanyMemberNumber"
+  resultMap="CompanyMemberMap" parameterType="int">
+  SELECT *
+  FROM pf_members m JOIN pf_company_member c
+  ON m.member_no = c.company_member_no
+  WHERE m.member_no=#{no}
+  </select>
+  
    <delete id="delete" parameterType="int">
   	DELETE 
   	FROM pf_company_member

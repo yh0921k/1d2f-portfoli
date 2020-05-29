@@ -255,16 +255,16 @@ public class MemberServiceImpl implements MemberService {
 
 
   // 어드민
-  
+
   @Override
   public List<Member> list(String regisDate, int currentPage, int pageSize) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
     params.put("offset", (currentPage - 1) * pageSize);
     params.put("pageSize", pageSize);
     params.put("createDate", regisDate);
-    
+
     List<Member> members = memberDao.findAll(params);
-    if(members.size() < 0) {
+    if (members.size() < 0) {
       throw new Exception("회원 정보 불러오기 실패");
     }
     return members;
@@ -276,6 +276,14 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.count();
   }
 
-
+  @Override
+  public CompanyMember getCompanyMember(int number) throws Exception {
+    CompanyMember companyMember = companyMemberDao.findByCompanyMemberNumber(number);
+    if ((companyMember) != null) {
+      return companyMember;
+    } else {
+      return null;
+    }
+  }
 
 }
