@@ -28,13 +28,14 @@
 <div class="row" id="blockStyle" style="margin-left: 0px;position: relative;backface-visibility: hidden;background: white;display:block;height: 316px;overflow: hidden;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
-<a href="#"
-  data-href="detail?number=${item.portfolio.number}" 
-  data-ajax-modal-size="modal-xl" 
-  data-ajax-modal-callback-function=""
-  data-ajax-modal-backdrop="" 
-  class="js-ajax-modal">
-  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width: 100%; width:100%; margin-right:20px; height: 316px">
+  <div id="spinning"
+  		 class="col-12 col-lg-4 mb-4 cursor js-ajax-modal" 
+  		 style="max-width: 100%; width:100%; margin-right:20px; height: 316px"
+		   data-href="detail?number=${item.portfolio.number}" 
+		   data-ajax-modal-size="modal-xl" 
+		   data-ajax-modal-callback-function=""
+		   data-ajax-modal-backdrop="" 
+  		 >
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.portfolio.thumbnail != null}">
            style="width:100%; background-image: url('../../upload/portfolio/${item.portfolio.thumbnail}_300x300.jpg');">
@@ -77,7 +78,6 @@
     
       </div>
     </div>
-    </a>
     </c:forEach>
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
 </div>
