@@ -26,6 +26,8 @@ public class JobPosting implements Serializable {
   private Major major;
   private District district;
   private FinalEducation finalEducation;
+  private Member member;
+  private Company company;
   List<JobPostingFile> files;
 
   @Override
@@ -37,7 +39,8 @@ public class JobPosting implements Serializable {
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
         + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
         + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", district="
-        + district + ", finalEducation=" + finalEducation + ", files=" + files + "]";
+        + district + ", finalEducation=" + finalEducation + ", member=" + member + ", company="
+        + company + ", files=" + files + "]";
   }
 
   @Override
@@ -45,6 +48,7 @@ public class JobPosting implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((certificate == null) ? 0 : certificate.hashCode());
+    result = prime * result + ((company == null) ? 0 : company.hashCode());
     result = prime * result + companyMemberNumber;
     result = prime * result + ((content == null) ? 0 : content.hashCode());
     result = prime * result + ((district == null) ? 0 : district.hashCode());
@@ -55,6 +59,7 @@ public class JobPosting implements Serializable {
     result = prime * result + ((job == null) ? 0 : job.hashCode());
     result = prime * result + jobPostingNumber;
     result = prime * result + ((major == null) ? 0 : major.hashCode());
+    result = prime * result + ((member == null) ? 0 : member.hashCode());
     result = prime * result + minimumCareer;
     result = prime * result + minimumEducationNumber;
     result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
@@ -66,7 +71,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
 
   @Override
   public boolean equals(Object obj) {
@@ -81,6 +85,11 @@ public class JobPosting implements Serializable {
       if (other.certificate != null)
         return false;
     } else if (!certificate.equals(other.certificate))
+      return false;
+    if (company == null) {
+      if (other.company != null)
+        return false;
+    } else if (!company.equals(other.company))
       return false;
     if (companyMemberNumber != other.companyMemberNumber)
       return false;
@@ -126,6 +135,11 @@ public class JobPosting implements Serializable {
         return false;
     } else if (!major.equals(other.major))
       return false;
+    if (member == null) {
+      if (other.member != null)
+        return false;
+    } else if (!member.equals(other.member))
+      return false;
     if (minimumCareer != other.minimumCareer)
       return false;
     if (minimumEducationNumber != other.minimumEducationNumber)
@@ -154,23 +168,6 @@ public class JobPosting implements Serializable {
     if (yearSalary != other.yearSalary)
       return false;
     return true;
-  }
-
-
-  public Major getMajor() {
-    return major;
-  }
-
-  public void setMajor(Major major) {
-    this.major = major;
-  }
-
-  public Certificate getCertificate() {
-    return certificate;
-  }
-
-  public void setCertificate(Certificate certificate) {
-    this.certificate = certificate;
   }
 
   public int getJobPostingNumber() {
@@ -293,6 +290,22 @@ public class JobPosting implements Serializable {
     this.employmentStatus = employmentStatus;
   }
 
+  public Certificate getCertificate() {
+    return certificate;
+  }
+
+  public void setCertificate(Certificate certificate) {
+    this.certificate = certificate;
+  }
+
+  public Major getMajor() {
+    return major;
+  }
+
+  public void setMajor(Major major) {
+    this.major = major;
+  }
+
   public District getDistrict() {
     return district;
   }
@@ -309,6 +322,22 @@ public class JobPosting implements Serializable {
     this.finalEducation = finalEducation;
   }
 
+  public Member getMember() {
+    return member;
+  }
+
+  public void setMember(Member member) {
+    this.member = member;
+  }
+
+  public Company getCompany() {
+    return company;
+  }
+
+  public void setCompany(Company company) {
+    this.company = company;
+  }
+
   public List<JobPostingFile> getFiles() {
     return files;
   }
@@ -316,5 +345,4 @@ public class JobPosting implements Serializable {
   public void setFiles(List<JobPostingFile> files) {
     this.files = files;
   }
-
 }

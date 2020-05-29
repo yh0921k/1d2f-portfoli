@@ -19,6 +19,8 @@ public interface JobPostingService {
 
   JobPosting get(int no) throws Exception;
 
+  JobPosting get(String title) throws Exception;
+
   List<JobPosting> search(String keyword) throws Exception;
 
   void update(JobPosting jobPosting) throws Exception;

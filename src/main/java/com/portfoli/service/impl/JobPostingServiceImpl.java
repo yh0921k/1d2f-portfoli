@@ -81,6 +81,11 @@ public class JobPostingServiceImpl implements JobPostingService {
     return jobPostingDao.findByNo(no);
   }
 
+  @Override
+  public JobPosting get(String title) throws Exception {
+    return jobPostingDao.findByTitle(title);
+  }
+
   @Transactional
   @Override
   public void update(JobPosting jobPosting) throws Exception {

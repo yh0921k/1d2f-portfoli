@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.Member;
+import com.portfoli.domain.Payment;
 import com.portfoli.service.JobPostingService;
 
 @Controller
@@ -95,5 +97,33 @@ public class PaymentController {
     }
 
     return gson.toJson(jobPostingTitle);
+  }
+
+  @PostMapping("order")
+  public void order(HttpServletRequest request,
+      String title, String product, int price, int term, String startDate, String endDate, Model model) throws Exception {
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+
+    JobPosting jobPosting = jobPostingService.get(title);
+
+    System.out.println(jobPosting.getMember().getName());
+    System.out.println(jobPosting.getCompany().getName());
+
+    Payment payment = new Payment();
+    payment.setMemberNumber(loginUser.getNumber());
+    payment.setProductName(product);
+    payment.setPrice(price);
+
+    model.addAttribute("jobPosting", jobPosting);
+    model.addAttribute("order", payment);
+    model.addAttribute("startDate", startDate);
+    model.addAttribute("endDate", endDate);
+    request.getSession().setAttribute("payment", payment);
+  }
+
+  @PostMapping("pay")
+  public void pay(HttpServletRequest request, String method) throws Exception {
+    Payment payment = (Payment) request.getSession().getAttribute("payment");
+    payment.setMethod(method);
   }
 }
