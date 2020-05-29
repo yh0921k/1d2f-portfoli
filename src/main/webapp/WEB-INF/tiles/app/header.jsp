@@ -50,10 +50,10 @@
           </c:if>
 
           <c:if test="${loginUser.type=='2'}">
-            <li class="nav-item"><a href="#" id="portfolio"
+            <li class="nav-item"><a href="/portfoli/app/portfolio/list" id="portfolio"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
-            <li class="nav-item"><a href="#" id="info"
+            <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
             <li class="nav-item"><a href="#" id="recommendInfoForCom"
@@ -140,8 +140,8 @@
 
             <li class="list-inline-item dropdown-menu-hover mt-3">
             <a href="#" id="dropdownAccountOptions"
-	             class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
-	             data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+              class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+              data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                 <span class="group-icon m-0"> <i
                   class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
               </span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}
@@ -180,7 +180,7 @@
                   <div class="dropdown-divider" style="z-index: 200;"></div>
 
                   <a href="/portfoli/app/calendar/calendar" target="_blank"
-                     class="dropdown-item text-truncate font-weight-medium">
+                       class="dropdown-item text-truncate font-weight-medium">
                   <span class="badge badge-success float-end font-weight-normal mt-1">
                     3 new</span>
                                 일정 <small class="d-block text-muted">internal messaging system</small>
@@ -193,10 +193,6 @@
                      class="dropdown-item text-truncate font-weight-medium">
                                      마이페이지 <small class="d-block text-muted">profile,
                       password and more...</small>
-                  </a>
-                  <a href="#!"
-                    class="dropdown-item text-truncate font-weight-medium">
-                               멤버쉽 <small class="d-block text-muted">계정 업그레이드</small>
                   </a>
 
                   <div class="dropdown-divider mb-0"></div>
@@ -305,12 +301,18 @@
                     </div>
 
                     <div class="dropdown-divider"></div>
-
-                    <a href="/portfoli/app/member/generalMypage"
+                    <a href="/portfoli/app/member/companyMypage"
                       class="dropdown-item text-truncate font-weight-medium">
                       마이페이지 <small class="d-block text-muted">profile,
                         password and more...</small>
                     </a>
+                    <a href="#!" target="_blank"
+                    class="dropdown-item text-truncate font-weight-medium">
+                    공고 <small class="d-block text-muted">montly billing</small>
+                  </a> <a href="/portfoli/app/payment/introduction"
+                    class="dropdown-item text-truncate font-weight-medium">
+                    멤버십 <small class="d-block text-muted">계정 업그레이드</small>
+                  </a>
 
                     <div class="dropdown-divider mb-0"></div>
                     <a href="/portfoli/app/auth/logout"

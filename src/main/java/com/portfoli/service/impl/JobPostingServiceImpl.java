@@ -56,6 +56,11 @@ public class JobPostingServiceImpl implements JobPostingService {
   }
 
   @Override
+  public List<JobPosting> myList(int userNumber) throws Exception {
+    return jobPostingDao.findAllByUserNumber(userNumber);
+  }
+
+  @Override
   public int ListCnt(JobPosting jobPosting) throws Exception {
     return jobPostingDao.ListCnt();
   }

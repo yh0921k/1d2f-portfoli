@@ -39,7 +39,6 @@
 
           <ul class="nav flex-column px-2 font-weight-bold">
             <li class="nav-item"><a class="nav-link" href="/portfoli/app/member/generalUpdate"> 내 정보 수정하기 </a></li>
-            <li class="nav-item"><a class="nav-link" href="#"> 멤버쉽 </a></li>
           </ul></li>
 
         <li class="nav-item font-weight-bold active"><a
@@ -61,12 +60,14 @@
         <span class="px-2 d-inline-block"> 일정 관리 </span>
         </a></li>
 
+        <c:if test="${loginUser.type == '1'}">
         <li class="nav-item"><a class="nav-link"
           href="account-favourites.html">
           <i class="fi fi-arrow-end m-0 fs--12"></i> <span
             class="px-2 d-inline-block"> 포트폴리오 관리 </span>
         </a></li>
-
+        </c:if>
+        
         <li class="nav-item"><a class="nav-link pt--200"
           href="account-settings.html">
           <i class="fi fi-arrow-end m-0 fs--12"></i> <span
