@@ -114,7 +114,7 @@ public class MemberController {
       if(loginUser.getType() == 1) {
         return "redirect:/app/member/generalMypage";
       } else {
-        return "redirect:/app/member/companylMypage";
+        return "redirect:/app/member/companyMypage";
       }
     } else {
       throw new Exception("사진 업로드 실패.");

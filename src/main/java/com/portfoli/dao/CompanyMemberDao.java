@@ -13,4 +13,5 @@ public interface CompanyMemberDao {
   CompanyMember findByEmailAndPassword(Map<String, Object> params) throws Exception;
 
   CompanyMember findByMemberNumber(int number) throws Exception;
+
 }

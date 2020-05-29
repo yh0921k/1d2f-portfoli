@@ -47,8 +47,7 @@
 		ON m.member_no = c.company_member_no
 		WHERE m.member_no=#{no}
 	</select>
-	
-  
+
    <delete id="delete" parameterType="int">
   	DELETE 
   	FROM pf_company_member

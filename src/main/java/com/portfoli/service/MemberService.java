@@ -29,6 +29,8 @@ public interface MemberService {
 
   GeneralMember getGeneralMember(int number) throws Exception;
 
+  CompanyMember getCompanyMember(int number) throws Exception;
+
   GeneralMember getSessionInfo(int number) throws Exception;
 
   int updateFlag(HashMap<String, Object> params) throws Exception;
@@ -44,7 +46,5 @@ public interface MemberService {
   List<Member> list(String regisDate, int currentPage, int pageSize) throws Exception;
 
   int selectListCnt() throws Exception;
-
-  CompanyMember getCompanyMember(int number) throws Exception;
 
 }
