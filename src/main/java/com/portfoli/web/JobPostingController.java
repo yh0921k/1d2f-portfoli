@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Certificate;
+import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.CompanyRequiredCertificate;
 import com.portfoli.domain.District;
 import com.portfoli.domain.EmploymentStatus;
@@ -24,12 +26,14 @@ import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
 import com.portfoli.domain.Major;
+import com.portfoli.domain.Member;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.DistrictService;
 import com.portfoli.service.EmploymentStatusService;
 import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.JobPostingService;
 import com.portfoli.service.MajorService;
+import com.portfoli.service.MemberService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
@@ -61,6 +65,9 @@ public class JobPostingController {
   @Autowired
   FinalEducationService finalEducationService;
 
+  @Autowired
+  MemberService memberService;
+
 
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
@@ -82,7 +89,7 @@ public class JobPostingController {
   }
 
   @PostMapping("add")
-  public String add(//
+  public String add(HttpServletRequest request, //
       JobPosting jobPosting, //
       Certificate certificate, //
       Major major, //
@@ -110,7 +117,9 @@ public class JobPostingController {
             }
           });
     }
-
+    CompanyMember companyMember = memberService.getCompanyMember(
+        ((CompanyMember) request.getSession().getAttribute("loginUser")).getNumber());
+    jobPosting.setCompanyMemberNumber(companyMember.getNumber());
     jobPosting.setFiles(files);
     System.out.println(jobPosting + "2222");
     jobPostingService.add(jobPosting);
@@ -124,19 +133,42 @@ public class JobPostingController {
   }
 
   @GetMapping("detail")
-  public void detail(@RequestParam(defaultValue = "1") int no, Model model) throws Exception {
-    jobPostingService.plusCnt(no);
-    model.addAttribute("jobPosting", jobPostingService.get(no));
+  public void detail(@RequestParam(defaultValue = "1") int no, HttpServletRequest request,
+      Model model) throws Exception {
+
+    Member mem = (Member) request.getSession().getAttribute("loginUser");
+    if (mem == null) {
+      throw new Exception("로그인을 하신 후, 채용정보를 볼 수 있습니다.");
+    } else {
+      System.out.println(mem.getNumber());
+      jobPostingService.plusCnt(no);
+      model.addAttribute("jobPosting", jobPostingService.get(no));
+
+      JobPosting jobPosting = jobPostingService.get(no);
+
+      // 자신이 작성한 채용공고인경우 수정/삭제버튼 생성
+      if (mem.getNumber() == jobPosting.getCompanyMemberNumber()) {
+        System.out.println("true");
+        model.addAttribute("modifiable", true);
+      }
+    }
   }
 
   @GetMapping("list")
-  public void list(@ModelAttribute("jobPosting") JobPosting jobPosting, Model model)
-      throws Exception {
+  public void list(@ModelAttribute("jobPosting") JobPosting jobPosting, Model model,
+      HttpServletRequest request) throws Exception {
 
+    Member mem = (Member) request.getSession().getAttribute("loginUser");
+    System.out.println(mem.getType());
     int listCnt = jobPostingService.ListCnt(jobPosting);
     List<JobPosting> jobPostings = jobPostingService.list();
     model.addAttribute("listCnt", listCnt);
     model.addAttribute("list", jobPostings);
+
+    // 기업회원일 경우
+    if (mem.getType() == 2) {
+      model.addAttribute("RegistrationPossible", true);
+    }
   }
 
   @GetMapping("list2")
@@ -151,7 +183,9 @@ public class JobPostingController {
   }
 
   @GetMapping("updateForm")
-  public void updateForm(int no, Model model) throws Exception {
+  public void updateForm(HttpServletRequest request, int no, Model model) throws Exception {
+    CompanyMember companyMember = memberService.getCompanyMember(
+        ((CompanyMember) request.getSession().getAttribute("loginUser")).getNumber());
     List<EmploymentStatus> employmentStatus = employmentStatusService.get();
     List<Certificate> certificates = certificateService.listCertificate();
     List<Major> majors = majorService.listMajor();
@@ -163,6 +197,7 @@ public class JobPostingController {
     model.addAttribute("majors", majors);
     model.addAttribute("districts", districts);
     model.addAttribute("finalEducations", finalEducations);
+    model.addAttribute("companyMember", companyMember);
   }
 
   @PostMapping("update")

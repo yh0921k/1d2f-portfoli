@@ -36,6 +36,10 @@
 		<id column="education_no" property="educationNumber"></id>
 		<result column="category" property="category"></result>
 		</association>
+		
+		  <association property="companyMember" javaType="CompanyMember">
+    <id column="company_member_no" property="number"></id>
+    </association>
 
     <association property="certificate" javaType="Certificate">
       <id column="certificate_no" property="certificateNumber" />
@@ -81,7 +85,7 @@
 		#{startDated},
 		#{endDated},
 		0,
-		6,
+		#{companyMemberNumber},
 		#{district.districtNumber},
 		now(),
 		1,
@@ -165,6 +169,7 @@
 		parameterType="int">
 	select
      j.job_posting_no,
+     j.company_member_no,
      j.title,
      j.content,
      j.minimum_career,
@@ -178,7 +183,8 @@
      c.name as certificate_name,
      m.name as major_name,
      d.name as district_name,
-     i.category
+     i.category,
+     s.member_no
      from pf_job_posting j
      left outer join
      pf_job_posting_file f on j.job_posting_no=f.job_posting_no
@@ -195,7 +201,11 @@
      left outer join
      pf_district d on j.work_place_no = d.district_no
      left outer join
-     pf_final_education i on j.minimum_education_no = i.education_no    
+     pf_final_education i on j.minimum_education_no = i.education_no
+     left outer join pf_company_member as k
+     on k.company_member_no = j.company_member_no
+     left outer join pf_members as s
+     on s.member_no = k.company_member_no    
    where
    j.job_posting_no=#{jobPostingNumber}
 	</select>
