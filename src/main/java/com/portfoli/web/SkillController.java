@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
+import com.portfoli.domain.Member;
 import com.portfoli.domain.Skill;
 import com.portfoli.service.FieldService;
 import com.portfoli.service.SkillService;
@@ -43,6 +44,18 @@ public class SkillController {
     System.out.println("fieldNumber : " + fieldNumber);
     List<Skill> list = skillService.list(fieldNumber);
     System.out.println("list : " + list);
+    model.addAttribute("list", list);
+    return new Gson().toJson(list);
+  }
+
+  @GetMapping(value = "listOfUser", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String listOfUser(HttpServletRequest request, Model model) throws Exception {
+
+    Member member = ((Member) request.getSession().getAttribute("loginUser"));
+    int memberNumber = member.getNumber();
+
+    List<Skill> list = skillService.listOfMember(memberNumber);
     model.addAttribute("list", list);
     return new Gson().toJson(list);
   }
