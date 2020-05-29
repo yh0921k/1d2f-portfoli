@@ -11,6 +11,8 @@ public interface JobPostingService {
 
   List<JobPosting> list2(int lastNo) throws Exception;
 
+  List<JobPosting> myList(int userNumber) throws Exception;
+
   int ListCnt(JobPosting jobPosting) throws Exception;
 
   void delete(int no) throws Exception;

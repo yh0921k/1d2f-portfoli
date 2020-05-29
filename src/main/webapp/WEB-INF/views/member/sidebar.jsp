@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
       <!--------------------------------------- nav bar ----------------------------------------------->
-
       <div class="col-lg-3 mb-5 h--600 border-right ml--20 mt--20">
 
         <!-- CATEGORIES -->
@@ -22,7 +21,6 @@
           <!-- desktop only -->
           <h3 class="h3 pt-3 pb-3 m-0 d-none d-lg-block ml-3">My Page</h3>
 
-
           <!-- navigation -->
           <ul id="nav_responsive"
             class="nav flex-column d-none d-lg-block font-weight-bold ">
@@ -37,8 +35,6 @@
               <ul class="nav flex-column px-2 font-weight-bold">
                 <li class="nav-item"><a class="nav-link"
                   href="/portfoli/app/member/generalUpdate"> 내 정보 수정하기 </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> 멤버쉽
-                </a></li>
               </ul></li>
 
             <li class="nav-item font-weight-bold"><a class="nav-link"
@@ -62,6 +58,7 @@
                 class="px-2 d-inline-block"> 일정 관리 </span>
             </a></li>
 
+            <c:if test="${loginUser.type == '1'}">
             <li class="nav-item">
             <a class="nav-link "href="#"> 
               <i class="fi fi-arrow-end m-0 fs--12"></i> 
@@ -79,6 +76,7 @@
               </li>
             </ul>
             </li>
+            </c:if>
 
             <li class="nav-item"><a class="nav-link pt--200"
                 style="margin-top: 200px; padding-top: 0px!important;"
