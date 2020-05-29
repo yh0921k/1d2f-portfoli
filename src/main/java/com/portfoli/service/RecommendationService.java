@@ -15,5 +15,7 @@ public interface RecommendationService {
 
   int rankAllCnt(Recommendation recommendation) throws Exception;
 
+  List<Recommendation> rankBySkill(int fieldNumber) throws Exception;
+
 
 }

@@ -40,6 +40,11 @@ public class RecommendationServiceImpl implements RecommendationService {
     return recommendationDao.rankAllCnt(recommendation);
   }
 
+  @Override
+  public List<Recommendation> rankBySkill(int fieldNumber) throws Exception {
+    return recommendationDao.rankBySkill(fieldNumber);
+  }
+
 
 
 

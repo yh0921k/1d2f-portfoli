@@ -2,6 +2,7 @@ package com.portfoli.web;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.portfoli.domain.Board;
 import com.portfoli.domain.BoardAttachment;
+import com.portfoli.domain.Field;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
@@ -30,6 +32,7 @@ import com.portfoli.domain.Portfolio;
 import com.portfoli.domain.Recommendation;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
+import com.portfoli.service.FieldService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.PortfolioService;
 import com.portfoli.service.PortfolioSkillService;
@@ -69,6 +72,28 @@ public class PortfolioController {
 
   @Autowired
   PortfolioSkillService portfolioSkillService;
+
+  @Autowired
+  FieldService fieldService;
+
+
+  @RequestMapping("rankBySkill")
+  public String rankBySkill(Model model) throws Exception {
+    List<Recommendation> list = new ArrayList<>();
+
+    List<Field> fields = fieldService.list();
+    for(Field field : fields) {
+      List<Recommendation> recommendations = recommendationService.rankBySkill(field.getNumber());
+
+      for(Recommendation recommendation : recommendations) {
+        list.add(recommendation);
+        System.out.println(recommendation.getPortfolio().getRankfield());
+        System.out.println(recommendation.getPortfolio().getRankskill());
+      }
+    }
+    model.addAttribute("list", list);
+    return "portfolio/rankbanner";
+  }
 
   @RequestMapping("rankAll")
   public String rankAll(Date startDate, Date endDate, @RequestParam(defaultValue="10") int quantity,
@@ -465,13 +490,12 @@ public class PortfolioController {
   @RequestMapping("detail")
   public String detail(int number, HttpServletRequest request, Model model) throws Exception {
 
-    Object mem = request.getSession().getAttribute("loginUser");
+    Member member = (Member) request.getSession().getAttribute("loginUser");
 
-    if(mem == null) {
+    if(member == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
     } else {
 
-      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
       Portfolio portfolio = portfolioService.get(number);
       Board board = boardService.get(number);
       Recommendation recommendation = (Recommendation) new Recommendation().setMember(member).setBoard(board);

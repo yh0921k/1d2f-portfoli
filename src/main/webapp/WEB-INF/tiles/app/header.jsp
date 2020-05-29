@@ -183,7 +183,7 @@
                      class="dropdown-item text-truncate font-weight-medium">
                   <span class="badge badge-success float-end font-weight-normal mt-1">
                     3 new</span>
-                                일정 <small class="d-block text-muted">internalmessaging system</small>
+                                일정 <small class="d-block text-muted">internal messaging system</small>
                   </a>
                   <a href="/portfoli/app/portfolio/mylist" target="_blank"
                      class="dropdown-item text-truncate font-weight-medium">

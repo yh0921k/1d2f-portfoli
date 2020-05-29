@@ -25,6 +25,7 @@
 	    <result column="thumbnail" property="thumbnail" /><!-- 섬네일 -->
 	    <result column="count" property="recommendedCount" /><!-- 추천수 -->
 	    <result column="readable" property="readable" /><!-- 공개여부 -->
+	    
 	    <association property="member" javaType="GeneralMember">
 	      <id column="member_no" property="number" /><!-- 아이디 -->
 	      <result column="id" property="id" /><!-- 아이디 -->
@@ -34,9 +35,20 @@
 	      <result column="membership" property="membership" /><!-- 멤버십 -->
 	      <result column="email" property="email" /><!-- 이메일 -->
 	    </association>
+	    
+	    <association property="rankfield" javaType="Field"><!-- 필드(대분류) -->
+	      <id column="field_no" property="number" /><!-- 필드번호 -->
+	      <result column="field_name" property="name" /><!-- 필드명 -->
+	    </association>
+	    
+	    <association property="rankskill" javaType="Skill"><!-- 스킬(소분류) -->
+	      <id column="skill_no" property="number" /><!-- 스킬번호 -->
+	      <result column="skill_name" property="name" /><!-- 스킬명 -->
+	    </association>
+
     </association>
     
-    <association property="member" javaType="GeneralMember">
+    <association property="member" javaType="Member">
     <id column="member_no" property="number" />
     <result column="id" property="id" />
     <result column="pwd" property="password" />
@@ -91,7 +103,7 @@
 	  	b.title, 
 	  	b.content, 
 	  	b.view_count, 
-	  	b.registered_date, 
+	  	b.registered_date,
 	    p.board_no,
       p.readable,
       p.homepage,
@@ -146,6 +158,55 @@
 	  WHERE p.board_no > 0
   </select>
  
+ 	<select id="rankBySkill" resultMap="RecommendationMap" parameterType="int">
+	 	select 
+		   s.skill_no,
+		   s.name skill_name, 
+		   f.field_no, 
+		   f.name field_name,
+		   ms.*, 
+		   ps.*,
+		   gm.general_member_no,
+		   m.member_no,
+		   m.id,
+	     p.board_no,
+       p.readable,
+       p.homepage,
+       p.thumbnail,
+       p.readable,
+       b.title, 
+	  	 b.content, 
+	  	 b.view_count, 
+	  	 b.registered_date,
+		   count(r.member_no) as count
+		from pf_skill s 
+		LEFT OUTER JOIN pf_field f 
+		ON s.field_no = f.field_no
+		LEFT OUTER JOIN pf_member_skill ms
+		ON s.skill_no = ms.skill_no
+		LEFT OUTER JOIN pf_portfolio_skill ps
+		ON ms.member_skill_no = ps.member_skill_no
+		LEFT OUTER JOIN pf_portfolio p
+		ON ps.board_no = p.board_no
+		LEFT OUTER JOIN pf_board b
+		ON p.board_no = b.board_no
+		LEFT OUTER JOIN pf_general_member gm
+		ON gm.general_member_no = p.general_member_no 
+		LEFT OUTER JOIN pf_members m
+		ON m.member_no = gm.general_member_no
+		LEFT OUTER JOIN pf_recommendation r
+		ON b.board_no = r.board_no
+		WHERE f.name is not null 
+			and ms.member_skill_no is not null 
+			and ps.board_no is not null 
+			and f.field_no = #{fieldNumber}
+		GROUP BY r.board_no	
+		HAVING count > 0
+		ORDER BY count(r.member_no) desc
+		limit 0, 1
+ 	</select>
+ <!-- 
+ 	 -->
 </mapper>
 
 

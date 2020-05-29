@@ -10,13 +10,21 @@ public class Portfolio extends Board implements java.io.Serializable{
   int readable;
   // 작성자의 id, 이름, 재직여부, 프로필사진, 멤버십, 이메일을 보관함
   GeneralMember member;
+  // 소분류
   List<Skill> skill;
+
+  // field별 랭킹 계산용
+  // 대분류
+  Field rankfield;
+  // 소분류
+  Skill rankskill;
+
 
   @Override
   public String toString() {
     return "Portfolio [homepage=" + homepage + ", thumbnail=" + thumbnail + ", recommendedCount="
         + recommendedCount + ", readable=" + readable + ", member=" + member + ", skill=" + skill
-        + "] Board" + super.toString() + "]";
+        + ", rankfield=" + rankfield + ", rankskill=" + rankskill + "] + " + super.toString();
   }
   @Override
   public int hashCode() {
@@ -24,6 +32,8 @@ public class Portfolio extends Board implements java.io.Serializable{
     int result = super.hashCode();
     result = prime * result + (homepage == null ? 0 : homepage.hashCode());
     result = prime * result + (member == null ? 0 : member.hashCode());
+    result = prime * result + (rankfield == null ? 0 : rankfield.hashCode());
+    result = prime * result + (rankskill == null ? 0 : rankskill.hashCode());
     result = prime * result + readable;
     result = prime * result + recommendedCount;
     result = prime * result + (skill == null ? 0 : skill.hashCode());
@@ -54,6 +64,20 @@ public class Portfolio extends Board implements java.io.Serializable{
         return false;
       }
     } else if (!member.equals(other.member)) {
+      return false;
+    }
+    if (rankfield == null) {
+      if (other.rankfield != null) {
+        return false;
+      }
+    } else if (!rankfield.equals(other.rankfield)) {
+      return false;
+    }
+    if (rankskill == null) {
+      if (other.rankskill != null) {
+        return false;
+      }
+    } else if (!rankskill.equals(other.rankskill)) {
       return false;
     }
     if (readable != other.readable) {
@@ -120,8 +144,18 @@ public class Portfolio extends Board implements java.io.Serializable{
     this.skill = skill;
     return this;
   }
-
-
+  public Field getRankfield() {
+    return rankfield;
+  }
+  public void setRankfield(Field rankfield) {
+    this.rankfield = rankfield;
+  }
+  public Skill getRankskill() {
+    return rankskill;
+  }
+  public void setRankskill(Skill rankskill) {
+    this.rankskill = rankskill;
+  }
 
 
 
