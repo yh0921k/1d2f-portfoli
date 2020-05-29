@@ -247,8 +247,7 @@
 
 							<div class="alert b-0 bg-danger-soft mt-3 mb-5 p-4 clearfix">
 
-								<p class="text-center">주의: 한 번 지워진 계정은 복구할 수 없습니다. 다시 한 번
-									생각해주세요.</p>
+								<p class="text-center">주의: 한 번 지워진 계정은 복구할 수 없습니다. 다시 한 번 생각해주세요.</p>
 
 
 								<i class="arrow arrow-lg arrow-bottom arrow-center border-danger-soft"></i>
@@ -260,11 +259,9 @@
 
 									<div class="form-label-group mb-1">
 										<input required placeholder="currentPassword" id="currentPassword" name="currentPassword"
-											type="password" class="form-control"> <label for="currentPassword">현재
-											비밀번호</label>
+											type="password" class="form-control"> <label for="currentPassword">현재 비밀번호</label>
 
-										<div class="mt--7 fs--13 text-muted mb--30 ">회원 탈퇴를 하기
-											위해 비밀번호를 한 번 더 입력해주세요.</div>
+										<div class="mt--7 fs--13 text-muted mb--30 ">회원 탈퇴를 하기 위해 비밀번호를 한 번 더 입력해주세요.</div>
 
 										<input type="submit" class="btn btn-danger btn-block" value="탈퇴하기">
 					</form>
@@ -276,6 +273,7 @@
 
 		</div>
 
+	</div>
 	</div>
 	</div>
 

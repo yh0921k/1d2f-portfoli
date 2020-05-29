@@ -76,7 +76,7 @@
             <ul class="nav flex-column px-2 font-weight-bold">
               <li class="nav-item">
                 <a class="nav-link"
-                   href="/portfoli/app/portfolio/mylist"> 포트폴리오 관리하기</a>
+                   href="/portfoli/app/portfolio/mylist"> 포트폴리오 관리</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link"
