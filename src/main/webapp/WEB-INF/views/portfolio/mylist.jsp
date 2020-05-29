@@ -100,36 +100,40 @@
                   ${item.registeredDate}</td>
 <%--------------------------------------등록일 --------------------------------------%>
 <%--------------------------------------공개여부 --------------------------------------%>
-	              <c:if test="${item.readable eq 1}">
-			        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-			        <a href="#" id="readableToggler"
-			           class="btn-toggle btn btn-sm btn-outline-secondary active"
-			           data-toggle-ajax-url-on="readableon?number=${item.number}"
-			           data-toggle-ajax-url-off="readableoff?number=${item.number}"
-			           data-toast-failure-position="">
-			          <span class="group-icon">
-			            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
-			            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
-			          </span>
-			          <br>
-			        </a>
-				      </td>
-	              </c:if>
-	              <c:if test="${item.getReadable() eq 0}">
-			        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
-			        <a href="#" id="readableToggler"
-			           class="btn-toggle btn btn-sm btn-outline-secondary"
-			           data-toggle-ajax-url-on="readableon?number=${item.number}"
-			           data-toggle-ajax-url-off="readableoff?number=${item.number}"
-			           data-toast-failure-position="">
-			          <span class="group-icon">
-			            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
-			            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
-			          </span>
-			          <br>
-			        </a>
-				      </td>
-	              </c:if>
+              <c:if test="${item.readable eq 1}">
+				        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+				        <a href="#"
+				           class="btn-toggle btn btn-sm btn-outline-secondary active readableToggler"
+				           data-toggle-ajax-url-on="readableon?number=${item.number}"
+				           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+				           data-toast-failure-position=""
+				           data-value="${item.thumbnail}"
+				           >
+				          <span class="group-icon">
+				            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+				            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+				          </span>
+				          <br>
+				        </a>
+					      </td>
+              </c:if>
+              <c:if test="${item.getReadable() eq 0}">
+				        <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
+				        <a href="#" 
+				           class="btn-toggle btn btn-sm btn-outline-secondary readableToggler"
+				           data-toggle-ajax-url-on="readableon?number=${item.number}"
+				           data-toggle-ajax-url-off="readableoff?number=${item.number}"
+				           data-toast-failure-position=""
+				           data-value="${item.thumbnail}"
+				           >
+				          <span class="group-icon">
+				            <i class="fi" style="font-size:medium; width: 50px;">비공개</i><%-- 비공개 --%>
+				            <i class="fi" style="font-size:medium; width: 50px;">공개</i><%-- 공개 --%>
+				          </span>
+				          <br>
+				        </a>
+					      </td>
+              </c:if>
 <%--------------------------------------공개여부 --------------------------------------%>
 <%--------------------------------------추천수 --------------------------------------%>
               <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">${item.getRecommendedCount()}</td>
@@ -145,8 +149,6 @@
 		              </c:forEach>
               </td>
 <%--------------------------------------스킬 --------------------------------------%>
-            </tr>
-            
             </c:forEach>
           </tbody>
         </table>
@@ -266,6 +268,7 @@
 <!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
 </div>
 </div>
+  <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
   function getQueryStringObject() {
       var a = window.location.search.substr(1).split('&');
@@ -316,10 +319,46 @@
 	   
 	 });
   
-  $("readableToggler").on('click', function(e){
-      e.stopImmediatePropagation();
-      e.currentTarget.stopImmediatePropagation();
+  
+  
+  $('.readableToggler').on('click', function() {
+		  // 공개설정인 경우 : 비공개처리는 조건없이 통과
+		  if($('#readableToggler').hasClass('active')) {
+			  alert("active임")
+		  }
+		   
+		  // 비공개설정인 경우 : 썸네일이 없으면 호출안함
+		  else {
+			  if($('#readableToggler').attr('data-value') == null) {
+			  alert("active아님");
+				  Swal.fire({
+					  icon: 'error',
+					  title: '잠깐!...',
+					  text: '썸네일을 넣어주세요.',
+					})
+					.then((result) => {
+						
+					});
+	  if (result.value) {
+	    Swal.fire(
+	      'Deleted!',
+	      'Your file has been deleted.',
+	      'success'
+	    )
+	  }
+					
+					
+					
+			  } else {
+				  Swal.fire({
+					  icon: 'success',
+					  title: '성공!',
+					  text: 'ㅎㅎ',
+					})
+			  }
+		  }
   });
+  
   
   var toggle = $('#styleToggle');
   $('#styleToggle').on('click',function(){

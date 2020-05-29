@@ -9,8 +9,9 @@
 		<id column="skill_no" property="number" />
 		<result column="field_no" property="fieldNumber"/>
 		<result column="name"	property="name" />
+		<result column="field_name"	property="fieldName" />
 	</resultMap>
-	
+
 	<select id="findAll" resultMap="SkillMap">
 		select skill_no, field_no, name 
 		from pf_skill
@@ -23,9 +24,21 @@
   </select>
   
   <select id="findAllByMemberNumber" resultMap="SkillMap" parameterType="int">
-    select ps.skill_no, ps.field_no, ps.name
+    select ps.skill_no, ps.field_no, ps.name, pf.name field_name
     from pf_member_skill pms join pf_skill ps
     on pms.skill_no=ps.skill_no
+    LEFT OUTER JOIN pf_field pf
+    ON pf.field_no = ps.field_no
     where general_member_no=#{memberNumber}
   </select>
+
+  <select id="findMemberSkillNumber" resultType="int" parameterType="map">
+    SELECT
+    	member_skill_no
+    FROM pf_member_skill
+    WHERE general_member_no = #{generalMemberNumber}
+    and skill_no = #{skillNumber}
+  </select>
+  
+  
 </mapper>

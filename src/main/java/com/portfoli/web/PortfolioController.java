@@ -30,6 +30,7 @@ import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
 import com.portfoli.domain.Portfolio;
 import com.portfoli.domain.Recommendation;
+import com.portfoli.domain.Skill;
 import com.portfoli.service.BoardAttachmentService;
 import com.portfoli.service.BoardService;
 import com.portfoli.service.FieldService;
@@ -37,6 +38,7 @@ import com.portfoli.service.MemberService;
 import com.portfoli.service.PortfolioService;
 import com.portfoli.service.PortfolioSkillService;
 import com.portfoli.service.RecommendationService;
+import com.portfoli.service.SkillService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
@@ -75,6 +77,9 @@ public class PortfolioController {
 
   @Autowired
   FieldService fieldService;
+
+  @Autowired
+  SkillService skillService;
 
 
   @RequestMapping("rankBySkill")
@@ -540,21 +545,24 @@ public class PortfolioController {
     }
   }
   @RequestMapping("form")
-  public void form() throws Exception {}
+  public void form(HttpServletRequest request, Model model) throws Exception {
+    Member member = (Member) request.getSession().getAttribute("loginUser");
+    List<Skill> myskills = skillService.listOfMember(member.getNumber());
+    model.addAttribute("myskills", myskills);
+  }
 
   @RequestMapping("add")
   public String add(String skills, Portfolio portfolio, HttpServletRequest request, Model model,
       @RequestParam("thumb") MultipartFile thumb,
       @RequestParam("files") MultipartFile[] files) throws Exception {
 
-    Object mem = request.getSession().getAttribute("loginUser");
+    Member member = (Member) request.getSession().getAttribute("loginUser");
 
-    if(mem == null) {
+    if(member == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
     } else {
 
-      GeneralMember member = memberService.getGeneralMember(((GeneralMember) mem).getNumber());
-      portfolio.setMember(member);
+      portfolio.setMember((GeneralMember)member);
 
       // Board 객체 추가(pf_board)
       Board board = new Board();
@@ -603,14 +611,13 @@ public class PortfolioController {
       }
       portfolioService.insert(portfolio);
 
-      // 기술명 확인하고 넣을 예정 (현재는 숫자로만 넣을 수 있음)
-      // 여기서 str은 member_skill_no임! (주의)
+      // [from TABLE pf_member_skill]  : str(기술번호)를 통해 member_skill_no(PK값)을 호출해서
+      // [to TABLE pf_portfolio_skill] : member_skill_no에 집어넣는다.
       String[] strs = skills.split(",");
       for(String str : strs) {
-        System.out.println(str);
-        portfolioSkillService.add(portfolio.getNumber(), Integer.valueOf(str));
+        portfolioSkillService.add(portfolio.getNumber(),
+            skillService.getMemberSkillNumber(member.getNumber(), Integer.valueOf(str)));
       }
-
       return "redirect:mylist";
     }
   }

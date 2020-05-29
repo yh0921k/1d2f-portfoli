@@ -41,7 +41,7 @@
   values ( 
 	  ${boardNumber}
 	  , 
-	  ${memberNumber}
+	  ${memberSkillNumber}
   )
   </insert>
 

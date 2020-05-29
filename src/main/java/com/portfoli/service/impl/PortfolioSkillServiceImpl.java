@@ -21,10 +21,10 @@ public class PortfolioSkillServiceImpl implements PortfolioSkillService {
   }
 
   @Override
-  public boolean add(int boardNumber, int memberNumber) throws Exception {
+  public boolean add(int boardNumber, int memberSkillNumber) throws Exception {
     Map<String, Integer> map = new HashMap<>();
     map.put("boardNumber", boardNumber);
-    map.put("memberNumber", memberNumber);
+    map.put("memberSkillNumber", memberSkillNumber);
     return portfolioSkillDao.insert(map);
   }
 

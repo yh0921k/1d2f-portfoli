@@ -28,8 +28,7 @@
 <div class="row" id="blockStyle" style="margin-left: 0px;position: relative;backface-visibility: hidden;background: white;display:block;height: 316px;overflow: hidden;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
-  <div id="spinning"
-  		 class="col-12 col-lg-4 mb-4 cursor js-ajax-modal" 
+  <div class="col-12 col-lg-4 mb-4 cursor js-ajax-modal" 
   		 style="max-width: 100%; width:100%; margin-right:20px; height: 316px"
 		   data-href="detail?number=${item.portfolio.number}" 
 		   data-ajax-modal-size="modal-xl" 
@@ -144,6 +143,12 @@
   </style>
   
   <script>
+  
+  setInterval(function() {
+	  alert('test');
+	  $('#blockStyle > div:nth-child(1)').appendTo($('#blockStyle'));
+  },3000);
+  
   $('.searchMonth').change(function() {
 	  var month = $('.searchMonth').val();
 	  console.log(month+"-01");

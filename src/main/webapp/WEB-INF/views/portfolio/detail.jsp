@@ -151,6 +151,7 @@
         <div style="position: relative; display: inline-block;" align="center">
 <c:if test="${myRecommendation == 1}">
         <a href="#" 
+        	 id="recommendationToggle"
 					 class="btn-toggle btn btn-sm btn-outline-secondary active"
 					 data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
 				   data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
@@ -160,11 +161,12 @@
 				    <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
 				  </span>
 				  <br>
-				  <span>${portfolio.recommendedCount}</span>
+				  <span id="recommendationCount">${portfolio.recommendedCount}</span>
 				</a>
 </c:if>
 <c:if test="${myRecommendation == 0}">
         <a href="#" 
+        	 id="recommendationToggle"
            class="btn-toggle btn btn-sm btn-outline-secondary"
            data-toggle-ajax-url-on="turnon?number=${portfolio.number}"
            data-toggle-ajax-url-off="turnoff?number=${portfolio.number}"
@@ -174,7 +176,7 @@
             <i class="fi fi-like text-warning" style="font-size:medium; width: 27px;"></i><%-- 추천됨 --%>
           </span>
           <br>
-          <span>${portfolio.recommendedCount}</span>
+				  <span id="recommendationCount">${portfolio.recommendedCount}</span>
         </a>
 </c:if>
 
@@ -293,6 +295,9 @@
   <link rel="stylesheet" href="${pageContext.request.getContextPath()}/resources/assets/css/core.min.css">
   <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
   <style>
+  .note-editable.card-block{
+  	-webkit-user-modify:read-only;
+  }
   
   #my-dropdown-menu{
   color:black; 
@@ -323,6 +328,15 @@
   $.SOW.core.dropdown.init('.dropdown-menu.dropdown-menu-hover');
   $.SOW.core.dropdown_click_ignore.init('.dropdown-menu.dropdown-click-ignore');
   $.SOW.core.dropdown_ajax.init('a[data-toggle="dropdown"]');
+
+  $('#recommendationToggle').on('click', function() {
+	  var oldValue = $('#recommendationCount').html();
+	  if($('#recommendationToggle').hasClass('active')) {
+	  	$('#recommendationCount').html(oldValue-1);
+	  } else {
+		  $('#recommendationCount').html(oldValue-1+2);
+	  }
+  });
   
   $('#sendMail').on('click', function() {
 	  location.href="mailto:" + "${portfolio.member.email}";

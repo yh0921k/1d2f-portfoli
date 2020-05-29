@@ -11,4 +11,6 @@ public interface SkillService {
 
   public List<Skill> listOfMember(int memberNumber) throws Exception;
 
+  public int getMemberSkillNumber(int generalMemberNumber, int skillNumber) throws Exception;
+
 }

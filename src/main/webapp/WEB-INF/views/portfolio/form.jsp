@@ -18,7 +18,7 @@
             <div class="col-12 col-lg-12">
         <h3 class="d-none d-lg-block m--3" style="margin-bottom: 1.4rem!important;">내 포트폴리오 등록</h3>
 
-               <form action="add" method="post" enctype="multipart/form-data">
+               <form id="addForm" action="add" method="post" enctype="multipart/form-data">
                 
           <span class="text-gray-900">제목 : </span> 
           <input required type="text"  placeholder="제목을 적어주세요"
@@ -26,23 +26,10 @@
                  name="title" value="${portfolio.title}">
           <br>
           <p class="text-gray-900 mt-3" style="display: inline-block;">기술 : </p>
-          <%--
-          <input type="text"  placeholder="기술명을 적어주세요"
-                 class="form-label-group form-control-clean col-md-11 mt--5"
-                 name="skills">
-           --%>
-                 
           <select name="skills" multiple class="bs-select form-label-group form-control-clean col-md-11 mt--5" title="기술을 골라주세요">
-          	<option value="1" data-subtext="Web">JAVA</option>
-          	<option value="2" data-subtext="Web">JSP</option>
-          	<option value="3" data-subtext="Web">Spring</option>
-          	<option value="4" data-subtext="Web">Django</option>
-          	<option value="5" data-subtext="Web">Javascript</option>
-          	<%--
-          	<c:forEach items="item">
-          	<option value="${item.memberSkillNumber}" data-subtext="${item.category}">${item.name}</option>
+          	<c:forEach items="${myskills}" var="item">
+          	<option value="${item.number}" data-subtext="${item.fieldName}">${item.name}</option>
 	          	</c:forEach>
-          	 --%>
           </select>
 
           <p class="text-gray-900 mt-3">내용 :</p>
@@ -73,7 +60,7 @@
           <div class='photoDiv' style="min-height: 200px;">
             <p class="text-gray-900 mt-3" style="margin-bottom: 0px">썸네일 :</p>
               <div class="form-control" align="center" >
-                    <input type="file" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
+                    <input type="file" id="thumb" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
               </div>
             
             <%-- filePar : 첨부파일 개수 늘리는 부분 --%>
@@ -90,7 +77,7 @@
             </label>
 
           <div align="right" class="container-fluid">
-            <button type="submit"
+            <button id="register" type="button"
               class="btn btn-outline-secondary btn-pill btn-sm mt-3">
               등록하기</button>
           </div>
@@ -124,14 +111,33 @@
     .buttonTD{text-align: center}
     .textAR{resize:none; border-color:pink}
   </style>
+  
+  <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
+  
+  
+  $('#register').on('click', function() {
+	  // 공개설정인 경우 : 썸네일 값이 있는지 체크
+	  if($('#readable').val() == 1 ) {
+		  if($('#thumb').val() != null) {
+			  Swal.fire({
+				  icon: 'error',
+				  title: '잠깐!...',
+				  text: '썸네일을 넣어주세요.',
+				})
+		  }
+	  }
+	  // 비공개설정인 경우 : 조건없이 통과
+	  if($('#readable').val() == 0 || $('#readable').val() == 'on') {
+	  	$('#addForm').submit();
+	  }
+  });
   
   $('input[type="checkbox"]').change(function(){
       this.value = (Number(this.checked));
   });
   
   var td = document.querySelector("#filePar");
-  console.log(td);
   
   td.addEventListener("click", function(e) {
       var br = document.createElement("br");

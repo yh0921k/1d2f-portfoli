@@ -1,6 +1,8 @@
 package com.portfoli.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -33,5 +35,13 @@ public class SkillServiceImpl implements SkillService {
   @Override
   public List<Skill> listOfMember(int memberNumber) throws Exception {
     return skillDao.findAllByMemberNumber(memberNumber);
+  }
+
+  @Override
+  public int getMemberSkillNumber(int generalMemberNumber, int skillNumber) throws Exception {
+    Map<String, Integer> map = new HashMap<>();
+    map.put("generalMemberNumber", generalMemberNumber);
+    map.put("skillNumber", skillNumber);
+    return skillDao.findMemberSkillNumber(map);
   }
 }
