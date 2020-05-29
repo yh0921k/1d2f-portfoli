@@ -549,13 +549,13 @@
           
         </div>
         <hr>
-        <div style="display:inline-block; width:30%; height:400px;">
+        <div style="display:inline-block; float:left; width:30%; height:800px;">
 					<div id= "selectField" class="iqs-container p--15 border rounded mt-3" style="background-color:lightcyan;">					
 					  <!-- ajax 필드 추가 코드 들어감 -->
 					</div>
         </div> 
         
-        <div style="display:inline-block; width:30%; height:400px;">
+        <div style="display:inline-block; float:left; width:70%; height:800px;">
           <div id="selectSkill" class="iqs-container p--15 border rounded mt-3" style="background-color:lightcyan;">         
             <!-- ajax 기술 추가 코드 들어감 -->             
           </div>
@@ -601,44 +601,66 @@
 
 <script>
   // Field 리스트 출력
-  $(document).ready(function() {
-	  $("#availableSkills").click(function() {
-		  console.log("FieldList 출력");
-		  if(document.getElementsByName("checkbox_p").length > 0) {
-			  return;
-		  }		  
-		  var xhr = new XMLHttpRequest();
-	    xhr.onreadystatechange = () => {
-	        if (xhr.readyState == 4) {
-	            if (xhr.status == 200) {
-	              var obj = JSON.parse(xhr.responseText);
-	              for(idx in obj) {
-	            	  var addHtml = `<div class="iqs-item">       
-	            	  <label class="form-checkbox form-checkbox-primary">
-	            	    <input class="field" type="checkbox" name="checkbox_p">
-	            	    <i></i>` + obj[idx].name + `</label>`
-	            	  $("#selectField").append(addHtml);
+  window.onload = function() {
+	  console.log("FieldList 출력");
+	  
+    if(document.getElementsByName("checkbox_p").length > 0) {
+      return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          let obj = JSON.parse(xhr.responseText);
+          for(idx in obj) {
+            var addHtml = `<div class="iqs-item">       
+            <label class="form-checkbox form-checkbox-primary">
+              <input class="field" type="checkbox" name="checkbox_p">
+              <i></i>` + obj[idx].name + `</label>`
+            $("#selectField").append(addHtml);
 
-	              }	              
-	            }
-	        }
-	    };
-	    xhr.open('GET', '../field/list', true); 
-	    xhr.send();
-	  });
-  });
+          }               
+        }
+    }
+    };
+    xhr.open('GET', '../field/list', true); 
+    xhr.send();
+  };  
+
   
   // Field 클릭 시 해당 Field에 맞는 우측에 Skill 리스트 출력
 $("#selectField").on("click", ".field", function() {
-  var fields = $("#selectField .field");
-	var field;
-	var selected;
-	for(field of fields) {
-		if($(field).is(":checked")) {
-			selected = field;
-		}
-		$(field).prop("checked", false);
-	}
-	$(selected).prop("checked", true);
+	$("#selectSkill").empty();
+	$("#selectField .field").prop("checked", false);
+	var fields = document.querySelectorAll("#selectField .field");
+	$(this).prop("checked", true);
+
+	var queryString = "";	
+	try {
+		if(queryString = $(this)[0].parentNode.textContent) {
+			queryString = queryString.trim();
+		}		
+	} catch (error) {
+		return;
+	}	
+	
+	var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            let obj = JSON.parse(xhr.responseText);
+            for(idx in obj) {
+              var addHtml = `<div class="iqs-item" style="display:inline-block; width:200px;">    
+              <label class="form-checkbox form-checkbox-primary">
+                <input class="skill" type="checkbox" name="checkbox_p">
+                <i></i>` + obj[idx].name + `</label>`
+              $("#selectSkill").append(addHtml);
+            }               
+          }
+      }
+  };
+  xhr.open('GET', '../skill/list?selected=' + queryString, true); 
+  xhr.send();
+	 
 });
 </script>

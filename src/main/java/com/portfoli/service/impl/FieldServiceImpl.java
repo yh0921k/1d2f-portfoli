@@ -25,5 +25,8 @@ public class FieldServiceImpl implements FieldService {
     return fieldDao.findAll();
   }
 
-
+  @Override
+  public int get(String fieldName) throws Exception {
+    return fieldDao.findNumber(fieldName);
+  }
 }
