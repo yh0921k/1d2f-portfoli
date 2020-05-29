@@ -252,13 +252,11 @@ public class JobPostingController {
 
   @GetMapping("mylist")
   public void myList(@ModelAttribute("jobPosting") JobPosting jobPosting, Model model,
-      HttpServletRequest request, int no) throws Exception {
+      HttpServletRequest request) throws Exception {
 
     Member mem = (Member) request.getSession().getAttribute("loginUser");
 
-    int listCnt = jobPostingService.ListCnt(jobPosting);
-    List<JobPosting> myPostingList = jobPostingService.myPostingList(no);
-    model.addAttribute("listCnt", listCnt);
+    List<JobPosting> myPostingList = jobPostingService.myPostingList(mem.getNumber());
     model.addAttribute("myPostingList", myPostingList);
 
     // 기업회원일 경우에만 공고등록 버튼 생성

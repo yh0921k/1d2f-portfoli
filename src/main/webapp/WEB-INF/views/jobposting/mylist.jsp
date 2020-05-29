@@ -10,57 +10,45 @@
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
 
-<div class="container" style="text-align:center" >
+<div class="container mt--20" style="width: 70%; margin-left: 10px;overflow-x: hidden;" >
+
 <h1 style="text-align:left">공고 관리</h1>
-<div id="searchForm" style="text-align:right">
-<form action='search' method='get' >
-  <input id='keyword' name='keyword' type='text' >
-  
-  <button aria-label="Global Search" type="submit"
-                  class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
-                  <i class="fi fi-search fs--20"></i>
-                </button>
-</form>
-</div>
-<p style="text-align:left">
-전체  (<c:out value="${listCnt}"/>) 건
-<p>
 <hr>
 
+<%-------------------------------------content----------------------------------%>
 <div>
 <table id="listTable" class="table table-striped table-hover">
-  <thead>
-    <th>no</th>
-    <th>고용형태</th>
+  
+  <thead>  
+    <th>번호</th>
     <th>제목</th>
-    <th>내용</th>
     <th>등록일</th>
+    <th>마감일</th>
     <th>조회수</th>
   </thead>
 
   <tbody>
-  <c:forEach items="${list}" var="item" varStatus="status">
+  <c:forEach items="${myPostingList}" var="item" varStatus="status">
     <tr id="tList">
       <td>${item.jobPostingNumber}</td>
-      <td>${item.employmentStatus.name}</td>      
       <td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
-      <td>${item.content}</td>
       <td>${item.postingRegistration}</td>
+      <td>${item.endDated}</td>
       <td>${item.viewCount}</td>
     </tr>
   </c:forEach>
   </tbody>
+  
 </table>
 </div>
-
-
 <hr>
-
 <c:if test="${RegistrationPossible== true}">
 <div style="text-align:right">
 <a href='form' class="btn btn-outline-dark btn-pill mb-1">글쓰기</a>
 </div>
 </c:if>
+<%------------------------------------content------------------------------------%>
+
 <br>
 <br>
 <br>
