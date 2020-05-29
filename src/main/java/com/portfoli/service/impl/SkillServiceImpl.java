@@ -29,4 +29,9 @@ public class SkillServiceImpl implements SkillService {
   public List<Skill> list(int fieldNumber) throws Exception {
     return skillDao.findAllByNumber(fieldNumber);
   }
+
+  @Override
+  public List<Skill> listOfMember(int memberNumber) throws Exception {
+    return skillDao.findAllByMemberNumber(memberNumber);
+  }
 }

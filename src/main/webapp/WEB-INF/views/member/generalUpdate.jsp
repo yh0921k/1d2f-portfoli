@@ -531,22 +531,7 @@
   <div class="d-block shadow-xs rounded p-4 mb-2">
     <div class="row">
       <div class="col">
-        <div id="availableList", style="width:100%; height:200px; background-color:seashell;">
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          <span class="badge badge-pill badge-secondary">Secondary</span>
-          
+        <div id="available", style="width:100%; height:200px; background-color:seashell;">
         </div>
         <hr>
         <div style="display:inline-block; float:left; width:30%; height:800px;">
@@ -604,12 +589,28 @@
   window.onload = function() {
 	  console.log("FieldList 출력");
 	  
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          let skillList = JSON.parse(xhr.responseText); 
+          for(var skill of skillList) {
+        	  var addHtml = `<span style="margin:2px;" class="badge badge-pill badge-secondary">` + skill.name + `</span>`
+        		$("#available").append(addHtml);
+          }
+         }               
+       }
+      }    
+    xhr.open('GET', '../skill/listOfUser', false); 
+    xhr.send();
+	  
     if(document.getElementsByName("checkbox_p").length > 0) {
       return;
     }
+    
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4) {
+	    if (xhr.readyState == 4) {
         if (xhr.status == 200) {
           let obj = JSON.parse(xhr.responseText);
           for(idx in obj) {
@@ -618,10 +619,9 @@
               <input class="field" type="checkbox" name="checkbox_p">
               <i></i>` + obj[idx].name + `</label>`
             $("#selectField").append(addHtml);
-
-          }               
-        }
-    }
+         }               
+       }
+	    }
     };
     xhr.open('GET', '../field/list', true); 
     xhr.send();
