@@ -13,6 +13,8 @@ public interface JobPostingService {
 
   List<JobPosting> myList(int userNumber) throws Exception;
 
+  List<JobPosting> myPostingList(int memberNumber) throws Exception;
+
   int ListCnt(JobPosting jobPosting) throws Exception;
 
   void delete(int no) throws Exception;

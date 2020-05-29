@@ -248,4 +248,29 @@ public class JobPostingController {
     jobPostingService.update(jobPosting);
     return "redirect:list";
   }
+
+
+  @GetMapping("mylist")
+  public void myList(@ModelAttribute("jobPosting") JobPosting jobPosting, Model model,
+      HttpServletRequest request, int no) throws Exception {
+
+    Member mem = (Member) request.getSession().getAttribute("loginUser");
+
+    int listCnt = jobPostingService.ListCnt(jobPosting);
+    List<JobPosting> myPostingList = jobPostingService.myPostingList(no);
+    model.addAttribute("listCnt", listCnt);
+    model.addAttribute("myPostingList", myPostingList);
+
+    // 기업회원일 경우에만 공고등록 버튼 생성
+    if (mem.getType() == 2) {
+      model.addAttribute("RegistrationPossible", true);
+    }
+
+    // JobPosting myList = jobPostingService.get(no);
+    //
+    // if (mem.getNumber() == myList.getCompanyMemberNumber()) {
+    // }
+
+  }
+
 }
