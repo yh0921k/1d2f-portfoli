@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.SkillDao">
+
+	<resultMap type="Skill" id="SkillMap">
+		<id column="skill_no" property="number" />
+		<result column="field_no" property="fieldNumber"/>
+		<result column="name"	property="name" />
+	</resultMap>
+	
+	<select id="findAll" resultMap="SkillMap">
+		select skill_no, field_no, name 
+		from pf_skill
+	</select>	
+	
+	<select id="findAllByNumber" resultMap="SkillMap" parameterType="int">
+    select skill_no, field_no, name 
+    from pf_skill
+    where field_no=#{fieldNumber}
+  </select>
+	
+</mapper>
