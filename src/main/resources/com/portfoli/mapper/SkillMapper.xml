@@ -21,5 +21,11 @@
     from pf_skill
     where field_no=#{fieldNumber}
   </select>
-	
+  
+  <select id="findAllByMemberNumber" resultMap="SkillMap" parameterType="int">
+    select ps.skill_no, ps.field_no, ps.name
+    from pf_member_skill pms join pf_skill ps
+    on pms.skill_no=ps.skill_no
+    where general_member_no=#{memberNumber}
+  </select>
 </mapper>
