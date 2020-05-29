@@ -7,4 +7,6 @@ public interface FieldService {
 
   public List<Field> list() throws Exception;
 
+  public int get(String fieldName) throws Exception;
+
 }
