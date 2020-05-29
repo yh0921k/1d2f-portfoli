@@ -92,7 +92,14 @@
             </li>
             
             </c:if>
-
+            
+            <c:if test="${loginUser.type == '2'}">
+             <li class="nav-item"><a class="nav-link "
+              href="/portfoli/app/jobposting/mylist"> <i
+                class="fi fi-arrow-end m-0 fs--12"></i> <span
+                class="px-2 d-inline-block"> 공고 관리 </span>
+            </a></li>
+            </c:if>
           </ul>
 
         </nav>

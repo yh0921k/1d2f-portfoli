@@ -61,7 +61,6 @@
 			시작일 | ${jobPosting.startDated}<br> 마감일 | ${jobPosting.endDated}<br>
 		</div>
 		<hr>
-		<button class="btn btn-outline-dark btn-lg">지원하기</button>
 
 		<c:if test="${not empty modifiable}">
 			<div style="text-align: right">
