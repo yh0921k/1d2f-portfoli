@@ -31,12 +31,20 @@
               </span> <span class="px-2 d-inline-block active font-weight-bold">
                   내 정보 </span>
             </a>
-
+						<c:if test="${loginUser.type == '1'}">
               <ul class="nav flex-column px-2 font-weight-bold">
                 <li class="nav-item"><a class="nav-link"
                   href="/portfoli/app/member/generalUpdate"> 내 정보 수정하기 </a></li>
-              </ul></li>
-
+              </ul>
+						</c:if>
+						<c:if test="${loginUser.type == '2'}">
+              <ul class="nav flex-column px-2 font-weight-bold">
+                <li class="nav-item"><a class="nav-link"
+                  href="/portfoli/app/member/companyUpdate"> 내 정보 수정하기 </a></li>
+              </ul>
+						</c:if>
+              
+              </li>
             <li class="nav-item font-weight-bold"><a class="nav-link"
               href="#"> <span class="group-icon"> <i
                   class="fi fi-arrow-end"></i> <i class="fi fi-arrow-down"></i>
@@ -52,13 +60,13 @@
               </ul></li>
 
 
+            <c:if test="${loginUser.type == '1'}">
             <li class="nav-item"><a class="nav-link "
               href="/portfoli/app/calendar/calendar"> <i
                 class="fi fi-arrow-end m-0 fs--12"></i> <span
                 class="px-2 d-inline-block"> 일정 관리 </span>
             </a></li>
 
-            <c:if test="${loginUser.type == '1'}">
             <li class="nav-item">
             <a class="nav-link "href="#"> 
               <i class="fi fi-arrow-end m-0 fs--12"></i> 
@@ -77,14 +85,13 @@
             </ul>
             </li>
             </c:if>
-
-            <li class="nav-item"><a class="nav-link pt--200"
-                style="margin-top: 200px; padding-top: 0px!important;"
-                href="account-settings.html"> <i
-                class="fi fi-arrow-end m-0 fs--12"></i> <span
-                class="px-2 d-inline-block"> 통계 </span>
-            </a></li>
-
+            
+            <c:if test="${loginUser.type == '2'}">
+            
+							<li class="nav-item"><a class="nav-link"  href="/portfoli/app/payment/introduction"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 멤버십 </span> </a>
+            </li>
+            
+            </c:if>
 
           </ul>
 

@@ -66,6 +66,16 @@ public class MemberServiceImpl implements MemberService {
   }
 
 
+  @Override
+  public CompanyMember getCompanyMember(int number) throws Exception {
+    CompanyMember companyMember =  companyMemberDao.findByMemberNumber(number);
+    if (companyMember != null) {
+      return companyMember;
+    } else {
+      return null;
+    }
+  }
+
   // 로그인
   @Override
   public Member get(String email, String password) throws Exception {
@@ -100,7 +110,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Member get(int number) throws Exception {
     Member member = memberDao.findByMemberNumber(number);
-    if ((member) != null) {
+    if (member != null) {
       return member;
     } else {
       return null;
@@ -111,7 +121,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public GeneralMember getGeneralMember(int number) throws Exception {
     GeneralMember generalMember = generalMemberDao.findByGeneralMemberNumber(number);
-    if ((generalMember) != null) {
+    if (generalMember != null) {
       return generalMember;
     } else {
       return null;
@@ -255,14 +265,14 @@ public class MemberServiceImpl implements MemberService {
 
 
   // 어드민
-  
+
   @Override
   public List<Member> list(String regisDate, int currentPage, int pageSize) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
     params.put("offset", (currentPage - 1) * pageSize);
     params.put("pageSize", pageSize);
     params.put("createDate", regisDate);
-    
+
     List<Member> members = memberDao.findAll(params);
     if(members.size() < 0) {
       throw new Exception("회원 정보 불러오기 실패");
@@ -275,6 +285,8 @@ public class MemberServiceImpl implements MemberService {
   public int selectListCnt() throws Exception {
     return memberDao.count();
   }
+
+
 
 
 

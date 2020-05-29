@@ -34,14 +34,20 @@
       #{companyNumber})
   </insert>
   
-  <select id="findByEmailAndPassword" 
-    resultMap="CompanyMemberMap" 
-    parameterType="map">
+  <select id="findByEmailAndPassword" resultMap="CompanyMemberMap" parameterType="map">
     SELECT c.company_member_no, m.type, m.id, m.name, m.email, c.position, c.company_no
     FROM pf_members m JOIN pf_company_member c
     ON m.member_no = c.company_member_no
     WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
   </select>
+  
+  <select id="findByMemberNumber" resultMap="CompanyMemberMap" parameterType="int">
+		SELECT *
+		FROM pf_members m JOIN pf_company_member c
+		ON m.member_no = c.company_member_no
+		WHERE m.member_no=#{no}
+	</select>
+	
   
    <delete id="delete" parameterType="int">
   	DELETE 

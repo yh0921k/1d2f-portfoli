@@ -179,21 +179,19 @@
 
                   <div class="dropdown-divider" style="z-index: 200;"></div>
 
-                  <a href="/portfoli/app/calendar/calendar" target="_blank"
-                       class="dropdown-item text-truncate font-weight-medium">
-                  <span class="badge badge-success float-end font-weight-normal mt-1">
-                    3 new</span>
-                                일정 <small class="d-block text-muted">internalmessaging system</small>
-                  </a>
-                  <a href="/portfoli/app/portfolio/mylist" target="_blank"
-                     class="dropdown-item text-truncate font-weight-medium">
-                                내 포트폴리오 <small class="d-block text-muted">portfolio</small>
-                  </a>
-                  <a href="/portfoli/app/member/generalMypage"
-                     class="dropdown-item text-truncate font-weight-medium">
-                                     마이페이지 <small class="d-block text-muted">profile,
-                      password and more...</small>
-                  </a>
+                      <a href="/portfoli/app/member/generalMypage" class="dropdown-item text-truncate font-weight-medium"> 마이페이지 
+                      <small class="d-block text-muted">profile, password and more...</small>
+                      </a>
+                      
+                      <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium"> 포트폴리오 
+                      <small class="d-block text-muted">portfolio</small>
+                      </a> 
+                      
+                      <a href="/portfoli/app/calendar/calendar" target="_blank" class="dropdown-item text-truncate font-weight-medium">
+                        <span class="badge badge-success float-end font-weight-normal mt-1">3 new</span> 일정 
+                        <small class="d-block text-muted">calendar</small>
+                      </a> 
+
 
                   <div class="dropdown-divider mb-0"></div>
 
@@ -283,9 +281,14 @@
                     <div class="dropdown-header fs--14 py-4">
 
                       <!-- profile image -->
-                      <div
+                     <div
                         class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
+                        <c:if test="${empty loginUser.photoFilePath}">
                         style="background-image: url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
+                        </c:if>
+                        <c:if test="${not empty loginUser.photoFilePath}">
+                        style="background-image: url('${pageContext.request.getContextPath()}/upload/member/${loginUser.photoFilePath}')"></div>
+                        </c:if>
 
                       <!-- initials - no image -->
                       <!--

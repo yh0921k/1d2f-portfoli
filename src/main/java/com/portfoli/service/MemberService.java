@@ -45,4 +45,6 @@ public interface MemberService {
 
   int selectListCnt() throws Exception;
 
+  CompanyMember getCompanyMember(int number) throws Exception;
+
 }
