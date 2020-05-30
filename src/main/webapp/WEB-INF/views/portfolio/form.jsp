@@ -23,7 +23,7 @@
           <span class="text-gray-900">제목 : </span> 
           <input required type="text"  placeholder="제목을 적어주세요"
                  class="form-label-group form-control-clean col-md-11 mt--5"
-                 name="title" value="${portfolio.title}">
+                 name="title">
           <br>
           <p class="text-gray-900 mt-3" style="display: inline-block;">기술 : </p>
           <select name="skills" multiple class="bs-select form-label-group form-control-clean col-md-11 mt--5" title="기술을 골라주세요">

@@ -21,10 +21,32 @@
                <form action="update" method="post" enctype="multipart/form-data">
                <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
                 
-          <span class="text-gray-900">제목 : </span>
-          <input required type="text" placeholder="제목을 적어주세요"
+          <span class="text-gray-900">제목 : </span> 
+          <input required type="text"  placeholder="제목을 적어주세요"
                  class="form-label-group form-control-clean col-md-11 mt--5"
                  name="title" value="${portfolio.title}">
+
+          <br>
+          <p class="text-gray-900 mt-3" style="display: inline-block;">기술 : </p>
+          <select multiple
+                  name="skills"
+                  class="bs-select form-label-group form-control-clean col-md-11 mt--5" 
+                  title="
+		      <%--스킬나열 --%>
+		      <c:forEach items="${portfolio.skill}" var="skill" varStatus="status">
+		                  ${skill.name}<c:if test="${!status.last}">,</c:if>
+		      </c:forEach>
+		      <c:if test="${empty portfolio.skill}">
+		                              기술을 적어주세요
+		      </c:if>
+                  "
+          >
+            <c:forEach items="${myskills}" var="item">
+            <option class="options" value="${item.number}" data-subtext="${item.fieldName}">${item.name}</option>
+            </c:forEach>
+          </select>
+
+
 
           <p class="text-gray-900 mt-3">내용 :</p>
           <textarea class="summernote-editor"
@@ -90,6 +112,9 @@
 </div>
 </div>
   <style>
+    .btn.dropdown-toggle.select-form-control.border-gray-400.form-control-clean{
+    background: lightblue;
+    }
     .lightGray{width: 100%; border:2px lightGray solid;}
     .darkerGray{color:#313335;}
     .firstTR{border-bottom:1px darkGray dashed; padding:0px 5px;}
@@ -103,6 +128,10 @@
     .textAR{resize:none; border-color:pink}
   </style>
   <script>
+  // 기존 skill title에 노출시키기
+  var skills = $('.bs-select.form-label-group.form-control-clean.col-md-11.mt--5').attr("title");
+  $('.btn.dropdown-toggle.select-form-control.border-gray-400.form-control-clean').attr("title", skills);
+  
   var td = document.querySelector("#filePar");
   console.log(td);
   

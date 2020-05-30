@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -26,6 +27,7 @@ import com.portfoli.domain.Board;
 import com.portfoli.domain.BoardAttachment;
 import com.portfoli.domain.Field;
 import com.portfoli.domain.GeneralMember;
+import com.portfoli.domain.GeneralMemberSkill;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
 import com.portfoli.domain.Portfolio;
@@ -81,6 +83,8 @@ public class PortfolioController {
   @Autowired
   SkillService skillService;
 
+  @Autowired
+  PortfolioSkillService portfoliSkillService;
 
   @RequestMapping("rankBySkill")
   public String rankBySkill(Model model) throws Exception {
@@ -92,8 +96,6 @@ public class PortfolioController {
 
       for(Recommendation recommendation : recommendations) {
         list.add(recommendation);
-        System.out.println(recommendation.getPortfolio().getRankfield());
-        System.out.println(recommendation.getPortfolio().getRankskill());
       }
     }
     model.addAttribute("list", list);
@@ -421,13 +423,24 @@ public class PortfolioController {
 
 
   @PostMapping("updateForm")
-  public void updateForm(Portfolio portfolio, Model model) throws Exception {
-    Portfolio item = portfolioService.get(portfolio.getNumber());
-    model.addAttribute("portfolio", item);
+  public void updateForm(Portfolio portfolio, Model model, HttpServletRequest request) throws Exception {
+
+    // 사용자의 스킬 리스트 붙이기
+    Member member = (Member) request.getSession().getAttribute("loginUser");
+    List<Skill> myskills = skillService.listOfMember(member.getNumber());
+    model.addAttribute("myskills", myskills);
+
+    //포트폴리오 내용 받아오기
+    portfolio = portfolioService.get(portfolio.getNumber());
+
+    // 포트폴리오에 사용된 스킬 리스트 붙이기
+    portfolio.setSkill(portfolioSkillService.findAllSkill(portfolio.getBoard().getNumber()).getSkill());
+    model.addAttribute("portfolio", portfolio);
+
   }
 
   @PostMapping("update")
-  public String updateForm(HttpServletRequest request, Portfolio portfolio,
+  public String updateForm(String skills, HttpServletRequest request, Portfolio portfolio,
       @RequestParam("thumb") MultipartFile thumb,
       @RequestParam("files") MultipartFile[] files) throws Exception {
 
@@ -485,6 +498,53 @@ public class PortfolioController {
         portfolio.getMember().setNumber(member.getNumber());
 
         portfolioService.update(portfolio);
+      }
+
+      String[] updateList = skills.split(",");
+      List<Skill> list = skillService.listOfMember(member.getNumber());
+      List<String> deleteList = new LinkedList<>();
+      List<String> sameList = new LinkedList<>();
+
+      for (int i = 0; i < list.size(); i++) {
+        boolean flag = false;
+        for (int j = 0; j < updateList.length; j++) {
+          if (updateList[j].equals(list.get(i).getName())) {
+            flag = true;
+          }
+        }
+        if (!flag) {
+          deleteList.add(list.get(i).getName());
+        } else {
+          sameList.add(list.get(i).getName());
+        }
+      }
+
+      for (int i = 0; i < sameList.size(); i++) {
+        for (int j = 0; j < updateList.length; j++) {
+          if (sameList.get(i).equals(updateList[j])) {
+            updateList[j] = null;
+          }
+        }
+      }
+
+      Map<String, Object> params = new HashMap<>();
+      params.put("memberNumber", member.getNumber());
+      for (String skillName : deleteList) {
+        params.put("skillName", skillName);
+        GeneralMemberSkill gms = skillService.get(params);
+        params.put("skillNumber", gms.getSkillNumber());
+
+        portfoliSkillService.delete(gms.getMemberSkillNumber());
+      }
+
+      // [from TABLE pf_member_skill]  : str(기술번호)를 통해 member_skill_no(PK값)을 호출해서
+      // [to TABLE pf_portfolio_skill] : member_skill_no에 집어넣는다.
+      if(skills != null) {
+        String[] strs = skills.split(",");
+        for(String str : strs) {
+          portfolioSkillService.add(portfolio.getNumber(),
+              skillService.getMemberSkillNumber(member.getNumber(), Integer.valueOf(str)));
+        }
       }
 
       return "redirect:mylist";
@@ -613,10 +673,12 @@ public class PortfolioController {
 
       // [from TABLE pf_member_skill]  : str(기술번호)를 통해 member_skill_no(PK값)을 호출해서
       // [to TABLE pf_portfolio_skill] : member_skill_no에 집어넣는다.
-      String[] strs = skills.split(",");
-      for(String str : strs) {
-        portfolioSkillService.add(portfolio.getNumber(),
-            skillService.getMemberSkillNumber(member.getNumber(), Integer.valueOf(str)));
+      if(skills != null) {
+        String[] strs = skills.split(",");
+        for(String str : strs) {
+          portfolioSkillService.add(portfolio.getNumber(),
+              skillService.getMemberSkillNumber(member.getNumber(), Integer.valueOf(str)));
+        }
       }
       return "redirect:mylist";
     }
