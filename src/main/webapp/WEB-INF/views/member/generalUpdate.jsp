@@ -529,19 +529,23 @@
 <!-- MEMBER AVAILABLE SKILL TAB -->
 <div id="tab_availableSkills" class="tab-pane border bt-0 p-4 shadow-xs">
   <div class="d-block shadow-xs rounded p-4 mb-2">
+    
     <div class="row">
       <div class="col">
-        <div id="available", style="width:100%; height:200px; background-color:seashell;">
-        </div>
+        <div id="available", style="width:100%; height:200px; background-color:#D8D8D8;">  
+	        <button id="apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill">
+	          Apply
+	        </button>
+        </div>  
         <hr>
-        <div style="display:inline-block; float:left; width:30%; height:800px;">
-					<div id= "selectField" class="iqs-container p--15 border rounded mt-3" style="background-color:lightcyan;">					
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:27%; height:400px; background-color:#D8D8D8;">
+					<div id= "selectField" class="iqs-container p--15 border rounded mt-3" >					
 					  <!-- ajax 필드 추가 코드 들어감 -->
 					</div>
-        </div> 
+        </div>
         
-        <div style="display:inline-block; float:left; width:70%; height:800px;">
-          <div id="selectSkill" class="iqs-container p--15 border rounded mt-3" style="background-color:lightcyan;">         
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;">
+          <div id="selectSkill" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">         
             <!-- ajax 기술 추가 코드 들어감 -->             
           </div>
         </div> 
@@ -558,6 +562,7 @@
 <div id="tab_interestSkills" class="tab-pane border bt-0 p-4 shadow-xs">
   <p>TETSETSETESTS</p>
   <div class="d-block shadow-xs rounded p-4 mb-2">
+      
     <div class="row">
       <div class="col">
       </div>
@@ -595,7 +600,7 @@
         if (xhr.status == 200) {
           let skillList = JSON.parse(xhr.responseText); 
           for(var skill of skillList) {
-        	  var addHtml = `<span style="margin:2px;" class="badge badge-pill badge-secondary">` + skill.name + `</span>`
+        	  var addHtml = `<span style="cursor:pointer; margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
         		$("#available").append(addHtml);
           }
          }               
@@ -650,17 +655,58 @@ $("#selectField").on("click", ".field", function() {
           if (xhr.status == 200) {
             let obj = JSON.parse(xhr.responseText);
             for(idx in obj) {
-              var addHtml = `<div class="iqs-item" style="display:inline-block; width:200px;">    
+              var addHtml = `<div class="iqs-item" style="display:inline-block; width:250px;">    
               <label class="form-checkbox form-checkbox-primary">
-                <input class="skill" type="checkbox" name="checkbox_p">
-                <i></i>` + obj[idx].name + `</label>`
+                <input class="skill" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
               $("#selectSkill").append(addHtml);
-            }               
+            }
           }
       }
   };
   xhr.open('GET', '../skill/list?selected=' + queryString, true); 
   xhr.send();
 	 
+});
+  
+$("#available").on("click", ".haveSkills", function() {
+   $(this).remove();
+});
+
+$("#selectSkill").on("click", ".skill", function() {
+  let haveSkillList = document.querySelectorAll(".haveSkills");
+  let selected = $(this)[0].parentNode.textContent.trim();
+  let isExist = false;
+  for(var skill of haveSkillList) {
+     if(selected===$(skill).text()) {
+    	 isExist = true;
+    	 return;
+     }
+  }
+  if(!isExist) {
+	  var addHtml = `<span style="cursor:pointer; margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + selected + `</span>`
+    $("#available").append(addHtml);
+  }
+});
+
+$("#apply").click(function() {
+	let haveSkillList = document.querySelectorAll(".haveSkills");
+
+	let skillArray = [];
+	for(let skill of haveSkillList) {
+		skillArray.push($(skill).text());		
+	}
+	 
+	let skillList = JSON.stringify(skillArray);
+	var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+        	  window.location.reload(true);
+          }
+      }
+  };
+  xhr.open('POST', '../skill/update');
+  xhr.setRequestHeader('Content-Type', 'application/json'); 
+  xhr.send(JSON.stringify(skillList));
 });
 </script>
