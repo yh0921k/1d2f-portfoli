@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.SkillDao;
+import com.portfoli.domain.GeneralMemberSkill;
 import com.portfoli.domain.Skill;
 import com.portfoli.service.SkillService;
 
@@ -43,5 +44,25 @@ public class SkillServiceImpl implements SkillService {
     map.put("generalMemberNumber", generalMemberNumber);
     map.put("skillNumber", skillNumber);
     return skillDao.findMemberSkillNumber(map);
+  }
+
+  @Override
+  public int delete(Map<String, Object> params) throws Exception {
+    return skillDao.delete(params);
+  }
+
+  @Override
+  public int add(Map<String, Object> params) throws Exception {
+    return skillDao.insert(params);
+  }
+
+  @Override
+  public Skill get(String skillName) throws Exception {
+    return skillDao.findByName(skillName);
+  }
+
+  @Override
+  public GeneralMemberSkill get(Map<String, Object> params) throws Exception {
+    return skillDao.findMemberSkill(params);
   }
 }

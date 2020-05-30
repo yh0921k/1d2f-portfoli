@@ -45,7 +45,10 @@
   )
   </insert>
 
-  
+  <delete id="deleteByMemberSkillNumber" parameterType="int">
+    delete from pf_portfolio_skill
+    where member_skill_no=#{memberSkillNumber}
+  </delete>
 </mapper>
 
 

@@ -28,7 +28,10 @@ public class PortfolioSkillServiceImpl implements PortfolioSkillService {
     return portfolioSkillDao.insert(map);
   }
 
-
+  @Override
+  public int delete(int memberSkillNumber) throws Exception {
+    return portfolioSkillDao.deleteByMemberSkillNumber(memberSkillNumber);
+  }
 
 
 
