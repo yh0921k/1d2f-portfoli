@@ -10,6 +10,18 @@
 		<result column="field_no" property="fieldNumber"/>
 		<result column="name"	property="name" />
 	</resultMap>
+
+  <resultMap type="PortfolioSkill" id="PortfolioSkillMap">
+    <id column="board_no" property="boardNumber"/>
+    <result column="member_skill_no" property="memberSkillNumber"/>
+  </resultMap>
+  
+  <resultMap type="GeneralMemberSkill" id="GeneralMemberSkillMap">
+    <id column="member_skill_no" property="memberSkillNumber"/>
+    <result column="general_member_no" property="generalMemberNumber"/>
+    <result column="skill_no" property="skillNumber"/>
+    <result column="level" property="level"/>
+  </resultMap>
 	
 	<select id="findAll" resultMap="SkillMap">
 		select skill_no, field_no, name 
@@ -27,5 +39,29 @@
     from pf_member_skill pms join pf_skill ps
     on pms.skill_no=ps.skill_no
     where general_member_no=#{memberNumber}
+  </select>
+  
+  <delete id="delete" parameterType="map">
+    delete from pf_member_skill
+    where general_member_no=#{memberNumber} and skill_no=#{skillNumber}
+  </delete>
+  
+  <insert id="insert" parameterType="map">
+    insert into pf_member_skill(general_member_no, skill_no)
+    values(#{memberNumber}, #{skillNumber})
+  </insert>
+  
+  <select id="findByName" resultMap="SkillMap" parameterType="string">
+    select skill_no, field_no, name 
+    from pf_skill 
+    where name=#{skillName}
+    limit 1
+  </select>
+  
+  <select id="findMemberSkill" resultMap="GeneralMemberSkillMap" parameterType="map">
+    select pms.member_skill_no, pms.general_member_no, pms.skill_no, pms.level 
+    from pf_member_skill as pms join pf_skill as ps
+    on pms.skill_no=ps.skill_no
+    where pms.general_member_no=#{memberNumber} and ps.name=#{skillName}
   </select>
 </mapper>
