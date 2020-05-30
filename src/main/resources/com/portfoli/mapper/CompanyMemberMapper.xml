@@ -9,6 +9,7 @@
     <id column="company_member_no" property="number"/>
     <result column="position" property="position"/>
     <result column="company_no" property="companyNumber"/>
+    <result column="photo" property="photoFilePath" />
     <result column="id" property="id" />
     <result column="pwd" property="password" />
     <result column="name" property="name" />
@@ -34,15 +35,20 @@
       #{companyNumber})
   </insert>
   
-  <select id="findByEmailAndPassword" 
-    resultMap="CompanyMemberMap" 
-    parameterType="map">
-    SELECT c.company_member_no, m.type, m.id, m.name, m.email, c.position, c.company_no
+  <select id="findByEmailAndPassword" resultMap="CompanyMemberMap" parameterType="map">
+    SELECT c.company_member_no, m.type, m.id, m.name, m.email, c.position, c.company_no, m.photo
     FROM pf_members m JOIN pf_company_member c
     ON m.member_no = c.company_member_no
     WHERE (m.id=#{email} OR m.email=#{email}) AND m.pwd=password(#{password})
   </select>
   
+  <select id="findByMemberNumber" resultMap="CompanyMemberMap" parameterType="int">
+		SELECT *
+		FROM pf_members m JOIN pf_company_member c
+		ON m.member_no = c.company_member_no
+		WHERE m.member_no=#{no}
+	</select>
+
    <delete id="delete" parameterType="int">
   	DELETE 
   	FROM pf_company_member

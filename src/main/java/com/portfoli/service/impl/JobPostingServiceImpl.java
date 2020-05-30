@@ -61,6 +61,11 @@ public class JobPostingServiceImpl implements JobPostingService {
   }
 
   @Override
+  public List<JobPosting> myPostingList(int memberNumber) throws Exception {
+    return jobPostingDao.myPostingList(memberNumber);
+  }
+
+  @Override
   public int ListCnt(JobPosting jobPosting) throws Exception {
     return jobPostingDao.ListCnt();
   }

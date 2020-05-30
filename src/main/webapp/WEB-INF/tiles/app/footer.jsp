@@ -12,7 +12,7 @@
 				<span class="h--70 mt--n20 d-inline-flex align-items-center">
 					<img
 					src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo.png"
-					width="110" height="32" alt="...">
+					width="70" height="32" alt="...">
 				</span>
 
 				<p class="lead" style="font-size: medium;">

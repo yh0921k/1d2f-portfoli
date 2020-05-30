@@ -1,9 +1,10 @@
+<%@page import="java.util.List"%>
+<%@page import="com.portfoli.domain.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
-      <!--------------------------------------- nav bar ----------------------------------------------->
-      <div class="col-lg-3 mb-5 h--600 border-right ml--20 mt--20">
+  
+  <div class="col-lg-3 mb-5 h--600 border-right ml--20 mt--20">
 
       <!-- CATEGORIES -->
       <nav class="nav-deep nav-deep-light mb-2">
@@ -63,13 +64,13 @@
               <li class="nav-item"><a class="nav-link" href="/portfoli/app/calendar/calendar"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 일정 관리 </span></a></li>
               
               <!-- 포트폴리오 -->
-              <li class="nav-item font-weight-bold">
+              <li class="nav-item font-weight-bold active">
                 <a class="nav-link" href="#"> 
                 <span class="group-icon"><i class="fi fi-arrow-end"></i><i class="fi fi-arrow-down"></i></span> 
                 <span class="px-2 d-inline-block active font-weight-bold"> 내 포트폴리오 </span>
                 </a>
               <ul class="nav flex-column px-2 font-weight-bold">
-                <li class="nav-item"><a class="nav-link" href="/portfoli/app/portfolio/mylist"> 포트폴리오 관리 </a></li>
+                <li class="nav-item active"><a class="nav-link" href="/portfoli/app/portfolio/mylist"> 포트폴리오 관리 </a></li>
                 <li class="nav-item"><a class="nav-link" href="/portfoli/app/portfolio/myRecommendedlist"> 내가 찜한 목록 </a></li>
               </ul>
               </li>
@@ -83,7 +84,7 @@
             <li class="nav-item"><a class="nav-link" href="/portfoli/app/payment/introduction"> <i class="fi fi-arrow-end m-0 fs--12"></i><span class="px-2 d-inline-block"> 멤버십 </span></a></li>
 
             <!-- 공고 관리 -->
-            <li class="nav-item active"><a class="nav-link " href="/portfoli/app/jobposting/mylist"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 공고 관리 </span></a></li>
+            <li class="nav-item"><a class="nav-link " href="/portfoli/app/jobposting/mylist"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 공고 관리 </span></a></li>
             </c:if>
 
         </ul>
@@ -92,5 +93,3 @@
       <!-- /CATEGORIES -->
 
     </div>
-      <!--------------------------------------------- /nav bar ------------------------------------------------>
-    

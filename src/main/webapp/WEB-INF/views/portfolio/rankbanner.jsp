@@ -19,8 +19,6 @@
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
     <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
-      <div class="table-responsive rounded" style="min-height: 500px; overflow:initial;">
-      </div>
     </div>
 
 
@@ -145,7 +143,7 @@
   <script>
   
   setInterval(function() {
-	  alert('test');
+	  console.log('블럭 바뀜');
 	  $('#blockStyle > div:nth-child(1)').appendTo($('#blockStyle'));
   },3000);
   

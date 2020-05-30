@@ -2,14 +2,14 @@
 <%@page import="com.portfoli.domain.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-  <div class="container-fluid">
+<div class="container-fluid">
 
-    <div class="row">
-<!--------------------------------------- nav bar ----------------------------------------------->
-  <jsp:include page="../member/sidebar.jsp"/>
-<!--------------------------------------- nav bar ----------------------------------------------->
+  <div class="row">
+    <!--------------------------------------- nav bar ----------------------------------------------->
+<jsp:include page="mylistSidebar.jsp"/>
+    <!--------------------------------------- nav bar ----------------------------------------------->
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
@@ -173,100 +173,100 @@
     <c:if test="${item.thumbnail != null}">
            style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
     </c:if>
-    <c:if test="${item.thumbnail == null}">
+								<c:if test="${item.thumbnail == null}">
            style="background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
     </c:if>
-    
-    <!-- 제목, 아이디 -->
-      <div class="card-body font-weight-light mt--60">
-        <div class="d-table">
-          <div class="d-table-cell align-bottom" style="text-align:center;">
-            <p style="max-height: 1.65rem;width: 16.5rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
-              ${item.title}
-            </p>
-            <p class="text-warning fs--13">
-              ${item.member.id}
-            </p>
-          </div>
-        </div>
-      </div>
-    <!-- 제목, 아이디 -->
+								<!-- 제목, 아이디 -->
+								<div class="card-body font-weight-light mt--60">
+									<div class="d-table">
+										<div class="d-table-cell align-bottom"
+											style="text-align: center;">
+											<p
+												style="max-height: 1.65rem; width: 16.5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+												${item.title}</p>
+											<p class="text-warning fs--13">${item.member.id}</p>
+										</div>
+									</div>
+								</div>
+								<!-- 제목, 아이디 -->
 
-    <!-- 카드하단 -->
-      <div class="card-footer bg-transparent b-0" style="height: 100px;">
-        <hr class="border-light opacity-2">
-        <a style="position: absolute; left: 67%;">
-        <span class="float-end fs--14 p-2">
-          ${item.getRecommendedCount()}
-        </span>
-        </a>
-        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
-          ${item.getViewCount()}
-        </a>
-      </div>
-    <!-- 카드하단 -->
-    
-      </div>
-    </div>
-    </a>
-    </c:forEach>
-<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
-</div>
-</div>
-<!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
-<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
-              <c:choose>
-              <c:when test="${not empty keyword}">
-              </c:when>
-              <c:otherwise>
+								<!-- 카드하단 -->
+								<div class="card-footer bg-transparent b-0"
+									style="height: 100px;">
+									<hr class="border-light opacity-2">
+									<a style="position: absolute; left: 67%;"> <span
+										class="float-end fs--14 p-2">
+											${item.getRecommendedCount()} </span>
+									</a> <a href="#" class="btn btn-sm btn-warning opacity-8"
+										style="position: absolute; left: 20%;">
+										${item.getViewCount()} </a>
+								</div>
+								<!-- 카드하단 -->
 
-  <div class="col-12 col-xl-12" style="margin-top: 2%;padding-right: 40%;margin: 10px auto;text-align: center;">
-   <nav aria-label="pagination">
-     <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
-    
-            <!-- prev부분 -->
-       <c:if test="${pagination.curPage == 1}"> 
-         <li class="page-item disabled btn-pill" data-page="prev">
-         <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging(1)">Prev</a></li>
-       </c:if>
-       <c:if test="${pagination.curPage != 1}"> 
-         <li class="page-item" data-page="prev">
-         <a class="page-link" href="#" tabindex="-1" aria-disabled="true" onClick="fn_paging('${pagination.prevPage}')">Prev</a></li>
-       </c:if>
-  
-            <!-- 중간 numbering 부분 -->
-      <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
-        <c:if test="${pageNum == pagination.curPage}">
-          <li class="page-item active" data-page="${pageNum}">
-            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
-          </li>
-        </c:if>
-        <c:if test="${pageNum != pagination.curPage}">
-          <li data-page="${pageNum}">
-            <a class="page-link" href="#" onClick="fn_center_paging('${pageNum}')">${pageNum}</a>
-          </li>
-        </c:if>
-      </c:forEach>
-      
-            <!-- next 부분 -->
-        <c:if test="${pagination.curPage < pagination.pageCnt}">
-          <li class="page-item btn-pill" data-page="next">
-            <a class="page-link" onClick="fn_paging('${pagination.nextPage}')" href="#">Next</a> 
-          </li>
-        </c:if>
-        <c:if test="${pagination.curPage >= pagination.pageCnt}"> 
-          <li class="page-item disabled btn-pill" data-page="next">
-            <a class="page-link" href="#">Next</a> 
-          </li>
-          
-        </c:if>
-      </ul>
-     </nav>
-    </div>
-              </c:otherwise>
-              </c:choose>
-<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
-</div>
+							</div>
+						</div>
+					</a>
+				</c:forEach>
+				<!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
+			</div>
+		</div>
+		<!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
+		<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
+		<c:choose>
+			<c:when test="${not empty keyword}">
+			</c:when>
+			<c:otherwise>
+
+				<div class="col-12 col-xl-12"
+					style="margin-top: 2%; padding-right: 40%; margin: 10px auto; text-align: center;">
+					<nav aria-label="pagination">
+						<ul
+							class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+
+							<!-- prev부분 -->
+							<c:if test="${pagination.curPage == 1}">
+								<li class="page-item disabled btn-pill" data-page="prev"><a
+									class="page-link" href="#" tabindex="-1" aria-disabled="true"
+									onClick="fn_paging(1)">Prev</a></li>
+							</c:if>
+							<c:if test="${pagination.curPage != 1}">
+								<li class="page-item" data-page="prev"><a class="page-link"
+									href="#" tabindex="-1" aria-disabled="true"
+									onClick="fn_paging('${pagination.prevPage}')">Prev</a></li>
+							</c:if>
+
+							<!-- 중간 numbering 부분 -->
+							<c:forEach var="pageNum" begin="${pagination.startPage}"
+								end="${pagination.endPage}">
+								<c:if test="${pageNum == pagination.curPage}">
+									<li class="page-item active" data-page="${pageNum}"><a
+										class="page-link" href="#"
+										onClick="fn_center_paging('${pageNum}')">${pageNum}</a></li>
+								</c:if>
+								<c:if test="${pageNum != pagination.curPage}">
+									<li data-page="${pageNum}"><a class="page-link" href="#"
+										onClick="fn_center_paging('${pageNum}')">${pageNum}</a></li>
+								</c:if>
+							</c:forEach>
+
+							<!-- next 부분 -->
+							<c:if test="${pagination.curPage < pagination.pageCnt}">
+								<li class="page-item btn-pill" data-page="next"><a
+									class="page-link" onClick="fn_paging('${pagination.nextPage}')"
+									href="#">Next</a></li>
+							</c:if>
+							<c:if test="${pagination.curPage >= pagination.pageCnt}">
+								<li class="page-item disabled btn-pill" data-page="next"><a
+									class="page-link" href="#">Next</a></li>
+
+							</c:if>
+						</ul>
+					</nav>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		<!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
+	</div>
 </div>
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
@@ -384,20 +384,24 @@
     location.href = "mylist?curPage=" + curPage;
     }
   </script>
-  <style>
-  .table .my-td.my{
-    padding: 1.2rem 1rem 1rem 1rem;
-  }
-    .cursor {
-      cursor: pointer;
-    }
-    .padding10_0{
-      padding: 10px 0px;
-    }
-    .padding10_10{
-      padding: 10px 10px;
-    }
-    .padding5_5{
-      padding: 5px 5px;
-    }
-  </style>
+<style>
+.table .my-td.my {
+	padding: 1.2rem 1rem 1rem 1rem;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.padding10_0 {
+	padding: 10px 0px;
+}
+
+.padding10_10 {
+	padding: 10px 10px;
+}
+
+.padding5_5 {
+	padding: 5px 5px;
+}
+</style>

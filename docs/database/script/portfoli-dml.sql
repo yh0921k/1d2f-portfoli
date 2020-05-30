@@ -1,4 +1,4 @@
-﻿-- 분야 샘플 데이터(pf_field)
+-- 분야 샘플 데이터(pf_field)
 insert into pf_field(field_no,name) values(401,"웹마스터·QA·테스터");
 insert into pf_field(field_no,name) values(402,"서버·네트워크·보안");
 insert into pf_field(field_no,name) values(403,"웹기획·PM");
