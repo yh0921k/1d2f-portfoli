@@ -742,7 +742,7 @@ CREATE TABLE pf_member_skill (
   member_skill_no   INTEGER NOT NULL COMMENT '회원보유기술번호', -- 회원보유기술번호
   general_member_no INTEGER NOT NULL COMMENT '일반회원번호', -- 일반회원번호
   skill_no          INTEGER NOT NULL COMMENT '기술번호', -- 기술번호
-  level             INTEGER NOT NULL COMMENT '등급' -- 등급
+  level             INTEGER NULL COMMENT '등급' -- 등급
 )
 COMMENT '회원보유기술';
 
