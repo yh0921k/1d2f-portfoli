@@ -8,6 +8,5 @@ public interface PortfolioSkillService {
 
   boolean add(int boardNumber, int memberNumber) throws Exception;
 
-
-
+  int delete(int memberSkillNumber) throws Exception;
 }
