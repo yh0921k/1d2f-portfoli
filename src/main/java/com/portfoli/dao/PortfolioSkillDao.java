@@ -9,9 +9,7 @@ public interface PortfolioSkillDao {
 
   boolean insert(Map<String, Integer> map) throws Exception;
 
-
-
-
+  int deleteByMemberSkillNumber(int memberSkillNumber) throws Exception;
 
 
 }
