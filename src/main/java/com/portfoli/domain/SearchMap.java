@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 public class SearchMap implements Serializable {
   private static final long serialVersionUID = 1L;
-
-  int number;
-  String keyword;
+  private int number;
+  private String keyword;
+  private int startIndex;
+  private int pageSize;
 
   public int getNumber() {
     return number;
@@ -26,6 +27,21 @@ public class SearchMap implements Serializable {
     return this;
   }
 
+  public int getStartIndex() {
+    return startIndex;
+  }
+
+  public void setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+  }
+
+  public int getPageSize() {
+    return pageSize;
+  }
+
+  public void setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+  }
 
   @Override
   public int hashCode() {

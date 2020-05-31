@@ -15,150 +15,166 @@ public class Member implements Serializable {
     return number;
   }
 
-  public void setNumber(int number) {
+  public Member setNumber(int number) {
     this.number = number;
+    return this;
   }
 
   public int getSmsYN() {
     return smsYN;
   }
 
-  public void setSmsYN(int smsYN) {
+  public Member setSmsYN(int smsYN) {
     this.smsYN = smsYN;
+    return this;
   }
 
   public int getEmailYN() {
     return emailYN;
   }
 
-  public void setEmailYN(int emailYN) {
+  public Member setEmailYN(int emailYN) {
     this.emailYN = emailYN;
+    return this;
   }
 
   public int getType() {
     return type;
   }
 
-  public void setType(int type) {
+  public Member setType(int type) {
     this.type = type;
+    return this;
   }
 
   public String getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public Member setId(String id) {
     this.id = id;
+    return this;
   }
 
   public String getPassword() {
     return password;
   }
 
-  public void setPassword(String password) {
+  public Member setPassword(String password) {
     this.password = password;
+    return this;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public Member setName(String name) {
     this.name = name;
+    return this;
   }
 
   public String getPostNumber() {
     return postNumber;
   }
 
-  public void setPostNumber(String postNumber) {
+  public Member setPostNumber(String postNumber) {
     this.postNumber = postNumber;
+    return this;
   }
 
   public String getBasicAddress() {
     return basicAddress;
   }
 
-  public void setBasicAddress(String basicAddress) {
+  public Member setBasicAddress(String basicAddress) {
     this.basicAddress = basicAddress;
+    return this;
   }
 
   public String getDetailAddress() {
     return detailAddress;
   }
 
-  public void setDetailAddress(String detailAddress) {
+  public Member setDetailAddress(String detailAddress) {
     this.detailAddress = detailAddress;
+    return this;
   }
 
   public String getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
+  public Member setEmail(String email) {
     this.email = email;
+    return this;
   }
 
   public String getTel() {
     return tel;
   }
 
-  public void setTel(String tel) {
+  public Member setTel(String tel) {
     this.tel = tel;
+    return this;
   }
 
   public String getUserkey() {
     return userkey;
   }
 
-  public void setUserkey(String userkey) {
+  public Member setUserkey(String userkey) {
     this.userkey = userkey;
+    return this;
   }
 
   public String getProvider() {
     return provider;
   }
 
-  public void setProvider(String provider) {
+  public Member setProvider(String provider) {
     this.provider = provider;
+    return this;
   }
 
   public Date getCreateDate() {
     return createDate;
   }
 
-  public void setCreateDate(Date createDate) {
+  public Member setCreateDate(Date createDate) {
     this.createDate = createDate;
+    return this;
   }
 
   public String getPhotoFilePath() {
     return photoFilePath;
   }
 
-  public void setPhotoFilePath(String photoFilePath) {
+  public Member setPhotoFilePath(String photoFilePath) {
     this.photoFilePath = photoFilePath;
+    return this;
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((basicAddress == null) ? 0 : basicAddress.hashCode());
-    result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-    result = prime * result + ((detailAddress == null) ? 0 : detailAddress.hashCode());
-    result = prime * result + ((email == null) ? 0 : email.hashCode());
+    result = prime * result + (basicAddress == null ? 0 : basicAddress.hashCode());
+    result = prime * result + (createDate == null ? 0 : createDate.hashCode());
+    result = prime * result + (detailAddress == null ? 0 : detailAddress.hashCode());
+    result = prime * result + (email == null ? 0 : email.hashCode());
     result = prime * result + emailYN;
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + (id == null ? 0 : id.hashCode());
+    result = prime * result + (name == null ? 0 : name.hashCode());
     result = prime * result + number;
-    result = prime * result + ((password == null) ? 0 : password.hashCode());
-    result = prime * result + ((photoFilePath == null) ? 0 : photoFilePath.hashCode());
-    result = prime * result + ((postNumber == null) ? 0 : postNumber.hashCode());
-    result = prime * result + ((provider == null) ? 0 : provider.hashCode());
+    result = prime * result + (password == null ? 0 : password.hashCode());
+    result = prime * result + (photoFilePath == null ? 0 : photoFilePath.hashCode());
+    result = prime * result + (postNumber == null ? 0 : postNumber.hashCode());
+    result = prime * result + (provider == null ? 0 : provider.hashCode());
     result = prime * result + smsYN;
-    result = prime * result + ((tel == null) ? 0 : tel.hashCode());
+    result = prime * result + (tel == null ? 0 : tel.hashCode());
     result = prime * result + type;
-    result = prime * result + ((userkey == null) ? 0 : userkey.hashCode());
+    result = prime * result + (userkey == null ? 0 : userkey.hashCode());
     return result;
   }
 

@@ -135,28 +135,33 @@
   $('#register').on('click', function() {
 	  
 	    // 제목과 내용이 비어있는지 체크 (bootstrap으로 required 구문 안먹음)
-      if($('#title').val() == "" || $('.note-editable.card-block > p').html() == undefined || $('.note-editable.card-block > p').html() == "<br>") {
+      if($('#title').val() == "" || $('.note-editable.card-block').html() == "" || $('.note-editable.card-block').html() == "<br>") {
           Swal.fire({
               icon: 'error',
               title: '잠깐!...',
               text: '제목, 내용을 넣어주세요.',
             })
-      return;
     }
 	    
-	    // 공개설정인 경우 : 썸네일 값이 있는지 체크
-	    if($('#readable').val() == 1 ) {
-	      if($('#thumb').val() != null) {
-	        Swal.fire({
-	          icon: 'error',
-	          title: '잠깐!...',
-	          text: '썸네일을 넣어주세요.',
-	        })
-	      }
-	    }
+
 	    // 비공개설정인 경우 : 조건없이 통과
-	    if($('#readable').val() == 0 || $('#readable').val() == 'on') {
+	    if($('#readable').val() == 0 || $('#readable').val() != 'on') {
+	          console.log($('#readable').val());
+	    	$('#readable').val(0);
 	      $('#updateForm').submit();
+	    } else {
+	        // 공개설정인 경우 : 썸네일 값이 있는지 체크
+	        if($('#thumb').val() == null) {
+	          Swal.fire({
+	            icon: 'error',
+	            title: '잠깐!...',
+	            text: '썸네일을 넣어주세요.',
+	          })
+	        } else {
+	          console.log($('#readable').val());
+	            $('#readable').val(1);
+	            $('#updateForm').submit();
+	        }
 	    }
 	  });
   

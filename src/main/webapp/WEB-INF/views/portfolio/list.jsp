@@ -22,22 +22,18 @@
 			        style="float:right; display: inline-block;font-size: 1rem;width: 9rem;height: 2.5rem;padding: 0.5rem;"
 			        onchange="fnSetPageSize(this.value)"
 			        >
-			  <option value="5">5개씩 보기</option>
-			  <option value="10">10개씩 보기</option>
-			  <option value="20">20개씩 보기</option>
-			  <option value="50">50개씩 보기</option>
+			  <option value="6">6개씩 보기</option>
+			  <option value="9">9개씩 보기</option>
+			  <option value="21">21개씩 보기</option>
+			  <option value="54">54개씩 보기</option>
 			</select>
 <!-------------------------------- 페이지 노출 컨텐츠수 -------------------------------->
 
       <!-- /PAGE TITLE -->
 
-
 <div class="row" id="banner" 
      style="margin-left: 0px;position: relative;margin-top: 2rem;backface-visibility: hidden;background: white;display:block;]overflow: hidden;">
 </div>
-
-
-
 
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
@@ -187,10 +183,6 @@
 </div>
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 <!--------------------------- 페이징부분(search 기능 없을때만 사용) ---------------------------------->
-              <c:choose>
-              <c:when test="${not empty keyword}">
-              </c:when>
-              <c:otherwise>
 
   <div class="col-12 col-xl-12" style="margin-top: 2%;padding-right: 40%;margin: 10px auto;text-align: center;">
    <nav aria-label="pagination">
@@ -235,8 +227,6 @@
       </ul>
      </nav>
     </div>
-              </c:otherwise>
-              </c:choose>
               
         </div>
       </section>
@@ -280,7 +270,15 @@
 	}
   
   function fnSetPageSize(val) {
-		  location.href = "list?quantity=" + val;
+      var addr = window.location.href.split('/portfolio/')[1];
+      if(addr.startsWith('searchAll')) {
+    	  console.log("진입함");
+    	  qs = getQueryStringObject();
+        console.log(qs);
+        location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + 1 + "&quantity=" + val;
+      } else {
+    	  location.href = "list?quantity=" + val;
+      }
   }
   
   var toggle = $('#styleToggle');
@@ -313,22 +311,21 @@
 	    
 	    var qs = getQueryStringObject();
 	    var page = qs.quantity;
-	      console.log($('pageSize'));
 	    switch(page) {
-	    case "5":
-	        $("option[value='5']").attr('selected','selected');
+	    case "6":
+	        $("option[value='6']").attr('selected','selected');
 	      break;
-	    case "10":
-	          $("option[value='10']").attr('selected','selected');
+	    case "9":
+	          $("option[value='9']").attr('selected','selected');
 	      break;
-	    case "20":
-	          $("option[value='20']").attr('selected','selected');
+	    case "21":
+	          $("option[value='21']").attr('selected','selected');
 	      break;
-	    case "50":
-	          $("option[value='50']").attr('selected','selected');
+	    case "54":
+	          $("option[value='54']").attr('selected','selected');
 	      break;
 	    default:
-	          $("option[value='10']").attr('selected','selected');
+	          $("option[value='9']").attr('selected','selected');
 	    }
 	    
 	       $("#keyword").keyup(function() {

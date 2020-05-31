@@ -50,7 +50,7 @@ import net.coobird.thumbnailator.name.Rename;
 @RequestMapping("/portfolio")
 @MultipartConfig(maxFileSize = 100000000)
 public class PortfolioController {
-  int pageSize = 10;
+  int pageSize = 9;
   static Logger logger = LogManager.getLogger(PortfolioController.class);
 
   public PortfolioController() {
@@ -104,7 +104,7 @@ public class PortfolioController {
   }
 
   @RequestMapping("rankAll")
-  public String rankAll(Date startDate, Date endDate, @RequestParam(defaultValue="10") int quantity,
+  public String rankAll(Date startDate, Date endDate, @RequestParam(defaultValue="9") int quantity,
       @ModelAttribute("recommendation") Recommendation recommendation,
       @RequestParam(defaultValue="1") int curPage, HttpServletRequest request, Model model) throws Exception {
     Member member = (Member) request.getSession().getAttribute("loginUser");
@@ -165,7 +165,7 @@ public class PortfolioController {
   }
 
   @RequestMapping("searchMyRecommendedlist")
-  public String searchMyRecommendedlist(@RequestParam(defaultValue="10") int quantity, String keyword,
+  public String searchMyRecommendedlist(@RequestParam(defaultValue="9") int quantity, String keyword,
       @ModelAttribute("portfolio") Portfolio portfolio, @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -208,7 +208,7 @@ public class PortfolioController {
   }
 
   @RequestMapping("myRecommendedlist")
-  public String myRecommendedlist(@RequestParam(defaultValue="10") int quantity,
+  public String myRecommendedlist(@RequestParam(defaultValue="9") int quantity,
       @ModelAttribute("portfolio") Portfolio portfolio, @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -275,16 +275,41 @@ public class PortfolioController {
   }
 
   @RequestMapping("searchAll")
-  public String searchAll(String keyword, HttpServletRequest request, Model model) throws Exception {
+  public String searchAll(@RequestParam(defaultValue="9") int quantity,
+      @RequestParam(defaultValue="1") int curPage, String keyword, @ModelAttribute("searchMap") SearchMap searchMap,
+      HttpServletRequest request, Model model) throws Exception {
 
     Member member = (Member) request.getSession().getAttribute("loginUser");
 
     if(member == null) {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
     } else {
-      SearchMap searchMap = new SearchMap().setKeyword(keyword);
-      System.out.println(searchMap);
+
+
+      this.pageSize = quantity;
+
+      // 전체리스트 개수
+      searchMap = new SearchMap().setKeyword(keyword);
       List<Portfolio> portfolios = portfolioService.search(searchMap);
+      int listCnt = portfolios.size();
+
+      Pagination pagination = new Pagination(listCnt, curPage);
+      pagination.setPageSize(pageSize);// 한페이지에 노출할 게시글 수
+
+      searchMap.setStartIndex(pagination.getStartIndex());
+      searchMap.setPageSize(pagination.getPageSize());
+
+      // 전체리스트 출력
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("pagination", pagination);
+
+      // 포트폴리오 리스트 받기
+      portfolios = portfolioService.search(searchMap);
+
+      System.out.println("포트폴리오값");
+      for(Portfolio portfolio : portfolios) {
+        System.out.println(portfolio);
+      }
 
       // 포트폴리오 스킬 붙이기
       for(Portfolio p : portfolios) {
@@ -369,7 +394,7 @@ public class PortfolioController {
 
 
   @RequestMapping("mylist")
-  public String mylist(@RequestParam(defaultValue="10") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
+  public String mylist(@RequestParam(defaultValue="9") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -411,7 +436,7 @@ public class PortfolioController {
   }
 
   @RequestMapping("listWithBanner")
-  public String listWithBanner(@RequestParam(defaultValue="10") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
+  public String listWithBanner(@RequestParam(defaultValue="9") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -465,7 +490,7 @@ public class PortfolioController {
   }
 
   @RequestMapping("list")
-  public String list(@RequestParam(defaultValue="10") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
+  public String list(@RequestParam(defaultValue="9") int quantity, @ModelAttribute("portfolio") Portfolio portfolio,
       @RequestParam(defaultValue="1") int curPage,
       HttpServletRequest request, Model model) throws Exception {
 
@@ -590,47 +615,51 @@ public class PortfolioController {
         });
         portfolio.setThumbnail(filename);
 
+        System.out.println(portfolio);
+        System.out.println(portfolio.getMember());
         // Portfolio 입력 중에서 작성자 정보입력
-        portfolio.getMember().setNumber(member.getNumber());
+        portfolio.setMember(new GeneralMember().setNumber(member.getNumber()));
 
         portfolioService.update(portfolio);
       }
 
-      String[] updateList = skills.split(",");
-      List<Skill> list = skillService.listOfMember(member.getNumber());
-      List<String> deleteList = new LinkedList<>();
-      List<String> sameList = new LinkedList<>();
+      if(skills != null) {
+        String[] updateList = skills.split(",");
+        List<Skill> list = skillService.listOfMember(member.getNumber());
+        List<String> deleteList = new LinkedList<>();
+        List<String> sameList = new LinkedList<>();
 
-      for (int i = 0; i < list.size(); i++) {
-        boolean flag = false;
-        for (int j = 0; j < updateList.length; j++) {
-          if (updateList[j].equals(list.get(i).getName())) {
-            flag = true;
+        for (int i = 0; i < list.size(); i++) {
+          boolean flag = false;
+          for (int j = 0; j < updateList.length; j++) {
+            if (updateList[j].equals(list.get(i).getName())) {
+              flag = true;
+            }
+          }
+          if (!flag) {
+            deleteList.add(list.get(i).getName());
+          } else {
+            sameList.add(list.get(i).getName());
           }
         }
-        if (!flag) {
-          deleteList.add(list.get(i).getName());
-        } else {
-          sameList.add(list.get(i).getName());
-        }
-      }
 
-      for (int i = 0; i < sameList.size(); i++) {
-        for (int j = 0; j < updateList.length; j++) {
-          if (sameList.get(i).equals(updateList[j])) {
-            updateList[j] = null;
+        for (int i = 0; i < sameList.size(); i++) {
+          for (int j = 0; j < updateList.length; j++) {
+            if (sameList.get(i).equals(updateList[j])) {
+              updateList[j] = null;
+            }
           }
         }
-      }
 
-      Map<String, Object> params = new HashMap<>();
-      params.put("memberNumber", member.getNumber());
-      for (String skillName : deleteList) {
-        params.put("skillName", skillName);
-        GeneralMemberSkill gms = skillService.get(params);
-        params.put("skillNumber", gms.getSkillNumber());
+        Map<String, Object> params = new HashMap<>();
+        params.put("memberNumber", member.getNumber());
+        for (String skillName : deleteList) {
+          params.put("skillName", skillName);
+          GeneralMemberSkill gms = skillService.get(params);
+          params.put("skillNumber", gms.getSkillNumber());
 
-        portfoliSkillService.delete(gms.getMemberSkillNumber());
+          portfoliSkillService.delete(gms.getMemberSkillNumber());
+        }
       }
 
       // [from TABLE pf_member_skill]  : str(기술번호)를 통해 member_skill_no(PK값)을 호출해서
@@ -686,6 +715,8 @@ public class PortfolioController {
 
       model.addAttribute("portfolio", portfolio);
       model.addAttribute("attachment", boardAttachment);
+
+      System.out.println(portfolio.getMember().getNumber());
 
       // 내가 작성한 포트폴리오인 경우, modifier 객체를 추가하여, 수정/삭제 버튼 삽입
       if(portfolio.getMember().getNumber() == member.getNumber()) {

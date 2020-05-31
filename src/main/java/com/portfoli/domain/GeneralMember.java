@@ -19,32 +19,36 @@ public class GeneralMember extends Member implements Serializable {
   }
 
   @Override
-  public void setNumber(int number) {
+  public GeneralMember setNumber(int number) {
     this.number = number;
+    return this;
   }
 
   public int getSeekingFlag() {
     return seekingFlag;
   }
 
-  public void setSeekingFlag(int seekingFlag) {
+  public GeneralMember setSeekingFlag(int seekingFlag) {
     this.seekingFlag = seekingFlag;
+    return this;
   }
 
   public int getCareer() {
     return career;
   }
 
-  public void setCareer(int career) {
+  public GeneralMember setCareer(int career) {
     this.career = career;
+    return this;
   }
 
   public String getMembereship() {
     return membership;
   }
 
-  public void setMembereship(String membereship) {
+  public GeneralMember setMembereship(String membereship) {
     this.membership = membereship;
+    return this;
   }
 
   @Override
@@ -52,7 +56,7 @@ public class GeneralMember extends Member implements Serializable {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + career;
-    result = prime * result + ((membership == null) ? 0 : membership.hashCode());
+    result = prime * result + (membership == null ? 0 : membership.hashCode());
     result = prime * result + number;
     result = prime * result + seekingFlag;
     return result;
