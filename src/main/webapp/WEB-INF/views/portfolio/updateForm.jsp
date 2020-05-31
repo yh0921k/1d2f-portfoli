@@ -18,11 +18,12 @@
             <div class="col-12 col-lg-12">
         <h3 class="d-none d-lg-block m--3" style="margin-bottom: 1.4rem!important;">내 포트폴리오 수정</h3>
 
-               <form action="update" method="post" enctype="multipart/form-data">
+               <form id="updateForm" action="update" method="post" enctype="multipart/form-data">
                <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
                 
           <span class="text-gray-900">제목 : </span> 
-          <input required type="text"  placeholder="제목을 적어주세요"
+          <input id="title"
+                 type="text"  placeholder="제목을 적어주세요"
                  class="form-label-group form-control-clean col-md-11 mt--5"
                  name="title" value="${portfolio.title}">
 
@@ -76,7 +77,7 @@
           <div class='photoDiv' style="min-height: 200px;">
             <p class="text-gray-900 mt-3" style="margin-bottom: 0px">썸네일 :</p>
               <div class="form-control" align="center" >
-                    <input type="file" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
+                    <input type="file" id="thumb" name="thumb" accept=".gif, .jpg, .jpeg, .png" class="files"/><br>
               </div>
             
             <%-- filePar : 첨부파일 개수 늘리는 부분 --%>
@@ -93,9 +94,10 @@
             </label>
 
           <div align="right" class="container-fluid">
-            <button type="submit"
-              class="btn btn-outline-secondary btn-pill btn-sm mt-3">
-              등록하기</button>
+            <button id="register"
+                    type="button"
+                    class="btn btn-outline-secondary btn-pill btn-sm mt-3">등록하기
+            </button>
           </div>
 
                 </form>
@@ -127,7 +129,38 @@
     .buttonTD{text-align: center}
     .textAR{resize:none; border-color:pink}
   </style>
+
+  <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
+  $('#register').on('click', function() {
+	  
+	    // 제목과 내용이 비어있는지 체크 (bootstrap으로 required 구문 안먹음)
+      if($('#title').val() == "" || $('.note-editable.card-block > p').html() == undefined || $('.note-editable.card-block > p').html() == "<br>") {
+          Swal.fire({
+              icon: 'error',
+              title: '잠깐!...',
+              text: '제목, 내용을 넣어주세요.',
+            })
+      return;
+    }
+	    
+	    // 공개설정인 경우 : 썸네일 값이 있는지 체크
+	    if($('#readable').val() == 1 ) {
+	      if($('#thumb').val() != null) {
+	        Swal.fire({
+	          icon: 'error',
+	          title: '잠깐!...',
+	          text: '썸네일을 넣어주세요.',
+	        })
+	      }
+	    }
+	    // 비공개설정인 경우 : 조건없이 통과
+	    if($('#readable').val() == 0 || $('#readable').val() == 'on') {
+	      $('#updateForm').submit();
+	    }
+	  });
+  
+  
   // 기존 skill title에 노출시키기
   var skills = $('.bs-select.form-label-group.form-control-clean.col-md-11.mt--5').attr("title");
   $('.btn.dropdown-toggle.select-form-control.border-gray-400.form-control-clean').attr("title", skills);

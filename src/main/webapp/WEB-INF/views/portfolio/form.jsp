@@ -21,7 +21,9 @@
                <form id="addForm" action="add" method="post" enctype="multipart/form-data">
                 
           <span class="text-gray-900">제목 : </span> 
-          <input required type="text"  placeholder="제목을 적어주세요"
+          <input required
+                 id="title"
+                 type="text"  placeholder="제목을 적어주세요"
                  class="form-label-group form-control-clean col-md-11 mt--5"
                  name="title">
           <br>
@@ -34,24 +36,25 @@
 
           <p class="text-gray-900 mt-3">내용 :</p>
 					<textarea class="summernote-editor"
-					  name="content" 
-					  data-placeholder="내용을 적어주세요."
-					  data-min-height="300" 
-					  data-max-height="1000" 
-					  data-focus="true" 
-					  data-lang="en-US"
-					  data-toolbar='[
-					      ["style", ["style"]],
-					      ["font", ["bold", "italic", "underline", "clear"]],
-					      ["fontname", ["fontname"]],
-					      ["color", ["color"]],
-					      ["para", ["ul", "ol", "paragraph"]],
-					      ["height", ["height"]],
-					      ["table", ["table"]],
-					      ["insert", ["link", "hr"]],
-					      ["view", ["fullscreen", "codeview"]],
-					      ["help", ["help"]]
-					    ]'>${portfolio.content}</textarea>
+					          id="content"
+									  name="content" 
+									  data-placeholder="내용을 적어주세요."
+									  data-min-height="300" 
+									  data-max-height="1000" 
+									  data-focus="true" 
+									  data-lang="en-US"
+									  data-toolbar='[
+									      ["style", ["style"]],
+									      ["font", ["bold", "italic", "underline", "clear"]],
+									      ["fontname", ["fontname"]],
+									      ["color", ["color"]],
+									      ["para", ["ul", "ol", "paragraph"]],
+									      ["height", ["height"]],
+									      ["table", ["table"]],
+									      ["insert", ["link", "hr"]],
+									      ["view", ["fullscreen", "codeview"]],
+									      ["help", ["help"]]
+									    ]'>${portfolio.content}</textarea>
   
 
           <span class="text-gray-900">홈페이지 : </span>
@@ -114,9 +117,18 @@
   
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
-  
-  
   $('#register').on('click', function() {
+	  
+	  // 제목과 내용이 비어있는지 체크 (bootstrap으로 required 구문 안먹음)
+      if($('#title').val() == "" || $('.note-editable.card-block > p').html() == undefined || $('.note-editable.card-block > p').html() == "<br>") {
+          Swal.fire({
+              icon: 'error',
+              title: '잠깐!...',
+              text: '제목, 내용을 넣어주세요.',
+            })
+		  return;
+	  }
+	  
 	  // 공개설정인 경우 : 썸네일 값이 있는지 체크
 	  if($('#readable').val() == 1 ) {
 		  if($('#thumb').val() != null) {
