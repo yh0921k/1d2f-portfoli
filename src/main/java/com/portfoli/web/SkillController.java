@@ -117,12 +117,13 @@ public class SkillController {
       System.out.println(skillName);
       params.put("skillName", skillName);
       GeneralMemberSkill gms = skillService.get(params);
-      params.put("skillNumber", gms.getSkillNumber());
-      System.out.println("gms : " + gms);
-
       if (gms == null) {
         continue;
       }
+
+      params.put("skillNumber", gms.getSkillNumber());
+      System.out.println("gms : " + gms);
+
       portfoliSkillService.delete(gms.getMemberSkillNumber());
       skillService.delete(params);
     }
