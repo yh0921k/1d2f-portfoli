@@ -101,6 +101,12 @@
 									src="../../resources/assets/images/naver_green.PNG" /></a>
 							</div>
 
+              <div class="col-6">
+							<a href="https://github.com/login/oauth/authorize?scope=user&client_id=74e05c13d93fb5feacb1"
+							class="btn btn-sm btn-block btn-github transition-hover-top text-white">
+							<i class="fi fi-social-github"></i>github</a>
+              </div>
+
 						</div>
 						<div class="form-label-group mb-3">
 							<input required placeholder="Email" name="email" type="text"
@@ -231,7 +237,7 @@
                 console.log('Please log into this app.');
             }
 		}
-		
+
 	</script>
 
 	<script src="../../resources/assets/js/core.min.js"></script>
