@@ -1,11 +1,11 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.portfoli.dao.PortfolioDao;
 import com.portfoli.domain.Portfolio;
+import com.portfoli.domain.SearchMap;
 import com.portfoli.service.PortfolioService;
 
 @Component
@@ -66,7 +66,7 @@ public class PortfolioServiceImpl implements PortfolioService {
   public int selectMyRecommendedListCnt(int generalMemberNumber) throws Exception {
     return portfolioDao.selectMyRecommendedListCnt(generalMemberNumber);
   }
-  
+
   @Override
   public void readableon(Portfolio portfolio) throws Exception {
     portfolioDao.readableon(portfolio);
@@ -78,9 +78,15 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
-  public List<Portfolio> search(Map<String, String> map) throws Exception {
-    return portfolioDao.search(map);
+  public List<Portfolio> search(SearchMap searchMap) throws Exception {
+    return portfolioDao.search(searchMap);
   }
+
+  @Override
+  public List<Portfolio> searchMyRecommendedlist(SearchMap searchMap) throws Exception {
+    return portfolioDao.findSomeRecommendedlist(searchMap);
+  }
+
 
 
 

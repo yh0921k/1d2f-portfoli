@@ -29,6 +29,11 @@
     </association>
   </resultMap>
   
+  <resultMap type="SearchMap" id="SearchMap">
+    <id column="keyword" property="keyword" /><!-- 게시글번호-->
+    <id column="number" property="number" /><!-- 제목-->
+  </resultMap>  
+  
   <!-- 전체 포트폴리오 리스트 추출 (페이징처리)-->
   <select id="findAll" resultMap="PortfolioMap" parameterType="Portfolio">
     SELECT
@@ -67,10 +72,10 @@
     ORDER BY count desc,
     b.view_count desc,
     b.registered_date desc
-    limit ${startIndex}, ${pageSize}
+    limit #{startIndex}, #{pageSize}
   </select>
   
-  <!-- 전체 포트폴리오 리스트 추출 (페이징처리)-->
+  <!-- 전체 포트폴리오 추천 리스트 추출 (페이징처리)-->
   <select id="findAllRecommendedlist" resultMap="PortfolioMap" parameterType="Portfolio">
     SELECT 
        r1.board_no, 
@@ -93,7 +98,7 @@
        
 	   FROM (SELECT * 
 		       FROM pf_recommendation 
-		       WHERE member_no = ${myNumber}
+		       WHERE member_no = 3
 		       ) r1 
 	   LEFT OUTER JOIN pf_recommendation r2 
 	   ON r1.board_no = r2.board_no 
@@ -112,7 +117,52 @@
      ORDER BY count desc,
      b.view_count desc,
      b.registered_date desc
-    limit ${startIndex}, ${pageSize}
+    limit #{startIndex}, #{pageSize}
+  </select>  
+
+  <!-- 검색된 포트폴리오 추천 리스트 추출 (페이징처리)-->
+  <select id="findSomeRecommendedlist" resultMap="PortfolioMap" parameterType="SearchMap">
+    SELECT 
+       r1.board_no, 
+       r1.recommendation_date,
+       count(r2.member_no) count,
+       p.homepage,
+       p.thumbnail,
+       p.readable,
+       b.title,
+       b.content,
+       b.view_count,
+       b.registered_date,
+       m.member_no,  -- 회원번호(작성자)  --
+       m.id,  -- id값  --
+       m.name, -- 이름 --
+       m.email, -- 이메일 --
+       g.seeking_flag,  -- 재직여부 --
+       m.photo,  -- 사진경로 --
+       g.membership -- 멤버십 --
+       
+     FROM (SELECT * 
+           FROM pf_recommendation 
+           WHERE member_no = #{number}
+           ) r1 
+     LEFT OUTER JOIN pf_recommendation r2 
+     ON r1.board_no = r2.board_no 
+     LEFT OUTER JOIN pf_board b
+     ON r1.board_no = b.board_no
+     LEFT OUTER JOIN pf_portfolio p
+     ON r1.board_no = p.board_no
+     LEFT OUTER JOIN pf_general_member as g
+     ON g.general_member_no = p.general_member_no
+     LEFT OUTER JOIN pf_members as m
+     ON m.member_no = g.general_member_no
+  
+     WHERE r1.board_no = p.board_no
+     AND b.title LIKE '%${keyword}%'
+     GROUP BY r1.board_no
+    
+     ORDER BY count desc,
+     b.view_count desc,
+     b.registered_date desc
   </select>  
 
   <!-- 사용자별 포트폴리오 리스트 추출 -->
@@ -149,7 +199,7 @@
     WHERE m.member_no = #{member.number}
     
     GROUP BY p.board_no
-    limit ${startIndex}, ${pageSize}
+    limit #{startIndex}, #{pageSize}
   </select>
    
   <select id="selectMyRecommendedListCnt" resultType="int" parameterType="int">
@@ -161,7 +211,7 @@
 	  LEFT OUTER JOIN pf_recommendation r 
 	  on b.board_no = r.board_no 
 	  
-	  WHERE member_no = ${number}
+	  WHERE member_no = #{number}
   </select>
    
   <select id="selectListCnt" resultType="int" parameterType="int">
@@ -177,7 +227,7 @@
 	  from pf_portfolio p 
 	  LEFT OUTER JOIN pf_general_member m 
 	  ON p.general_member_no = m.general_member_no
-	  WHERE p.general_member_no = ${number}
+	  WHERE p.general_member_no = #{number}
   </select>
   
   <select id="findByNo" resultMap="PortfolioMap" parameterType="int">
@@ -214,14 +264,20 @@
   </select>
 
 <!-- mylist에서 상단 검색어 기능 -->
-  <select id="search" resultMap="PortfolioMap" parameterType="Map">
+  <select id="search" resultMap="PortfolioMap" parameterType="SearchMap">
     SELECT
       * 
     FROM pf_portfolio p 
     LEFT OUTER JOIN pf_board b 
     ON p.board_no = b.board_no 
     WHERE b.title like '%${keyword}%'
+    <if test="number > 0">
     AND p.general_member_no = ${number}
+    </if>
+    <if test="number == null || number == 0">
+    AND p.readable = 1
+    </if>
+    
   </select>
 
 

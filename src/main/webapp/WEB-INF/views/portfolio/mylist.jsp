@@ -14,7 +14,7 @@
 <!-------------------------------------------- 컨텐츠부분 -------------------------------------------->
 
 <div class="container" style="width: 70%;overflow-y: scroll;margin-left: 10px;overflow-x: hidden;">
-    <div class="portlet mt--20"  style="width: 95%; box-shadow: 0 0 0 0; display:inline-block">
+    <div class="portlet mt--20"  style="width: 100%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
           <h3 class="h2" style="display:inline-block;">포트폴리오 관리하기</h3>
@@ -23,7 +23,7 @@
                   onclick="location.href='form'">글쓰기(+)</button>
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
         <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
-           style="margin-bottom: 0.3rem;margin-left: 30%;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
+           style="margin-left:0px;float: right;;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
           <span class="group-icon">
             <i class="fi fi-list"></i>
             <i class="fi fi-squared-dots"></i>
@@ -32,7 +32,7 @@
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
 <!-------------------------------- 페이지 노출 컨텐츠수 -------------------------------->
       <select name="quantity" id="fnPageSize" class="form-control mb-3"
-              style="margin-bottom: 0.5rem!important;display: inline-block;font-size: 1rem;width: 9rem;height: 2.5rem;padding: 0.5rem;"
+              style="float: right;display: inline-block;font-size: 1rem;width: 9rem;height: 2.5rem;padding: 0.5rem;"
               onchange="fnSetPageSize(this.value)"
               >
         <option value="5">5개씩 보기</option>
@@ -43,13 +43,14 @@
 <!-------------------------------- 페이지 노출 컨텐츠수 -------------------------------->
       </div>
 <!-------------------------------- 검색창 -------------------------------->
-		<form action='searchMylist' method='get' >
-		  <input class="form-control" id='keyword' name='keyword' type='text'
-		         style="display:inline-block; width: 90%; height: 2.5rem; margin: 3rem 0rem;">
-		  <button aria-label="Global Search" type="submit"
-		          class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted">
-		     <i class="fi fi-search fs--20"></i>
-		  </button>
+		<form action='searchMylist' method='get' style="text-align:center;">
+      <button aria-label="Global Search" type="submit"
+              class="btn bg-transparent shadow-none m-0 px-2 py-1 text-muted"
+              style="float:right; width:3%; box-sizing:content-box;margin:2% 0rem!important">
+         <i class="fi fi-search fs--20"></i>
+      </button>
+      <input class="form-control" id='keyword' name='keyword' type='text'
+             style="float:right; display:inline-block; width: 93%;height: 2.5rem; margin: 2% 0rem;">
 		</form>
 <!-------------------------------- 검색창 -------------------------------->
       <div class="table-responsive rounded" style="min-height: 500px; overflow:initial;">
@@ -159,7 +160,7 @@
 
 
 
-<div class="row" id="blockStyle" style="margin-left:50000px ; position:absolute; margin-top:-550px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none;">
+<div class="row" id="blockStyle" style="margin-left:50000px ; position:absolute; margin-top:-500px; -webkit-backface-visibility:hidden; backface-visibility:hidden; background:white; display:none; width:100%;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
@@ -168,13 +169,14 @@
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
-  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:300px; max-height:300px; margin-right:20px">
+  <div class="col-12 col-lg-4 mb-4 cursor" 
+       style="max-width:33%; width:33%; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
-           style="background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
+           style="width:100%;background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
     </c:if>
 								<c:if test="${item.thumbnail == null}">
-           style="background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
+           style="width:100%;background-image: url('../../resources/assets/images/background/black.png');">
     </c:if>
 								<!-- 제목, 아이디 -->
 								<div class="card-body font-weight-light mt--60">
@@ -182,7 +184,7 @@
 										<div class="d-table-cell align-bottom"
 											style="text-align: center;">
 											<p
-												style="max-height: 1.65rem; width: 16.5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+												style="max-height: 1.65rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 												${item.title}</p>
 											<p class="text-warning fs--13">${item.member.id}</p>
 										</div>

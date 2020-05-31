@@ -82,7 +82,7 @@
 
               <!-- documentation -->
               <c:if test="${loginUser.type=='1' or loginUser.type==null}">
-                <li class="nav-item"><a href="/portfoli/app/portfolio/list" id="portfolio"
+                <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
                   style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
                 <li class="nav-item"><a
@@ -98,7 +98,7 @@
               </c:if>
 
               <c:if test="${loginUser.type=='2'}">
-                <li class="nav-item"><a href="/portfoli/app/portfolio/list" id="portfolio"
+                <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
                   style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"

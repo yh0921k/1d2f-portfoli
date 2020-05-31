@@ -1,8 +1,8 @@
 package com.portfoli.service;
 
 import java.util.List;
-import java.util.Map;
 import com.portfoli.domain.Portfolio;
+import com.portfoli.domain.SearchMap;
 
 public interface PortfolioService {
 
@@ -26,11 +26,14 @@ public interface PortfolioService {
 
   void readableoff(Portfolio portfolio) throws Exception;
 
-  List<Portfolio> search(Map<String, String> map) throws Exception;
+  List<Portfolio> search(SearchMap searchMap) throws Exception;
 
   List<Portfolio> listMyRecommendedlist(Portfolio portfolio) throws Exception;
 
   int selectMyRecommendedListCnt(int generalMemberNumber) throws Exception;
+
+  List<Portfolio> searchMyRecommendedlist(SearchMap searchMap) throws Exception;
+
 
 
 }
