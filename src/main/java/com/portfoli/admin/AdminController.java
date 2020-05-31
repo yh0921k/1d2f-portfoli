@@ -2,6 +2,7 @@ package com.portfoli.admin;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,10 +30,16 @@ public class AdminController {
   }
 
   @GetMapping("loginForm")
-  public void loginForm(final HttpServletRequest request, final HttpSession session)
-      throws Exception {
+  public void loginForm(final HttpServletRequest request) throws Exception {
     System.out.println("loginForm");
-    request.getSession().invalidate();
+    HttpSession session = request.getSession();
+
+    System.out.println("Session isValid : " + session.getAttribute("isValid"));
+    if (session.getAttribute("isValid") != null
+        && session.getAttribute("isValid").equals("false")) {
+      request.setAttribute("isValid", "false");
+    }
+    session.invalidate();
     System.out.println("loginForm after invalidate()");
   }
 
@@ -43,8 +50,8 @@ public class AdminController {
   }
 
   @RequestMapping("login")
-  public String login(final HttpServletRequest request, final String id, final String password)
-      throws Exception {
+  public String login(final HttpServletRequest request, final HttpServletResponse response,
+      final String id, final String password) throws Exception {
     logger.info("AdminController::login() called");
 
     if (request.getSession().getAttribute("admin") != null) {
@@ -52,13 +59,14 @@ public class AdminController {
     }
 
     Admin admin = adminService.get(id, password);
+    HttpSession session = request.getSession();
+    System.out.println("Admin : " + admin);
     if (admin != null) {
-      HttpSession session = request.getSession();
       session.setAttribute("admin", admin);
       return "redirect:index";
-    } else {
-      return "loginForm";
     }
+    session.setAttribute("isValid", "false");
+    return "redirect:loginForm";
   }
 
   @GetMapping("index")

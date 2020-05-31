@@ -91,13 +91,14 @@
 
 
 
+              <div id=invalid_p class="pl-4"></div>
 							<div class="row">
-
-								<!-- <div class="col-12 col-md-6 mt-4"> -->
-								<div style="width:504px;" class="pl-4">
+								<div class="col-12 col-md-6">
+								<div style="width:504px;" class="pl-2 pr-2">
+									
 									<button type="submit" class="btn btn-dark btn-block transition-hover-top">
 										Sign In
-									</button> 
+									</button>  
 								</div> 
 <!-- 
 								<div class="col-12 col-md-6 mt-4 text-align-end text-center-xs">
@@ -125,5 +126,16 @@
 		</div><!-- /#wrapper -->
 		<script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
 		<script src="${pageContext.request.getContextPath()}/resources/assets/js/vendor_bundle.min.js"></script>
+		
+		<script>
+		  $(document).ready(function() {
+			  var isValid = "${isValid}"; 
+			  if(isValid === "false") {
+				  $("#invalid_p").append(`<p id="invalid" style="color:red; margin-bottom:12px; font-size:12px;">아이디와 패스워드를 확인해주세요.</p>`);
+			  }
+		  });
+		  
+		</script>
 	</body>
 </html>
+
