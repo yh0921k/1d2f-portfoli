@@ -113,4 +113,9 @@ public class JobPostingServiceImpl implements JobPostingService {
     System.out.println("plusCnt 호출!");
     return jobPostingDao.plusCnt(jobPostingNumber);
   }
+
+  @Override
+  public List<JobPosting> findDeadline() throws Exception {
+    return jobPostingDao.findDeadline();
+  }
 }

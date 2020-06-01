@@ -27,4 +27,6 @@ public interface JobPostingService {
 
   int plusCnt(int jobPostingNumber) throws Exception;
 
+  List<JobPosting> findDeadline() throws Exception;
+
 }
