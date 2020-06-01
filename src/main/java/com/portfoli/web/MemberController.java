@@ -29,10 +29,12 @@ import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.GeneralMemberCertification;
 import com.portfoli.domain.GeneralMemberEducation;
+import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.Member;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.CompanyService;
 import com.portfoli.service.FinalEducationService;
+import com.portfoli.service.JobPostingService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.UserMailSendService;
 
@@ -60,6 +62,9 @@ public class MemberController {
 
   @Autowired
   FinalEducationService finalEducationService;
+
+  @Autowired
+  JobPostingService jobPostingService;
 
   @Autowired
   private UserMailSendService mailsender;
@@ -111,7 +116,7 @@ public class MemberController {
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
       loginUser.setPhotoFilePath(filename);
       request.setAttribute("loginUser", loginUser);
-      if(loginUser.getType() == 1) {
+      if (loginUser.getType() == 1) {
         return "redirect:/app/member/generalMypage";
       } else {
         return "redirect:/app/member/companyMypage";
@@ -138,7 +143,8 @@ public class MemberController {
   }
 
   @PostMapping("updateDefaultInfo")
-  public String updateDefaultInfo(HttpServletRequest request, GeneralMember member, MultipartFile photoFile) throws Exception {
+  public String updateDefaultInfo(HttpServletRequest request, GeneralMember member,
+      MultipartFile photoFile) throws Exception {
 
     // 사진 파일 처리
     String filename = null;
@@ -208,7 +214,7 @@ public class MemberController {
       memCert.setIssueDate(issueDate[i]);
       memCert.setExpireDate(expireDate[i]);
       certs.add(memCert);
-      //System.out.println("------------------------" + memCert);
+      // System.out.println("------------------------" + memCert);
 
     }
 
@@ -223,7 +229,7 @@ public class MemberController {
     memEdu.setEducationNumber(educationNumber);
     memEdu.setSchoolName(schoolName);
     edus.add(memEdu);
-    //System.out.println("-------------" + memEdu);
+    // System.out.println("-------------" + memEdu);
 
     finalEducationService.insertEduByMemberNumber(edus, memberNumber);
     return "redirect:/app/member/generalUpdate";
@@ -255,16 +261,26 @@ public class MemberController {
 
   @GetMapping("companyMypage")
   public void viewingCompanyMypage(HttpSession session, Model model) throws Exception {
-    Company company = companyService.get(((CompanyMember) session.getAttribute("loginUser")).getCompanyNumber());
-    //System.out.println("--------------" + company);
+    Company company =
+        companyService.get(((CompanyMember) session.getAttribute("loginUser")).getCompanyNumber());
+    // System.out.println("--------------" + company);
+
+    // 마감일이 7일 이하로 남은 공고
+    List<JobPosting> DeadlinePosting = jobPostingService.findDeadline();
+
+    // 마감일이 7일 이하로 남은 공고가 있을경우 알림
+    if (DeadlinePosting != null) {
+      model.addAttribute("DeadlinePosting", DeadlinePosting);
+    }
     model.addAttribute("company", company);
   }
 
 
   @GetMapping("companyUpdate")
   public void companyUpdate(HttpServletRequest request, Model model) throws Exception {
-    CompanyMember companyMember = memberService.getCompanyMember(((CompanyMember) request.getSession().getAttribute("loginUser")).getNumber());
-    //System.out.println("-----------" + companyMember);
+    CompanyMember companyMember = memberService.getCompanyMember(
+        ((CompanyMember) request.getSession().getAttribute("loginUser")).getNumber());
+    // System.out.println("-----------" + companyMember);
     model.addAttribute("member", companyMember);
   }
 
@@ -285,12 +301,13 @@ public class MemberController {
   }
 
   @PostMapping("updatePassword")
-  public String updatePassword(HttpServletRequest request, String newPassword, String password) throws Exception {
+  public String updatePassword(HttpServletRequest request, String newPassword, String password)
+      throws Exception {
 
     int memberNumber = ((Member) request.getSession().getAttribute("loginUser")).getNumber();
 
     if (memberService.updatePassword(memberNumber, newPassword, password) > 0) {
-      if(((Member) request.getSession().getAttribute("loginUser")).getType() == 1) {
+      if (((Member) request.getSession().getAttribute("loginUser")).getType() == 1) {
         return "redirect:/app/member/generalUpdate";
       } else {
         return "redirect:/app/member/companyUpdate";

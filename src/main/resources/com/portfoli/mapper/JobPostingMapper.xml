@@ -315,6 +315,33 @@
     limit 0, 5
   </select>
   
+  <select id="findDeadline" resultMap="JobPostingMap">
+    select
+    j.job_posting_no,
+    j.title,
+    j.content,
+    j.minimum_career,
+    j.job,
+    j.year_salary,
+    j.start_dated,
+    j.end_dated,
+    j.view_count,
+    j.posting_registration,
+    f.file_path,
+    e.employment_stat_name
+    from
+    pf_job_posting j
+    left outer join
+    pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+    join
+    pf_employment_status e
+    ON j.employment_stat_no = e.employment_stat_no
+    where
+    now() > date(subdate(j.end_dated,INTERVAL 7 DAY))
+    order by
+    j.job_posting_no desc      
+  </select>
+  
 </mapper>
 
 
