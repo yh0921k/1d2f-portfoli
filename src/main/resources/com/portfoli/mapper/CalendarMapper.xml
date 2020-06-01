@@ -7,8 +7,7 @@
 
 	<resultMap type="Calendar" id="CalendarMap">
 		<id column="schedule_no" property="id" />
-		<result column="general_member_no"
-			property="generalMemberNumber" />
+		<result column="general_member_no" property="generalMemberNumber" />
 		<result column="start_date" property="start" />
 		<result column="end_date" property="end" />
 		<result column="class" property="className" />
@@ -35,6 +34,16 @@
 		DELETE FROM pf_schedule
 		WHERE schedule_no = #{id}
 	</delete>
+
+	<select id="checkToday" parameterType="int" resultMap="CalendarMap">
+	<![CDATA[
+		SELECT * 
+		FROM pf_schedule
+		WHERE general_member_no = #{number}
+		AND start_date <= now()
+		AND end_date >= now()
+	]]>
+	</select>
 	
 	<update id="update" parameterType="Calendar">
 	 UPDATE pf_schedule

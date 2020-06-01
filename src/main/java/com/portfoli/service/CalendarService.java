@@ -13,5 +13,6 @@ public interface CalendarService {
 
   void update(Calendar calendar) throws Exception;
 
+  List<Calendar> checkToday(int memberNumber) throws Exception;
 
 }

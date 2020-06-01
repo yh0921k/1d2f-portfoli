@@ -13,4 +13,6 @@ public interface CalendarDao {
 
   int update(Calendar calendar);
 
+  List<Calendar> checkToday(int memberNumber);
+
 }

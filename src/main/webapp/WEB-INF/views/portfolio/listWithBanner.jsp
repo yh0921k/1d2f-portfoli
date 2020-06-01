@@ -186,7 +186,7 @@
 
 <div class="row" 
      id="blockStyle" 
-     style="margin-left: 0px; position: relative; margin-top:-500px; backface-visibility: hidden; background: white; display: none; justify-content:center;">
+     style="margin-left: 0px; position: relative; margin-top:-500px; backface-visibility: hidden; background: white; display: none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
@@ -314,11 +314,10 @@
   </style>
   
   <script>
-  /*
   setInterval(function() {
 	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
 	  },3000);
-  */
+
   function getQueryStringObject() {
 	    var a = window.location.search.substr(1).split('&');
 	    if (a == "") return {};
