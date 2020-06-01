@@ -111,7 +111,7 @@
 <%-------------------------------- 공개여부 --------------------------------%>
               <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
               <a href="#" id="readableToggler"
-                 class="btn-toggle btn btn-sm btn-outline-secondary active"
+                 class=" btn btn-sm btn-outline-secondary active"
                  data-toggle-ajax-url-on="readableon?number=${item.number}"
                  data-toggle-ajax-url-off="readableoff?number=${item.number}"
                  data-toast-failure-position="">
@@ -126,7 +126,7 @@
                 <c:if test="${item.getReadable() eq 0}">
               <td class="my-td my" style="max-width: 20rem;overflow: hidden;text-overflow: ellipsis;">
               <a href="#" id="readableToggler"
-                 class="btn-toggle btn btn-sm btn-outline-secondary"
+                 class=" btn btn-sm btn-outline-secondary"
                  data-toggle-ajax-url-on="readableon?number=${item.number}"
                  data-toggle-ajax-url-off="readableoff?number=${item.number}"
                  data-toast-failure-position="">
