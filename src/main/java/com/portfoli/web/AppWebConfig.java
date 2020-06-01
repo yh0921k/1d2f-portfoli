@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -16,7 +18,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @ComponentScan(value = "com.portfoli.web")
 @EnableWebMvc
-public class AppWebConfig {
+public class AppWebConfig implements WebMvcConfigurer {
 
   static Logger logger = LogManager.getLogger(AppWebConfig.class);
 
@@ -57,7 +59,12 @@ public class AppWebConfig {
     CommonsMultipartResolver mr = new CommonsMultipartResolver();
     mr.setMaxUploadSize(100000000);
     mr.setMaxInMemorySize(20000000);
-    mr.setMaxUploadSizePerFile(100000000); //업로드 파일 용량 95.4MB로 수정
+    mr.setMaxUploadSizePerFile(100000000); // 업로드 파일 용량 95.4MB로 수정
     return mr;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new ControllerInterceptor()).addPathPatterns("/**");
   }
 }
