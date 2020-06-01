@@ -37,12 +37,13 @@ public class AdminControllerInterceptor implements HandlerInterceptor {
       date = dateFormat.format(new Date());
       ipAddr = (null != request.getHeader("X-FORWARDED-FOR")) ? request.getHeader("X-FORWARDED-FOR")
           : request.getRemoteAddr();
-      url = request.getContextPath() + "/" + modelAndView.getViewName();
+      url = request.getContextPath() + "/admin/" + modelAndView.getViewName();
       user = ((Admin) request.getSession().getAttribute("admin")).getId();
       logger.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
     } catch (Exception e) {
-      if (user == null)
+      if (user == null) {
         user = "default";
+      }
       logger.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
     }
   }
