@@ -115,7 +115,7 @@ public class JobPostingServiceImpl implements JobPostingService {
   }
 
   @Override
-  public List<JobPosting> findDeadline() throws Exception {
-    return jobPostingDao.findDeadline();
+  public List<JobPosting> findDeadline(int memberNumber) throws Exception {
+    return jobPostingDao.findDeadline(memberNumber);
   }
 }

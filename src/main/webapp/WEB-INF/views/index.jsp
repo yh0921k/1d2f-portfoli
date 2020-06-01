@@ -84,34 +84,34 @@
               <c:if test="${loginUser.type=='1' or loginUser.type==null}">
                 <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span>포트폴리오</span></a></li>
                 <li class="nav-item"><a
                   href="/portfoli/app/jobposting/list" id="info"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
+                  style="width: 150px; margin-left: 0px;"> <span>채용정보</span></a></li>
                 <li class="nav-item"><a href="#" id="recommendInfo"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;" <span>추천채용정보</span></a></li>
-                <li class="nav-item"><a href="#" id="ranking"
+                  style="width: 150px; margin-left: 0px;"> <span>추천채용정보</span></a></li>
+                <li class="nav-item"><a href="/portfoli/app/rank/list " id="ranking"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span>랭킹</span></a></li>
               </c:if>
 
               <c:if test="${loginUser.type=='2'}">
                 <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span>포트폴리오</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
+                  style="width: 150px; margin-left: 0px;"> <span>채용정보</span></a></li>
                 <li class="nav-item"><a href="#" id="recommendInfoForCom"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;" <span>인재추천정보</span></a></li>
-                <li class="nav-item"><a href="#" id="ranking"
+                  style="width: 150px; margin-left: 0px;"> <span>인재추천정보</span></a></li>
+                <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span>랭킹</span></a></li>
               </c:if>
-              <!-- /NAVIGATION -->
+              <!-- /NAVIGATION --> 
 
           <!-- 로그인 전 -->
           <c:if test="${empty loginUser}">

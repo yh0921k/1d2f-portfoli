@@ -221,27 +221,31 @@
 
 <!-- 알림 -->
 <div class="col-12 col-xl-6 mb-3">
-	<div class="portlet">
+  <div class="portlet">
 
-		<div class="portlet-header">
-			<span class="d-block text-dark text-truncate font-weight-medium">알림</span>
-		</div>
+    <div class="portlet-header">
+      <span class="d-block text-dark text-truncate font-weight-medium">알림</span>
+    </div>
 
-		<div class="portlet-body">
-			<div class="row h-100 d-flex align-items-center">
-				<div class="col my-3">
+    <div class="portlet-body">
+      <div class="row h-100 d-flex align-items-center">
+        <div class="col my-3">
 
-					<c:if test="${not empty DeadlinePosting}">
-						<p>
-							<strong>공고 기간이 얼마 남지 않았습니다.</strong>
-						</p>
-					</c:if>
+          <c:if test="${not empty DeadlinePosting}">
+            <p>
+              <strong>공고 기간이 얼마 남지 않았습니다.</strong>
+            </p>
+          </c:if>
 
-				</div>
-			</div>
-		</div>
+          <c:if test="${empty DeadlinePosting}">
+            <p>알림이 존재하지 않습니다.</p>
+          </c:if>
 
-	</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 <!--  알림  -->
 

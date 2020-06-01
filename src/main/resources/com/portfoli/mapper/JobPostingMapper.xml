@@ -315,7 +315,7 @@
     limit 0, 5
   </select>
   
-  <select id="findDeadline" resultMap="JobPostingMap">
+  <select id="findDeadline" resultMap="JobPostingMap"  parameterType="int">
     select
     j.job_posting_no,
     j.title,
@@ -337,7 +337,7 @@
     pf_employment_status e
     ON j.employment_stat_no = e.employment_stat_no
     where
-    now() > date(subdate(j.end_dated,INTERVAL 7 DAY))
+    j.company_member_no=#{companyMemberNumber} and now() > date(subdate(j.end_dated,INTERVAL 7 DAY))
     order by
     j.job_posting_no desc      
   </select>

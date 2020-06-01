@@ -44,7 +44,7 @@
             <li class="nav-item"><a href="#" id="recommendInfo"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 0px;" <span>추천채용정보</span></a></li>
-            <li class="nav-item"><a href="#" id="ranking"
+            <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
           </c:if>
@@ -59,7 +59,7 @@
             <li class="nav-item"><a href="#" id="recommendInfoForCom"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 0px;" <span>인재추천정보</span></a></li>
-            <li class="nav-item"><a href="#" id="ranking"
+            <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
           </c:if>

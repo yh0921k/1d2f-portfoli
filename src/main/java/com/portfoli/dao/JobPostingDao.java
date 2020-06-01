@@ -27,6 +27,6 @@ public interface JobPostingDao {
 
   int plusCnt(int jobPostingNumber) throws Exception;
 
-  public List<JobPosting> findDeadline() throws Exception;
+  public List<JobPosting> findDeadline(int memberNumber) throws Exception;
 
 }
