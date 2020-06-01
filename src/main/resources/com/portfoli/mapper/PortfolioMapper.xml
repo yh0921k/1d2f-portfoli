@@ -309,7 +309,9 @@
     b.view_count desc,
     b.registered_date desc
     
+    <if test="pageSize > 0">
     limit #{startIndex}, #{pageSize}
+    </if>
   </select>
 
 

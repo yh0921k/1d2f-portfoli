@@ -272,9 +272,7 @@
   function fnSetPageSize(val) {
       var addr = window.location.href.split('/portfolio/')[1];
       if(addr.startsWith('searchAll')) {
-    	  console.log("진입함");
     	  qs = getQueryStringObject();
-        console.log(qs);
         location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + 1 + "&quantity=" + val;
       } else {
     	  location.href = "list?quantity=" + val;
@@ -293,16 +291,31 @@
 	  });
   
 	  function fn_center_paging(pageNum) {
-		  var qs = getQueryStringObject();
+		  
+	  var addr = window.location.href.split('/portfolio/')[1];
+	  var qs = getQueryStringObject();
+	  
+	  if(addr.startsWith('searchAll')) {
+      location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + pageNum + "&quantity=" + qs.quantity;
+		  
+	  } else {
 		  if(qs.quantity != null) {
 			  location.href = "list?quantity=" + qs.quantity + "&curPage=" + pageNum;
 		  } else {
 	      location.href = "list?curPage=" + pageNum;
 		  }
 	  }
+	  }
 	  
   function fn_paging(curPage) {
-	  location.href = "list?curPage=" + curPage;
+	  var addr = window.location.href.split('/portfolio/')[1];
+	  var qs = getQueryStringObject();
+	  
+	  if(addr.startsWith('searchAll')) {
+	      location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + curPage + "&quantity=" + qs.quantity;
+		  } else {
+	  		location.href = "list?curPage=" + curPage;
+		  }
 	  }
   
   $(document).ready(function() {

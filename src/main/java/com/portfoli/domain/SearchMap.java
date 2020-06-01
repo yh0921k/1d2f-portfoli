@@ -31,16 +31,18 @@ public class SearchMap implements Serializable {
     return startIndex;
   }
 
-  public void setStartIndex(int startIndex) {
+  public SearchMap setStartIndex(int startIndex) {
     this.startIndex = startIndex;
+    return this;
   }
 
   public int getPageSize() {
     return pageSize;
   }
 
-  public void setPageSize(int pageSize) {
+  public SearchMap setPageSize(int pageSize) {
     this.pageSize = pageSize;
+    return this;
   }
 
   @Override
@@ -79,8 +81,10 @@ public class SearchMap implements Serializable {
 
   @Override
   public String toString() {
-    return "SearchMap [number=" + number + ", keyword=" + keyword + "]";
+    return "SearchMap [number=" + number + ", keyword=" + keyword + ", startIndex=" + startIndex
+        + ", pageSize=" + pageSize + "]";
   }
+
 
 
 }

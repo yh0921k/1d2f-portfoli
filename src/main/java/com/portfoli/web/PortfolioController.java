@@ -290,6 +290,7 @@ public class PortfolioController {
 
       // 전체리스트 개수
       searchMap = new SearchMap().setKeyword(keyword);
+      //   .setStartIndex(0).setPageSize(1000);
       List<Portfolio> portfolios = portfolioService.search(searchMap);
       int listCnt = portfolios.size();
 
@@ -303,6 +304,8 @@ public class PortfolioController {
       model.addAttribute("listCnt", listCnt);
       model.addAttribute("pagination", pagination);
 
+      System.out.println("서치맵입니다>>>>");
+      System.out.println(searchMap);
       // 포트폴리오 리스트 받기
       portfolios = portfolioService.search(searchMap);
 
