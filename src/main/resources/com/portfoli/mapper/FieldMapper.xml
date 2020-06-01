@@ -27,4 +27,21 @@
 	  where name=#{name}
 	</select>
 	
+	<select id="findByMemberNumber" resultMap="FieldMap" parameterType="int">
+    select pf.field_no, pf.name 
+    from pf_field as pf join pf_general_member_interest as pgmi
+    on pf.field_no=pgmi.field_no
+    where pgmi.general_member_no=#{memberNumber}
+  </select>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from pf_general_member_interest
+    where general_member_no=#{memberNumber}
+  </delete>
+  
+  <insert id="insert" parameterType="map">
+    insert into pf_general_member_interest(general_member_no, field_no)
+    values(#{memberNumber}, #{fieldNumber})
+  </insert>
+  
 </mapper>
