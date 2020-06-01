@@ -234,6 +234,7 @@ CREATE TABLE pf_job_posting (
   job                  TEXT         NOT NULL COMMENT '직무', -- 직무
   year_salary          INTEGER      NULL     COMMENT '연봉', -- 연봉
   readable             INTEGER      NOT NULL COMMENT '공개여부', -- 공개여부
+  tel                  VARCHAR(20)      NOT NULL COMMENT '연락처', -- 연락처
   minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
   employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
 )
