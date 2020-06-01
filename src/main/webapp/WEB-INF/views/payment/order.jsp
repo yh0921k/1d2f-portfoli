@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<style>
+th {
+  background-color: #F5F5F5;
+  padding-left: 15px;
+}
+</style>
 
 <section class="pt-4 pb-0">
   <div class="container">
@@ -15,8 +21,7 @@
         </ol>
       </nav>
     </div>
-    <br>
-    <br> <span class="font-weight-bold">신청 상품 정보</span>
+    <br> <br> <span class="font-weight-bold">신청 상품 정보</span>
     <table class="table m-0">
       <thead>
         <tr>
@@ -44,51 +49,62 @@
               ${order.price}원</span></td>
 
           <!-- term -->
-          <td id="term" class="text-muted text-center">${startDate} ~ ${endDate}</td>
+          <td id="term" class="text-muted text-center">${startDate}~
+            ${endDate}</td>
 
         </tr>
         <!-- /product -->
       </tbody>
     </table>
 
-    <h1 class="font-weight-light">결제 정보</h1>
+    <span class="font-weight-bold">결제 정보</span>
     <table>
       <tr>
-        <th class="w--20">주문자</th>
-        <td>${jobPosting.member.name}(${jobPosting.company.name})
+        <th class="w--200 bb-0 font-weight-normal">주문자</th>
+        <td><div class="ml-3 mb-3">${jobPosting.member.name}(${jobPosting.company.name})</div>
       </tr>
       <tr>
-        <th class="w--200" style="background-color: #F5F5F5;">결제 수단</th>
-        <th scope="col"><input type="radio" name="method"
-          id="paymethod01" value="card" checked>신용카드 <input
-          type="radio" name="method" id="paymethod02" value="bank">
-          무통장 입금<br>
-          <div id="info1">
-            [ 신용카드 결제안내 ] <br> 신용카드 결제 시 매출 전표가 발행되며, 부가가치세법 제 33조에 따라
-            세금계산서를 발행하지 않습니다. <br> 신용카드는 세금계산서가 발행되지 않으므로 결제 완료 후 발행되는
-            매출전표로 세금계산서를 대신할 수 있습니다. <br> 대금 결제 청구서는 (주)이니시스 명의로 청구됩니다. <br>
-            <strong>법인카드로 결제하실 경우, 사업자등록번호 인증을 실시</strong>합니다. <br>
+        <th class="w--200 bb-0 font-weight-normal">결제 수단</th>
+        <td scope="col"><input type="radio" name="method"
+          id="paymethod01" class="mb-2 ml-3" value="card" checked>
+          신용카드 <input type="radio" name="method" id="paymethod02"
+          class="mb-2" value="bank"> 무통장 입금 <br>
+          <div id="info1" class="ml-3 mb-3">
+            <small> [ 신용카드 결제안내 ] <br> 신용카드 결제 시 매출 전표가 발행되며,
+              부가가치세법 제 33조에 따라 세금계산서를 발행하지 않습니다. <br> 대금 결제 청구서는 (주)이니시스
+              명의로 청구됩니다. <br> <strong>법인카드로 결제하실 경우, 사업자등록번호 인증을
+                실시</strong>합니다. <br></small>
           </div>
-          <div id="info2" style="display: none;">
-            [ 무통장 입금 결제안내 ] <br> 입금이 완료되어야, 신청하신 상품과 서비스가 적용됩니다. <br>
-            결제하기 버튼을 클릭하면 입금계좌번호를 확인하실 수 있습니다.
-          </div></th>
+          <div id="info2" class="ml-3 mb-3" style="display: none;">
+            <small> [ 무통장 입금 결제안내 ] <br> 입금이 완료되어야, 신청하신 상품과 서비스가
+              적용됩니다. <br> 결제하기 버튼을 클릭하면 입금계좌번호를 확인하실 수 있습니다.
+            </small>
+          </div></td>
       </tr>
 
       <tr>
-        <th class="w--200" style="background-color: #F5F5F5;">주문자 이메일</th>
-        <td><input type="text" class="form-control form-control-sm"
-          value="${jobPosting.member.email}">
-          <small> (입력하신 메일주소로 결제 완료 메일이 발송됩니다.) </small></td>
+        <th class="w--200 bb-0 font-weight-normal">주문자 이메일</th>
+        <td><input type="text"
+          class="form-control form-control-sm ml-3"
+          style="width: 300px; position: static; float: left;"
+          value="${jobPosting.member.email}"> <small class="mt-2"
+          style="position: relative; float: right;"> (입력하신 메일주소로 결제
+            완료 메일이 발송됩니다.) </small></td>
       </tr>
     </table>
+    <br>
+    <br>
     <form action="/portfoli/app/payment/complete" method="post"
       id="payForm">
       <input id="impUid" name="impUid" type="hidden"> <input
         id="merchantUid" name="merchantUid" type="hidden">
-      <button id="payBtn" type="button" class="btn btn-sm btn-primary mb-1">
-        결제하기</button>
+      <div class="d-middle">
+        <button id="payBtn" type="button"
+          class="btn btn-sm btn-primary mb-3">결제하기</button>
+      </div>
     </form>
+    <br>
+    <br>
   </div>
 </section>
 
@@ -120,7 +136,7 @@ function payForCard() {
       alert('결제가 완료되었습니다.');
       $('#impUid').val(response.imp_uid);
       $('#merchantUid').val(response.merchant_uid);
-      $('#pay-form').submit();
+      $('#payForm').submit();
     } else {
       alert('결제실패 : ' + response.error_msg);
     }
@@ -131,18 +147,16 @@ function payForBank() {
   alert('무통장 입금');
 }
 
-/*
 $('input[id=paymethod01]').on('click', function() {
   $("#info2").hide();
   $("#info1").show();
-  //$('.btn-primary').prop('href', "/portfoli/app/payment/pay");
+  // $('.btn-primary').prop('href', "/portfoli/app/payment/pay");
 
 })
 
-$('input[id=paymethod03]').on('click', function() {
+$('input[id=paymethod02]').on('click', function() {
   $("#info1").hide();
   $("#info2").show();
-  $('.btn-primary').prop('href', "/portfoli/app/payment/bank");
+  // $('.btn-primary').prop('href', "/portfoli/app/payment/bank");
 })
-*/
 </script>

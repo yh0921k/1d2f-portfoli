@@ -345,7 +345,7 @@ CREATE TABLE pf_payment (
   product_name VARCHAR(255) NOT NULL COMMENT '상품명', -- 상품명
   price        INTEGER      NOT NULL COMMENT '가격', -- 가격
   method       VARCHAR(40)  NOT NULL COMMENT '결제수단', -- 결제수단
-  stat         INTEGER      NOT NULL COMMENT '결제상태', -- 결제상태
+  comment         VARCHAR(100)      NOT NULL COMMENT '결제상태', -- 결제상태
   pay_date     DATETIME     NOT NULL COMMENT '결제일' -- 결제일
 )
 COMMENT '결제';

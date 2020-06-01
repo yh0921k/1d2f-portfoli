@@ -118,7 +118,7 @@
               data-input-suggest-name="title" 
               data-input-suggest-ajax-url="jobPostingList" 
               data-input-suggest-ajax-method="GET" 
-              data-input-suggest-ajax-limit="20">
+              data-input-suggest-ajax-limit="20" style="width: 300px;">
             <label for="input_jobPosting">공고 목록</label>
           </div>
           <span class="text-muted">기간 선택하기</span>
@@ -132,9 +132,9 @@
                 class="custom-control-input"> <label
                 class="custom-control-label" for="customRadioInline2"><span class="text-muted">1주일</span></label>
             </div>
-            <br>
+            <br><br>
           <span class="text-muted">시작일</span>
-          <input type="text" name="startDate" class="form-control datepicker" 
+          <input type="text" name="startDate" class="form-control form-control-sm datepicker" 
             data-today-highlight="true" 
             data-layout-rounded="false" 
             data-title="Smarty Datepicker" 
@@ -153,7 +153,7 @@
               "monthsShort": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
               "today": "오늘 날짜 선택",
               "clear": "초기화",
-              "titleFormat": "yyyy MM"}'>
+              "titleFormat": "yyyy MM"}' style="width: 300px;">
           <input name="endDate" type="hidden" value="">
           <br>
           <div style="display: none;" id="selectItem">

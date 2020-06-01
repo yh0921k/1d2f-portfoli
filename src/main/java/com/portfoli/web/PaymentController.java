@@ -1,5 +1,6 @@
 package com.portfoli.web;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +28,7 @@ import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Payment;
 import com.portfoli.service.JobPostingService;
+import com.portfoli.service.PaymentService;
 
 @Controller
 @RequestMapping("payment")
@@ -34,16 +37,14 @@ public class PaymentController {
 
   public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
   public static final String IMPORT_PAYMENT_URL = "https://api.iamport.kr/payments/{1}";
-
-  // public static final String IMPORT_PAYMENTINFO_URL = "https://api.iamport.kr/payments/find/";
-  // public static final String IMPORT_CANCEL_URL = "https://api.iamport.kr/payments/cancel";
-  // public static final String IMPORT_PREPARE_URL = "https://api.iamport.kr/payments/prepare";
-
   public static final String KEY = "1453295861280296";
   public static final String SECRET = "OG0vl1zxv6UL2tAIETxE8tks4xgFZFpOlpjGqSeWZ8H1BiJgbgVjKfMON2uMHTA2jTJKMYGL6nMIFwYQ";
 
   @Autowired
   JobPostingService jobPostingService;
+
+  @Autowired
+  PaymentService paymentService;
 
   public PaymentController() {
     PaymentController.logger.debug("PaymentController 객체 생성!");
@@ -63,8 +64,8 @@ public class PaymentController {
     HttpEntity<String> request = new HttpEntity<String>(gson.toJson(key), headers);
 
     RestTemplate rt = new RestTemplate();
-    Map<String,Object> result = rt.postForObject(IMPORT_TOKEN_URL, request, Map.class);
-    Map<String,Object> response = (Map<String, Object>) result.get("response");
+    Map<String, Object> result = rt.postForObject(IMPORT_TOKEN_URL, request, Map.class);
+    Map<String, Object> response = (Map<String, Object>) result.get("response");
 
     System.out.println(response);
 
@@ -154,26 +155,44 @@ public class PaymentController {
 
   @SuppressWarnings({"unchecked", "rawtypes"})
   @PostMapping("complete")
-  public void complete(String impUid, String merchantUid, Model model) throws Exception {
+  public void complete(HttpServletRequest request, String impUid, String merchantUid,
+      Model model) throws Exception {
     String accessToken = getToken();
 
     // 액세스 토큰을 가지고 서버에서 결제 정보를 조회한다.
     HttpHeaders headers = new HttpHeaders();
     headers.add("Authorization", accessToken);
 
-    HttpEntity request = new HttpEntity(headers);
+    HttpEntity entityRequest = new HttpEntity(headers);
 
     RestTemplate rt = new RestTemplate();
-    ResponseEntity<String> response = rt.exchange(
+
+    ResponseEntity<String> result = rt.exchange(
         IMPORT_PAYMENT_URL,
         HttpMethod.GET,
-        request,
+        entityRequest,
         String.class,
         impUid
         );
 
-    System.out.println(response);
-    
     // 정상적인 결제가 맞다면, 주문 정보를 DB에 저장한다.
+    if (result.getStatusCodeValue() == 200) {
+      Map<String, Object> resultBody = new JSONParser(result.getBody()).parseObject();
+      Map<String, Object> response = (Map<String, Object>) resultBody.get("response");
+
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Payment payment = new Payment();
+      payment.setProductName((String) response.get("name"));
+      payment.setMemberNumber(loginUser.getNumber());
+      payment.setPrice(Integer.parseInt(String.valueOf(response.get("amount"))));
+      payment.setMethod((String) response.get("card_name") + ", " + (String) response.get("card_number"));
+      payment.setComment((String) response.get("pg_tid"));
+      // payment.setPayDate(new Date(Long.parseLong(String.valueOf(response.get("paid_at")))));
+      payment.setPayDate(new Date(System.currentTimeMillis()));
+
+      paymentService.add(payment);
+
+      model.addAttribute("payment", payment);
+    }
   }
 }

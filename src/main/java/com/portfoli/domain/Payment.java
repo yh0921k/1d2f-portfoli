@@ -11,13 +11,13 @@ public class Payment implements Serializable {
   private String productName;
   private int price;
   private String method;
-  private String status;
+  private String comment;
   private Date payDate;
 
   @Override
   public String toString() {
     return "Payment [number=" + number + ", memberNumber=" + memberNumber + ", productName="
-        + productName + ", price=" + price + ", method=" + method + ", status=" + status
+        + productName + ", price=" + price + ", method=" + method + ", comment=" + comment
         + ", payDate=" + payDate + "]";
   }
 
@@ -61,12 +61,12 @@ public class Payment implements Serializable {
     this.method = method;
   }
 
-  public String getStatus() {
-    return status;
+  public String getComment() {
+    return comment;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setComment(String comment) {
+    this.comment = comment;
   }
 
   public Date getPayDate() {
@@ -87,7 +87,7 @@ public class Payment implements Serializable {
     result = prime * result + ((payDate == null) ? 0 : payDate.hashCode());
     result = prime * result + price;
     result = prime * result + ((productName == null) ? 0 : productName.hashCode());
-    result = prime * result + ((status == null) ? 0 : status.hashCode());
+    result = prime * result + ((comment == null) ? 0 : comment.hashCode());
     return result;
   }
 
@@ -121,10 +121,10 @@ public class Payment implements Serializable {
         return false;
     } else if (!productName.equals(other.productName))
       return false;
-    if (status == null) {
-      if (other.status != null)
+    if (comment == null) {
+      if (other.comment != null)
         return false;
-    } else if (!status.equals(other.status))
+    } else if (!comment.equals(other.comment))
       return false;
     return true;
   }
