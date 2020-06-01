@@ -192,12 +192,17 @@
                   href="#" id="dropdownAccountOptions"
                   class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
                   data-toggle="dropdown" aria-expanded="false"
-                  aria-haspopup="true">
-                <span id="showAlarm" class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0"></span>
-								<span class="group-icon m-0">
+                  aria-haspopup="true"> 
+                  
+                  <span
+                class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0"
+                id="showAlarm"></span>
+                  
+                  <span class="group-icon m-0">
                       <i class="fi w--15 fi-user-male"></i> <i
                       class="fi w--15 fi-close"></i>
-                  </span> <span
+                  </span> 
+                  <span  
                     class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}
                   </span>
                 </a>
@@ -238,12 +243,12 @@
                       <small class="d-block text-muted">profile, password and more...</small>
                       </a>
                       
-                      <a href="/portfoli/app/portfolio/mylist" target="_blank" class="dropdown-item text-truncate font-weight-medium">내 포트폴리오 
+                      <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium"> 포트폴리오 
                       <small class="d-block text-muted">portfolio</small>
                       </a> 
                       
                       <a href="/portfoli/app/calendar/calendar" target="_blank" class="dropdown-item text-truncate font-weight-medium">
-                        <span id="alarm" class="badge badge-success float-end font-weight-normal mt-1"><c:if test="${todoLists > 0}">${todoLists} new</c:if></span> 일정 
+                        <span id="alarm" class="badge badge-success float-end font-weight-normal mt-1"></span> 일정 
                         <small class="d-block text-muted">calendar</small>
                       </a> 
 
@@ -321,8 +326,7 @@
                   href="#" id="dropdownAccountOptions"
                   class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
                   data-toggle="dropdown" aria-expanded="false"
-                  aria-haspopup="true">
-								<span class="group-icon m-0">
+                  aria-haspopup="true"> <span class="group-icon m-0">
                       <i class="fi w--15 fi-user-male"></i> <i
                       class="fi w--15 fi-close"></i>
                   </span> <span
@@ -720,12 +724,39 @@
 
 	</div>
 	<!-- /#wrapper -->
+	
 <script src="${pageContext.request.getContextPath()}/resources/assets/js/core.min.js"></script>
 <script>
 
-// 오늘 일정에 해당하는 개수 추가
-$('#showAlarm').html($('#alarm').html().split(' new')[0]);
+// 오늘 스케쥴 개수만큼 마이페이지 우측상단에 표기
+function checkSchedule() {
+	  console.log('trying socket connection2');
+	  var wsUri2 = "ws://" + window.location.host
+	      + "/portfoli/app/calendar/alert";
+	  if (wsUri2 == "ws://localhost:9999/portfoli/app/calendar/alert") {
+	    websocket2 = new WebSocket(wsUri2);
+	  } else {
+	    wsUri2 = "ws://121.132.195.172:8080/portfoli/app/calendar/alert";
+	    websocket2 = new WebSocket(wsUri2);
+	  }
+	  websocket2.onopen = function(evt2) {
+	    console.log('connection opened2');
+	    onOpen(websocket2, evt2);
+	  };
+	  websocket2.onmessage = function(evt2) {
+	    console.log("received message2 : " + evt2.data);
+	    onMessage2(evt2);
+	  };
+	  websocket2.onerror = function(evt2) {
+	    console.log('error2 : ' + err);
+	    onError(websocket2, evt2);
+	  };
+	  websocket2.onclose = function(evt2) {
+	    console.log("WebSocket is closed now2");
+	  };
+}
 
+// 받은 쪽지 개수만큼 쪽지 우측상단에 표기
 function sendMessage() {
   console.log('trying socket connection');
   var wsUri = "ws://" + window.location.host
@@ -738,7 +769,7 @@ function sendMessage() {
   }
   websocket.onopen = function(evt) {
     console.log('connection opened');
-    onOpen(evt);
+    onOpen(websocket, evt);
   };
   websocket.onmessage = function(evt) {
     console.log("received message : " + evt.data);
@@ -746,22 +777,28 @@ function sendMessage() {
   };
   websocket.onerror = function(evt) {
     console.log('error : ' + err);
-    onError(evt);
+    onError(websocket, evt);
   };
   websocket.onclose = function(evt) {
     console.log("WebSocket is closed now.");
   };
 }
-function onOpen(evt) {
+function onOpen(websocket, evt) {
+	console.log("send 처리함");
   websocket.send("${loginUser.number}");
 }
 function onMessage(evt) {
-  $('#count').append(evt.data);
+	  $('#count').append(evt.data);
+}
+function onMessage2(evt) {
+	  $('#showAlarm').append(evt.data);
+		$('#alarm').append(evt.data + " new");
 }
 function onError(evt) {
 }
 $(document).ready(function() {
   sendMessage();
+  checkSchedule();
 });
 </script>
 </body>

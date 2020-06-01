@@ -148,6 +148,36 @@
 	</div>
 </footer>
   <script>
+
+//오늘 스케쥴 개수만큼 마이페이지 우측상단에 표기
+function checkSchedule() {
+	  console.log('trying socket connection2');
+	  var wsUri2 = "ws://" + window.location.host
+	      + "/portfoli/app/calendar/alert";
+	  if (wsUri2 == "ws://localhost:9999/portfoli/app/calendar/alert") {
+	    websocket2 = new WebSocket(wsUri2);
+	  } else {
+	    wsUri2 = "ws://121.132.195.172:8080/portfoli/app/calendar/alert";
+	    websocket2 = new WebSocket(wsUri2);
+	  }
+	  websocket2.onopen = function(evt2) {
+	    console.log('connection opened2');
+	    onOpen(websocket2, evt2);
+	  };
+	  websocket2.onmessage = function(evt2) {
+	    console.log("received message2 : " + evt2.data);
+	    onMessage2(evt2);
+	  };
+	  websocket2.onerror = function(evt2) {
+	    console.log('error2 : ' + err);
+	    onError(websocket2, evt2);
+	  };
+	  websocket2.onclose = function(evt2) {
+	    console.log("WebSocket is closed now2");
+	  };
+}
+ 
+//받은 쪽지 개수만큼 쪽지 우측상단에 표기
 function sendMessage() {
   console.log('trying socket connection');
   var wsUri = "ws://" + window.location.host
@@ -160,7 +190,7 @@ function sendMessage() {
   }
   websocket.onopen = function(evt) {
     console.log('connection opened');
-    onOpen(evt);
+    onOpen(websocket, evt);
   };
   websocket.onmessage = function(evt) {
     console.log("received message : " + evt.data);
@@ -174,15 +204,21 @@ function sendMessage() {
     console.log("WebSocket is closed now.");
   };
 }
-function onOpen(evt) {
+function onOpen(websocket, evt) {
+	console.log("send 처리함");
   websocket.send("${loginUser.number}");
 }
 function onMessage(evt) {
   $('#count').append(evt.data);
 }
+function onMessage2(evt) {
+	  $('#showAlarm').append(evt.data);
+		$('#alarm').append(evt.data + " new");
+}
 function onError(evt) {
 }
 $(document).ready(function() {
-  sendMessage();
+	  sendMessage();
+	  checkSchedule();
 });
 </script>
