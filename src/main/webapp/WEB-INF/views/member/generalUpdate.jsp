@@ -116,8 +116,8 @@
 					<li id="availableSkills" class="nav-item"><a class="nav-link nav-link-remember" data-toggle="tab" href="#tab_availableSkills">보유기술</a>
 					</li>
 					
-					<!-- 일반회원 - 내정보수정 - 관심기술 탭 -->
-          <li class="nav-item"><a class="nav-link nav-link-remember" data-toggle="tab" href="#tab_interestSkills">관심기술</a>
+					<!-- 일반회원 - 내정보수정 - 관심분야 탭 -->
+          <li id="interestSkills" class="nav-item"><a class="nav-link nav-link-remember" data-toggle="tab" href="#tab_interestSkills">관심분야</a>
           </li>
 				</ul>
 
@@ -630,11 +630,27 @@
 
 <!-- MEMBER INTEREST SKILL TAB -->
 <div id="tab_interestSkills" class="tab-pane border bt-0 p-4 shadow-xs">
-  <p>TETSETSETESTS</p>
   <div class="d-block shadow-xs rounded p-4 mb-2">
       
     <div class="row">
       <div class="col">
+        <div id="int_available", style="width:100%; height:200px; background-color:#D8D8D8;">  
+          <button id="int_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill">
+            Apply
+          </button>
+        </div>  
+        <hr>
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:100%; height:400px; background-color:#D8D8D8;">
+           <div id= "int_selectField" class="iqs-container p--15 border rounded mt-3" >          
+              <!-- ajax 필드 추가 코드 들어감 -->
+           </div>
+        </div>
+          
+<!--          <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;"> -->
+<!--            <div id="int_selectSkill" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">          -->
+<!--              ajax 기술 추가 코드 들어감              -->
+<!--            </div> -->
+<!--          </div> -->
       </div>
     </div> 
   </div>
@@ -678,6 +694,22 @@
       }    
     xhr.open('GET', '../skill/listOfUser', false); 
     xhr.send();
+    
+    // 관심 분야 리스트 불러오기
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          let skillList = JSON.parse(xhr.responseText); 
+          for(var skill of skillList) {
+            var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
+            $("#int_available").append(addHtml);
+          }
+         }               
+       }
+      }    
+    xhr.open('GET', '../field/listOfUserInterest', false); 
+    xhr.send();
 	  
     if(document.getElementsByName("checkbox_p").length > 0) {
       return;
@@ -691,9 +723,9 @@
           for(idx in obj) {
             var addHtml = `<div class="iqs-item">       
             <label class="form-checkbox form-checkbox-primary">
-              <input class="field" type="checkbox" name="checkbox_p">
-              <i></i>` + obj[idx].name + `</label>`
+              <input class="field" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
             $("#selectField").append(addHtml);
+            $("#int_selectField").append(addHtml);
          }               
        }
 	    }
@@ -776,6 +808,54 @@ $("#apply").click(function() {
       }
   };
   xhr.open('POST', '../skill/update');
+  xhr.setRequestHeader('Content-Type', 'application/json'); 
+  xhr.send(JSON.stringify(skillList));
+});
+</script>
+
+<!-- 관심 분야 탭 -->
+<script>
+// Field 클릭 시
+$("#int_selectField").on("click", ".field", function() {  
+  console.log($(this));
+  
+  let interestSkillList = document.querySelectorAll(".interestSkills");
+  let selected = $(this)[0].parentNode.textContent.trim();
+  let isExist = false;
+  for(var skill of interestSkillList) {
+     if(selected===$(skill).text()) {
+       isExist = true;
+       return;
+     }
+  }
+  if(!isExist) {
+    var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestSkills badge badge-pill badge-secondary">` + selected + `</span>`
+    $("#int_available").append(addHtml);
+  }
+});
+
+$("#int_available").on("click", ".interestSkills", function() {
+   $(this).remove();
+});
+
+$("#int_apply").click(function() {
+  let interestSkillList = document.querySelectorAll(".interestSkills");
+
+  let skillArray = [];
+  for(let skill of interestSkillList) {
+    skillArray.push($(skill).text());   
+  }
+   
+  let skillList = JSON.stringify(skillArray);
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            window.location.reload(true);
+          }
+      }
+  };
+  xhr.open('POST', '../field/update');
   xhr.setRequestHeader('Content-Type', 'application/json'); 
   xhr.send(JSON.stringify(skillList));
 });
