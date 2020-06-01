@@ -16,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.portfoli.domain.Calendar;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Message;
+import com.portfoli.service.CalendarService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.MessageService;
 import com.portfoli.service.UserMailSendService;
@@ -43,6 +45,9 @@ public class AuthController {
 
   @Autowired
   MessageService messageService;
+
+  @Autowired
+  CalendarService calendarService;
 
   @GetMapping("loginForm")
   public void loginForm(HttpSession session, HttpServletRequest request, Model model)
@@ -86,6 +91,7 @@ public class AuthController {
     Member member = memberService.get(email, password);
 
     if (member != null) {
+      // 쪽지함 불러오기
       request.getSession().setAttribute("loginUser", member);
 
       List<Message> recentMessages = messageService.listReceivedMessage(member.getNumber(), 1, 5);
@@ -94,6 +100,14 @@ public class AuthController {
         m.setMember(sender);
       }
       request.getSession().setAttribute("inbox", recentMessages);
+
+      // 캘린더 불러오기
+      List<Calendar> todoLists = calendarService.checkToday(member.getNumber());
+      System.out.println("캘린더 출력");
+      for(Calendar todoList : todoLists) {
+        System.out.println(todoList);
+      }
+      request.getSession().setAttribute("todoLists", todoLists.size());
 
       return "redirect:/";
 

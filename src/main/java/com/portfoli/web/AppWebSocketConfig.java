@@ -13,9 +13,18 @@ public class AppWebSocketConfig implements WebSocketConfigurer {
   @Autowired
   MessageWebSocketHandler messageWebSocketHandler;
 
+  @Autowired
+  CalendarWebSocketHandler calendarWebSocketHandler;
+
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     registry.addHandler(messageWebSocketHandler, "/message/alert")
-        .addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
+    .addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
+
+    registry.addHandler(calendarWebSocketHandler, "/calendar/alert")
+    .addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
+
   }
+
+
 }
