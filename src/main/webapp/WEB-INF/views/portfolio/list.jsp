@@ -128,7 +128,7 @@
 
 <div class="row" 
      id="blockStyle" 
-     style="margin-left: 0px; position: relative; margin-top:-500px; backface-visibility: hidden; background: white; display: none; justify-content:center;">
+     style="margin-left: 0px; position: relative; margin-top:-500px; backface-visibility: hidden; background: white; display: none;">
 <!--------------------------------------------- 프토폴리오 리스트 (블럭형) --------------------------------------------->
   <c:forEach items="${list}" var="item">
 <a href="#"
