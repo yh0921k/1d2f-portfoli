@@ -260,13 +260,15 @@ public class MemberController {
   }
 
   @GetMapping("companyMypage")
-  public void viewingCompanyMypage(HttpSession session, Model model) throws Exception {
+  public void viewingCompanyMypage(HttpSession session, HttpServletRequest request, Model model)
+      throws Exception {
     Company company =
         companyService.get(((CompanyMember) session.getAttribute("loginUser")).getCompanyNumber());
     // System.out.println("--------------" + company);
 
-    // 마감일이 7일 이하로 남은 공고
-    List<JobPosting> DeadlinePosting = jobPostingService.findDeadline();
+    // 자신의 공고중 마감일이 7일 이하로 남은 공고
+    Member mem = (Member) request.getSession().getAttribute("loginUser");
+    List<JobPosting> DeadlinePosting = jobPostingService.findDeadline(mem.getNumber());
 
     // 마감일이 7일 이하로 남은 공고가 있을경우 알림
     if (DeadlinePosting != null) {
