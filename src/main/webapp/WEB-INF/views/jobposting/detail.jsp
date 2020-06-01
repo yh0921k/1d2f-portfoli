@@ -4,18 +4,18 @@
 
 <c:if test="${not empty jobPosting}">
 
-<!---------------------------------------content---------------------------------------------------->
+	<!---------------------------------------content---------------------------------------------------->
 	<div class="container">
 		<br>
 		<div style="width: 100%;">
-<!------------------------------------------제목---------------------------------------------------->		
+			<!------------------------------------------제목---------------------------------------------------->
 			<h4>${jobPosting.title}<br>
-<!------------------------------------------/제목--------------------------------------------------->			
+				<!------------------------------------------/제목--------------------------------------------------->
 			</h4>
 			<hr>
 
 			<div class="row gutters-sm mb-3">
-<!-----------------------------------------지원자격 ------------------------------------------------->
+				<!-----------------------------------------지원자격 ------------------------------------------------->
 				<div class="col-12 col-xl-6 mb-3">
 					<div class="portlet">
 
@@ -26,23 +26,28 @@
 						<div class="portlet-body">
 							<div class="row h-100 d-flex align-items-center">
 								<div class="col my-3">
-									<p class="text-gray-900 mb-1 ml-3">경력 
-										<font style="color:orange;">${jobPosting.minimumCareer} 년 이상</font></p>
-										<p class="text-gray-900 mb-1 ml-3">자격증 
-                    <font style="color:orange;">${jobPosting.certificate.name}</font></p>
-                    <p class="text-gray-900 mb-1 ml-3">요구전공 
-                    <font style="color:orange;">${jobPosting.major.name}</font></p>
-                    <p class="text-gray-900 mb-1 ml-3">최소학력 
-                    <font style="color:orange;">${jobPosting.finalEducation.category}</font></p>
+									<p class="text-gray-900 mb-1 ml-3">
+										경력 <font style="color: orange;">${jobPosting.minimumCareer}
+											년 이상</font>
+									</p>
+									<p class="text-gray-900 mb-1 ml-3">
+										자격증 <font style="color: orange;">${jobPosting.certificate.name}</font>
+									</p>
+									<p class="text-gray-900 mb-1 ml-3">
+										요구전공 <font style="color: orange;">${jobPosting.major.name}</font>
+									</p>
+									<p class="text-gray-900 mb-1 ml-3">
+										최소학력 <font style="color: orange;">${jobPosting.finalEducation.category}</font>
+									</p>
 								</div>
 							</div>
 						</div>
 
 					</div>
 				</div>
-<!-----------------------------------------/지원자격 ------------------------------------------------->
+				<!-----------------------------------------/지원자격 ------------------------------------------------->
 				<br>
-<!-----------------------------------------근무조건 -------------------------------------------------->
+				<!-----------------------------------------근무조건 -------------------------------------------------->
 				<div class="col-12 col-xl-6 mb-3">
 					<div class="portlet">
 
@@ -54,20 +59,22 @@
 							<div class="row h-100 d-flex align-items-center">
 								<div class="col my-3">
 									<p class="text-gray-900 mb-1 ml-3">
-									직무 
-									<font style="color:orange;">${jobPosting.job}</font></p>
-									<p class="text-gray-900 mb-1 ml-3">고용형태 
-									<font style="color:orange;">${jobPosting.employmentStatus.name}</font></p>
-									<p class="text-gray-900 mb-1 ml-3">지역 
-								  <font style="color:orange;">${jobPosting.district.name}</font></p>
-									
+										직무 <font style="color: orange;">${jobPosting.job}</font>
+									</p>
+									<p class="text-gray-900 mb-1 ml-3">
+										고용형태 <font style="color: orange;">${jobPosting.employmentStatus.name}</font>
+									</p>
+									<p class="text-gray-900 mb-1 ml-3">
+										지역 <font style="color: orange;">${jobPosting.district.name}</font>
+									</p>
+
 								</div>
 							</div>
 						</div>
 
 					</div>
 				</div>
-<!----------------------------------------/근무조건 -------------------------------------------------->
+				<!----------------------------------------/근무조건 -------------------------------------------------->
 			</div>
 
 			<br>
@@ -80,75 +87,76 @@
 
 		<hr>
 		<h3>상세요강</h3>
-<!------------------------------------------ 사진 -------------------------------------------------->
-		<p>
+		<!------------------------------------------ 사진 -------------------------------------------------->
+		<div>
 			<c:forEach items="${jobPosting.files}" var="jobPostingFile">
 				<img
 					src="${pageContext.servletContext.contextPath}/upload/jobposting/${jobPostingFile.filePath}"
 					width="100%">
 			</c:forEach>
-		</p>
-<!------------------------------------------ /사진 ------------------------------------------------->
-		
-<!------------------------------------------ 내용 -------------------------------------------------->
-		<div style="text-align: center">
-			<textarea readonly rows="20" cols="130" style="border:none">${jobPosting.content}</textarea>
 		</div>
-<!----------------------------------------- /내용 -------------------------------------------------->
+
+		<!------------------------------------------ /사진 ------------------------------------------------->
+
+		<!------------------------------------------ 내용 -------------------------------------------------->
+		<div style="text-align: center">
+			<textarea readonly rows="20" cols="130" style="border: none">${jobPosting.content}</textarea>
+		</div>
+		<!----------------------------------------- /내용 -------------------------------------------------->
 		<br>
-		  <hr>
-    
-	<div class="row gutters-sm mb-3">
-<!----------------------------------------- 남은시간 ------------------------------------------------>
-        <div class="col-12 col-xl-6 mb-3">
-          <div class="portlet" style="text-align: center">
-
-            <div class="portlet-header">
-              <span class="d-block text-dark text-truncate font-weight-medium"><h4>남은시간</h4></span>
-            </div>
-
-            <div class="portlet-body">
-              <div class="row h-100 d-flex align-items-center">
-                <div class="col my-3">
-                  <p class="text-gray-900 mb-1 ml-3">
-                  
-                <p id="timer" style="text-clolor: red"></p>
-      시작일 | ${jobPosting.startDated}
-      <br> 마감일 | ${jobPosting.endDated}<br>
-                  
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-<!----------------------------------------- /남은시간 ------------------------------------------------>
-	
-
-<!----------------------------------------- 지원방법 ------------------------------------------------>
-        <div class="col-12 col-xl-6 mb-3">
-          <div class="portlet">
-
-            <div class="portlet-header">
-              <span class="d-block text-dark text-truncate font-weight-medium"><h4>지원방법</h4></span>
-            </div>
-
-            <div class="portlet-body">
-              <div class="row h-100 d-flex align-items-center">
-                <div class="col my-3">
-                   <p class="text-gray-900 mb-1 ml-3">연락처
-                    <font style="color:orange;">${jobPosting.tel}</font></p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-<!----------------------------------------- /지원방법 ------------------------------------------------>
-</div>
-<p>마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
 		<hr>
-<!----------------------------------------- 수정삭제 ------------------------------------------------>
+
+		<div class="row gutters-sm mb-3">
+			<!----------------------------------------- 남은시간 ------------------------------------------------>
+			<div class="col-12 col-xl-6 mb-3">
+				<div class="portlet" style="text-align: center">
+
+					<div class="portlet-header">
+						<span class="d-block text-dark text-truncate font-weight-medium"><h4>남은시간</h4></span>
+					</div>
+
+					<div class="portlet-body">
+						<div class="row h-100 d-flex align-items-center">
+							<div class="col my-3">
+								<p class="text-gray-900 mb-1 ml-3">
+								<p id="timer" style="text-clolor: red"></p>
+								시작일 | ${jobPosting.startDated} <br> 마감일 |
+								${jobPosting.endDated}<br>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!----------------------------------------- /남은시간 ------------------------------------------------>
+
+
+			<!----------------------------------------- 지원방법 ------------------------------------------------>
+			<div class="col-12 col-xl-6 mb-3">
+				<div class="portlet">
+
+					<div class="portlet-header">
+						<span class="d-block text-dark text-truncate font-weight-medium"><h4>지원방법</h4></span>
+					</div>
+
+					<div class="portlet-body">
+						<div class="row h-100 d-flex align-items-center">
+							<div class="col my-3">
+								<p class="text-gray-900 mb-1 ml-3">
+									연락처 <font style="color: orange;">${jobPosting.tel}</font>
+								</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!----------------------------------------- /지원방법 ------------------------------------------------>
+		</div>
+		<p>마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
+		<hr>
+		<!----------------------------------------- 수정삭제 ------------------------------------------------>
 		<c:if test="${not empty modifiable}">
 			<div style="text-align: right">
 				<a href='updateForm?no=${jobPosting.jobPostingNumber}'
@@ -159,7 +167,7 @@
 					class="btn btn-outline-dark btn-pill mb-1">삭제</a>
 			</div>
 		</c:if>
-<!----------------------------------------- /수정삭제 ------------------------------------------------>
+		<!----------------------------------------- /수정삭제 ------------------------------------------------>
 		<!-- <div id="map" style="width:500px;height:200px;"></div>  -->
 
 
