@@ -159,15 +159,18 @@ public class JobPostingController {
       HttpServletRequest request) throws Exception {
 
     Member mem = (Member) request.getSession().getAttribute("loginUser");
-    System.out.println(mem.getType());
-    int listCnt = jobPostingService.ListCnt(jobPosting);
-    List<JobPosting> jobPostings = jobPostingService.list();
-    model.addAttribute("listCnt", listCnt);
-    model.addAttribute("list", jobPostings);
+    if (mem == null) {
+      throw new Exception("로그인을 하신 후, 채용정보를 볼 수 있습니다.");
+    } else {
+      int listCnt = jobPostingService.ListCnt(jobPosting);
+      List<JobPosting> jobPostings = jobPostingService.list();
+      model.addAttribute("listCnt", listCnt);
+      model.addAttribute("list", jobPostings);
 
-    // 기업회원일 경우
-    if (mem.getType() == 2) {
-      model.addAttribute("RegistrationPossible", true);
+      // 기업회원일 경우
+      if (mem.getType() == 2) {
+        model.addAttribute("RegistrationPossible", true);
+      }
     }
   }
 
