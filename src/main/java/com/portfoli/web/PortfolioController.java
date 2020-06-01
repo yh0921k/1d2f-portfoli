@@ -618,13 +618,14 @@ public class PortfolioController {
         });
         portfolio.setThumbnail(filename);
 
-        System.out.println(portfolio);
-        System.out.println(portfolio.getMember());
         // Portfolio 입력 중에서 작성자 정보입력
         portfolio.setMember(new GeneralMember().setNumber(member.getNumber()));
-
-        portfolioService.update(portfolio);
       }
+
+      System.out.println("포트폴리오 >> ");
+      System.out.println(portfolio);
+
+      portfolioService.update(portfolio);
 
       if(skills != null) {
         String[] updateList = skills.split(",");

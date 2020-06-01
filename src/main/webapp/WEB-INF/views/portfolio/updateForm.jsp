@@ -18,7 +18,7 @@
             <div class="col-12 col-lg-12">
         <h3 class="d-none d-lg-block m--3" style="margin-bottom: 1.4rem!important;">내 포트폴리오 수정</h3>
 
-               <form id="updateForm" action="update" method="post" enctype="multipart/form-data">
+               <form id="update" action="update" method="post" enctype="multipart/form-data">
                <input name="number" type="hidden" value="${portfolio.getNumber()}"/>
                 
           <span class="text-gray-900">제목 : </span> 
@@ -143,12 +143,13 @@
             })
     }
 	    
-
+      console.log($('#readable').val());
+	    
 	    // 비공개설정인 경우 : 조건없이 통과
 	    if($('#readable').val() == 0 || $('#readable').val() != 'on') {
-	          console.log($('#readable').val());
 	    	$('#readable').val(0);
-	      $('#updateForm').submit();
+	          console.log($('#readable').val());
+	      $('#update').submit();
 	    } else {
 	        // 공개설정인 경우 : 썸네일 값이 있는지 체크
 	        if($('#thumb').val() == null) {
@@ -158,9 +159,9 @@
 	            text: '썸네일을 넣어주세요.',
 	          })
 	        } else {
-	          console.log($('#readable').val());
 	            $('#readable').val(1);
-	            $('#updateForm').submit();
+	          console.log($('#readable').val());
+	            $('#update').submit();
 	        }
 	    }
 	  });

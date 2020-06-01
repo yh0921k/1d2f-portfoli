@@ -343,7 +343,7 @@
      <set>
      <if test="homepage != null and homepage != ''"> homepage = #{homepage}, </if>
      <if test="thumbnail != null and thumbnail != ''"> thumbnail = #{thumbnail}, </if>
-     <if test="readable != null and readable != ''"> readable = #{readable} </if>
+     <if test="readable == 1 || readable == 0"> readable = #{readable} </if>
      </set>
      WHERE board_no = #{number}
   </update>

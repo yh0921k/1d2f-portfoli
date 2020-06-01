@@ -324,38 +324,27 @@
   
   
   $('.readableToggler').on('click', function() {
+	  
 		  // 공개설정인 경우 : 비공개처리는 조건없이 통과
-		  if($('#readableToggler').hasClass('active')) {
-			  alert("active임")
+		  if($(this).hasClass('active')) {
+			  Swal.fire({
+				  icon: 'success',
+				  title: '성공!'
+				})
 		  }
 		   
 		  // 비공개설정인 경우 : 썸네일이 없으면 호출안함
 		  else {
-			  if($('#readableToggler').attr('data-value') == null) {
-			  alert("active아님");
-				  Swal.fire({
-					  icon: 'error',
-					  title: '잠깐!...',
-					  text: '썸네일을 넣어주세요.',
-					})
-					.then((result) => {
-						
-					});
-	  if (result.value) {
-	    Swal.fire(
-	      'Deleted!',
-	      'Your file has been deleted.',
-	      'success'
-	    )
-	  }
-					
-					
-					
+			  if($(this).attr('data-value') == null || $(this).attr('data-value') == '') {
+					  Swal.fire({
+						  icon: 'error',
+						  title: '잠깐!...',
+						  text: '썸네일을 넣어주세요.',
+						})
 			  } else {
 				  Swal.fire({
 					  icon: 'success',
-					  title: '성공!',
-					  text: 'ㅎㅎ',
+					  title: '성공!'
 					})
 			  }
 		  }
