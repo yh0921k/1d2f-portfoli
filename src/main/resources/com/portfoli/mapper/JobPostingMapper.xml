@@ -19,6 +19,7 @@
 		<result column="job" property="job" />
 		<result column="year_salary" property="yearSalary" />
 		<result column="readable" property="readable" />
+		<result column="tel" property="tel" />
 		<result column="minimum_education_no"	property="minimumEducationNumber" />
 
 		<association property="employmentStatus"
@@ -62,11 +63,12 @@
 		useGeneratedKeys="true" keyColumn="job_posting_no"
 		keyProperty="jobPostingNumber">
 		insert into pf_job_posting(
+		tel,
 		title,
 		content,
 		minimum_career,
 		job,
-		year_salary,
+		year_salary,		
 		start_dated,
 		end_dated,
 		view_count,
@@ -77,6 +79,7 @@
 		minimum_education_no,
 		employment_stat_no)
 		values(
+		#{tel},
 		#{title},
 		#{content},
 		#{minimumCareer},
@@ -105,6 +108,7 @@
 		j.end_dated,
 		j.view_count,
 		j.posting_registration,
+		j.tel,
 		f.file_path,
 		e.employment_stat_name
 		from
@@ -175,6 +179,7 @@
      j.minimum_career,
      j.job,
      j.year_salary,
+     j.tel,
      j.start_dated,
      j.end_dated,
      j.view_count,
@@ -222,7 +227,8 @@
 			<if test="endDated != null">end_dated=#{endDated},</if>
 			<if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number},</if>
 			<if test="district != null and district != ''">work_place_no=#{district.districtNumber},</if>
-			<if test="finalEducation != null and finalEducation != ''">minimum_education_no=#{finalEducation.educationNumber}</if>
+			<if test="finalEducation != null and finalEducation != ''">minimum_education_no=#{finalEducation.educationNumber},</if>
+			<if test="tel != null and tel != ''">tel=#{tel}</if>
 		</set>
 		where job_posting_no=#{jobPostingNumber}
 	</update>
