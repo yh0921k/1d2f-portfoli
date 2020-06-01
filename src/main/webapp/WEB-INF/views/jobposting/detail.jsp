@@ -3,30 +3,73 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:if test="${not empty jobPosting}">
-	<div class="container" style="width: 100%; height: 1900px;">
+
+<!---------------------------------------content---------------------------------------------------->
+	<div class="container">
 		<br>
-		<h5>채용정보</h5>
 		<div style="width: 100%;">
+<!------------------------------------------제목---------------------------------------------------->		
 			<h4>${jobPosting.title}<br>
+<!------------------------------------------/제목--------------------------------------------------->			
 			</h4>
 			<hr>
 
-			<div style="width: 50%;">
-				<h5>지원자격</h5>
-				<p class="text-gray-900 mb-1 ml-3">경력 :
-					${jobPosting.minimumCareer} 년 이상</p>
-			</div>
-			<br>
+			<div class="row gutters-sm mb-3">
+<!-----------------------------------------지원자격 ------------------------------------------------->
+				<div class="col-12 col-xl-6 mb-3">
+					<div class="portlet">
 
-			<div style="width: 50%;">
-				<h5>근무조건</h5>
-				<p class="text-gray-900 mb-1 ml-3">직무 : ${jobPosting.job}</p>
-				<p class="text-gray-900 mb-1 ml-3">고용형태 : ${jobPosting.employmentStatus.name}</p>
-				<p class="text-gray-900 mb-1 ml-3">자격증 : ${jobPosting.certificate.name}</p>
-				<p class="text-gray-900 mb-1 ml-3">요구전공 : ${jobPosting.major.name}</p>
-        <p class="text-gray-900 mb-1 ml-3">지역 : ${jobPosting.district.name}</p>
-        <p class="text-gray-900 mb-1 ml-3">최소학력 : ${jobPosting.finalEducation.category}</p>
+						<div class="portlet-header">
+							<span class="d-block text-dark text-truncate font-weight-medium"><h5>지원자격</h5></span>
+						</div>
+
+						<div class="portlet-body">
+							<div class="row h-100 d-flex align-items-center">
+								<div class="col my-3">
+									<p class="text-gray-900 mb-1 ml-3">경력 
+										<font style="color:orange;">${jobPosting.minimumCareer} 년 이상</font></p>
+										<p class="text-gray-900 mb-1 ml-3">자격증 
+                    <font style="color:orange;">${jobPosting.certificate.name}</font></p>
+                    <p class="text-gray-900 mb-1 ml-3">요구전공 
+                    <font style="color:orange;">${jobPosting.major.name}</font></p>
+                    <p class="text-gray-900 mb-1 ml-3">최소학력 
+                    <font style="color:orange;">${jobPosting.finalEducation.category}</font></p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+<!-----------------------------------------/지원자격 ------------------------------------------------->
+				<br>
+<!-----------------------------------------근무조건 -------------------------------------------------->
+				<div class="col-12 col-xl-6 mb-3">
+					<div class="portlet">
+
+						<div class="portlet-header">
+							<span class="d-block text-dark text-truncate font-weight-medium"><h5>근무조건</h5></span>
+						</div>
+
+						<div class="portlet-body">
+							<div class="row h-100 d-flex align-items-center">
+								<div class="col my-3">
+									<p class="text-gray-900 mb-1 ml-3">
+									직무 
+									<font style="color:orange;">${jobPosting.job}</font></p>
+									<p class="text-gray-900 mb-1 ml-3">고용형태 
+									<font style="color:orange;">${jobPosting.employmentStatus.name}</font></p>
+									<p class="text-gray-900 mb-1 ml-3">지역 
+								  <font style="color:orange;">${jobPosting.district.name}</font></p>
+									
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+<!----------------------------------------/근무조건 -------------------------------------------------->
 			</div>
+
 			<br>
 			<p style="text-align: right; font-color: black;">
 				조회수: ${jobPosting.viewCount}<br>
@@ -37,31 +80,76 @@
 
 		<hr>
 		<h3>상세요강</h3>
+<!------------------------------------------ 사진 -------------------------------------------------->
 		<p>
 			<c:forEach items="${jobPosting.files}" var="jobPostingFile">
 				<img
 					src="${pageContext.servletContext.contextPath}/upload/jobposting/${jobPostingFile.filePath}"
-					width="100%" height="600">
+					width="100%">
 			</c:forEach>
 		</p>
-
+<!------------------------------------------ /사진 ------------------------------------------------->
+		
+<!------------------------------------------ 내용 -------------------------------------------------->
 		<div style="text-align: center">
-			<textarea readonly rows="20" cols="130">${jobPosting.content}</textarea>
+			<textarea readonly rows="20" cols="130" style="border:none">${jobPosting.content}</textarea>
 		</div>
-
+<!----------------------------------------- /내용 -------------------------------------------------->
 		<br>
+		  <hr>
+    
+	<div class="row gutters-sm mb-3">
+<!----------------------------------------- 남은시간 ------------------------------------------------>
+        <div class="col-12 col-xl-6 mb-3">
+          <div class="portlet" style="text-align: center">
 
+            <div class="portlet-header">
+              <span class="d-block text-dark text-truncate font-weight-medium"><h4>남은시간</h4></span>
+            </div>
+
+            <div class="portlet-body">
+              <div class="row h-100 d-flex align-items-center">
+                <div class="col my-3">
+                  <p class="text-gray-900 mb-1 ml-3">
+                  
+                <p id="timer" style="text-clolor: red"></p>
+      시작일 | ${jobPosting.startDated}
+      <br> 마감일 | ${jobPosting.endDated}<br>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+<!----------------------------------------- /남은시간 ------------------------------------------------>
+	
+
+<!----------------------------------------- 지원방법 ------------------------------------------------>
+        <div class="col-12 col-xl-6 mb-3">
+          <div class="portlet">
+
+            <div class="portlet-header">
+              <span class="d-block text-dark text-truncate font-weight-medium"><h4>지원방법</h4></span>
+            </div>
+
+            <div class="portlet-body">
+              <div class="row h-100 d-flex align-items-center">
+                <div class="col my-3">
+                  <p class="text-gray-900 mb-1 ml-3">
+                   <p>전화지원</p> 
+                   <p>전화</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+<!----------------------------------------- /지원방법 ------------------------------------------------>
+</div>
+<p>마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
 		<hr>
-
-		<div
-			style="text-align: center; width: 25%; height: 180px; padding: 5px;">
-			<h4>남은시간</h4>
-			<p id="timer" style="text-clolor: red"></p>
-
-			시작일 | ${jobPosting.startDated}<br> 마감일 | ${jobPosting.endDated}<br>
-		</div>
-		<hr>
-
+<!----------------------------------------- 수정삭제 ------------------------------------------------>
 		<c:if test="${not empty modifiable}">
 			<div style="text-align: right">
 				<a href='updateForm?no=${jobPosting.jobPostingNumber}'
@@ -72,25 +160,30 @@
 					class="btn btn-outline-dark btn-pill mb-1">삭제</a>
 			</div>
 		</c:if>
-		
+<!----------------------------------------- /수정삭제 ------------------------------------------------>
+		<!-- <div id="map" style="width:500px;height:200px;"></div>  -->
+
+
 	</div>
 </c:if>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<!---------------------------------------/content--------------------------------------------------->
+
 <c:if test="${empty jobPosting}">
 	<p>해당 공고가 없습니다.</p>
 </c:if>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=126304aee8e06ce802d9561ab754dba4"></script>
+<script>
+	var container = document.getElementById('map');
+	var options = {
+		center : new kakao.maps.LatLng(33.450701, 126.570667),
+		level : 3
+	};
 
+	var map = new kakao.maps.Map(container, options);
+</script>
 <script>
 	//마감일
 	var endDate = new Date('${jobPosting.endDated}');
