@@ -16,59 +16,71 @@
       <label for="tel">전화번호 *</label> <input id="tel" placeholder="전화번호"
         autocomplete="off" class="form-control" name='tel' type='text'><br>
     </div>
-
-		<div class="row">
-			<span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">고용형태
-				: </span> <select id="select_options2" name="employmentStatus.number"
-				class="form-control form-control-sm col-md-3">
-				<c:forEach items="${employmentStatus}" var="employmentStatus">
-					<option value="${employmentStatus.number}">${employmentStatus.name}</option>
-				</c:forEach>
-			</select>
-		</div>
-		
-		   <div class="row">
-      <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">지역
-        : </span> <select id="select_options2" name="district.districtNumber"
-        class="form-control form-control-sm col-md-3">
-        <c:forEach items="${districts}" var="district">
-          <option value="${district.districtNumber}">${district.name}</option>
-        </c:forEach>
-      </select>
-    </div>
-    
-     <div class="row">
-      <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">최소학력
-        : </span> <select id="select_options2" name="finalEducation.educationNumber"
-        class="form-control form-control-sm col-md-3">
-        <c:forEach items="${finalEducations}" var="finalEducation">
-          <option value="${finalEducation.educationNumber}">${finalEducation.category}</option>
-        </c:forEach>
-      </select>
-    </div>
-		
-		<!-- jobPosting.certificate.name -->
-		
-		<div class="row">
-      <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">자격증
-        : </span> <select id="select_options2" name="certificate.certificateNumber"
-        class="form-control form-control-sm col-md-3">
-        <c:forEach items="${certificates}" var="certificate">
-          <option value="${certificate.certificateNumber}">${certificate.name}</option>
-        </c:forEach>
-      </select>
-    </div>
-    
-    <div class="row">
-      <span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">요구전공
-        : </span> <select id="select_options2" name="major.majorNumber"
-        class="form-control form-control-sm col-md-3">
-        <c:forEach items="${majors}" var="major">
-          <option value="${major.majorNumber}">${major.name}</option>
-        </c:forEach>
-      </select>
-    </div>
-    
+<!--------------------------------------------고용형태----------------------------------------------->
+		 <div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect01"
+              name="employmentStatus.number">
+              <c:forEach items="${employmentStatus}" var="employmentStatus">
+                <option value="${employmentStatus.number}">${employmentStatus.name}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect01" >고용형태</label>
+            </div>
+          </div>
+<!-------------------------------------------/고용형태----------------------------------------------->
+<!-----------------------------------------------지역----------------------------------------------->		
+    <div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect02"
+              name="district.districtNumber">
+              <c:forEach items="${districts}" var="district">
+                <option value="${district.districtNumber}">${district.name}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect02" >지역</label>
+            </div>
+          </div>
+<!----------------------------------------------/지역----------------------------------------------->	
+<!-----------------------------------------------학력----------------------------------------------->	 
+		<div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect03"
+              name="finalEducation.educationNumber">
+              <c:forEach items="${finalEducations}" var="finalEducation">
+                <option value="${finalEducation.educationNumber}">${finalEducation.category}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect03" >최소학력</label>
+            </div>
+          </div>
+<!----------------------------------------------/학력----------------------------------------------->
+<!----------------------------------------------자격증----------------------------------------------->		
+    <div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect04"
+              name="certificate.certificateNumber">
+              <c:forEach items="${certificates}" var="certificate">
+                <option value="${certificate.certificateNumber}">${certificate.name}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect04" >자격증</label>
+            </div>
+          </div>
+<!---------------------------------------------/자격증----------------------------------------------->
+<!---------------------------------------------전공------------------------------------------------->
+    <div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect05"
+              name="major.majorNumber">
+              <c:forEach items="${majors}" var="major">
+                <option value="${major.majorNumber}">${major.name}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect05" >요구전공</label>
+            </div>
+          </div>
+<!--------------------------------------------/전공------------------------------------------------->    
 		<textarea id="content" name='content' rows='10' cols='40'
 			class="markdown-editor" autocomplete="off"
 			data-toolbar='["bold", "italic", "strikethrough", "|", "heading-1", "heading-2", "heading-3", "|", "image", "link", "|", "unordered-list", "ordered-list", "quote", "|", "guide", "|", "preview"]'
@@ -80,17 +92,20 @@
 			data-lng-prompt-url="Type your URL:"></textarea>
 
 		<br>
-
+<!--------------------------------------------경력-------------------------------------------------->
 		<div class="col-sm-13">
 			최소경력* <input id="minimumCareer" autocomplete="off"
 				placeholder="최소경력(숫자만 입력가능)" name='minimumCareer' type='number'
 				class="form-control"><br>
 		</div>
-
+<!-------------------------------------------/경력-------------------------------------------------->
+<!--------------------------------------------직무-------------------------------------------------->
 		<div class="col-sm-13">
 			직무* <input placeholder="직무" autocomplete="off" id="job" name='job'
 				type='text' class="form-control" /> <label for="job"></label>
 		</div>
+<!-------------------------------------------/직무-------------------------------------------------->
+<!-------------------------------------------시작일-------------------------------------------------->		
 		<br> 시작일* <input id="startDat ed" autocomplete="off" type='text'
 			name='startDated' class="form-control datepicker"
 			data-today-highlight="true" data-layout-rounded="false"
@@ -106,6 +121,8 @@
 	    "today": "Today",
 	    "clear": "Clear",
 	    "titleFormat": "MM yyyy"}'>
+<!------------------------------------------/시작일-------------------------------------------------->
+<!------------------------------------------마감일--------------------------------------------------->
 		<br> 마감일* <input id="endDated" autocomplete="off" type='text'
 			name='endDated' class="form-control datepicker"
 			data-today-highlight="true" data-layout-rounded="false"
@@ -121,7 +138,8 @@
    "today": "Today",
    "clear": "Clear",
    "titleFormat": "MM yyyy"}'>
-
+<!-----------------------------------------/마감일--------------------------------------------------->
+<!-----------------------------------------이미지---------------------------------------------------->
 		<br> 이미지 첨부*
 		<div class="input-group">
 			<div class="custom-file custom-file-primary">
@@ -138,22 +156,18 @@
 					data-file-btn-clear="a.js-file-upload-clear2"
 					class="custom-file-input"> <label class="custom-file-label"
 					for="jobPostingFiles">파일을 선택하세요</label>
-
-
 			</div>
 		</div>
-
 
 		<div class="js-file-input-preview-single-container2 ml--n6 mr--n6">
 			<!-- preview container -->
 		</div>
 
-
 		<div class="mt-1">
 			<a href="#" class="hide js-file-upload-clear2 btn btn-light btn-sm">
 				이미지 삭제 </a>
 		</div>
-
+<!----------------------------------------/이미지---------------------------------------------------->		
 
 		<button id="btn1" class="btn btn-primary btn-lg btn-block">등록</button>
 	</form>
