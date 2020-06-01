@@ -20,6 +20,7 @@ public class JobPosting implements Serializable {
   private String job;
   private int yearSalary;
   private int readable;
+  private String tel;
   private int minimumEducationNumber;
   private EmploymentStatus employmentStatus;
   private Certificate certificate;
@@ -29,7 +30,6 @@ public class JobPosting implements Serializable {
   private CompanyMember companyMember;
   List<JobPostingFile> files;
 
-
   @Override
   public String toString() {
     return "JobPosting [jobPostingNumber=" + jobPostingNumber + ", companyMemberNumber="
@@ -37,10 +37,10 @@ public class JobPosting implements Serializable {
         + workPlaceNumber + ", minimumCareer=" + minimumCareer + ", viewCount=" + viewCount
         + ", postingRegistration=" + postingRegistration + ", startDated=" + startDated
         + ", endDated=" + endDated + ", job=" + job + ", yearSalary=" + yearSalary + ", readable="
-        + readable + ", minimumEducationNumber=" + minimumEducationNumber + ", employmentStatus="
-        + employmentStatus + ", certificate=" + certificate + ", major=" + major + ", district="
-        + district + ", finalEducation=" + finalEducation + ", companyMember=" + companyMember
-        + ", files=" + files + "]";
+        + readable + ", tel=" + tel + ", minimumEducationNumber=" + minimumEducationNumber
+        + ", employmentStatus=" + employmentStatus + ", certificate=" + certificate + ", major="
+        + major + ", district=" + district + ", finalEducation=" + finalEducation
+        + ", companyMember=" + companyMember + ", files=" + files + "]";
   }
 
   @Override
@@ -64,13 +64,13 @@ public class JobPosting implements Serializable {
     result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
     result = prime * result + readable;
     result = prime * result + ((startDated == null) ? 0 : startDated.hashCode());
+    result = prime * result + ((tel == null) ? 0 : tel.hashCode());
     result = prime * result + ((title == null) ? 0 : title.hashCode());
     result = prime * result + viewCount;
     result = prime * result + workPlaceNumber;
     result = prime * result + yearSalary;
     return result;
   }
-
 
 
   @Override
@@ -152,6 +152,11 @@ public class JobPosting implements Serializable {
         return false;
     } else if (!startDated.equals(other.startDated))
       return false;
+    if (tel == null) {
+      if (other.tel != null)
+        return false;
+    } else if (!tel.equals(other.tel))
+      return false;
     if (title == null) {
       if (other.title != null)
         return false;
@@ -165,7 +170,6 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
-
 
 
   public Major getMajor() {
@@ -286,6 +290,14 @@ public class JobPosting implements Serializable {
 
   public void setReadable(int readable) {
     this.readable = readable;
+  }
+
+  public String getTel() {
+    return tel;
+  }
+
+  public void setTel(String tel) {
+    this.tel = tel;
   }
 
   public int getMinimumEducationNumber() {
