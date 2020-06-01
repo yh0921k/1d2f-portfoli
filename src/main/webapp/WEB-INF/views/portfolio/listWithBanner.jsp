@@ -34,60 +34,59 @@
 
 <div class="row" id="banner" 
      style="margin-left: 0px;position: relative;margin-top: 2rem;backface-visibility: hidden;background: white;display:block;height: 317px;overflow: hidden;">
-<!--------------------------------------------- 프토폴리오 랭킹배너--------------------------------------------->
+<!--------------------------------------------- 포트폴리오 랭킹배너--------------------------------------------->
   <c:forEach items="${banners}" var="item">
-            <div class="col-12 col-lg-4"
-                 style="z-index: 150;font-size: 1.4rem;position: absolute;margin-left: 3rem;margin-top: 2rem;float: left;text-overflow: ellipsis;">
-            ${item.portfolio.rankfield.name} 분야 Best Portfolio
-            </div>
-  <div class="col-12 col-lg-4 mb-4 cursor js-ajax-modal" 
-       style="max-width: 100%; width:100%; margin-right:20px; height: 316px"
-       data-href="detail?number=${item.portfolio.number}" 
-       data-ajax-modal-size="modal-xl" 
-       data-ajax-modal-callback-function=""
-       data-ajax-modal-backdrop="" 
-       >
-    <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
-    <c:if test="${item.portfolio.thumbnail != null}">
-           style="width:100%; background-image: url('../../upload/portfolio/${item.portfolio.thumbnail}_300x300.jpg');">
-    </c:if>
-    <c:if test="${item.portfolio.thumbnail == null}">
-           style="width:100%; background-image: url('../../resources/assets/images/background/black.png');">
-    </c:if>
-    
-    <!-- 제목, 아이디 -->
-      <div class="card-body font-weight-light mt--60">
-        <div class="d-table">
-          <div class="d-table-cell align-bottom" style="text-align:center;">
-            <p>
-              ${item.portfolio.title}
-            </p>
-            <p class="text-warning fs--13">
-              by ${item.portfolio.member.id}
-            </p>
-          </div>
-        </div>
-      </div>
-    <!-- 제목, 아이디 -->
-
-    <!-- 카드하단 -->
-      <div class="card-footer bg-transparent b-0" style="height: 100px;">
-        <hr class="border-light opacity-2">
-        <a style="position: absolute; left: 67%;">
-        <span class="float-end fs--14 p-2">
-          ${item.portfolio.getRecommendedCount()}
-        </span>
-        </a>
-        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
-          ${item.portfolio.getViewCount()}
-        </a>
-      </div>
-    <!-- 카드하단 -->
-    
-      </div>
+  <div>
+     <div class="col-12 col-lg-4"
+          style="z-index: 150;max-width: 80%;font-size: 1.4rem;position: absolute;margin-left: 3rem;margin-top: 2rem;float: left;text-overflow: ellipsis;">
+     ${item.portfolio.rankfield.name} 분야 Best Portfolio
+     </div>
+			  	<div class="col-12 col-lg-4 mb-4 cursor js-ajax-modal" 
+			       style="max-width: 100%; width:100%; margin-right:20px; height: 316px"
+			       data-href="detail?number=${item.portfolio.number}" 
+			       data-ajax-modal-size="modal-xl" 
+			       data-ajax-modal-callback-function=""
+			       data-ajax-modal-backdrop="" 
+			       >
+			    <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
+			    <c:if test="${item.portfolio.thumbnail != null}">
+			           style="width:100%; background-image: url('../../upload/portfolio/${item.portfolio.thumbnail}_300x300.jpg');">
+			    </c:if>
+			    <c:if test="${item.portfolio.thumbnail == null}">
+			           style="width:100%; background-image: url('../../resources/assets/images/background/black.png');">
+			    </c:if>
+			    
+			    <!-- 제목, 아이디 -->
+			      <div class="card-body font-weight-light mt--60">
+			        <div class="d-table">
+			          <div class="d-table-cell align-bottom" style="text-align:center;">
+			            <p style="text-align: left; margin-left: 2rem;font-size: 1.2rem;">
+			              ${item.portfolio.title}
+			            </p>
+			            <p class="text-warning fs--13" style="text-align: left; margin-left: 2rem;font-size: 1.2rem;">
+			              by ${item.portfolio.member.id}
+			            </p>
+			          </div>
+			        </div>
+			      </div>
+			    <!-- 제목, 아이디 -->
+			
+			    <!-- 카드하단 -->
+			      <div class="card-footer bg-transparent b-0" style="height: 100px;">
+			        <hr class="border-light opacity-2">
+			        <span class="btn btn-sm btn-success opacity-8" style="position: absolute; left:10rem;">
+			          추천수 : ${item.portfolio.getRecommendedCount()}
+			        </span>
+			        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:2rem;">
+			          조회수 : ${item.portfolio.getViewCount()}
+			        </a>
+			      </div>
+			    <!-- 카드하단 -->
+			      </div>
+			    </div>
     </div>
     </c:forEach>
-<!--------------------------------------------- 프토폴리오 랭킹배너--------------------------------------------->
+<!--------------------------------------------- 포트폴리오 랭킹배너--------------------------------------------->
 </div>
 
 
@@ -222,8 +221,8 @@
     <!-- 카드하단 -->
       <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
-        <a style="position: absolute; left: 67%;">
-        <span class="float-end fs--14 p-2">
+        <a href="#" class="btn btn-sm btn-success opacity-8" style="position: absolute; left: 67%;">
+        <span class="fs--14">
           ${item.getRecommendedCount()}
         </span>
         </a>
@@ -314,9 +313,9 @@
   </style>
   
   <script>
-  setInterval(function() {
-	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
-	  },3000);
+ // setInterval(function() {
+	//    $('#banner > div:nth-child(1)').appendTo($('#banner'));
+	 // },3000);
 
   function getQueryStringObject() {
 	    var a = window.location.search.substr(1).split('&');

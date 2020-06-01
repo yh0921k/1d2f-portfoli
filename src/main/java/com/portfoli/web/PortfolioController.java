@@ -455,8 +455,10 @@ public class PortfolioController {
       for(Field field : fields) {
         List<Recommendation> recommendations = recommendationService.rankBySkill(field.getNumber());
 
+        System.out.println("리스트입니다");
         for(Recommendation recommendation : recommendations) {
           list.add(recommendation);
+          System.out.println(">>>>>"+recommendation);
         }
       }
       model.addAttribute("banners", list);
