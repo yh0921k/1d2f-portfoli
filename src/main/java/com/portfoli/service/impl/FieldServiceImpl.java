@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -28,5 +29,20 @@ public class FieldServiceImpl implements FieldService {
   @Override
   public int get(String fieldName) throws Exception {
     return fieldDao.findNumber(fieldName);
+  }
+
+  @Override
+  public List<Field> listOfMemberInterest(int memberNumber) throws Exception {
+    return fieldDao.findByMemberNumber(memberNumber);
+  }
+
+  @Override
+  public int delete(int memberNumber) throws Exception {
+    return fieldDao.deleteAll(memberNumber);
+  }
+
+  @Override
+  public int add(Map<String, Object> params) throws Exception {
+    return fieldDao.insert(params);
   }
 }
