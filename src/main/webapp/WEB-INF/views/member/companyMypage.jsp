@@ -232,9 +232,9 @@
         <div class="col my-3">
 
           <c:if test="${not empty DeadlinePosting}">
-            <p>
-              <strong>공고 기간이 얼마 남지 않았습니다.</strong>
-            </p>
+            <h4>           
+              <font style="color:orange;">공고 기간이 얼마 남지 않았습니다.</font>
+            </h4>
           </c:if>
 
           <c:if test="${empty DeadlinePosting}">
