@@ -1,4 +1,4 @@
-package com.portfoli.admin;
+package com.portfoli.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,21 +8,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import com.portfoli.domain.Admin;
+import com.portfoli.domain.Member;
 
-public class AdminControllerInterceptor implements HandlerInterceptor {
+public class ControllerInterceptor implements HandlerInterceptor {
 
   static Logger logger = LogManager.getLogger("runMode");
-  final static int EXPIRETIME = 600;
-
-  @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
-    System.out.println("AdminControllerInterceptor.preHandle()");
-    request.getSession().setAttribute("expire", EXPIRETIME);
-    request.getSession().setMaxInactiveInterval(EXPIRETIME);
-    return true;
-  }
 
   @Override
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -32,13 +22,13 @@ public class AdminControllerInterceptor implements HandlerInterceptor {
     String ipAddr = null;
     String url = null;
     try {
-      System.out.println("AdminControllerInterceptor.postHandle()");
+      System.out.println("ControllerInterceptor.postHandle()");
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
       date = dateFormat.format(new Date());
       ipAddr = (null != request.getHeader("X-FORWARDED-FOR")) ? request.getHeader("X-FORWARDED-FOR")
           : request.getRemoteAddr();
-      url = request.getContextPath() + "/admin/" + modelAndView.getViewName();
-      user = ((Admin) request.getSession().getAttribute("admin")).getId();
+      url = request.getContextPath() + "/app/" + modelAndView.getViewName();
+      user = ((Member) request.getSession().getAttribute("loginUser")).getId();
       logger.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
     } catch (Exception e) {
       if (user == null) {
@@ -46,12 +36,5 @@ public class AdminControllerInterceptor implements HandlerInterceptor {
       }
       logger.info(String.format("[%s]:%s > %15s:%s", date, ipAddr, user, url));
     }
-  }
-
-  @Override
-  public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-      Object handler, Exception ex) throws Exception {
-    System.out.println("AdminControllerInterceptor.afterCompletion()");
-
   }
 }
