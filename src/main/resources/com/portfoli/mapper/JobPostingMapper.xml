@@ -49,13 +49,13 @@
     
     <association property="member" javaType="Member">
     <id column="member_no" property="number"/>
-    <result column="name" property="name"/>
+    <result column="member_name" property="name"/>
     <result column="email" property="email"/>
     </association>
     
     <association property="company" javaType="Company">
     <id column="company_no" property="number"/>
-    <result column="name" property="name"/>
+    <result column="company_name" property="name"/>
     </association>
     
 		<collection property="files" ofType="JobPostingFile">
@@ -289,8 +289,8 @@
     select
     j.job_posting_no,
     j.title,
-    c.name,
-    m.name,
+    c.name as company_name,
+    m.name as member_name,
     m.email
     from pf_job_posting j
     join pf_members m
