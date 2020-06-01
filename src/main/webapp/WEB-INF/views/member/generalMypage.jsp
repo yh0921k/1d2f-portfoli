@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 	<div class="container-fluid">
 
@@ -65,7 +65,9 @@
 												data-file-preview-img-height="118"
 												data-file-btn-clear="a.js-file-upload-avatar-circle-remove"
 												data-file-preview-img-cover="true"
-												class="custom-file-input absolute-full"> <c:if
+												class="custom-file-input absolute-full">
+												<c:choose>
+												<c:when
 													test="${empty loginUser.photoFilePath}">
 													<svg class="fill-gray-500 rounded-circle m-4 z-index-0"
 														viewBox="0 0 60 60">
@@ -74,11 +76,18 @@
 														<path
 															d="M55.467,46.526l-9.723-4.21c-0.23-0.115-0.485-0.396-0.704-0.771l6.525-0.005c0,0,0.377,0.037,0.962,0.037c1.073,0,2.638-0.122,4-0.707c0.817-0.352,1.425-1.047,1.669-1.907c0.246-0.868,0.09-1.787-0.426-2.523c-1.865-2.654-6.218-9.589-6.354-16.623c-0.003-0.121-0.397-12.083-12.21-12.18c-1.187,0.01-2.309,0.156-3.372,0.413c0.792,2.094,0.719,3.968,0.665,4.576v4.733c0.648,0.922,1,2.017,1,3.141v4c0,1.907-1.004,3.672-2.607,4.662c-0.748,2.022-1.738,3.911-2.949,5.621c-0.15,0.213-0.298,0.414-0.443,0.604v2.86c0,0.442,0.236,0.825,0.631,1.022l9.553,4.776c3.587,1.794,5.815,5.399,5.815,9.41V57.5H60v-3.697C60,50.711,58.282,47.933,55.467,46.526z"></path>
 													</svg>
-												</c:if> <c:if test="${not empty loginUser.photoFilePath}">
-													<img class="rounded-circle img-thumbnail h--120 w--120"
-														src='${pageContext.request.getContextPath()}/upload/member/${loginUser.photoFilePath}'>
-													<br>
-												</c:if>
+												</c:when>
+												<c:when test="${fn:startsWith(loginUser.photoFilePath, 'https://avatars3.githubusercontent.com/')}">
+												  <img class="rounded-circle img-thumbnail h--120 w--120"
+                            src='${loginUser.photoFilePath}'>
+                          <br>
+                          </c:when>
+												<c:when test="${not empty loginUser.photoFilePath}">
+                          <img class="rounded-circle img-thumbnail h--120 w--120"
+                            src='${pageContext.request.getContextPath()}/upload/member/${loginUser.photoFilePath}'>
+                          <br>
+                        </c:when>
+												</c:choose>
 
 											</label>
 											<button class="btn btn-outline-dark btn-pill mb-1 btn-sm"

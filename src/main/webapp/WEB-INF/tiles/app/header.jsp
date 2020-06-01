@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- HEADER -->
@@ -109,16 +110,27 @@
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
-                      <!-- image --> <c:if
-                        test="${empty recentMessage.member.photoFilePath}">
+                      <!-- image -->
+                      <c:set var="photo" value="${recentMessage.member.photoFilePath}"/>
+                      <c:choose>
+                      <c:when
+                        test="${empty photo}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
                           style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
-                      </c:if> <c:if test="${not empty recentMessage.member.photoFilePath}">
+                      </c:when> 
+                      <c:when test="${fn:startsWith(photo, 'https://avatars3.githubusercontent.com/')}">
+                      <div
+                          class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
+                          style="background-image:url('${photo}')"></div>
+                      </c:when>
+                      <c:when test="${not empty photo}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
-                          style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${recentMessage.member.photoFilePath}')"></div>
-                      </c:if> <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
+                          style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${photo}')"></div>
+                      </c:when>
+                      </c:choose> 
+                      <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
                       <!-- title -->
                       <p class="fs--14 m-0 text-truncate font-weight-normal">
                         ${recentMessage.title}</p> <!-- date --> <small
@@ -154,14 +166,22 @@
                 <div class="dropdown-header fs--14 py-4">
 
                   <!-- profile image -->
-                  <div
-                    class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
-                    <c:if test="${empty loginUser.photoFilePath}">
+                    <c:set var="photo" value="${loginUser.photoFilePath}"/>
+                      <c:choose>
+                        <c:when test="${empty photo}">
+                      <div
+                        class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
                         style="background-image: url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
-                        </c:if>
-                    <c:if test="${not empty loginUser.photoFilePath}">
-                        style="background-image: url('${pageContext.request.getContextPath()}/upload/member/${loginUser.photoFilePath}')"></div>
-                        </c:if>
+                        </c:when>
+                          <c:when test="${fn:startsWith(photo, 'https://avatars3.githubusercontent.com/')}">
+                            <div class="w--60 h--60 rounded-circle bg-cover bg-light float-start"
+                          style="background-image:url('${photo}')"></div>
+                          </c:when>
+                        <c:when test="${not empty photo}">
+                          <div class="w--60 h--60 rounded-circle bg-cover bg-light float-start"
+                        style="background-image: url('${pageContext.request.getContextPath()}/upload/member/${photo}')"></div>
+                        </c:when>
+                        </c:choose>
                     <!-- initials - no image -->
                     <!--
                     <div data-initials=${loginUser.name} data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
