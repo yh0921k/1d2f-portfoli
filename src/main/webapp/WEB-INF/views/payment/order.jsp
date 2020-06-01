@@ -21,7 +21,7 @@ th {
         </ol>
       </nav>
     </div>
-    <br> <br> <span class="font-weight-bold">신청 상품 정보</span>
+    <br> <br> <span class="font-weight-bold">신청 상품 정보</span><hr class="mb-0">
     <table class="table m-0">
       <thead>
         <tr>
@@ -56,12 +56,12 @@ th {
         <!-- /product -->
       </tbody>
     </table>
-
-    <span class="font-weight-bold">결제 정보</span>
+    <br><br>
+    <span class="font-weight-bold">결제 정보</span><hr class="pt-0 mb-2">
     <table>
       <tr>
         <th class="w--200 bb-0 font-weight-normal">주문자</th>
-        <td><div class="ml-3 mb-3">${jobPosting.member.name}(${jobPosting.company.name})</div>
+        <td><div class="ml-3 mb-3 pt-1">${jobPosting.member.name}(${jobPosting.company.name})</div></td>
       </tr>
       <tr>
         <th class="w--200 bb-0 font-weight-normal">결제 수단</th>

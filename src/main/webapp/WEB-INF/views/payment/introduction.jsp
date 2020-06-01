@@ -112,13 +112,13 @@
           <input name="product" type="hidden" value="">
           <input name="price" type="hidden" value="">
           <div class="form-label-group mb-3">
-            <input name="title" id="input_jobPosting" type="text" class="form-control input-suggest" value="" 
+            <input name="title" id="input_jobPosting" type="text" class="form-control input-suggest w--300" value="" 
               placeholder="JobPosting" 
               data-input-suggest-mode="text" 
               data-input-suggest-name="title" 
               data-input-suggest-ajax-url="jobPostingList" 
               data-input-suggest-ajax-method="GET" 
-              data-input-suggest-ajax-limit="20" style="width: 300px;">
+              data-input-suggest-ajax-limit="20">
             <label for="input_jobPosting">공고 목록</label>
           </div>
           <span class="text-muted">기간 선택하기</span>
@@ -134,7 +134,7 @@
             </div>
             <br><br>
           <span class="text-muted">시작일</span>
-          <input type="text" name="startDate" class="form-control form-control-sm datepicker" 
+          <input type="text" name="startDate" class="form-control form-control-sm datepicker w--300" 
             data-today-highlight="true" 
             data-layout-rounded="false" 
             data-title="Smarty Datepicker" 
@@ -153,7 +153,7 @@
               "monthsShort": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
               "today": "오늘 날짜 선택",
               "clear": "초기화",
-              "titleFormat": "yyyy MM"}' style="width: 300px;">
+              "titleFormat": "yyyy MM"}'>
           <input name="endDate" type="hidden" value="">
           <br>
           <div style="display: none;" id="selectItem">
