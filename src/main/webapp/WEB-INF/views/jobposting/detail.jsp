@@ -136,9 +136,8 @@
             <div class="portlet-body">
               <div class="row h-100 d-flex align-items-center">
                 <div class="col my-3">
-                  <p class="text-gray-900 mb-1 ml-3">
-                   <p>전화지원</p> 
-                   <p>전화</p>
+                   <p class="text-gray-900 mb-1 ml-3">연락처
+                    <font style="color:orange;">${jobPosting.tel}</font></p>
                 </div>
               </div>
             </div>

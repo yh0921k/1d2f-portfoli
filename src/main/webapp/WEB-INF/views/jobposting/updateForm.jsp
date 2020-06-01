@@ -16,6 +16,11 @@
 				제목* <input name='title' placeholder="제목" class="form-control"
 					type='text' value='${jobPosting.title}'><br>
 			</div>
+			
+			<div class="col-sm-13">
+                전화번호* <input name='tel' placeholder="전화번호" class="form-control"
+          type='text' value='${jobPosting.tel}'><br>
+      </div>
 
 			<div class="row">
 				<span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">고용형태

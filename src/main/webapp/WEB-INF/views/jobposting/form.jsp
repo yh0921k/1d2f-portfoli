@@ -11,6 +11,11 @@
 			<label for="title">제목 *</label> <input id="title" placeholder="제목"
 				autocomplete="off" class="form-control" name='title' type='text'><br>
 		</div>
+		
+		<div class="col-sm-13">
+      <label for="tel">전화번호 *</label> <input id="tel" placeholder="전화번호"
+        autocomplete="off" class="form-control" name='tel' type='text'><br>
+    </div>
 
 		<div class="row">
 			<span class="text-gray-900 mt--12 mr--5" style="margin-left: 30px;">고용형태
