@@ -14,8 +14,9 @@ public class CompanyMember extends Member implements Serializable {
   }
 
   @Override
-  public void setNumber(int number) {
+  public Member setNumber(int number) {
     this.number = number;
+    return this;
   }
 
   public int getCompanyNumber() {
