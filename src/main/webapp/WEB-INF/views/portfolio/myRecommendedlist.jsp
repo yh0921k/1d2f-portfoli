@@ -205,32 +205,32 @@
     </c:if>
     
     <!-- 제목, 아이디 -->
-      <div class="card-body font-weight-light mt--60">
-        <div class="d-table">
-          <div class="d-table-cell align-bottom" style="text-align:center;">
-            <p style="max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
+      <div class="card-body font-weight-light mt--60" 
+           style="font-size: 1.2rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 100%;">
+        <div class="d-table" style="display: block!important;margin: 0!important;margin-right: 0px!important;max-width: 100%;width: 100%;">
+          <div class="d-table-cell align-bottom" style="text-align: left;width: 100%;display: block!important;padding-left: 2rem;">
+            <p style="font-size:1.2rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;margin-right: 5%;">
               ${item.title}
             </p>
-            <p class="text-warning fs--13">
+            <p class="text-warning fs--13" style="font-size:1.2rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;margin-right: 5%;">
               ${item.member.id}
             </p>
           </div>
         </div>
-      </div>
-    <!-- 제목, 아이디 -->
+      </div>    <!-- 제목, 아이디 -->
 
     <!-- 카드하단 -->
       <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
-        <a style="position: absolute; left: 67%;">
-        <span class="float-end fs--14 p-2">
+        <a href="#" class="btn btn-sm btn-success opacity-8" style="float:left; margin-left:1.3rem;">
+        <span class="fs--14">
           ${item.getRecommendedCount()}
         </span>
         </a>
-        <a href="#" class="btn btn-sm btn-warning opacity-8" style="position: absolute; left:20%;">
+        <a href="#" class="btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
           ${item.getViewCount()}
         </a>
-      </div>
+        </div>
     <!-- 카드하단 -->
     
       </div>
