@@ -149,7 +149,16 @@
 						<div class="row h-100 d-flex align-items-center">
 							<div class="col my-3">
 								<p class="text-gray-900 mb-1 ml-3">
-									담당자 연락처 <font style="color: orange;">${jobPosting.tel}</font>
+									회사명 <font style="color: orange;">${jobPosting.company.name}</font>
+								</p>
+								<p class="text-gray-900 mb-1 ml-3">
+									지원방법 <font style="color: orange;">전화지원</font>
+								</p>
+								<p class="text-gray-900 mb-1 ml-3">
+									담당자 <font style="color: orange;">${jobPosting.company.representative}</font>
+								</p>
+								<p class="text-gray-900 mb-1 ml-3">
+									연락처 <font style="color: orange;">${jobPosting.tel}</font>
 								</p>
 							</div>
 						</div>
@@ -188,6 +197,7 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=126304aee8e06ce802d9561ab754dba4"></script>
 <script>
+<%------------------------------------------카카오맵 ------------------------------------------------%>
 	var container = document.getElementById('map');
 	var options = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667),
@@ -195,8 +205,10 @@
 	};
 
 	var map = new kakao.maps.Map(container, options);
+<%-----------------------------------------/카카오맵 ------------------------------------------------%>
 </script>
 <script>
+	<%------------------------------------------타이머 ------------------------------------------------%>
 	//마감일
 	var endDate = new Date('${jobPosting.endDated}');
 	endDate.setHours(0, 0, 0, 0);
@@ -206,7 +218,6 @@
 	var gap = now.getTime() - endDate.getTime();
 	var result = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
 
-	//타이머 시작
 	$(document).ready(function() {
 		tid = setInterval('msg_time()', 1000); // 타이머 1초간격으로 수행
 	});
@@ -243,7 +254,7 @@
 			RemainDate = RemainDate - 1000; // 남은시간 -1초
 		}
 	}
-	//타이머 끝
+<%------------------------------------------/타이머 ------------------------------------------------%>
 
 	var delBtn = document.getElementById("delBtn");
 	delBtn.onclick = function() {

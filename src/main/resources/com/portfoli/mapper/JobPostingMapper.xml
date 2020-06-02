@@ -61,6 +61,7 @@
     <association property="company" javaType="Company">
     <id column="company_no" property="number"/>
     <result column="company_name" property="name"/>
+    <result column="representative" property="representative"></result>
     </association>
     
     <association property="field" javaType="Field">
@@ -213,9 +214,10 @@
      m.name as major_name,
      d.name as district_name,
      i.category,
-     s.member_no,
+     cp.representative,
+     cp.name as company_name,
      fi.name as field_name,
-     sk.name as skill_name
+     sk.name as skill_name     
      from pf_job_posting j
      left outer join
      pf_job_posting_file f on j.job_posting_no=f.job_posting_no
@@ -235,8 +237,8 @@
      pf_final_education i on j.minimum_education_no = i.education_no
      left outer join pf_company_member as k
      on k.company_member_no = j.company_member_no
-     left outer join pf_members as s
-     on s.member_no = k.company_member_no
+     left outer join pf_company as cp
+     on cp.company_no = k.company_no
      left outer join pf_field as fi
      on j.field_no = fi.field_no   
      left outer join pf_skill as sk
