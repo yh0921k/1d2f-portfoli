@@ -140,12 +140,27 @@
 				data-lng-prompt-url="Type your URL:">${jobPosting.content}</textarea>
 
 			<!-----------------------------------------/내용---------------------------------------------------->
-			<!-----------------------------------------경력----------------------------------------------------->
-			<div class="col-sm-13">
-				최소경력* <input id="minimumCareer" placeholder="최소경력(숫자만 입력가능)"
-					name='minimumCareer' type='number' class="form-control"
-					value='${jobPosting.minimumCareer}'><br>
-			</div>
+			<!-----------------------------------------경력----------------------------------------------------->			
+			<div class="form-label-group mb-3">
+  <select id="minimumCareer" class="form-control" name='minimumCareer'>
+    <option value="무관">무관</option>
+    <option value="신입">신입</option>
+    <option value="신입, 경력">신입, 경력</option>
+    <option value="경력(1년 이상)">경력(1년 이상)</option>
+    <option value="경력(2년 이상)">경력(2년 이상)</option>
+    <option value="경력(3년 이상)">경력(3년 이상)</option>
+    <option value="경력(5년 이상)">경력(5년 이상)</option>
+    <option value="경력(7년 이상)">경력(7년 이상)</option>
+    <option value="경력(10년 이상)">경력(10년 이상)</option>
+    <option value="신입, 경력(1년 이상)">신입, 경력(1년 이상)</option>
+    <option value="신입, 경력(2년 이상)">신입, 경력(2년 이상)</option>
+    <option value="신입, 경력(3년 이상)">신입, 경력(3년 이상)</option>
+    <option value="신입, 경력(5년 이상)">신입, 경력(5년 이상)</option>
+    <option value="신입, 경력(7년 이상)">신입, 경력(7년 이상)</option>
+    <option value="신입, 경력(10년 이상)">신입, 경력(10년 이상)</option>
+  </select>
+  <label for="select_options2">* 경력 구분을 선택하지 않으면 기본값은 '무관'입니다.</label>
+</div>
 			<!-----------------------------------------/경력----------------------------------------------------->
 			<!-----------------------------------------직무----------------------------------------------------->
 			<div class="col-sm-13">
