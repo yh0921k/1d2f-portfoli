@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -22,5 +23,10 @@ public class RankServiceImpl implements RankService {
   @Override
   public List<Rank> list() throws Exception {
     return rankDao.findAll();
+  }
+
+  @Override
+  public List<Rank> list(Map<String, Object> params) throws Exception {
+    return rankDao.findAllByFilter(params);
   }
 }
