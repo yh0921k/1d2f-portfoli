@@ -119,11 +119,6 @@
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
                           style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
                       </c:when> 
-                      <c:when test="${fn:startsWith(photo, 'https://avatars3.githubusercontent.com/')}">
-                      <div
-                          class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
-                          style="background-image:url('${photo}')"></div>
-                      </c:when>
                       <c:when test="${not empty photo}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"

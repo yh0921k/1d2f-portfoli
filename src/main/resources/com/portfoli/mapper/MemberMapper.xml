@@ -27,12 +27,11 @@
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
 		INSERT INTO
-		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type,
-		provider <if test="photoFilePath != null and photoFilePath != ''">,photo</if>)
+		pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, provider)
 		VALUES
 		(#{id}, PASSWORD(#{password}), #{name}, #{email},
 		#{tel}, #{smsYN},
-		#{emailYN}, #{type}, #{provider}, #{photoFilePath})
+		#{emailYN}, #{type}, #{provider})
 	</insert>
 
 	<update id="putKey" parameterType="map">
