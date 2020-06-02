@@ -809,6 +809,13 @@ INSERT INTO pf_general_member_certification(general_member_no, certificate_no, i
 INSERT INTO pf_general_member_certification(general_member_no, certificate_no, issue_date) VALUES(4, 1320, '2019-8-16');
 INSERT INTO pf_general_member_certification(general_member_no, certificate_no, issue_date) VALUES(5, 1320, '2019-8-16');
 
+-- 팔로잉 예제 데이터
+INSERT INTO pf_following(follower, following) VALUES(1, 2);
+INSERT INTO pf_following(follower, following) VALUES(2, 3);
+INSERT INTO pf_following(follower, following) VALUES(4, 7);
+INSERT INTO pf_following(follower, following) VALUES(10, 4);
+INSERT INTO pf_following(follower, following) VALUES(8, 5);
+
 -- 쪽지 예제 데이터
 INSERT INTO pf_message(message_no, message_sender, message_receiver, title, content, send_date, receive_date, message_sender_delete, message_receiver_delete) VALUES(1, 1, 2, '안녕하세요~', '저랑 맞팔하실래요?', '2020-1-1', '2020-1-2', 0, 0);
 INSERT INTO pf_message(message_no, message_sender, message_receiver, title, content, send_date, message_sender_delete, message_receiver_delete) VALUES(2, 2, 3, '반가워요~', '취업 정보 같이 공유해요!', '2020-2-10', 0, 0);
@@ -1058,29 +1065,36 @@ INSERT INTO pf_board_attachment(attachment_no, board_no, file_name, file_path)
 -- pf_job_posting 채용공고 (pf_company_member 인서트 후(완), pf_final_education인서트 후)
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
-year_salary,readable,tel,minimum_education_no,employment_stat_no)
+year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(1,6,'프론트엔드 개발자 모집','내용1',101010,'무관',1,NOW(),'2020-1-1','2020-2-2','프론트엔드',
-  26000000,1,'010-1111-1111',1,1);  
+  26000000,1,'010-1111-1111',1,1,409,40904);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
-year_salary,readable,tel,minimum_education_no,employment_stat_no)
+year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(2,7,'백엔드 개발자 모집','내용2',101020,'신입',2,NOW(),'2020-2-2','2020-3-3','백엔드',
-  28000000,2,'010-2222-2222',2,2);  
+  28000000,2,'010-2222-2222',2,2,415,41505);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
-year_salary,readable,tel,minimum_education_no,employment_stat_no)
+year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(3,8,'서버 개발자 모집','내용3',101030,'신입, 경력',3,NOW(),'2020-3-3','2020-4-4','서버개발',
-  30000000,3,'010-3333-3333',3,3);  
+  30000000,3,'010-3333-3333',3,3,405,40530);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
-year_salary,readable,tel,minimum_education_no,employment_stat_no)
+year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(4,9,'자바 개발자 모집','내용4',101040,'경력(1년 이상)',4,NOW(),'2020-4-4','2020-5-5','자바',
-  32000000,4,'010-4444-4444',4,4);  
+  32000000,4,'010-4444-4444',4,4,416,41619);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
-year_salary,readable,tel,minimum_education_no,employment_stat_no)
+year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(5,10,'풀스택 개발자 모집','내용5',101050,'경력(2년 이상)',5,NOW(),'2020-5-5','2020-6-6','풀스택',
-  34000000,5,'010-5555-5555',5,5);  
+  34000000,5,'010-5555-5555',5,5,404,40430);  
+  
+-- pf_apply (pf_job_posting 인서트 후)
+INSERT INTO pf_apply(apply_no, general_member_no, job_posting_no) VALUES(1, 1, 1);
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(2, 2);
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(3, 4);
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(4, 5);
+INSERT INTO pf_apply(general_member_no, job_posting_no) VALUES(1, 2);
  
 -- pf_job_posting_file 채용공고첨부파일 데이터  (pf_job_posting 인서트 후)
 INSERT INTO pf_job_posting_file(job_posting_file_no,job_posting_no,file_path) VALUES(1,1,'/file/path'); 
