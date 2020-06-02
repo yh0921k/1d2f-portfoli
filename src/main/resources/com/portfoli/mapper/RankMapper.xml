@@ -69,4 +69,58 @@
 		  ps.field_no=pf.field_no 
 		order by view_count desc;
 	</select>	
+	
+	<select id="findAllByFilter" resultMap="RankMap" parameterType="map">
+    select 
+      pp.board_no, pp.thumbnail, pp.homepage, pp.readable, 
+      pb.title, pb.registered_date, pb.view_count, 
+      pm.id, 
+      pgm.seeking_flag, pgm.career, 
+      pps.member_skill_no, 
+      ps.skill_no, ps.name, 
+      (select count(*) 
+       from pf_recommendation as pr 
+       where pr.board_no=pp.board_no) as like_count 
+    from 
+      pf_portfolio as pp 
+      join 
+      pf_board as pb 
+      on 
+      pp.board_no=pb.board_no 
+      join
+      pf_members as pm 
+      on
+      pp.general_member_no=pm.member_no
+      join
+      pf_general_member as pgm 
+      on
+      pm.member_no=pgm.general_member_no
+      left outer join
+      pf_portfolio_skill as pps 
+      on 
+      pp.board_no=pps.board_no 
+      left outer join 
+      pf_member_skill as pms
+      on
+      pps.member_skill_no=pms.member_skill_no 
+      left outer join
+      pf_skill as ps
+      on
+      pms.skill_no=ps.skill_no
+      left outer join 
+      pf_field as pf
+      on
+      ps.field_no=pf.field_no 
+    <where>
+      <if test="skillList.size != 0">
+        <foreach collection="skillList" item="item" index="index" separator=" or">
+				  ps.name=#{item}
+				</foreach>
+      </if>
+    </where>
+    <trim prefix="ORDER BY">
+      <if test="orderCount == '좋아요수'">  like_count desc </if>
+      <if test="orderCount == '조회수'">  pb.view_count desc </if>                       
+    </trim>
+  </select>
 </mapper>
