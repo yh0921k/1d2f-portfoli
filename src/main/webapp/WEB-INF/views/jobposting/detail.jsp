@@ -67,7 +67,9 @@
 									<p class="text-gray-900 mb-1 ml-3">
 										지역 <font style="color: orange;">${jobPosting.district.name}</font>
 									</p>
-
+									<p class="text-gray-900 mb-1 ml-3">
+                                         분야 <font style="color: orange;">${jobPosting.field.name}</font>
+                  </p>
 								</div>
 							</div>
 						</div>
