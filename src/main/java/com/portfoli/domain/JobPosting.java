@@ -12,7 +12,7 @@ public class JobPosting implements Serializable {
   private String title;
   private String content;
   private int workPlaceNumber;
-  private int minimumCareer;
+  private String minimumCareer;
   private int viewCount;
   private Date postingRegistration;
   private Date startDated;
@@ -33,6 +33,7 @@ public class JobPosting implements Serializable {
 
   List<JobPostingFile> files;
 
+
   @Override
   public String toString() {
     return "JobPosting [jobPostingNumber=" + jobPostingNumber + ", companyMemberNumber="
@@ -46,6 +47,7 @@ public class JobPosting implements Serializable {
         + ", companyMember=" + companyMember + ", member=" + member + ", company=" + company
         + ", files=" + files + "]";
   }
+
 
   @Override
   public int hashCode() {
@@ -65,7 +67,7 @@ public class JobPosting implements Serializable {
     result = prime * result + jobPostingNumber;
     result = prime * result + ((major == null) ? 0 : major.hashCode());
     result = prime * result + ((member == null) ? 0 : member.hashCode());
-    result = prime * result + minimumCareer;
+    result = prime * result + ((minimumCareer == null) ? 0 : minimumCareer.hashCode());
     result = prime * result + minimumEducationNumber;
     result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
     result = prime * result + readable;
@@ -77,6 +79,8 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
+
+
 
   @Override
   public boolean equals(Object obj) {
@@ -151,7 +155,10 @@ public class JobPosting implements Serializable {
         return false;
     } else if (!member.equals(other.member))
       return false;
-    if (minimumCareer != other.minimumCareer)
+    if (minimumCareer == null) {
+      if (other.minimumCareer != null)
+        return false;
+    } else if (!minimumCareer.equals(other.minimumCareer))
       return false;
     if (minimumEducationNumber != other.minimumEducationNumber)
       return false;
@@ -185,6 +192,8 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
+
+
 
   public int getJobPostingNumber() {
     return jobPostingNumber;
@@ -226,11 +235,11 @@ public class JobPosting implements Serializable {
     this.workPlaceNumber = workPlaceNumber;
   }
 
-  public int getMinimumCareer() {
+  public String getMinimumCareer() {
     return minimumCareer;
   }
 
-  public void setMinimumCareer(int minimumCareer) {
+  public void setMinimumCareer(String minimumCareer) {
     this.minimumCareer = minimumCareer;
   }
 
