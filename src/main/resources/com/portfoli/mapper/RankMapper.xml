@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.RankDao">
+
+	<resultMap type="Rank" id="RankMap">
+		<id column="board_no" property="number" />
+		<result column="title" property="title"/>
+		<result column="id"	property="id" />
+		<result column="career"	property="career" />
+		<result column="homepage" property="homepage" />
+		<result column="thumbnail" property="thumbnail" />
+		<result column="readable" property="readable" />
+		<result column="seeking_flag" property="seekingFlag" />
+		<result column="view_count" property="viewCount" />
+		<result column="like_count" property="likeCount" />
+		<result column="registered_date" property="registeredDate" />
+
+		<collection property="skills" ofType="Skill">
+      <id column="skill_no" property="number" />
+      <result column="name" property="name" />
+      <result column="field_no" property="fieldNumber" />
+    </collection>
+		
+	</resultMap>
+	
+	<select id="findAll" resultMap="RankMap">
+		select 
+		  pp.board_no, pp.thumbnail, pp.homepage, pp.readable, 
+		  pb.title, pb.registered_date, pb.view_count, 
+		  pm.id, 
+		  pgm.seeking_flag, pgm.career, 
+		  pps.member_skill_no, 
+		  ps.skill_no, ps.name, 
+		  (select count(*) 
+		   from pf_recommendation as pr 
+		   where pr.board_no=pp.board_no) as like_count 
+		from 
+		  pf_portfolio as pp 
+		  join 
+		  pf_board as pb 
+		  on 
+		  pp.board_no=pb.board_no 
+		  join
+		  pf_members as pm 
+		  on
+		  pp.general_member_no=pm.member_no
+		  join
+		  pf_general_member as pgm 
+		  on
+		  pm.member_no=pgm.general_member_no
+		  left outer join
+		  pf_portfolio_skill as pps 
+		  on 
+		  pp.board_no=pps.board_no 
+		  left outer join 
+		  pf_member_skill as pms
+		  on
+		  pps.member_skill_no=pms.member_skill_no 
+		  left outer join
+		  pf_skill as ps
+		  on
+		  pms.skill_no=ps.skill_no
+		  left outer join 
+		  pf_field as pf
+		  on
+		  ps.field_no=pf.field_no 
+		order by view_count desc;
+	</select>	
+</mapper>
