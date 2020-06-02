@@ -66,6 +66,27 @@
         </div>
       </div>
 			<!-------------------------------------------/분야-------------------------------------------------->
+			<!-------------------------------------------기술--------------------------------------------------->
+			<div class="input-group mb-3 ml-1">
+        <select class="custom-select" id="inputGroupSelect07"
+          name="skill.number">
+          <c:forEach items="${skills}" var="skill">
+            <c:if
+              test="${jobPosting.skill.name == skill.name}">
+              <option value="${skill.number}" selected="selected">${skill.name}</option>
+            </c:if>
+            <c:if
+              test="${jobPosting.skill.name != skill.name}">
+              <option value="${skill.number}">${skill.name}</option>
+            </c:if>
+          </c:forEach>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text label label-outline-secondary"
+            for="inputGroupSelect07">기술</label>
+        </div>
+      </div>
+			<!-------------------------------------------/기술-------------------------------------------------->
 			<!-------------------------------------------지역--------------------------------------------------->
 			
 			<div class="input-group mb-3 ml-1">

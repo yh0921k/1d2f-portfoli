@@ -28,7 +28,7 @@
 								<div class="col my-3">
 									<p class="text-gray-900 mb-1 ml-3">
 										경력 <font style="color: orange;">${jobPosting.minimumCareer}
-											</font>
+										</font>
 									</p>
 									<p class="text-gray-900 mb-1 ml-3">
 										자격증 <font style="color: orange;">${jobPosting.certificate.name}</font>
@@ -38,6 +38,9 @@
 									</p>
 									<p class="text-gray-900 mb-1 ml-3">
 										최소학력 <font style="color: orange;">${jobPosting.finalEducation.category}</font>
+									</p>
+									<p class="text-gray-900 mb-1 ml-3">
+										기술 <font style="color: orange;">${jobPosting.skill.name}</font>
 									</p>
 								</div>
 							</div>
@@ -68,8 +71,8 @@
 										지역 <font style="color: orange;">${jobPosting.district.name}</font>
 									</p>
 									<p class="text-gray-900 mb-1 ml-3">
-                                         분야 <font style="color: orange;">${jobPosting.field.name}</font>
-                  </p>
+										분야 <font style="color: orange;">${jobPosting.field.name}</font>
+									</p>
 								</div>
 							</div>
 						</div>
