@@ -119,7 +119,7 @@
         <!-- /portlet : header -->
 
         <!-- portlet : body -->
-        <div class="portlet-body pt-0">
+        <div class="portlet-body pt-0" style="min-height: 450px;">
 
           <!-- 
           <form novalidate class="bs-validate" method="post" action="#!">
@@ -144,7 +144,7 @@
             <div class="table-responsive">
               <table class="table table-align-middle border-bottom mb-6">
 
-                <thead>
+                <thead <c:if test="${empty sent}">style="visibility:hidden;"</c:if>>
                   <tr class="text-muted fs--13">
                     <th class="w--30 hidden-lg-down"><label
                       class="form-checkbox form-checkbox-primary float-start">
@@ -161,9 +161,9 @@
                 <tbody id="item_list">
 
                   <!-- message -->
+                  <c:if test="${empty sent}"> <div class="pt-3 ml-3">보낸 쪽지가 없습니다.</div></c:if>
                   <c:forEach items="${sent}" var="message">
                     <tr id="message_id_${message.number}" class="text-dark">
-
                       <td class="hidden-lg-down"><label
                         class="form-checkbox form-checkbox-secondary float-start">
                           <input type="checkbox" name="item_id[]" value="1">
@@ -186,8 +186,7 @@
                           </span>
                           </a>
 
-                          <div
-                            class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
+                          <div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
                             <a href="#!"
                               class="js-ajax-confirm dropdown-item text-truncate"
                               data-href="/portfoli/app/message/sent/delete?number=${message.number}"
@@ -219,7 +218,7 @@
 
             <!-- options and pagination -->
             <div class="row text-center-xs">
-              <div class="hidden-lg-down col-12 col-xl-6">
+              <div class="hidden-lg-down col-12 col-xl-6" <c:if test="${empty sent}">style="visibility:hidden;"</c:if>>
 
                 <!-- SELECTED ITEMS -->
                 <div class="dropup">
@@ -264,8 +263,8 @@
               <!-- pagination -->
               <div class="col-12 col-xl-6">
                 <nav aria-label="pagination">
-                  <ul
-                    class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+                  <ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end"
+                  <c:if test="${empty sent}">style="visibility:hidden;"</c:if>>
 
                     <c:if test="${page != startPage}">
                       <li
