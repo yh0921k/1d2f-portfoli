@@ -304,15 +304,8 @@ public class PortfolioController {
       model.addAttribute("listCnt", listCnt);
       model.addAttribute("pagination", pagination);
 
-      System.out.println("서치맵입니다>>>>");
-      System.out.println(searchMap);
       // 포트폴리오 리스트 받기
       portfolios = portfolioService.search(searchMap);
-
-      System.out.println("포트폴리오값");
-      for(Portfolio portfolio : portfolios) {
-        System.out.println(portfolio);
-      }
 
       // 포트폴리오 스킬 붙이기
       for(Portfolio p : portfolios) {
@@ -463,9 +456,6 @@ public class PortfolioController {
           Portfolio p = portfolioSkillService.findAllSkill(recommendation.getPortfolio().getNumber());
           recommendation.getPortfolio().setSkill(p.getSkill());
           list.add(recommendation);
-          for(Skill s : recommendation.getPortfolio().getSkill()) {
-            System.out.println(s.getName());
-          }
         }
       }
       model.addAttribute("banners", list);
@@ -631,8 +621,6 @@ public class PortfolioController {
         portfolio.setMember(new GeneralMember().setNumber(member.getNumber()));
       }
 
-      System.out.println("포트폴리오 >> ");
-      System.out.println(portfolio);
 
       portfolioService.update(portfolio);
 
@@ -729,7 +717,6 @@ public class PortfolioController {
       model.addAttribute("portfolio", portfolio);
       model.addAttribute("attachment", boardAttachment);
 
-      System.out.println(portfolio.getMember().getNumber());
 
       // 내가 작성한 포트폴리오인 경우, modifier 객체를 추가하여, 수정/삭제 버튼 삽입
       if(portfolio.getMember().getNumber() == member.getNumber()) {

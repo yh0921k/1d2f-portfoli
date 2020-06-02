@@ -254,11 +254,11 @@
                       <small class="d-block text-muted">profile, password and more...</small>
                       </a>
                       
-                      <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium"> 포트폴리오 
-                      <small class="d-block text-muted">portfolio</small>
+                      <a href="/portfoli/app/portfolio/mylist" class="dropdown-item text-truncate font-weight-medium"> 내 포트폴리오 
+                      <small class="d-block text-muted">my portfolio</small>
                       </a> 
                       
-                      <a href="/portfoli/app/calendar/calendar" target="_blank" class="dropdown-item text-truncate font-weight-medium">
+                      <a href="/portfoli/app/calendar/calendar" class="dropdown-item text-truncate font-weight-medium">
                         <span id="alarm" class="badge badge-success float-end font-weight-normal mt-1"></span> 일정 
                         <small class="d-block text-muted">calendar</small>
                       </a> 
