@@ -28,6 +28,7 @@ import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
 import com.portfoli.domain.Major;
 import com.portfoli.domain.Member;
+import com.portfoli.domain.Skill;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.DistrictService;
 import com.portfoli.service.EmploymentStatusService;
@@ -36,6 +37,7 @@ import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.JobPostingService;
 import com.portfoli.service.MajorService;
 import com.portfoli.service.MemberService;
+import com.portfoli.service.SkillService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
@@ -73,6 +75,9 @@ public class JobPostingController {
   @Autowired
   FieldService fieldService;
 
+  @Autowired
+  SkillService skillService;
+
 
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
@@ -86,12 +91,14 @@ public class JobPostingController {
     List<District> districts = districtService.get();
     List<FinalEducation> finalEducations = finalEducationService.findAll();
     List<Field> fields = fieldService.list();
+    List<Skill> skills = skillService.list();
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
     model.addAttribute("majors", majors);
     model.addAttribute("districts", districts);
     model.addAttribute("finalEducations", finalEducations);
     model.addAttribute("fields", fields);
+    model.addAttribute("skills", skills);
   }
 
   @PostMapping("add")
@@ -197,6 +204,7 @@ public class JobPostingController {
     List<District> districts = districtService.get();
     List<FinalEducation> finalEducations = finalEducationService.findAll();
     List<Field> fields = fieldService.list();
+    List<Skill> skills = skillService.list();
     model.addAttribute("jobPosting", jobPostingService.get(no));
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
@@ -205,6 +213,7 @@ public class JobPostingController {
     model.addAttribute("finalEducations", finalEducations);
     model.addAttribute("companyMember", companyMember);
     model.addAttribute("fields", fields);
+    model.addAttribute("skills", skills);
   }
 
   @PostMapping("update")

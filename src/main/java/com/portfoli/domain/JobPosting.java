@@ -31,6 +31,7 @@ public class JobPosting implements Serializable {
   private Member member;
   private Company company;
   private Field field;
+  private Skill skill;
 
   List<JobPostingFile> files;
 
@@ -45,7 +46,7 @@ public class JobPosting implements Serializable {
         + ", employmentStatus=" + employmentStatus + ", certificate=" + certificate + ", major="
         + major + ", district=" + district + ", finalEducation=" + finalEducation
         + ", companyMember=" + companyMember + ", member=" + member + ", company=" + company
-        + ", field=" + field + ", files=" + files + "]";
+        + ", field=" + field + ", skill=" + skill + ", files=" + files + "]";
   }
 
   @Override
@@ -71,6 +72,7 @@ public class JobPosting implements Serializable {
     result = prime * result + minimumEducationNumber;
     result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
     result = prime * result + readable;
+    result = prime * result + ((skill == null) ? 0 : skill.hashCode());
     result = prime * result + ((startDated == null) ? 0 : startDated.hashCode());
     result = prime * result + ((tel == null) ? 0 : tel.hashCode());
     result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -79,6 +81,8 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
+
+
 
   @Override
   public boolean equals(Object obj) {
@@ -172,6 +176,11 @@ public class JobPosting implements Serializable {
       return false;
     if (readable != other.readable)
       return false;
+    if (skill == null) {
+      if (other.skill != null)
+        return false;
+    } else if (!skill.equals(other.skill))
+      return false;
     if (startDated == null) {
       if (other.startDated != null)
         return false;
@@ -195,6 +204,7 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
+
 
   public int getJobPostingNumber() {
     return jobPostingNumber;
@@ -386,6 +396,14 @@ public class JobPosting implements Serializable {
 
   public void setField(Field field) {
     this.field = field;
+  }
+
+  public Skill getSkill() {
+    return skill;
+  }
+
+  public void setSkill(Skill skill) {
+    this.skill = skill;
   }
 
   public List<JobPostingFile> getFiles() {
