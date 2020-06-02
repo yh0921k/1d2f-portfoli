@@ -8,6 +8,17 @@
         <div class="container py-1">
 
           <h3 class="h2" style="display:inline-block;">포트폴리오 게시판</h3>
+    <%--
+    <div style="display:inline-block" class="dataTables_length" id="rand_yjK_length">
+      <label>
+          <!-- 페이지 불릴 때 필드 리스트 로딩 -->
+          <c:forEach var="field" items="${fieldList}">
+            ${field.name}
+          </c:forEach>
+      </label>
+    </div>
+    --%>
+          
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
         <a href="#" class="btn btn-soft btn-toggle" id="styleToggle" 
            style="float: right;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
@@ -33,7 +44,7 @@
 
 
 <div class="row" id="banner" 
-     style="margin-left: 0px;position: relative;margin-top: 2rem;backface-visibility: hidden;background: white;display:block;height: 317px;overflow: hidden;">
+     style="width: 100%;margin-left: 0px;position: relative;margin-top: 2rem;backface-visibility: hidden;background: white;display:block;height: 317px;overflow: hidden;">
 <!--------------------------------------------- 포트폴리오 랭킹배너--------------------------------------------->
   <c:forEach items="${banners}" var="item">
   <div>
@@ -58,14 +69,19 @@
 			    
 			    <!-- 제목, 아이디 -->
 			      <div class="card-body font-weight-light mt--60">
-			        <div class="d-table">
-			          <div class="d-table-cell align-bottom" style="text-align: left;padding-left: 2rem;">
-			            <p style="font-size: 1.2rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;width: 80%;">
+			        <div class="d-table" style="text-align: left;width: 100%;display: block!important;padding: 0 2rem;">
+			          <div class="d-table-cell align-bottom" style="display: block!important;">
+			            <p style="font-size: 1.2rem;display: block!important;">
 			              ${item.portfolio.title}
 			            </p>
-			            <p class="text-warning fs--13" style="font-size: 1.2rem;">
+			            <p class="text-warning fs--13" style="display: block!important;">
 			              by ${item.portfolio.member.id}
 			            </p>
+			            <p style="display: block!important;overflow:hidden;max-height: 3rem;white-space: normal;text-overflow: ellipsis;"> 
+			            <c:forEach items="${item.portfolio.skill}" var="skills">
+			            ${skills.name}/
+			            </c:forEach>
+                  </p>
 			          </div>
 			        </div>
 			      </div>
@@ -205,7 +221,7 @@
     
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60" 
-           style="font-size: 1.2rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 100%;">
+           style="font-size: 1.2rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 100%;margin-top: 40px!important;">
         <div class="d-table" style="display: block!important;margin: 0!important;margin-right: 0px!important;max-width: 100%;width: 100%;">
           <div class="d-table-cell align-bottom" style="text-align: left;width: 100%;display: block!important;padding-left: 2rem;">
             <p style="font-size:1.2rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;margin-right: 5%;">
@@ -213,6 +229,11 @@
             </p>
             <p class="text-warning fs--13" style="font-size:1.2rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;margin-right: 5%;">
               ${item.member.id}
+            </p>
+            <p style="font-size:1rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;margin-right: 5%;">
+            <c:forEach items="${item.skill}" var="skill">
+            ${skill.name}/
+            </c:forEach>
             </p>
           </div>
         </div>
@@ -224,11 +245,11 @@
         <hr class="border-light opacity-2">
         <a href="#" class="btn btn-sm btn-success opacity-8" style="float:left; margin-left:1.3rem;">
         <span class="fs--14">
-          ${item.getRecommendedCount()}
+              추천수 : ${item.getRecommendedCount()}
         </span>
         </a>
         <a href="#" class="btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
-          ${item.getViewCount()}
+              조회수 : ${item.getViewCount()}
         </a>
       </div>
     <!-- 카드하단 -->
@@ -314,9 +335,9 @@
   </style>
   
   <script>
- // setInterval(function() {
-	//    $('#banner > div:nth-child(1)').appendTo($('#banner'));
-	 // },3000);
+//    setInterval(function() {
+//	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
+//	  },3000);
 
   function getQueryStringObject() {
 	    var a = window.location.search.substr(1).split('&');

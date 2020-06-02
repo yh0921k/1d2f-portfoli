@@ -449,16 +449,23 @@ public class PortfolioController {
       throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
     } else {
 
+      // 필트리스트 삽입
+      List<Field> fieldList = fieldService.list();
+      request.setAttribute("fieldList", fieldList);
+
       // 배너부분 추가
       List<Recommendation> list = new ArrayList<>();
       List<Field> fields = fieldService.list();
       for(Field field : fields) {
         List<Recommendation> recommendations = recommendationService.rankBySkill(field.getNumber());
 
-        System.out.println("리스트입니다");
         for(Recommendation recommendation : recommendations) {
+          Portfolio p = portfolioSkillService.findAllSkill(recommendation.getPortfolio().getNumber());
+          recommendation.getPortfolio().setSkill(p.getSkill());
           list.add(recommendation);
-          System.out.println(">>>>>"+recommendation);
+          for(Skill s : recommendation.getPortfolio().getSkill()) {
+            System.out.println(s.getName());
+          }
         }
       }
       model.addAttribute("banners", list);
