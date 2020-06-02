@@ -230,7 +230,7 @@
 		<set>
 			<if test="title != null and title != ''">title=#{title},</if>
 			<if test="content != null and content != ''">content=#{content},</if>
-			<if test="minimumCareer > 0">minimum_career=#{minimumCareer},</if>
+			<if test="minimumCareer != null and minimumCareer != ''">minimum_career=#{minimumCareer},</if>
 			<if test="job != null and job != ''">job=#{job},</if>
 			<if test="yearSalary > 0">year_salary=#{yearSalary},</if>
 			<if test="startDated != null">start_dated=#{startDated},</if>
