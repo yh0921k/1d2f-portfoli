@@ -54,8 +54,5 @@
   <definition name="calendar/eventEdit.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/calendar/eventEdit.jsp"/>
   </definition>
-  <definition name="payment/pay.do" extends="empty">
-    <put-attribute name="body" value ="/WEB-INF/views/payment/pay.jsp"/>
-  </definition>
 
 </tiles-definitions>
