@@ -78,6 +78,8 @@ public class GithubLoginController {
 
       if (response.getStatusCodeValue() == 200) {
         Map<String, Object> parsedJson = new JSONParser(response.getBody()).parseObject();
+        System.out.println(parsedJson);
+
         String id = (String) parsedJson.get("login");
         String name;
         if (parsedJson.get("name") != null) {
@@ -85,8 +87,14 @@ public class GithubLoginController {
         } else {
           name = (String) parsedJson.get("login");
         }
-        String photo = (String) parsedJson.get("avatar_url");
-        String email = id + "@github.com";
+
+        String email;
+        if (parsedJson.get("email") != null) {
+          email = (String) parsedJson.get("email");
+        } else {
+          email = id + "@github.com";
+        }
+
         String password = (String) parsedJson.get("node_id");
 
         Member member = memberService.findMemberByOtherProvider("github", email);
@@ -112,7 +120,6 @@ public class GithubLoginController {
             newMember.setEmail(email);
             newMember.setProvider("github");
             newMember.setPassword(password);
-            newMember.setPhotoFilePath(photo);
             newMember.setType(1);
             newMember.setId("github_" + id);
             newMember.setSmsYN(0);
