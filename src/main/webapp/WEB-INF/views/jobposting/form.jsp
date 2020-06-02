@@ -93,11 +93,26 @@
 
 		<br>
 <!--------------------------------------------경력-------------------------------------------------->
-		<div class="col-sm-13">
-			최소경력* <input id="minimumCareer" autocomplete="off"
-				placeholder="최소경력(숫자만 입력가능)" name='minimumCareer' type='number'
-				class="form-control"><br>
-		</div>
+		<div class="form-label-group mb-3">
+  <select id="minimumCareer" class="form-control" name='minimumCareer'>
+    <option value="무관">무관</option>
+    <option value="신입">신입</option>
+    <option value="신입, 경력">신입, 경력</option>
+    <option value="경력(1년 이상)">경력(1년 이상)</option>
+    <option value="경력(2년 이상)">경력(2년 이상)</option>
+    <option value="경력(3년 이상)">경력(3년 이상)</option>
+    <option value="경력(5년 이상)">경력(5년 이상)</option>
+    <option value="경력(7년 이상)">경력(7년 이상)</option>
+    <option value="경력(10년 이상)">경력(10년 이상)</option>
+    <option value="신입, 경력(1년 이상)">신입, 경력(1년 이상)</option>
+    <option value="신입, 경력(2년 이상)">신입, 경력(2년 이상)</option>
+    <option value="신입, 경력(3년 이상)">신입, 경력(3년 이상)</option>
+    <option value="신입, 경력(5년 이상)">신입, 경력(5년 이상)</option>
+    <option value="신입, 경력(7년 이상)">신입, 경력(7년 이상)</option>
+    <option value="신입, 경력(10년 이상)">신입, 경력(10년 이상)</option>
+  </select>
+  <label for="select_options2">* 경력 구분을 선택하지 않으면 기본값은 '무관'입니다.</label>
+</div>
 <!-------------------------------------------/경력-------------------------------------------------->
 <!--------------------------------------------직무-------------------------------------------------->
 		<div class="col-sm-13">
@@ -206,7 +221,7 @@ document.querySelector("#form1").onsubmit = () => {
 	var regExp = /^[0-9]+$/; //정수 유효성 검사코드
 	
 	var minimumCareer = document.querySelector("#minimumCareer");
-	  if (!regExp.test(minimumCareer.value)) {
+	  if (minimumCareer.value == "") {
 	    Swal.fire({
 	            title: '최소경력은 필수 입력 항목입니다.',
 	            icon: 'error',

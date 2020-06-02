@@ -28,7 +28,7 @@
 								<div class="col my-3">
 									<p class="text-gray-900 mb-1 ml-3">
 										경력 <font style="color: orange;">${jobPosting.minimumCareer}
-											년 이상</font>
+											</font>
 									</p>
 									<p class="text-gray-900 mb-1 ml-3">
 										자격증 <font style="color: orange;">${jobPosting.certificate.name}</font>
@@ -144,7 +144,7 @@
 						<div class="row h-100 d-flex align-items-center">
 							<div class="col my-3">
 								<p class="text-gray-900 mb-1 ml-3">
-									연락처 <font style="color: orange;">${jobPosting.tel}</font>
+									담당자 연락처 <font style="color: orange;">${jobPosting.tel}</font>
 								</p>
 							</div>
 						</div>
