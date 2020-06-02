@@ -29,6 +29,19 @@
             </div>
           </div>
 <!-------------------------------------------/고용형태----------------------------------------------->
+<!--------------------------------------------분야-------------------------------------------------->
+ <div class="input-group mb-3 ml-1">
+            <select class="custom-select" id="inputGroupSelect06"
+              name="field.number">
+              <c:forEach items="${fields}" var="field">
+                <option value="${field.number}">${field.name}</option>
+              </c:forEach>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text label label-outline-secondary" for="inputGroupSelect06" >분야</label>
+            </div>
+          </div>
+<!-------------------------------------------/분야-------------------------------------------------->
 <!-----------------------------------------------지역----------------------------------------------->		
     <div class="input-group mb-3 ml-1">
             <select class="custom-select" id="inputGroupSelect02"

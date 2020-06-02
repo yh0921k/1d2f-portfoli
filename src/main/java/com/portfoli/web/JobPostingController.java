@@ -22,6 +22,7 @@ import com.portfoli.domain.CompanyMember;
 import com.portfoli.domain.CompanyRequiredCertificate;
 import com.portfoli.domain.District;
 import com.portfoli.domain.EmploymentStatus;
+import com.portfoli.domain.Field;
 import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.JobPostingFile;
@@ -30,6 +31,7 @@ import com.portfoli.domain.Member;
 import com.portfoli.service.CertificateService;
 import com.portfoli.service.DistrictService;
 import com.portfoli.service.EmploymentStatusService;
+import com.portfoli.service.FieldService;
 import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.JobPostingService;
 import com.portfoli.service.MajorService;
@@ -68,6 +70,9 @@ public class JobPostingController {
   @Autowired
   MemberService memberService;
 
+  @Autowired
+  FieldService fieldService;
+
 
   public JobPostingController() {
     logger.debug("JobPostingController 생성");
@@ -80,12 +85,13 @@ public class JobPostingController {
     List<Major> majors = majorService.listMajor();
     List<District> districts = districtService.get();
     List<FinalEducation> finalEducations = finalEducationService.findAll();
-    System.out.println(certificates);
+    List<Field> fields = fieldService.list();
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
     model.addAttribute("majors", majors);
     model.addAttribute("districts", districts);
     model.addAttribute("finalEducations", finalEducations);
+    model.addAttribute("fields", fields);
   }
 
   @PostMapping("add")
@@ -94,8 +100,6 @@ public class JobPostingController {
       Certificate certificate, //
       Major major, //
       MultipartFile[] jobPostingFiles) throws Exception {
-    System.out.println(certificate);
-    System.out.println(jobPosting + "1111");
 
     ArrayList<JobPostingFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/jobposting");
@@ -140,7 +144,6 @@ public class JobPostingController {
     if (mem == null) {
       throw new Exception("로그인을 하신 후, 채용정보를 볼 수 있습니다.");
     } else {
-      System.out.println(mem.getNumber());
       jobPostingService.plusCnt(no);
       model.addAttribute("jobPosting", jobPostingService.get(no));
 
@@ -148,7 +151,6 @@ public class JobPostingController {
 
       // 자신이 작성한 채용공고인경우 수정/삭제버튼 생성
       if (mem.getNumber() == jobPosting.getCompanyMemberNumber()) {
-        System.out.println("true");
         model.addAttribute("modifiable", true);
       }
     }
@@ -194,6 +196,7 @@ public class JobPostingController {
     List<Major> majors = majorService.listMajor();
     List<District> districts = districtService.get();
     List<FinalEducation> finalEducations = finalEducationService.findAll();
+    List<Field> fields = fieldService.list();
     model.addAttribute("jobPosting", jobPostingService.get(no));
     model.addAttribute("employmentStatus", employmentStatus);
     model.addAttribute("certificates", certificates);
@@ -201,6 +204,7 @@ public class JobPostingController {
     model.addAttribute("districts", districts);
     model.addAttribute("finalEducations", finalEducations);
     model.addAttribute("companyMember", companyMember);
+    model.addAttribute("fields", fields);
   }
 
   @PostMapping("update")
@@ -209,7 +213,6 @@ public class JobPostingController {
       Certificate certificate, //
       Major major, //
       MultipartFile[] jobPostingFiles) throws Exception {
-    System.out.println(certificate);
     ArrayList<JobPostingFile> files = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/jobposting");
     for (MultipartFile jobPostingFile : jobPostingFiles) {
@@ -242,12 +245,6 @@ public class JobPostingController {
       jobPosting.setFiles(null);
     }
 
-    // if (companyRequiredCertificates.size() > 0) {
-    // jobPosting.setCompanyRequiredCertificates(companyRequiredCertificates);
-    // } else {
-    // jobPosting.setCompanyRequiredCertificates(null);
-    // }
-
     jobPostingService.update(jobPosting);
     return "redirect:list";
   }
@@ -266,11 +263,6 @@ public class JobPostingController {
     if (mem.getType() == 2) {
       model.addAttribute("RegistrationPossible", true);
     }
-
-    // JobPosting myList = jobPostingService.get(no);
-    //
-    // if (mem.getNumber() == myList.getCompanyMemberNumber()) {
-    // }
 
   }
 

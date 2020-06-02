@@ -30,9 +30,9 @@ public class JobPosting implements Serializable {
   private CompanyMember companyMember;
   private Member member;
   private Company company;
+  private Field field;
 
   List<JobPostingFile> files;
-
 
   @Override
   public String toString() {
@@ -45,9 +45,8 @@ public class JobPosting implements Serializable {
         + ", employmentStatus=" + employmentStatus + ", certificate=" + certificate + ", major="
         + major + ", district=" + district + ", finalEducation=" + finalEducation
         + ", companyMember=" + companyMember + ", member=" + member + ", company=" + company
-        + ", files=" + files + "]";
+        + ", field=" + field + ", files=" + files + "]";
   }
-
 
   @Override
   public int hashCode() {
@@ -61,6 +60,7 @@ public class JobPosting implements Serializable {
     result = prime * result + ((district == null) ? 0 : district.hashCode());
     result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
     result = prime * result + ((endDated == null) ? 0 : endDated.hashCode());
+    result = prime * result + ((field == null) ? 0 : field.hashCode());
     result = prime * result + ((files == null) ? 0 : files.hashCode());
     result = prime * result + ((finalEducation == null) ? 0 : finalEducation.hashCode());
     result = prime * result + ((job == null) ? 0 : job.hashCode());
@@ -79,8 +79,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
-
 
   @Override
   public boolean equals(Object obj) {
@@ -127,6 +125,11 @@ public class JobPosting implements Serializable {
       if (other.endDated != null)
         return false;
     } else if (!endDated.equals(other.endDated))
+      return false;
+    if (field == null) {
+      if (other.field != null)
+        return false;
+    } else if (!field.equals(other.field))
       return false;
     if (files == null) {
       if (other.files != null)
@@ -192,8 +195,6 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
-
-
 
   public int getJobPostingNumber() {
     return jobPostingNumber;
@@ -377,6 +378,14 @@ public class JobPosting implements Serializable {
 
   public void setCompany(Company company) {
     this.company = company;
+  }
+
+  public Field getField() {
+    return field;
+  }
+
+  public void setField(Field field) {
+    this.field = field;
   }
 
   public List<JobPostingFile> getFiles() {

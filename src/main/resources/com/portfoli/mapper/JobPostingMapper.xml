@@ -63,6 +63,11 @@
     <result column="company_name" property="name"/>
     </association>
     
+    <association property="field" javaType="Field">
+    <id column="field_no" property="number"/>
+    <result column="field_name" property="name"/>
+    </association>
+    
 		<collection property="files" ofType="JobPostingFile">
 			<id column="job_posting_file_no" property="jobPostingFileNumber" />
 			<result column="file_path" property="filePath" />
@@ -87,7 +92,9 @@
 		posting_registration,
 		readable,
 		minimum_education_no,
-		employment_stat_no)
+		employment_stat_no,
+		field_no,
+		skill_no)
 		values(
 		#{tel},
 		#{title},
@@ -103,7 +110,9 @@
 		now(),
 		1,
 		#{finalEducation.educationNumber},
-		#{employmentStatus.number})
+		#{employmentStatus.number},
+		#{field.number},
+    40101)
 	</insert>
 
 	<select id="findAll" resultMap="JobPostingMap">
@@ -199,7 +208,8 @@
      m.name as major_name,
      d.name as district_name,
      i.category,
-     s.member_no
+     s.member_no,
+     fi.name as field_name
      from pf_job_posting j
      left outer join
      pf_job_posting_file f on j.job_posting_no=f.job_posting_no
@@ -220,7 +230,9 @@
      left outer join pf_company_member as k
      on k.company_member_no = j.company_member_no
      left outer join pf_members as s
-     on s.member_no = k.company_member_no    
+     on s.member_no = k.company_member_no
+     left outer join pf_field as fi
+     on j.field_no = fi.field_no   
    where
    j.job_posting_no=#{jobPostingNumber}
 	</select>
@@ -238,7 +250,8 @@
 			<if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number},</if>
 			<if test="district != null and district != ''">work_place_no=#{district.districtNumber},</if>
 			<if test="finalEducation != null and finalEducation != ''">minimum_education_no=#{finalEducation.educationNumber},</if>
-			<if test="tel != null and tel != ''">tel=#{tel}</if>
+			<if test="tel != null and tel != ''">tel=#{tel},</if>
+			<if test="field != null and field != ''">field_no=#{field.number}</if>
 		</set>
 		where job_posting_no=#{jobPostingNumber}
 	</update>
