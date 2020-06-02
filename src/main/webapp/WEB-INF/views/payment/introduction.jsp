@@ -112,7 +112,7 @@
           <input name="product" type="hidden" value="">
           <input name="price" type="hidden" value="">
           <div class="form-label-group mb-3">
-            <input name="title" id="input_jobPosting" type="text" class="form-control input-suggest w--300" value="" 
+            <input name="jobPostingTitle" id="input_jobPosting" type="text" class="form-control input-suggest w--300" value="" 
               placeholder="JobPosting" 
               data-input-suggest-mode="text" 
               data-input-suggest-name="title" 

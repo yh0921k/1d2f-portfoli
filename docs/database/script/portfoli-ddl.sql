@@ -123,6 +123,9 @@ DROP TABLE IF EXISTS pf_qna RESTRICT;
 -- 기업
 DROP TABLE IF EXISTS pf_company RESTRICT;
 
+-- 회원기업공고지원
+DROP TABLE IF EXISTS pf_apply RESTRICT;
+
 -- 채용추천
 DROP TABLE IF EXISTS pf_job_recommendation RESTRICT;
 
@@ -137,6 +140,9 @@ DROP TABLE IF EXISTS pf_question_category RESTRICT;
 
 -- 신고분류
 DROP TABLE IF EXISTS pf_report_class RESTRICT;
+
+-- 팔로잉
+DROP TABLE IF EXISTS pf_following RESTRICT;
 
 -- 공지사항분류
 DROP TABLE IF EXISTS pf_notice_category RESTRICT;
@@ -224,10 +230,7 @@ CREATE TABLE pf_job_posting (
   readable             INTEGER      NOT NULL COMMENT '공개여부', -- 공개여부
   tel                  VARCHAR(20)      NOT NULL COMMENT '연락처', -- 연락처
   minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
-  employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호', -- 고용형태번호
-  field_no             INTEGER      NOT NULL COMMENT '분야번호', -- 분야번호
-  skill_no             INTEGER      NOT NULL COMMENT '기술번호' -- 기술번호
-  
+  employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호' -- 고용형태번호
 )
 COMMENT '채용공고';
 
@@ -338,13 +341,16 @@ ALTER TABLE pf_banner
 
 -- 결제
 CREATE TABLE pf_payment (
-  pay_no       INTEGER      NOT NULL COMMENT '결제번호', -- 결제번호
-  member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  product_name VARCHAR(255) NOT NULL COMMENT '상품명', -- 상품명
-  price        INTEGER      NOT NULL COMMENT '가격', -- 가격
-  method       VARCHAR(40)  NOT NULL COMMENT '결제수단', -- 결제수단
-  comment         VARCHAR(100)      NOT NULL COMMENT '결제상태', -- 결제상태
-  pay_date     DATETIME     NOT NULL COMMENT '결제일' -- 결제일
+  pay_no        INTEGER      NOT NULL COMMENT '결제번호', -- 결제번호
+  member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  product_name  VARCHAR(255) NOT NULL COMMENT '상품명', -- 상품명
+  price         INTEGER      NOT NULL COMMENT '가격', -- 가격
+  apply_posting VARCHAR(40)  NOT NULL COMMENT '적용공고', -- 적용공고
+  method        VARCHAR(40)  NOT NULL COMMENT '결제수단', -- 결제수단
+  comment       VARCHAR(100) NOT NULL COMMENT '결제상태', -- 결제상태
+  pay_date      DATETIME     NOT NULL COMMENT '결제일', -- 결제일
+  start_date    DATETIME     NOT NULL COMMENT '시작일', -- 시작일
+  end_date      DATETIME     NOT NULL COMMENT '마감일' -- 마감일
 )
 COMMENT '결제';
 
@@ -880,6 +886,24 @@ CREATE UNIQUE INDEX UIX_pf_company
 ALTER TABLE pf_company
   MODIFY COLUMN company_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '기업번호';
 
+-- 회원기업공고지원
+CREATE TABLE pf_apply (
+  apply_no          INTEGER NOT NULL COMMENT '지원번호', -- 지원번호
+  general_member_no INTEGER NOT NULL COMMENT '일반회원번호', -- 일반회원번호
+  job_posting_no    INTEGER NOT NULL COMMENT '채용공고번호' -- 채용공고번호
+)
+COMMENT '회원기업공고지원';
+
+-- 회원기업공고지원
+ALTER TABLE pf_apply
+  ADD CONSTRAINT PK_pf_apply -- 회원기업공고지원 기본키
+    PRIMARY KEY (
+      apply_no -- 지원번호
+    );
+
+ALTER TABLE pf_apply
+  MODIFY COLUMN apply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '지원번호';
+
 -- 채용추천
 CREATE TABLE pf_job_recommendation (
   general_member_no INTEGER NOT NULL COMMENT '일반회원번호', -- 일반회원번호
@@ -973,6 +997,22 @@ ALTER TABLE pf_report_class
 
 ALTER TABLE pf_report_class
   MODIFY COLUMN report_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '신고분류번호';
+
+-- 팔로잉
+CREATE TABLE pf_following (
+  follower  INTEGER NOT NULL COMMENT '팔로워', -- 팔로워
+  following INTEGER NOT NULL COMMENT '팔로잉' -- 팔로잉
+)
+COMMENT '팔로잉';
+
+-- 팔로잉
+ALTER TABLE pf_following
+  ADD CONSTRAINT PK_pf_following -- 팔로잉 기본키
+    PRIMARY KEY (
+      follower,  -- 팔로워
+      following  -- 팔로잉
+    );
+
 -- 공지사항분류
 CREATE TABLE pf_notice_category (
   category_no INTEGER      NOT NULL COMMENT '공지사항분류번호', -- 공지사항분류번호
@@ -1081,8 +1121,7 @@ ALTER TABLE pf_portfolio
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 포트폴리오
 ALTER TABLE pf_portfolio
@@ -1102,8 +1141,7 @@ ALTER TABLE pf_job_posting
     )
     REFERENCES pf_company_member ( -- 기업회원
       company_member_no -- 기업회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 채용공고
 ALTER TABLE pf_job_posting
@@ -1143,8 +1181,7 @@ ALTER TABLE pf_report
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 신고
 ALTER TABLE pf_report
@@ -1154,8 +1191,7 @@ ALTER TABLE pf_report
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 신고
 ALTER TABLE pf_report
@@ -1185,8 +1221,7 @@ ALTER TABLE pf_message
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 회원쪽지
 ALTER TABLE pf_message
@@ -1196,8 +1231,7 @@ ALTER TABLE pf_message
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 배너
 ALTER TABLE pf_banner
@@ -1217,8 +1251,7 @@ ALTER TABLE pf_payment
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 공지사항
 ALTER TABLE pf_notice
@@ -1248,8 +1281,7 @@ ALTER TABLE pf_alarm
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 알림
 ALTER TABLE pf_alarm
@@ -1279,8 +1311,7 @@ ALTER TABLE pf_bookmark
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 첨부파일
 ALTER TABLE pf_attachments
@@ -1290,8 +1321,7 @@ ALTER TABLE pf_attachments
     )
     REFERENCES pf_message ( -- 회원쪽지
       message_no -- 회원쪽지번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 채용공고첨부파일
 ALTER TABLE pf_job_posting_file
@@ -1301,8 +1331,7 @@ ALTER TABLE pf_job_posting_file
     )
     REFERENCES pf_job_posting ( -- 채용공고
       job_posting_no -- 채용공고번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 포트폴리오파일
 ALTER TABLE pf_board_attachment
@@ -1322,8 +1351,7 @@ ALTER TABLE pf_general_member_certification
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 일반회원자격증
 ALTER TABLE pf_general_member_certification
@@ -1355,8 +1383,7 @@ ALTER TABLE pf_general_mem_edu_major
     REFERENCES pf_general_mem_edu ( -- 일반회원학력
       general_member_no, -- 일반회원번호
       education_no       -- 학력번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 일반회원학력
 ALTER TABLE pf_general_mem_edu
@@ -1366,8 +1393,7 @@ ALTER TABLE pf_general_mem_edu
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 일반회원학력
 ALTER TABLE pf_general_mem_edu
@@ -1387,8 +1413,7 @@ ALTER TABLE pf_interest_location
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 일반회원관심지역
 ALTER TABLE pf_interest_location
@@ -1418,8 +1443,7 @@ ALTER TABLE pf_general_member_interest
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 회원보유기술
 ALTER TABLE pf_member_skill
@@ -1429,8 +1453,7 @@ ALTER TABLE pf_member_skill
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 회원보유기술
 ALTER TABLE pf_member_skill
@@ -1450,8 +1473,7 @@ ALTER TABLE pf_portfolio_skill
     )
     REFERENCES pf_portfolio ( -- 포트폴리오
       board_no -- 포트폴리오게시글번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 포트폴리오구성기술
 ALTER TABLE pf_portfolio_skill
@@ -1461,8 +1483,7 @@ ALTER TABLE pf_portfolio_skill
     )
     REFERENCES pf_member_skill ( -- 회원보유기술
       member_skill_no -- 회원보유기술번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 기업요구전공
 ALTER TABLE pf_company_required_major
@@ -1482,8 +1503,7 @@ ALTER TABLE pf_company_required_major
     )
     REFERENCES pf_job_posting ( -- 채용공고
       job_posting_no -- 채용공고번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 기업요구자격증
 ALTER TABLE pf_company_required_certificate
@@ -1503,8 +1523,7 @@ ALTER TABLE pf_company_required_certificate
     )
     REFERENCES pf_job_posting ( -- 채용공고
       job_posting_no -- 채용공고번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- QNA질문
 ALTER TABLE pf_qna
@@ -1524,8 +1543,7 @@ ALTER TABLE pf_qna
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- QNA질문
 ALTER TABLE pf_qna
@@ -1537,6 +1555,26 @@ ALTER TABLE pf_qna
       category_no -- 질문분류번호
     );
 
+-- 회원기업공고지원
+ALTER TABLE pf_apply
+  ADD CONSTRAINT FK_pf_general_member_TO_pf_apply -- 일반회원 -> 회원기업공고지원
+    FOREIGN KEY (
+      general_member_no -- 일반회원번호
+    )
+    REFERENCES pf_general_member ( -- 일반회원
+      general_member_no -- 일반회원번호
+    );
+
+-- 회원기업공고지원
+ALTER TABLE pf_apply
+  ADD CONSTRAINT FK_pf_job_posting_TO_pf_apply -- 채용공고 -> 회원기업공고지원
+    FOREIGN KEY (
+      job_posting_no -- 채용공고번호
+    )
+    REFERENCES pf_job_posting ( -- 채용공고
+      job_posting_no -- 채용공고번호
+    );
+
 -- 채용추천
 ALTER TABLE pf_job_recommendation
   ADD CONSTRAINT FK_pf_general_member_TO_pf_job_recommendation -- 일반회원 -> 채용추천
@@ -1545,8 +1583,7 @@ ALTER TABLE pf_job_recommendation
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 채용추천
 ALTER TABLE pf_job_recommendation
@@ -1556,8 +1593,7 @@ ALTER TABLE pf_job_recommendation
     )
     REFERENCES pf_job_posting ( -- 채용공고
       job_posting_no -- 채용공고번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- 게시글추천
 ALTER TABLE pf_recommendation
@@ -1577,8 +1613,27 @@ ALTER TABLE pf_recommendation
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
+    );
+
+-- 팔로잉
+ALTER TABLE pf_following
+  ADD CONSTRAINT FK_pf_members_TO_pf_following -- 회원 -> 팔로잉
+    FOREIGN KEY (
+      follower -- 팔로워
     )
-ON DELETE CASCADE;
+    REFERENCES pf_members ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 팔로잉
+ALTER TABLE pf_following
+  ADD CONSTRAINT FK_pf_members_TO_pf_following2 -- 회원 -> 팔로잉2
+    FOREIGN KEY (
+      following -- 팔로잉
+    )
+    REFERENCES pf_members ( -- 회원
+      member_no -- 회원번호
+    );
 
 -- 일정(개인용)
 ALTER TABLE pf_schedule
@@ -1588,8 +1643,7 @@ ALTER TABLE pf_schedule
     )
     REFERENCES pf_general_member ( -- 일반회원
       general_member_no -- 일반회원번호
-    )
-ON DELETE CASCADE;
+    );
 
 -- FAQ 자주묻는질문
 ALTER TABLE pf_faq

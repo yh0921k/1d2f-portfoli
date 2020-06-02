@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
@@ -133,10 +134,8 @@ public class PaymentController {
 
   @PostMapping("order")
   public void order(HttpServletRequest request,
-      String title, String product, int price, int term, String startDate, String endDate, Model model) throws Exception {
+      String jobPostingTitle, String product, int price, String startDate, String endDate, Model model) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-    JobPosting jobPosting = jobPostingService.get(title);
 
     // System.out.println(jobPosting.getMember().getName());
     // System.out.println(jobPosting.getCompany().getName());
@@ -145,11 +144,12 @@ public class PaymentController {
     payment.setMemberNumber(loginUser.getNumber());
     payment.setProductName(product);
     payment.setPrice(price);
+    payment.setJobPostingTitle(jobPostingTitle);
+    System.out.println(startDate.replace("/", "-"));
+    payment.setStartDate(Date.valueOf(startDate.replace("/", "-")));
+    payment.setEndDate(Date.valueOf(endDate.replace("/", "-")));
 
-    model.addAttribute("jobPosting", jobPosting);
-    model.addAttribute("order", payment);
-    model.addAttribute("startDate", startDate);
-    model.addAttribute("endDate", endDate);
+    model.addAttribute("jobPosting", jobPostingService.get(jobPostingTitle));
     request.getSession().setAttribute("payment", payment);
   }
 
@@ -181,7 +181,7 @@ public class PaymentController {
       Map<String, Object> response = (Map<String, Object>) resultBody.get("response");
 
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      Payment payment = new Payment();
+      Payment payment = (Payment) request.getSession().getAttribute("payment");
       payment.setProductName((String) response.get("name"));
       payment.setMemberNumber(loginUser.getNumber());
       payment.setPrice(Integer.parseInt(String.valueOf(response.get("amount"))));
@@ -194,5 +194,38 @@ public class PaymentController {
 
       model.addAttribute("payment", payment);
     }
+  }
+
+  @GetMapping("list")
+  public void list(HttpServletRequest request,
+      @RequestParam(defaultValue = "1") int pageNumber,
+      @RequestParam(defaultValue = "3") int pageSize,
+      Model model) throws Exception {
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+
+
+    int size = paymentService.listCount(loginUser.getNumber());
+    int totalPage = size / 3;
+    if (size % 3 > 0) {
+      totalPage++;
+    }
+
+    if (pageNumber < 1 || pageNumber > totalPage) {
+      pageNumber = 1;
+    }
+
+    int endPage = (int) Math.ceil(pageNumber / (double) 5) * 5;
+    int startPage = endPage - 5 + 1;
+
+    if (endPage > totalPage) {
+      endPage = totalPage;
+    }
+
+    model.addAttribute("payments", paymentService.list(loginUser.getNumber(), pageNumber, pageSize));
+    model.addAttribute("pageNumber", pageNumber);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("totalPage", totalPage);
+    model.addAttribute("startPage", startPage);
+    model.addAttribute("endPage", endPage);
   }
 }

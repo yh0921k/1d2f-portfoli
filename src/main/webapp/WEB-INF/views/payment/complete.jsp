@@ -29,7 +29,7 @@
 
     <br>
     <div class="d-middle">
-      <a href="#" class="btn btn-sm btn-success btn-soft mb-3">결제 내역 확인</a>
+      <a href="/portfoli/app/payment/list" class="btn btn-sm btn-success btn-soft mb-3">결제 내역 확인</a>
       <a href="/portfoli" class="btn btn-sm btn-secondary btn-soft mb-3">
         <i class="fi fi-home"></i>홈으로 가기
       </a>

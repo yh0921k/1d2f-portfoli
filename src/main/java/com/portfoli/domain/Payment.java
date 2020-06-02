@@ -13,12 +13,16 @@ public class Payment implements Serializable {
   private String method;
   private String comment;
   private Date payDate;
+  private Date startDate;
+  private Date endDate;
+  private String jobPostingTitle;
 
   @Override
   public String toString() {
     return "Payment [number=" + number + ", memberNumber=" + memberNumber + ", productName="
         + productName + ", price=" + price + ", method=" + method + ", comment=" + comment
-        + ", payDate=" + payDate + "]";
+        + ", payDate=" + payDate + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", jobPostingTitle=" + jobPostingTitle + "]";
   }
 
   public int getNumber() {
@@ -77,17 +81,44 @@ public class Payment implements Serializable {
     this.payDate = payDate;
   }
 
+  public String getJobPostingTitle() {
+    return jobPostingTitle;
+  }
+
+  public void setJobPostingTitle(String jobPostingTitle) {
+    this.jobPostingTitle = jobPostingTitle;
+  }
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+    result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+    result = prime * result + ((jobPostingTitle == null) ? 0 : jobPostingTitle.hashCode());
     result = prime * result + memberNumber;
     result = prime * result + ((method == null) ? 0 : method.hashCode());
     result = prime * result + number;
     result = prime * result + ((payDate == null) ? 0 : payDate.hashCode());
     result = prime * result + price;
     result = prime * result + ((productName == null) ? 0 : productName.hashCode());
-    result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+    result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
     return result;
   }
 
@@ -100,6 +131,21 @@ public class Payment implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Payment other = (Payment) obj;
+    if (comment == null) {
+      if (other.comment != null)
+        return false;
+    } else if (!comment.equals(other.comment))
+      return false;
+    if (endDate == null) {
+      if (other.endDate != null)
+        return false;
+    } else if (!endDate.equals(other.endDate))
+      return false;
+    if (jobPostingTitle == null) {
+      if (other.jobPostingTitle != null)
+        return false;
+    } else if (!jobPostingTitle.equals(other.jobPostingTitle))
+      return false;
     if (memberNumber != other.memberNumber)
       return false;
     if (method == null) {
@@ -121,10 +167,10 @@ public class Payment implements Serializable {
         return false;
     } else if (!productName.equals(other.productName))
       return false;
-    if (comment == null) {
-      if (other.comment != null)
+    if (startDate == null) {
+      if (other.startDate != null)
         return false;
-    } else if (!comment.equals(other.comment))
+    } else if (!startDate.equals(other.startDate))
       return false;
     return true;
   }

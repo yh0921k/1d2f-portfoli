@@ -40,17 +40,16 @@ th {
         <tr>
 
           <!-- product name -->
-          <td id="productName">${order.productName}<br> <span
+          <td id="productName">${payment.productName}<br> <span
             class="d-block text-muted fs--13">${jobPosting.title}</span>
           </td>
 
           <!-- price -->
           <td id="price"><span class="d-block text-success fs--15">
-              ${order.price}원</span></td>
+              ${payment.price}원</span></td>
 
           <!-- term -->
-          <td id="term" class="text-muted text-center">${startDate}~
-            ${endDate}</td>
+          <td id="term" class="text-muted text-center">${payment.startDate} ~ ${payment.endDate}</td>
 
         </tr>
         <!-- /product -->

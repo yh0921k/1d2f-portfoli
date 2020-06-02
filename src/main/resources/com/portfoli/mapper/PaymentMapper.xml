@@ -9,15 +9,43 @@
     <result column="member_no" property="memberNumber"/>
     <result column="product_name" property="productName"/>
     <result column="price" property="price"/>
+    <result column="apply_posting" property="jobPostingTitle"/>
     <result column="method" property="method"/>
     <result column="comment" property="comment"/>
     <result column="pay_date" property="payDate"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
   </resultMap>
 
   <insert id="insert" parameterType="Payment"
   useGeneratedKeys="true" keyColumn="pay_no" keyProperty="number">
-    insert into pf_payment(member_no, product_name, price, method, comment, pay_date)
+    insert into pf_payment(member_no, product_name, price, apply_posting, method, comment, pay_date, start_date, end_date)
     values
-    (#{memberNumber}, #{productName}, #{price}, #{method}, #{comment}, #{payDate})
+    (#{memberNumber}, #{productName}, #{price}, #{jobPostingTitle}, #{method}, #{comment}, #{payDate}, #{startDate}, #{endDate})
   </insert>
+
+  <select id="findAllByUserNumber" resultMap="PaymentMap" parameterType="map">
+    select
+      pay_no,
+      member_no,
+      product_name,
+      price,
+      apply_posting,
+      method,
+      comment,
+      pay_date,
+      start_date,
+      end_date
+    from pf_payment p
+    where
+      member_no=#{userNumber}
+    order by pay_no desc
+    limit #{offset}, #{pageSize}
+  </select>
+
+  <select id="findAllCount" resultType="int" parameterType="int">
+    select count(*)
+    from pf_payment
+    where member_no=#{userNumber}
+  </select>
 </mapper>
