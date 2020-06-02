@@ -1,6 +1,11 @@
 ﻿-- 기존 데이터베이스가 존재하면 삭제
 DROP DATABASE IF EXISTS portfolidb;
 
+-- 데이터베이스 새로 생성
+CREATE DATABASE portfolidb
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
 -- 로컬에서만 접속할 수 있는 사용자를 만들기:
 CREATE USER 'team'@localhost IDENTIFIED BY '1111';
 -- 원격에서만 접속할 수 있는 사용자를 만들기:
@@ -9,11 +14,6 @@ CREATE USER 'team'@'%' IDENTIFIED BY '1111';
 -- 유저에게 데이터베이스 권한 부여
 GRANT ALL ON portfolidb.* TO team@localhost;
 GRANT ALL ON portfolidb.* TO team@'%';
-
--- 데이터베이스 새로 생성
-CREATE DATABASE portfolidb
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_general_ci;
 
 -- 데이터베이스 접속
 use portfolidb;
@@ -1062,23 +1062,6 @@ ALTER TABLE pf_alarm_class
 
 ALTER TABLE pf_alarm_class
   MODIFY COLUMN alarm_class_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '알림분류번호';
-
--- 결제수단
-CREATE TABLE pf_payment_method (
-  payment_method_no INTEGER     NOT NULL COMMENT '결제수단번호', -- 결제수단번호
-  payment_method    VARCHAR(40) NOT NULL COMMENT '결제수단명' -- 결제수단명
-)
-COMMENT '결제수단';
-
--- 결제수단
-ALTER TABLE pf_payment_method
-  ADD CONSTRAINT PK_pf_payment_method -- 결제수단 기본키
-    PRIMARY KEY (
-      payment_method_no -- 결제수단번호
-    );
-
-ALTER TABLE pf_payment_method
-  MODIFY COLUMN payment_method_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제수단번호';
 
 -- FAQ 자주묻는질문
 CREATE TABLE pf_faq (
