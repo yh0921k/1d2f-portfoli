@@ -19,6 +19,8 @@ public interface JobPostingDao {
 
   public JobPosting findByNo(int no) throws Exception;
 
+  public JobPosting findByTitle(String title) throws Exception;
+
   public int update(JobPosting jobPosting) throws Exception;
 
   public int delete(int no) throws Exception;
