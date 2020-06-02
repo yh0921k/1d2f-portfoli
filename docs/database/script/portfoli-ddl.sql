@@ -45,9 +45,6 @@ DROP TABLE IF EXISTS pf_banner RESTRICT;
 -- 결제
 DROP TABLE IF EXISTS pf_payment RESTRICT;
 
--- 판매상품
-DROP TABLE IF EXISTS pf_product RESTRICT;
-
 -- 회원
 DROP TABLE IF EXISTS pf_members RESTRICT;
 
@@ -155,9 +152,6 @@ DROP TABLE IF EXISTS pf_schedule RESTRICT;
 
 -- 알림분류
 DROP TABLE IF EXISTS pf_alarm_class RESTRICT;
-
--- 결제수단
-DROP TABLE IF EXISTS pf_payment_method RESTRICT;
 
 -- FAQ 자주묻는질문
 DROP TABLE IF EXISTS pf_faq RESTRICT;
@@ -347,12 +341,13 @@ ALTER TABLE pf_banner
 
 -- 결제
 CREATE TABLE pf_payment (
-  pay_no            INTEGER  NOT NULL COMMENT '결제번호', -- 결제번호
-  member_no         INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
-  product_no        INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
-  payment_method_no INTEGER  NOT NULL COMMENT '결제수단번호', -- 결제수단번호
-  stat              INTEGER  NOT NULL COMMENT '결제상태', -- 결제상태
-  pay_date          DATETIME NOT NULL DEFAULT now() COMMENT '결제일' -- 결제일
+  pay_no       INTEGER      NOT NULL COMMENT '결제번호', -- 결제번호
+  member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  product_name VARCHAR(255) NOT NULL COMMENT '상품명', -- 상품명
+  price        INTEGER      NOT NULL COMMENT '가격', -- 가격
+  method       VARCHAR(40)  NOT NULL COMMENT '결제수단', -- 결제수단
+  comment         VARCHAR(100)      NOT NULL COMMENT '결제상태', -- 결제상태
+  pay_date     DATETIME     NOT NULL COMMENT '결제일' -- 결제일
 )
 COMMENT '결제';
 
@@ -365,25 +360,6 @@ ALTER TABLE pf_payment
 
 ALTER TABLE pf_payment
   MODIFY COLUMN pay_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제번호';
-
--- 판매상품
-CREATE TABLE pf_product (
-  product_no INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
-  name       VARCHAR(255) NOT NULL COMMENT '상품명', -- 상품명
-  duration   INTEGER      NOT NULL COMMENT '기간', -- 기간
-  price      INTEGER      NOT NULL COMMENT '가격' -- 가격
-)
-COMMENT '판매상품';
-
--- 판매상품
-ALTER TABLE pf_product
-  ADD CONSTRAINT PK_pf_product -- 판매상품 기본키
-    PRIMARY KEY (
-      product_no -- 상품번호
-    );
-
-ALTER TABLE pf_product
-  MODIFY COLUMN product_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '상품번호';
 
 -- 회원
 CREATE TABLE pf_members (
@@ -1283,32 +1259,12 @@ ALTER TABLE pf_banner
 
 -- 결제
 ALTER TABLE pf_payment
-  ADD CONSTRAINT FK_pf_product_TO_pf_payment -- 판매상품 -> 결제
-    FOREIGN KEY (
-      product_no -- 상품번호
-    )
-    REFERENCES pf_product ( -- 판매상품
-      product_no -- 상품번호
-    );
-
--- 결제
-ALTER TABLE pf_payment
   ADD CONSTRAINT FK_pf_members_TO_pf_payment -- 회원 -> 결제
     FOREIGN KEY (
       member_no -- 회원번호
     )
     REFERENCES pf_members ( -- 회원
       member_no -- 회원번호
-    );
-
--- 결제
-ALTER TABLE pf_payment
-  ADD CONSTRAINT FK_pf_payment_method_TO_pf_payment -- 결제수단 -> 결제
-    FOREIGN KEY (
-      payment_method_no -- 결제수단번호
-    )
-    REFERENCES pf_payment_method ( -- 결제수단
-      payment_method_no -- 결제수단번호
     );
 
 -- 공지사항

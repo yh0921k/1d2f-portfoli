@@ -52,11 +52,21 @@
     <result column="major_name" property="name"/>
     </association>
     
+    <association property="member" javaType="Member">
+    <id column="member_no" property="number"/>
+    <result column="member_name" property="name"/>
+    <result column="email" property="email"/>
+    </association>
+    
+    <association property="company" javaType="Company">
+    <id column="company_no" property="number"/>
+    <result column="company_name" property="name"/>
+    </association>
+    
 		<collection property="files" ofType="JobPostingFile">
 			<id column="job_posting_file_no" property="jobPostingFileNumber" />
 			<result column="file_path" property="filePath" />
 		</collection>
-
 	</resultMap>
 
 	<insert id="insert" parameterType="JobPosting"
@@ -290,7 +300,7 @@
     from pf_job_posting
     where company_member_no=#{userNumber}
   </select>
-  
+
   <select id="myPostingList" resultMap="JobPostingMap"
     parameterType="int">
     select
@@ -347,12 +357,22 @@
     order by
     j.job_posting_no desc      
   </select>
-  
+
+  <select id="findByTitle" resultMap="JobPostingMap" parameterType="string">
+    select
+    j.job_posting_no,
+    j.title,
+    c.name as company_name,
+    m.name as member_name,
+    m.email
+    from pf_job_posting j
+    join pf_members m
+    on j.company_member_no=m.member_no
+    join pf_company_member cm
+    on j.company_member_no=cm.company_member_no
+    join pf_company c
+    on cm.company_no=c.company_no
+    where title=#{title}
+  </select>
+
 </mapper>
-
-
-
-
-
-
-

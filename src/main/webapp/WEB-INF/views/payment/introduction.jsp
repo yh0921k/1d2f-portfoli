@@ -108,11 +108,14 @@
           구직자에게 채용공고를 더 효과적으로 노출시킬 수 있습니다. <br><br><br>
           등록된 공고
           </span>
+          <form action='order' method='post' id='order'>
+          <input name="product" type="hidden" value="">
+          <input name="price" type="hidden" value="">
           <div class="form-label-group mb-3">
-            <input id="input_jobPosting" type="text" class="form-control input-suggest" value="" 
+            <input name="title" id="input_jobPosting" type="text" class="form-control input-suggest w--300" value="" 
               placeholder="JobPosting" 
               data-input-suggest-mode="text" 
-              data-input-suggest-name="jobPosting" 
+              data-input-suggest-name="title" 
               data-input-suggest-ajax-url="jobPostingList" 
               data-input-suggest-ajax-method="GET" 
               data-input-suggest-ajax-limit="20">
@@ -120,18 +123,18 @@
           </div>
           <span class="text-muted">기간 선택하기</span>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" value="0" id="customRadioInline1" name="term"
+              <input type="radio" value="1" id="customRadioInline1" name="term"
                 class="custom-control-input" checked> <label
                  class="custom-control-label" for="customRadioInline1"><span class="text-muted">1일</span></label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" value="1" id="customRadioInline2" name="term"
+              <input type="radio" value="7" id="customRadioInline2" name="term"
                 class="custom-control-input"> <label
                 class="custom-control-label" for="customRadioInline2"><span class="text-muted">1주일</span></label>
             </div>
-            <br>
+            <br><br>
           <span class="text-muted">시작일</span>
-          <input type="text" name="" class="form-control datepicker" 
+          <input type="text" name="startDate" class="form-control form-control-sm datepicker w--300" 
             data-today-highlight="true" 
             data-layout-rounded="false" 
             data-title="Smarty Datepicker" 
@@ -151,6 +154,7 @@
               "today": "오늘 날짜 선택",
               "clear": "초기화",
               "titleFormat": "yyyy MM"}'>
+          <input name="endDate" type="hidden" value="">
           <br>
           <div style="display: none;" id="selectItem">
           <span class="text-muted">선택한 상품</span>
@@ -186,10 +190,11 @@
   </table>
   <br><br>
   <div class="text-align-end" style="margin-right:120px;">
-  <a href="#" class="btn btn-sm btn-primary mb-1">결제하기</a>
+  <button type="submit" class="btn btn-sm btn-primary mb-1">결제하기</button>
   </div>
   <br><br><br>
   </div>
+  </form>
           </div>
       </div>
       <div class="tab-pane fade" id="v-pills-b" role="tabpanel" aria-labelledby="v-pills-b-tab">
@@ -218,23 +223,35 @@
 </div>
 
 <script>
-console.dir($(document));
-
 $('.datepicker').on('change', function() {
-  console.log($('#input_jobPosting').val());
   $("#selectItem").show();
 $('#productName').append('프리미엄 채용 공고<br> <span class="d-block text-muted fs--13">' + $('#input_jobPosting').val() + '</span>');
-if ($('input[name=term]:checked').val() == 0) {
+var endDate;
+if ($('input[name=term]:checked').val() == 1) {
   $('#price').append('<span class="d-block text-success fs--15">' + "2,000" + '원</span>');
-  $('#term').append($('.datepicker').val() + " ~ " + $('.datepicker').val());
+  var endDate = new Date($('.datepicker').val());
+  endDate.setDate(endDate.getDate() + 1);
+  endDate = getFormatDate(new Date(endDate));
+  $('#term').append($('.datepicker').val() + " ~ " + endDate);
+  $('input[name="endDate"]').val(endDate);
+  
 } else {
   $('#price').append('<span class="d-block text-success fs--15">' + "10,000" + '원</span>');
   var endDate = new Date($('.datepicker').val());
   endDate.setDate(endDate.getDate() + 7);
-  $('#term').append($('.datepicker').val() + " ~ " + getFormatDate(new Date(endDate)));
+  endDate = getFormatDate(new Date(endDate))
+  $('#term').append($('.datepicker').val() + " ~ " + endDate);
+  $('input[name="endDate"]').val(endDate);
 }
+});
 
-console.log($('input[name=term]:checked').val());
+$('#order').submit(function() {
+  $('input[name="product"]').prop('value', "프리미엄 채용 공고");
+  if ($('input[name=term]:checked').val() == 1) {
+  $('input[name="price"]').prop('value', '2000');
+  } else {
+    $('input[name="price"]').prop('value', '10000');
+  }
 });
 
 function getFormatDate(date){

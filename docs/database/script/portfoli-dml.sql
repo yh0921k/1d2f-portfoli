@@ -838,24 +838,6 @@ INSERT INTO pf_attachments(file_no, message_no, file_name, file_path) VALUES(8, 
 INSERT INTO pf_attachments(file_no, message_no, file_name, file_path) VALUES(9, 5, 'image2.jpg', '.data/note/note9.jpg');
 INSERT INTO pf_attachments(file_no, message_no, file_name, file_path) VALUES(10, 6, 'image.png', '.data/note/note10.png');
 
--- 판매상품 예제 데이터
-INSERT INTO pf_product(product_no, name, duration, price) VALUES(1, 'Portfoli Basic', 0, 8800);
-INSERT INTO pf_product(product_no, name, duration, price) VALUES(2, 'Portfoli Pro', 0, 29800);
-
--- 결제수단 예제 데이터
-INSERT INTO pf_payment_method(payment_method) VALUES('무통장입금');
-INSERT INTO pf_payment_method(payment_method) VALUES('카드결제');
-INSERT INTO pf_payment_method(payment_method) VALUES('휴대폰결제');
-
--- 결제 예제 데이터
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, pay_date) VALUES(1, 2, 1, 1, 1, '2020-4-1 12:00:00');
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, pay_date) VALUES(2, 4, 2, 3, 1, '2020-4-1 13:10:20');
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, pay_date) VALUES(3, 5, 1, 3, 1, '2020-4-2 14:24:30');
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, pay_date) VALUES(4, 6, 1, 2, 1, '2020-4-3 15:48:20');
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat, pay_date) VALUES(5, 7, 1, 1, 1, '2020-4-4 17:01:03');
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat) VALUES(6, 8, 1, 1, 1);
-INSERT INTO pf_payment(pay_no, member_no, product_no, payment_method_no, stat) VALUES(7, 9, 2, 3, 1);
-
 -- 알림분류 예제 데이터
 INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) VALUES(1,  '새 쪽지가 도착했습니다.');
 INSERT INTO pf_alarm_class(alarm_class_no, alarm_class) VALUES(2,  '일주일 뒤 마감되는 일정이 있습니다.');
