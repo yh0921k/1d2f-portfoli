@@ -149,7 +149,7 @@
 						<div class="row h-100 d-flex align-items-center">
 							<div class="col my-3">
 								<p class="text-gray-900 mb-1 ml-3">
-									회사명 <font style="color: orange;">${jobPosting.company.name}</font>
+									기업명 <font style="color: orange;">${jobPosting.company.name}</font>
 								</p>
 								<p class="text-gray-900 mb-1 ml-3">
 									지원방법 <font style="color: orange;">전화지원</font>
