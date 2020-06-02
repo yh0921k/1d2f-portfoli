@@ -1,6 +1,7 @@
 package com.portfoli.web;
 
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
@@ -78,11 +79,26 @@ public class RankController {
 
   @PostMapping(value = "listByOption", produces = "text/plain;charset=UTF-8")
   @ResponseBody
-  public String listByOption(HttpServletRequest request, Model model, String selected)
-      throws Exception {
+  public String listByOption(HttpServletRequest request) throws Exception {
+
     List<Rank> rankList = rankService.list();
     request.setAttribute("rankList", rankList);
-    System.out.println("Test");
+    return new Gson().toJson(rankList);
+  }
+
+  @PostMapping(value = "listByFilter", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String listByFilter(HttpServletRequest request,
+      @RequestBody Map<String, Object> convertedData) throws Exception {
+
+    List<String> skillList = (List<String>) convertedData.get("skillList");
+    String orderCount = (String) convertedData.get("orderCount");
+
+    List<Rank> rankList = rankService.list(convertedData);
+    request.setAttribute("rankList", rankList);
+    for (Rank r : rankList) {
+      System.out.println(r);
+    }
     return new Gson().toJson(rankList);
   }
 }
