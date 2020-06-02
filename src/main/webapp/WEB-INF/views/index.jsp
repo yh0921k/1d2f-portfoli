@@ -154,7 +154,7 @@
                       data-href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
                       data-ajax-modal-size="modal-md"
                       data-ajax-modal-centered="true"
-                      data-ajax-modal-backdrop="static"> <span
+                      data-ajax-modal-backdrop=""> <span
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
@@ -301,7 +301,7 @@
                       data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
                       data-ajax-modal-size="modal-md"
                       data-ajax-modal-centered="true"
-                      data-ajax-modal-backdrop="static"> <span
+                      data-ajax-modal-backdrop=""> <span
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
