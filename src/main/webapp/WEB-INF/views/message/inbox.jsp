@@ -84,8 +84,8 @@
 						<!-- 기업회원 -->
 						<c:if test="${loginUser.type == '2'}">
 						
-						<!-- 멤버십 -->
-						<li class="nav-item"><a class="nav-link" href="/portfoli/app/payment/introduction"> <i class="fi fi-arrow-end m-0 fs--12"></i><span class="px-2 d-inline-block"> 멤버십 </span></a></li>
+						<!-- 상품 구매 내역 -->
+						<li class="nav-item"><a class="nav-link" href="/portfoli/app/payment/list"> <i class="fi fi-arrow-end m-0 fs--12"></i><span class="px-2 d-inline-block"> 상품 구매 내역 </span></a></li>
 
 						<!-- 공고 관리 -->
 						<li class="nav-item"><a class="nav-link " href="/portfoli/app/jobposting/mylist"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 공고 관리 </span></a></li>

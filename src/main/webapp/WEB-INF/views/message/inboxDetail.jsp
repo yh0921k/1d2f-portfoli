@@ -59,24 +59,35 @@
                 href="/portfoli/app/message/sent"> 보낸 쪽지함 </a></li>
             </ul></li>
 
+            <!-- 일반회원 -->
+            <c:if test="${loginUser.type == '1'}">
+            
+              <!-- 일정 -->
+              <li class="nav-item"><a class="nav-link" href="/portfoli/app/calendar/calendar"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 일정 관리 </span></a></li>
+              
+              <!-- 포트폴리오 -->
+              <li class="nav-item font-weight-bold">
+                <a class="nav-link" href="#"> 
+                <span class="group-icon"><i class="fi fi-arrow-end"></i><i class="fi fi-arrow-down"></i></span> 
+                <span class="px-2 d-inline-block active font-weight-bold"> 내 포트폴리오 </span>
+                </a>
+              <ul class="nav flex-column px-2 font-weight-bold">
+                <li class="nav-item"><a class="nav-link" href="/portfoli/app/portfolio/mylist"> 포트폴리오 관리 </a></li>
+                <li class="nav-item"><a class="nav-link" href="/portfoli/app/portfolio/myRecommendedlist"> 내가 찜한 목록 </a></li>
+              </ul>
+              </li>
+              
+            </c:if>
+            
+            <!-- 기업회원 -->
+            <c:if test="${loginUser.type == '2'}">
+            
+            <!-- 상품 구매 내역 -->
+            <li class="nav-item"><a class="nav-link" href="/portfoli/app/payment/list"> <i class="fi fi-arrow-end m-0 fs--12"></i><span class="px-2 d-inline-block"> 상품 구매 내역 </span></a></li>
 
-          <li class="nav-item"><a class="nav-link"
-            href="account-orders.html"> <i
-              class="fi fi-arrow-end m-0 fs--12"></i> <span
-              class="px-2 d-inline-block"> 일정 관리 </span>
-          </a></li>
-
-          <li class="nav-item"><a class="nav-link"
-            href="account-favourites.html"> <i
-              class="fi fi-arrow-end m-0 fs--12"></i> <span
-              class="px-2 d-inline-block"> 포트폴리오 관리 </span>
-          </a></li>
-
-          <li class="nav-item"><a class="nav-link pt--200"
-            href="account-settings.html"> <i
-              class="fi fi-arrow-end m-0 fs--12"></i> <span
-              class="px-2 d-inline-block"> 통계 </span>
-          </a></li>
+            <!-- 공고 관리 -->
+            <li class="nav-item"><a class="nav-link " href="/portfoli/app/jobposting/mylist"> <i class="fi fi-arrow-end m-0 fs--12"></i> <span class="px-2 d-inline-block"> 공고 관리 </span></a></li>
+            </c:if>
 
         </ul>
       </nav>
