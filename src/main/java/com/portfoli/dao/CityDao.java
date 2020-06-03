@@ -7,8 +7,8 @@ public interface CityDao {
 
   public List<City> findAll() throws Exception;
 
-  // public int findNumber(String fieldName) throws Exception;
-  //
+  public int findNumber(String cityName) throws Exception;
+
   // public List<Field> findByMemberNumber(int memberNumber) throws Exception;
   //
   // public int deleteAll(int memberNumber) throws Exception;
