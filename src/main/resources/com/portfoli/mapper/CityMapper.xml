@@ -15,11 +15,11 @@
 		from pf_city
 	</select>	
 	
-<!-- 	<select id="findNumber" resultType="integer" parameterType="string"> -->
-<!-- 	  select field_no -->
-<!-- 	  from pf_field -->
-<!-- 	  where name=#{name} -->
-<!-- 	</select> -->
+	<select id="findNumber" resultType="integer" parameterType="string">
+	  select city_no 
+	  from pf_city 
+	  where name=#{name}
+	</select>
 	
 <!-- 	<select id="findByMemberNumber" resultMap="FieldMap" parameterType="int"> -->
 <!--     select pf.field_no, pf.name  -->
