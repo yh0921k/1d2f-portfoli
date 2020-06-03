@@ -57,7 +57,7 @@
             <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
-            <li class="nav-item"><a href="#" id="recommendInfoForCom"
+            <li class="nav-item"><a href="/portfoli/app/recommendEmployee/recommend" id="recommendInfoForCom"
               class="nav-link dropdown-toggle nav-link-caret-hide"
               style="width: 150px; margin-left: 0px;" <span>인재추천정보</span></a></li>
             <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
