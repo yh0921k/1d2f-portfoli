@@ -514,7 +514,21 @@
       <p>Test</p>
     <div class="row">
       <div class="col">
-
+        <div id="dis_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
+          <button id="dis_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
+        </div>  
+        <hr>
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:27%; height:400px; background-color:#D8D8D8;">
+          <div id= "dis_selectCity" class="iqs-container p--15 border rounded mt-3" >          
+            <!-- ajax 필드 추가 코드 들어감 -->
+          </div>
+        </div>
+        
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;">
+          <div id="dis_selectDistrict" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">         
+            <!-- ajax 기술 추가 코드 들어감 -->             
+          </div>
+        </div>
       </div>
     </div> 
   </div>
@@ -574,11 +588,13 @@
       }    
     xhr.open('GET', '../field/listOfUserInterest', false); 
     xhr.send();
+    
 	  
     if(document.getElementsByName("checkbox_p").length > 0) {
       return;
     }
     
+    // 페이지 로딩시 보유 기술과 관심 기술에 분야 출력
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
 	    if (xhr.readyState == 4) {
@@ -594,7 +610,25 @@
        }
 	    }
     };
-    xhr.open('GET', '../field/list', true); 
+    xhr.open('GET', '../field/list', false); 
+    xhr.send();
+    
+    // 페이지 로딩시 관심 지역에 도시 리스트 출력
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          let obj = JSON.parse(xhr.responseText);
+          for(idx in obj) {
+            var addHtml = `<div class="iqs-item">       
+            <label class="form-checkbox form-checkbox-primary">
+              <input class="city" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
+            $("#dis_selectCity").append(addHtml);
+         }               
+       }
+      }
+    };
+    xhr.open('GET', '../city/list', false); 
     xhr.send();
   };  
 
@@ -723,4 +757,9 @@ $("#int_apply").click(function() {
   xhr.setRequestHeader('Content-Type', 'application/json'); 
   xhr.send(JSON.stringify(skillList));
 });
+</script>
+
+<!-- 관심 지역 탭 -->
+<script>
+
 </script>
