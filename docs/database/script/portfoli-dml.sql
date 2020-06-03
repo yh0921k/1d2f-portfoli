@@ -1065,22 +1065,22 @@ INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
 year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(2,7,'백엔드 개발자 모집','내용2',101020,'신입',2,NOW(),'2020-2-2','2020-3-3','백엔드',
-  28000000,2,'010-2222-2222',2,2,415,41505);  
+  28000000,1,'010-2222-2222',2,2,415,41505);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
 year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(3,8,'서버 개발자 모집','내용3',101030,'신입, 경력',3,NOW(),'2020-3-3','2020-4-4','서버개발',
-  30000000,3,'010-3333-3333',3,3,405,40530);  
+  30000000,1,'010-3333-3333',3,3,405,40530);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
 year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(4,9,'자바 개발자 모집','내용4',101040,'경력(1년 이상)',4,NOW(),'2020-4-4','2020-5-5','자바',
-  32000000,4,'010-4444-4444',4,4,416,41619);  
+  32000000,1,'010-4444-4444',4,4,416,41619);  
 INSERT INTO pf_job_posting (job_posting_no,company_member_no,title,content,work_place_no,
 minimum_career,view_count,posting_registration,start_dated,end_dated,job,
 year_salary,readable,tel,minimum_education_no,employment_stat_no,field_no,skill_no)
   VALUES(5,10,'풀스택 개발자 모집','내용5',101050,'경력(2년 이상)',5,NOW(),'2020-5-5','2020-6-6','풀스택',
-  34000000,5,'010-5555-5555',5,5,404,40430);  
+  34000000,1,'010-5555-5555',5,5,404,40430);  
  
 -- pf_job_posting_file 채용공고첨부파일 데이터  (pf_job_posting 인서트 후)
 INSERT INTO pf_job_posting_file(job_posting_file_no,job_posting_no,file_path) VALUES(1,1,'/file/path'); 
