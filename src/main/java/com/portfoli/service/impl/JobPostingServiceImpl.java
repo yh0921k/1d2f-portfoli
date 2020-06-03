@@ -127,8 +127,9 @@ public class JobPostingServiceImpl implements JobPostingService {
   }
 
   @Override
-  public List<JobPosting> findRecommendedEmployerList(int districtNumber, int fieldNumber) throws Exception {
+  public List<JobPosting> findRecommendedEmployerList(int startIndex, int districtNumber, int fieldNumber) throws Exception {
     Map<String, Integer> map = new HashMap<>();
+    map.put("startIndex", startIndex);
     map.put("districtNumber", districtNumber);
     map.put("skillNumber", fieldNumber);
     return jobPostingDao.findRecommendedEmployerList(map);

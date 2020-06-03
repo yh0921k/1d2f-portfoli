@@ -32,6 +32,9 @@ public class JobPosting implements Serializable {
   private Company company;
   private Field field;
   private Skill skill;
+  // 페이징 관련 임시변수
+  protected int startIndex;
+  protected int pageSize;
 
   List<JobPostingFile> files;
 
@@ -53,29 +56,29 @@ public class JobPosting implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((certificate == null) ? 0 : certificate.hashCode());
-    result = prime * result + ((company == null) ? 0 : company.hashCode());
-    result = prime * result + ((companyMember == null) ? 0 : companyMember.hashCode());
+    result = prime * result + (certificate == null ? 0 : certificate.hashCode());
+    result = prime * result + (company == null ? 0 : company.hashCode());
+    result = prime * result + (companyMember == null ? 0 : companyMember.hashCode());
     result = prime * result + companyMemberNumber;
-    result = prime * result + ((content == null) ? 0 : content.hashCode());
-    result = prime * result + ((district == null) ? 0 : district.hashCode());
-    result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
-    result = prime * result + ((endDated == null) ? 0 : endDated.hashCode());
-    result = prime * result + ((field == null) ? 0 : field.hashCode());
-    result = prime * result + ((files == null) ? 0 : files.hashCode());
-    result = prime * result + ((finalEducation == null) ? 0 : finalEducation.hashCode());
-    result = prime * result + ((job == null) ? 0 : job.hashCode());
+    result = prime * result + (content == null ? 0 : content.hashCode());
+    result = prime * result + (district == null ? 0 : district.hashCode());
+    result = prime * result + (employmentStatus == null ? 0 : employmentStatus.hashCode());
+    result = prime * result + (endDated == null ? 0 : endDated.hashCode());
+    result = prime * result + (field == null ? 0 : field.hashCode());
+    result = prime * result + (files == null ? 0 : files.hashCode());
+    result = prime * result + (finalEducation == null ? 0 : finalEducation.hashCode());
+    result = prime * result + (job == null ? 0 : job.hashCode());
     result = prime * result + jobPostingNumber;
-    result = prime * result + ((major == null) ? 0 : major.hashCode());
-    result = prime * result + ((member == null) ? 0 : member.hashCode());
-    result = prime * result + ((minimumCareer == null) ? 0 : minimumCareer.hashCode());
+    result = prime * result + (major == null ? 0 : major.hashCode());
+    result = prime * result + (member == null ? 0 : member.hashCode());
+    result = prime * result + (minimumCareer == null ? 0 : minimumCareer.hashCode());
     result = prime * result + minimumEducationNumber;
-    result = prime * result + ((postingRegistration == null) ? 0 : postingRegistration.hashCode());
+    result = prime * result + (postingRegistration == null ? 0 : postingRegistration.hashCode());
     result = prime * result + readable;
-    result = prime * result + ((skill == null) ? 0 : skill.hashCode());
-    result = prime * result + ((startDated == null) ? 0 : startDated.hashCode());
-    result = prime * result + ((tel == null) ? 0 : tel.hashCode());
-    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    result = prime * result + (skill == null ? 0 : skill.hashCode());
+    result = prime * result + (startDated == null ? 0 : startDated.hashCode());
+    result = prime * result + (tel == null ? 0 : tel.hashCode());
+    result = prime * result + (title == null ? 0 : title.hashCode());
     result = prime * result + viewCount;
     result = prime * result + workPlaceNumber;
     result = prime * result + yearSalary;
@@ -86,122 +89,170 @@ public class JobPosting implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     JobPosting other = (JobPosting) obj;
     if (certificate == null) {
-      if (other.certificate != null)
+      if (other.certificate != null) {
         return false;
-    } else if (!certificate.equals(other.certificate))
+      }
+    } else if (!certificate.equals(other.certificate)) {
       return false;
+    }
     if (company == null) {
-      if (other.company != null)
+      if (other.company != null) {
         return false;
-    } else if (!company.equals(other.company))
+      }
+    } else if (!company.equals(other.company)) {
       return false;
+    }
     if (companyMember == null) {
-      if (other.companyMember != null)
+      if (other.companyMember != null) {
         return false;
-    } else if (!companyMember.equals(other.companyMember))
+      }
+    } else if (!companyMember.equals(other.companyMember)) {
       return false;
-    if (companyMemberNumber != other.companyMemberNumber)
+    }
+    if (companyMemberNumber != other.companyMemberNumber) {
       return false;
+    }
     if (content == null) {
-      if (other.content != null)
+      if (other.content != null) {
         return false;
-    } else if (!content.equals(other.content))
+      }
+    } else if (!content.equals(other.content)) {
       return false;
+    }
     if (district == null) {
-      if (other.district != null)
+      if (other.district != null) {
         return false;
-    } else if (!district.equals(other.district))
+      }
+    } else if (!district.equals(other.district)) {
       return false;
+    }
     if (employmentStatus == null) {
-      if (other.employmentStatus != null)
+      if (other.employmentStatus != null) {
         return false;
-    } else if (!employmentStatus.equals(other.employmentStatus))
+      }
+    } else if (!employmentStatus.equals(other.employmentStatus)) {
       return false;
+    }
     if (endDated == null) {
-      if (other.endDated != null)
+      if (other.endDated != null) {
         return false;
-    } else if (!endDated.equals(other.endDated))
+      }
+    } else if (!endDated.equals(other.endDated)) {
       return false;
+    }
     if (field == null) {
-      if (other.field != null)
+      if (other.field != null) {
         return false;
-    } else if (!field.equals(other.field))
+      }
+    } else if (!field.equals(other.field)) {
       return false;
+    }
     if (files == null) {
-      if (other.files != null)
+      if (other.files != null) {
         return false;
-    } else if (!files.equals(other.files))
+      }
+    } else if (!files.equals(other.files)) {
       return false;
+    }
     if (finalEducation == null) {
-      if (other.finalEducation != null)
+      if (other.finalEducation != null) {
         return false;
-    } else if (!finalEducation.equals(other.finalEducation))
+      }
+    } else if (!finalEducation.equals(other.finalEducation)) {
       return false;
+    }
     if (job == null) {
-      if (other.job != null)
+      if (other.job != null) {
         return false;
-    } else if (!job.equals(other.job))
+      }
+    } else if (!job.equals(other.job)) {
       return false;
-    if (jobPostingNumber != other.jobPostingNumber)
+    }
+    if (jobPostingNumber != other.jobPostingNumber) {
       return false;
+    }
     if (major == null) {
-      if (other.major != null)
+      if (other.major != null) {
         return false;
-    } else if (!major.equals(other.major))
+      }
+    } else if (!major.equals(other.major)) {
       return false;
+    }
     if (member == null) {
-      if (other.member != null)
+      if (other.member != null) {
         return false;
-    } else if (!member.equals(other.member))
+      }
+    } else if (!member.equals(other.member)) {
       return false;
+    }
     if (minimumCareer == null) {
-      if (other.minimumCareer != null)
+      if (other.minimumCareer != null) {
         return false;
-    } else if (!minimumCareer.equals(other.minimumCareer))
+      }
+    } else if (!minimumCareer.equals(other.minimumCareer)) {
       return false;
-    if (minimumEducationNumber != other.minimumEducationNumber)
+    }
+    if (minimumEducationNumber != other.minimumEducationNumber) {
       return false;
+    }
     if (postingRegistration == null) {
-      if (other.postingRegistration != null)
+      if (other.postingRegistration != null) {
         return false;
-    } else if (!postingRegistration.equals(other.postingRegistration))
+      }
+    } else if (!postingRegistration.equals(other.postingRegistration)) {
       return false;
-    if (readable != other.readable)
+    }
+    if (readable != other.readable) {
       return false;
+    }
     if (skill == null) {
-      if (other.skill != null)
+      if (other.skill != null) {
         return false;
-    } else if (!skill.equals(other.skill))
+      }
+    } else if (!skill.equals(other.skill)) {
       return false;
+    }
     if (startDated == null) {
-      if (other.startDated != null)
+      if (other.startDated != null) {
         return false;
-    } else if (!startDated.equals(other.startDated))
+      }
+    } else if (!startDated.equals(other.startDated)) {
       return false;
+    }
     if (tel == null) {
-      if (other.tel != null)
+      if (other.tel != null) {
         return false;
-    } else if (!tel.equals(other.tel))
+      }
+    } else if (!tel.equals(other.tel)) {
       return false;
+    }
     if (title == null) {
-      if (other.title != null)
+      if (other.title != null) {
         return false;
-    } else if (!title.equals(other.title))
+      }
+    } else if (!title.equals(other.title)) {
       return false;
-    if (viewCount != other.viewCount)
+    }
+    if (viewCount != other.viewCount) {
       return false;
-    if (workPlaceNumber != other.workPlaceNumber)
+    }
+    if (workPlaceNumber != other.workPlaceNumber) {
       return false;
-    if (yearSalary != other.yearSalary)
+    }
+    if (yearSalary != other.yearSalary) {
       return false;
+    }
     return true;
   }
 
@@ -413,4 +464,19 @@ public class JobPosting implements Serializable {
   public void setFiles(List<JobPostingFile> files) {
     this.files = files;
   }
+  public int getStartIndex() {
+    return startIndex;
+  }
+  public JobPosting setStartIndex(int startIndex) {
+    this.startIndex = startIndex;
+    return this;
+  }
+  public int getPageSize() {
+    return pageSize;
+  }
+  public JobPosting setPageSize(int pageSize) {
+    this.pageSize = pageSize;
+    return this;
+  }
+
 }

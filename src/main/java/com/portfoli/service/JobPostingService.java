@@ -31,6 +31,6 @@ public interface JobPostingService {
 
   List<JobPosting> findDeadline(int memberNumber) throws Exception;
 
-  List<JobPosting> findRecommendedEmployerList(int districtNumber, int fieldNumber) throws Exception;
+  List<JobPosting> findRecommendedEmployerList(int startIndex, int districtNumber, int fieldNumber) throws Exception;
 
 }
