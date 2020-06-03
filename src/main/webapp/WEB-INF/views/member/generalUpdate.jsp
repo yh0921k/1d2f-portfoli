@@ -90,6 +90,9 @@
 					
 					<!-- 일반회원 - 내정보수정 - 관심분야 탭 -->
           <li id="interestSkills" class="nav-item"><a class="nav-link nav-link-remember text-muted" data-toggle="tab" href="#tab_interestSkills">관심분야</a></li>
+          
+          <!-- 일반회원 - 내정보수정 - 관심지역 탭 -->
+          <li id="interestLocation" class="nav-item"><a class="nav-link nav-link-remember text-muted" data-toggle="tab" href="#tab_interestLocation">관심지역</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -373,18 +376,17 @@
 
 			<div class="col">
 				<form method="post" action="updateProfile">
-
-					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">* 학력 구분을 선택하지 않으면 기본값은 '미분류'입니다.</p>
-          <div class="form-label-group input-group mb-3 ml-3">
-            <select class="custom-select" id="inputGroupSelect02" name="edu.educationNumber">
-              <c:forEach items="${edus}" var="edu">
-                <option value="${edu.educationNumber}">${edu.category}</option>
-              </c:forEach>
-            </select>
-            <div class="input-group-append">
-              <label class="input-group-text label label-outline-secondary mr-3" for="inputGroupSelect02" >학력</label>
-            </div>
-          </div>
+         
+         <div class="input-group mb-3 ml-1">
+          <select
+            class="bs-select form-label-group form-control-clean col-md-5 mt--5"
+            id="inputGroupSelect06" name="edu.educationNumber">
+              <option value="${memEdu.finalEducation.educationNumber}" selected>기존 학력 : ${memEdu.finalEducation.category}</option>
+            <c:forEach items="${edus}" var="edu">
+              <option value="${edu.educationNumber}" >${edu.category}</option>
+            </c:forEach>
+          </select>
+        </div>
           
 					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">* 학교 구분을 선택하지 않으면 기본값은 '대학교'입니다.</p>
 					<div class="form-label-group input-group mb-3 ml-3">
@@ -451,7 +453,7 @@
     
     <div class="row">
       <div class="col">
-        <div id="available", style="width:100%; height:200px; background-color:#D8D8D8;">  
+        <div id="available" style="width:100%; height:200px; background-color:#D8D8D8;">  
 	        <button id="apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
         </div>  
         <hr>
@@ -481,7 +483,7 @@
       
     <div class="row">
       <div class="col">
-        <div id="int_available", style="width:100%; height:200px; background-color:#D8D8D8;">  
+        <div id="int_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
           <button id="int_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
         </div>  
         <hr>
@@ -501,6 +503,37 @@
   </div>
 </div>
 <!-- MEMBER INTEREST SKILL TAB -->
+
+
+
+
+
+<!-- MEMBER INTEREST LOCATION TAB -->
+<div id="tab_interestLocation" class="tab-pane border bt-0 p-4 shadow-xs">
+  <div class="d-block shadow-xs rounded p-4 mb-2">
+      <p>Test</p>
+    <div class="row">
+      <div class="col">
+        <div id="dis_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
+          <button id="dis_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
+        </div>  
+        <hr>
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:27%; height:400px; background-color:#D8D8D8;">
+          <div id= "dis_selectCity" class="iqs-container p--15 border rounded mt-3" >          
+            <!-- ajax 필드 추가 코드 들어감 -->
+          </div>
+        </div>
+        
+        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;">
+          <div id="dis_selectDistrict" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">         
+            <!-- ajax 기술 추가 코드 들어감 -->             
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+<!-- MEMBER INTEREST LOCATION TAB -->
 
 
 
@@ -555,11 +588,13 @@
       }    
     xhr.open('GET', '../field/listOfUserInterest', false); 
     xhr.send();
+    
 	  
     if(document.getElementsByName("checkbox_p").length > 0) {
       return;
     }
     
+    // 페이지 로딩시 보유 기술과 관심 기술에 분야 출력
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
 	    if (xhr.readyState == 4) {
@@ -575,7 +610,25 @@
        }
 	    }
     };
-    xhr.open('GET', '../field/list', true); 
+    xhr.open('GET', '../field/list', false); 
+    xhr.send();
+    
+    // 페이지 로딩시 관심 지역에 도시 리스트 출력
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          let obj = JSON.parse(xhr.responseText);
+          for(idx in obj) {
+            var addHtml = `<div class="iqs-item">       
+            <label class="form-checkbox form-checkbox-primary">
+              <input class="city" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
+            $("#dis_selectCity").append(addHtml);
+         }               
+       }
+      }
+    };
+    xhr.open('GET', '../city/list', false); 
     xhr.send();
   };  
 
@@ -704,4 +757,9 @@ $("#int_apply").click(function() {
   xhr.setRequestHeader('Content-Type', 'application/json'); 
   xhr.send(JSON.stringify(skillList));
 });
+</script>
+
+<!-- 관심 지역 탭 -->
+<script>
+
 </script>

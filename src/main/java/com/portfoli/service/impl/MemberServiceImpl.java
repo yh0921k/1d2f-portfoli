@@ -286,5 +286,11 @@ public class MemberServiceImpl implements MemberService {
   }
 
 
+  @Override
+  public List<GeneralMember> findAll() throws Exception {
+    return generalMemberDao.findAll();
+  }
+
+
 
 }
