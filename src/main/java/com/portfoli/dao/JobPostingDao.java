@@ -1,6 +1,7 @@
 package com.portfoli.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.portfoli.domain.JobPosting;
 
 public interface JobPostingDao {
@@ -30,5 +31,7 @@ public interface JobPostingDao {
   int plusCnt(int jobPostingNumber) throws Exception;
 
   public List<JobPosting> findDeadline(int memberNumber) throws Exception;
+
+  public List<JobPosting> findRecommendedEmployerList(Map<String, Integer> map) throws Exception;
 
 }

@@ -30,6 +30,7 @@
 		
 		<association property="district" javaType="District">
 		<id column="district_no" property="districtNumber"></id>
+		<result column="city_name" property="cityName"></result>
 		<result column="district_name" property="name"></result>
 		</association>
 		
@@ -398,5 +399,59 @@
     on cm.company_no=c.company_no
     where title=#{title}
   </select>
+
+	<select id="findRecommendedEmployerList" parameterType="map" resultMap="JobPostingMap">
+		SELECT 
+			jp.job_posting_no,
+			jp.title,
+			jp.content,
+			jp.minimum_career,
+			jp.job,
+			jp.year_salary,
+			jp.start_dated,
+			jp.end_dated,
+			jp.view_count,
+			jp.posting_registration,
+			jp.tel,
+			ci.name as city_name,
+			d.name as district_name,
+			cp.name as company_name,
+			fi.name as field_name
+		FROM pf_job_posting jp
+		LEFT OUTER JOIN pf_job_posting_file f 
+		ON jp.job_posting_no=f.job_posting_no
+    JOIN pf_employment_status e
+    ON jp.employment_stat_no = e.employment_stat_no
+    LEFT OUTER JOIN pf_company_required_certificate r 
+    ON jp.job_posting_no = r.job_posting_no
+    LEFT OUTER JOIN pf_certificate c 
+		ON r.certificate_no = c.certificate_no
+    LEFT OUTER JOIN 
+    pf_company_required_major q 
+    ON jp.job_posting_no = q.job_posting_no
+    LEFT OUTER JOIN pf_major m 
+    ON q.major_no = m.major_no
+    LEFT OUTER JOIN pf_district d
+    ON jp.work_place_no = d.district_no
+    LEFT OUTER JOIN pf_final_education i 
+    ON jp.minimum_education_no = i.education_no
+    LEFT OUTER JOIN pf_company_member as k
+    ON k.company_member_no = jp.company_member_no
+    LEFT OUTER JOIN pf_company as cp
+    ON cp.company_no = k.company_no
+    LEFT OUTER JOIN pf_field as fi
+    ON jp.field_no = fi.field_no   
+    LEFT OUTER JOIN pf_city as ci
+    ON convert(ci.city_no, char(3)) = convert(d.district_no, char(3))
+    
+		WHERE jp.field_no = #{skillNumber} 
+		AND readable > 0
+		-- 나중에 eq1로 수정할 예정
+		AND work_place_no = #{districtNumber}
+		<![CDATA[
+		-- AND jp.start_dated >= now()
+		-- 나중에 데이터 충분하면 삽입예정
+		]]>
+	</select>
 
 </mapper>

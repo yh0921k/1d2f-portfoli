@@ -1,6 +1,8 @@
 package com.portfoli.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -123,4 +125,14 @@ public class JobPostingServiceImpl implements JobPostingService {
   public List<JobPosting> findDeadline(int memberNumber) throws Exception {
     return jobPostingDao.findDeadline(memberNumber);
   }
+
+  @Override
+  public List<JobPosting> findRecommendedEmployerList(int districtNumber, int fieldNumber) throws Exception {
+    Map<String, Integer> map = new HashMap<>();
+    map.put("districtNumber", districtNumber);
+    map.put("skillNumber", fieldNumber);
+    return jobPostingDao.findRecommendedEmployerList(map);
+  }
+
+
 }
