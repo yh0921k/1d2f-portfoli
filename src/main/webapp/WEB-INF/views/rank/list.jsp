@@ -147,9 +147,13 @@ window.onload = function() {
         	                  <img src="../../upload/portfolio/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
         	                </div>
         	              </div>
-        	              <h5 class="card-title">` + item.title + `</h5>
+        	              <h5 data-href="../portfolio/detail?number=` + item.number + `" 
+        	                  data-ajax-modal-size="modal-xl" 
+        	                      data-ajax-modal-centered="true" 
+        	                      data-ajax-modal-callback-function=""
+        	                      class="js-ajax-modal card-title">` + item.title + `</h5>
         	              <span><strong>` + item.id + `<strong></span>
-        	              <h6><a href="` + item.homepage + `" target="_blank">` + item.homepage + `</a></h6>
+        	              <h6><a href="http://` + item.homepage + `" target="_blank">` + item.homepage + `</a></h6>
         	              <br>
         	              <p class="card-text" style="height:20px; margin-top:30px; margin-bottom:6px;">` + portfolioSkill +`</p>
         	              <span style="font-size:15px;">조회수 : ` + item.viewCount + `</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -195,6 +199,12 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$("#skills").change(function() {
 	  let skillName = $("#skills option:selected").val()
+	  
+	  if(skillName === $("#skills #allField").val()) {
+		  $("#filter_field .selectedSkills").remove();
+		  filter();
+		  return;
+	  }
 	  
 	  var list = document.querySelectorAll("#filterSkills .selectedSkills");
 	  for(var item of list) {
