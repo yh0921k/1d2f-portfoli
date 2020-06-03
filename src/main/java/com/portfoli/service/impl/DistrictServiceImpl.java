@@ -24,4 +24,9 @@ public class DistrictServiceImpl implements DistrictService {
     return districts;
   }
 
+  @Override
+  public List<District> list(int cityNumber) throws Exception {
+    return districtDao.findAllByNumber(cityNumber);
+  }
+
 }

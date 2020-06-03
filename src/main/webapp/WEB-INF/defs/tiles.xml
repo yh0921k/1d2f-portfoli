@@ -57,5 +57,8 @@
   <definition name="recommendEmployer/listMore.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/recommendEmployer/listMore.jsp"/>
   </definition>
+  <definition name="jobposting/premium.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/jobposting/premium.jsp"/>
+  </definition>
 
 </tiles-definitions>

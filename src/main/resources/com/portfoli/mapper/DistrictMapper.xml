@@ -15,7 +15,13 @@
     FROM pf_district
   </select>
   
-
+  <select id="findAllByNumber" resultMap="DistrictMap" parameterType="int">
+    <![CDATA[
+    select district_no, name 
+    from pf_district
+    where district_no >= #{cityNumber} and district_no < #{cityNumber}+1000 
+    ]]>
+  </select>
 
 </mapper>
 

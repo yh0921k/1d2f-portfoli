@@ -1,11 +1,14 @@
 package com.portfoli.web;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,12 +27,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Payment;
 import com.portfoli.service.JobPostingService;
 import com.portfoli.service.PaymentService;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("payment")
@@ -40,6 +47,9 @@ public class PaymentController {
   public static final String IMPORT_PAYMENT_URL = "https://api.iamport.kr/payments/{1}";
   public static final String KEY = "1453295861280296";
   public static final String SECRET = "OG0vl1zxv6UL2tAIETxE8tks4xgFZFpOlpjGqSeWZ8H1BiJgbgVjKfMON2uMHTA2jTJKMYGL6nMIFwYQ";
+
+  @Autowired
+  ServletContext servletContext;
 
   @Autowired
   JobPostingService jobPostingService;
@@ -68,7 +78,7 @@ public class PaymentController {
     Map<String, Object> result = rt.postForObject(IMPORT_TOKEN_URL, request, Map.class);
     Map<String, Object> response = (Map<String, Object>) result.get("response");
 
-    System.out.println(response);
+    logger.debug(response);
 
     return (String)response.get("access_token");
 
@@ -134,22 +144,38 @@ public class PaymentController {
 
   @PostMapping("order")
   public void order(HttpServletRequest request,
-      String jobPostingTitle, String product, int price, String startDate, String endDate, Model model) throws Exception {
+      String jobPostingTitle, String product, int price, String startDate, String endDate,
+      MultipartFile image, Model model) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-    // System.out.println(jobPosting.getMember().getName());
-    // System.out.println(jobPosting.getCompany().getName());
 
     Payment payment = new Payment();
     payment.setMemberNumber(loginUser.getNumber());
     payment.setProductName(product);
     payment.setPrice(price);
     payment.setJobPostingTitle(jobPostingTitle);
-    System.out.println(startDate.replace("/", "-"));
     payment.setStartDate(Date.valueOf(startDate.replace("/", "-")));
     payment.setEndDate(Date.valueOf(endDate.replace("/", "-")));
 
-    model.addAttribute("jobPosting", jobPostingService.get(jobPostingTitle));
+    JobPosting jobPosting = jobPostingService.get(jobPostingTitle);
+
+    if (image.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/jobposting");
+      String filename = UUID.randomUUID().toString();
+      image.transferTo(new File(dirPath + "/" + filename));
+      jobPosting.setLogo(filename);
+
+      Thumbnails.of(dirPath + "/" + filename)
+      .size(300, 70)
+      .outputFormat("jpg")
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x70";
+        }
+      });
+    }
+
+    request.getSession().setAttribute("jobPosting", jobPosting);
     request.getSession().setAttribute("payment", payment);
   }
 
@@ -190,7 +216,7 @@ public class PaymentController {
       // payment.setPayDate(new Date(Long.parseLong(String.valueOf(response.get("paid_at")))));
       payment.setPayDate(new Date(System.currentTimeMillis()));
 
-      paymentService.add(payment);
+      paymentService.add(payment, (JobPosting) request.getSession().getAttribute("jobPosting"));
 
       model.addAttribute("payment", payment);
     }
@@ -202,7 +228,6 @@ public class PaymentController {
       @RequestParam(defaultValue = "3") int pageSize,
       Model model) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
 
     int size = paymentService.listCount(loginUser.getNumber());
     int totalPage = size / 3;

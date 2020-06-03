@@ -34,4 +34,7 @@ public interface JobPostingDao {
 
   public List<JobPosting> findRecommendedEmployerList(Map<String, Integer> map) throws Exception;
 
+  public List<JobPosting> findPremiumJobPosting() throws Exception;
+
+  public int insertLogo(JobPosting jobPosting) throws Exception;
 }

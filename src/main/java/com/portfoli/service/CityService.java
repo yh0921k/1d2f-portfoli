@@ -7,7 +7,7 @@ public interface CityService {
 
   public List<City> list() throws Exception;
 
-  // public int get(String fieldName) throws Exception;
+  public int get(String cityName) throws Exception;
   //
   // public List<Field> listOfMemberInterest(int memberNumber) throws Exception;
   //

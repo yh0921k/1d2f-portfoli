@@ -24,11 +24,11 @@ public class CityServiceImpl implements CityService {
   public List<City> list() throws Exception {
     return cityDao.findAll();
   }
-  //
-  // @Override
-  // public int get(String fieldName) throws Exception {
-  // return fieldDao.findNumber(fieldName);
-  // }
+
+  @Override
+  public int get(String cityName) throws Exception {
+    return cityDao.findNumber(cityName);
+  }
   //
   // @Override
   // public List<Field> listOfMemberInterest(int memberNumber) throws Exception {

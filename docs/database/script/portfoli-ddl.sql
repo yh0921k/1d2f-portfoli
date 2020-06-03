@@ -226,8 +226,8 @@ CREATE TABLE pf_job_posting (
   minimum_education_no INTEGER      NOT NULL COMMENT '최소학력번호', -- 최소학력번호
   employment_stat_no   INTEGER      NOT NULL COMMENT '고용형태번호', -- 고용형태번호
   field_no             INTEGER      NOT NULL COMMENT '분야번호', -- 분야번호
-  skill_no             INTEGER      NOT NULL COMMENT '기술번호' -- 기술번호
-  
+  skill_no             INTEGER      NOT NULL COMMENT '기술번호', -- 기술번호
+  logo       VARCHAR(255) NULL     COMMENT '기업로고' -- 기업로고
 )
 COMMENT '채용공고';
 

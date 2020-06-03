@@ -21,6 +21,7 @@
 		<result column="readable" property="readable" />
 		<result column="tel" property="tel" />
 		<result column="minimum_education_no"	property="minimumEducationNumber" />
+		<result column="logo" property="logo" />
 
 		<association property="employmentStatus"
 			javaType="EmploymentStatus">
@@ -455,4 +456,35 @@
 		limit #{startIndex}, 10
 	</select>
 
+  <select id="findPremiumJobPosting" resultMap="JobPostingMap">
+    select
+    j.title,
+    j.minimum_career,
+    j.end_dated,
+    j.logo,
+    c.name as company_name,
+    i.category,
+    d.name as district_name
+    from
+    pf_job_posting j
+    join
+    pf_payment p on j.title = p.apply_posting
+    join pf_company_member cm
+    on j.company_member_no=cm.company_member_no
+    join pf_company c
+    on cm.company_no=c.company_no
+    left outer join
+    pf_final_education i on j.minimum_education_no = i.education_no
+    left outer join
+    pf_district d on j.work_place_no = d.district_no
+    where now() >= p.start_date AND now() &lt; p.end_date
+    order by p.pay_no desc;
+  </select>
+  
+  <update id="insertLogo" parameterType="JobPosting">
+    update pf_job_posting
+    set
+    logo = #{logo}
+    where job_posting_no = #{jobPostingNumber}
+  </update>
 </mapper>

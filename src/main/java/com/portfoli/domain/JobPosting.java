@@ -32,10 +32,10 @@ public class JobPosting implements Serializable {
   private Company company;
   private Field field;
   private Skill skill;
+  private String logo;
   // 페이징 관련 임시변수
   protected int startIndex;
   protected int pageSize;
-
   List<JobPostingFile> files;
 
   @Override
@@ -49,7 +49,7 @@ public class JobPosting implements Serializable {
         + ", employmentStatus=" + employmentStatus + ", certificate=" + certificate + ", major="
         + major + ", district=" + district + ", finalEducation=" + finalEducation
         + ", companyMember=" + companyMember + ", member=" + member + ", company=" + company
-        + ", field=" + field + ", skill=" + skill + ", files=" + files + "]";
+        + ", field=" + field + ", skill=" + skill + ", logo=" + logo + ", files=" + files + "]";
   }
 
   @Override
@@ -72,6 +72,10 @@ public class JobPosting implements Serializable {
     result = prime * result + (major == null ? 0 : major.hashCode());
     result = prime * result + (member == null ? 0 : member.hashCode());
     result = prime * result + (minimumCareer == null ? 0 : minimumCareer.hashCode());
+    result = prime * result + (logo == null ? 0 : logo.hashCode());
+    result = prime * result + (major == null ? 0 : major.hashCode());
+    result = prime * result + (member == null ? 0 : member.hashCode());
+    result = prime * result + (minimumCareer == null ? 0 : minimumCareer.hashCode());
     result = prime * result + minimumEducationNumber;
     result = prime * result + (postingRegistration == null ? 0 : postingRegistration.hashCode());
     result = prime * result + readable;
@@ -84,8 +88,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
-
 
   @Override
   public boolean equals(Object obj) {
@@ -182,6 +184,11 @@ public class JobPosting implements Serializable {
     if (jobPostingNumber != other.jobPostingNumber) {
       return false;
     }
+    if (logo == null) {
+      if (other.logo != null)
+        return false;
+    } else if (!logo.equals(other.logo))
+      return false;
     if (major == null) {
       if (other.major != null) {
         return false;
@@ -255,7 +262,6 @@ public class JobPosting implements Serializable {
     }
     return true;
   }
-
 
   public int getJobPostingNumber() {
     return jobPostingNumber;
@@ -479,4 +485,11 @@ public class JobPosting implements Serializable {
     return this;
   }
 
+  public String getLogo() {
+    return logo;
+  }
+
+  public void setLogo(String logo) {
+    this.logo = logo;
+  }
 }
