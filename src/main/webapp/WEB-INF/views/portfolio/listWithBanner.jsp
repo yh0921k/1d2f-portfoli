@@ -210,18 +210,18 @@
   data-ajax-modal-callback-function=""
   data-ajax-modal-backdrop="" 
   class="js-ajax-modal">
-  <div class="col-12 col-lg-4 mb-4 cursor" style="max-width:33%; width:33%; max-height:300px;">
+  <div class="outerbox col-12 col-lg-4 mb-4 cursor" style="max-width:33%; width:33%; max-height:300px;">
     <div class="card b-0 shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 bg-cover overlay-dark overlay-opacity-4 text-white"
     <c:if test="${item.thumbnail != null}">
-           style="width:100%!important;background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg'); width:300px;">
+           style="width:100%!important;background-image: url('../../upload/portfolio/${item.thumbnail}_300x300.jpg');">
     </c:if>
     <c:if test="${item.thumbnail == null}">
-           style="width:100%!important;background-image: url('../../resources/assets/images/background/black.png'); width:300px;">
+           style="width:100%!important;background-image: url('../../resources/assets/images/background/black.png');">
     </c:if>
     
     <!-- 제목, 아이디 -->
       <div class="card-body font-weight-light mt--60" 
-           style="font-size: 1.2rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 100%;margin-top: 40px!important;">
+           style="font-size: 1.2rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 100%;margin-top: 5%!important">
         <div class="d-table" style="display: block!important;margin: 0!important;margin-right: 0px!important;max-width: 100%;width: 100%;">
           <div class="d-table-cell align-bottom" style="text-align: left;width: 100%;display: block!important;padding-left: 2rem;">
             <p style="font-size:1.2rem;max-height: 1.65rem;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;margin-right: 5%;">
@@ -335,10 +335,13 @@
   </style>
   
   <script>
-//    setInterval(function() {
-//	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
-//	  },3000);
+  
+  // 배너 돌아가는 움직임 구현
+    setInterval(function() {
+	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
+	  },3000);
 
+  // 쿼리스트링 split 구문
   function getQueryStringObject() {
 	    var a = window.location.search.substr(1).split('&');
 	    if (a == "") return {};
@@ -382,9 +385,24 @@
 	  }
   
   $(document).ready(function() {
+	  
+	  // outerbox 높이, 너비에 맞추기
+	  var wid = $(document).width();
+	  console.log("outerbox 너비: " + wid);
+	  if(wid < 970) {
+	  var outerbox = $('.outerbox');
+	  outerbox.css('height', wid * 0.3);
+	  outerbox.css('max-height', wid * 0.3);
+	  $('.card-footer.bg-transparent.b-0').css('display','none');
+	  $('.d-table-cell.align-bottom').css('padding-left', '5%');
+	  }
+	  console.log("outerbox (970px 이하일때) 높이조정:" + $('.outerbox').css('height'));
+	  
+	  // 스타일 토글러
 	    $('#styleToggle').click();
 	    $('#styleToggle').addClass('active');
 	    
+	    // 페이지당 노출 페이지 변경
 	    var qs = getQueryStringObject();
 	    var page = qs.quantity;
 	      console.log($('pageSize'));
@@ -405,6 +423,7 @@
 	          $("option[value='9']").attr('selected','selected');
 	    }
 	    
+	    // 간단 검색 기능
 	       $("#keyword").keyup(function() {
 	         var k = $(this).val();
 	         $("#listTable > tbody > tr").hide();
