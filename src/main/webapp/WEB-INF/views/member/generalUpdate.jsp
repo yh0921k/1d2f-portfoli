@@ -511,7 +511,6 @@
 <!-- MEMBER INTEREST LOCATION TAB -->
 <div id="tab_interestLocation" class="tab-pane border bt-0 p-4 shadow-xs">
   <div class="d-block shadow-xs rounded p-4 mb-2">
-      <p>Test</p>
     <div class="row">
       <div class="col">
         <div id="dis_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
@@ -761,5 +760,79 @@ $("#int_apply").click(function() {
 
 <!-- 관심 지역 탭 -->
 <script>
+// Field 클릭 시 해당 Field에 맞는 우측에 Skill 리스트 출력
+$("#dis_selectCity").on("click", ".city", function() {
+  $("#dis_selectDistrict").empty();
+  $("#dis_selectCity .city").prop("checked", false);
+  var fields = document.querySelectorAll("#dis_selectCity .city");
+  $(this).prop("checked", true);
 
+  var queryString = ""; 
+  try {
+    if(queryString = $(this)[0].parentNode.textContent) {
+      queryString = queryString.trim();
+    }   
+  } catch (error) {
+    return;
+  } 
+  
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            let obj = JSON.parse(xhr.responseText);
+            for(idx in obj) {
+              var addHtml = `<div class="iqs-item" style="display:inline-block; width:250px;">    
+              <label class="form-checkbox form-checkbox-primary">
+                <input class="district" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
+              $("#dis_selectDistrict").append(addHtml);
+            }
+          }
+      }
+  };
+  xhr.open('GET', '../district/list?selected=' + queryString, true); 
+  xhr.send();   
+});
+  
+// $("#available").on("click", ".haveSkills", function() {
+//    $(this).remove();
+// });
+
+// $("#selectSkill").on("click", ".skill", function() {
+//   let haveSkillList = document.querySelectorAll(".haveSkills");
+//   let selected = $(this)[0].parentNode.textContent.trim();
+//   let isExist = false;
+//   for(var skill of haveSkillList) {
+//      if(selected===$(skill).text()) {
+//        isExist = true;
+//        return;
+//      }
+//   }
+//   if(!isExist) {
+//     var addHtml = `<span style="cursor:pointer; margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + selected + `</span>`
+//     $("#available").append(addHtml);
+//   }
+// });
+
+// $("#apply").click(function() {
+//   let haveSkillList = document.querySelectorAll(".haveSkills");
+
+//   let skillArray = [];
+//   for(let skill of haveSkillList) {
+//     skillArray.push($(skill).text());   
+//   }
+   
+//   let skillList = JSON.stringify(skillArray);
+//   var xhr = new XMLHttpRequest();
+//   xhr.onreadystatechange = () => {
+//       if (xhr.readyState == 4) {
+//           if (xhr.status == 200) {
+//             window.location.reload(true);
+//           }
+//       }
+//   };
+//   xhr.open('POST', '../skill/update');
+//   xhr.setRequestHeader('Content-Type', 'application/json'); 
+//   xhr.send(JSON.stringify(skillList));
+// });
 </script>
