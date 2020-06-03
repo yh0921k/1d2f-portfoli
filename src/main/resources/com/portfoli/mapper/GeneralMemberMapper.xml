@@ -72,5 +72,9 @@
 		WHERE general_member_no = #{memberNumber}
 	</delete>
 
+  <select id="findAll" resultMap="GeneralMemberMap">
+    SELECT *
+    FROM pf_general_member
+  </select>
 
 </mapper>

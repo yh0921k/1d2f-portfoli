@@ -47,4 +47,6 @@ public interface MemberService {
 
   int selectListCnt() throws Exception;
 
+  List<GeneralMember> findAll() throws Exception;
+
 }

@@ -1,6 +1,7 @@
 package com.portfoli.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.portfoli.domain.GeneralMember;
 
@@ -17,5 +18,7 @@ public interface GeneralMemberDao {
   GeneralMember getSessionByGNumber(int generalMemberNumber) throws Exception;
 
   int updateFlag(HashMap<String, Object> params) throws Exception;
+
+  List<GeneralMember> findAll() throws Exception;
 
 }
