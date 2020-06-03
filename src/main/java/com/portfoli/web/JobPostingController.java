@@ -119,14 +119,14 @@ public class JobPostingController {
       files.add(new JobPostingFile().setFilePath(filename));
 
       Thumbnails.of(dirPath + "/" + filename)//
-          .size(300, 300)//
-          .outputFormat("jpg")//
-          .toFiles(new Rename() {
-            @Override
-            public String apply(String name, ThumbnailParameter param) {
-              return name + "_300x300";
-            }
-          });
+      .size(300, 300)//
+      .outputFormat("jpg")//
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x300";
+        }
+      });
     }
     CompanyMember companyMember = memberService.getCompanyMember(
         ((CompanyMember) request.getSession().getAttribute("loginUser")).getNumber());
@@ -233,14 +233,14 @@ public class JobPostingController {
       files.add(new JobPostingFile().setFilePath(filename));
 
       Thumbnails.of(dirPath + "/" + filename)//
-          .size(300, 300)//
-          .outputFormat("jpg")//
-          .toFiles(new Rename() {
-            @Override
-            public String apply(String name, ThumbnailParameter param) {
-              return name + "_300x300";
-            }
-          });
+      .size(300, 300)//
+      .outputFormat("jpg")//
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x300";
+        }
+      });
 
     }
 
@@ -275,4 +275,13 @@ public class JobPostingController {
 
   }
 
+  @GetMapping("premium")
+  public void premium(Model model) throws Exception {
+    List<JobPosting> list = jobPostingService.premiumList();
+    System.out.println(list.toString());
+    model.addAttribute("premium", jobPostingService.premiumList());
+    for (JobPosting jp : list) {
+      System.out.println(jp.getFiles().toString());
+    }
+  }
 }

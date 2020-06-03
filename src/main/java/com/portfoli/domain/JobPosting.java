@@ -32,6 +32,7 @@ public class JobPosting implements Serializable {
   private Company company;
   private Field field;
   private Skill skill;
+  private String logo;
 
   List<JobPostingFile> files;
 
@@ -46,7 +47,7 @@ public class JobPosting implements Serializable {
         + ", employmentStatus=" + employmentStatus + ", certificate=" + certificate + ", major="
         + major + ", district=" + district + ", finalEducation=" + finalEducation
         + ", companyMember=" + companyMember + ", member=" + member + ", company=" + company
-        + ", field=" + field + ", skill=" + skill + ", files=" + files + "]";
+        + ", field=" + field + ", skill=" + skill + ", logo=" + logo + ", files=" + files + "]";
   }
 
   @Override
@@ -66,6 +67,7 @@ public class JobPosting implements Serializable {
     result = prime * result + ((finalEducation == null) ? 0 : finalEducation.hashCode());
     result = prime * result + ((job == null) ? 0 : job.hashCode());
     result = prime * result + jobPostingNumber;
+    result = prime * result + ((logo == null) ? 0 : logo.hashCode());
     result = prime * result + ((major == null) ? 0 : major.hashCode());
     result = prime * result + ((member == null) ? 0 : member.hashCode());
     result = prime * result + ((minimumCareer == null) ? 0 : minimumCareer.hashCode());
@@ -81,8 +83,6 @@ public class JobPosting implements Serializable {
     result = prime * result + yearSalary;
     return result;
   }
-
-
 
   @Override
   public boolean equals(Object obj) {
@@ -152,6 +152,11 @@ public class JobPosting implements Serializable {
       return false;
     if (jobPostingNumber != other.jobPostingNumber)
       return false;
+    if (logo == null) {
+      if (other.logo != null)
+        return false;
+    } else if (!logo.equals(other.logo))
+      return false;
     if (major == null) {
       if (other.major != null)
         return false;
@@ -204,7 +209,6 @@ public class JobPosting implements Serializable {
       return false;
     return true;
   }
-
 
   public int getJobPostingNumber() {
     return jobPostingNumber;
@@ -412,5 +416,13 @@ public class JobPosting implements Serializable {
 
   public void setFiles(List<JobPostingFile> files) {
     this.files = files;
+  }
+
+  public String getLogo() {
+    return logo;
+  }
+
+  public void setLogo(String logo) {
+    this.logo = logo;
   }
 }

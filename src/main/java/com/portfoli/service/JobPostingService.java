@@ -31,4 +31,5 @@ public interface JobPostingService {
 
   List<JobPosting> findDeadline(int memberNumber) throws Exception;
 
+  List<JobPosting> premiumList() throws Exception;
 }

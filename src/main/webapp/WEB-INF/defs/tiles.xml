@@ -54,5 +54,8 @@
   <definition name="calendar/eventEdit.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/calendar/eventEdit.jsp"/>
   </definition>
+  <definition name="jobposting/premium.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/jobposting/premium.jsp"/>
+  </definition>
 
 </tiles-definitions>
