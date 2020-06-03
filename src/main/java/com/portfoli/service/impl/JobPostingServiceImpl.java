@@ -134,5 +134,8 @@ public class JobPostingServiceImpl implements JobPostingService {
     return jobPostingDao.findRecommendedEmployerList(map);
   }
 
-
+  @Override
+  public List<JobPosting> premiumList() throws Exception {
+    return jobPostingDao.findPremiumJobPosting();
+  }
 }

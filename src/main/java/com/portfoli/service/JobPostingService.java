@@ -33,4 +33,5 @@ public interface JobPostingService {
 
   List<JobPosting> findRecommendedEmployerList(int districtNumber, int fieldNumber) throws Exception;
 
+  List<JobPosting> premiumList() throws Exception;
 }

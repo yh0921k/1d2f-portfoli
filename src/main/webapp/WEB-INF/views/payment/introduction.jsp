@@ -21,7 +21,7 @@
         기업 로고가 노출되어 주목도가 높으며,<br> 다양한 영역에 동시 노출됩니다.
         </span>
         <br><br>
-        <button type="button" class="btn btn-success mb-1" onClick="location.href='/portfoli/app/payment/order'">서비스 이용하기</button>
+        <button type="button" class="btn btn-success mb-1" onClick="location.href='#gotobottom'" style="display: scroll;">서비스 이용하기</button>
 
       </div>
     </div>
@@ -35,7 +35,7 @@
         등록한 공고를 기반으로<br> 기업에 적합한 인재를 열람 가능합니다.
         </span>
         <br><br>
-        <button type="button" class="btn btn-success mb-1" onClick="location.href='#'">서비스 이용하기</button>
+        <button type="button" class="btn btn-success mb-1" onClick="location.href='#gotobottom'" style="display: scroll;">서비스 이용하기</button>
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@
     </div>
   </div>
 
-  <div class="col-9">
+  <div class="col-9" id="gotobottom">
     <div class="tab-content" id="v-pills-tabContent">
       <div class="tab-pane fade show active" id="v-pills-a" role="tabpanel" aria-labelledby="v-pills-a-tab">
           <div style="min-height: 500px;">
@@ -107,8 +107,8 @@
           채용공고를 이용하면 차별화된 위치에 다양한 디자인 효과가 적용되어 노출되기 때문에 <br>
           구직자에게 채용공고를 더 효과적으로 노출시킬 수 있습니다. <br><br><br>
           등록된 공고
-          </span>
-          <form action='order' method='post' id='order'>
+          </span><hr class="mt-1" align="left" width="300px">
+          <form action='order' method='post' id='order' enctype='multipart/form-data'>
           <input name="product" type="hidden" value="">
           <input name="price" type="hidden" value="">
           <div class="form-label-group mb-3">
@@ -133,7 +133,7 @@
                 class="custom-control-label" for="customRadioInline2"><span class="text-muted">1주일</span></label>
             </div>
             <br><br>
-          <span class="text-muted">시작일</span>
+          <span class="text-muted">시작일</span><hr class="mt-1" align="left" width="300px">
           <input type="text" name="startDate" class="form-control form-control-sm datepicker w--300" 
             data-today-highlight="true" 
             data-layout-rounded="false" 
@@ -188,7 +188,39 @@
       <!-- /product -->
     </tbody>
   </table>
-  <br><br>
+  <div><span class="text-muted mb-0">이미지 첨부<br><small>기업을 대표하는 로고 이미지를 선택하시면 <br>
+  구직자들의 이목을 집중시킬 수 있습니다.</small></span></div><hr class="mt-1" align="left" width="380px">
+  <div class="input-group" style="width: 30%;">
+  <div class="custom-file custom-file-secondary">
+  <input name="image" 
+        type="file" 
+        data-file-ext="jpg, png" 
+        data-file-max-size-kb-per-file="30000"
+        data-file-ext-err-msg="Allowed:" 
+        data-file-size-err-item-msg="File too large!"
+        data-file-size-err-total-msg="Total allowed size exceeded!"
+        data-file-toast-position="bottom-center"
+        data-file-preview-container=".js-file-input-preview-single-container2" 
+        data-file-preview-img-height="70" 
+        data-file-preview-show-info="false" 
+        data-file-btn-clear="a.js-file-upload-clear2"
+        class="custom-file-input"
+        id="image">
+    
+    <label class="custom-file-label" for="image">파일 첨부</label>
+
+  </div>
+</div>
+
+
+<div class="js-file-input-preview-single-container2 ml--n6 mr--n6"><!-- preview container --></div>
+
+<div class="mt-1">
+  <a href="#" class="hide js-file-upload-clear2 btn btn-light btn-sm">
+    초기화
+  </a>
+</div>
+<br><br>
   <div class="text-align-end" style="margin-right:120px;">
   <button type="submit" class="btn btn-sm btn-primary mb-1">결제하기</button>
   </div>

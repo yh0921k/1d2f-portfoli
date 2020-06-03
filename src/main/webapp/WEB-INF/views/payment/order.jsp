@@ -38,7 +38,7 @@ th {
       <tbody>
         <!-- product -->
         <tr>
-
+        
           <!-- product name -->
           <td id="productName">${payment.productName}<br> <span
             class="d-block text-muted fs--13">${jobPosting.title}</span>
@@ -49,7 +49,9 @@ th {
               ${payment.price}원</span></td>
 
           <!-- term -->
-          <td id="term" class="text-muted text-center">${payment.startDate} ~ ${payment.endDate}</td>
+          <td id="term" class="text-muted text-center" style="width: 240px;">
+            ${payment.startDate} ~ ${payment.endDate}
+          </td>
 
         </tr>
         <!-- /product -->
@@ -122,7 +124,7 @@ function payForCard() {
   IMP.init('imp35276447');
 
   IMP.request_pay({
-    amount : '${payment.price}',
+    amount : '10',
     pay_method : '${payment.method}',
     buyer_tel : '${loginUser.tel}',
     buyer_name : '${loginUser.name}',
