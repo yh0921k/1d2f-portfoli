@@ -373,18 +373,17 @@
 
 			<div class="col">
 				<form method="post" action="updateProfile">
-
-					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">* 학력 구분을 선택하지 않으면 기본값은 '미분류'입니다.</p>
-          <div class="form-label-group input-group mb-3 ml-3">
-            <select class="custom-select" id="inputGroupSelect02" name="edu.educationNumber">
-              <c:forEach items="${edus}" var="edu">
-                <option value="${edu.educationNumber}">${edu.category}</option>
-              </c:forEach>
-            </select>
-            <div class="input-group-append">
-              <label class="input-group-text label label-outline-secondary mr-3" for="inputGroupSelect02" >학력</label>
-            </div>
-          </div>
+         
+         <div class="input-group mb-3 ml-1">
+          <select
+            class="bs-select form-label-group form-control-clean col-md-5 mt--5"
+            id="inputGroupSelect06" name="edu.educationNumber">
+              <option value="${memEdu.finalEducation.educationNumber}" selected>기존 학력 : ${memEdu.finalEducation.category}</option>
+            <c:forEach items="${edus}" var="edu">
+              <option value="${edu.educationNumber}" >${edu.category}</option>
+            </c:forEach>
+          </select>
+        </div>
           
 					<p class="ml-3" style="font-size: 12px; margin-bottom: 0px">* 학교 구분을 선택하지 않으면 기본값은 '대학교'입니다.</p>
 					<div class="form-label-group input-group mb-3 ml-3">
