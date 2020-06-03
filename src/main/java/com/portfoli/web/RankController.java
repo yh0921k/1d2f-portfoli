@@ -1,5 +1,6 @@
 package com.portfoli.web;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
@@ -95,6 +96,23 @@ public class RankController {
     String orderCount = (String) convertedData.get("orderCount");
 
     List<Rank> rankList = rankService.list(convertedData);
+    if (skillList.size() > 0) {
+      rankList.sort(new Comparator<Rank>() {
+        @Override
+        public int compare(Rank o1, Rank o2) {
+          int size = o1.getSkill().size();
+          int compareSize = o2.getSkill().size();
+
+          if (size < compareSize) {
+            return 1;
+          } else if (size > compareSize) {
+            return -1;
+          }
+          return 0;
+        }
+      });
+    }
+
     request.setAttribute("rankList", rankList);
     for (Rank r : rankList) {
       System.out.println(r);

@@ -90,6 +90,9 @@
 					
 					<!-- 일반회원 - 내정보수정 - 관심분야 탭 -->
           <li id="interestSkills" class="nav-item"><a class="nav-link nav-link-remember text-muted" data-toggle="tab" href="#tab_interestSkills">관심분야</a></li>
+          
+          <!-- 일반회원 - 내정보수정 - 관심지역 탭 -->
+          <li id="interestLocation" class="nav-item"><a class="nav-link nav-link-remember text-muted" data-toggle="tab" href="#tab_interestLocation">관심지역</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -450,7 +453,7 @@
     
     <div class="row">
       <div class="col">
-        <div id="available", style="width:100%; height:200px; background-color:#D8D8D8;">  
+        <div id="available" style="width:100%; height:200px; background-color:#D8D8D8;">  
 	        <button id="apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
         </div>  
         <hr>
@@ -480,7 +483,7 @@
       
     <div class="row">
       <div class="col">
-        <div id="int_available", style="width:100%; height:200px; background-color:#D8D8D8;">  
+        <div id="int_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
           <button id="int_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
         </div>  
         <hr>
@@ -500,6 +503,23 @@
   </div>
 </div>
 <!-- MEMBER INTEREST SKILL TAB -->
+
+
+
+
+
+<!-- MEMBER INTEREST LOCATION TAB -->
+<div id="tab_interestLocation" class="tab-pane border bt-0 p-4 shadow-xs">
+  <div class="d-block shadow-xs rounded p-4 mb-2">
+      <p>Test</p>
+    <div class="row">
+      <div class="col">
+
+      </div>
+    </div> 
+  </div>
+</div>
+<!-- MEMBER INTEREST LOCATION TAB -->
 
 
 
