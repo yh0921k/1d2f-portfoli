@@ -14,7 +14,8 @@
 		<result column="school_name" property="schoolName" />
 		
 		<association property="finalEducation" javaType="FinalEducation">
-			<result column="category" property="category" />
+			<id column="education_no" property="educationNumber"/>
+			<result column="category" property="category" />			
 		</association>
 		
 	</resultMap>
@@ -29,6 +30,7 @@
 		resultMap="GeneralMemberEducationMap">
 		SELECT 
 		f.category , 
+		f.education_no , 
 		m.school_name
 		FROM pf_general_mem_edu m
 		LEFT OUTER JOIN pf_final_education f
