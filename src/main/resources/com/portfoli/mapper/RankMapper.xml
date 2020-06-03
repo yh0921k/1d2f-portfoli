@@ -67,6 +67,7 @@
 		  pf_field as pf
 		  on
 		  ps.field_no=pf.field_no 
+		where readable=1 
 		order by view_count desc;
 	</select>	
 	
@@ -112,7 +113,9 @@
       on
       ps.field_no=pf.field_no 
     <where>
+      readable=1 
       <if test="skillList.size != 0">
+        and 
         <foreach collection="skillList" item="item" index="index" separator=" or">
 				  ps.name=#{item}
 				</foreach>
