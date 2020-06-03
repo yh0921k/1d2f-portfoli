@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.CityDao">
+
+	<resultMap type="City" id="CityMap">
+		<id column="city_no" property="cityNumber" />
+		<result column="name"	property="name" />
+	</resultMap>
+	
+	<select id="findAll" resultMap="CityMap">
+		select city_no, name
+		from pf_city
+	</select>	
+	
+<!-- 	<select id="findNumber" resultType="integer" parameterType="string"> -->
+<!-- 	  select field_no -->
+<!-- 	  from pf_field -->
+<!-- 	  where name=#{name} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="findByMemberNumber" resultMap="FieldMap" parameterType="int"> -->
+<!--     select pf.field_no, pf.name  -->
+<!--     from pf_field as pf join pf_general_member_interest as pgmi -->
+<!--     on pf.field_no=pgmi.field_no -->
+<!--     where pgmi.general_member_no=#{memberNumber} -->
+<!--   </select> -->
+  
+<!--   <delete id="deleteAll" parameterType="int"> -->
+<!--     delete from pf_general_member_interest -->
+<!--     where general_member_no=#{memberNumber} -->
+<!--   </delete> -->
+  
+<!--   <insert id="insert" parameterType="map"> -->
+<!--     insert into pf_general_member_interest(general_member_no, field_no) -->
+<!--     values(#{memberNumber}, #{fieldNumber}) -->
+<!--   </insert> -->
+  
+</mapper>
