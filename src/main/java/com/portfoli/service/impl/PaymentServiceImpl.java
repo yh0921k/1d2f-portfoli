@@ -42,4 +42,18 @@ public class PaymentServiceImpl implements PaymentService {
   public int listCount(int userNumber) throws Exception {
     return paymentDao.findAllCount(userNumber);
   }
+
+  @Override
+  public List<Payment> adminList(int pageNumber, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNumber - 1) * pageSize);
+    param.put("pageSize", pageSize);
+
+    return paymentDao.findAllForAdmin(param);
+  }
+
+  @Override
+  public int adminListCount() throws Exception {
+    return paymentDao.adminCount();
+  }
 }
