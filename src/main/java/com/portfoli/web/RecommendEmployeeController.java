@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.portfoli.domain.City;
 import com.portfoli.domain.District;
+import com.portfoli.domain.Field;
 import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Skill;
 import com.portfoli.service.CityService;
 import com.portfoli.service.DistrictService;
+import com.portfoli.service.FieldService;
 import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.MemberService;
 import com.portfoli.service.SkillService;
@@ -47,19 +49,24 @@ public class RecommendEmployeeController {
   @Autowired
   CityService cityService;
 
+  @Autowired
+  FieldService fieldService;
+
   @GetMapping("recommend")
-  public void recommendEmployee(Model model, @RequestParam(defaultValue = "109000") int cityNumber)
-      throws Exception {
+  public void recommendEmployee(Model model, @RequestParam(defaultValue = "109000") int cityNumber,
+      @RequestParam(defaultValue = "40101") int fieldNumber) throws Exception {
     List<GeneralMember> memCareers = memberService.findAll();
     List<District> districts = districtService.get();
     List<FinalEducation> educations = finalEducationService.findAll();
     List<Skill> skills = skillService.list();
     List<City> citys = cityService.list();
+    List<Field> fields = fieldService.list();
     model.addAttribute("memCareers", memCareers);
     model.addAttribute("districts", districts);
     model.addAttribute("educations", educations);
     model.addAttribute("skills", skills);
     model.addAttribute("citys", citys);
+    model.addAttribute("fields", fields);
   }
 
 }

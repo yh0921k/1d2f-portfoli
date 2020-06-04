@@ -79,7 +79,7 @@
 						
 							<select
                 style="z-index:100;"
-                class="bs-select form-control form-label-group form-control-clean col-md-7 mt--5"
+                class="bs-select form-control form-label-group form-control-clean col-md-12 mt--5"
                 data-ajax-target="#district_category"
                 id="city_category" name="city_category"
                 data-ajax-callback-function="selectedCity">
@@ -89,7 +89,7 @@
               </select>
               
                <select
-                class="bs-select form-control form-label-group form-control-clean col-md-7 mt--5"
+                class="bs-select form-control form-label-group form-control-clean col-md-12 mt--5"
                 id="district_category" name="district_category"
                 data-ajax-url="../district/list2"
                 data-ajax-method="GET"
@@ -133,15 +133,29 @@
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
 					<div style="height:300px;z-index:1; "  class="card-body">
 						<h5 class="card-title">기술/툴</h5>
-						<div class="input-group mb-3 ml-1" style="z-index:1;">
+						
+						
 							<select
-								class="bs-select form-label-group form-control-clean col-md-12 mt--5"
-								id="inputGroupSelect07" name="skill.number">
-								<c:forEach items="${skills}" var="skill">
-									<option value="${skill.number}">${skill.name}</option>
-								</c:forEach>
-							</select>
-						</div>
+                class="bs-select form-control form-label-group form-control-clean col-md-12 mt--5"
+                data-ajax-target="#skill_category"
+                id="field_category" name="field_category"
+                data-ajax-callback-function="selectedField">
+                <c:forEach items="${fields}" var="field">
+                  <option value="${field.name}">${field.name}</option>
+                </c:forEach>
+              </select>
+              
+               <select
+                class="bs-select form-control form-label-group form-control-clean col-md-12 mt--5"
+                id="skill_category" name="skill_category"
+                data-ajax-url="../skill/list2"
+                data-ajax-method="GET"
+                data-ajax-callback-function="selectedSkill">
+                <c:forEach items="${skills}" var="skill">
+                  <option value="${skill.number}">${skill.name}</option>
+                </c:forEach>
+              </select>	
+						
 					</div>
 				</div>
 </div>
@@ -323,7 +337,20 @@ function selectedCity(el, value, label) {
 	<%-----district로 작업할경우 코드 들어갈 곳 도시번호------%>
 	}
 
+	  function selectedField(el, value, label) {
+	      <%-----Field로 작업할경우 코드 들어갈 곳 ------%>  
+	        console.log(value, label)
+	      <%-----Field로 작업할경우 코드 들어갈 곳 ------%>
+	      }
 
+	  function selectedSkill(el, value, label) {
+	  <%-----Skill로 작업할경우 코드 들어갈 곳------%>
+	    
+	    console.log(value, label)
+	  <%-----Skill로 작업할경우 코드 들어갈 곳------%>
+	  }
 	$.SOW.core.ajax_select.init('#city_category');
 	$.SOW.core.ajax_select.init('#district_category');
+	 $.SOW.core.ajax_select.init('#field_category');
+	  $.SOW.core.ajax_select.init('#skill_category');
 </script>

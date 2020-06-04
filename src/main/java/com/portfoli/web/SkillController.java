@@ -1,5 +1,6 @@
 package com.portfoli.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -140,4 +141,24 @@ public class SkillController {
     }
     return "OK";
   }
+
+  @GetMapping(value = "list2", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String list2(String value) throws Exception {
+
+    int fieldNumber = fieldService.get(value);
+    System.out.println("분야 번호 " + fieldNumber);
+    List<Skill> list = skillService.list2(fieldNumber);
+    System.out.println("분야 번호에 해당하는 skill 리스트" + list);
+    List<Map<String, Object>> smartyList = new ArrayList<>();
+    for (Skill s : list) {
+      HashMap<String, Object> skillData = new HashMap<>();
+      skillData.put("label", s.getName());
+      skillData.put("value", s.getNumber());
+      skillData.put("selected", false);
+      smartyList.add(skillData);
+    }
+    return new Gson().toJson(smartyList);
+  }
+
 }
