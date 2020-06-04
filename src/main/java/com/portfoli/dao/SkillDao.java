@@ -11,6 +11,8 @@ public interface SkillDao {
 
   public List<Skill> findAllByNumber(int fieldNumber) throws Exception;
 
+  public List<Skill> findAllByNumber2(int fieldNumber) throws Exception;
+
   public List<Skill> findAllByMemberNumber(int memberNumber) throws Exception;
 
   public int findMemberSkillNumber(Map<String, Integer> map) throws Exception;
