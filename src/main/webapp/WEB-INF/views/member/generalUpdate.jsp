@@ -519,13 +519,13 @@
         <hr>
         <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:27%; height:400px; background-color:#D8D8D8;">
           <div id= "dis_selectCity" class="iqs-container p--15 border rounded mt-3" >          
-            <!-- ajax 필드 추가 코드 들어감 -->
+            <!-- ajax 도시 추가 코드 들어감 -->
           </div>
         </div>
         
         <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;">
           <div id="dis_selectDistrict" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">         
-            <!-- ajax 기술 추가 코드 들어감 -->             
+            <!-- ajax 지역 추가 코드 들어감 -->             
           </div>
         </div>
       </div>
@@ -586,6 +586,22 @@
        }
       }    
     xhr.open('GET', '../field/listOfUserInterest', false); 
+    xhr.send();
+    
+ // 관심 지역 리스트 불러오기
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          let skillList = JSON.parse(xhr.responseText); 
+          for(var skill of skillList) {
+            var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestDistrict badge badge-pill badge-secondary">` + skill.name + `</span>`
+            $("#dis_available").append(addHtml);
+          }
+         }               
+       }
+      }    
+    xhr.open('GET', '../district/listOfUserInterest', false); 
     xhr.send();
     
 	  
@@ -794,45 +810,45 @@ $("#dis_selectCity").on("click", ".city", function() {
   xhr.send();   
 });
   
-// $("#available").on("click", ".haveSkills", function() {
-//    $(this).remove();
-// });
+$("#dis_available").on("click", ".interestDistrict", function() {
+   $(this).remove();
+});
 
-// $("#selectSkill").on("click", ".skill", function() {
-//   let haveSkillList = document.querySelectorAll(".haveSkills");
-//   let selected = $(this)[0].parentNode.textContent.trim();
-//   let isExist = false;
-//   for(var skill of haveSkillList) {
-//      if(selected===$(skill).text()) {
-//        isExist = true;
-//        return;
-//      }
-//   }
-//   if(!isExist) {
-//     var addHtml = `<span style="cursor:pointer; margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + selected + `</span>`
-//     $("#available").append(addHtml);
-//   }
-// });
+$("#dis_selectDistrict").on("click", ".district", function() {
+  let haveSkillList = document.querySelectorAll(".interestDistrict");
+  let selected = $(this)[0].parentNode.textContent.trim();
+  let isExist = false;
+  for(var skill of haveSkillList) {
+     if(selected===$(skill).text()) {
+       isExist = true;
+       return;
+     }
+  }
+  if(!isExist) {
+    var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestDistrict badge badge-pill badge-secondary">` + selected + `</span>`
+    $("#dis_available").append(addHtml);
+  }
+});
 
-// $("#apply").click(function() {
-//   let haveSkillList = document.querySelectorAll(".haveSkills");
+$("#dis_apply").click(function() {
+  let interestDistrictList = document.querySelectorAll(".interestDistrict");
 
-//   let skillArray = [];
-//   for(let skill of haveSkillList) {
-//     skillArray.push($(skill).text());   
-//   }
+  let districtList = [];
+  for(let district of interestDistrictList) {
+	  districtList.push($(district).text());   
+  }
    
-//   let skillList = JSON.stringify(skillArray);
-//   var xhr = new XMLHttpRequest();
-//   xhr.onreadystatechange = () => {
-//       if (xhr.readyState == 4) {
-//           if (xhr.status == 200) {
-//             window.location.reload(true);
-//           }
-//       }
-//   };
-//   xhr.open('POST', '../skill/update');
-//   xhr.setRequestHeader('Content-Type', 'application/json'); 
-//   xhr.send(JSON.stringify(skillList));
-// });
+  let data = JSON.stringify(districtList);
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            window.location.reload(true);
+          }
+      }
+  };
+  xhr.open('POST', '../district/update');
+  xhr.setRequestHeader('Content-Type', 'application/json'); 
+  xhr.send(data);
+});
 </script>

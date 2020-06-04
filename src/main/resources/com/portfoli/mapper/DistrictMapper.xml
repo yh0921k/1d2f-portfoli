@@ -22,7 +22,37 @@
     where district_no >= #{cityNumber} and district_no < #{cityNumber}+1000 
     ]]>
   </select>
+  
+  <select id="findAllByMemberNumber" resultMap="DistrictMap" parameterType="int">
 
+    select pd.district_no, pd.name 
+    from 
+      pf_interest_location as pil 
+    join 
+      pf_district as pd
+    on 
+      pil.location_no=pd.district_no 
+    where 
+      pil.general_member_no=#{memberNumber}
+  </select>
+  
+  <select id="findByName" resultMap="DistrictMap" parameterType="string">
+    select district_no, name 
+    from      
+      pf_district 
+    where 
+      name=#{districtName} limit 1
+  </select>
+  
+  <delete id="delete" parameterType="map">
+    delete from pf_interest_location 
+    where general_member_no=#{memberNumber} and location_no=#{districtNumber}
+  </delete>
+  
+  <insert id="insert" parameterType="map">
+    insert into pf_interest_location(general_member_no, location_no)
+    values(#{memberNumber}, #{districtNumber})
+  </insert>
 </mapper>
 
 
