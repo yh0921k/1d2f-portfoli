@@ -12,7 +12,7 @@ public class Report extends Board implements Serializable {
   private Member member;
   private List<BoardAttachment> attachments;
   private ReportCategory reportCategory;
-  private int HandleCategory;
+  private int handleCategory;
   private Date handleDate;
   private String handleContent;
 
@@ -22,7 +22,7 @@ public class Report extends Board implements Serializable {
   public String toString() {
     return "Report [reporterNumber=" + reporterNumber + ", targetNumber=" + targetNumber
         + ", member=" + member + ", attachments=" + attachments + ", reportCategory="
-        + reportCategory + ", HandleCategory=" + HandleCategory + ", handleDate=" + handleDate
+        + reportCategory + ", handleCategory=" + handleCategory + ", handleDate=" + handleDate
         + ", handleContent=" + handleContent + ", ref=" + ref + ", reStep=" + reStep + "]";
   }
 
@@ -67,11 +67,11 @@ public class Report extends Board implements Serializable {
   }
 
   public int getHandleCategory() {
-    return HandleCategory;
+    return handleCategory;
   }
 
   public void setHandleCategory(int handleCategory) {
-    HandleCategory = handleCategory;
+    this.handleCategory = handleCategory;
   }
 
   public Date getHandleDate() {
@@ -110,7 +110,7 @@ public class Report extends Board implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + HandleCategory;
+    result = prime * result + handleCategory;
     result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
     result = prime * result + ((handleContent == null) ? 0 : handleContent.hashCode());
     result = prime * result + ((handleDate == null) ? 0 : handleDate.hashCode());
@@ -132,7 +132,7 @@ public class Report extends Board implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Report other = (Report) obj;
-    if (HandleCategory != other.HandleCategory)
+    if (handleCategory != other.handleCategory)
       return false;
     if (attachments == null) {
       if (other.attachments != null)

@@ -866,14 +866,9 @@ INSERT INTO pf_report_class(report_class_no, report_class) VALUES(4, '상업적 
 INSERT INTO pf_report_class(report_class_no, report_class) VALUES(5, '기타');
 
 -- 신고 예제 데이터 (게시글 데이터 입력 후 INSERT(완))
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date) VALUES(1, 1, 2, 1, 1, '2020-4-1');
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date) VALUES(2, 3, 4, 2, 2, '2020-4-2');
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, handle_class_no, handle_date) VALUES(3, 5, 6, 3, 3, '2020-4-2');
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(4, 7, 8, 5);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(5, 1, 3, 1);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(6, 1, 8, 1);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(7, 1, 9, 4);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no) VALUES(8, 1, 3, 5);
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(1, 1, 2, 1, 1, 0);
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(2, 3, 4, 2, 2, 0);
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(3, 5, 6, 3, 3, 0);
 
 -- pf_bookmark (pf_portfolio 인서트 후(완))
 INSERT INTO pf_bookmark(board_no, member_no) VALUES(31, 2);

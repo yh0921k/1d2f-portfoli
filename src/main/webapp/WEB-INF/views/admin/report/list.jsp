@@ -7,8 +7,6 @@
   <section class="rounded mb-3 ">
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
       <strong> 신고 처리 </strong>
-      <small class="fs--11 text-muted d-block mt-1">
-               사용자가 신고한 내역입니다. </small>
     </div>
     
       <div class="col-sm-12">
