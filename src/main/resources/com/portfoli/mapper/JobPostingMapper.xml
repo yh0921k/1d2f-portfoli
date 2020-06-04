@@ -561,4 +561,11 @@
 		logo = #{logo}
 		where job_posting_no = #{jobPostingNumber}
 	</update>
+	
+	<select id="progressCnt" resultType="int">
+    select
+    count(*)
+    from pf_job_posting
+    where end_dated >= now()
+  </select>
 </mapper>
