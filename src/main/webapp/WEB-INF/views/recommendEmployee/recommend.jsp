@@ -17,17 +17,15 @@
 
 						<div class="input-group mb-3 ml-1">
 							<!------------------------------------------경력신입체크---------------------------------------------->
+            <a id="toggleCareer" style="height:40px;" href="#!" class="btn btn-primary btn-soft btn-toggle btn-sm">
+						  <span class="group-icon">
+						    <i>신입</i>
+						    <i>경력</i>
+						  </span>		
+						</a>
 
-							<div style="padding-right: 60px;">
-								<input id="radioCareer" type="radio" name="fruit" value=""> 경력
-							</div>
-
-							<div style="padding-left: 60px;">
-								<input id="radioNew" type="radio" name="fruit" value="" /> 신입
-							</div>
 							<br> <br>
 							<!-----------------------------------------/경력신입체크---------------------------------------------->
-							<div>
 
 								<div class="overLessYear form-label-group mb-3 ml-1">
 									<select id="overYear"
@@ -63,7 +61,6 @@
 									</select>
 								</div>
 
-							</div>
 
 						</div>
 					</div>
@@ -200,16 +197,27 @@
 </div>
 
 <script>
+var toggle = 1;
 window.onload = function() {
 	$(".overLessYear").hide();
 };
 
-$("#radioNew").click(function() {
-	$(".overLessYear").hide();
-});
-
-$("#radioCareer").click(function() {
-	$(".overLessYear").show();
+$("#toggleCareer").click(function() {
+	if(toggle = (1 - toggle)) {
+	  $(".overLessYear").hide();	
+	  
+	  item = $("#toggleCareer i").text();
+	  if(item.substring(0, 2) == $("#filterList .careerNew").text()) {
+		  return;
+	  }
+	  
+	  $("#filterField #filterList").append(
+		      `<span style="cursor:pointer; margin:2px;" class="careerNew badge badge-pill badge-secondary">` + item.substring(0, 2) + `</span>`
+		      );
+	} else {
+	  $(".overLessYear").show();
+	  $("#filterList .careerNew").remove();
+	}
 });
 
 $("#overYear").change(function(){
