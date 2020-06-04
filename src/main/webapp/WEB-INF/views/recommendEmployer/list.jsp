@@ -12,42 +12,43 @@
 	  <div class="d-block shadow-xs rounded p-4 mb-2">
 	      
 	    <div class="row">
-	      <div class="col">
-	        <div id="int_available">
-	        관심필드 : 
+	      <div class="col" style="position: relative;height: 150px;">
+	        <div id="dis_available" class="scrollable-vertical scrollable-styled-dark p-4 border-danger" style="border:1px solid;position: relative;width: 48%;display: inline-block;height: 100%!important;">
+	        <strong style="margin-left: 0.5%!important;font-size: 1rem;">관심 지역</strong><br>
 	        </div>  
-	        <div id="dis_available">
-	        관심지역 : 
+	        <div id="int_available" class="scrollable-vertical scrollable-styled-dark p-4 border-success" style="position: relative;border:1px solid;width: 48%;display: inline-block;height: 100%;">
+	        <strong style="margin-left: 0.5%!important;font-size: 1rem;">관심 분야</strong><br>
 	        </div>  
 	        </div>
 	    </div> 
 	  </div>
 	</div>
 	
-	<c:forEach var="item" items="${jobpostings}">
-  <div class="card-body posting" style="height:240px" onclick="detail(${item.jobPostingNumber})" ">
+	<c:forEach var="item" items="${jobpostings}" varStatus="status">
+  <div class="card-body posting" style="display:none; height:240px" onclick="detail(${item.jobPostingNumber})" data-index="${status.getIndex()}" >
     <div style="disply:inline-block; float:left; height:200px; width:200px; margin-left:10px; margin-right:20px;">
       <div id="thumbnail" style="display:inline-block; float:left; width:200px; height:200px; border:1px solid; "> 
         <img src="../../upload/jobposting/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
       </div>
     </div>
     <h5 class="card-title">${item.company.name}</h5>
-    <span><strong>${item.title}<strong></span>
+    <span><strong>${item.title}</strong></span>
     <h6><a>${item.tel}</a></h6>
     <br>
     <c:set var="now" value="<%=new java.util.Date()%>" />
 		<fmt:formatDate var="now" value="${now}" pattern="yyyyMMdd" />
 		<fmt:formatDate var="bdate" value="${item.startDated}" pattern="yyyyMMdd" />
     <p class="card-text" style="height:20px; margin-bottom:6px;">${item.field.name}</p>
-    <p class="card-text" style="height:20px; margin-bottom:6px;">${item.district.cityName}&nbsp; ${item.district.name}</p>
-    <span style="font-size:15px;">시작일: ${item.startDated}&nbsp;(${bdate - now})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <p class="card-text" style="height:20px; margin-bottom:6px;">${item.district.cityName}&nbsp;${item.district.name}</p>
+    <span style="font-size:15px;">${item.startDated}&nbsp;(${bdate - now}일 전)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <span style="font-size:15px;">조회수 : ${item.viewCount}</span>
-  </div>
   <hr>
+  </div>
   </c:forEach>
+  <div style="margin-left:3%">
+  총 <span id="total">13</span>개 결과 중 <span id="printed"></span>개를 출력했습니다.
+  </div>
 </div>
-
-
 
 <!--------------------------------------더보기------------------------------------------------------->
 <button id="moreListBtn" 
@@ -66,23 +67,40 @@
 var button = document.getElementById("moreListBtn");
 
 button.onclick = function() {
-	var startIndex = parseInt($(".posting").index($(".posting:last")));
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'listMore?startIndex=' + (startIndex+1), false);
-	xhr.send();
-	$('#bodyDiv').append(xhr.responseText);
+	var clickCnt = parseInt($('#printed').html()) - 1;
 	
-	if(xhr.responseText == "") {
-		Swal.fire({
-			  icon: 'error',
-			  title: '더 이상 값이 없습니다',
-			})
+  for(var i = clickCnt+1; i < clickCnt+6; i++) {
+  	var total = 1*$('#total').html();
+ 	 	var printed = 1*$('#printed').html();
+ 	 	
+  	if(total > printed) {
+  	  $(".posting[data-index="+i+"]").css('display', 'block');
+  	  $('#printed').html(i+1);
+  	} else {
+  		
+  	  Swal.fire({
+		  position: 'center',
+		  icon: 'warning',
+		  title: '더이상 결과가 없습니다.',
+		  showConfirmButton: false,
+		  timer: 1000
+		})
+  		
+  		break;
+  	}
 	}
+  
 };
 <%------------------------------------------/더보기 ------------------------------------------------%>
 
+window.onload = function() {
+	  var lastNum = $(".posting").index($(".posting:last"));
+	  $('#total').html(lastNum+1);
 
-  window.onload = function() {
+	  for(let i=0; i<5 ;i++) {
+	  	$(".posting[data-index="+i+"]").css('display', 'block');
+	    $('#printed').html(i+1);
+	  }
 	  
     // 관심 분야 리스트 불러오기
     var xhr = new XMLHttpRequest();
@@ -91,7 +109,7 @@ button.onclick = function() {
         if (xhr.status == 200) {
           let skillList = JSON.parse(xhr.responseText); 
           for(var skill of skillList) {
-            var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
+            var addHtml = `<span style="/*cursor:pointer;*/margin:2px;" class="interestSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
             $("#int_available").append(addHtml);
           }
          }               
@@ -131,7 +149,7 @@ button.onclick = function() {
          if (xhr.status == 200) {
            let skillList = JSON.parse(xhr.responseText); 
            for(var skill of skillList) {
-             var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestDistrict badge badge-pill badge-secondary">` + skill.name + `</span>`
+             var addHtml = `<span style="/*cursor:pointer; */margin:2px;" class="interestDistrict badge badge-pill badge-secondary">` + skill.name + `</span>`
              $("#dis_available").append(addHtml);
            }
           }               
