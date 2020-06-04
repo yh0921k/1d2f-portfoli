@@ -35,6 +35,13 @@
     where field_no=#{fieldNumber}
   </select>
   
+   <select id="findAllByNumber2" resultMap="SkillMap" parameterType="int">
+    select skill_no, name 
+    from pf_skill 
+    where
+    field_no=#{fieldNumber} 
+  </select>
+  
   <select id="findAllByMemberNumber" resultMap="SkillMap" parameterType="int">
     select ps.skill_no, ps.field_no, ps.name, pf.name field_name
     from pf_member_skill pms join pf_skill ps
