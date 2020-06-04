@@ -1,6 +1,7 @@
 package com.portfoli.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import com.portfoli.dao.DistrictDao;
 import com.portfoli.domain.District;
@@ -27,6 +28,26 @@ public class DistrictServiceImpl implements DistrictService {
   @Override
   public List<District> list(int cityNumber) throws Exception {
     return districtDao.findAllByNumber(cityNumber);
+  }
+
+  @Override
+  public List<District> listOfMember(int memberNumber) throws Exception {
+    return districtDao.findAllByMemberNumber(memberNumber);
+  }
+
+  @Override
+  public District get(String districtName) throws Exception {
+    return districtDao.findByName(districtName);
+  }
+
+  @Override
+  public int delete(Map<String, Object> params) throws Exception {
+    return districtDao.delete(params);
+  }
+
+  @Override
+  public int add(Map<String, Object> params) throws Exception {
+    return districtDao.insert(params);
   }
 
 }
