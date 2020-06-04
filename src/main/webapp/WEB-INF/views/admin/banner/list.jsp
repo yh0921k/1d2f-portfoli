@@ -3,29 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div id="middle" class="flex-fill">
-  <!-- 
-          <div class="page-title shadow-xs">
-            <h1 class="h5 pt-2 mb-0 font-weight-normal">
-              배너 관리
-            </h1>
 
-              <p class="breadcrumb breadcrumb-sublime fs--13 pb-2">
-                  배너를 등록, 수정, 삭제하는 페이지입니다.
-              </p>
-          </div>
-         -->
   <!-- Primary -->
   <section class="rounded mb-3">
     <!-- header -->
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-      배너 관리 <small class="fs--11 text-muted d-block mt-1">
-      배너를 등록, 수정, 삭제하는 페이지입니다.</small>
+      <strong>배너 관리</strong>
     </div>
     <!-- /header -->
 
     <!-- Main -->
-    <div class="row gutters-sm">
-      <div class="col-12 col-lg-7 col-xl-9 mb-5">
+      <div class="col-12-sm">
         <!-- Activate List -->
         <div class="portlet-header">
           <div class="float-end">
@@ -37,32 +25,7 @@
           <span class="d-block text-muted text-truncate font-weight-medium pt-1">
             게시중인 배너 </span>
         </div>
-<div class="nestable dd"
-  data-nestable-max-depth="3" 
 
-  data-update-delete-with-childs="false"
-  data-update-delete-with-childs-error="Please move or delete childs first!" 
-  data-update-delete-params="['action','delete']['section','shop_category']" 
-
-  data-ajax-update-url="POST" 
-  data-ajax-update-params="['action','reorder']['section','shop_category']" 
-
-  data-update-toast-success="Order Saved!" 
-  data-update-toast-position="top-center" 
->
-  <ol class="dd-list">
-  <c:forEach items="${activatedList}" var="postedBanner">
-    <li class="dd-item dd-has-options dd-handle-custom" data-id="${postedBanner.order}">
-      <div class="dd-content text-truncate">
-      <a href="/portfoli/admin/banner/detail?number=${postedBanner.number}">
-        <span class="font-weight-medium text-muted mx-2 m-0-xs">${postedBanner.title} </span></a>
-      </div>
-      <div class="dd-handle fi fi-list"></div>
-    </li>
-  </c:forEach>
-  </ol>
-</div>
-        <!-- 
         <div class="list-group sortable" data-sort-swap="true">
           <c:forEach items="${activatedList}" var="postedBanner">
             <div class="list-group-item">
@@ -71,7 +34,6 @@
             </div>
           </c:forEach>
         </div>
-         -->
         <!-- /Activate List -->
 
         <!-- NotActivate List -->
@@ -91,7 +53,6 @@
         </div>
         <!-- /NotActivate List -->
 
-      </div>
     </div>
   </section>
 </div>

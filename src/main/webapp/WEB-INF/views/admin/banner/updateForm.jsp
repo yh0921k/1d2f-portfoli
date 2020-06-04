@@ -4,28 +4,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="middle" class="flex-fill">
-  <!-- 
-          <div class="page-title shadow-xs">
-            <h1 class="h5 pt-2 mb-0 font-weight-normal">
-              배너 관리
-            </h1>
-
-              <p class="breadcrumb breadcrumb-sublime fs--13 pb-2">
-                  배너를 등록, 수정, 삭제하는 페이지입니다.
-              </p>
-          </div>
-         -->
-  <!-- Primary -->
   <section class="rounded mb-3">
-    <!-- header -->
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-      배너 수정 <small class="fs--11 text-muted d-block mt-1"> - </small>
+      <strong>배너 관리</strong>
     </div>
-    <!-- /header -->
 
     <!-- Main -->
     <div class="row gutters-sm">
-      <div class="col-12 col-lg-7 col-xl-9 mb-5">
+      <div class="col-sm-12 mb-5">
         <!-- Search form -->
         <form class="js-ajax"
           action="/portfoli/admin/banner/update" method="post"
@@ -53,7 +39,7 @@
               <tr>
                 <th scope="row">제목</th>
                 <td><input type="text" name="title" id="title"
-                  class="form-control-sm form-control-clean" value="${banner.title}"></td>
+                  class="form-control form-control-sm" value="${banner.title}"></td>
               </tr>
               <tr>
                 <th scope="row">배너이미지</th>
@@ -62,7 +48,7 @@
                     <!-- remove button --> <a href="#"
                     class="js-file-input-showcase-remove hide position-absolute absolute-top text-align-start w--600 z-index-3">
                       <span
-                      class="d-inline-block btn btn-sm bg-secondary text-white pt--4 pb--4 pl--10 pr--10 m--1"
+                      class="d-inline-block btn btn-sm bg-secondary text-white pt--4 pb--4 pl--10 pr--10 m--1 mt-2 mb-2"
                       title="remove image" data-tooltip="tooltip"> <i class="fi fi-close m-0"></i>
                     </span>
                   </a> <span
@@ -93,7 +79,7 @@
               </tr>
               <tr>
                 <th scope="row">기간</th>
-                <td><div class="form-label-group">
+                <td><div class="form-label-group mt-2 mb-2">
                     <input autocomplete="off" type="text" value="${fn:substring(banner.startDate, 0, 16)}"
                       class="form-control form-control-sm rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
@@ -109,7 +95,7 @@
                       placeholder="시작일" name="startDate" id="startDate"> <label for="startDate">
                       시작일 </label>
                   </div>
-                  <div class="form-label-group">
+                  <div class="form-label-group mt-2 mb-2">
                     <a href="#"
                       class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
                     <input autocomplete="off" type="text" value="${fn:substring(banner.endDate, 0, 16)}"
@@ -133,12 +119,12 @@
               <tr>
                 <th scope="row">게시 여부</th>
                 <td>
-                  <div class="custom-control custom-radio custom-control-inline">
+                  <div class="custom-control custom-radio custom-control-inline  mt-2 mb-2">
                     <input type="radio" value="0" id="customRadioInline1" name="activateYN"
                       class="custom-control-input" checked> <label
                       class="custom-control-label" for="customRadioInline1">숨기기</label>
                   </div>
-                  <div class="custom-control custom-radio custom-control-inline">
+                  <div class="custom-control custom-radio custom-control-inline  mt-2 mb-2">
                     <input type="radio" value="1" id="customRadioInline2" name="activateYN"
                       class="custom-control-input"> <label
                       class="custom-control-label" for="customRadioInline2">보이기</label>
@@ -148,11 +134,11 @@
             </table>
           </div>
           <div class="text-center">
-          <button type="submit" class="btn btn-sm btn-primary btn-soft">
-            <i class="fi fi-check"></i> 수정
+          <button type="submit" class="btn btn-sm btn-outline-success btn-pill">
+            <i class="fi fi-pencil"></i> 수정
           </button>
           <button type="button"
-            class="btn btn-sm btn-light btn-soft btn-pill mb-1"
+            class="btn btn-sm btn-outline-secondary btn-pill"
             onClick='location.href="/portfoli/admin/banner/detail?number=${banner.number}"'> 뒤로
           </button>
           </div>
