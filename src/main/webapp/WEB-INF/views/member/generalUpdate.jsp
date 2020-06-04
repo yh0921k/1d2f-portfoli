@@ -450,27 +450,33 @@
 <!-- MEMBER AVAILABLE SKILL TAB -->
 <div id="tab_availableSkills" class="tab-pane border bt-0 p-4 shadow-xs">
   <div class="d-block shadow-xs rounded p-4 mb-2">
+  
+  
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+          <div id="available" class="card-body" style="height:150px">
+            <button id="apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <div class="row">
-      <div class="col">
-        <div id="available" style="width:100%; height:200px; background-color:#D8D8D8;">  
-	        <button id="apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
-        </div>  
-        <hr>
-        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:27%; height:400px; background-color:#D8D8D8;">
-					<div id= "selectField" class="iqs-container p--15 border rounded mt-3" >					
-					  <!-- ajax 필드 추가 코드 들어감 -->
-					</div>
-        </div>
-        
-        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;">
-          <div id="selectSkill" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">         
-            <!-- ajax 기술 추가 코드 들어감 -->             
+      <div class="col-4 col-lg-4">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+          <div id="selectField" class="card-body" style="height:600px">
           </div>
-        </div> 
+        </div>
       </div>
-      <hr>
-    </div>  
+      
+      <div class="col-8 col-lg-8">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+          <div id="selectSkill" class="card-body" style="height:600px">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- MEMBER AVAILABLE SKILL TAB -->
@@ -480,26 +486,26 @@
 <!-- MEMBER INTEREST SKILL TAB -->
 <div id="tab_interestSkills" class="tab-pane border bt-0 p-4 shadow-xs">
   <div class="d-block shadow-xs rounded p-4 mb-2">
-      
+
+
     <div class="row">
-      <div class="col">
-        <div id="int_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
-          <button id="int_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
-        </div>  
-        <hr>
-        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:100%; height:400px; background-color:#D8D8D8;">
-           <div id= "int_selectField" class="iqs-container p--15 border rounded mt-3" >          
-              <!-- ajax 필드 추가 코드 들어감 -->
-           </div>
+      <div class="col-12 col-lg-12">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
+          <div id="int_available" class="card-body" style="height:150px">
+            <button id="int_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
+          </div>
         </div>
-          
-<!--          <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;"> -->
-<!--            <div id="int_selectSkill" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">          -->
-<!--              ajax 기술 추가 코드 들어감              -->
-<!--            </div> -->
-<!--          </div> -->
       </div>
-    </div> 
+    </div>
+    
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
+          <div id="int_selectField" class="card-body" style="height:600px">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- MEMBER INTEREST SKILL TAB -->
@@ -511,25 +517,32 @@
 <!-- MEMBER INTEREST LOCATION TAB -->
 <div id="tab_interestLocation" class="tab-pane border bt-0 p-4 shadow-xs">
   <div class="d-block shadow-xs rounded p-4 mb-2">
+  
     <div class="row">
-      <div class="col">
-        <div id="dis_available" style="width:100%; height:200px; background-color:#D8D8D8;">  
-          <button id="dis_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
-        </div>  
-        <hr>
-        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:27%; height:400px; background-color:#D8D8D8;">
-          <div id= "dis_selectCity" class="iqs-container p--15 border rounded mt-3" >          
-            <!-- ajax 도시 추가 코드 들어감 -->
-          </div>
-        </div>
-        
-        <div style="overflow:auto; overflow-x:hidden; display:inline-block; float:left; width:73%; height:400px; background-color:#D8D8D8;">
-          <div id="dis_selectDistrict" class="iqs-container p--15 border rounded mt-3" style="margin-left:10px;">         
-            <!-- ajax 지역 추가 코드 들어감 -->             
+      <div class="col-12 col-lg-12">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
+          <div id="dis_available" class="card-body" style="height:150px">
+            <button id="dis_apply" style="position:absolute; right:55px; bottom:35px;" type="button" class="btn btn-sm btn-outline-secondary btn-pill"> 저장하기 </button>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
+    
+    <div class="row">
+      <div class="col-4 col-lg-4">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
+          <div id="dis_selectCity" class="card-body" style="height:600px">
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-8 col-lg-8">
+        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
+          <div id="dis_selectDistrict" class="card-body" style="height:600px">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- MEMBER INTEREST LOCATION TAB -->
