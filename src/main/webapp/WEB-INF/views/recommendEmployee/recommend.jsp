@@ -78,15 +78,28 @@
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
 					<div style="height:300px;"  class="card-body">
 						<h5 class="card-title">지역</h5>
-						<div class="input-group mb-3 ml-1">
+						
 							<select
-								class="bs-select form-label-group form-control-clean col-md-12 mt--5"
-								id="inputGroupSelect06" name="generalMember.number">
-								<c:forEach items="${districts}" var="district">
-									<option value="${districtNumber.number}">${district.name}</option>
-								</c:forEach>
-							</select>
-						</div>
+                class="bs-select form-control form-label-group form-control-clean col-md-7 mt--5"
+                data-ajax-target="#district_category"
+                id="city_category" name="city_category"
+                data-ajax-callback-function="selectedCity">
+                <c:forEach items="${citys}" var="city">
+                  <option value="${city.name}">${city.name}</option>
+                </c:forEach>
+              </select>
+              
+               <select
+                class="bs-select form-control form-label-group form-control-clean col-md-7 mt--5"
+                id="district_category" name="district_category"
+                data-ajax-url="../district/list2"
+                data-ajax-method="GET"
+                data-ajax-callback-function="selectedDistrict">
+                <c:forEach items="${districts}" var="district">
+                  <option value="${district.districtNumber}">${district.name}</option>
+                </c:forEach>
+              </select>
+							
 					</div>
 				</div>
 				</div>
@@ -279,4 +292,21 @@ $("#selectEducation").change(function(){
 $("#filterField").on("click", "#filterList .badge", function(){
 	  $(this).remove();
 });
+
+function selectedCity(el, value, label) {
+	<%-----city로 작업할경우 코드 들어갈 곳 도시번호------%>  
+	  console.log(value, label)
+	<%-----city로 작업할경우 코드 들어갈 곳 도시번호------%>
+	}
+
+	function selectedDistrict(el, value, label) {
+	<%-----district로 작업할경우 코드 들어갈 곳 도시번호------%>
+	  
+	  console.log(value, label)
+	<%-----district로 작업할경우 코드 들어갈 곳 도시번호------%>
+	}
+
+
+	$.SOW.core.ajax_select.init('#city_category');
+	$.SOW.core.ajax_select.init('#district_category');
 </script>

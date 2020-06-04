@@ -8,10 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.portfoli.domain.City;
 import com.portfoli.domain.District;
 import com.portfoli.domain.FinalEducation;
 import com.portfoli.domain.GeneralMember;
 import com.portfoli.domain.Skill;
+import com.portfoli.service.CityService;
 import com.portfoli.service.DistrictService;
 import com.portfoli.service.FinalEducationService;
 import com.portfoli.service.MemberService;
@@ -41,16 +44,22 @@ public class RecommendEmployeeController {
   @Autowired
   SkillService skillService;
 
+  @Autowired
+  CityService cityService;
+
   @GetMapping("recommend")
-  public void recommendEmployee(Model model) throws Exception {
+  public void recommendEmployee(Model model, @RequestParam(defaultValue = "109000") int cityNumber)
+      throws Exception {
     List<GeneralMember> memCareers = memberService.findAll();
     List<District> districts = districtService.get();
     List<FinalEducation> educations = finalEducationService.findAll();
     List<Skill> skills = skillService.list();
+    List<City> citys = cityService.list();
     model.addAttribute("memCareers", memCareers);
     model.addAttribute("districts", districts);
     model.addAttribute("educations", educations);
     model.addAttribute("skills", skills);
+    model.addAttribute("citys", citys);
   }
 
 }
