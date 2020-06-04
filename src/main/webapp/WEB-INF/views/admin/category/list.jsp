@@ -32,15 +32,15 @@
              <tbody>
                <c:forEach items="${list}" var="item">
 			          <tr>
-			            <td class="TD">
-			              <a class="js-ajax-modal btn btn-sm" 
+			            <td>
+			              <a style="color:blue;" class="js-ajax-modal btn btn-sm" 
 					            data-href="/portfoli/admin/category/detail?number=${item.categoryNumber}"
 					            data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
 					            data-ajax-modal-backdrop="static">${item.categoryNumber}</a>
 			            </td>
 			            
 			            <td>
-                    <a style="color:blue" class="js-ajax-modal btn btn-sm" 
+                    <a style="color:blue;" class="js-ajax-modal btn btn-sm" 
                       data-href="detail?number=${item.categoryNumber}"
                       data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
                       data-ajax-modal-backdrop="static">${item.name}</a>
@@ -84,6 +84,7 @@
 </div>
 
 <style>
+  table{align:center;}
   .TD {padding: 10px 0px} 
   td {padding: 10px 0px} 
 </style>
