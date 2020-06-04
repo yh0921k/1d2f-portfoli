@@ -3,37 +3,24 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="middle" class="flex-fill">
-  <!-- 
-          <div class="page-title shadow-xs">
-            <h1 class="h5 pt-2 mb-0 font-weight-normal">
-              배너 관리
-            </h1>
-
-              <p class="breadcrumb breadcrumb-sublime fs--13 pb-2">
-                  배너를 등록, 수정, 삭제하는 페이지입니다.
-              </p>
-          </div>
-         -->
   <section class="rounded mb-3">
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-      배너 상세보기 <small class="fs--11 text-muted d-block mt-1">
-      등록한 배너의 정보입니다.</small>
+      <strong>배너 관리</strong>
     </div>
 
-    <div class="row gutters-sm">
-      <div class="col-12 col-lg-7 col-xl-9 mb-5">
+      <div class="col-sm-12">
         <!-- detail form -->
         <div class="table-responsive" style="overflow: visible;">
 
-          <table class="table table-sm">
-            <tr>
+          <table class="table">
+            <tr >
               <th scope="row">기업</th>
               <td>
                 <table class="table table-bordered table-hover table-striped">
                   <tr>
-                    <td>${company.name}</td>
-                    <td>${company.tel}</td>
-                    <td>${company.representative}</td>
+                    <td width="50">${company.name}</td>
+                    <td width="30">${company.tel}</td>
+                    <td width="20">${company.representative}</td>
                   </tr>
                 </table>
               </td>
@@ -41,7 +28,7 @@
             <tr>
               <th scope="row">제목</th>
               <td>
-              <span class="d-block text-muted text-truncate font-weight-medium pt-1">${banner.title}</span>
+              <span class="d-block text-muted text-truncate font-weight-medium pt-1 mt-2 mb-2">${banner.title}</span>
               </td>
             </tr>
             <tr>
@@ -66,7 +53,7 @@
             </tr>
             <tr>
               <th scope="row">링크 URL</th>
-              <td><a class="link-muted" href="${banner.url}">${banner.url}</a></td>
+              <td><a class="link-muted mt-2 mb-2" href="${banner.url}">${banner.url}</a></td>
             </tr>
             <tr>
               <th scope="row">게시 기간</th>
@@ -113,22 +100,24 @@
         </div>
         <div class="text-center">
           <button type="button"
-            class="btn btn-sm btn-success btn-soft btn-pill mb-1"
+            class="btn btn-sm btn-outline-success btn-pill mb-1"
             onClick='location.href="/portfoli/admin/banner/updateForm?number=${banner.number}"'>
             <i class="fi fi-check"></i> 수정
           </button>
           <button type="button"
-            class="btn btn-sm btn-danger btn-soft btn-pill mb-1"
+            class="btn btn-sm btn-outline-danger btn-pill mb-1"
             onClick='location.href="/portfoli/admin/banner/delete?number=${banner.number}"'>
-            <i class="fi fi-check"></i> 삭제
+            <i class="fi fi-thrash"></i> 삭제
           </button>
+        <div class="d-inline-block" style="float: right;">
           <button type="button"
-            class="btn btn-sm btn-light btn-soft btn-pill mb-1"
-            onClick='location.href="/portfoli/admin/banner/list"'>뒤로
+            class="btn btn-sm btn-outline-secondary btn-pill mb-1"
+            onClick='location.href="/portfoli/admin/banner/list"'>
+            <i class="fi fi-arrow-left"></i> 뒤로
           </button>
+        </div>
         </div>
 
       </div>
-    </div>
   </section>
 </div>

@@ -409,9 +409,9 @@
 <section class="sow-util-slideshow min-h-75vh d-middle justify-content-start overlay-dark overlay-opacity-4 z-index: 1;" 
         data-sow-slideshow-interval="4000" 
         data-sow-slideshow-fade-delay="5000" 
-        data-sow-slideshow="resources/assets/images/best_sigak_portfolio.jpg,
-        resources/assets/images/best_front_portfolio.jpg,
-        resources/assets/images/best_video_portfolio.jpg">
+        data-sow-slideshow="${pageContext.servletContext.contextPath}/resources/assets/images/best_sigak_portfolio.jpg,
+        ${pageContext.servletContext.contextPath}/resources/assets/images/best_front_portfolio.jpg,
+        ${pageContext.servletContext.contextPath}/resources/assets/images/best_video_portfolio.jpg">
         <div class="container"> 
 
           <div class="text-center-md text-center-xs d-middle justify-content-start">

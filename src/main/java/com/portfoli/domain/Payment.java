@@ -17,6 +17,8 @@ public class Payment implements Serializable {
   private Date endDate;
   private String jobPostingTitle;
 
+  private Member member;
+
   @Override
   public String toString() {
     return "Payment [number=" + number + ", memberNumber=" + memberNumber + ", productName="
@@ -103,6 +105,14 @@ public class Payment implements Serializable {
 
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
+  }
+
+  public Member getMember() {
+    return member;
+  }
+
+  public void setMember(Member member) {
+    this.member = member;
   }
 
   @Override

@@ -15,6 +15,12 @@
     <result column="pay_date" property="payDate"/>
     <result column="start_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
+
+    <association property="member" javaType="Member">
+      <id column="member_no" property="number"/>
+      <result column="id" property="id"/>
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
 
   <insert id="insert" parameterType="Payment"
@@ -47,5 +53,30 @@
     select count(*)
     from pf_payment
     where member_no=#{userNumber}
+  </select>
+  
+  <select id="findAllForAdmin" resultMap="PaymentMap" parameterType="map">
+    select
+      p.pay_no,
+      p.member_no,
+      p.product_name,
+      p.price,
+      p.apply_posting,
+      p.method,
+      p.comment,
+      p.pay_date,
+      p.start_date,
+      p.end_date,
+      m.id,
+      m.name
+    from pf_payment p
+    join pf_members m on p.member_no = m.member_no
+    order by pay_no desc
+    limit #{offset}, #{pageSize}
+  </select>
+  
+  <select id="adminCount" resultType="int" parameterType="int">
+    select count(*)
+    from pf_payment
   </select>
 </mapper>

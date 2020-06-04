@@ -7,8 +7,6 @@
   <section class="rounded mb-3 ">
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
       <strong> 신고 처리 </strong>
-      <small class="fs--11 text-muted d-block mt-1">
-               처리 내역을 작성해주세요. </small>
     </div>
 
         <form class="js-ajax"
@@ -20,6 +18,7 @@
           data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> 빈 칸을 모두 작성해주세요."
           data-error-toast-delay="3000" data-error-toast-position="bottom-center"
           data-error-scroll-ignore="true" data-ajax-callback-function="replyCallback">
+      <input type='hidden' name='targetNumber' value='${report.targetNumber}'>
       <input type='hidden' name='reporterNumber' value='${report.reporterNumber}'>
       <input type='hidden' name='ref' value='${report.ref}'>
       <input type='hidden' name='reStep' value='${report.reStep}'>
@@ -75,7 +74,7 @@
                   </div>
               </td>
             </tr>
-                      </table>
+          </table>
           <div class="text-center">
             <button type="submit"
               class="btn btn-sm btn-outline-primary btn-pill">

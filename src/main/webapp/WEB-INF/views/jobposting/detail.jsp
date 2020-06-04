@@ -142,7 +142,7 @@
 				<div class="portlet">
 
 					<div class="portlet-header">
-						<span class="d-block text-dark text-truncate font-weight-medium"><h4>지원방법</h4></span>
+						<span class="d-block text-dark text-truncate font-weight-medium text-center"><h4>지원방법</h4></span>
 					</div>
 
 					<div class="portlet-body">
@@ -172,13 +172,11 @@
 		<hr>
 		<!----------------------------------------- 수정삭제 ------------------------------------------------>
 		<c:if test="${not empty modifiable}">
-			<div style="text-align: right">
+			<div style="text-align: center">
 				<a href='updateForm?no=${jobPosting.jobPostingNumber}'
-					class="btn btn-outline-dark btn-pill mb-1">수정</a>
-			</div>
-			<div style="text-align: right">
+					class="btn btn-sm btn-outline-secondary btn-pill mb-3">수정</a>
 				<a href='delete?no=${jobPosting.jobPostingNumber}' id="delBtn"
-					class="btn btn-outline-dark btn-pill mb-1">삭제</a>
+					class="btn btn-sm btn-outline-secondary btn-pill mb-3">삭제</a>
 			</div>
 		</c:if>
 		<!----------------------------------------- /수정삭제 ------------------------------------------------>

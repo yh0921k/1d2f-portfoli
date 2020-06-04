@@ -7,17 +7,17 @@
   <section class="rounded mb-3 ">
     <div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
       <strong> 신고 처리 </strong>
-      <small class="fs--11 text-muted d-block mt-1">
-               사용자가 신고한 내역입니다. </small>
     </div>
     
       <div class="col-12">
       <div class="table-responsive">
         <table class="table table-align-middle border-bottom mb-3">
+        <c:if test="not empty ${report.reportCategory.category}">
           <tr>
             <th scope="row">카테고리</th>
             <td>${report.reportCategory.category}</td>
           </tr>
+        </c:if>
           <tr>
             <th scope="row">신고 대상</th>
             <td>${report.member.id}</td>

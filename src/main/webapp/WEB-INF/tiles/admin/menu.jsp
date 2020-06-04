@@ -31,8 +31,9 @@
 						신고 처리
 				</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#"> <i
-						class="fas fa-coins"></i> 결제 관리
+				<li class="nav-item"><a class="nav-link" href="/portfoli/admin/payment/list"> <i
+						class="fas fa-coins"></i>
+						결제 내역
 				</a></li>
 
 				<li class="nav-item"><a class="nav-link"

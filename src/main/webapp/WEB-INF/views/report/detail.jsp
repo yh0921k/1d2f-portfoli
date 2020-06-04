@@ -21,10 +21,12 @@
       
       <div class="table-responsive rounded" style="min-height: 500px;">
         <table class="table m-0">
+        <c:if test="not empty ${report.reportCategory.category}">
           <tr>
             <th scope="row">카테고리</th>
             <td>${report.reportCategory.category}</td>
           </tr>
+        </c:if>
           <tr>
             <th scope="row">신고 대상</th>
             <td>${report.member.id}</td>

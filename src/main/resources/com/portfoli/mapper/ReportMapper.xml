@@ -36,8 +36,8 @@
   </resultMap>
 
   <insert id="insert" parameterType="Report">
-  insert into pf_report(board_no, reporter_no, target_no, report_class_no)
-  values(#{number}, #{reporterNumber}, #{targetNumber}, #{reportCategory.number})
+  insert into pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step)
+  values(#{number}, #{reporterNumber}, #{targetNumber}, #{reportCategory.number}, #{number}, 0)
   </insert>
 
   <select id="findAllByReporterNumber" resultMap="ReportMap" parameterType="map">

@@ -10,4 +10,8 @@ public interface PaymentDao {
   List<Payment> findAllByUserNumber(Map<String, Object> param) throws Exception;
 
   int findAllCount(int userNumber) throws Exception;
+
+  List<Payment> findAllForAdmin(Map<String, Object> param) throws Exception;
+
+  int adminCount() throws Exception;
 }
