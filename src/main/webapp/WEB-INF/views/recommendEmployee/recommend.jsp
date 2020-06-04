@@ -8,27 +8,28 @@
 <div class="container" style="height:1000px; padding: 30px 0px;">
 
 <div class="row">
-    <div class="col-3 col-lg-3">
+    <div style="z-index:1;" class="col-3 col-lg-3">
 			<!-------------------------------------------경력--------------------------------------------------->
-				<div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div style="height:300px;"  class="card-body">
+				<div style="z-index:1;" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
+					<div style="z-index:1; height:300px;"  class="card-body">
 
 						<h5 class="card-title">경력</h5>
 
-						<div class="input-group mb-3 ml-1">
+						<div style="z-index:1;" class="input-group mb-3 ml-1">
 							<!------------------------------------------경력신입체크---------------------------------------------->
+					<div style="width:100%">		
             <a id="toggleCareer" style="height:40px;" href="#!" class="btn btn-primary btn-soft btn-toggle btn-sm">
 						  <span class="group-icon">
 						    <i>신입</i>
 						    <i>경력</i>
 						  </span>		
 						</a>
-
+					</div>
 							<br> <br>
 							<!-----------------------------------------/경력신입체크---------------------------------------------->
 
-								<div class="overLessYear form-label-group mb-3 ml-1">
-									<select id="overYear"
+								<div style="z-index:1;" class="overLessYear form-label-group mb-3 ml-1">
+									<select style="z-index:1;" id="overYear"
 										class="bs-select form-label-group form-control-clean col-md-15 mt--5"
 										name='overYear'>
 										<option value=0>최소경력</option>
@@ -151,9 +152,9 @@
 <hr>
 
 		<div class="row" style="z-index:0;">
-      <div class="col-2 col-lg-2">
-        <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
-          <div id="searchCount" class="card-body" style="height:150px">
+      <div style="z-index:0;" class="col-2 col-lg-2">
+        <div style="z-index:0;" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
+          <div style="z-index:0; height:150px;" id="searchCount" class="card-body">
             <p>조회수</p>
           </div>
         </div>
