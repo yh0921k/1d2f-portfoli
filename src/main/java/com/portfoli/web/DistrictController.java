@@ -1,5 +1,6 @@
 package com.portfoli.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -127,5 +128,22 @@ public class DistrictController {
       districtService.add(params);
     }
     return "OK";
+  }
+
+  @GetMapping(value = "list2", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String list2(String value) throws Exception {
+
+    int cityNumber = cityService.get(value);
+    List<District> list = districtService.list(cityNumber);
+    List<Map<String, Object>> smartyList = new ArrayList<>();
+    for (District d : list) {
+      HashMap<String, Object> districtData = new HashMap<>();
+      districtData.put("label", d.getName());
+      districtData.put("value", d.getDistrictNumber());
+      districtData.put("selected", false);
+      smartyList.add(districtData);
+    }
+    return new Gson().toJson(smartyList);
   }
 }
