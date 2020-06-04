@@ -79,7 +79,7 @@
     </div>
     <!--------------------------------------------- /nav bar ------------------------------------------------>
 
-    <div class="col-lg-8 mt--20" data-gfont="Nanum Gothic">
+    <div class="col-lg-8 mt--20">
       <div id="middle" class="flex-fill">
         <div class="page-title bg-transparent b-0">
           <h1 class="h3 mt-3 mb-3 px-3" style="display: inline-block;">상품 구매 내역</h1>
