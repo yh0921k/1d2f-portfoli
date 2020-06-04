@@ -73,14 +73,14 @@
 
 			<!------------------------------------------/경력--------------------------------------------------->
 			<!------------------------------------------지역---------------------------------------------------->
-    <div class="col-3 col-lg-3">
-				<div
+    <div class="col-3 col-lg-3" style="z-index:1;">
+				<div style="z-index:1;"
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div style="height:300px;"  class="card-body">
+					<div style="height:300px; z-index:1;"  class="card-body">
 						<h5 class="card-title">지역</h5>
 						
 							<select
-                style=""
+                style="z-index:100;"
                 class="bs-select form-control form-label-group form-control-clean col-md-7 mt--5"
                 data-ajax-target="#district_category"
                 id="city_category" name="city_category"
@@ -108,12 +108,12 @@
 
 			<!-----------------------------------------/지역---------------------------------------------------->
 			<!-----------------------------------------학력----------------------------------------------------->
-<div class="col-3 col-lg-3">
-				<div
+<div class="col-3 col-lg-3" style="z-index:1;">
+				<div style="z-index:1;"
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div style="height:300px;"  class="card-body">
+					<div style="height:300px;z-index:1;"  class="card-body">
 						<h5 class="card-title">학력</h5>
-						<div class="input-group mb-3 ml-1">
+						<div class="input-group mb-3 ml-1" style="z-index:1;">
 							<select
 								class="bs-select form-label-group form-control-clean col-md-12 mt--5"
 								id="selectEducation" name="generalMember.number">
@@ -130,12 +130,12 @@
 		
 			<!----------------------------------------/학력----------------------------------------------------->
 			<!---------------------------------------기술,툴----------------------------------------------------->
-<div class="col-3 col-lg-3">
-				<div
+<div class="col-3 col-lg-3" style="z-index:1;">
+				<div style="z-index:1;"
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div style="height:300px;"  class="card-body">
+					<div style="height:300px;z-index:1; "  class="card-body">
 						<h5 class="card-title">기술/툴</h5>
-						<div class="input-group mb-3 ml-1">
+						<div class="input-group mb-3 ml-1" style="z-index:1;">
 							<select
 								class="bs-select form-label-group form-control-clean col-md-12 mt--5"
 								id="inputGroupSelect07" name="skill.number">
@@ -153,7 +153,7 @@
         </div>
 <hr>
 
-		<div class="row" style="">
+		<div class="row" style="z-index:0;">
       <div class="col-2 col-lg-2">
         <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
           <div id="searchCount" class="card-body" style="height:150px">
@@ -162,9 +162,9 @@
         </div>
       </div>
       
-      <div class="col-10 col-lg-10" style="">
-        <div id="filterField" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
-          <div id="filterList" class="card-body" style="height:150px">
+      <div class="col-10 col-lg-10" style="z-index:0;">
+        <div id="filterField" style="z-index:0;" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
+          <div id="filterList" class="card-body" style="height:150px; z-index:0;">
             <p>Filter</p>
           </div>
         </div>
@@ -176,7 +176,7 @@
   <!-- 테이블 출력 부분 -->
   <div class="row">
     <div class="col-12 col-lg-12">
-      <div style="" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+      <div style="z-index:-1;" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
         <div id="searchTable" class="card-body" style="height:150px">
         
 			    <div style="display:inline-block" class="dataTables_length" id="rand_yjK_length">
@@ -215,7 +215,7 @@
 
 <style>
 	.bs-select.form-label-group.form-control-clean.col-md-12.mt--5.js-bselectified{
-		;
+		z-index:1;
 	}
 </style>
 
