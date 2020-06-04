@@ -17,6 +17,10 @@
   </definition>
   
   <!-- Tiles 제외 선언부 -->
+  <definition name="main.do" extends="empty">
+    <put-attribute name="body" value ="/WEB-INF/views/index.jsp"/>
+  </definition>
+  
   <definition name="auth/loginForm.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/auth/loginForm.jsp"/>
   </definition>
@@ -60,5 +64,4 @@
   <definition name="jobposting/premium.do" extends="empty">
     <put-attribute name="body" value ="/WEB-INF/views/jobposting/premium.jsp"/>
   </definition>
-
 </tiles-definitions>

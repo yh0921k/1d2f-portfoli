@@ -410,7 +410,8 @@
         data-sow-slideshow-interval="4000" 
         data-sow-slideshow-fade-delay="5000" 
         data-sow-slideshow="resources/assets/images/best_sigak_portfolio.jpg,
-        resources/assets/images/best_front_portfolio.jpg,
+        <!-- resources/assets/images/best_front_portfolio.jpg, -->
+        ${pageContext.servletContext.contextPath}/upload/banner/1d6a4fd8-6e3b-446b-92a5-bf3972bd9a67,
         resources/assets/images/best_video_portfolio.jpg">
         <div class="container"> 
 
