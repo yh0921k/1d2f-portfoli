@@ -28,7 +28,9 @@
       title,
       start_date,
       end_date,
-      activate
+      activate,
+      image,
+      url
     from pf_banner
     where activate=1
   </select>
