@@ -124,7 +124,7 @@ function payForCard() {
   IMP.init('imp35276447');
 
   IMP.request_pay({
-    amount : '10',
+    amount : '${payment.price}',
     pay_method : '${payment.method}',
     buyer_tel : '${loginUser.tel}',
     buyer_name : '${loginUser.name}',
