@@ -49,7 +49,7 @@
   <c:forEach items="${banners}" var="item">
   <div>
      <div class="col-12 col-lg-4"
-          style="z-index: 150;max-width: 80%;font-size: 1.4rem;position: absolute;margin-left: 3rem;margin-top: 2rem;float: left;text-overflow: ellipsis;">
+          style="z-index: 150;max-width: 80%;height: 2.3rem;font-size: 1.4rem;position: absolute;margin-left: 3rem;margin-top: 2rem;float: left;overflow: hidden;text-overflow: ellipsis;">
      ${item.portfolio.rankfield.name} 분야 Best Portfolio
      </div>
 			  	<div class="col-12 col-lg-4 mb-4 cursor js-ajax-modal" 
@@ -91,10 +91,10 @@
 			      <div class="card-footer bg-transparent b-0" style="height: 100px;">
 			        <hr class="border-light opacity-2">
 			        <span class="btn btn-sm btn-success opacity-8" style="float:left; margin-left:1.3rem;">
-			          추천수 : ${item.portfolio.getRecommendedCount()}
+			          추천수: ${item.portfolio.getRecommendedCount()}
 			        </span>
 			        <a href="#" class="btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
-			          조회수 : ${item.portfolio.getViewCount()}
+			          조회수: ${item.portfolio.getViewCount()}
 			        </a>
 			      </div>
 			    <!-- 카드하단 -->
@@ -244,12 +244,12 @@
       <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
         <a href="#" class="btn btn-sm btn-success opacity-8" style="float:left; margin-left:1.3rem;">
-        <span class="fs--14">
-              추천수 : ${item.getRecommendedCount()}
+        <span class="recommendSpan fs--14">
+              추천수:${item.getRecommendedCount()}
         </span>
         </a>
-        <a href="#" class="btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
-              조회수 : ${item.getViewCount()}
+        <a href="#" class="viewCountSpan btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
+              조회수:${item.getViewCount()}
         </a>
       </div>
     <!-- 카드하단 -->
@@ -337,9 +337,9 @@
   <script>
   
   // 배너 돌아가는 움직임 구현
-    setInterval(function() {
-	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
-	  },3000);
+//    setInterval(function() {
+//	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
+//	  },3000);
 
   // 쿼리스트링 split 구문
   function getQueryStringObject() {
@@ -385,18 +385,41 @@
 	  }
   
   $(document).ready(function() {
-	  
+
+	  // 다양한 브라우저 크기에서 유연한 작동 제공
+	  $(window).resize(function(){
 	  // outerbox 높이, 너비에 맞추기
-	  var wid = $(document).width();
-	  console.log("outerbox 너비: " + wid);
-	  if(wid < 970) {
-	  var outerbox = $('.outerbox');
-	  outerbox.css('height', wid * 0.3);
-	  outerbox.css('max-height', wid * 0.3);
-	  $('.card-footer.bg-transparent.b-0').css('display','none');
-	  $('.d-table-cell.align-bottom').css('padding-left', '5%');
-	  }
-	  console.log("outerbox (970px 이하일때) 높이조정:" + $('.outerbox').css('height'));
+		  var wid = $(document).width();
+		  if(wid < 970) {
+		  var outerbox = $('.outerbox');
+		  outerbox.css('height', wid * 0.3);
+		  outerbox.css('max-height', wid * 0.3);
+		  $('.card-footer.bg-transparent.b-0').css('display','none');
+		  $('.d-table-cell.align-bottom').css('padding-left', '5%');
+		  // 조회수, 추천수 글자 제거
+		  $('.viewCountSpan').html($('.viewCountSpan').html().replace('조회수:', ''));
+		  $('.recommendSpan').html($('.recommendSpan').html().replace('추천수:', ''));
+		  } else {
+			  var outerbox = $('.outerbox');
+			  outerbox.css('height', "");
+			  outerbox.css('max-height', "300px");
+			  $('.card-footer.bg-transparent.b-0').css('display','block');
+			  $('.d-table-cell.align-bottom').css('padding-left', '2rem');
+			  
+			  // 조회수, 추천수 글자 추가
+			  if($('.viewCountSpan').html().indexOf('조회수') == -1){
+				  let temp = "조회수:" + $('.viewCountSpan').html();
+				  console.log(temp);
+				  $('.viewCountSpan').html(temp);
+			  }
+			  if($('.recommendSpan').html().indexOf('추천수') == -1){
+				  let temp = "추천수:" + $('.recommendSpan').html();
+				  console.log(temp);
+				  $('.recommendSpan').html(temp);
+			  }
+		  }
+		  // console.log("outerbox (970px 이하일때) 높이조정:" + $('.outerbox').css('height'));
+	  });
 	  
 	  // 스타일 토글러
 	    $('#styleToggle').click();
