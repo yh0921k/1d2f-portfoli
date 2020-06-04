@@ -174,7 +174,7 @@
   <!-- 테이블 출력 부분 -->
   <div class="row">
     <div class="col-12 col-lg-12">
-      <div style="z-index:-1;" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+      <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
         <div id="searchTable" class="card-body" style="height:150px">
         
 			    <div style="display:inline-block" class="dataTables_length" id="rand_yjK_length">
