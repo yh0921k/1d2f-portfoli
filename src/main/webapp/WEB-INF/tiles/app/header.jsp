@@ -11,9 +11,6 @@
       class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit">
       <div class="align-items-start">
 
-        <!-- 
-                Logo : height: 70px max
-              -->
         <a class="navbar-brand" href="/portfoli"> <img
           src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo.png"
           width="150" height="20" alt="..."> <img
@@ -22,7 +19,6 @@
         </a>
 
       </div>
-
 
       <!-- Menu -->
 
@@ -33,50 +29,57 @@
         <ul class="navbar-nav fs--14">
           <!-- Menu -->
 
-          <!-- documentation -->
-          <c:if test="${loginUser.type=='1' or loginUser.type==null}">
-            <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner"
-              id="portfolio"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
-            <li class="nav-item"><a href="/portfoli/app/jobposting/list"
-              id="info" class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
-            <li class="nav-item"><a 
-            	href="/portfoli/app/recommendEmployer/list" id="recommendInfo"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 0px;" <span>추천채용정보</span></a></li>
-            <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
-          </c:if>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarMainNav">
 
-          <c:if test="${loginUser.type=='2'}">
-            <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 30px;" <span>포트폴리오</span></a></li>
-            <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 0px;" <span>채용정보</span></a></li>
-            <li class="nav-item"><a href="/portfoli/app/recommendEmployee/recommend" id="recommendInfoForCom"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 0px;" <span>인재추천정보</span></a></li>
-            <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
-              class="nav-link dropdown-toggle nav-link-caret-hide"
-              style="width: 150px; margin-left: 30px;" <span>랭킹</span></a></li>
-          </c:if>
-          <!-- /NAVIGATION -->
+            <!-- NAVIGATION -->
+            <ul class="navbar-nav fs--14">
+              <!-- Menu -->
+
+              <!-- documentation -->
+              <c:if test="${loginUser.type=='1' or loginUser.type==null}">
+                <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
+                <li class="nav-item"><a
+                  href="/portfoli/app/jobposting/list" id="info"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
+                <li class="nav-item"><a 
+                  href="/portfoli/app/recommendEmployer/list" id="recommendInfo"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">추천채용정보</span></a></li>
+                <li class="nav-item"><a href="/portfoli/app/rank/list " id="ranking"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">랭킹</span></a></li>
+              </c:if>
+
+              <c:if test="${loginUser.type=='2'}">
+                <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
+                <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
+                <li class="nav-item"><a href="/portfoli/app/recommendEmployee/recommend" id="recommendInfoForCom"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">인재추천정보</span></a></li>
+                <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
+                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">랭킹</span></a></li>
+              </c:if>
+              <!-- /NAVIGATION --> 
 
           <!-- 로그인 전 -->
           <c:if test="${empty loginUser}">
-            <li class="nav-item"><a class="nav-link text-secondary"
+            <li class="nav-item"><a
+              class="nav-link text-secondary"
               href="/portfoli/app/member/generalJoin"
-              style="text-decoration: none; font-weight: bold;">회원가입</a></li>
+              style="text-decoration: none; font-size: 1.1rem;">회원가입</a></li>
 
             <li
               class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
               <a target="_blank" href="/portfoli/app/auth/loginForm"
-              class="nav-link text-secondary" style="font-weight: bold;">로그인</a>
+              class="nav-link text-secondary" style="font-size: 1.1rem;">로그인</a>
             </li>
           </c:if>
 
@@ -107,26 +110,23 @@
                       data-href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
                       data-ajax-modal-size="modal-md"
                       data-ajax-modal-centered="true"
-                      data-ajax-modal-backdrop="static"> <span
+                      data-ajax-modal-backdrop=""> <span
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
                       <!-- image -->
-                      <c:set var="photo" value="${recentMessage.member.photoFilePath}"/>
                       <c:choose>
                       <c:when
-                        test="${empty photo}">
+                        test="${empty recentMessage.member.photoFilePath}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
                           style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
                       </c:when> 
-                      <c:when test="${not empty photo}">
+                      <c:when test="${not empty recentMessage.member.photoFilePath}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
-                          style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${photo}')"></div>
-                      </c:when>
-                      </c:choose> 
-                      <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
+                          style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${recentMessage.member.photoFilePath}')"></div>
+                      </c:when></c:choose> <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
                       <!-- title -->
                       <p class="fs--14 m-0 text-truncate font-weight-normal">
                         ${recentMessage.title}</p> <!-- date --> <small
@@ -144,56 +144,67 @@
                     class="d-inline-block pl-2 pr-2">받은 쪽지함으로 이동</span>
                   </a>
                 </div>
-              </div></li>
+                </div>
+                </li>
 
-            <li class="list-inline-item dropdown-menu-hover mt-3">
-            <a href="#" id="dropdownAccountOptions"
-              class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
-              data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-              
-                  <span class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0"
-												id="showAlarm"></span>
-              
-                <span class="group-icon m-0"> <i
-                  class="fi w--15 fi-user-male"></i> <i class="fi w--15 fi-close"></i>
-              </span> <span class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}
-              </span>
-            </a>
+                <li class="list-inline-item dropdown-menu-hover mt-3"><a
+                  href="#" id="dropdownAccountOptions"
+                  class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
+                  data-toggle="dropdown" aria-expanded="false"
+                  aria-haspopup="true"> 
+                  
+                  <span
+                class="badge badge-danger shadow-danger-md animate-pulse fs--10 p--3 mt--n3 position-absolute end-0"
+                id="showAlarm"></span>
+                  
+                  <span class="group-icon m-0">
+                      <i class="fi w--15 fi-user-male"></i> <i
+                      class="fi w--15 fi-close"></i>
+                  </span> 
+                  <span  
+                    class="fs--14 d-none d-sm-inline-block font-weight-medium">[일반]&nbsp;&nbsp;${loginUser.name}
+                  </span>
+                </a>
 
-              <div aria-labelledby="dropdownAccountOptions"
-                class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
+                  <div aria-labelledby="dropdownAccountOptions"
+                    class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-navbar-autopos dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15 w--300">
 
-                <div class="dropdown-header fs--14 py-4">
+                    <div class="dropdown-header fs--14 py-4">
 
-                  <!-- profile image -->
-                    <c:set var="photo" value="${loginUser.photoFilePath}"/>
+                      <!-- profile image -->
+                      <c:set var="photo" value="${loginUser.photoFilePath}"/>
                       <c:choose>
                         <c:when test="${empty photo}">
                       <div
                         class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
                         style="background-image: url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
                         </c:when>
+                          <c:when test="${fn:startsWith(photo, 'https://avatars3.githubusercontent.com/')}">
+                            <div class="w--60 h--60 rounded-circle bg-cover bg-light float-start"
+                          style="background-image:url('${photo}')"></div>
+                          </c:when>
                         <c:when test="${not empty photo}">
                           <div class="w--60 h--60 rounded-circle bg-cover bg-light float-start"
                         style="background-image: url('${pageContext.request.getContextPath()}/upload/member/${photo}')"></div>
                         </c:when>
                         </c:choose>
-                    <!-- initials - no image -->
-                    <!--
+                        <!-- initials - no image -->
+                        <!--
                     <div data-initials=${loginUser.name} data-assign-color="true" class="sow-util-initials bg-light rounded h5 w--60 h--60 d-inline-flex justify-content-center align-items-center rounded-circle float-start">
                       <i class="fi fi-circle-spin fi-spin"></i>
                     </div>
                     -->
 
-                    <!-- user detail -->
-                    <span class="d-block font-weight-medium text-truncate fs--16"><a
-                      href="/portfoli/app/member/generalMypage" class="text-muted">${loginUser.name}</a>
-                    </span> <span
-                      class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
+                        <!-- user detail -->
+                        <span
+                          class="d-block font-weight-medium text-truncate fs--16"><a
+                          href="/portfoli/app/member/generalMypage"
+                          class="text-muted">${loginUser.name}</a> </span> <span
+                          class="d-block text-muted font-weight-medium text-truncate">${loginUser.email}</span>
 
-                  </div>
+                      </div>
 
-                  <div class="dropdown-divider" style="z-index: 200;"></div>
+                      <div class="dropdown-divider" style="z-index: 200;"></div>
 
                       <a href="/portfoli/app/member/generalMypage" class="dropdown-item text-truncate font-weight-medium"> 마이페이지 
                       <small class="d-block text-muted">profile, password and more...</small>
@@ -208,21 +219,21 @@
                         <small class="d-block text-muted">calendar</small>
                       </a> 
 
-                  <div class="dropdown-divider mb-0"></div>
+                      <div class="dropdown-divider mb-0"></div>
 
-                  <a href="/portfoli/app/auth/logout"
-                    class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
-                    <i class="fi fi-power float-start"></i> Log Out
-                  </a>
-                </div>
-              </div></li>
+                      <a href="/portfoli/app/auth/logout"
+                        class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
+                        <i class="fi fi-power float-start"></i> Log Out
+                      </a>
+                    </div>
+                    </div>
+                    </li>
           </c:if>
 
           <!-- 기업 회원 로그인 후 -->
-
           <c:if test="${loginUser.type == '2'}">
-            <li class="list-inline-item ml--6 mr--6 dropdown mt-3"><a
-              href="#" id="dropdownMessageOptions"
+            <li class="list-inline-item ml--6 mr--6 dropdown mt-3"><a href="#"
+              id="dropdownMessageOptions"
               class="btn btn-sm rounded-circle btn-light dropdown-toggle"
               data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
 
@@ -245,12 +256,11 @@
                       data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
                       data-ajax-modal-size="modal-md"
                       data-ajax-modal-centered="true"
-                      data-ajax-modal-backdrop="static"> <span
+                      data-ajax-modal-backdrop=""> <span
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
-                      <!-- image --> <c:if
-                        test="${empty recentMessage.member.photoFilePath}">
+                      <!-- image --> <c:if test="${empty recentMessage.member.photoFilePath}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
                           style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
@@ -277,8 +287,7 @@
                   </a>
                 </div>
 
-                <li
-                  class="list-inline-item ml--6 mr--6 dropdown-menu-hover mt-3"><a
+                <li class="list-inline-item ml--6 mr--6 dropdown-menu-hover mt-3"><a
                   href="#" id="dropdownAccountOptions"
                   class="btn btn-sm btn-light dropdown-toggle btn-pill pl--12 pr--12"
                   data-toggle="dropdown" aria-expanded="false"
@@ -296,7 +305,7 @@
                     <div class="dropdown-header fs--14 py-4">
 
                       <!-- profile image -->
-                     <div
+                      <div
                         class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
                         <c:if test="${empty loginUser.photoFilePath}">
                         style="background-image: url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
@@ -319,19 +328,20 @@
                     </div>
 
                     <div class="dropdown-divider"></div>
+                    
                     <a href="/portfoli/app/member/companyMypage"
-                      class="dropdown-item text-truncate font-weight-medium">
-                      마이페이지 <small class="d-block text-muted">profile,
-                        password and more...</small>
-                    </a>
-                    <a href="#!" target="_blank"
+                        class="dropdown-item text-truncate font-weight-medium">
+                        마이페이지 <small class="d-block text-muted">profile,
+                          password and more...</small>
+                      </a>
+                    <a href="/portfoli/app/jobposting/mylist" target="_blank"
                     class="dropdown-item text-truncate font-weight-medium">
-                    공고 <small class="d-block text-muted">montly billing</small>
+                    채용 공고 관리 <small class="d-block text-muted">job posting management</small>
                   </a> <a href="/portfoli/app/payment/introduction"
                     class="dropdown-item text-truncate font-weight-medium">
-                    멤버십 <small class="d-block text-muted">계정 업그레이드</small>
+                    채용 상품 안내 <small class="d-block text-muted">recruitment product information</small>
                   </a>
-
+                      
                     <div class="dropdown-divider mb-0"></div>
                     <a href="/portfoli/app/auth/logout"
                       class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore font-weight-medium pt-3 pb-3">
@@ -339,12 +349,15 @@
                     </a>
                   </div></li>
           </c:if>
-        </ul>
+          </ul>
+          </div>
+
+        </nav>
       </div>
+      <!-- /NAVBAR -->
 
-    </nav>
-  </div>
-  <!-- /NAVBAR -->
-
-</header>
+    </header>
 <!-- /HEADER -->
+<script>
+console.log("dsadsad")
+</script>

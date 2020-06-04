@@ -59,9 +59,6 @@
 
           <div class="align-items-start">
 
-            <!-- 
-                Logo : height: 70px max
-              -->
             <a class="navbar-brand" href="/portfoli">
             <img src="${pageContext.request.getContextPath()}/resources/assets/images/logo/logo.png"
               width="150" height="20" alt="...">
@@ -70,10 +67,7 @@
             </a>
 
           </div>
-
-
           <!-- Menu -->
-
           <div class="collapse navbar-collapse justify-content-end" id="navbarMainNav">
 
             <!-- NAVIGATION -->
@@ -81,36 +75,36 @@
               <!-- Menu -->
 
               <!-- documentation -->
-              <c:if test="${loginUser.type=='1' or loginUser.type==null}">
+              <c:if test="${loginUser.type=='1' or loginUser.type == null}">
                 <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;"> <span>포트폴리오</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
                 <li class="nav-item"><a
                   href="/portfoli/app/jobposting/list" id="info"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;"> <span>채용정보</span></a></li>
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
                 <li class="nav-item"><a 
                 	href="/portfoli/app/recommendEmployer/list" id="recommendInfo"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;"> <span>추천채용정보</span></a></li>
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">추천채용정보</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/rank/list " id="ranking"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;"> <span>랭킹</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">랭킹</span></a></li>
               </c:if>
 
               <c:if test="${loginUser.type=='2'}">
                 <li class="nav-item"><a href="/portfoli/app/portfolio/listWithBanner" id="portfolio"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;"> <span>포트폴리오</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;"> <span>채용정보</span></a></li>
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/recommendEmployee/recommend" id="recommendInfoForCom"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 0px;"> <span>인재추천정보</span></a></li>
+                  style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">인재추천정보</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/rank/list" id="ranking"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
-                  style="width: 150px; margin-left: 30px;"> <span>랭킹</span></a></li>
+                  style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">랭킹</span></a></li>
               </c:if>
               <!-- /NAVIGATION --> 
 
@@ -119,12 +113,12 @@
             <li class="nav-item"><a
               class="nav-link text-secondary"
               href="/portfoli/app/member/generalJoin"
-              style="text-decoration: none; font-weight: bold;">회원가입</a></li>
+              style="text-decoration: none; font-size: 1.1rem;">회원가입</a></li>
 
             <li
               class="list-inline-item ml--6 mr--6 float-start d-none d-lg-inline-block">
               <a target="_blank" href="/portfoli/app/auth/loginForm"
-              class="nav-link text-secondary" style="font-weight: bold;">로그인</a>
+              class="nav-link text-secondary" style="font-size: 1.1rem;">로그인</a>
             </li>
           </c:if>
 
@@ -306,8 +300,7 @@
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
-                      <!-- image --> <c:if
-                        test="${empty recentMessage.member.photoFilePath}">
+                      <!-- image --> <c:if test="${empty recentMessage.member.photoFilePath}">
                         <div
                           class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
                           style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
@@ -381,12 +374,12 @@
                         마이페이지 <small class="d-block text-muted">profile,
                           password and more...</small>
                       </a>
-                    <a href="#!" target="_blank"
+                    <a href="/portfoli/app/jobposting/mylist" target="_blank"
                     class="dropdown-item text-truncate font-weight-medium">
-                    공고 <small class="d-block text-muted">montly billing</small>
+                    채용 공고 관리 <small class="d-block text-muted">job posting management</small>
                   </a> <a href="/portfoli/app/payment/introduction"
                     class="dropdown-item text-truncate font-weight-medium">
-                    멤버십 <small class="d-block text-muted">계정 업그레이드</small>
+                    채용 상품 안내 <small class="d-block text-muted">recruitment product information</small>
                   </a>
                       
                     <div class="dropdown-divider mb-0"></div>
@@ -409,10 +402,9 @@
 <section class="sow-util-slideshow min-h-75vh d-middle justify-content-start overlay-dark overlay-opacity-4 z-index: 1;" 
         data-sow-slideshow-interval="4000" 
         data-sow-slideshow-fade-delay="5000" 
-        data-sow-slideshow="resources/assets/images/best_sigak_portfolio.jpg,
-        <!-- resources/assets/images/best_front_portfolio.jpg, -->
-        ${pageContext.servletContext.contextPath}/upload/banner/1d6a4fd8-6e3b-446b-92a5-bf3972bd9a67,
-        resources/assets/images/best_video_portfolio.jpg">
+        data-sow-slideshow="${pageContext.request.getContextPath()}/resources/assets/images/best_sigak_portfolio.jpg,
+        ${pageContext.request.getContextPath()}/upload/banner/${banner},
+        ${pageContext.request.getContextPath()}/resources/assets/images/best_video_portfolio.jpg">
         <div class="container"> 
 
           <div class="text-center-md text-center-xs d-middle justify-content-start">
@@ -433,11 +425,36 @@
             </div>
 
           </div>
-
         </div>
-        </section>
-        
-        <!-- <div> 추가!</div> -->
+</section>
+<%--
+        <div class="container">채용중인 기업</div>
+        <div class="swiper-container swiper-preloader swiper-btn-group swiper-btn-group-end text-white h--220" style="width: 1160px;"
+  data-swiper='{
+    "slidesPerView": 1,
+    "spaceBetween": 0,
+    "autoplay": false,
+    "loop": true,
+    "pagination": { "type": "bullets" }
+  }'>
+
+
+  <div class="swiper-wrapper">
+   <c:forEach items="${bannerList}" var="banner">
+     <c:if test="empty banner">
+       <div class="swiper-slide d-middle bg-white overlay-dark overlay-opacity-1 bg-cover" style="background:url('${pageContext.servletContext.contextPath}/resources/assets/images/defaultbanner.png')"></div>
+     </c:if>
+    <div onclick="location.href='${banner.url}';" class="swiper-slide d-middle bg-white overlay-dark overlay-opacity-1 bg-cover" style="background:url('${pageContext.servletContext.contextPath}/upload/banner/${banner.filePath}');"></div>
+   </c:forEach>
+  </div>
+
+  <div class="swiper-button-next swiper-button-white"></div>
+  <div class="swiper-button-prev swiper-button-white"></div>
+
+  <div class="swiper-pagination"></div>
+
+</div>
+ --%>
 <!-- 
 		<div class="col-xs-12" style="padding-bottom: 5px;">
 			<div id="carouselExampleIndicators" class="carousel slide"
