@@ -5,24 +5,13 @@
 
 <!-- div =  container > highContetns , rowContents > highcon > high  -->
 
-<div class="container"
-	style="width: 2000px; height: 1500px; padding: 30px 0px;">
+<div class="container" style="height:1000px; padding: 30px 0px;">
 
-
-	<div class="highContents"
-		style="width: 100%; height: 45%; margin: auto; float: left;">
-
-		<div class="highcon1"
-			style="width: 100%; height: 70%; float: left; text-align: center;">
-
+<div class="row">
+    <div class="col-3 col-lg-3">
 			<!-------------------------------------------경력--------------------------------------------------->
-			<div clss="high1"
-				style="width: 24%; height: 100%; float: left; padding: 3px;">
-
-
-				<div
-					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div class="card-body">
+				<div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
+					<div style="height:300px;"  class="card-body">
 
 						<h5 class="card-title">경력</h5>
 
@@ -54,7 +43,6 @@
 										<option value=7>7년 이상</option>
 										<option value=8>8년 이상</option>
 										<option value=9>9년 이상</option>
-										<option value=10>10년 이상</option>
 									</select>
 								</div>
 
@@ -72,7 +60,6 @@
 										<option value=7>7년 이하</option>
 										<option value=8>8년 이하</option>
 										<option value=9>9년 이하</option>
-										<option value=10>10년 이하</option>
 									</select>
 								</div>
 
@@ -81,17 +68,15 @@
 						</div>
 					</div>
 				</div>
+				</div>
 
-			</div>
-			<!-- high1 /div -->
+
 			<!------------------------------------------/경력--------------------------------------------------->
 			<!------------------------------------------지역---------------------------------------------------->
-			<div class="high2"
-				style="width: 25%; height: 100%; float: left; padding: 3px;">
-
+    <div class="col-3 col-lg-3">
 				<div
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div class="card-body">
+					<div style="height:300px;"  class="card-body">
 						<h5 class="card-title">지역</h5>
 						<div class="input-group mb-3 ml-1">
 							<select
@@ -104,18 +89,15 @@
 						</div>
 					</div>
 				</div>
+				</div>
 
 
-			</div>
-			<!-- high2 /div -->
 			<!-----------------------------------------/지역---------------------------------------------------->
 			<!-----------------------------------------학력----------------------------------------------------->
-			<div class="high3"
-				style="width: 26%; height: 100%; float: left; padding: 3px;">
-
+<div class="col-3 col-lg-3">
 				<div
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div class="card-body">
+					<div style="height:300px;"  class="card-body">
 						<h5 class="card-title">학력</h5>
 						<div class="input-group mb-3 ml-1">
 							<select
@@ -129,18 +111,15 @@
 						</div>
 					</div>
 				</div>
+</div>
 
-
-			</div>
-			<!-- high3 /div -->
+		
 			<!----------------------------------------/학력----------------------------------------------------->
 			<!---------------------------------------기술,툴----------------------------------------------------->
-			<div class="high4"
-				style="width: 25%; height: 100%; float: left; padding: 3px;">
-
+<div class="col-3 col-lg-3">
 				<div
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
-					<div class="card-body">
+					<div style="height:300px;"  class="card-body">
 						<h5 class="card-title">기술/툴</h5>
 						<div class="input-group mb-3 ml-1">
 							<select
@@ -153,17 +132,12 @@
 						</div>
 					</div>
 				</div>
+</div>
 
 
-
-			</div>
-			<!-- high4 /div -->
 			<!--------------------------------------/기술,툴----------------------------------------------------->
-		</div>
-		<!-- highcon1 /div -->
-
-
-		<div class="highcon2" style="width: 100%; height: 30%; float: left;">
+        </div>
+<hr>
 
 		<div class="row">
       <div class="col-2 col-lg-2">
@@ -182,13 +156,8 @@
         </div>
       </div>
     </div>
+<hr>
 
-		</div>
-		<!-- highcon2 /div -->
-
-
-	</div>
-	<!-- highContents /div -->
 
   <!-- 테이블 출력 부분 -->
   <div class="row">
@@ -250,6 +219,11 @@ $("#overYear").change(function(){
 		return;
 	}
 	
+	let compare = document.querySelectorAll("#filterList .careerEnd");
+	if($(compare).length > 0 && $("#overYear option:selected").text().charAt(0) > $(compare).text().charAt(0)) {
+		return;
+	}
+	
 	let current = document.querySelectorAll("#filterList .careerStart");
 	if(current.length) {
 		$(current).remove();
@@ -265,6 +239,11 @@ $("#lessYear").change(function(){
   let startIdx = $("#lessYear option").index($("#lessYear option:selected"));
   
   if($("#lessYear option:selected").val() == 0) {
+    return;
+  }
+  
+  let compare = document.querySelectorAll("#filterList .careerStart");
+  if($(compare).length > 0 && $("#lessYear option:selected").text().charAt(0) < $(compare).text().charAt(0)) {
     return;
   }
   
@@ -286,19 +265,18 @@ $("#selectEducation").change(function(){
     return;
   }
   
-  let current = document.querySelectorAll("#filterList .careerEnd");
+  let current = document.querySelectorAll("#filterList .selectEdu");
   if(current.length) {
     $(current).remove();
   } 
   
   let item = $("#selectEducation option:selected").text();
   $("#filterField #filterList").append(
-      `<span style="cursor:pointer; margin:2px;" class="careerEnd badge badge-pill badge-secondary">` + item + `</span>`
+      `<span style="cursor:pointer; margin:2px;" class="selectEdu badge badge-pill badge-secondary">` + item + `</span>`
       );
 });
 
 $("#filterField").on("click", "#filterList .badge", function(){
-	  console.log("Test");
 	  $(this).remove();
 });
 </script>
