@@ -81,48 +81,4 @@ public class RecommendEmployerController {
     }
   }
 
-  @GetMapping("listMore")
-  public void listMore(int startIndex, HttpServletRequest request, Model model) throws Exception {
-
-    System.out.println("받은 인덱스값입니다.");
-    System.out.println(startIndex);
-
-    Member member = (Member) request.getSession().getAttribute("loginUser");
-
-    if(member == null) {
-      throw new Exception("로그인을 하신 후, 포트폴리오 목록을 볼 수 있습니다.");
-    } else {
-      List<JobPosting> jobpostings = new ArrayList<>();
-
-      List<Field> fields = fieldService.listOfMemberInterest(member.getNumber());
-      List<Integer> fieldNumbers = new ArrayList<>();
-      for(Field field : fields) {
-        fieldNumbers.add(field.getNumber());
-      }
-
-      // 일반회원 관심지역 번호 뽑아와야함
-      //      List<District> districts = interestLocationService.get(generalMemberNumber);
-      List<Integer> districtNumbers = new ArrayList<>();
-      //      for(District district : districts) {
-      //        districtNumbers.add(district.getDistrictNumber());
-      //      }
-      districtNumbers.add(101010);
-
-      // 조건에 충적하는 리스트 찾기
-      for(int districtNumber : districtNumbers) {
-        for(int fieldNumber : fieldNumbers) {
-          List<JobPosting> list = jobPostingService.findRecommendedEmployerList(
-              startIndex, districtNumber, fieldNumber);
-          if(list != null) {
-            jobpostings.addAll(list);
-          }
-        }
-      }
-
-      if(jobpostings != null) {
-        model.addAttribute("jobpostings", jobpostings);
-      }
-    }
-
-  }
 }

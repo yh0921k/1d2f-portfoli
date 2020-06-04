@@ -453,7 +453,6 @@
 		-- AND jp.start_dated >= now()
 		-- 나중에 데이터 충분하면 삽입예정
 		]]>
-		limit #{startIndex}, 10
 	</select>
 
   <select id="findPremiumJobPosting" resultMap="JobPostingMap">
