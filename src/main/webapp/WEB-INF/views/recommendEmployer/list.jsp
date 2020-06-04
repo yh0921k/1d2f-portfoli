@@ -16,7 +16,7 @@
 	        <div id="int_available">
 	        관심필드 : 
 	        </div>  
-	        <div id="region_available">
+	        <div id="dis_available">
 	        관심지역 : 
 	        </div>  
 	        </div>
@@ -24,7 +24,6 @@
 	  </div>
 	</div>
 	
-	<!-- MEMBER INTEREST SKILL TAB -->
 	<c:forEach var="item" items="${jobpostings}">
   <div class="card-body posting" style="height:240px" onclick="detail(${item.jobPostingNumber})" ">
     <div style="disply:inline-block; float:left; height:200px; width:200px; margin-left:10px; margin-right:20px;">
@@ -47,6 +46,8 @@
   <hr>
   </c:forEach>
 </div>
+
+
 
 <!--------------------------------------더보기------------------------------------------------------->
 <button id="moreListBtn" 
@@ -122,6 +123,28 @@ button.onclick = function() {
     xhr.send();
   };  
 
+
+  // 관심 지역 리스트 불러오기
+     var xhr = new XMLHttpRequest();
+     xhr.onreadystatechange = () => {
+       if (xhr.readyState == 4) {
+         if (xhr.status == 200) {
+           let skillList = JSON.parse(xhr.responseText); 
+           for(var skill of skillList) {
+             var addHtml = `<span style="cursor:pointer; margin:2px;" class="interestDistrict badge badge-pill badge-secondary">` + skill.name + `</span>`
+             $("#dis_available").append(addHtml);
+           }
+          }               
+        }
+       }    
+     xhr.open('GET', '../district/listOfUserInterest', false); 
+     xhr.send();
+     
+ 	  
+     if(document.getElementsByName("checkbox_p").length > 0) {
+       //return;
+     }
+  
   
   function detail(number) {
 	  location.href = "../jobposting/detail?no=" + number;

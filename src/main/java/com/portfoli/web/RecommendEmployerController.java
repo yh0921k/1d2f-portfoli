@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.portfoli.domain.District;
 import com.portfoli.domain.Field;
 import com.portfoli.domain.JobPosting;
 import com.portfoli.domain.Member;
+import com.portfoli.service.DistrictService;
 import com.portfoli.service.FieldService;
 import com.portfoli.service.JobPostingService;
 
@@ -38,6 +40,9 @@ public class RecommendEmployerController {
   @Autowired
   JobPostingService jobPostingService;
 
+  @Autowired
+  DistrictService districtService;
+
   @GetMapping("list")
   public void list(HttpServletRequest request, Model model) throws Exception {
     Member member = (Member) request.getSession().getAttribute("loginUser");
@@ -47,25 +52,29 @@ public class RecommendEmployerController {
     } else {
       List<JobPosting> jobpostings = new ArrayList<>();
 
+      // 일반회원 관심필드 번호 추출
       List<Field> fields = fieldService.listOfMemberInterest(member.getNumber());
       List<Integer> fieldNumbers = new ArrayList<>();
       for(Field field : fields) {
         fieldNumbers.add(field.getNumber());
       }
 
-      // 일반회원 관심지역 번호 뽑아와야함
-      //      List<District> districts = interestLocationService.get(generalMemberNumber);
+      // 일반회원 관심지역 번호 추출
+      List<District> districts = districtService.listOfMember(member.getNumber());
       List<Integer> districtNumbers = new ArrayList<>();
-      //      for(District district : districts) {
-      //        districtNumbers.add(district.getDistrictNumber());
-      //      }
-      districtNumbers.add(101010);
+      for(District district : districts) {
+        districtNumbers.add(district.getDistrictNumber());
+      }
 
       // 조건에 충적하는 리스트 찾기
       for(int districtNumber : districtNumbers) {
         for(int fieldNumber : fieldNumbers) {
           jobpostings.addAll(jobPostingService.findRecommendedEmployerList(0, districtNumber, fieldNumber));
         }
+      }
+
+      for(int i = 0; i < jobpostings.size(); i++) {
+        System.out.println("[" + i + "]번째" + jobpostings.get(i).toString());
       }
 
       model.addAttribute("jobpostings", jobpostings);
