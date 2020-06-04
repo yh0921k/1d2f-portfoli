@@ -65,4 +65,9 @@ public class SkillServiceImpl implements SkillService {
   public GeneralMemberSkill get(Map<String, Object> params) throws Exception {
     return skillDao.findMemberSkill(params);
   }
+
+  @Override
+  public List<Skill> list2(int fieldNumber) throws Exception {
+    return skillDao.findAllByNumber2(fieldNumber);
+  }
 }
