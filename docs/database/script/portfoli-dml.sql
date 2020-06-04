@@ -1110,6 +1110,11 @@ INSERT INTO pf_company_required_certificate  (certificate_no,job_posting_no) VAL
 INSERT INTO pf_company_required_certificate  (certificate_no,job_posting_no) VALUES(2290,4);
 INSERT INTO pf_company_required_certificate  (certificate_no,job_posting_no) VALUES(2434,5);  
 
+-- pf_payment 결제
+INSERT INTO pf_payment values(1, 6, "프리미엄 채용 공고", 2000, "프론트엔드 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200603172453691675", "2020-06-03 00:00:00", "2020-06-02 00:00:00", "2020-06-19 00:00:00");
+INSERT INTO pf_payment values(2, 7, "프리미엄 채용 공고", 2000, "백엔드 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200604103951575498", "2020-06-04 00:00:00", "2020-06-06 00:00:00", "2020-06-07 00:00:00");
+INSERT INTO pf_payment values(3, 8, "프리미엄 채용 공고", 10000, "서버 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200604154913450083", "2020-06-04 00:00:00", "2020-06-06 00:00:00", "2020-06-07 00:00:00");
+
 -- pf_general_mem_edu 일반회원학력 데이터(pf_final_education 인서트 후)
 INSERT INTO pf_general_mem_edu(general_member_no,education_no,school_name) VALUES(1,1,'서울대학교');
 INSERT INTO pf_general_mem_edu(general_member_no,education_no,school_name) VALUES(2,2,'고려대학교');
