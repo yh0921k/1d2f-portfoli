@@ -80,6 +80,7 @@
 						<h5 class="card-title">지역</h5>
 						<div class="input-group mb-3 ml-1">
 							<select
+								style="z-index:100;"
 								class="bs-select form-label-group form-control-clean col-md-12 mt--5"
 								id="inputGroupSelect06" name="generalMember.number">
 								<c:forEach items="${districts}" var="district">
@@ -139,7 +140,7 @@
         </div>
 <hr>
 
-		<div class="row">
+		<div class="row" style="z-index:0;">
       <div class="col-2 col-lg-2">
         <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
           <div id="searchCount" class="card-body" style="height:150px">
@@ -148,7 +149,7 @@
         </div>
       </div>
       
-      <div class="col-10 col-lg-10">
+      <div class="col-10 col-lg-10" style="z-index:-1;">
         <div id="filterField" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-danger bl-0 br-0 bb-0 bw--2">
           <div id="filterList" class="card-body" style="height:150px">
             <p>Filter</p>
@@ -162,7 +163,7 @@
   <!-- 테이블 출력 부분 -->
   <div class="row">
     <div class="col-12 col-lg-12">
-      <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+      <div style="z-index:-1;" class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
         <div id="searchTable" class="card-body" style="height:150px">
         
 			    <div style="display:inline-block" class="dataTables_length" id="rand_yjK_length">
@@ -198,6 +199,13 @@
 
 
 </div>
+
+<style>
+	.bs-select.form-label-group.form-control-clean.col-md-12.mt--5.js-bselectified{
+		z-index:555;
+	}
+</style>
+
 
 <script>
 window.onload = function() {
