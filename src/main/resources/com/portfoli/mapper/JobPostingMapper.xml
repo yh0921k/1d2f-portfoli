@@ -7,20 +7,23 @@
 
 	<resultMap type="JobPosting" id="JobPostingMap">
 		<id column="job_posting_no" property="jobPostingNumber" />
-		<result column="company_member_no" property="companyMemberNumber" />
+		<result column="company_member_no"
+			property="companyMemberNumber" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="work_place_no" property="workPlaceNumber" />
 		<result column="minimum_career" property="minimumCareer" />
 		<result column="view_count" property="viewCount" />
-		<result column="posting_registration"	property="postingRegistration" />
+		<result column="posting_registration"
+			property="postingRegistration" />
 		<result column="start_dated" property="startDated" />
 		<result column="end_dated" property="endDated" />
 		<result column="job" property="job" />
 		<result column="year_salary" property="yearSalary" />
 		<result column="readable" property="readable" />
 		<result column="tel" property="tel" />
-		<result column="minimum_education_no"	property="minimumEducationNumber" />
+		<result column="minimum_education_no"
+			property="minimumEducationNumber" />
 		<result column="logo" property="logo" />
 
 		<association property="employmentStatus"
@@ -28,54 +31,56 @@
 			<id column="employment_stat_no" property="number" />
 			<result column="employment_stat_name" property="name" />
 		</association>
-		
-		<association property="district" javaType="District">
-		<id column="district_no" property="districtNumber"></id>
-		<result column="city_name" property="cityName"></result>
-		<result column="district_name" property="name"></result>
-		</association>
-		
-		<association property="finalEducation" javaType="FinalEducation">
-		<id column="education_no" property="educationNumber"></id>
-		<result column="category" property="category"></result>
-		</association>
-		
-		  <association property="companyMember" javaType="CompanyMember">
-    <id column="company_member_no" property="number"></id>
-    </association>
 
-    <association property="certificate" javaType="Certificate">
-      <id column="certificate_no" property="certificateNumber" />
-      <result column="certificate_name" property="name" />
-    </association>
-    
-    <association property="major" javaType="Major">
-    <id column="major_no" property="majorNumber"/>
-    <result column="major_name" property="name"/>
-    </association>
-    
-    <association property="member" javaType="Member">
-    <id column="member_no" property="number"/>
-    <result column="member_name" property="name"/>
-    <result column="email" property="email"/>
-    </association>
-    
-    <association property="company" javaType="Company">
-    <id column="company_no" property="number"/>
-    <result column="company_name" property="name"/>
-    <result column="representative" property="representative"></result>
-    </association>
-    
-    <association property="field" javaType="Field">
-    <id column="field_no" property="number"/>
-    <result column="field_name" property="name"/>
-    </association>
-    
-    <association property="skill" javaType="Skill">
-    <id column="skill_no" property="number"/>
-    <result column="skill_name" property="name"/>
-    </association>
-    
+		<association property="district" javaType="District">
+			<id column="district_no" property="districtNumber"></id>
+			<result column="city_name" property="cityName"></result>
+			<result column="district_name" property="name"></result>
+		</association>
+
+		<association property="finalEducation"
+			javaType="FinalEducation">
+			<id column="education_no" property="educationNumber"></id>
+			<result column="category" property="category"></result>
+		</association>
+
+		<association property="companyMember"
+			javaType="CompanyMember">
+			<id column="company_member_no" property="number"></id>
+		</association>
+
+		<association property="certificate" javaType="Certificate">
+			<id column="certificate_no" property="certificateNumber" />
+			<result column="certificate_name" property="name" />
+		</association>
+
+		<association property="major" javaType="Major">
+			<id column="major_no" property="majorNumber" />
+			<result column="major_name" property="name" />
+		</association>
+
+		<association property="member" javaType="Member">
+			<id column="member_no" property="number" />
+			<result column="member_name" property="name" />
+			<result column="email" property="email" />
+		</association>
+
+		<association property="company" javaType="Company">
+			<id column="company_no" property="number" />
+			<result column="company_name" property="name" />
+			<result column="representative" property="representative"></result>
+		</association>
+
+		<association property="field" javaType="Field">
+			<id column="field_no" property="number" />
+			<result column="field_name" property="name" />
+		</association>
+
+		<association property="skill" javaType="Skill">
+			<id column="skill_no" property="number" />
+			<result column="skill_name" property="name" />
+		</association>
+
 		<collection property="files" ofType="JobPostingFile">
 			<id column="job_posting_file_no" property="jobPostingFileNumber" />
 			<result column="file_path" property="filePath" />
@@ -91,7 +96,7 @@
 		content,
 		minimum_career,
 		job,
-		year_salary,		
+		year_salary,
 		start_dated,
 		end_dated,
 		view_count,
@@ -120,7 +125,7 @@
 		#{finalEducation.educationNumber},
 		#{employmentStatus.number},
 		#{field.number},
-    #{skill.number})
+		#{skill.number})
 	</insert>
 
 	<select id="findAll" resultMap="JobPostingMap">
@@ -137,14 +142,40 @@
 		j.posting_registration,
 		j.tel,
 		f.file_path,
-		e.employment_stat_name
-		from
-		pf_job_posting j
+		e.employment_stat_name,
+		c.name as certificate_name,
+		m.name as major_name,
+		d.name as district_name,
+		i.category,
+		cp.representative,
+		cp.name as company_name,
+		fi.name as field_name,
+		sk.name as skill_name
+		from pf_job_posting j
 		left outer join
 		pf_job_posting_file f on j.job_posting_no=f.job_posting_no
-		join
-		pf_employment_status e
-		ON j.employment_stat_no = e.employment_stat_no
+		join pf_employment_status e
+		on j.employment_stat_no = e.employment_stat_no
+		left outer join
+		pf_company_required_certificate r on j.job_posting_no = r.job_posting_no
+		left outer join
+		pf_certificate c on r.certificate_no = c.certificate_no
+		left outer join
+		pf_company_required_major q on j.job_posting_no = q.job_posting_no
+		left outer join
+		pf_major m on q.major_no = m.major_no
+		left outer join
+		pf_district d on j.work_place_no = d.district_no
+		left outer join
+		pf_final_education i on j.minimum_education_no = i.education_no
+		left outer join pf_company_member as k
+		on k.company_member_no = j.company_member_no
+		left outer join pf_company as cp
+		on cp.company_no = k.company_no
+		left outer join pf_field as fi
+		on j.field_no = fi.field_no
+		left outer join pf_skill as sk
+		on j.skill_no = sk.skill_no
 		where
 		j.end_dated > now()
 		order by
@@ -160,58 +191,21 @@
 
 	<select id="findMore" resultMap="JobPostingMap"
 		parameterType="int">
-  <![CDATA[
-   select
-     j.job_posting_no,
-     j.title,
-     j.content,
-     j.minimum_career,
-     j.job,
-     j.year_salary,
-     j.start_dated,
-     j.end_dated,
-     j.view_count,
-     j.posting_registration,
-     f.file_path,
-     e.employment_stat_name
-   from
-     pf_job_posting j
-     left outer join
-     pf_job_posting_file f on j.job_posting_no=f.job_posting_no
-     join
-     pf_employment_status e
-     ON j.employment_stat_no = e.employment_stat_no
-   where 
-     end_dated > now() and j.job_posting_no < #{lastNo}
-  order by
-    j.job_posting_no desc 
-  limit 0, 5
-  ]]>
-	</select>
-
-	<select id="ListCnt" resultType="int" parameterType="int">
-		select
-		count(*)
-		from pf_job_posting
-	</select>
-
-
-	<select id="findByNo" resultMap="JobPostingMap"
-		parameterType="int">
-	select
-     j.job_posting_no,
-     j.company_member_no,
-     j.title,
-     j.content,
-     j.minimum_career,
-     j.job,
-     j.year_salary,
-     j.tel,
-     j.start_dated,
-     j.end_dated,
-     j.view_count,
-     f.file_path,
-     e.employment_stat_name,
+     <![CDATA[
+    select
+    j.job_posting_no,
+    j.title,
+    j.content,
+    j.minimum_career,
+    j.job,
+    j.year_salary,
+    j.start_dated,
+    j.end_dated,
+    j.view_count,
+    j.posting_registration,
+    j.tel,
+    f.file_path,
+    e.employment_stat_name,
      c.name as certificate_name,
      m.name as major_name,
      d.name as district_name,
@@ -246,7 +240,71 @@
      left outer join pf_skill as sk
      on j.skill_no = sk.skill_no
    where
-   j.job_posting_no=#{jobPostingNumber}
+   end_dated > now() and j.job_posting_no < #{lastNo}
+    order by
+    j.job_posting_no desc
+    limit 0, 5
+          ]]>
+	</select>
+
+	<select id="ListCnt" resultType="int" parameterType="int">
+		select
+		count(*)
+		from pf_job_posting
+	</select>
+
+
+	<select id="findByNo" resultMap="JobPostingMap"
+		parameterType="int">
+		select
+		j.job_posting_no,
+		j.company_member_no,
+		j.title,
+		j.content,
+		j.minimum_career,
+		j.job,
+		j.year_salary,
+		j.tel,
+		j.start_dated,
+		j.end_dated,
+		j.view_count,
+		f.file_path,
+		e.employment_stat_name,
+		c.name as certificate_name,
+		m.name as major_name,
+		d.name as district_name,
+		i.category,
+		cp.representative,
+		cp.name as company_name,
+		fi.name as field_name,
+		sk.name as skill_name
+		from pf_job_posting j
+		left outer join
+		pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+		join pf_employment_status e
+		on j.employment_stat_no = e.employment_stat_no
+		left outer join
+		pf_company_required_certificate r on j.job_posting_no = r.job_posting_no
+		left outer join
+		pf_certificate c on r.certificate_no = c.certificate_no
+		left outer join
+		pf_company_required_major q on j.job_posting_no = q.job_posting_no
+		left outer join
+		pf_major m on q.major_no = m.major_no
+		left outer join
+		pf_district d on j.work_place_no = d.district_no
+		left outer join
+		pf_final_education i on j.minimum_education_no = i.education_no
+		left outer join pf_company_member as k
+		on k.company_member_no = j.company_member_no
+		left outer join pf_company as cp
+		on cp.company_no = k.company_no
+		left outer join pf_field as fi
+		on j.field_no = fi.field_no
+		left outer join pf_skill as sk
+		on j.skill_no = sk.skill_no
+		where
+		j.job_posting_no=#{jobPostingNumber}
 	</select>
 
 	<update id="update" parameterType="JobPosting">
@@ -261,7 +319,8 @@
 			<if test="endDated != null">end_dated=#{endDated},</if>
 			<if test="employmentStatus != null and employmentStatus != ''">employment_stat_no=#{employmentStatus.number},</if>
 			<if test="district != null and district != ''">work_place_no=#{district.districtNumber},</if>
-			<if test="finalEducation != null and finalEducation != ''">minimum_education_no=#{finalEducation.educationNumber},</if>
+			<if test="finalEducation != null and finalEducation != ''">minimum_education_no=#{finalEducation.educationNumber},
+			</if>
 			<if test="tel != null and tel != ''">tel=#{tel},</if>
 			<if test="field != null and field != ''">field_no=#{field.number},</if>
 			<if test="skill != null and skill != ''">skill_no=#{skill.number}</if>
@@ -291,161 +350,177 @@
 		f.file_path,
 		e.employment_stat_name,
 		c.name as certificate_name,
-		m.name as major_name
+		m.name
+		as major_name
 		from
-		pf_job_posting j		
+		pf_job_posting j
 		left outer join
 		pf_job_posting_file f on
 		j.job_posting_no = f.job_posting_no
 		join pf_employment_status e on
-		j.employment_stat_no = e.employment_stat_no
+		j.employment_stat_no =
+		e.employment_stat_no
 		left outer join
-		pf_company_required_certificate r on
-	  j.job_posting_no = r.job_posting_no
+		pf_company_required_certificate r
+		on
+		j.job_posting_no = r.job_posting_no
 		left outer join
-		pf_certificate c on r.certificate_no = c.certificate_no
+		pf_certificate c on r.certificate_no
+		= c.certificate_no
 		left outer join
-		pf_company_required_major q on j.job_posting_no = q.job_posting_no
+		pf_company_required_major q on
+		j.job_posting_no = q.job_posting_no
 		left outer join
-		pf_major m on q.major_no = m.major_no
+		pf_major m on
+		q.major_no = m.major_no
 		where
 		j.title like #{keywordPattern}
-		or j.content like #{keywordPattern}
+		or j.content
+		like #{keywordPattern}
 		or j.minimum_career like #{keywordPattern}
-		or j.start_dated like #{keywordPattern}
-		or j.end_dated like	#{keywordPattern}
+		or
+		j.start_dated like #{keywordPattern}
+		or j.end_dated like
+		#{keywordPattern}
 		or j.job like #{keywordPattern}
-		or j.year_salary like	#{keywordPattern}
+		or j.year_salary like
+		#{keywordPattern}
 		or e.employment_stat_name like #{keywordPattern}
-		or c.name like #{keywordPattern}
+		or
+		c.name like #{keywordPattern}
 		or m.name like #{keywordPattern}
 	</select>
-	
-	<select id="findAllByUserNumber" resultMap="JobPostingMap" parameterType="int">
-    select *
-    from pf_job_posting
-    where company_member_no=#{userNumber}
-  </select>
 
-  <select id="myPostingList" resultMap="JobPostingMap"
-    parameterType="int">
-    select
-    j.job_posting_no,
-    j.company_member_no,
-    j.title,
-    j.content,
-    j.minimum_career,
-    j.job,
-    j.year_salary,
-    j.start_dated,
-    j.end_dated,
-    j.view_count,
-    j.posting_registration,
-    f.file_path,
-    e.employment_stat_name
-    from
-    pf_job_posting j
-    left outer join
-    pf_job_posting_file f on j.job_posting_no=f.job_posting_no
-    join
-    pf_employment_status e
-    ON j.employment_stat_no = e.employment_stat_no
-    where
-    j.company_member_no=#{companyMemberNumber}
-    order by
-    j.job_posting_no desc
-    limit 0, 5
-  </select>
-  
-  <select id="findDeadline" resultMap="JobPostingMap"  parameterType="int">
-    select
-    j.job_posting_no,
-    j.title,
-    j.content,
-    j.minimum_career,
-    j.job,
-    j.year_salary,
-    j.start_dated,
-    j.end_dated,
-    j.view_count,
-    j.posting_registration,
-    f.file_path,
-    e.employment_stat_name
-    from
-    pf_job_posting j
-    left outer join
-    pf_job_posting_file f on j.job_posting_no=f.job_posting_no
-    join
-    pf_employment_status e
-    ON j.employment_stat_no = e.employment_stat_no
-    where
-    j.company_member_no=#{companyMemberNumber} and now() > date(subdate(j.end_dated,INTERVAL 7 DAY))
-    order by
-    j.job_posting_no desc      
-  </select>
+	<select id="findAllByUserNumber" resultMap="JobPostingMap"
+		parameterType="int">
+		select *
+		from pf_job_posting
+		where company_member_no=#{userNumber}
+	</select>
 
-  <select id="findByTitle" resultMap="JobPostingMap" parameterType="string">
-    select
-    j.job_posting_no,
-    j.title,
-    c.name as company_name,
-    m.name as member_name,
-    m.email
-    from pf_job_posting j
-    join pf_members m
-    on j.company_member_no=m.member_no
-    join pf_company_member cm
-    on j.company_member_no=cm.company_member_no
-    join pf_company c
-    on cm.company_no=c.company_no
-    where title=#{title}
-  </select>
+	<select id="myPostingList" resultMap="JobPostingMap"
+		parameterType="int">
+		select
+		j.job_posting_no,
+		j.company_member_no,
+		j.title,
+		j.content,
+		j.minimum_career,
+		j.job,
+		j.year_salary,
+		j.start_dated,
+		j.end_dated,
+		j.view_count,
+		j.posting_registration,
+		f.file_path,
+		e.employment_stat_name
+		from
+		pf_job_posting j
+		left outer join
+		pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+		join
+		pf_employment_status e
+		ON j.employment_stat_no = e.employment_stat_no
+		where
+		j.company_member_no=#{companyMemberNumber}
+		order by
+		j.job_posting_no desc
+		limit 0, 5
+	</select>
 
-	<select id="findRecommendedEmployerList" parameterType="map" resultMap="JobPostingMap">
-		SELECT 
-			jp.job_posting_no,
-			jp.title,
-			jp.content,
-			jp.minimum_career,
-			jp.job,
-			jp.year_salary,
-			jp.start_dated,
-			jp.end_dated,
-			jp.view_count,
-			jp.posting_registration,
-			jp.tel,
-			ci.name as city_name,
-			d.name as district_name,
-			cp.name as company_name,
-			fi.name as field_name
+	<select id="findDeadline" resultMap="JobPostingMap"
+		parameterType="int">
+		select
+		j.job_posting_no,
+		j.title,
+		j.content,
+		j.minimum_career,
+		j.job,
+		j.year_salary,
+		j.start_dated,
+		j.end_dated,
+		j.view_count,
+		j.posting_registration,
+		f.file_path,
+		e.employment_stat_name
+		from
+		pf_job_posting j
+		left outer join
+		pf_job_posting_file f on j.job_posting_no=f.job_posting_no
+		join
+		pf_employment_status e
+		ON j.employment_stat_no = e.employment_stat_no
+		where
+		j.company_member_no=#{companyMemberNumber} and now() > date(subdate(j.end_dated,INTERVAL 7 DAY))
+		order by
+		j.job_posting_no desc
+	</select>
+
+	<select id="findByTitle" resultMap="JobPostingMap"
+		parameterType="string">
+		select
+		j.job_posting_no,
+		j.title,
+		c.name as company_name,
+		m.name as member_name,
+		m.email
+		from pf_job_posting j
+		join pf_members m
+		on j.company_member_no=m.member_no
+		join pf_company_member cm
+		on j.company_member_no=cm.company_member_no
+		join pf_company c
+		on cm.company_no=c.company_no
+		where title=#{title}
+	</select>
+
+	<select id="findRecommendedEmployerList" parameterType="map"
+		resultMap="JobPostingMap">
+		SELECT
+		jp.job_posting_no,
+		jp.title,
+		jp.content,
+		jp.minimum_career,
+		jp.job,
+		jp.year_salary,
+		jp.start_dated,
+		jp.end_dated,
+		jp.view_count,
+		jp.posting_registration,
+		jp.tel,
+		ci.name as city_name,
+		d.name as district_name,
+		cp.name as company_name,
+		fi.name as field_name
 		FROM pf_job_posting jp
-		LEFT OUTER JOIN pf_job_posting_file f 
+		LEFT OUTER JOIN
+		pf_job_posting_file f
 		ON jp.job_posting_no=f.job_posting_no
-    JOIN pf_employment_status e
-    ON jp.employment_stat_no = e.employment_stat_no
-    LEFT OUTER JOIN pf_company_required_certificate r 
-    ON jp.job_posting_no = r.job_posting_no
-    LEFT OUTER JOIN pf_certificate c 
+		JOIN pf_employment_status e
+		ON jp.employment_stat_no = e.employment_stat_no
+		LEFT OUTER JOIN pf_company_required_certificate r
+		ON jp.job_posting_no = r.job_posting_no
+		LEFT OUTER JOIN pf_certificate c
 		ON r.certificate_no = c.certificate_no
-    LEFT OUTER JOIN 
-    pf_company_required_major q 
-    ON jp.job_posting_no = q.job_posting_no
-    LEFT OUTER JOIN pf_major m 
-    ON q.major_no = m.major_no
-    LEFT OUTER JOIN pf_district d
-    ON jp.work_place_no = d.district_no
-    LEFT OUTER JOIN pf_final_education i 
-    ON jp.minimum_education_no = i.education_no
-    LEFT OUTER JOIN pf_company_member as k
-    ON k.company_member_no = jp.company_member_no
-    LEFT OUTER JOIN pf_company as cp
-    ON cp.company_no = k.company_no
-    LEFT OUTER JOIN pf_field as fi
-    ON jp.field_no = fi.field_no   
-    LEFT OUTER JOIN pf_city as ci
-    ON convert(ci.city_no, char(3)) = convert(d.district_no, char(3))
-    
-		WHERE jp.field_no = #{skillNumber} 
+		LEFT OUTER JOIN
+		pf_company_required_major q
+		ON jp.job_posting_no = q.job_posting_no
+		LEFT OUTER JOIN pf_major m
+		ON q.major_no = m.major_no
+		LEFT OUTER JOIN pf_district d
+		ON jp.work_place_no = d.district_no
+		LEFT OUTER JOIN pf_final_education i
+		ON jp.minimum_education_no = i.education_no
+		LEFT OUTER JOIN pf_company_member as k
+		ON k.company_member_no = jp.company_member_no
+		LEFT OUTER JOIN pf_company as cp
+		ON cp.company_no = k.company_no
+		LEFT OUTER JOIN pf_field as fi
+		ON jp.field_no = fi.field_no
+		LEFT OUTER JOIN pf_city as ci
+		ON convert(ci.city_no, char(3)) = convert(d.district_no, char(3))
+
+		WHERE jp.field_no = #{skillNumber}
 		AND readable > 0
 		-- 나중에 eq1로 수정할 예정
 		AND work_place_no = #{districtNumber}
@@ -455,35 +530,35 @@
 		]]>
 	</select>
 
-  <select id="findPremiumJobPosting" resultMap="JobPostingMap">
-    select
-    j.title,
-    j.minimum_career,
-    j.end_dated,
-    j.logo,
-    c.name as company_name,
-    i.category,
-    d.name as district_name
-    from
-    pf_job_posting j
-    join
-    pf_payment p on j.title = p.apply_posting
-    join pf_company_member cm
-    on j.company_member_no=cm.company_member_no
-    join pf_company c
-    on cm.company_no=c.company_no
-    left outer join
-    pf_final_education i on j.minimum_education_no = i.education_no
-    left outer join
-    pf_district d on j.work_place_no = d.district_no
-    where now() >= p.start_date AND now() &lt; p.end_date
-    order by p.pay_no desc;
-  </select>
-  
-  <update id="insertLogo" parameterType="JobPosting">
-    update pf_job_posting
-    set
-    logo = #{logo}
-    where job_posting_no = #{jobPostingNumber}
-  </update>
+	<select id="findPremiumJobPosting" resultMap="JobPostingMap">
+		select
+		j.title,
+		j.minimum_career,
+		j.end_dated,
+		j.logo,
+		c.name as company_name,
+		i.category,
+		d.name as district_name
+		from
+		pf_job_posting j
+		join
+		pf_payment p on j.title = p.apply_posting
+		join pf_company_member cm
+		on j.company_member_no=cm.company_member_no
+		join pf_company c
+		on cm.company_no=c.company_no
+		left outer join
+		pf_final_education i on j.minimum_education_no = i.education_no
+		left outer join
+		pf_district d on j.work_place_no = d.district_no
+		where now() >= p.start_date AND now() &lt; p.end_date
+		order by p.pay_no desc;
+	</select>
+
+	<update id="insertLogo" parameterType="JobPosting">
+		update pf_job_posting
+		set
+		logo = #{logo}
+		where job_posting_no = #{jobPostingNumber}
+	</update>
 </mapper>
