@@ -320,6 +320,42 @@ $("#selectEducation").change(function(){
       );
 });
 
+$("#district_category").change(function(){
+    let startIdx = $("#district_category option").index($("#district_category option:selected"));
+    
+    if($("#district_category option:selected").val() == 0) {
+      return;
+    }
+    
+    let current = document.querySelectorAll("#filterList .selectDistrict");
+    if(current.length) {
+      $(current).remove();
+    } 
+    
+    let item = $("#district_category option:selected").text();
+    $("#filterField #filterList").append(
+        `<span style="cursor:pointer; margin:2px;" class="selectDistrict badge badge-pill badge-secondary">` + item + `</span>`
+        );
+  });
+
+$("#skill_category").change(function(){
+    let startIdx = $("#skill_category option").index($("#skill_category option:selected"));
+    
+    if($("#skill_category option:selected").val() == 0) {
+      return;
+    }
+    
+    let current = document.querySelectorAll("#filterList .selectSkill");
+    if(current.length) {
+      $(current).remove();
+    } 
+    
+    let item = $("#skill_category option:selected").text();
+    $("#filterField #filterList").append(
+        `<span style="cursor:pointer; margin:2px;" class="selectSkill badge badge-pill badge-secondary">` + item + `</span>`
+        );
+  });
+
 $("#filterField").on("click", "#filterList .badge", function(){
 	  $(this).remove();
 });
