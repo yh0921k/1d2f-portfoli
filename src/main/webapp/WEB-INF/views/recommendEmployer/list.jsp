@@ -9,9 +9,11 @@
 <div class="container py-1" id="bodyDiv">
 	<!-- MEMBER INTEREST SKILL TAB -->
 	<div class="tab-pane border bt-0 p-4 shadow-xs">
+	    <strong class="p-4" style="font-size:1.3rem;">Employment Recommendation</strong>
 	  <div class="d-block shadow-xs rounded p-4 mb-2">
 	      
 	    <div class="row">
+	    
 	      <div class="col" style="position: relative;height: 150px;">
 	        <div id="dis_available" class="scrollable-vertical scrollable-styled-dark p-4 border-danger" style="border:1px solid;position: relative;width: 48%;display: inline-block;height: 100%!important;">
 	        <strong style="margin-left: 0.5%!important;font-size: 1rem;">관심 지역</strong><br>
@@ -31,7 +33,7 @@
         <img src="../../upload/jobposting/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
       </div>
     </div>
-    <h5 class="card-title">${item.company.name}</h5>
+    <h5 class="card-title" style="font-weight: bold;font-size: 1.2rem;margin-top: 0.8%;">${item.company.name}</h5>
     <span><strong>${item.title}</strong></span>
     <h6><a>${item.tel}</a></h6>
     <br>

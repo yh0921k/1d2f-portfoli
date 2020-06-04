@@ -7,7 +7,7 @@
       <section class="bg-white" style="padding: 30px 0px;">
         <div class="container py-1">
 
-          <h3 class="h2" style="display:inline-block;">포트폴리오 게시판</h3>
+          <h3 class="h2" style="display:inline-block;margin-left: 3%;font-weight: bold;">Portfolios</h3>
     <%--
     <div style="display:inline-block" class="dataTables_length" id="rand_yjK_length">
       <label>
