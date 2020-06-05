@@ -42,7 +42,7 @@
                   style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
                 <li class="nav-item"><a
                   href="/portfoli/app/jobposting/list" id="info"
-                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  class="nav-link dropdown-toggle nav-link-caret-hide jobposting"
                   style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
                 <li class="nav-item"><a 
                   href="/portfoli/app/recommendEmployer/list" id="recommendInfo"
@@ -58,7 +58,7 @@
                   class="nav-link dropdown-toggle nav-link-caret-hide"
                   style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
-                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  class="nav-link dropdown-toggle nav-link-caret-hide jobposting"
                   style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/recommendEmployee/recommend" id="recommendInfoForCom"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
@@ -359,5 +359,26 @@
     </header>
 <!-- /HEADER -->
 <script>
-console.log("dsadsad")
+
+$(document).ready(function() {
+	var queryString = window.location.href;
+	console.log(queryString);
+	var cssTarget;
+	if(queryString.indexOf('/portfoli/app/portfolio/listWithBanner') > -1
+			|| queryString.indexOf('/portfoli/app/portfolio/searchAll') > -1
+			|| queryString.indexOf('/portfoli/app/portfolio/list') > -1) {
+		cssTarget = $('#portfolio > span');
+	} else if(queryString.indexOf('/portfoli/app/jobposting/list') > -1 
+			|| queryString.indexOf('/portfoli/app/jobposting/detail') > -1 
+			|| queryString.indexOf('/portfoli/app/jobposting/search') > -1) {
+		cssTarget = $('.jobposting > span');
+	} else if(queryString.indexOf('/portfoli/app/recommendEmployer/list') > -1) {
+		cssTarget = $('#recommendInfo > span');
+	} else if(queryString.indexOf('/portfoli/app/recommendEmployee/recommend') > -1) {
+		cssTarget = $('#recommendInfoForCom > span');
+	} else if(queryString.indexOf('/portfoli/app/rank/list') > -1){
+		cssTarget = $('#ranking > span');
+	}
+	cssTarget.css('font-size','1.1rem').css('font-weight','bold').css('text-shadow','2px 2px 19px #8ec1a1').css('color','#85ad94');
+});
 </script>
