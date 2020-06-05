@@ -17,7 +17,7 @@
     <div class="portlet mt--20"  style="width: 100%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
-          <h3 class="h2" style="display:inline-block;">내가 찜한 목록</h3>
+          <h3 class="h2" style="display:inline-block; font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem;">My Recommended Portfolios</h3>
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
         <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
            style="float:right;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">

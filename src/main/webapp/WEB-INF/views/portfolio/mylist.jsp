@@ -17,7 +17,7 @@
     <div class="portlet mt--20"  style="width: 100%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
-          <h3 class="h2" style="display:inline-block;">포트폴리오 관리하기</h3>
+          <h3 class="h2" style="display:inline-block; font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem;">My Portfolios</h3>
           <button class="btn btn-outline-secondary btn-pill btn-sm" 
                   style="margin-bottom:.5rem;margin-left: 2rem;"
                   onclick="location.href='form'">글쓰기(+)</button>

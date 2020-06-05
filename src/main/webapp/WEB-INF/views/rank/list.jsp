@@ -7,7 +7,7 @@
 <section class="bg-white" style="padding: 30px 0px;">
 	<div class="container py-1">
 	
-	  <h3 class="h4" style="display:inline-block;"><strong>Ranking</strong></h3>
+	  <h3 class="h4" style="display:inline-block; text-align:left; font-size:1.8rem; margin-left:1rem;"><strong>Ranking</strong></h3>
 	  
 	  
 	  <hr>

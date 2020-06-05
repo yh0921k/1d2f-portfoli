@@ -5,8 +5,8 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container" style="text-align:center" >
-<h1 style="text-align:left">채용정보</h1>
+<div class="container" style="text-align:center; padding: 30px 0px;" >
+<h1 style="font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem;">Job Informations</h1>
 <c:import url="/app/jobposting/premium"/>
 <!--------------------------------------공고검색----------------------------------------------------->
 <div id="searchForm" style="text-align:right">
