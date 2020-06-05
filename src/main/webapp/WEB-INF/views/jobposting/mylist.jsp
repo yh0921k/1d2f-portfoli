@@ -15,7 +15,7 @@
 		<div class="container mt--20"
 			style="width: 70%; margin-left: 10px; overflow-x: hidden;">
 
-			<h3 style="text-align: left">공고 관리</h3>
+			<h3 class="myfont myfont-md" style="text-align: left">공고 관리</h3>
 			<hr>
 
 			<%-------------------------------------content----------------------------------%>
@@ -56,6 +56,24 @@
 		</div>
 	</div>
 </div>
+
+<style>
+
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	margin-left:1rem;
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+</style>
 
 <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

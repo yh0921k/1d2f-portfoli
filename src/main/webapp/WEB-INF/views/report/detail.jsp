@@ -10,7 +10,7 @@
     <div class="portlet mt--20" style="width: 65%;">
 
       <div class="portlet-header">
-        <h1 class="d-none d-lg-block m--3">내 신고내역</h1>
+        <h1 class="d-none d-lg-block m--3 myfont myfont-lg">내 신고내역</h1>
         <!-- 
         <div align="right" class="container-fluid">
           <a href="/portfoli/app/report/delete?number=${report.number}"><button type="button"
@@ -64,3 +64,19 @@
   <!-------------------------------------------- /contents -------------------------------------------------->
 </div>
 </div>
+<style>
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	/*margin-left:1rem;*/
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+</style>

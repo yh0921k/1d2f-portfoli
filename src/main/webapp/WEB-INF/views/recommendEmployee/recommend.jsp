@@ -6,7 +6,9 @@
 <!-- div =  container > highContetns , rowContents > highcon > high  -->
 
 <div class="container" style="height:1000px; padding: 30px 0px;">
-
+	<div style="font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem; margin-bottom:2rem;">
+	  <strong>Employment Recommendation</strong>
+	</div>
 <div class="row">
     <div style="z-index:1;" class="col-3 col-lg-3">
 			<!-------------------------------------------경력--------------------------------------------------->

@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="modal-header">
-	<h2 class="modal-title fs--18 m-0">QNA 상세보기</h2>
+	<h2 class="modal-title fs--18 m-0"><strong>QNA 상세보기</strong></h2>
 
 	<button type="button" class="close pointer" data-dismiss="modal"
 		aria-label="Close">
