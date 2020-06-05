@@ -207,14 +207,18 @@
             <thead>
 			        <th>이름</th>
 			        <th>경력구분</th>
+			        <th>학력구분</th>
 			        <th>포트폴리오</th>
+			        <th>구성기술</th>
 			        <th>관심지역</th>
 			        <th>보유기술</th>
             </thead>
             <tbody>
 			        <td>이름</td>
 			        <td>경력구분</td>
+			        <td>학력구분</td>
 			        <td>포트폴리오</td>
+			        <td>구성기술</td>
 			        <td>지역</td>
 			        <td>기술</td>
             </tbody>
@@ -237,6 +241,82 @@
 
 <script>
 var toggle = 1;
+
+
+
+var filter = function() {
+    console.log("Filter()");
+    let data = {};
+    
+    data.careerNew = $("#filterList .careerNew").text();
+    data.careerStart = $("#filterList .careerStart").text(); 
+    data.careerEnd = $("#filterList .careerEnd").text();
+    data.selectEducation = $("#filterList .selectEdu").text();
+    data.viewOrder = $("#orderCount option:selected").text();
+    
+    console.log(data);
+    var convertedData = JSON.stringify(data);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+              let obj = JSON.parse(xhr.responseText);
+              console.log("OBJ : ", obj);
+              $("#portfolio_field > div").remove();
+              for(let item of obj) {
+                //console.log(item.thumbnail);
+//                 let makeHtml = "";
+//                 let portfolioSkill = "";
+//                 for(let skill of item.skills) {
+//                   portfolioSkill += `<span style="margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
+//                 }
+                
+//                 makeHtml += `<div class="row">
+//                     <div class="col-12 col-lg-12">
+//                       <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
+//                         <div class="card-body" style="height:240px">
+//                           <div style="disply:inline-block; float:left; height:200px; width:200px; margin-left:10px; margin-right:20px;">
+//                             <div id="thumbnail" style="display:inline-block; float:left; width:200px; height:200px; border:1px solid; "> 
+//                               <img src="../../upload/portfolio/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
+//                             </div>
+//                           </div>
+//                           <h5 class="card-title">` + item.title + `</h5>
+//                           <span><strong>` + item.id + `<strong></span>
+//                           <h6><a href="` + item.homepage + `" target="_blank">` + item.homepage + `</a></h6>
+//                           <br>
+//                           <p class="card-text" style="height:20px; margin-top:30px; margin-bottom:6px;">` + portfolioSkill +`</p>
+//                           <span style="font-size:15px;">조회수 : ` + item.viewCount + `</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//                           <span style="font-size:15px;">좋아요 : ` + item.likeCount + `</span>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>`;
+//                 $("#portfolio_field").append(makeHtml);
+              }
+            }
+        }
+    };
+    xhr.open('POST', 'listByFilter');
+    xhr.setRequestHeader('Content-Type', 'application/json'); 
+    xhr.send(convertedData);
+//     data.skillList = [];
+//     var skillList = document.querySelectorAll("#filter_field .selectedSkills");
+//     for(let skill of skillList) {
+//       data.skillList.push(skill.innerText);
+//     }
+//     data.orderCount = $("#orderCount option:selected").val()
+    
+//     var convertedData = JSON.stringify(data);
+    
+};
+
+
+
+
+
+
+
 window.onload = function() {
 	$(".overLessYear").hide();
 };
@@ -253,6 +333,9 @@ $("#toggleCareer").click(function() {
 	  $("#filterField #filterList").append(
 		      `<span style="cursor:pointer; margin:2px;" class="careerNew badge badge-pill badge-secondary">` + item.substring(0, 2) + `</span>`
 		      );
+	  $("#filterList .careerStart").remove();
+	  $("#filterList .careerEnd").remove();
+	  filter();
 	} else {
 	  $(".overLessYear").show();
 	  $("#filterList .careerNew").remove();
@@ -280,6 +363,7 @@ $("#overYear").change(function(){
 	$("#filterField #filterList").append(
 			`<span style="cursor:pointer; margin:2px;" class="careerStart badge badge-pill badge-secondary">` + item + `</span>`
 			);
+	filter();
 });
 
 $("#lessYear").change(function(){
@@ -303,6 +387,7 @@ $("#lessYear").change(function(){
   $("#filterField #filterList").append(
       `<span style="cursor:pointer; margin:2px;" class="careerEnd badge badge-pill badge-secondary">` + item + `</span>`
       );
+  filter();
 });
 	
 $("#selectEducation").change(function(){
@@ -321,6 +406,7 @@ $("#selectEducation").change(function(){
   $("#filterField #filterList").append(
       `<span style="cursor:pointer; margin:2px;" class="selectEdu badge badge-pill badge-secondary">` + item + `</span>`
       );
+  filter();
 });
 
 $("#district_category").change(function(){
@@ -359,6 +445,11 @@ $("#skill_category").change(function(){
 
 $("#filterField").on("click", "#filterList .badge", function(){
 	  $(this).remove();
+	  filter();
+});
+
+$("#orderCount").change(function(){
+	filter();
 });
 
 function selectedCity(el, value, label) {
