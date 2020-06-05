@@ -85,6 +85,7 @@
                 data-ajax-target="#district_category"
                 id="city_category" name="city_category"
                 data-ajax-callback-function="selectedCity">
+                <option value="0">지역전체</option>
                 <c:forEach items="${citys}" var="city">
                   <option value="${city.name}">${city.name}</option>
                 </c:forEach>
@@ -142,21 +143,23 @@
                 data-ajax-target="#skill_category"
                 id="field_category" name="field_category"
                 data-ajax-callback-function="selectedField">
+                <option value="0">분야전체</option>
                 <c:forEach items="${fields}" var="field">
                   <option value="${field.name}">${field.name}</option>
                 </c:forEach>
               </select>
               
-               <select
+                <select
                 class="bs-select form-control form-label-group form-control-clean col-md-12 mt--5"
                 id="skill_category" name="skill_category"
                 data-ajax-url="../skill/list2"
                 data-ajax-method="GET"
                 data-ajax-callback-function="selectedSkill">
+                <option value="0">기술전체</option>
                 <c:forEach items="${skills}" var="skill">
                   <option value="${skill.number}">${skill.name}</option>
                 </c:forEach>
-              </select>	
+              </select> 
 						
 					</div>
 				</div>
@@ -331,7 +334,6 @@ $("#district_category").change(function(){
     
     let current = document.querySelectorAll("#filterList .selectDistrict");
     if(current.length) {
-      $(current).remove();
     } 
     
     let item = $("#district_category option:selected").text();
@@ -349,7 +351,6 @@ $("#skill_category").change(function(){
     
     let current = document.querySelectorAll("#filterList .selectSkill");
     if(current.length) {
-      $(current).remove();
     } 
     
     let item = $("#skill_category option:selected").text();
