@@ -16,8 +16,8 @@
 <div class="container" style="width: 70%;overflow-y: scroll;margin-left: 10px;overflow-x: hidden;">
     <div class="portlet mt--20"  style="width: 100%; box-shadow: 0 0 0 0; display:inline-block">
 
-      <div class="portlet-header">
-          <h3 class="h2" style="display:inline-block; font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem;">My Recommended Portfolios</h3>
+      <div class="portlet-header" style="height:5rem;">
+          <h3 class="h2 myfont myfont-md" style="display:inline-block;">My Recommended Portfolios</h3>
 <!-------------------------------- 보기 스타일 전환버튼 -------------------------------->
         <a href="#!" class="btn btn-soft btn-toggle" id="styleToggle" 
            style="float:right;border: 1px #9E9E9E solid;padding:0.4rem 0.7rem;">
@@ -385,20 +385,36 @@
     location.href = "mylist?curPage=" + curPage;
     }
   </script>
-  <style>
-  .table .my-td.my{
-    padding: 1.2rem 1rem 1rem 1rem;
-  }
-    .cursor {
-      cursor: pointer;
-    }
-    .padding10_0{
-      padding: 10px 0px;
-    }
-    .padding10_10{
-      padding: 10px 10px;
-    }
-    .padding5_5{
-      padding: 5px 5px;
-    }
-  </style>
+<style>
+.table .my-td.my{
+  padding: 1.2rem 1rem 1rem 1rem;
+}
+.cursor {
+  cursor: pointer;
+}
+.padding10_0{
+  padding: 10px 0px;
+}
+.padding10_10{
+  padding: 10px 10px;
+}
+.padding5_5{
+  padding: 5px 5px;
+}
+
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	/*margin-left:1rem;*/
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+
+</style>

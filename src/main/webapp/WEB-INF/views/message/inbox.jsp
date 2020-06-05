@@ -102,7 +102,7 @@
   <div class="col-lg-8 mt--20">
       <div id="middle" class="flex-fill">
         <div class="page-title bg-transparent b-0">
-          <h1 class="h3 mt-3 mb-3 px-3 font-weight-normal">쪽지함</h1>
+          <h1 class="h3 mt-3 mb-3 px-3 font-weight-normal myfont myfont-md">받은 쪽지함</h1>
         </div>
       </div>
 
@@ -319,3 +319,20 @@
       </div>
     </div>
   </div>
+  
+  <style>
+  .myfont{
+  	font-weight:bold!important;
+  	text-align:left; 
+  	margin-left:1rem;
+  }
+  .myfont-md{
+  	font-size:1.5rem!important; 
+  }
+  .myfont-lg{
+  	font-size:1.8rem!important; 
+  }
+  .myfont-sm{
+  	font-size:1.2rem!important; 
+  }
+  </style>
