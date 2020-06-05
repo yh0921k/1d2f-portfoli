@@ -335,7 +335,6 @@ $("#district_category").change(function(){
 		inputValue = $("#district_category").val();
 		// 도시이름 입력 (district단위)
 		inputText = $("#district_category option:selected").html();
-		console.log(inputValue+":"+inputText);
     let startIdx = $("#district_category option").index($("#district_category option:selected"));
     
     if($("#district_category option:selected").val() == 0) {
@@ -343,8 +342,12 @@ $("#district_category").change(function(){
     }
     
     let current = document.querySelectorAll("#filterList .selectDistrict");
-    if(current.length) {
-    } 
+    console.log("current : ", current);
+    for(let item of current) {
+    	if($(item).val() == $("#district_category option:selected").val()) {
+    		return;
+    	}
+    }
     
     let item = $("#district_category option:selected").text();
     // value 값에 도시번호, innerHTML에 도시이름 입력
@@ -353,7 +356,7 @@ $("#district_category").change(function(){
     
     var sibling = $("#district_category option:selected").siblings("option:not(:selected)");
     var arrays = {};
-    for(var s in sibling) {
+    for(var s of sibling) {
     	arrays[s.value] = s.innerHTML;
     }
     	
@@ -361,7 +364,7 @@ $("#district_category").change(function(){
 	    for(var filteredElement of $("#filterField #filterList span")) {
 	    	for(var arr in arrays) {
 	    		// 도시전체로 할 경우, sibling의 도시번호를 찾아서 삭제
-	    		if(filteredElement.value == arr.value) {
+	    		if(filteredElement.getAttribute("value") == arr) {
 	    		  document.querySelector('#filterList').removeChild(filteredElement);
 	    		}
 	    	}
@@ -377,6 +380,13 @@ $("#skill_category").change(function(){
     }
     
     let current = document.querySelectorAll("#filterList .selectSkill");
+    
+    for(let item of current) {
+    	if($(item).text() == $("#skill_category option:selected").text()) {
+    		return;
+    	}
+    }
+    
     if(current.length) {
     } 
     
