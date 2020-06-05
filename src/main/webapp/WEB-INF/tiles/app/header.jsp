@@ -358,10 +358,25 @@
 
     </header>
 <!-- /HEADER -->
+
+<%-- 상단 앵커 추가 --%>
+<a class="scroll" href='#header' style="border: 1px solid black;text-align: center;width: 47px;height: 51px;position:fixed;z-index: 100;bottom:10px;right:10px;cursor: pointer;background-color: #dee6e1;font-weight: bolder;display: table;">
+	<div style="top: 10px;position: relative;">
+		<i class="fi-arrow-up fi"></i>
+	</div>
+</a>
 <script>
 
 $(document).ready(function() {
-	var queryString = window.location.href;
+	
+	// 상단 앵커 기능 구현 (w/ scroll 효과)
+  $(".scroll").click(function(event){
+      event.preventDefault();
+      $('html,body').animate({scrollTop:$(this.hash).offset().top}, 600);
+  });
+	
+// url 링크에 따라 상단 nav바에 text-shadow 효과 주기
+	var queryString = window.location.pathname;
 	console.log(queryString);
 	var cssTarget;
 	if(queryString.indexOf('/portfoli/app/portfolio/listWithBanner') > -1
