@@ -17,10 +17,10 @@
 
 						<h5 class="card-title">경력</h5>
 
-						<div style="z-index:1;" class="input-group mb-3 ml-1">
+						<div style="z-index:1;margin-left:0!important" class="input-group mb-3 ml-1">
 							<!------------------------------------------경력신입체크---------------------------------------------->
-					<div style="width:100%">		
-            <a id="toggleCareer" style="height:40px;" href="#!" class="btn btn-primary btn-soft btn-toggle btn-sm">
+					<div style="width:100%; margin-bottom:1rem;">		
+            <a id="toggleCareer" style="width:100%; height:40px;" href="#!" class="btn btn-primary btn-soft btn-toggle btn-sm">
 						  <span class="group-icon">
 						    <i>신입</i>
 						    <i>경력</i>
@@ -30,8 +30,8 @@
 							<br> <br>
 							<!-----------------------------------------/경력신입체크---------------------------------------------->
 
-								<div style="z-index:1;" class="overLessYear form-label-group mb-3 ml-1">
-									<select style="z-index:1;" id="overYear"
+								<div style="z-index:2;width:100%;margin-left:0!important;" class="overLessYear form-label-group mb-3 ml-1">
+									<select style="z-index:2;" id="overYear"
 										class="bs-select form-label-group form-control-clean col-md-15 mt--5"
 										name='overYear'>
 										<option value=0>최소경력</option>
@@ -47,7 +47,7 @@
 									</select>
 								</div>
 
-								<div class="overLessYear form-label-group mb-3 ml-1">
+								<div style="z-index:1;width:100%;margin-left:0!important;" class="overLessYear form-label-group mb-3 ml-1">
 									<select id="lessYear"
 										class="bs-select form-label-group form-control-clean col-md-15 mt--5"
 										name='overYear'>
@@ -114,7 +114,7 @@
 					class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-success bl-0 br-0 bb-0 bw--2">
 					<div style="height:300px;z-index:1;"  class="card-body">
 						<h5 class="card-title">학력</h5>
-						<div class="input-group mb-3 ml-1" style="z-index:1;">
+						<div class="input-group mb-3 ml-1" style="z-index:1; margin-left:0!important">
 							<select
 								class="bs-select form-label-group form-control-clean col-md-12 mt--5"
 								id="selectEducation" name="generalMember.number">
@@ -194,7 +194,7 @@
   <div class="row">
     <div class="col-12 col-lg-12">
       <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
-        <div id="searchTable" class="card-body" style="height:150px">
+        <div id="searchTable" class="card-body">
         
 			    <div style="display:inline-block" class="dataTables_length" id="rand_yjK_length">
 			      <label>
@@ -234,6 +234,11 @@
 	.bs-select.form-label-group.form-control-clean.col-md-12.mt--5.js-bselectified{
 		z-index:1;
 	}
+	.dropdown.bootstrap-select.bs-select.form-label-group.form-control-clean.col-md-15.mt--5 {
+		width:100%;
+	}
+	th {vertical-align:middle;}
+	td {vertical-align:middle;}
 </style>
 
 
