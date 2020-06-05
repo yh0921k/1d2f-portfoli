@@ -1,6 +1,7 @@
 package com.portfoli.web;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -21,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.portfoli.domain.District;
 import com.portfoli.domain.Member;
+import com.portfoli.domain.Rank;
 import com.portfoli.service.CityService;
 import com.portfoli.service.DistrictService;
+import com.portfoli.service.RankService;
 
 @Controller
 @RequestMapping("/district")
@@ -38,6 +41,9 @@ public class DistrictController {
 
   @Autowired
   CityService cityService;
+
+  @Autowired
+  RankService rankService;
 
   public DistrictController() {
     logger.debug("DistrictController 생성");
@@ -147,5 +153,38 @@ public class DistrictController {
     HashSet<Object> seen = new HashSet<>();
     smartyList.removeIf(obj -> !seen.add(obj.get("label")));
     return new Gson().toJson(smartyList);
+  }
+
+  @PostMapping(value = "listByFilter", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String listByFilter(HttpServletRequest request,
+      @RequestBody Map<String, Object> convertedData) throws Exception {
+
+    List<String> skillList = (List<String>) convertedData.get("skillList");
+    String orderCount = (String) convertedData.get("orderCount");
+
+    List<Rank> rankList = rankService.list(convertedData);
+    if (skillList.size() > 0) {
+      rankList.sort(new Comparator<Rank>() {
+        @Override
+        public int compare(Rank o1, Rank o2) {
+          int size = o1.getSkill().size();
+          int compareSize = o2.getSkill().size();
+
+          if (size < compareSize) {
+            return 1;
+          } else if (size > compareSize) {
+            return -1;
+          }
+          return 0;
+        }
+      });
+    }
+
+    request.setAttribute("rankList", rankList);
+    for (Rank r : rankList) {
+      System.out.println(r);
+    }
+    return new Gson().toJson(rankList);
   }
 }
