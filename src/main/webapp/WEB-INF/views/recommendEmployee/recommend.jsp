@@ -331,6 +331,7 @@ $("#selectEducation").change(function(){
 });
 
 $("#district_category").change(function(){
+	console.log("변함");
     let startIdx = $("#district_category option").index($("#district_category option:selected"));
     
     if($("#district_category option:selected").val() == 0) {
@@ -342,9 +343,25 @@ $("#district_category").change(function(){
     } 
     
     let item = $("#district_category option:selected").text();
-    $("#filterField #filterList").append(
-        `<span style="cursor:pointer; margin:2px;" class="selectDistrict badge badge-pill badge-secondary">` + item + `</span>`
-        );
+    var newChild = `<span style="cursor:pointer; margin:2px;" class="selectDistrict badge badge-pill badge-secondary">` + item + `</span>`;
+    $("#filterField #filterList").append(newChild);
+    
+    var sibling = $("#district_category option:selected").siblings("option:not(:selected)");
+    var arrays = [];
+    for(var s of sibling) {
+    	arrays.push(s.innerHTML);
+    }
+    	
+   	if($("#district_category option:selected").text().endsWith('전체')) {
+	    
+	    for(var filteredElement of $("#filterField #filterList span")) {
+	    	for(var arr of arrays) {
+	    		if(filteredElement.innerHTML == arr) {
+	    		  document.querySelector('#filterList').removeChild(filteredElement);
+	    		}
+	    	}
+	    }
+   	}
   });
 
 $("#skill_category").change(function(){
