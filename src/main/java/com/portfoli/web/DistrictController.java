@@ -144,6 +144,8 @@ public class DistrictController {
       districtData.put("selected", false);
       smartyList.add(districtData);
     }
+    HashSet<Object> seen = new HashSet<>();
+    smartyList.removeIf(obj -> !seen.add(obj.get("label")));
     return new Gson().toJson(smartyList);
   }
 }
