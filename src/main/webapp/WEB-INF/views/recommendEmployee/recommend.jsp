@@ -430,7 +430,7 @@ $("#district_category").change(function(){
     let current = document.querySelectorAll("#filterList .selectDistrict");
     console.log("current : ", current);
     for(let item of current) {
-    	if($(item).val() == $("#district_category option:selected").val()) {
+    	if($(item).text() == $("#district_category option:selected").text()) {
     		return;
     	}
     }
