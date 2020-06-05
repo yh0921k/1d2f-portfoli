@@ -1,4 +1,4 @@
-<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/src/main/webapp/resources/assets/images/logo/logo2.png?raw=true" alt="logo" style="zoom:50%;" />
+<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/src/main/webapp/resources/assets/images/logo/logo2.png?raw=true" width="10%">
 
 ### 포트폴리오 관리 및 공유를 통한 구인, 구직 시스템
 
@@ -85,6 +85,13 @@
   </table>
 
 
+
+<br/>
+
+--- 
+
+#### :wrench: 시스템 아키텍쳐
+<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/src/main/webapp/resources/assets/images/System.png?raw=true" width="90%">
 
 <br/>
 
