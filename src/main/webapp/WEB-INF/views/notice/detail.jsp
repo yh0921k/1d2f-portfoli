@@ -11,8 +11,8 @@
     <!-------------------------------------------- contents -------------------------------------------------->
     <div class="portlet mt--20 p-3" style="width: 60%;box-shadow: none;">
 
-      <div class="portlet-header">
-        <h1 class="d-none d-lg-block">공지사항</h1>
+      <div class="portlet-header" style="padding:0px;">
+        <h1 class="d-none d-lg-block myfont myfont-lg">공지사항</h1>
 
       </div>
       <form action="updateForm" method="post">
@@ -66,20 +66,34 @@
   </div>
  </div>
     <!-------------------------------------------- contents -------------------------------------------------->
-  <style>
-    #description.form-control{background-color: transparent; border-color: #eff1f3!important;}
-    .photoDiv{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
-    .files{margin:5px 0px;}
-    .lightGray{width: 100%; border:2px lightGray solid;}
-    .darkerGray{color:#313335;}
-    .firstTR{border-bottom:1px darkGray dashed;}
-    .padding{padding:10px; border:0px;}
-    .photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
-    .photoInside{text-align: center}
-    .buttonTD{text-align: center}
-    .textAR{padding:0px 5px;}
-    .textAR_in{border-color:transparent; resize:none; width: 100%; height: 450px;}
-  </style>
+<style>
+#description.form-control{background-color: transparent; border-color: #eff1f3!important;}
+.photoDiv{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
+.files{margin:5px 0px;}
+.lightGray{width: 100%; border:2px lightGray solid;}
+.darkerGray{color:#313335;}
+.firstTR{border-bottom:1px darkGray dashed;}
+.padding{padding:10px; border:0px;}
+.photoTD{padding:10px; border-top:1px darkGray dashed; border-bottom:1px darkGray dashed; background: lightGray; height: 150px;}
+.photoInside{text-align: center}
+.buttonTD{text-align: center}
+.textAR{padding:0px 5px;}
+.textAR_in{border-color:transparent; resize:none; width: 100%; height: 450px;}
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	margin-left:1rem;
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+</style>
   
   <script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
   <script>
@@ -153,4 +167,5 @@
       })
     }
   </script>
+  
 

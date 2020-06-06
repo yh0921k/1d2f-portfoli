@@ -36,7 +36,7 @@
         <div class="border mb-3 p-3" style="min-height: 300px;">
           <p style="white-space: pre-wrap;">${report.content}</p>
         </div>
-
+        <c:if test="not empty ${report.reportCategory.category}">
         <table class="table m-0">
           <tr>
           <th scope="row">첨부파일</th>
@@ -48,6 +48,7 @@
           </td>
           </tr>
         </table>
+        </c:if>
         <div class="text-center">
           <button type="button"
             class="btn btn-sm btn-outline-primary btn-pill"

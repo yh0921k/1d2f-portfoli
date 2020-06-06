@@ -5,8 +5,8 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container" style="text-align:center" >
-<h1 style="text-align:left">채용정보</h1>
+<div class="container" style="text-align:center; padding: 30px 0px;" >
+<h1 style="font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem;">Job Informations</h1>
 <c:import url="/app/jobposting/premium"/>
 <!--------------------------------------공고검색----------------------------------------------------->
 <div id="searchForm" style="text-align:right">
@@ -30,24 +30,40 @@
 <table id="listTable" class="table table-striped table-hover">
 	<thead>
 	  <th></th>
-		<th>no</th>
-		<th>제목</th>
-		<th>시작일</th>
+		<th style="display:none;">no</th>
+		<th>기업</th>
+		<th>지원자격</th>
+		<th>근무조건</th>
 		<th>마감일</th>
 		<th>조회수</th>
 	</thead>
 
 	<tbody>
-	<c:forEach items="${list}" var="item" varStatus="status">
+	<c:set var="today" value="${System.currentTimeMillis()}"/>
+	<c:forEach items="${jobPostings}" var="jobPosting" varStatus="status">
     <tr id="tList">
-    <td><a href='detail?no=${item.jobPostingNumber}'><c:forEach items="${item.files}" var="jobPostingFile">
+    <td><a href='detail?no=${jobPosting.jobPostingNumber}'><c:forEach items="${jobPosting.files}" var="jobPostingFile">
       <img src="../../upload/jobposting/${jobPostingFile.filePath}" width="100" height="100">
       </c:forEach></td>
-			<td>${item.jobPostingNumber}</td>
-			<td><a href='detail?no=${item.jobPostingNumber}'>${item.title}</a></td>
-			<td>${item.startDated}</td>
-			<td>${item.endDated}</td>
-			<td>${item.viewCount}</td>
+			<td style="display:none;">${jobPosting.jobPostingNumber}</td>
+			<td><font style="color: orange;">${jobPosting.company.name}</font><br>
+			<a href='detail?no=${jobPosting.jobPostingNumber}' style="color:black;">${jobPosting.title}</a>
+			</td>
+			
+			<td>경력 <font style="color: orange;">${jobPosting.minimumCareer}
+                    </font><br>
+          최소학력 <font style="color: orange;">${jobPosting.finalEducation.category}</font>          
+                    </td>
+			<td>
+			고용형태 <font style="color: orange;">${jobPosting.employmentStatus.name}</font><br>
+			지역 <font style="color: orange;">${jobPosting.district.name}</font>
+			</td>
+			<td>${jobPosting.endDated}<br>
+			<span id='D' class="fs--15 font-weight-bold mb-0" style="color: #424242;">
+          D-${String.format("%.0f", (jobPosting.endDated.getTime() - today) / 1000 / 60 / 60 / 24)}
+        </span>
+			</td>
+			<td>${jobPosting.viewCount}</td>
 		</tr>
 	</c:forEach>
   </tbody>

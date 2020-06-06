@@ -9,7 +9,7 @@
 <div class="container py-1" id="bodyDiv">
 	<!-- MEMBER INTEREST SKILL TAB -->
 	<div class="tab-pane border bt-0 p-4 shadow-xs">
-	    <strong class="p-4" style="font-size:1.3rem;">Employment Recommendation</strong>
+	    <strong class="p-4" style="font-weight:bold; text-align:left; font-size:1.8rem; margin-left:1rem;">Employment Recommendation</strong>
 	  <div class="d-block shadow-xs rounded p-4 mb-2">
 	      
 	    <div class="row">

@@ -33,6 +33,10 @@ public interface PortfolioDao {
   List<Portfolio> search(SearchMap searchMap) throws Exception;
 
   List<Portfolio> findSomeRecommendedlist(SearchMap searchMap) throws Exception;
+  
+  int selectMonthListCnt() throws Exception;
+  
+  int sumViewCount() throws Exception;
 
 
 

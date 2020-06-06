@@ -37,4 +37,6 @@ public interface JobPostingDao {
   public List<JobPosting> findPremiumJobPosting() throws Exception;
 
   public int insertLogo(JobPosting jobPosting) throws Exception;
+  
+  public int progressCnt() throws Exception;
 }

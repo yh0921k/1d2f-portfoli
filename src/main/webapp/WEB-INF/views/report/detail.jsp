@@ -10,7 +10,7 @@
     <div class="portlet mt--20" style="width: 65%;">
 
       <div class="portlet-header">
-        <h1 class="d-none d-lg-block m--3">내 신고내역</h1>
+        <h1 class="d-none d-lg-block m--3 myfont myfont-lg">내 신고내역</h1>
         <!-- 
         <div align="right" class="container-fluid">
           <a href="/portfoli/app/report/delete?number=${report.number}"><button type="button"
@@ -45,22 +45,7 @@
         <div class="border m-3 p-3" style="min-height: 300px;">
           <p style="white-space: pre-wrap;">${report.content}</p>
         </div>
-        <!-- 
-        <c:forEach items="${report.attachments}" var="attachment">
-        <div class="position-relative bg-white rounded">
-          <span data-id="0" data-file-name="${attachment.fileName}"
-            class="js-file-input-item d-inline-block position-relative overflow-hidden text-center show-hover-container shadow-md m-2 rounded float-start">
-          <span class="js-file-input-preview-header text-white position-absolute w-100 top-0 left-0 right-0 clearfix overlay-dark overlay-opacity-2">
-          <span class="text-truncate d-block fs--12 pl--5 pr--5"> ${attachment.fileName} </span> </span>
-          <span class="js-file-input-preview-footer text-white position-absolute w-100 bottom-0 left-0 right-0 clearfix overlay-dark overlay-opacity-2">
-            <a href="${pageContext.servletContext.contextPath}/upload/report/${attachment.filePath}"
-              class="js-file-input-preview-footer text-white position-absolute w-100 bottom-0 left-0 right-0 clearfix overlay-dark overlay-opacity-2">
-            </a> </span>
-            <img width="300" height="200"
-              src="${pageContext.servletContext.contextPath}/upload/report/${attachment.filePath}">
-          </span>
-          </div>
-          </c:forEach> -->
+        <c:if test="not empty ${report.reportCategory.category}">
         <table class="table m-0">
           <tr>
           <th scope="row">첨부파일</th>
@@ -72,22 +57,26 @@
           </td>
           </tr>
         </table>
-          <!-- 
-        <div class="text-center">
-          <button type="button"
-            class="btn btn-sm btn-outline-danger btn-pill"
-            onClick='location.href="/portfoli/app/report/delete?number=${report.number}"'>
-            <i class="fi fi-thrash"></i> 삭제
-          </button>
-          <button type="button"
-            class="btn btn-sm btn-outline-secondary btn-pill"
-            onClick='location.href="/portfoli/app/report/list"'> 뒤로
-          </button>
-        </div>
-         -->
+        </c:if>
     </div>
     <br>
   </div>
   <!-------------------------------------------- /contents -------------------------------------------------->
 </div>
 </div>
+<style>
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	/*margin-left:1rem;*/
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+</style>

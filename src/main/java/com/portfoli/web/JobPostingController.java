@@ -119,14 +119,14 @@ public class JobPostingController {
       files.add(new JobPostingFile().setFilePath(filename));
 
       Thumbnails.of(dirPath + "/" + filename)//
-      .size(300, 300)//
-      .outputFormat("jpg")//
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_300x300";
-        }
-      });
+          .size(300, 300)//
+          .outputFormat("jpg")//
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_300x300";
+            }
+          });
     }
     CompanyMember companyMember = memberService.getCompanyMember(
         ((CompanyMember) request.getSession().getAttribute("loginUser")).getNumber());
@@ -174,7 +174,7 @@ public class JobPostingController {
       int listCnt = jobPostingService.ListCnt(jobPosting);
       List<JobPosting> jobPostings = jobPostingService.list();
       model.addAttribute("listCnt", listCnt);
-      model.addAttribute("list", jobPostings);
+      model.addAttribute("jobPostings", jobPostings);
 
       // 기업회원일 경우
       if (mem.getType() == 2) {
@@ -186,7 +186,7 @@ public class JobPostingController {
   @GetMapping("list2")
   public void list2(@RequestParam(defaultValue = "1") int lastNo, Model model) throws Exception {
     List<JobPosting> jobPostings = jobPostingService.list2(lastNo);
-    model.addAttribute("list", jobPostings);
+    model.addAttribute("jobPostings", jobPostings);
   }
 
   @GetMapping("search")
@@ -233,14 +233,14 @@ public class JobPostingController {
       files.add(new JobPostingFile().setFilePath(filename));
 
       Thumbnails.of(dirPath + "/" + filename)//
-      .size(300, 300)//
-      .outputFormat("jpg")//
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_300x300";
-        }
-      });
+          .size(300, 300)//
+          .outputFormat("jpg")//
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_300x300";
+            }
+          });
 
     }
 

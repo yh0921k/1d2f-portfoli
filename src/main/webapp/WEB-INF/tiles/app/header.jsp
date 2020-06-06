@@ -42,7 +42,7 @@
                   style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
                 <li class="nav-item"><a
                   href="/portfoli/app/jobposting/list" id="info"
-                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  class="nav-link dropdown-toggle nav-link-caret-hide jobposting"
                   style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
                 <li class="nav-item"><a 
                   href="/portfoli/app/recommendEmployer/list" id="recommendInfo"
@@ -58,7 +58,7 @@
                   class="nav-link dropdown-toggle nav-link-caret-hide"
                   style="width: 150px; margin-left: 30px;"> <span style="font-size: 1.1rem;">포트폴리오</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/jobposting/list" id="info"
-                  class="nav-link dropdown-toggle nav-link-caret-hide"
+                  class="nav-link dropdown-toggle nav-link-caret-hide jobposting"
                   style="width: 150px; margin-left: 0px;"> <span style="font-size: 1.1rem;">채용정보</span></a></li>
                 <li class="nav-item"><a href="/portfoli/app/recommendEmployee/recommend" id="recommendInfoForCom"
                   class="nav-link dropdown-toggle nav-link-caret-hide"
@@ -358,6 +358,42 @@
 
     </header>
 <!-- /HEADER -->
+
+<%-- 상단 앵커 추가 --%>
+<a class="scroll" href='#header' style="border: 1px solid black;text-align: center;width: 47px;height: 51px;position:fixed;z-index: 100;bottom:10px;right:10px;cursor: pointer;background-color: #dee6e1;font-weight: bolder;display: table;">
+	<div style="top: 10px;position: relative;">
+		<i class="fi-arrow-up fi"></i>
+	</div>
+</a>
 <script>
-console.log("dsadsad")
+
+$(document).ready(function() {
+	
+	// 상단 앵커 기능 구현 (w/ scroll 효과)
+  $(".scroll").click(function(event){
+      event.preventDefault();
+      $('html,body').animate({scrollTop:$(this.hash).offset().top}, 600);
+  });
+	
+// url 링크에 따라 상단 nav바에 text-shadow 효과 주기
+	var queryString = window.location.pathname;
+	console.log(queryString);
+	var cssTarget;
+	if(queryString.indexOf('/portfoli/app/portfolio/listWithBanner') > -1
+			|| queryString.indexOf('/portfoli/app/portfolio/searchAll') > -1
+			|| queryString.indexOf('/portfoli/app/portfolio/list') > -1) {
+		cssTarget = $('#portfolio > span');
+	} else if(queryString.indexOf('/portfoli/app/jobposting/list') > -1 
+			|| queryString.indexOf('/portfoli/app/jobposting/detail') > -1 
+			|| queryString.indexOf('/portfoli/app/jobposting/search') > -1) {
+		cssTarget = $('.jobposting > span');
+	} else if(queryString.indexOf('/portfoli/app/recommendEmployer/list') > -1) {
+		cssTarget = $('#recommendInfo > span');
+	} else if(queryString.indexOf('/portfoli/app/recommendEmployee/recommend') > -1) {
+		cssTarget = $('#recommendInfoForCom > span');
+	} else if(queryString.indexOf('/portfoli/app/rank/list') > -1){
+		cssTarget = $('#ranking > span');
+	}
+	cssTarget.css('font-size','1.1rem').css('font-weight','bold').css('text-shadow','2px 2px 19px #8ec1a1').css('color','#85ad94');
+});
 </script>

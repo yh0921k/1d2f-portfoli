@@ -14,7 +14,7 @@
     <div class="portlet mt--20" style="width: 60%;box-shadow: none;">
 
       <div class="portlet-header">
-        <h1 class="d-none d-lg-block m--3">FAQ</h1>
+        <h1 class="d-none d-lg-block m--3 myfont myfont-lg">FAQ</h1>
       </div>
 
       <div class="table-responsive rounded" style="min-height: 500px;">
@@ -94,8 +94,25 @@
 </div>
     <!-------------------------------------------- 페이징부분 -------------------------------------------------->
 
-  <script>
-  function fn_paging(curPage) {
-    location.href = "list?curPage=" + curPage;
-    }
-  </script>
+<style>
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	/*margin-left:1rem;*/
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+</style>
+
+<script>
+function fn_paging(curPage) {
+  location.href = "list?curPage=" + curPage;
+  }
+</script>

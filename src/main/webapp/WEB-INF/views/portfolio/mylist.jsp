@@ -17,7 +17,7 @@
     <div class="portlet mt--20"  style="width: 100%; box-shadow: 0 0 0 0; display:inline-block">
 
       <div class="portlet-header">
-          <h3 class="h2" style="display:inline-block;">포트폴리오 관리하기</h3>
+          <h3 class="h2 myfont myfont-md" style="display:inline-block;">My Portfolios</h3>
           <button class="btn btn-outline-secondary btn-pill btn-sm" 
                   style="margin-bottom:.5rem;margin-left: 2rem;"
                   onclick="location.href='form'">글쓰기(+)</button>
@@ -405,4 +405,21 @@
 .padding5_5 {
 	padding: 5px 5px;
 }
+
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	margin-left:1rem;
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+
+
 </style>

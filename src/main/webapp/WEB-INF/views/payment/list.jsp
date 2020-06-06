@@ -61,7 +61,7 @@
 
           <!-- 상품 구매 내역 -->
           <li class="nav-item active"><a class="nav-link"
-            href="/portfoli/app/payment/list"> <i
+            	href="/portfoli/app/payment/list"> <i
               class="fi fi-arrow-end m-0 fs--12"></i><span
               class="px-2 d-inline-block"> 상품 구매 내역 </span></a></li>
 
@@ -79,11 +79,11 @@
     </div>
     <!--------------------------------------------- /nav bar ------------------------------------------------>
 
-    <div class="col-lg-8 mt--20" data-gfont="Nanum Gothic">
+    <div class="col-lg-8 mt--20">
       <div id="middle" class="flex-fill">
         <div class="page-title bg-transparent b-0">
-          <h1 class="h3 mt-3 mb-3 px-3" style="display: inline-block;">상품 구매 내역</h1>
-          <h6 style="margin-left: 700px; display: inline-block;"
+          <h1 class="h3 mt-3 mb-3 px-3 myfont myfont-md" style="display: inline-block;">상품 구매 내역</h1>
+          <h6 style="display: inline-block;position: absolute;top: 1rem;right: 15%;"
             onclick="location.href='/portfoli/app/qna/list'"> 결제 관련 문의 </h6>
         </div>
       </div>
@@ -150,3 +150,20 @@
     </div>
   </div>
 </div>
+<style>
+
+.myfont{
+	font-weight:bold!important;
+	text-align:left; 
+	margin-left:1rem;
+}
+.myfont-md{
+	font-size:1.5rem!important; 
+}
+.myfont-lg{
+	font-size:1.8rem!important; 
+}
+.myfont-sm{
+	font-size:1.2rem!important; 
+}
+</style>

@@ -364,7 +364,22 @@
     WHERE board_no = #{number}
   </delete>
 
+  <select id="selectMonthListCnt" resultType="int">
+    SELECT 
+      count(*)
+    FROM pf_portfolio as p
+    JOIN pf_board as b 
+    ON p.board_no = b.board_no
+    WHERE DATE_FORMAT(b.registered_date, '%Y-%m') = date_format(curdate(),'%Y-%m')
+  </select>
   
+  <select id="sumViewCount" resultType="int">
+    SELECT
+      SUM(b.view_count)
+    FROM pf_portfolio as p
+    JOIN pf_board as b 
+    ON p.board_no = b.board_no
+  </select>
 </mapper>
 
 

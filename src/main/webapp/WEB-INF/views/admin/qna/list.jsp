@@ -6,7 +6,7 @@
 <div id="middle" class="flex-fill">
 	<section class="rounded mb-3 ">
 		<div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
-			<strong>Qna</strong>
+			<strong>QNA</strong>
 		</div>
 		<div id="rand_yjK_wrapper" class="dataTables_wrapper dt-bootstrap4">
 			<div class="row mb-3">
