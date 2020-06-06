@@ -1155,3 +1155,5 @@ INSERT INTO pf_schedule(general_member_no, start_date, end_date, title) VALUES(2
 INSERT INTO pf_schedule(general_member_no, start_date, title) VALUES(3, '2020-06-10', '취업 준비 시작');
 INSERT INTO pf_schedule(general_member_no, title) VALUES(4, '기업 공고 찾아보기');
 INSERT INTO pf_schedule(general_member_no, title) VALUES(5, '기업 공고 찾아보기');
+
+DELETE FROM pf_city where city_no > 200000;
