@@ -459,6 +459,11 @@ $("#district_category").change(function(){
   });
 
 $("#skill_category").change(function(){
+    // 기술번호 입력 (district단위)
+    inputValue = $('#skill_category').val();
+    // 기술이름 입력 (district단위)
+    inputText = $("#skill_category option:selected").html();
+
     let startIdx = $("#skill_category option").index($("#skill_category option:selected"));
     
     if($("#skill_category option:selected").val() == 0) {
@@ -478,8 +483,8 @@ $("#skill_category").change(function(){
     
     let item = $("#skill_category option:selected").text();
     $("#filterField #filterList").append(
-        `<span style="cursor:pointer; margin:2px;" class="selectSkill badge badge-pill badge-secondary">` + item + `</span>`
-        );
+        `<span style="cursor:pointer; margin:2px;" value=` + inputValue + ` class="selectSkill badge badge-pill badge-secondary">` + item + `</span>`
+    );
   });
 
 $("#filterField").on("click", "#filterList .badge", function(){
