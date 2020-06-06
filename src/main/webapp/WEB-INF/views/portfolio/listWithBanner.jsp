@@ -248,8 +248,10 @@
               추천수:${item.getRecommendedCount()}
         </span>
         </a>
-        <a href="#" class="viewCountSpan btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
+        <a href="#" class="btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
+        <span class="fs--14 viewCountSpan">
               조회수:${item.getViewCount()}
+        </span>
         </a>
       </div>
     <!-- 카드하단 -->
@@ -337,9 +339,9 @@
   <script>
   
   // 배너 돌아가는 움직임 구현
-//    setInterval(function() {
-//	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
-//	  },3000);
+    setInterval(function() {
+	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
+	  },3000);
 
   // 쿼리스트링 split 구문
   function getQueryStringObject() {

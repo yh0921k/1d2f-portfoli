@@ -166,12 +166,14 @@
       <div class="card-footer bg-transparent b-0" style="height: 100px;">
         <hr class="border-light opacity-2">
         <a href="#" class="btn btn-sm btn-success opacity-8" style="float:left; margin-left:1.3rem;">
-        <span class="fs--14">
-          ${item.getRecommendedCount()}
+        <span class="recommendSpan fs--14">
+                추천수:${item.getRecommendedCount()}
         </span>
         </a>
         <a href="#" class="btn btn-sm btn-warning opacity-8" style="float:left; margin-left:1rem;">
-          ${item.getViewCount()}
+        <span class="fs--14 viewCountSpan">
+                조회수:${item.getViewCount()}
+        </span>
         </a>
       </div>
     <!-- 카드하단 -->
@@ -250,105 +252,143 @@
     }
   </style>
   
-  <script>
-  /*
-  setInterval(function() {
-	    $('#banner > div:nth-child(1)').appendTo($('#banner'));
-	  },3000);
-  */
-  function getQueryStringObject() {
-	    var a = window.location.search.substr(1).split('&');
-	    if (a == "") return {};
-	    var b = {};
-	    for (var i = 0; i < a.length; ++i) {
-	        var p = a[i].split('=', 2);
-	        if (p.length == 1)
-	            b[p[0]] = "";
-	        else
-	            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-	    }
-	    return b;
-	}
-  
-  function fnSetPageSize(val) {
-      var addr = window.location.href.split('/portfolio/')[1];
-      if(addr.startsWith('searchAll')) {
-    	  qs = getQueryStringObject();
-        location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + 1 + "&quantity=" + val;
+<script>
+ setInterval(function() {
+    $('#banner > div:nth-child(1)').appendTo($('#banner'));
+  },3000);
+
+ function getQueryStringObject() {
+    var a = window.location.search.substr(1).split('&');
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i) {
+        var p = a[i].split('=', 2);
+        if (p.length == 1)
+            b[p[0]] = "";
+        else
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+}
+ 
+ function fnSetPageSize(val) {
+     var addr = window.location.href.split('/portfolio/')[1];
+     if(addr.startsWith('searchAll')) {
+   	  qs = getQueryStringObject();
+       location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + 1 + "&quantity=" + val;
+     } else {
+   	  location.href = "list?quantity=" + val;
+     }
+ }
+ 
+ var toggle = $('#styleToggle');
+  $('#styleToggle').on('click',function(){
+    if(toggle.hasClass("active")) {
+        $('.table.m-0').css('display', 'contents');
+        $('#blockStyle').hide('fast');
       } else {
-    	  location.href = "list?quantity=" + val;
+        $('.table.m-0').css('display', 'none');
+        $('#blockStyle').css('margin-left', 0).show('fast');
       }
+  });
+ 
+  function fn_center_paging(pageNum) {
+	  
+  var addr = window.location.href.split('/portfolio/')[1];
+  var qs = getQueryStringObject();
+  
+  if(addr.startsWith('searchAll')) {
+     location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + pageNum + "&quantity=" + qs.quantity;
+	  
+  } else {
+	  if(qs.quantity != null) {
+		  location.href = "list?quantity=" + qs.quantity + "&curPage=" + pageNum;
+	  } else {
+      location.href = "list?curPage=" + pageNum;
+	  }
+  }
   }
   
-  var toggle = $('#styleToggle');
-	  $('#styleToggle').on('click',function(){
-	    if(toggle.hasClass("active")) {
-	        $('.table.m-0').css('display', 'contents');
-	        $('#blockStyle').hide('fast');
-	      } else {
-	        $('.table.m-0').css('display', 'none');
-	        $('#blockStyle').css('margin-left', 0).show('fast');
-	      }
-	  });
+ function fn_paging(curPage) {
+  var addr = window.location.href.split('/portfolio/')[1];
+  var qs = getQueryStringObject();
   
-	  function fn_center_paging(pageNum) {
-		  
-	  var addr = window.location.href.split('/portfolio/')[1];
-	  var qs = getQueryStringObject();
-	  
-	  if(addr.startsWith('searchAll')) {
-      location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + pageNum + "&quantity=" + qs.quantity;
-		  
+  if(addr.startsWith('searchAll')) {
+      location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + curPage + "&quantity=" + qs.quantity;
 	  } else {
-		  if(qs.quantity != null) {
-			  location.href = "list?quantity=" + qs.quantity + "&curPage=" + pageNum;
-		  } else {
-	      location.href = "list?curPage=" + pageNum;
-		  }
+  		location.href = "list?curPage=" + curPage;
 	  }
-	  }
-	  
-  function fn_paging(curPage) {
-	  var addr = window.location.href.split('/portfolio/')[1];
-	  var qs = getQueryStringObject();
-	  
-	  if(addr.startsWith('searchAll')) {
-	      location.href = "searchAll?keyword=" + qs.keyword + "&curPage=" + curPage + "&quantity=" + qs.quantity;
-		  } else {
-	  		location.href = "list?curPage=" + curPage;
-		  }
-	  }
-  
-  $(document).ready(function() {
-	    $('#styleToggle').click();
-	    $('#styleToggle').addClass('active');
+  }
+ 
+$(document).ready(function() {
+	
+	
+    // 다양한 브라우저 크기에서 유연한 작동 제공
+    $(window).resize(function(){
+    // outerbox 높이, 너비에 맞추기
+      var wid = $(document).width();
+      if(wid < 970) {
+      var outerbox = $('.outerbox');
+      outerbox.css('height', wid * 0.3);
+      outerbox.css('max-height', wid * 0.3);
+      $('.card-footer.bg-transparent.b-0').css('display','none');
+      $('.d-table-cell.align-bottom').css('padding-left', '5%');
+      // 조회수, 추천수 글자 제거
+      $('.viewCountSpan').html($('.viewCountSpan').html().replace('조회수:', ''));
+      $('.recommendSpan').html($('.recommendSpan').html().replace('추천수:', ''));
+      } else {
+        var outerbox = $('.outerbox');
+        outerbox.css('height', "");
+        outerbox.css('max-height', "300px");
+        $('.card-footer.bg-transparent.b-0').css('display','block');
+        $('.d-table-cell.align-bottom').css('padding-left', '2rem');
+        
+        // 조회수, 추천수 글자 추가
+        if($('.viewCountSpan').html().indexOf('조회수') == -1){
+          let temp = "조회수:" + $('.viewCountSpan').html();
+          console.log(temp);
+          $('.viewCountSpan').html(temp);
+        }
+        if($('.recommendSpan').html().indexOf('추천수') == -1){
+          let temp = "추천수:" + $('.recommendSpan').html();
+          console.log(temp);
+          $('.recommendSpan').html(temp);
+        }
+      }
+      // console.log("outerbox (970px 이하일때) 높이조정:" + $('.outerbox').css('height'));
+    });
+
+	
+	
+   $('#styleToggle').click();
+   $('#styleToggle').addClass('active');
+   
+   var qs = getQueryStringObject();
+   var page = qs.quantity;
+   switch(page) {
+   case "6":
+       $("option[value='6']").attr('selected','selected');
+     break;
+   case "9":
+         $("option[value='9']").attr('selected','selected');
+     break;
+   case "21":
+         $("option[value='21']").attr('selected','selected');
+     break;
+   case "54":
+         $("option[value='54']").attr('selected','selected');
+     break;
+   default:
+         $("option[value='9']").attr('selected','selected');
+   }
+   
+	  $("#keyword").keyup(function() {
+	    var k = $(this).val();
+	    $("#listTable > tbody > tr").hide();
 	    
-	    var qs = getQueryStringObject();
-	    var page = qs.quantity;
-	    switch(page) {
-	    case "6":
-	        $("option[value='6']").attr('selected','selected');
-	      break;
-	    case "9":
-	          $("option[value='9']").attr('selected','selected');
-	      break;
-	    case "21":
-	          $("option[value='21']").attr('selected','selected');
-	      break;
-	    case "54":
-	          $("option[value='54']").attr('selected','selected');
-	      break;
-	    default:
-	          $("option[value='9']").attr('selected','selected');
-	    }
-	    
-	       $("#keyword").keyup(function() {
-	         var k = $(this).val();
-	         $("#listTable > tbody > tr").hide();
-	         
-	         var temp = $("#listTable > tbody > tr > td:nth-child(n):contains('"+ k +"')");
-	         $(temp).parent().show();
-	         })
-	       
-	     });
-  </script>
+	    var temp = $("#listTable > tbody > tr > td:nth-child(n):contains('"+ k +"')");
+	    $(temp).parent().show();
+	    })
+      
+});
+</script>
