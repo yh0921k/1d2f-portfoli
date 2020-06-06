@@ -211,18 +211,18 @@
 			        <th>경력구분</th>
 			        <th>학력구분</th>
 			        <th>포트폴리오</th>
-			        <th>구성기술</th>
 			        <th>관심지역</th>
 			        <th>보유기술</th>
+			        <th>재직여부</th>
             </thead>
             <tbody>
 			        <td>이름</td>
 			        <td>경력구분</td>
 			        <td>학력구분</td>
 			        <td>포트폴리오</td>
-			        <td>구성기술</td>
 			        <td>지역</td>
 			        <td>기술</td>
+			        <td>구직중</td>
             </tbody>
           </table>        
         </div>
@@ -249,8 +249,6 @@
 <script>
 var toggle = 1;
 
-
-
 var filter = function() {
     console.log("Filter()");
     let data = {};
@@ -260,6 +258,18 @@ var filter = function() {
     data.careerEnd = $("#filterList .careerEnd").text();
     data.selectEducation = $("#filterList .selectEdu").text();
     data.viewOrder = $("#orderCount option:selected").text();
+    
+    data.skillList = [];
+    let selectSkillList = $("#filterList .selectSkill");
+    for(let skill of selectSkillList) {
+    	data.skillList.push($(skill).text());
+    }
+    
+    data.districtList = [];
+    let selectDistrictList = $("#filterList .selectDistrict");
+    for(let district of selectDistrictList) {
+        data.districtList.push($(district).text());
+    }
     
     console.log(data);
     var convertedData = JSON.stringify(data);
@@ -306,23 +316,8 @@ var filter = function() {
     };
     xhr.open('POST', 'listByFilter');
     xhr.setRequestHeader('Content-Type', 'application/json'); 
-    xhr.send(convertedData);
-//     data.skillList = [];
-//     var skillList = document.querySelectorAll("#filter_field .selectedSkills");
-//     for(let skill of skillList) {
-//       data.skillList.push(skill.innerText);
-//     }
-//     data.orderCount = $("#orderCount option:selected").val()
-    
-//     var convertedData = JSON.stringify(data);
-    
+    xhr.send(convertedData);    
 };
-
-
-
-
-
-
 
 window.onload = function() {
 	$(".overLessYear").hide();
@@ -456,6 +451,7 @@ $("#district_category").change(function(){
 	    	}
 	    }
    	}
+   	filter();
   });
 
 $("#skill_category").change(function(){
@@ -483,8 +479,9 @@ $("#skill_category").change(function(){
     
     let item = $("#skill_category option:selected").text();
     $("#filterField #filterList").append(
-        `<span style="cursor:pointer; margin:2px;" value=` + inputValue + ` class="selectSkill badge badge-pill badge-secondary">` + item + `</span>`
+      `<span style="cursor:pointer; margin:2px;" value=` + inputValue + ` class="selectSkill badge badge-pill badge-secondary">` + item + `</span>`
     );
+    filter();
   });
 
 $("#filterField").on("click", "#filterList .badge", function(){
