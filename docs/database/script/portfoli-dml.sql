@@ -709,10 +709,10 @@ INSERT INTO pf_portfolio_skill(board_no, member_skill_no) VALUES(40, 4);
 
 -- 기업 예제 데이터
 INSERT INTO pf_company(company_no, business_registration_no, name, tel, representative) VALUES (1, '201-81-64418', '워플', '064-903-1555', '김국헌');
-INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('120-87-65764', '배고파', '1600-0988', '신용재');
-INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('220-81-83678', 'Hmarket', '1566-5700', '정재화');
-INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('211-88-79575', '모신나', '1544-7200', '변진섭');
-INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('129-86-50524', '플래닝애드', '070-8680-6620', '윤미래');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('120-87-65764', '카카오', '1600-0988', '신용재');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('220-81-83678', 'LINE', '1566-5700', '정재화');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('211-88-79575', 'NEVER', '1544-7200', '변진섭');
+INSERT INTO pf_company(business_registration_no, name, tel, representative) VALUES ('129-86-50524', 'CODE42', '070-8680-6620', '윤미래');
 
 -- 기업회원 예제 데이터
 INSERT INTO pf_company_member(company_member_no, position, company_no) VALUES (6, '대리', 1);
@@ -852,11 +852,11 @@ INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) VALUES(9, 7, 
 INSERT INTO pf_alarm(alarm_no, member_no, alarm_class_no, content) VALUES(10, 8, 1,  '내용1');
 
 -- 배너 예제 데이터
-INSERT INTO pf_banner(banner_no, company_no, title, image, url, start_date, end_date, activate) VALUES(1, 1, '배너광고1', '.data/banner1.png', 'https://plus-ex.com/', '2020-3-1 08:00:00', '2020-03-31 23:59:59', 1);
-INSERT INTO pf_banner(banner_no, company_no, title, image, url, start_date, end_date, activate) VALUES(2, 3, '배너광고2', '.data/banner2.png', 'http://sampartners.co.kr/', '2020-3-1 08:00:00', '2020-03-31 23:59:59', 0);
-INSERT INTO pf_banner(banner_no, company_no, title, image, url, start_date, end_date, activate) VALUES(3, 4, '배너광고3', '.data/banner3.png', 'https://linepluscorp.com/', '2020-3-1 08:00:00', '2020-03-31 23:59:59', 0);
-INSERT INTO pf_banner(company_no, title, image, url, start_date, end_date, activate) VALUES(2, '배너광고4', '.data/banner/banner4.png', 'http://www.woowahan.com/', '2020-4-1 08:00:00', '2020-04-30 23:59:59', 1);
-INSERT INTO pf_banner(company_no, title, image, url, start_date, end_date, activate) VALUES(5, '배너광고5', '.data/banner/banner5.png', 'https://www.kakaocorp.com/', '2020-4-1 08:00:00', '2020-04-30 23:59:59', 0);
+INSERT INTO pf_banner(banner_no, company_no, title, image, url, start_date, end_date, activate) VALUES(1, 1, '배너광고1', '.data/banner1.png', 'https://plus-ex.com/', '2020-3-1 08:00:00', '2020-06-30 23:59:59', 0);
+INSERT INTO pf_banner(banner_no, company_no, title, image, url, start_date, end_date, activate) VALUES(2, 3, '배너광고2', '.data/banner2.png', 'http://sampartners.co.kr/', '2020-3-1 08:00:00', '2020-06-30 23:59:59', 0);
+INSERT INTO pf_banner(banner_no, company_no, title, image, url, start_date, end_date, activate) VALUES(3, 4, '배너광고3', '.data/banner3.png', 'https://linepluscorp.com/', '2020-3-1 08:00:00', '2020-06-30 23:59:59', 0);
+INSERT INTO pf_banner(company_no, title, image, url, start_date, end_date, activate) VALUES(2, '배너광고4', '.data/banner/banner4.png', 'http://www.woowahan.com/', '2020-4-1 08:00:00', '2020-06-30 23:59:59', 0);
+INSERT INTO pf_banner(company_no, title, image, url, start_date, end_date, activate) VALUES(5, '배너광고5', '.data/banner/banner5.png', 'https://www.kakaocorp.com/', '2020-4-1 08:00:00', '2020-06-30 23:59:59', 0);
 
 -- 신고분류 예제 데이터
 INSERT INTO pf_report_class(report_class_no, report_class) VALUES(1, '도배');
