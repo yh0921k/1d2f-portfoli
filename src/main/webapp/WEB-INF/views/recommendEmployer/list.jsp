@@ -101,7 +101,10 @@ window.onload = function() {
 
 	  for(let i=0; i<5 ;i++) {
 	  	$(".posting[data-index="+i+"]").css('display', 'block');
-	    $('#printed').html(i+1);
+	  	
+	  	if($('#total').html() > $('#printed').html()) {
+	      $('#printed').html(i+1);
+	  	}
 	  }
 	  
     // 관심 분야 리스트 불러오기
