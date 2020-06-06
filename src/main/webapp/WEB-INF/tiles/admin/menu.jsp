@@ -61,7 +61,7 @@
 				</a></li>
 
 				<li class="nav-title mt-5">
-					<h6 class="fs--15 mb-1 text-white font-weight-bold">로그 및 통계</h6>
+					<h6 class="fs--15 mb-1 text-white font-weight-bold">로그</h6>
 				</li>
 
 				<li class="nav-item"><a class="nav-link"
@@ -69,9 +69,6 @@
 						class="nav-icon fi fi-folder-full"></i> Log
 				</a></li>
 
-				<li class="nav-item"><a class="nav-link js-ajax" href="#">
-						<i class="nav-icon fi fi-graph"></i> 통계
-				</a></li>
 
 			</ul>
 		</nav>
