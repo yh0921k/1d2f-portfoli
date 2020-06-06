@@ -550,16 +550,19 @@ insert into pf_district(district_no,name) values(118000,"세종특별자치시")
 
 
 -- 회원 예제 데이터
-INSERT INTO pf_members(member_no, id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey) VALUES (1, 'yh0921k', PASSWORD('1111'), '김용희', '06611', '서울특별시 서초구 강남대로 459 (서초동, 백암빌딩)', 'yh0921k@gmail.com', '010-1234-5678', 1, 1, 1, 'Y');
-INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey) VALUES ('moonsolid', PASSWORD('2222'), '문국태', 'moonsolid@naver.com', '010-9876-5432', 1, 1, 1, 'Y');
-INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey) VALUES ('oreotaste', PASSWORD('3333'), '손영쿡', 'oreotaste@daum.net', '010-2345-6789', 1, 1, 1, 'Y');
-INSERT INTO pf_members(id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey) VALUES ('juljasong', PASSWORD('4444'), '윤리아', '06621', '서울특별시 서초구 서초대로74길 33(서초동, 비트빌)', 'juljasong@gmail.com', '010-4567-8901', 1, 1, 1, 'Y');
-INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey) VALUES ('jeoneunhee', PASSWORD('5555'), '전은희', 'jeoneunhee@naber.com', '010-1234-5674', 1, 1, 1, 'Y');
-INSERT INTO pf_members(id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey) VALUES ('warple', PASSWORD('6666'), '노정진', '63091', '제주특별자치도 제주시 1100로 3198-13(노형동)', 'contact_us@warple.co.kr', '010-2754-3257', 1, 1, 2, 'Y');
-INSERT INTO pf_members(id, pwd, name, post_no, basic_address, detail_address, email, tel, sms_yn, email_yn, type, userkey) VALUES ('baegopa', PASSWORD('7777'), '김홍준', '05544', '서울특별시 송파 구 위례성대로 2(방이동, 장은빌딩)', '2층', 'help@baegopa.com', '010-4312-6754', 1, 1, 2, 'Y');
-INSERT INTO pf_members(id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey) VALUES ('hmarket', PASSWORD('8888'), '광병진', '06236', '서울특별시 강남구 테헤란로(역삼 동, 강남파이낸스센터)', 'hmk_cs@corp.hmarket.co.kr', '010-4952-6589', 1, 1, 2, 'Y');
-INSERT INTO pf_members(id, pwd, name, post_no, basic_address, detail_address,  email, tel, sms_yn, email_yn, type, userkey) VALUES ('mosinna', PASSWORD('9999'), '김정우', '06017', '서울특별시 남구 언주로174길 30(신사동, 로빈명품관)', '지하1층', 'help@mosinna.com', '010-2394-3958', 1, 1, 2, 'Y');
-INSERT INTO pf_members(id, pwd, name, post_no, basic_address, detail_address, email, tel, sms_yn, email_yn, type, userkey) VALUES ('planningadd', PASSWORD('1010'), '김성수', '13637', '경기도 성남시 분당구 구미로9번길 10(구미동, 세종그랑시아II)', '1-230', 'planning1@naver.com', '010-4958-9068', 1, 1, 2, 'Y');
+INSERT INTO pf_members(member_no, id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES (1, 'yh0921k', PASSWORD('1111'), '김용희', '06611', '서울특별시 서초구 강남대로 459 (서초동, 백암빌딩)', 'yh0921k@gmail.com', '010-1234-5678', 1, 1, 1, 'Y', '2020-06-04');
+INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('moonsolid', PASSWORD('2222'), '문국태', 'moonsolid@naver.com', '010-9876-5432', 1, 1, 1, 'Y', '2020-06-05');
+INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('oreotaste', PASSWORD('3333'), '손영쿡', 'oreotaste@daum.net', '010-2345-6789', 1, 1, 1, 'Y', '2020-06-06');
+INSERT INTO pf_members(id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('juljasong', PASSWORD('4444'), '윤리아', '06621', '서울특별시 서초구 서초대로74길 33(서초동, 비트빌)', 'juljasong@gmail.com', '010-4567-8901', 1, 1, 1, 'Y', '2020-06-07');
+INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('jeoneunhee', PASSWORD('5555'), '전은희', 'jeoneunhee@naber.com', '010-1234-5674', 1, 1, 1, 'Y', '2020-06-08');
+INSERT INTO pf_members(id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('warple', PASSWORD('6666'), '노정진', '63091', '제주특별자치도 제주시 1100로 3198-13(노형동)', 'contact_us@warple.co.kr', '010-2754-3257', 1, 1, 2, 'Y', '2020-06-04');
+INSERT INTO pf_members(id, pwd, name, post_no, basic_address, detail_address, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('baegopa', PASSWORD('7777'), '김홍준', '05544', '서울특별시 송파 구 위례성대로 2(방이동, 장은빌딩)', '2층', 'help@baegopa.com', '010-4312-6754', 1, 1, 2, 'Y', '2020-06-05');
+INSERT INTO pf_members(id, pwd, name, post_no, basic_address, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('hmarket', PASSWORD('8888'), '광병진', '06236', '서울특별시 강남구 테헤란로(역삼 동, 강남파이낸스센터)', 'hmk_cs@corp.hmarket.co.kr', '010-4952-6589', 1, 1, 2, 'Y', '2020-06-06');
+INSERT INTO pf_members(id, pwd, name, post_no, basic_address, detail_address,  email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('mosinna', PASSWORD('9999'), '김정우', '06017', '서울특별시 남구 언주로174길 30(신사동, 로빈명품관)', '지하1층', 'help@mosinna.com', '010-2394-3958', 1, 1, 2, 'Y', '2020-06-07');
+INSERT INTO pf_members(id, pwd, name, post_no, basic_address, detail_address, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('planningadd', PASSWORD('1010'), '김성수', '13637', '경기도 성남시 분당구 구미로9번길 10(구미동, 세종그랑시아II)', '1-230', 'planning1@naver.com', '010-4958-9068', 1, 1, 2, 'Y', '2020-06-08');
+INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('appleman', PASSWORD('1111'), '팀쿡', 'apple@daum.net', '010-2123-6289', 1, 1, 1, 'Y', '2020-06-09');
+INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('younglee', PASSWORD('1111'), '이영이', 'young@google.com', '010-7763-8679', 1, 1, 1, 'Y', '2020-06-09');
+INSERT INTO pf_members(id, pwd, name, email, tel, sms_yn, email_yn, type, userkey, create_date) VALUES ('restful', PASSWORD('1111'), '홍길동', 'restapi@google.com', '010-12433-7223', 1, 1, 1, 'Y', '2020-06-09');
 
 -- 게시글 예제 데이터 (pf_board)
 INSERT INTO pf_board (board_no, title, content, view_count, registered_date)
@@ -866,9 +869,10 @@ INSERT INTO pf_report_class(report_class_no, report_class) VALUES(4, '상업적 
 INSERT INTO pf_report_class(report_class_no, report_class) VALUES(5, '기타');
 
 -- 신고 예제 데이터 (게시글 데이터 입력 후 INSERT(완))
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(1, 1, 2, 1, 1, 0);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(2, 3, 4, 2, 2, 0);
-INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(3, 5, 6, 3, 3, 0);
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(1, 1, 2, 1, 2, 0);
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(2, 2, 3, 2, 3, 0);
+INSERT INTO pf_report(board_no, reporter_no, target_no, report_class_no, ref, re_step) VALUES(3, 3, 4, 3, 3, 0);
+
 
 -- pf_bookmark (pf_portfolio 인서트 후(완))
 INSERT INTO pf_bookmark(board_no, member_no) VALUES(31, 2);
@@ -949,39 +953,30 @@ INSERT INTO pf_major(major_no, name) VALUES(9009,'한국음악');
 INSERT INTO pf_major(major_no, name) VALUES(9010,'기계설계');
   
 -- 공지사항분류 예제데이터 (pf_notice_category)
-INSERT INTO pf_notice_category (category_no, name) VALUES(0, "미분류");
+INSERT INTO pf_notice_category (category_no, name) VALUES(0, "기타");
 INSERT INTO pf_notice_category (category_no, name) VALUES(1, "로그인관련");
 INSERT INTO pf_notice_category (category_no, name) VALUES(2, "상품관련");
 INSERT INTO pf_notice_category (category_no, name) VALUES(3, "결제관련");
 INSERT INTO pf_notice_category (category_no, name) VALUES(4, "배송관련");
-INSERT INTO pf_notice_category (category_no, name) VALUES(5, "유형5");
-INSERT INTO pf_notice_category (category_no, name) VALUES(6, "유형6");
-INSERT INTO pf_notice_category (category_no, name) VALUES(7, "유형7");
-INSERT INTO pf_notice_category (category_no, name) VALUES(8, "유형8");
-INSERT INTO pf_notice_category (category_no, name) VALUES(9, "유형9"); 
-INSERT INTO pf_notice_category (category_no, name) VALUES(10, "유형10");
-INSERT INTO pf_notice_category (category_no, name) VALUES(11, "유형11");
-INSERT INTO pf_notice_category (category_no, name) VALUES(12, "유형12");
-INSERT INTO pf_notice_category (category_no, name) VALUES(13, "유형13");
 
 -- 공지사항 예제데이터 (pf_notice)
 INSERT INTO pf_notice (board_no, category_no) VALUES(11,1);
 INSERT INTO pf_notice (board_no, category_no) VALUES(12,2);
 INSERT INTO pf_notice (board_no, category_no) VALUES(13,3);
 INSERT INTO pf_notice (board_no, category_no) VALUES(14,4);
-INSERT INTO pf_notice (board_no, category_no) VALUES(15,5);
-INSERT INTO pf_notice (board_no, category_no) VALUES(16,6);
-INSERT INTO pf_notice (board_no, category_no) VALUES(17,7);
-INSERT INTO pf_notice (board_no, category_no) VALUES(18,8);
-INSERT INTO pf_notice (board_no, category_no) VALUES(19,9);
-INSERT INTO pf_notice (board_no, category_no) VALUES(20,10);
+INSERT INTO pf_notice (board_no, category_no) VALUES(15,1);
+INSERT INTO pf_notice (board_no, category_no) VALUES(16,2);
+INSERT INTO pf_notice (board_no, category_no) VALUES(17,3);
+INSERT INTO pf_notice (board_no, category_no) VALUES(18,4);
+INSERT INTO pf_notice (board_no, category_no) VALUES(19,1);
+INSERT INTO pf_notice (board_no, category_no) VALUES(20,2);
 
 -- 질문분류 예제데이터 (pf_question_category)
-INSERT INTO pf_question_category(category_no, name) VALUES(1, "질문유형1");
-INSERT INTO pf_question_category(category_no, name) VALUES(2, "질문유형2");
-INSERT INTO pf_question_category(category_no, name) VALUES(3, "질문유형3");
-INSERT INTO pf_question_category(category_no, name) VALUES(4, "질문유형4");
-INSERT INTO pf_question_category(category_no, name) VALUES(5, "질문유형5");
+INSERT INTO pf_question_category(category_no, name) VALUES(1, "기타");
+INSERT INTO pf_question_category(category_no, name) VALUES(2, "로그인관련");
+INSERT INTO pf_question_category(category_no, name) VALUES(3, "상품관련");
+INSERT INTO pf_question_category(category_no, name) VALUES(4, "결제관련");
+INSERT INTO pf_question_category(category_no, name) VALUES(5, "배송관련");
 
 -- qna질문 예제데이터 (pf_qna)
 INSERT INTO pf_qna(board_no, member_no, category_no, readable, email_notification, sms_notification, answer, answer_date)
@@ -1106,9 +1101,13 @@ INSERT INTO pf_company_required_certificate  (certificate_no,job_posting_no) VAL
 INSERT INTO pf_company_required_certificate  (certificate_no,job_posting_no) VALUES(2434,5);  
 
 -- pf_payment 결제
-INSERT INTO pf_payment values(1, 6, "프리미엄 채용 공고", 2000, "프론트엔드 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200603172453691675", "2020-06-03 00:00:00", "2020-06-02 00:00:00", "2020-06-19 00:00:00");
-INSERT INTO pf_payment values(2, 7, "프리미엄 채용 공고", 2000, "백엔드 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200604103951575498", "2020-06-04 00:00:00", "2020-06-06 00:00:00", "2020-06-07 00:00:00");
-INSERT INTO pf_payment values(3, 8, "프리미엄 채용 공고", 10000, "서버 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200604154913450083", "2020-06-04 00:00:00", "2020-06-06 00:00:00", "2020-06-07 00:00:00");
+INSERT INTO pf_payment values(1, 6, "프리미엄 채용 공고", 22000, "프론트엔드 개발자 모집", "BC카드, 456765*********1", "StdpayISP_INIpayTest20200603172453691675", "2020-06-02 00:00:00", "2020-06-04 00:00:00", "2020-06-19 00:00:00");
+INSERT INTO pf_payment values(2, 7, "프리미엄 채용 공고", 10000, "서버 개발자 모집", "BC카드, 123123*********3", "StdpayISP_INIpayTest20200604154913450083", "2020-06-03 00:00:00", "2020-06-03 00:00:00", "2020-06-09 00:00:00");
+INSERT INTO pf_payment values(3, 8, "프리미엄 채용 공고", 4000, "백엔드 개발자 모집", "BC카드, 448123*********2", "StdpayISP_INIpayTest20200604103951575498", "2020-06-04 00:00:00", "2020-06-05 00:00:00", "2020-06-07 00:00:00");
+INSERT INTO pf_payment values(4, 9, "프리미엄 채용 공고", 38000, "서버 개발자 모집", "BC카드, 234876*********4", "StdpayISP_INIpayTest20200604154913450083", "2020-06-05 00:00:00", "2020-06-05 00:00:00", "2020-06-30 00:00:00");
+INSERT INTO pf_payment values(5, 10, "프리미엄 채용 공고", 10000, "서버 개발자 모집", "BC카드, 877656*********8", "StdpayISP_INIpayTest20200604154913450083", "2020-06-06 00:00:00", "2020-06-10 00:00:00", "2020-06-17 00:00:00");
+INSERT INTO pf_payment values(6, 6, "프리미엄 채용 공고", 2000, "서버 개발자 모집", "BC카드, 77777*********2", "StdpayISP_INIpayTest20200604154913450083", "2020-06-07 00:00:00", "2020-06-07 00:00:00", "2020-06-08 00:00:00");
+INSERT INTO pf_payment values(7, 7, "프리미엄 채용 공고", 28000, "서버 개발자 모집", "BC카드, 546765*********3", "StdpayISP_INIpayTest20200604154913450083", "2020-06-08 00:00:00", "2020-06-10 00:00:00", "2020-06-30 00:00:00");
 
 -- pf_general_mem_edu 일반회원학력 데이터(pf_final_education 인서트 후)
 INSERT INTO pf_general_mem_edu(general_member_no,education_no,school_name) VALUES(1,1,'서울대학교');
@@ -1148,7 +1147,7 @@ INSERT INTO pf_general_member_interest(general_member_no, field_no) VALUES(5, 40
 INSERT INTO pf_schedule(general_member_no, start_date, end_date, title) VALUES(1, '2020-05-01', '2020-07-01', 'TOEIC');
 INSERT INTO pf_schedule(general_member_no, end_date, title) VALUES(2, '2020-08-11', '정보처리기사');
 INSERT INTO pf_schedule(general_member_no, title) VALUES(3, '우아한형제들 날짜 확인할것');
-INSERT INTO pf_schedule(general_member_no, start_date, end_date, title, description) VALUES(4, '2020-03-01', '2020-07-01', '1일 1알고리즘', '상세');
+INSERT INTO pf_schedule(general_member_no, start_date, end_date, title, description) VALUES(4, '2020-06-10', '2020-07-01', '1일 1알고리즘', '상세');
 INSERT INTO pf_schedule(general_member_no, end_date, title) VALUES(5, '2020-08-11', '카카오 코딩 테스트');
 INSERT INTO pf_schedule(general_member_no, end_date, title) VALUES(1, '2020-09-10', '카카오 1차 면접');
 INSERT INTO pf_schedule(general_member_no, start_date, end_date, title) VALUES(2, '2020-01-01', '2020-06-01', 'SSAPY 활동 기간');
