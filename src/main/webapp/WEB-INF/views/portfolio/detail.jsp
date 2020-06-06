@@ -84,7 +84,7 @@
         </div>
         <c:choose>
         <c:when test="${membership eq 'none'}">
-        일반회원
+              일반회원
         </c:when>
         <c:otherwise>
         ${membership}
@@ -97,12 +97,12 @@
         </div>
         등록일 : ${portfolio.registeredDate}
       </a>
-      <a class="list-group-item list-group-item-action" style="font-size: 0.8em">
-      <div style="display: block;">
-        <div style="font-size: 1em; margin-left:10px"
+      <div class="list-group-item list-group-item-action" style="font-size: 0.8em; display: flex; position:relative;">
+        <div style="font-size: 1em; flex:1;"
              class="badge badge-white badge-soft badge-ico-lg float-start js-ajax-modal btn btn-sm"
              data-href="/portfoli/app/message/form?receiverNumber=${portfolio.member.number}"
-             data-ajax-modal-size="modal-md" data-ajax-modal-centered="true"
+             data-ajax-modal-size="modal-md"
+             data-ajax-modal-centered="true"
              title="쪽지보내기"
              >
              <%--
@@ -110,17 +110,27 @@
              data-ajax-modal-backdrop="static"
              --%>
               
-        <i class="fi fi-chat" style="font-style: normal; font-size:1.2rem;"></i> <span>쪽지</span>
+        <i class="fi fi-chat" style="font-style: normal; font-size:1.2rem;margin:0;"></i> <br><span>쪽지</span>
         </div>
-        <div style="font-size: 1em; margin-left:15%" 
+        <div style="font-size: 1em; flex:1;" 
              class="badge badge-white badge-soft badge-ico-lg float-start btn"
              id="sendMail"
              title="이메일 보내기"
         >
-        <i class="fi fi-envelope-2" style="font-style: normal; font-size:1.2rem;"></i> <span>메일</span>
+        <i class="fi fi-envelope-2" style="font-style: normal; font-size:1.2rem;margin:0;"></i><br><span>메일</span>
+        </div>
+
+
+        <div style="font-size: 1em; flex:1;" 
+             class="badge badge-white badge-soft badge-ico-lg float-start js-ajax-modal btn btn-sm"
+             data-href="/portfoli/app/report/form?number=${portfolio.member.number}"
+             data-ajax-modal-size="modal-md"
+             data-ajax-modal-centered="true"
+             title="신고하기"
+        >
+        <i class="fi fi-round-info-full" style="font-style: normal; font-size:1.2rem;margin:0;"></i><br><span>신고</span>
         </div>
       </div>
-      </a>
     </div>
   </div>
 
