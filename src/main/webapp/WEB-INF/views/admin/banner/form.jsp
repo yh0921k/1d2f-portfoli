@@ -8,8 +8,6 @@
       <strong>배너 관리</strong>
     </div>
 
-    <!-- Main -->
-    <div class="col-12-sm">
       <!-- Search form -->
       <form novalidate class="bs-validate js-ajax"
         action="/portfoli/admin/banner/add" method="post"
@@ -28,21 +26,21 @@
             <tr>
               <th scope="row">기업명</th>
               <td><input type="text" id="searchInput"
-                class="form-control form-control-sm form-control-clean"
+                class="form-control form-control-clean col-12-sm mt-2 mb-2"
                 placeholder="기업명 검색"></td>
             </tr>
             <tr>
               <th scope="row">제목</th>
               <td><input type="text" name="title" id="title"
-                class="form-control form-control-sm form-control-clean"
+                class="form-control form-control-clean col-12-sm mt-2 mb-2"
                 placeholder="제목"></td>
             </tr>
             <tr>
               <th scope="row">배너이미지</th>
               <td><label
-                class="rounded text-center position-relative d-block cursor-pointer border border-secondary border-dashed">
+                class="rounded text-center position-relative d-block cursor-pointer border border-secondary border-dashed w--600 h--120">
                   <!-- remove button --> <a href="#"
-                  class="js-file-input-showcase-remove hide position-absolute absolute-top text-align-start w--600 z-index-3">
+                  class="js-file-input-showcase-remove hide position-absolute absolute-top text-align-start z-index-3">
                     <span
                     class="d-inline-block btn btn-sm bg-secondary text-white pt--4 pb--4 pl--10 pr--10 m--1 mt-2 mb-2"
                     title="remove image" data-tooltip="tooltip"> <i
@@ -86,14 +84,14 @@
             <tr>
               <th scope="row">링크 URL</th>
               <td><input required type="text" name="url"
-                class="form-control form-control-sm  mt-2 mb-2"
+                class="form-control form-control-sm col-12-sm mt-2 mb-2"
                 placeholder="http://"></td>
             </tr>
             <tr>
               <th scope="row">기간</th>
-              <td><div class="form-label-group mt-2 mb-2">
+              <td><div class="form-label-group col-12-sm mt-2 mb-2">
                   <input autocomplete="off" type="text"
-                    class="form-control form-control-sm rangepicker"
+                    class="form-control rangepicker"
                     data-single-datepicker="true" data-timepicker="true"
                     data-timepicker-24h="true"
                     data-disable-auto-update-input="false"
@@ -104,14 +102,11 @@
                         "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                       }'
-                    placeholder="시작일" name="startDate" id="startDate"> <label
-                    for="startDate">시작일</label>
+                    placeholder="시작일" name="startDate" id="startDate"> <label for="startDate">시작일</label>
                 </div>
                 <div class="form-label-group mt-2 mb-2">
-                  <a href="#"
-                    class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
                   <input required autocomplete="off" type="text"
-                    class="form-control form-control-sm rangepicker"
+                    class="form-control rangepicker"
                     data-single-datepicker="true" data-timepicker="true"
                     data-timepicker-24h="true"
                     data-disable-auto-update-input="true"
@@ -122,9 +117,7 @@
                         "lang_months"  : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                       }'
-                    placeholder="마감일" name="endDate" id="endDate"> <label
-                    for="endDate">마감일</label> <a href="#"
-                    class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
+                    placeholder="마감일" name="endDate" id="endDate"> <label for="endDate">마감일</label>
                 </div></td>
             </tr>
             <tr>
@@ -157,8 +150,6 @@
           </button>
         </div>
       </form>
-
-    </div>
   </section>
 </div>
 

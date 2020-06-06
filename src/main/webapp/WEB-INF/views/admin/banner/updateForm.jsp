@@ -10,8 +10,7 @@
     </div>
 
     <!-- Main -->
-    <div class="row gutters-sm">
-      <div class="col-sm-12 mb-5">
+      <div class="mb-5">
         <!-- Search form -->
         <form class="js-ajax"
           action="/portfoli/admin/banner/update" method="post"
@@ -27,7 +26,7 @@
             <table class="table table-sm">
               <tr>
                 <th scope="row">기업</th>
-                <td><table class="table table-bordered table-hover table-striped">
+                <td><table class="table table-bordered table-hover table-striped col-sm-12">
                   <tr>
                     <td>${company.name}</td>
                     <td>${company.tel}</td>
@@ -39,14 +38,14 @@
               <tr>
                 <th scope="row">제목</th>
                 <td><input type="text" name="title" id="title"
-                  class="form-control form-control-sm" value="${banner.title}"></td>
+                  class="form-control form-control-sm col-sm-12 mt-2 mb-2" value="${banner.title}"></td>
               </tr>
               <tr>
                 <th scope="row">배너이미지</th>
                 <td><label
-                  class="rounded text-center position-relative d-block cursor-pointer border border-secondary border-dashed">
+                  class="rounded text-center position-relative d-block cursor-pointer border border-secondary border-dashed w--600 h--120">
                     <!-- remove button --> <a href="#"
-                    class="js-file-input-showcase-remove hide position-absolute absolute-top text-align-start w--600 z-index-3">
+                    class="js-file-input-showcase-remove hide position-absolute absolute-top text-align-start z-index-3">
                       <span
                       class="d-inline-block btn btn-sm bg-secondary text-white pt--4 pb--4 pl--10 pr--10 m--1 mt-2 mb-2"
                       title="remove image" data-tooltip="tooltip"> <i class="fi fi-close m-0"></i>
@@ -75,13 +74,13 @@
               <tr>
                 <th scope="row">링크 URL</th>
                 <td><input type="text" name="url"
-                  class="form-control form-control-sm" value="${banner.url}"></td>
+                  class="form-control form-control-sm col-sm-12 mt-2 mb-2" value="${banner.url}"></td>
               </tr>
               <tr>
                 <th scope="row">기간</th>
-                <td><div class="form-label-group mt-2 mb-2">
+                <td><div class="form-label-group mt-2 mb-2 pl-0 pr-0 col-sm-12">
                     <input autocomplete="off" type="text" value="${fn:substring(banner.startDate, 0, 16)}"
-                      class="form-control form-control-sm rangepicker"
+                      class="form-control rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
                       data-disable-auto-update-input="true"
@@ -95,11 +94,9 @@
                       placeholder="시작일" name="startDate" id="startDate"> <label for="startDate">
                       시작일 </label>
                   </div>
-                  <div class="form-label-group mt-2 mb-2">
-                    <a href="#"
-                      class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
+                  <div class="form-label-group mt-2 mb-2 pl-0 pr-0 col-sm-12">
                     <input autocomplete="off" type="text" value="${fn:substring(banner.endDate, 0, 16)}"
-                      class="form-control form-control-sm rangepicker"
+                      class="form-control rangepicker"
                       data-single-datepicker="true" data-timepicker="true"
                       data-timepicker-24h="true"
                       data-disable-auto-update-input="true"
@@ -112,14 +109,12 @@
                       }'
                       placeholder="마감일" name="endDate" id="endDate"> <label for="endDate">
                       마감일 </label>
-                      <a href="#"
-                      class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
                   </div></td>
               </tr>
               <tr>
                 <th scope="row">게시 여부</th>
                 <td>
-                  <div class="custom-control custom-radio custom-control-inline  mt-2 mb-2">
+                  <div class="custom-control custom-radio custom-control-inline mt-2 mb-2">
                     <input type="radio" value="0" id="customRadioInline1" name="activateYN"
                       class="custom-control-input" checked> <label
                       class="custom-control-label" for="customRadioInline1">숨기기</label>
@@ -144,7 +139,6 @@
           </div>
         </form>
 
-      </div>
     </div>
   </section>
 </div>
