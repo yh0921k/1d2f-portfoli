@@ -12,8 +12,8 @@ cd ../../
 gradle build
 
 cd docs/database/script/
-winpty mysql -u root -p -h 127.0.0.1  -e "source portfoli-ddl.sql"
-winpty mysql -u root -p -h 127.0.0.1  -e "source portfoli-dml.sql"
+mysql -u root -p -e "source portfoli-ddl.sql"
+mysql -u root -p -e "source portfoli-dml.sql"
 
 rm $TOMCAT_HOME/portfoli.war
 rm -rf $TOMCAT_HOME/portfoli
