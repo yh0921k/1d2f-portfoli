@@ -157,7 +157,7 @@
                 data-ajax-callback-function="selectedSkill">
                 <option value="0">기술전체</option>
                 <c:forEach items="${skills}" var="skill">
-                  <option value="${skill.number}">${skill.name}</option>
+                  <option value="${skill.skillNumber}">${skill.name}</option>
                 </c:forEach>
               </select> 
 						
@@ -205,7 +205,7 @@
 			      </label>
 			    </div>
         
-          <table class="table table-striped table-hover">
+          <table id="viewPeople" class="table table-striped table-hover">
             <thead>
 			        <th>이름</th>
 			        <th>경력구분</th>
@@ -216,13 +216,7 @@
 			        <th>재직여부</th>
             </thead>
             <tbody>
-			        <td>이름</td>
-			        <td>경력구분</td>
-			        <td>학력구분</td>
-			        <td>포트폴리오</td>
-			        <td>지역</td>
-			        <td>기술</td>
-			        <td>구직중</td>
+              <!-- 비동기 데이터 입력부분 -->			        
             </tbody>
           </table>        
         </div>
@@ -271,46 +265,58 @@ var filter = function() {
         data.districtList.push($(district).text());
     }
     
-    console.log(data);
+
     var convertedData = JSON.stringify(data);
     
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {
           if (xhr.status == 200) {
+        	    var sCount = 0;
               let obj = JSON.parse(xhr.responseText);
-              console.log("OBJ : ", obj);
-              $("#portfolio_field > div").remove();
+              
+              $("#viewPeople > tbody > tr").remove();
               for(let item of obj) {
-                //console.log(item.thumbnail);
-//                 let makeHtml = "";
-//                 let portfolioSkill = "";
-//                 for(let skill of item.skills) {
-//                   portfolioSkill += `<span style="margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
-//                 }
+                let makeHtml = "";
                 
-//                 makeHtml += `<div class="row">
-//                     <div class="col-12 col-lg-12">
-//                       <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
-//                         <div class="card-body" style="height:240px">
-//                           <div style="disply:inline-block; float:left; height:200px; width:200px; margin-left:10px; margin-right:20px;">
-//                             <div id="thumbnail" style="display:inline-block; float:left; width:200px; height:200px; border:1px solid; "> 
-//                               <img src="../../upload/portfolio/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
-//                             </div>
-//                           </div>
-//                           <h5 class="card-title">` + item.title + `</h5>
-//                           <span><strong>` + item.id + `<strong></span>
-//                           <h6><a href="` + item.homepage + `" target="_blank">` + item.homepage + `</a></h6>
-//                           <br>
-//                           <p class="card-text" style="height:20px; margin-top:30px; margin-bottom:6px;">` + portfolioSkill +`</p>
-//                           <span style="font-size:15px;">조회수 : ` + item.viewCount + `</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-//                           <span style="font-size:15px;">좋아요 : ` + item.likeCount + `</span>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>`;
-//                 $("#portfolio_field").append(makeHtml);
+                let havePortfolio = "";
+                for(let portfolio of item.portfolios) {
+                	havePortfolio += `<span style="cursor:pointer; margin:2px;" 
+											                		data-href="../portfolio/detail?number=` + portfolio.boardNumber + `" 
+											                    data-ajax-modal-size="modal-xl" 
+											                    data-ajax-modal-centered="true" 
+											                    data-ajax-modal-callback-function=""
+											                    class="js-ajax-modal card-title havePortfolios badge badge-pill badge-secondary">` 
+											                    + portfolio.boardNumber + `</span>`
+                }
+                
+                let interestDistrict = "";
+                for(let district of item.districts) {
+                	interestDistrict += `<span style="margin:2px;" class="interestDistrict badge badge-pill badge-secondary">` + district.name + `</span>`
+                }
+                
+                let haveSkill = "";
+                for(let skill of item.skills) {
+                	haveSkill += `<span style="margin:2px;" class="haveSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
+                }
+                
+                let flag = item.seekingFlag == 1 ? "구직중" : "재직중";
+                
+                makeHtml += `<tr>
+                              <td>` + item.name + `</td>
+							                <td>` + item.career + `년차</td>
+							                <td>` + item.educationName + `</td>
+							                <td>` + havePortfolio + `</td>
+							                <td>` + interestDistrict + `</td>
+ 							                <td>` + haveSkill + `</td>
+ 							                <td>` + flag + `</td>
+                             </tr>`                  
+							                	
+                $("#viewPeople > tbody").append(makeHtml);
+                sCount++;
               }
+              $("#searchCount > h5").remove();
+              $("#searchCount").append(`<h5>` + sCount + `건 검색</h5>`);
             }
         }
     };
@@ -422,8 +428,7 @@ $("#district_category").change(function(){
       return;
     }
     
-    let current = document.querySelectorAll("#filterList .selectDistrict");
-    console.log("current : ", current);
+    let current = document.querySelectorAll("#filterList .selectDistrict");    
     for(let item of current) {
     	if($(item).text() == $("#district_category option:selected").text()) {
     		return;
@@ -495,27 +500,27 @@ $("#orderCount").change(function(){
 
 function selectedCity(el, value, label) {
 	<%-----city로 작업할경우 코드 들어갈 곳 도시번호------%>  
-	  console.log(value, label)
+	  //console.log(value, label)
 	<%-----city로 작업할경우 코드 들어갈 곳 도시번호------%>
 	}
 
 	function selectedDistrict(el, value, label) {
 	<%-----district로 작업할경우 코드 들어갈 곳 도시번호------%>
 	  
-	  console.log(value, label)
+	  //console.log(value, label)
 	<%-----district로 작업할경우 코드 들어갈 곳 도시번호------%>
 	}
 
 	  function selectedField(el, value, label) {
 	      <%-----Field로 작업할경우 코드 들어갈 곳 ------%>  
-	        console.log(value, label)
+	        //console.log(value, label)
 	      <%-----Field로 작업할경우 코드 들어갈 곳 ------%>
 	      }
 
 	  function selectedSkill(el, value, label) {
 	  <%-----Skill로 작업할경우 코드 들어갈 곳------%>
 	    
-	    console.log(value, label)
+	    //console.log(value, label)
 	  <%-----Skill로 작업할경우 코드 들어갈 곳------%>
 	  }
 	$.SOW.core.ajax_select.init('#city_category');
