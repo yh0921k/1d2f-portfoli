@@ -1,3 +1,9 @@
+-- 자동화 스크립트를 위한 데이터베이스 선택문장
+use portfolidb;
+set character_set_client = utf8;
+set character_set_connection = utf8;
+set character_set_results = utf8;
+
 -- 분야 샘플 데이터(pf_field)
 insert into pf_field(field_no,name) values(401,"웹마스터·QA·테스터");
 insert into pf_field(field_no,name) values(402,"서버·네트워크·보안");
