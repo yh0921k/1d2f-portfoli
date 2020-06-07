@@ -126,17 +126,18 @@
               title: '잠깐!...',
               text: '제목, 내용을 넣어주세요.',
             })
-		  return;
 	  }
 	  
 	  // 공개설정인 경우 : 썸네일 값이 있는지 체크
 	  if($('#readable').val() == 1 ) {
-		  if($('#thumb').val() != null) {
+		  if(!$('#thumb').val()) {
 			  Swal.fire({
 				  icon: 'error',
 				  title: '잠깐!...',
 				  text: '썸네일을 넣어주세요.',
 				})
+		  } else {
+		      $('#addForm').submit();
 		  }
 	  }
 	  // 비공개설정인 경우 : 조건없이 통과

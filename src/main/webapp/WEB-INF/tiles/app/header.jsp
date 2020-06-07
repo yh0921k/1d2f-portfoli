@@ -394,6 +394,8 @@ $(document).ready(function() {
 	} else if(queryString.indexOf('/portfoli/app/rank/list') > -1){
 		cssTarget = $('#ranking > span');
 	}
-	cssTarget.css('font-size','1.1rem').css('font-weight','bold').css('text-shadow','2px 2px 19px #8ec1a1').css('color','#85ad94');
+	if(cssTarget != null) {
+	 cssTarget.css('font-size','1.1rem').css('font-weight','bold').css('text-shadow','2px 2px 19px #8ec1a1').css('color','#85ad94');
+	}
 });
 </script>
