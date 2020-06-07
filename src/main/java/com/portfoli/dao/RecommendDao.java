@@ -6,7 +6,7 @@ import com.portfoli.domain.Recommend;
 
 public interface RecommendDao {
 
-  public List<Recommend> findAll() throws Exception;
+  // public List<Recommend> findAll() throws Exception;
 
   public List<Recommend> findAllByFilter(Map<String, Object> params) throws Exception;
 }
