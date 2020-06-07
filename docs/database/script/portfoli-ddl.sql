@@ -6,14 +6,24 @@ CREATE DATABASE portfolidb
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 
+DROP USER 'team'@'localhost';
+DROP USER 'team'@'%';
+DROP USER 'team'@'127.0.0.1';
+DROP USER 'team'@'::1';
+
 -- 로컬에서만 접속할 수 있는 사용자를 만들기:
 CREATE USER 'team'@localhost IDENTIFIED BY '1111';
 -- 원격에서만 접속할 수 있는 사용자를 만들기:
 CREATE USER 'team'@'%' IDENTIFIED BY '1111';
 
+CREATE USER 'team'@'127.0.0.1' IDENTIFIED BY '1111';
+CREATE USER 'team'@'::1' IDENTIFIED BY '1111';
+
 -- 유저에게 데이터베이스 권한 부여
-GRANT ALL ON portfolidb.* TO team@localhost;
+GRANT ALL ON portfolidb.* TO team@'localhost';
 GRANT ALL ON portfolidb.* TO team@'%';
+GRANT ALL ON portfolidb.* TO team@'127.0.0.1';
+GRANT ALL ON portfolidb.* TO team@'::1';
 
 -- 데이터베이스 접속
 use portfolidb;
