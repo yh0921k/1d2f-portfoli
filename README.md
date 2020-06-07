@@ -4,6 +4,31 @@
 
 &nbsp;&nbsp;본 프로젝트는 기존의 구인&구직 사이트를 모티브로 하여 문제점을 찾고 보완했으며, 사용자의 편리성을 위한 추가적인 기능을 제공한다. 기존 시스템과의 부각되는 차이점은 포트폴리오 공유를 통한 구인&구직 활동을 서비스하며, 기업 사용자와 일반 사용자의 편리한 커뮤니케이션을 제공한다.
 
+<br/>
+
+---
+
+#### :key: Installation
+```bash
+git clone https://github.com/yh0921k/1d2f-portfoli.git
+cd 1d2f-portfoli.git
+
+# windows
+# test : windows 10
+sh start_on_windows.sh
+
+# linux
+# test : ubuntu 18.04
+sh start_on_linux.sh
+
+# See also
+# docs/kyh/release_on_windows.sh
+# docs/kyh/release_on_linux.sh
+
+# Tomcat and MariaDB must be installed in your environment.
+# You can modify the TOMCAT_BIN and TOMCAT_HOME paths according to your environment.
+# Additionally, you can change the account for database script operation.
+```
 
 
 <br/>
