@@ -20,10 +20,10 @@ public class RecommendServiceImpl implements RecommendService {
     this.recommendDao = recommendDao;
   }
 
-  @Override
-  public List<Recommend> list() throws Exception {
-    return recommendDao.findAll();
-  }
+  // @Override
+  // public List<Recommend> list() throws Exception {
+  // return recommendDao.findAll();
+  // }
 
   @Override
   public List<Recommend> list(Map<String, Object> params) throws Exception {
