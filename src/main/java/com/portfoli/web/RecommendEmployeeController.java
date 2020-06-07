@@ -1,6 +1,5 @@
 package com.portfoli.web;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -105,14 +104,75 @@ public class RecommendEmployeeController {
     }
 
     List<Recommend> rankList = recommendService.list(convertedData);
-    List<Recommend> result = new ArrayList<>();
-    for (int i = 0; i < rankList.size(); i++) {
-
-    }
+    // List<Recommend> result = new ArrayList<>();
 
     for (Recommend r : rankList) {
       System.out.println(r);
     }
+    // 사용자 중복 제거
+    // for (int i = 0; i < rankList.size(); i++) {
+    // boolean flag = true;
+    // for (int j = 0; j < result.size(); j++) {
+    // if (rankList.get(i).getName().equals(result.get(j).getName())) {
+    // flag = false;
+    // }
+    // }
+    // if (flag) {
+    // result.add(rankList.get(i));
+    // }
+    // }
+
+    // 포트폴리오 한 리스트로 병합
+    // for (int i = 0; i < result.size(); i++) {
+    // List<Portfolio> pList = new ArrayList<>();
+    // int who = -1;
+    // for (int j = 0; j < rankList.size(); j++) {
+    // if (result.get(i).getName().equals(rankList.get(j).getName())) {
+    // who = i;
+    // Portfolio portfolio = rankList.get(j).getPortfolios().get(0);
+    // if (!pList.contains(portfolio)) {
+    // pList.add(portfolio);
+    // }
+    // }
+    // }
+    // result.get(who).setPortfolios(pList);
+    // }
+
+    // 스킬 한 리스트로 병합
+    // for (int i = 0; i < result.size(); i++) {
+    // List<Skill> sList = new ArrayList<>();
+    // int who = -1;
+    // for (int j = 0; j < rankList.size(); j++) {
+    // if (result.get(i).getName().equals(rankList.get(j).getName())) {
+    // who = i;
+    // Skill skill = rankList.get(j).getSkills().get(0);
+    // if (!sList.contains(skill)) {
+    // sList.add(skill);
+    // }
+    // }
+    // }
+    // result.get(who).setSkills(sList);
+    // }
+
+    // 관심지역 한 리스트로 병합
+    // for (int i = 0; i < result.size(); i++) {
+    // List<District> dList = new ArrayList<>();
+    // int who = -1;
+    // for (int j = 0; j < rankList.size(); j++) {
+    // if (result.get(i).getName().equals(rankList.get(j).getName())) {
+    // who = i;
+    // District district = rankList.get(j).getDistricts().get(0);
+    // if (!dList.contains(district)) {
+    // dList.add(district);
+    // }
+    // }
+    // }
+    // result.get(who).setDistricts(dList);
+    // }
+
+    // for (Recommend r : result) {
+    // System.out.println(r);
+    // }
 
     return new Gson().toJson(rankList);
   }

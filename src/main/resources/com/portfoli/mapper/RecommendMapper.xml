@@ -13,8 +13,8 @@
 		<result column="category" property="educationName" />
 		<result column="seeking_flag" property="seekingFlag" />
 		
-		<collection property="portfolios" ofType="Portfolio">
-	    <id column="board_no" property="number" />
+		<collection property="portfolios" ofType="DatabasePortfolio">
+	    <id column="board_no" property="boardNumber" />
 	    <result column="title" property="title" />
 	    <result column="readable" property="readable" />
 	  </collection>
@@ -25,7 +25,7 @@
     </collection>
 
 		<collection property="skills"  ofType="Skill">
-      <id column="skill_no" property="number" />
+      <id column="skill_no" property="skillNumber" />
       <result column="skill_name" property="name" />
       <result column="field_no" property="fieldNumber" />
     </collection>
@@ -36,7 +36,7 @@
 	<select id="findAllByFilter" resultMap="RecommendMap" parameterType="map">
 	  select 
 	    pm.name, 
-	    pgm.seeking_flag, pgm.career, 
+	    pgm.general_member_no, pgm.seeking_flag, pgm.career, 
 	    pfe.category, 
 	    pp.readable, 
 	    pb.board_no, pb.title, 
@@ -97,13 +97,13 @@
       </if>
       <if test="skillList.size != 0">
         and 
-        <foreach collection="skillList" item="item" index="index" separator=" or">
+        <foreach collection="skillList" open="(" close=")" item="item" index="index" separator=" or">
          ps.name=#{item}
        </foreach>
       </if>
       <if test="districtList.size != 0">
         and 
-        <foreach collection="districtList" item="item" index="index" separator=" or">
+        <foreach collection="districtList" open="(" close=")" item="item" index="index" separator=" or">
          pd.name=#{item}
        </foreach>
       </if>

@@ -6,7 +6,7 @@
 <mapper namespace="com.portfoli.dao.SkillDao">
 
 	<resultMap type="Skill" id="SkillMap">
-		<id column="skill_no" property="number" />
+		<id column="skill_no" property="skillNumber" />
 		<result column="field_no" property="fieldNumber"/>
 		<result column="name"	property="name" />
 		<result column="field_name"	property="fieldName" />

@@ -135,7 +135,7 @@ public class SkillController {
       if (skillName == null) {
         continue;
       }
-      int skillNumber = skillService.get(skillName).getNumber();
+      int skillNumber = skillService.get(skillName).getSkillNumber();
       params.put("skillNumber", skillNumber);
       skillService.add(params);
     }
@@ -154,7 +154,7 @@ public class SkillController {
     for (Skill s : list) {
       HashMap<String, Object> skillData = new HashMap<>();
       skillData.put("label", s.getName());
-      skillData.put("value", s.getNumber());
+      skillData.put("value", s.getSkillNumber());
       skillData.put("selected", false);
       smartyList.add(skillData);
     }

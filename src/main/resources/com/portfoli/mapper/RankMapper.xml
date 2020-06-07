@@ -19,7 +19,7 @@
 		<result column="registered_date" property="registeredDate" />
 
 		<collection property="skills" ofType="Skill">
-      <id column="skill_no" property="number" />
+      <id column="skill_no" property="skillNumber" />
       <result column="name" property="name" />
       <result column="field_no" property="fieldNumber" />
     </collection>
