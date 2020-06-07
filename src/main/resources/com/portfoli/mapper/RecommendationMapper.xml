@@ -42,7 +42,7 @@
 	    </association>
 	    
 	    <association property="rankskill" javaType="Skill"><!-- 스킬(소분류) -->
-	      <id column="skill_no" property="number" /><!-- 스킬번호 -->
+	      <id column="skill_no" property="skillNumber" /><!-- 스킬번호 -->
 	      <result column="skill_name" property="name" /><!-- 스킬명 -->
 	    </association>
 

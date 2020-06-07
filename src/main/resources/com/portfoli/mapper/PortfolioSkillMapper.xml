@@ -8,7 +8,7 @@
     <id column="board_no" property="number" /><!-- 게시글번호-->
     
     <collection property="skill" ofType="Skill">
-      <id column="sskill_no" property="number" /><!-- 기술번호-->
+      <id column="sskill_no" property="skillNumber" /><!-- 기술번호-->
       <result column="field_no" property="fieldNumber" /><!-- 기술구분 -->
       <result column="sname" property="name" /><!-- 이름 -->
     </collection>
