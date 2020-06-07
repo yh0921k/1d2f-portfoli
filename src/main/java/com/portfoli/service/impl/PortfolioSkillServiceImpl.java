@@ -29,8 +29,8 @@ public class PortfolioSkillServiceImpl implements PortfolioSkillService {
   }
 
   @Override
-  public int delete(int memberSkillNumber) throws Exception {
-    return portfolioSkillDao.deleteByMemberSkillNumber(memberSkillNumber);
+  public int delete(int boardNumber) throws Exception {
+    return portfolioSkillDao.deleteByBoardNumber(boardNumber);
   }
 
 

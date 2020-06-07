@@ -4,10 +4,7 @@ import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 import javax.servlet.ServletContext;
@@ -27,7 +24,6 @@ import com.portfoli.domain.Board;
 import com.portfoli.domain.BoardAttachment;
 import com.portfoli.domain.Field;
 import com.portfoli.domain.GeneralMember;
-import com.portfoli.domain.GeneralMemberSkill;
 import com.portfoli.domain.Member;
 import com.portfoli.domain.Pagination;
 import com.portfoli.domain.Portfolio;
@@ -624,43 +620,9 @@ public class PortfolioController {
 
       portfolioService.update(portfolio);
 
+      // 포트폴리오에 스킬이 있는경우 이전에 등록한 스킬을 삭제하고 새로운 스킬을 등록한다.
       if(skills != null) {
-        String[] updateList = skills.split(",");
-        List<Skill> list = skillService.listOfMember(member.getNumber());
-        List<String> deleteList = new LinkedList<>();
-        List<String> sameList = new LinkedList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-          boolean flag = false;
-          for (int j = 0; j < updateList.length; j++) {
-            if (updateList[j].equals(list.get(i).getName())) {
-              flag = true;
-            }
-          }
-          if (!flag) {
-            deleteList.add(list.get(i).getName());
-          } else {
-            sameList.add(list.get(i).getName());
-          }
-        }
-
-        for (int i = 0; i < sameList.size(); i++) {
-          for (int j = 0; j < updateList.length; j++) {
-            if (sameList.get(i).equals(updateList[j])) {
-              updateList[j] = null;
-            }
-          }
-        }
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("memberNumber", member.getNumber());
-        for (String skillName : deleteList) {
-          params.put("skillName", skillName);
-          GeneralMemberSkill gms = skillService.get(params);
-          params.put("skillNumber", gms.getSkillNumber());
-
-          portfoliSkillService.delete(gms.getMemberSkillNumber());
-        }
+        portfoliSkillService.delete(board.getNumber());
       }
 
       // [from TABLE pf_member_skill]  : str(기술번호)를 통해 member_skill_no(PK값)을 호출해서

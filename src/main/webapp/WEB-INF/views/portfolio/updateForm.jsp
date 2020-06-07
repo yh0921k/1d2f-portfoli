@@ -43,7 +43,7 @@
                   "
           >
             <c:forEach items="${myskills}" var="item">
-            <option class="options" value="${item.number}" data-subtext="${item.fieldName}">${item.name}</option>
+            <option class="options" value="${item.skillNumber}" data-subtext="${item.fieldName}">${item.name}</option>
             </c:forEach>
           </select>
 

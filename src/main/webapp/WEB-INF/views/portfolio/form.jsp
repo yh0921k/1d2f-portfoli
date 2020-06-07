@@ -30,7 +30,7 @@
           <p class="text-gray-900 mt-3" style="display: inline-block;">기술 : </p>
           <select name="skills" multiple class="bs-select form-label-group form-control-clean col-md-11 mt--5" title="기술을 골라주세요">
           	<c:forEach items="${myskills}" var="item">
-          	<option value="${item.number}" data-subtext="${item.fieldName}">${item.name}</option>
+          	<option value="${item.skillNumber}" data-subtext="${item.fieldName}">${item.name}</option>
 	          	</c:forEach>
           </select>
 
