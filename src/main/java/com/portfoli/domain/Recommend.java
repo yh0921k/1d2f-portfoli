@@ -15,7 +15,7 @@ public class Recommend implements Serializable {
   String educationName;
 
   int seekingFlag;
-  List<Portfolio> portfolios;
+  transient List<Portfolio> portfolios;
   List<District> districts;
   List<Skill> skills;
 
