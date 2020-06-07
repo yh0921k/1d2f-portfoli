@@ -15,7 +15,7 @@ public class Recommend implements Serializable {
   String educationName;
 
   int seekingFlag;
-  transient List<Portfolio> portfolios;
+  List<DatabasePortfolio> portfolios;
   List<District> districts;
   List<Skill> skills;
 
@@ -67,11 +67,11 @@ public class Recommend implements Serializable {
     this.seekingFlag = seekingFlag;
   }
 
-  public List<Portfolio> getPortfolios() {
+  public List<DatabasePortfolio> getPortfolios() {
     return portfolios;
   }
 
-  public void setPortfolios(List<Portfolio> portfolios) {
+  public void setPortfolios(List<DatabasePortfolio> portfolios) {
     this.portfolios = portfolios;
   }
 
