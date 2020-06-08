@@ -305,6 +305,9 @@ var filter = function() {
                 makeHtml += `<tr>
                               <td>` + item.name + `</td>
 							                <td>` + item.career + `년차</td>
+							                
+							                
+							                
 							                <td>` + item.educationName + `</td>
 							                <td>` + havePortfolio + `</td>
 							                <td>` + interestDistrict + `</td>
@@ -436,16 +439,31 @@ $("#district_category").change(function(){
     }
     
     let item = $("#district_category option:selected").text();
-    // value 값에 도시번호, innerHTML에 도시이름 입력
-    var newChild = `<span style="cursor:pointer; margin:2px;" value=` + inputValue + ` class="selectDistrict badge badge-pill badge-secondary">` + item + `</span>`;
-    $("#filterField #filterList").append(newChild);
     
     var sibling = $("#district_category option:selected").siblings("option:not(:selected)");
     var arrays = {};
     for(var s of sibling) {
     	arrays[s.value] = s.innerHTML;
     }
-    	
+
+    // 선택값이 '전체'로 끝나지 않는 경우 +
+    // 이미 '전체'가 filterList에 있는 경우 : 값이 들어가지 않도록
+   	if(!$("#district_category option:selected").text().endsWith('전체')) {
+	    for(var filteredElement of $("#filterField #filterList span")) {
+	    	if(filteredElement.getAttribute("value").endsWith("000") &&
+	    		filteredElement.getAttribute("value").substr(0,3) == $("#district_category").val().substr(0,3)) {
+	    		console.log("전체값이 있다.");
+	    		return;
+	    	}
+	    }
+   	}
+    
+    // value 값에 도시번호, innerHTML에 도시이름 입력
+    var newChild = `<span style="cursor:pointer; margin:2px;" value=` + inputValue + ` class="selectDistrict badge badge-pill badge-secondary">` + item + `</span>`;
+    $("#filterField #filterList").append(newChild);
+    
+    // 선택값이 '전체'로 끝나는 경우
+    // 이하 도시로 들어가있는 span태그 모두 삭제
    	if($("#district_category option:selected").text().endsWith('전체')) {
 	    for(var filteredElement of $("#filterField #filterList span")) {
 	    	for(var arr in arrays) {
