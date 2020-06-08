@@ -301,25 +301,28 @@
                 <div class="max-h-75vh">
                   <c:forEach items="${inbox}" var="recentMessage">
                     <a
-                      href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+                      href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
                       class="js-ajax-modal clearfix dropdown-item font-weight-medium px-3 border-bottom border-light overflow-hidden shadow-md-hover bg-theme-color-light"
-                      data-href="/portfoli/app/message/inbox/modal?number=${recentMessage.number}"
+                      data-href="/portfoli/app/message/inboxModal?number=${recentMessage.number}"
                       data-ajax-modal-size="modal-md"
                       data-ajax-modal-centered="true" data-ajax-modal-backdrop="">
                       <span
                       class="badge badge-soft badge-warning float-end font-weight-normal mt-1"
                       <c:if test="${not empty recentMessage.receiveDate}"> style="visibility:hidden;"</c:if>>new</span>
 
-                      <!-- image --> <c:if
-                        test="${empty recentMessage.member.photoFilePath}">
-                        <div
-                          class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
-                          style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
-                      </c:if> <c:if test="${not empty recentMessage.member.photoFilePath}">
-                        <div
-                          class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
-                          style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${item.member.photoFilePath}')"></div>
-                      </c:if> <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
+                      <!-- image --> <c:choose>
+                        <c:when test="${empty recentMessage.member.photoFilePath}">
+                          <div
+                            class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
+                            style="background-image:url('${pageContext.request.getContextPath()}/resources/assets/images/icons/user80.png')"></div>
+                        </c:when>
+                        <c:when
+                          test="${not empty recentMessage.member.photoFilePath}">
+                          <div
+                            class="w--50 h--50 mb-2 mt-1 rounded-circle bg-cover bg-light float-start"
+                            style="background-image:url('${pageContext.request.getContextPath()}/upload/member/${recentMessage.member.photoFilePath}')"></div>
+                        </c:when>
+                      </c:choose> <!-- sender --> <strong class="d-block text-truncate">${recentMessage.member.id}</strong>
                       <!-- title -->
                       <p class="fs--14 m-0 text-truncate font-weight-normal">
                         ${recentMessage.title}</p> <!-- date --> <small
@@ -337,7 +340,6 @@
                     class="d-inline-block pl-2 pr-2">받은 쪽지함으로 이동</span>
                   </a>
                 </div>
-
                 <li
                   class="list-inline-item ml--6 mr--6 dropdown-menu-hover mt-3"><a
                   href="#" id="dropdownAccountOptions"
