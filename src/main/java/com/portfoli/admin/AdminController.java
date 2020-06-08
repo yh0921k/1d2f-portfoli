@@ -1,5 +1,6 @@
 package com.portfoli.admin;
 
+import java.util.Arrays;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +9,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.portfoli.dao.MemberDao;
 import com.portfoli.domain.Admin;
 import com.portfoli.service.AdminService;
 
@@ -24,6 +27,9 @@ public class AdminController {
 
   @Autowired
   AdminService adminService;
+
+  @Autowired
+  MemberDao memberDao;
 
   public AdminController() {
     logger.info("AdminController 객체 생성!");
@@ -70,5 +76,12 @@ public class AdminController {
   }
 
   @GetMapping("index")
-  public void index() throws Exception {}
+  public void index(Model model) throws Exception {
+    int[] count = new int[12];
+    for (int i = 1; i <= 12; i++) {
+      count[i - 1] = memberDao.findRegisteredCountForAMonth(i);
+    }
+
+    model.addAttribute("newMemberCountForAMonth", Arrays.toString(count));
+  }
 }

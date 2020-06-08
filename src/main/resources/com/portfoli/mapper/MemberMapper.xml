@@ -138,4 +138,9 @@
     FROM pf_members
   </select>
   
+  <select id="findRegisteredCountForAMonth" resultType="int" parameterType="int">
+    SELECT count(*)
+    FROM pf_members
+    WHERE DATE_FORMAT(create_date, '%Y') = YEAR(curdate()) AND DATE_FORMAT(create_date, '%m') = #{month}
+  </select>
 </mapper>

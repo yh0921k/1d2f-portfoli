@@ -39,4 +39,5 @@ public interface MemberDao {
 
   int count();
 
+  int findRegisteredCountForAMonth(int month);
 }
