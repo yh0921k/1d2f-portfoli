@@ -102,8 +102,12 @@ window.onload = function() {
 	  for(let i=0; i<5 ;i++) {
 	  	$(".posting[data-index="+i+"]").css('display', 'block');
 	  	
-	  	if($('#total').html() > $('#printed').html()) {
+	  	if($('#total').html() - $('#printed').html() > 0) {
 	      $('#printed').html(i+1);
+	  	}
+	  	
+	  	if($('#total').html() == 0) {
+		    $('#printed').html(0);
 	  	}
 	  }
 	  
