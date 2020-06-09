@@ -93,9 +93,13 @@
 <br>
 </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+				integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+				crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+				integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+				crossorigin="anonymous"></script>
 <script>
 <%-------------------------------------------더보기 ------------------------------------------------%>
 var tag1 = document.getElementById("moreListBtn");
@@ -103,11 +107,18 @@ var tbody = document.querySelector("#listTable > tbody");
 
 tag1.onclick = function() {
 	var lastNo = parseInt(document.querySelector("#listTable > tbody > tr:last-child > td:nth-child(2)").innerHTML);
-	console.log(lastNo);
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'list2?lastNo=' + lastNo, false);
 	xhr.send();
 	tbody.innerHTML = tbody.innerHTML + xhr.responseText;
+	
+	if(xhr.responseText == "") {
+		Swal.fire({
+			title : '더이상 채용정보가 없습니다.',
+			icon : 'warning',
+			timer : 3000
+		})
+	}
 };
 <%------------------------------------------/더보기 ------------------------------------------------%>
 <%------------------------------------------검색키업이벤트--------------------------------------------%>

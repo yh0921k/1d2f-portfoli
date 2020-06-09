@@ -194,9 +194,9 @@
 	<p>해당 공고가 없습니다.</p>
 </c:if>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="${pageContext.getServletContext().getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=126304aee8e06ce802d9561ab754dba4"></script>
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=126304aee8e06ce802d9561ab754dba4"></script>
 <script>
 <%------------------------------------------카카오맵 ------------------------------------------------%>
 	var container = document.getElementById('map');
