@@ -139,7 +139,13 @@ window.onload = function() {
         		  }
         		  
         		  makeHtml += `<div class="row">
-        	        <div class="col-12 col-lg-12">
+        	        <div class="col-12 col-lg-12 js-ajax-modal"
+        	        		data-href="../portfolio/detail?number=` + item.number + `" 
+      	              data-ajax-modal-size="modal-xl" 
+      	              data-ajax-modal-centered="true" 
+      	              data-ajax-modal-callback-function=""
+      	              style="cursor:pointer;"
+        	        >
         	          <div class="card shadow-md shadow-lg-hover transition-all-ease-250 transition-hover-top h-100 border-primary bl-0 br-0 bb-0 bw--2">
         	            <div class="card-body" style="height:240px">
         	              <div style="disply:inline-block; float:left; height:200px; width:200px; margin-left:10px; margin-right:20px;">
@@ -147,11 +153,7 @@ window.onload = function() {
         	                  <img src="../../upload/portfolio/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
         	                </div>
         	              </div>
-        	              <h5 data-href="../portfolio/detail?number=` + item.number + `" 
-        	                  data-ajax-modal-size="modal-xl" 
-        	                      data-ajax-modal-centered="true" 
-        	                      data-ajax-modal-callback-function=""
-        	                      class="js-ajax-modal card-title">` + item.title + `</h5>
+        	              <h5 class="card-title">` + item.title + `</h5>
         	              <span><strong>` + item.id + `<strong></span>
         	              <h6><a href="http://` + item.homepage + `" target="_blank">` + item.homepage + `</a></h6>
         	              <br>
