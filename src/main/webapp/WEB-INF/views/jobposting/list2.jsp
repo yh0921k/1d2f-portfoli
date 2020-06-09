@@ -7,13 +7,17 @@
 
 <c:set var="today" value="${System.currentTimeMillis()}"/>
   <c:forEach items="${jobPostings}" var="jobPosting" varStatus="status">
-    <tr id="tList">
-    <td><a href='detail?no=${jobPosting.jobPostingNumber}'><c:forEach items="${jobPosting.files}" var="jobPostingFile">
+    <tr class="transition-all-ease-250 transition-hover-top h-100 bl-0 br-0 bb-0 bw--2 card-body posting"
+    		style="color:black; cursor:pointer;"
+    		id="tList"
+    		onclick="location.href='detail?no=${jobPosting.jobPostingNumber}'"
+    		>
+    <td><c:forEach items="${jobPosting.files}" var="jobPostingFile">
       <img src="../../upload/jobposting/${jobPostingFile.filePath}" width="100" height="100">
       </c:forEach></td>
       <td style="display:none;">${jobPosting.jobPostingNumber}</td>
       <td><font style="color: orange;">${jobPosting.company.name}</font><br>
-      <a href='detail?no=${jobPosting.jobPostingNumber}' style="color:black;">${jobPosting.title}</a>
+      ${jobPosting.title}
       </td>
       
       <td>경력 <font style="color: orange;">${jobPosting.minimumCareer}
