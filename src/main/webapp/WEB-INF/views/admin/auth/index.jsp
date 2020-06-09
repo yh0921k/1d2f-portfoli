@@ -62,7 +62,7 @@
             data-chartjs-labels='["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'
             data-chartjs-datasets='[{                                                           
                           "label":                    "Orders",
-                          "data":                     [11, 11, 17, 11, 15, 12, 13, 16, 11, 18, 20, 21],
+                          "data":                     ${visitCountForAMonth},
                           "fill":                     false,
                           "backgroundColor":          "rgba(54, 162, 235, 1)"
                       }]'></canvas>
