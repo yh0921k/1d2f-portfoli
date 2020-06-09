@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -559,6 +560,7 @@ public class PortfolioController {
 
   }
 
+  @Transactional
   @PostMapping("update")
   public String updateForm(String skills, HttpServletRequest request, Portfolio portfolio,
       @RequestParam("thumb") MultipartFile thumb,
@@ -700,6 +702,7 @@ public class PortfolioController {
     model.addAttribute("myskills", myskills);
   }
 
+  @Transactional
   @RequestMapping("add")
   public String add(String skills, Portfolio portfolio, HttpServletRequest request, Model model,
       @RequestParam("thumb") MultipartFile thumb,
@@ -773,6 +776,7 @@ public class PortfolioController {
     }
   }
 
+  @Transactional
   @RequestMapping("delete")
   public String delete(int number) throws Exception {
     try {

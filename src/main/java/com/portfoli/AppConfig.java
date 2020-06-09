@@ -6,14 +6,16 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 // 어플리케이션을 설정하는 클래스
 // Spring IoC Container가 탐색할 패키지 설정
 // > 지정한 패키지 및 그 하위 패키지를 모두 탐색하여
 // > @Component 어노테이션이 붙은 클래스를 찾아 객체를 생성한다.
+@EnableTransactionManagement
 @ComponentScan(value = "com.portfoli",
-    excludeFilters = {@Filter(type = FilterType.REGEX, pattern = "com.portfoli.admin.*"),
-        @Filter(type = FilterType.REGEX, pattern = "com.portfoli.web.*")})
+excludeFilters = {@Filter(type = FilterType.REGEX, pattern = "com.portfoli.admin.*"),
+    @Filter(type = FilterType.REGEX, pattern = "com.portfoli.web.*")})
 public class AppConfig {
 
   static Logger logger = LogManager.getLogger(AppConfig.class);
