@@ -1,4 +1,4 @@
-<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/src/main/webapp/resources/assets/images/logo/logo2.png?raw=true" width="10%">
+<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/logo.png?raw=true" width="10%">
 
 ### 포트폴리오 관리 및 공유를 통한 구인, 구직 시스템
 
@@ -116,7 +116,34 @@ sh start_on_linux.sh
 --- 
 
 #### :wrench: 시스템 아키텍쳐
-<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/src/main/webapp/resources/assets/images/System.png?raw=true" width="90%">
+<img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/System.png?raw=true" width="90%">
+
+<br/>
+
+---
+
+#### :movie_camera: Demo
+
+<br/>
+
+<table>
+  <tr>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g1.gif?raw=true" width="90%"></th>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g2.gif?raw=true" width="90%"></th>
+  </tr>
+  <tr>
+    <th>로그인, 회원가입, 이메일 인증</th>
+    <th>랭킹, 인재추천, 채용추천</th>
+  </tr>  
+  <tr>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g3.gif?raw=true" width="90%"></th>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g4.gif?raw=true" width="90%"></th>
+  </tr>
+  <tr>
+    <th>채용공고, 포트폴리오</th>
+    <th>배너, 쪽지, 캘린더</th>
+  </tr>
+</table>
 
 <br/>
 
