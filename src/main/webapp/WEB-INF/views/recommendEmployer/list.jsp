@@ -63,7 +63,7 @@
 <!-------------------------------------/더보기------------------------------------------------------->
 
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="${pageContext.getServletContext().getContextPath()}/node_modules/components-jqueryui/jquery-ui.min.js"></script>
 <script src="${pageContext.request.getContextPath()}/resources/assets/js/generalUpdate.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.getContextPath()}/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>

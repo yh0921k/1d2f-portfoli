@@ -13,17 +13,22 @@
 
 <div class="modal-body p--30">
 
-	<form class="bs-validate js-ajax" novalidate action="eventCreate" method="POST" data-modal-autoclose-on-success="true"
-		data-modal-autoclose-on-success-delay="800"
-		data-ajax-container="#ajax_response_container"
-		data-ajax-update-url="false" data-ajax-show-loading-icon="true"
-		data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
-		data-error-toast-delay="3000" data-error-toast-position="top-center"
-		data-error-scroll-up="true" data-ajax-callback-function="reload">
+	<form class="bs-validate js-ajax" 
+				novalidate action="eventCreate" 
+				method="POST" 
+				data-modal-autoclose-on-success="true"
+				data-modal-autoclose-on-success-delay="800"
+				data-ajax-container="#ajax_response_container"
+				data-ajax-update-url="false" 
+				data-ajax-show-loading-icon="true"
+				data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Please, complete all required fields!"
+				data-error-toast-delay="3000" 
+				data-error-toast-position="top-center"
+				data-error-scroll-up="true" 
+				data-ajax-callback-function="reload">
 
 		<input type="hidden" name="action" value="add_event">
 		<!-- <input type="hidden" id="event_id" name="id" value=''> -->
-
 
 		<div class="bg-light pl--20 pr--20 pt--20 mb-4 rounded">
 
@@ -33,22 +38,27 @@
 
 					<div class="form-label-group">
 
-						<input required autocomplete="off" type="text"
-							class="form-control rangepicker" data-load-delay="800"
-							data-single-datepicker="true" data-timepicker="true"
-							data-timepicker-24h="true" data-timepicker-show-seconds="false"
-							data-disable-auto-update-input="true" data-date-start=""
-							data-date-format="YYYY-MM-DD HH:mm"
-							data-quick-locale='{
-                    "lang_apply"  : "적용",
-                    "lang_cancel" : "취소",
-                    "lang_months"   : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-                  }'
-							placeholder="Event Date Start" name="start" id="start"
-							value=${start}> <label for="start">시작일</label> <a
-							href="#"
-							class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
+						<input required autocomplete="off"
+									 type="text"
+									 class="form-control rangepicker" 
+									 data-load-delay="800"
+									 data-single-datepicker="true" 
+									 data-timepicker="true"
+									 data-timepicker-24h="true" 
+									 data-timepicker-show-seconds="false"
+									 data-disable-auto-update-input="true"
+									 data-date-start=""
+									 data-date-format="YYYY-MM-DD HH:mm"
+									 data-quick-locale='{
+		                    "lang_apply"  : "적용",
+		                    "lang_cancel" : "취소",
+		                    "lang_months"   : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		                    "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+		                  }'
+									 placeholder="Event Date Start" name="start" id="start"
+									 value=${start}> <label for="start">시작일</label> <a
+									 href="#"
+									 class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
 
 					</div>
 
@@ -59,19 +69,25 @@
 
 					<div class="form-label-group">
 
-						<input autocomplete="off" type="text"
-							class="form-control rangepicker" data-single-datepicker="true"
-							data-timepicker="true" data-timepicker-24h="true"
-							data-timepicker-show-seconds="false"
-							data-disable-auto-update-input="true" data-date-start=""
-							data-date-format="YYYY-MM-DD HH:mm"
-							data-quick-locale='{
-                    "lang_apply"  : "적용",
-                    "lang_cancel" : "취소",
-                    "lang_months"   : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-                  }'
-							placeholder="Event Date End" name="end" id="end"> 
+						<input autocomplete="off"
+									 type="text"
+									 class="form-control rangepicker"
+									 data-single-datepicker="true"
+									 data-timepicker="true"
+									 data-timepicker-24h="true"
+									 data-timepicker-show-seconds="false"
+									 data-disable-auto-update-input="true"
+									 data-date-start=""
+									 data-date-format="YYYY-MM-DD HH:mm"
+									 data-quick-locale='{
+		                    "lang_apply"  : "적용",
+		                    "lang_cancel" : "취소",
+		                    "lang_months"   : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		                    "lang_weekdays" : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+		                  }'
+									 placeholder="Event Date End"
+									 name="end"
+									 id="end"> 
 							<label for="end">종료일</label> <a href="#" class="btn btn-rangepicker-clear position-absolute end-0 top-0 z-index-2 fi fi-close"></a>
 
 					</div>
@@ -118,6 +134,7 @@
 </div>
 
 <script>
+
 const loadedToDos = localStorage.getItem('toDos');
 //var todoList = [];
 
