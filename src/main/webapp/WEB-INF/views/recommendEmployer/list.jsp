@@ -27,7 +27,10 @@
 	</div>
 	
 	<c:forEach var="item" items="${jobpostings}" varStatus="status">
-  <div class="card-body posting" style="display:none; height:240px" onclick="detail(${item.jobPostingNumber})" data-index="${status.getIndex()}" >
+  <div class="card transition-all-ease-250 transition-hover-top h-100 bl-0 br-0 bb-0 bw--2 card-body posting"
+  		 style="cursor:pointer;display:none; height:240px"
+  		 onclick="detail(${item.jobPostingNumber})"
+  		 data-index="${status.getIndex()}" >
     <div style="disply:inline-block; float:left; height:200px; width:200px; margin-left:10px; margin-right:20px;">
       <div id="thumbnail" style="display:inline-block; float:left; width:200px; height:200px; border:1px solid; "> 
         <img src="../../upload/jobposting/` + item.thumbnail + `_300x300.jpg" width="200" height="200">
