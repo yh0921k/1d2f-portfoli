@@ -123,20 +123,23 @@ sh start_on_linux.sh
 ---
 
 #### :movie_camera: Demo
+
+<br/>
+
 <table>
   <tr>
-    <td><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g1.gif?raw=true" width="90%"><td>
-    <td><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g2.gif?raw=true" width="90%"><td>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g1.gif?raw=true" width="90%"></th>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g2.gif?raw=true" width="90%"></th>
   </tr>
-  <tr align="left">
+  <tr>
     <th>로그인, 회원가입, 이메일 인증</th>
     <th>랭킹, 인재추천, 채용추천</th>
   </tr>  
   <tr>
-    <td><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g3.gif?raw=true" width="90%"><td>
-    <td><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g4.gif?raw=true" width="90%"><td>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g3.gif?raw=true" width="90%"></th>
+    <th><img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/g4.gif?raw=true" width="90%"></th>
   </tr>
-  <tr align="left">
+  <tr>
     <th>채용공고, 포트폴리오</th>
     <th>배너, 쪽지, 캘린더</th>
   </tr>
