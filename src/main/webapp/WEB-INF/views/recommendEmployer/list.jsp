@@ -99,6 +99,56 @@ button.onclick = function() {
 <%------------------------------------------/더보기 ------------------------------------------------%>
 
 window.onload = function() {
+	
+	// 관심지역이 비어있을 경우, 프로필로 이동유도
+	var dists = $("div#dis_available span");
+	  console.log(dists);
+	    for(dist of dists) {
+	     console.log($(dist).html());
+	    }
+	if(dists.length == 0 ) {
+	    console.log(dists.length == 0);
+		Swal.fire({
+			  title: '관심지역이 비어있습니다.',
+			  text: "내 프로필에서 수정하시겠습니까?",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+	      confirmButtonText: '네',
+	      cancelButtonText: '아니오'
+			}).then((result) => {
+			  if (result.value) {
+				    location.href="../member/generalUpdate";
+			  }
+			})
+		
+	}
+	
+	// 관심분야가 비어있을 경우, 프로필로 이동유도
+	var intrs = $("div#int_available span");
+	console.log(intrs);
+		for(intr of intrs) {
+	   console.log($(intr).html());
+		}
+	if(intrs.length == 0) {
+		console.log(intrs.length == 0);
+	    Swal.fire({
+	        title: '관심분야가 비어있습니다.',
+	        text: "내 프로필에서 수정하시겠습니까?",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: '네',
+	        cancelButtonText: '아니오'
+	      }).then((result) => {
+	        if (result.value) {
+	            location.href="../member/generalUpdate";
+	        }
+	      })
+	}
+	
 	  var lastNum = $(".posting").index($(".posting:last"));
 	  $('#total').html(lastNum+1);
 
@@ -114,43 +164,7 @@ window.onload = function() {
 	  	}
 	  }
 	  
-    // 관심 분야 리스트 불러오기
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          let skillList = JSON.parse(xhr.responseText); 
-          for(var skill of skillList) {
-            var addHtml = `<span style="/*cursor:pointer;*/margin:2px;" class="interestSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
-            $("#int_available").append(addHtml);
-          }
-         }               
-       }
-      }    
-    xhr.open('GET', '../field/listOfUserInterest', false); 
-    xhr.send();
-	  
-    if(document.getElementsByName("checkbox_p").length > 0) {
-      return;
-    }
-    
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = () => {
-	    if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          let obj = JSON.parse(xhr.responseText);
-          for(idx in obj) {
-            var addHtml = `<div class="iqs-item">       
-            <label class="form-checkbox form-checkbox-primary">
-              <input class="field" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
-            $("#selectField").append(addHtml);
-            $("#int_selectField").append(addHtml);
-         }               
-       }
-	    }
-    };
-    xhr.open('GET', '../field/list', true); 
-    xhr.send();
+
   };  
 
 
@@ -170,11 +184,39 @@ window.onload = function() {
      xhr.open('GET', '../district/listOfUserInterest', false); 
      xhr.send();
      
- 	  
-     if(document.getElementsByName("checkbox_p").length > 0) {
-       //return;
-     }
-  
+     // 관심 분야 리스트 불러오기
+     var xhr = new XMLHttpRequest();
+     xhr.onreadystatechange = () => {
+       if (xhr.readyState == 4) {
+         if (xhr.status == 200) {
+           let skillList = JSON.parse(xhr.responseText); 
+           for(var skill of skillList) {
+             var addHtml = `<span style="/*cursor:pointer;*/margin:2px;" class="interestSkills badge badge-pill badge-secondary">` + skill.name + `</span>`
+             $("#int_available").append(addHtml);
+           }
+          }               
+        }
+       }    
+     xhr.open('GET', '../field/listOfUserInterest', false); 
+     xhr.send();
+     
+     var xhr = new XMLHttpRequest();
+     xhr.onreadystatechange = () => {
+       if (xhr.readyState == 4) {
+         if (xhr.status == 200) {
+           let obj = JSON.parse(xhr.responseText);
+           for(idx in obj) {
+             var addHtml = `<div class="iqs-item">       
+             <label class="form-checkbox form-checkbox-primary">
+               <input class="field" type="checkbox" name="checkbox_p">` + obj[idx].name + `</label>`
+             $("#selectField").append(addHtml);
+             $("#int_selectField").append(addHtml);
+          }               
+        }
+       }
+     };
+     xhr.open('GET', '../field/list', true); 
+     xhr.send();
   
   function detail(number) {
 	  location.href = "../jobposting/detail?no=" + number;
