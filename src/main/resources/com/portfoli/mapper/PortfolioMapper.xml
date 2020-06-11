@@ -96,8 +96,11 @@
        m.photo,  -- 사진경로 --
        g.membership -- 멤버십 --
        
-	   FROM (SELECT * 
-		       FROM pf_recommendation 
+	   FROM (SELECT
+	           board_no,
+	           member_no,
+	           recommendation_date
+		       FROM pf_recommendation
 		       WHERE member_no = 3
 		       ) r1 
 	   LEFT OUTER JOIN pf_recommendation r2 
