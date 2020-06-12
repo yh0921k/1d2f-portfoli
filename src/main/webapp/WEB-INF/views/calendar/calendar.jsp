@@ -97,7 +97,7 @@
 								<li class="nav-item"><a class="nav-link" href="/portfoli/app/portfolio/myRecommendedlist"> 내가 찜한 목록 </a></li>
 							</ul>
 							</li>
-							
+							 
 						</c:if>
 						
 						<!-- 기업회원 -->
@@ -112,17 +112,21 @@
 
 				</ul>
 
-			</nav>
+			</nav> 
 			<!-- /CATEGORIES -->
 
 		</div>
 
-		<div class="portlet col-lg-2 mt--20" id="mydiv" draggable="true" ondragstart="dragstart(event)">
-			<div class="portlet-header">
+		<div class="portlet col-lg-2 mt--20" 
+		     id="mydiv" 
+		     draggable="false" 
+		     ondragstart="dragstart(event)" 
+		     style="position: absolute;top: 30%;left: -6%;padding: 10px;">
+			<div class="portlet-header" style="position: relative;">
 				<h6 class="js-toDoList d-none d-lg-block m--3">< To Do List ></h6>
 			</div>
-			<form class="js-toDoForm">
-				<input class="form-control form-control-sm" type="text" placeholder="할 일 추가"></input>
+			<form class="js-toDoForm" style="position:relative;">
+				<input style="position:relative; height:5rem;" class="form-control form-control-sm" type="text" placeholder="할 일 추가"></input>
 			</form>
 		</div>
 
