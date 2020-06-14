@@ -160,6 +160,9 @@ DROP TABLE IF EXISTS pf_alarm_class RESTRICT;
 -- FAQ 자주묻는질문
 DROP TABLE IF EXISTS pf_faq RESTRICT;
 
+-- 방문자정보
+DROP TABLE IF EXISTS pf_visitor RESTRICT;
+
 -- 일반회원
 CREATE TABLE pf_general_member (
   general_member_no INTEGER      NOT NULL COMMENT '일반회원번호', -- 일반회원번호
@@ -1054,6 +1057,25 @@ ALTER TABLE pf_faq
     PRIMARY KEY (
       board_no -- 게시글번호
     );
+
+-- 방문자정보
+CREATE TABLE pf_visitor(
+        visit_no INTEGER NOT NULL,
+        visit_ip VARCHAR(100) NOT NULL,
+        visit_time DATETIME NOT NULL,
+        visit_refer VARCHAR(300) NOT NULL,
+        visit_agent VARCHAR(400) NOT NULL
+);
+
+-- 방문자
+ALTER TABLE pf_visitor
+  ADD CONSTRAINT PK_pf_visitor -- 방문자 기본키
+    PRIMARY KEY (
+      visit_no 
+    );
+
+ALTER TABLE pf_visitor
+  MODIFY COLUMN visit_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '방문번호';
 
 -- 일반회원
 ALTER TABLE pf_general_member

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfoli.dao.VisitorDao">
+  <insert id="insert" parameterType="Visitor">
+  insert into pf_visitor(
+  visit_ip, visit_time, <if test="visitRefer != null and visitRefer !=''">visit_refer, </if>visit_agent)
+  values(
+  #{visitIp}, NOW(), <if test="visitRefer != null and visitRefer !=''">#{visitRefer}, </if>#{visitAgent})
+  </insert>
+
+  <select id="findVisitCountForAMonth" resultType="int" parameterType="int">
+    SELECT count(*)
+    FROM pf_visitor
+    WHERE DATE_FORMAT(visit_time, '%Y') = YEAR(curdate()) AND DATE_FORMAT(visit_time, '%m') = #{month}
+  </select>
+</mapper>
