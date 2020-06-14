@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd docs/yk/
+cd docs/kyh/
 sh release_on_linux.sh
