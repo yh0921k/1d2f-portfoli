@@ -8,7 +8,7 @@
 
 ---
 
-#### :key: Installation
+#### :key: &nbsp;&nbsp;&nbsp;Installation
 ```bash
 git clone https://github.com/yh0921k/1d2f-portfoli.git
 cd 1d2f-portfoli.git
@@ -35,7 +35,7 @@ sh start_on_linux.sh
 
 ---
 
-#### :dart: 개요 및 특징​
+#### :dart: &nbsp;&nbsp;&nbsp;개요 및 특징​
 
 ##### **기존 시스템의 문제점**
 
@@ -65,7 +65,7 @@ sh start_on_linux.sh
 
 ---
 
-#### :pushpin: 소개
+#### :pushpin: &nbsp;&nbsp;&nbsp;소개
 
 <table class="tg">
     <tr align="left">
@@ -115,14 +115,14 @@ sh start_on_linux.sh
 
 --- 
 
-#### :wrench: 시스템 아키텍쳐
+#### :wrench: &nbsp;&nbsp;&nbsp;시스템 아키텍쳐
 <img src="https://github.com/yh0921k/1d2f-portfoli/blob/master/docs/kyh/images/System.png?raw=true" width="90%">
 
 <br/>
 
 ---
 
-#### :movie_camera: Demo
+#### :movie_camera: &nbsp;&nbsp;&nbsp;Demo
 
 <br/>
 
@@ -149,7 +149,7 @@ sh start_on_linux.sh
 
 ---
 
-#### :book: Reference
+#### :book: &nbsp;&nbsp;&nbsp;Reference
 
 - Document
   - [Java 11 API](https://docs.oracle.com/en/java/javase/11/docs/api/index.html)
